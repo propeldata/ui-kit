@@ -1,0 +1,22 @@
+{
+  "name": "@propel-wc/plugins",
+  "version": "0.1.0",
+  "private": true,
+  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "chart.js": "^4.0.1",
+    "rimraf": "^3.0.2"
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
+}
