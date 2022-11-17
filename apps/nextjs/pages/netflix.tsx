@@ -36,7 +36,11 @@ const NetflixPage = () => (
     </div>
 
     <div className="block">
-      <time-series accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN} styles={JSON.stringify(styles)}></time-series>
+      <time-series
+        metric="queryCount"
+        accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN}
+        styles={JSON.stringify(styles)}
+      ></time-series>
     </div>
   </div>
 )

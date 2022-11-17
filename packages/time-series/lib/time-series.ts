@@ -98,7 +98,7 @@ export class TimeSeries extends LitElement {
    * This should eventually be replaced
    * to customer's app credentials
    */
-  @property({ type: Object })
+  @property()
   accessToken: string = ''
 
   /**
