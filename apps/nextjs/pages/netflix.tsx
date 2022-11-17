@@ -14,7 +14,7 @@ const styles = {
     hoverColor: '#7d150f'
   },
   canvas: {
-    width: '1000px',
+    width: '800px',
     backgroundColor: '#222222',
     padding: 40,
     borderRadius: '8px'
@@ -30,8 +30,11 @@ const styles = {
 }
 
 const NetflixPage = () => (
-  <div className="bg-[#141414] p-10 h-full my-auto">
-    <Image className="self-center" src="/logo-netflix.png" width={217} height={70} />
+  <div className="bg-[#141414] p-10 h-[100vh] grid gap-10 place-items-center items-center">
+    <div className="block">
+      <Image className="self-center" src="/logo-netflix.png" width={150} height={50} />
+    </div>
+
     <div className="block">
       <time-series accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN} styles={JSON.stringify(styles)}></time-series>
     </div>
