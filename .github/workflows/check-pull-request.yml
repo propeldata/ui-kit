@@ -8,6 +8,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: propeldata/actions
+          token: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          path: actions
       - uses: ./actions/propel-code-artifact
         with:
           aws_access_key_id: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
@@ -23,6 +28,11 @@ jobs:
   #   timeout-minutes: 15
   #   steps:
   #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         repository: propeldata/actions
+  #         token: ${{ secrets.PROPELDATA_CI_TOKEN }}
+  #         path: actions
   #     - uses: ./actions/propel-code-artifact
   #       with:
   #         aws_access_key_id: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
