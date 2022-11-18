@@ -1,7 +1,6 @@
 {
-  "name": "@propel-wc/time-series",
+  "name": "@propeldata/wc-time-series",
   "version": "0.1.0",
-  "private": true,
   "module": "dist/time-series.js",
   "main": "dist/time-series.js",
   "types": "dist/time-series.d.ts",
@@ -19,7 +18,7 @@
     "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@propel-wc/plugins": "0.1.0",
+    "@propeldata/wc-plugins": "workspace:^0.1.0",
     "chart.js": "^4.0.1",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
