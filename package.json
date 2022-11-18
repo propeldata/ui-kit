@@ -10,9 +10,12 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "release": "propel-release",
+    "test": "echo 'No tests yet'"
   },
   "devDependencies": {
+    "@propeldata/release": "^1.9.31",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "turbo": "latest",
