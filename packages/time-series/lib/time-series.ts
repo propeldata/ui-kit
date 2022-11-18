@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { gql, request } from 'graphql-request'
-import { customCanvasBackgroundColor } from '@propel-wc/plugins'
+import { customCanvasBackgroundColor } from '@propeldata/wc-plugins'
 import {
   BarController,
   LineController,
