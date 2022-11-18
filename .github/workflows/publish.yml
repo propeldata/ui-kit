@@ -42,17 +42,17 @@ jobs:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           slack_signing_secret: ${{ secrets.SLACK_SIGNING_SECRET }}
           message_type: 'build'
-      - uses: ./.github/actions/prepare
-        with:
-          cache_fresh_start: 'true'
-      - run: yarn test
-
-      # Release
       - uses: ./actions/propel-code-artifact
         with:
           aws_access_key_id: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.BUILD_AWS_SECRET_ACCESS_KEY }}
           aws_default_region: ${{ secrets.BUILD_AWS_DEFAULT_REGION }}
+      - uses: ./.github/actions/prepare
+        with:
+          cache_fresh_start: 'true'
+      - run: yarn build
+
+      # Release
       - run: |
           git config --global user.email "engineering@propeldata.com"
           git config --global user.name "Propel Data Cloud, LLC." 
