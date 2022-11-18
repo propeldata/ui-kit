@@ -1,5 +1,5 @@
 // @ts-nocheck
-import '@propel-wc/time-series'
+import '@propeldata/wc-time-series'
 import Image from 'next/image'
 
 const styles = {
