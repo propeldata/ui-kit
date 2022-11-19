@@ -27,8 +27,6 @@ export type BarStyles = {
     lineHeight?: number | string
   }
   canvas?: {
-    width?: string
-    height?: string
     backgroundColor?: string
     padding?: PaddingOptions
     borderRadius?: string

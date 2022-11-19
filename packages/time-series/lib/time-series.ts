@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { request } from 'graphql-request'
-import { customCanvasBackgroundColor } from '@propel-wc/plugins'
+import { customCanvasBackgroundColor } from '@propeldata/wc-plugins'
 import {
   BarController,
   LineController,
@@ -126,7 +126,7 @@ export class TimeSeries extends LitElement {
 
   override render() {
     return html`
-      <div class="chart-container" style="position: relative">
+      <div class="chart-container">
         <canvas id="chart-root"> </canvas>
       </div>
     `
@@ -143,7 +143,7 @@ export class TimeSeries extends LitElement {
     Chart.defaults.font.style = this.styles.font?.style
     Chart.defaults.font.lineHeight = this.styles.font?.lineHeight
 
-    const timeSeriesChart = new Chart(this._root, {
+    new Chart(this._root, {
       type: 'bar',
       responsive: true,
       data: {
@@ -192,12 +192,7 @@ export class TimeSeries extends LitElement {
       }
     })
 
-    const container = timeSeriesChart.canvas.parentNode as HTMLDivElement
-
     this._root.style.borderRadius = this.styles.canvas?.borderRadius as string
-
-    container.style.height = this.styles.canvas?.height as string
-    container.style.width = this.styles.canvas?.width as string
   }
 
   /**

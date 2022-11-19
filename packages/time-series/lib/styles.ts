@@ -29,6 +29,7 @@ export const stylesInitialState = {
 
 export const scopedStyles = css`
   .chart-container {
-    border-radius: 10px;
+    height: 100%;
+    width: 100%;
   }
 `
