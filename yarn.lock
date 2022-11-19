@@ -535,6 +535,7 @@ __metadata:
     lit: ^2.4.1
     lit-analyzer: ^1.2.1
     rimraf: ^3.0.2
+    typescript: ^4.9.3
   languageName: unknown
   linkType: soft
 
@@ -6820,7 +6821,7 @@ turbo@latest:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4, typescript@npm:^4.8.3, typescript@npm:^4.8.4":
+"typescript@npm:^4.6.4, typescript@npm:^4.8.3, typescript@npm:^4.8.4, typescript@npm:^4.9.3":
   version: 4.9.3
   resolution: "typescript@npm:4.9.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Ftypescript%2F-%2Ftypescript-4.9.3.tgz"
   bin:
@@ -6840,7 +6841,7 @@ turbo@latest:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
   version: 4.9.3
   resolution: "typescript@patch:typescript@npm%3A4.9.3%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-4.9.3.tgz#~builtin<compat/typescript>::version=4.9.3&hash=d73830"
   bin:

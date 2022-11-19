@@ -75,8 +75,6 @@ type BarStyles = {
     lineHeight?: number | string
   }
   canvas?: {
-    width?: string
-    height?: string
     backgroundColor?: string
     padding?: PaddingOptions
     borderRadius?: string
@@ -89,7 +87,8 @@ type Styles = BarStyles
 export class TimeSeries extends LitElement {
   static override styles = css`
     .chart-container {
-      border-radius: 10px;
+      height: 100%;
+      width: 100%;
     }
   `
 
@@ -118,7 +117,6 @@ export class TimeSeries extends LitElement {
       hoverColor: '#64748B'
     },
     canvas: {
-      width: '100%',
       backgroundColor: '#ffffff',
       padding: 12,
       borderRadius: '0px'
@@ -135,7 +133,7 @@ export class TimeSeries extends LitElement {
 
   override render() {
     return html`
-      <div class="chart-container" style="position: relative">
+      <div class="chart-container">
         <canvas id="chart-root"> </canvas>
       </div>
     `
@@ -151,7 +149,7 @@ export class TimeSeries extends LitElement {
     Chart.defaults.font.style = this.styles.font?.style
     Chart.defaults.font.lineHeight = this.styles.font?.lineHeight
 
-    const timeSeriesChart = new Chart(this._root, {
+    new Chart(this._root, {
       type: 'bar',
       responsive: true,
       data: {
@@ -200,12 +198,7 @@ export class TimeSeries extends LitElement {
       }
     })
 
-    const container = timeSeriesChart.canvas.parentNode as HTMLDivElement
-
     this._root.style.borderRadius = this.styles.canvas?.borderRadius as string
-
-    container.style.height = this.styles.canvas?.height as string
-    container.style.width = this.styles.canvas?.width as string
   }
 
   async fetchData() {
