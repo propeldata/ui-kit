@@ -32,7 +32,11 @@ const NetflixPage = () => (
   <div className="bg-[#141414] p-10 h-full flex flex-col items-center justify-center gap-10">
     <Image className="self-center" src="/logo-netflix.png" width={217} height={70} />
     <div className="h-full w-full">
-      <time-series accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN} styles={JSON.stringify(styles)}></time-series>
+      <time-series
+        metric="queryCount"
+        accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN}
+        styles={JSON.stringify(styles)}
+      ></time-series>
     </div>
   </div>
 )

@@ -1,6 +1,6 @@
-import { LitElement, html, css } from 'lit'
+import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
-import { gql, request } from 'graphql-request'
+import { request } from 'graphql-request'
 import { customCanvasBackgroundColor } from '@propeldata/wc-plugins'
 import {
   BarController,
@@ -13,7 +13,15 @@ import {
   Tooltip,
   Chart
 } from 'chart.js'
+import { scopedStyles, stylesInitialState } from './styles'
+import { BarStyles } from './types'
+import { QUERY, DEFAULT_PROPEL_API } from './utils'
 
+/**
+ * It registers only the modules that will be used
+ * in the context of a BarChart and LineChart so
+ * we reduce bundle weight
+ */
 Chart.register(
   {
     BarController,
@@ -33,102 +41,87 @@ Chart.register(
   }
 )
 
-const DEFAULT_PROPEL_API = 'https://api.us-east-2.dev.propeldata.com/graphql'
-
-const QUERY = gql`
-  query TimeSeries($uniqueName: String!, $timeSeriesInput: TimeSeriesInput!) {
-    metricByName(uniqueName: $uniqueName) {
-      timeSeries(input: $timeSeriesInput) {
-        labels
-        values
-      }
-    }
-  }
-`
-
-type PaddingOptions =
-  | number
-  | {
-      top?: number
-      bottom?: number
-      right?: number
-      left?: number
-    }
-
-type BarStyles = {
-  border?: {
-    width?: number
-    radius?: number
-    color?: string
-    hoverColor?: string
-  }
-  background?: {
-    color?: string
-    hoverColor?: string
-  }
-  font?: {
-    color?: string
-    family?: string
-    size?: number
-    style?: 'normal' | 'italic' | 'oblique' | 'initial' | 'inherit'
-    weight?: string
-    lineHeight?: number | string
-  }
-  canvas?: {
-    backgroundColor?: string
-    padding?: PaddingOptions
-    borderRadius?: string
-  }
-}
-
+/**
+ * `styles` attribute can be either `BarStyles` or `LineStyles`
+ */
 type Styles = BarStyles
 
 @customElement('time-series')
 export class TimeSeries extends LitElement {
-  static override styles = css`
-    .chart-container {
-      height: 100%;
-      width: 100%;
-    }
-  `
+  /**
+   * Scoped css. This won't conflict with elements
+   * outside the shadow DOM
+   */
+  static override styles = scopedStyles
 
+  /**
+   * The html node where the chart will render
+   */
   @state()
   private _root?: HTMLCanvasElement
 
+  /**
+   * Metric unique name
+   */
   @property()
+  metric: string = ''
+
+  /**
+   * Relative time range that the chart
+   * will respond to
+   */
+  @property()
+  relativeTimeRange: string = 'LAST_30_DAYS'
+
+  /**
+   * Granularity that the chart
+   * will respond to
+   */
+  @property()
+  granularity: string = 'DAY'
+
+  /**
+   * If passed along with `values`, the component
+   * will ignore the built-in graphql operations
+   */
+  @property({ type: Array })
   labels: string[] = []
 
-  @property()
+  /**
+   * If passed along with `labels`, the component
+   * will ignore the built-in graphql operations
+   */
+  @property({ type: Array })
   values: string[] = []
 
+  /**
+   * This should eventually be replaced
+   * to customer's app credentials
+   */
   @property()
   accessToken: string = ''
 
+  /**
+   * Basic styles initial state
+   */
   @property({ type: Object })
-  styles: Styles = {
-    border: {
-      width: 1,
-      radius: 2,
-      color: '#94A3B8',
-      hoverColor: '#64748B'
-    },
-    background: {
-      color: '#CBD5E1',
-      hoverColor: '#64748B'
-    },
-    canvas: {
-      backgroundColor: '#ffffff',
-      padding: 12,
-      borderRadius: '0px'
-    },
-    font: {
-      color: '#475569',
-      family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-      size: 12,
-      weight: '500',
-      style: 'normal',
-      lineHeight: 1
+  styles: Styles = stylesInitialState
+
+  protected override async firstUpdated(): Promise<void> {
+    /**
+     * It gets the node where the chart will be rendered
+     */
+    this._root = this.renderRoot.querySelector('#chart-root') as HTMLCanvasElement
+
+    /**
+     * If the user passes `values` and `labels` attributes, it
+     * should behave as a dumb component without any graphql operation performed
+     */
+    if (!this.values.length || !this.labels.length) {
+      await this.fetchData()
     }
+
+    await this.setupChart()
   }
 
   override render() {
@@ -140,6 +133,7 @@ export class TimeSeries extends LitElement {
   }
 
   async setupChart() {
+    // If a root element is not found, Chart.js won't be able to render anything
     if (!this._root) return
 
     Chart.defaults.color = this.styles.font?.color as string
@@ -201,17 +195,22 @@ export class TimeSeries extends LitElement {
     this._root.style.borderRadius = this.styles.canvas?.borderRadius as string
   }
 
+  /**
+   * Fetches the timse series data
+   * when the user doesn't provide
+   * its on `labels` and `values`
+   */
   async fetchData() {
     const response = await request(
       DEFAULT_PROPEL_API,
       QUERY,
       {
-        uniqueName: 'queryCount',
+        uniqueName: this.metric,
         timeSeriesInput: {
           timeRange: {
-            relative: 'LAST_30_DAYS'
+            relative: this.relativeTimeRange
           },
-          granularity: 'DAY'
+          granularity: this.granularity
         }
       },
       {
@@ -223,12 +222,6 @@ export class TimeSeries extends LitElement {
 
     this.labels = [...metricData.labels]
     this.values = [...metricData.values]
-  }
-
-  protected override async firstUpdated(): Promise<void> {
-    this._root = this.renderRoot.querySelector('#chart-root') as HTMLCanvasElement
-    await this.fetchData()
-    await this.setupChart()
   }
 }
 
