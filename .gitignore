@@ -1,5 +1,9 @@
 node_modules
 dist
+.vercel
+storybook-static
+build-storybook.log
+
 
 # Editor directories and files
 .vscode/*
