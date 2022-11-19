@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/wc-time-series",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "module": "dist/time-series.js",
   "main": "dist/time-series.js",
   "types": "dist/time-series.d.ts",
