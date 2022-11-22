@@ -9,7 +9,6 @@
   "scripts": {
     "build": "turbo run build",
     "prepare": "yarn build",
-    "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "release": "propel-release",
