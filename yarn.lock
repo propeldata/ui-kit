@@ -2462,6 +2462,7 @@ __metadata:
   dependencies:
     chart.js: ^4.0.1
     rimraf: ^3.0.2
+    typescript: ^4.9.3
   languageName: unknown
   linkType: soft
 
