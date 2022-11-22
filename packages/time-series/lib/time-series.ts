@@ -64,21 +64,21 @@ export class TimeSeries extends LitElement {
    * Metric unique name
    */
   @property()
-  metric: string = ''
+  metric = ''
 
   /**
    * Relative time range that the chart
    * will respond to
    */
   @property()
-  relativeTimeRange: string = 'LAST_30_DAYS'
+  relativeTimeRange = 'LAST_30_DAYS'
 
   /**
    * Granularity that the chart
    * will respond to
    */
   @property()
-  granularity: string = 'DAY'
+  granularity = 'DAY'
 
   /**
    * If passed along with `values`, the component
@@ -99,7 +99,7 @@ export class TimeSeries extends LitElement {
    * to customer's app credentials
    */
   @property()
-  accessToken: string = ''
+  accessToken = ''
 
   /**
    * Basic styles initial state
@@ -143,7 +143,7 @@ export class TimeSeries extends LitElement {
     Chart.defaults.font.style = this.styles.font?.style
     Chart.defaults.font.lineHeight = this.styles.font?.lineHeight
 
-    new Chart(this._root, {
+    const options = {
       type: 'bar',
       responsive: true,
       data: {
@@ -160,15 +160,13 @@ export class TimeSeries extends LitElement {
           }
         ]
       },
-      // @ts-ignore
       plugins: [customCanvasBackgroundColor],
       options: {
         plugins: {
-          // @ts-ignore
           customCanvasBackgroundColor: {
             color: this.styles.canvas?.backgroundColor
           }
-        },
+        } as any,
         layout: {
           padding: this.styles.canvas?.padding
         },
@@ -179,7 +177,7 @@ export class TimeSeries extends LitElement {
             },
             beginAtZero: true,
             ticks: {
-              callback: (_value, index) => {
+              callback: (_: any, index: number) => {
                 const labelDate = new Date(this.labels[index])
                 const month = labelDate.getUTCMonth() + 1
                 const day = labelDate.getUTCDate()
@@ -190,7 +188,9 @@ export class TimeSeries extends LitElement {
           }
         }
       }
-    })
+    } as any
+
+    new Chart(this._root, options)
 
     this._root.style.borderRadius = this.styles.canvas?.borderRadius as string
   }
@@ -226,6 +226,12 @@ export class TimeSeries extends LitElement {
 }
 
 declare global {
+  // eslint-disable-next-line
+  namespace JSX {
+    interface IntrinsicElements {
+      'time-series': any
+    }
+  }
   interface HTMLElementTagNameMap {
     'time-series': TimeSeries
   }

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import '@propeldata/wc-time-series'
 import Image from 'next/image'
 

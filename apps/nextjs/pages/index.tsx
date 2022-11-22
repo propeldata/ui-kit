@@ -1,4 +1,3 @@
-// @ts-nocheck
 import '@propeldata/wc-time-series'
 
 const IndexPage = () => (
