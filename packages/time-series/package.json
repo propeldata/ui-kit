@@ -20,7 +20,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@propeldata/wc-plugins": "workspace:^0.1.0",
+    "@propeldata/wc-plugins": "workspace:^",
     "chart.js": "^4.0.1",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",

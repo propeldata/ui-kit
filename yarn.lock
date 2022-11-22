@@ -2388,7 +2388,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/nextjs@workspace:apps/nextjs"
   dependencies:
-    "@propeldata/wc-time-series": "workspace:^0.1.0"
+    "@propeldata/wc-time-series": "workspace:^"
     "@types/node": ^12.12.21
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
@@ -2419,7 +2419,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/vanilla@workspace:apps/vanilla"
   dependencies:
-    "@propeldata/wc-time-series": "workspace:^0.1.0"
+    "@propeldata/wc-time-series": "workspace:^"
     typescript: ^4.6.4
     vite: ^3.2.3
   languageName: unknown
@@ -2456,7 +2456,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/wc-plugins@workspace:^0.1.0, @propeldata/wc-plugins@workspace:packages/plugins":
+"@propeldata/wc-plugins@workspace:^, @propeldata/wc-plugins@workspace:packages/plugins":
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-plugins@workspace:packages/plugins"
   dependencies:
@@ -2466,11 +2466,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/wc-time-series@workspace:^0.1.0, @propeldata/wc-time-series@workspace:packages/time-series":
+"@propeldata/wc-time-series@workspace:^, @propeldata/wc-time-series@workspace:packages/time-series":
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-time-series@workspace:packages/time-series"
   dependencies:
-    "@propeldata/wc-plugins": "workspace:^0.1.0"
+    "@propeldata/wc-plugins": "workspace:^"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.6.0

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@propeldata/wc-time-series": "workspace:^0.1.0"
+    "@propeldata/wc-time-series": "workspace:^"
   },
   "devDependencies": {
     "typescript": "^4.6.4",
