@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { request } from 'graphql-request'
@@ -46,7 +47,7 @@ Chart.register(
  */
 type Styles = BarStyles
 
-@customElement('time-series')
+@customElement('wc-time-series')
 export class TimeSeries extends LitElement {
   /**
    * Scoped css. This won't conflict with elements
@@ -162,6 +163,7 @@ export class TimeSeries extends LitElement {
       },
       plugins: [customCanvasBackgroundColor],
       options: {
+        maintainAspectRatio: false,
         plugins: {
           customCanvasBackgroundColor: {
             color: this.styles.canvas?.backgroundColor
@@ -229,10 +231,10 @@ declare global {
   // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicElements {
-      'time-series': any
+      'wc-time-series': any
     }
   }
   interface HTMLElementTagNameMap {
-    'time-series': TimeSeries
+    'wc-time-series': TimeSeries
   }
 }
