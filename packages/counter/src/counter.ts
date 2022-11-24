@@ -2,18 +2,12 @@ import { LitElement, html, adoptStyles, css, unsafeCSS } from 'lit'
 import { request } from 'graphql-request'
 import { customElement, property } from 'lit/decorators.js'
 
-import type { CounterStyles } from './types'
-import { QUERY, DEFAULT_PROPEL_API } from './utils'
+import { CounterStyles, Position } from './types'
+import { QUERY, DEFAULT_PROPEL_API, getTextAlignByPosition, getValueWithPrefixAndSufix } from './utils'
 import { stylesInitialState } from './styles'
 
-@customElement('counter-web')
+@customElement('wc-counter')
 export class Counter extends LitElement {
-  /**
-   * Scoped css. This won't conflict with elements
-   * outside the shadow DOM
-   */
-  static override styles = []
-
   /**
    * If passed, the component
    * will ignore the built-in graphql operations
@@ -23,6 +17,7 @@ export class Counter extends LitElement {
 
   /**
    * Metric unique name
+   * will be ignored when value is passed
    */
   @property()
   metric = ''
@@ -30,6 +25,7 @@ export class Counter extends LitElement {
   /**
    * Relative time range that the chart
    * will respond to
+   * will be ignored when value is passed
    */
   @property()
   relativeTimeRange = 'LAST_30_DAYS'
@@ -37,6 +33,7 @@ export class Counter extends LitElement {
   /**
    * This should eventually be replaced
    * to customer's app credentials
+   * will be ignored when value is passed
    */
   @property()
   accessToken = ''
@@ -45,19 +42,13 @@ export class Counter extends LitElement {
    * Symbol to be shown before the value text
    */
   @property()
-  valuePrefix = ''
+  prefixValue = ''
 
   /**
    * Symbol to be shown after the value text
    */
   @property()
-  valueSufix = ''
-
-  /**
-   * If added, it will prevent number's comma separator
-   */
-  @property()
-  noSeparator = false
+  sufixValue = ''
 
   /**
    * Basic styles initial state
@@ -110,7 +101,8 @@ export class Counter extends LitElement {
       height = stylesInitialState.height,
       color = stylesInitialState.color,
       fontSize,
-      position = stylesInitialState.position
+      position = stylesInitialState.position,
+      background = stylesInitialState.background
     } = this.styles || {}
 
     if (this.shadowRoot) {
@@ -119,12 +111,25 @@ export class Counter extends LitElement {
           .counter-container {
             width: ${unsafeCSS(width.trim())};
             height: ${unsafeCSS(height.trim())};
+
+            background: ${unsafeCSS(background)};
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas: ${unsafeCSS(
+              `"${Position.TopLeft} ${Position.TopCenter} ${Position.TopRight}"
+              "${Position.CenterLeft} ${Position.Center} ${Position.CenterRight}"
+              "${Position.BottomLeft} ${Position.BottomCenter} ${Position.BottomRight}"`
+            )};
           }
 
           .counter-value {
+            grid-area: ${unsafeCSS(position)};
+
+            text-align: ${unsafeCSS(getTextAlignByPosition(position))};
             color: ${unsafeCSS(color.trim())};
             font-size: ${unsafeCSS(fontSize?.trim() || '48px')};
-            text-align: ${unsafeCSS(position.trim())};
             width: 100%;
             margin: 0;
           }
@@ -152,16 +157,13 @@ export class Counter extends LitElement {
   }
 
   override render() {
-    console.log(this.value)
-
     if (!this.value) return null
-
-    const value = this.noSeparator ? this.value : parseInt(this.value).toLocaleString()
-    const valueWithPrefixAndSufix = (this.valuePrefix || '') + value + (this.valueSufix || '')
 
     return html`
       <div class="counter-container">
-        <p class="counter-value">${valueWithPrefixAndSufix}</p>
+        <div class="counter-value">
+          ${getValueWithPrefixAndSufix({ prefix: this.prefixValue, value: this.value, sufix: this.sufixValue })}
+        </div>
       </div>
     `
   }
@@ -171,10 +173,10 @@ declare global {
   // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicElements {
-      'counter-web': any
+      'wc-counter': any
     }
   }
   interface HTMLElementTagNameMap {
-    'counter-web': Counter
+    'wc-counter': Counter
   }
 }

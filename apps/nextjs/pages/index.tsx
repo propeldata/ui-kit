@@ -6,16 +6,15 @@ const IndexPage = () => (
     <div className="w-full h-[600px] col-span-4">
       <time-series metric="queryCount" accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN}></time-series>
     </div>
-    <div className="flex flex-col h-52 justify-center max-w-xs gap-4 p-5 shadow-2xl">
+    <div className="h-52 justify-center max-w-xs gap-4 p-5 shadow-2xl">
       <h1 className="text-2xl font-semibold">Counter</h1>
-      <counter-web
+      <wc-counter
         metric="queryCount"
-        styles={JSON.stringify({ position: 'right' })}
-        noSeparator
-        valueSufix="%"
+        styles={JSON.stringify({ position: 'center-right' })}
+        sufixValue="%"
         accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN}
         relativeTimeRange="LAST_90_DAYS"
-      ></counter-web>
+      ></wc-counter>
     </div>
   </div>
 )

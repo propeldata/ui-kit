@@ -28,7 +28,7 @@
   },
   "files": [
     "dist",
-    "lib"
+    "src"
   ],
   "engines": {
     "node": ">=10"
