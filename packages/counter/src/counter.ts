@@ -2,8 +2,15 @@ import { LitElement, html, adoptStyles, css, unsafeCSS } from 'lit'
 import { request } from 'graphql-request'
 import { customElement, property } from 'lit/decorators.js'
 
-import { CounterStyles, Position } from './types'
-import { QUERY, DEFAULT_PROPEL_API, getTextAlignByPosition, getValueWithPrefixAndSufix } from './utils'
+import { CounterStyles } from './types'
+import {
+  QUERY,
+  DEFAULT_PROPEL_API,
+  getTextAlignByPosition,
+  getValueWithPrefixAndSufix,
+  getJustifyContentByPosition,
+  getAlignItemsByPosition
+} from './utils'
 import { stylesInitialState } from './styles'
 
 @customElement('wc-counter')
@@ -114,19 +121,13 @@ export class Counter extends LitElement {
 
             background: ${unsafeCSS(background)};
 
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-areas: ${unsafeCSS(
-              `"${Position.TopLeft} ${Position.TopCenter} ${Position.TopRight}"
-              "${Position.CenterLeft} ${Position.Center} ${Position.CenterRight}"
-              "${Position.BottomLeft} ${Position.BottomCenter} ${Position.BottomRight}"`
-            )};
+            display: flex;
+
+            justify-content: ${unsafeCSS(getJustifyContentByPosition(position))};
+            align-items: ${unsafeCSS(getAlignItemsByPosition(position))};
           }
 
           .counter-value {
-            grid-area: ${unsafeCSS(position)};
-
             text-align: ${unsafeCSS(getTextAlignByPosition(position))};
             color: ${unsafeCSS(color.trim())};
             font-size: ${unsafeCSS(fontSize?.trim() || '48px')};

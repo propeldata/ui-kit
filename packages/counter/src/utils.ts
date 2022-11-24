@@ -28,6 +28,34 @@ export const getTextAlignByPosition = (position: Position) => {
   }[position]
 }
 
+export const getJustifyContentByPosition = (position: Position) => {
+  return {
+    [Position.Center]: 'center',
+    [Position.CenterLeft]: 'flex-start',
+    [Position.CenterRight]: 'flex-end',
+    [Position.TopCenter]: 'center',
+    [Position.TopLeft]: 'flex-start',
+    [Position.TopRight]: 'flex-end',
+    [Position.BottomCenter]: 'center',
+    [Position.BottomLeft]: 'flex-start',
+    [Position.BottomRight]: 'flex-end'
+  }[position]
+}
+
+export const getAlignItemsByPosition = (position: Position) => {
+  return {
+    [Position.Center]: 'center',
+    [Position.CenterLeft]: 'center',
+    [Position.CenterRight]: 'center',
+    [Position.TopCenter]: 'flex-start',
+    [Position.TopLeft]: 'flex-start',
+    [Position.TopRight]: 'flex-start',
+    [Position.BottomCenter]: 'flex-end',
+    [Position.BottomLeft]: 'flex-end',
+    [Position.BottomRight]: 'flex-end'
+  }[position]
+}
+
 export const getValueWithPrefixAndSufix = (params: { prefix?: string; value: string; sufix?: string }) => {
   const { prefix, value, sufix } = params
 
