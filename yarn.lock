@@ -2426,7 +2426,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/wc-counter@workspace:^0.1.0, @propeldata/wc-counter@workspace:packages/counter":
+"@propeldata/wc-counter@workspace:^, @propeldata/wc-counter@workspace:packages/counter":
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-counter@workspace:packages/counter"
   dependencies:
@@ -2473,7 +2473,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/wc-plugins@workspace:^0.1.2, @propeldata/wc-plugins@workspace:packages/plugins":
+"@propeldata/wc-plugins@workspace:^0.1.0, @propeldata/wc-plugins@workspace:^0.1.2, @propeldata/wc-plugins@workspace:packages/plugins":
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-plugins@workspace:packages/plugins"
   dependencies:
