@@ -166,3 +166,15 @@ export class Counter extends LitElement {
     `
   }
 }
+
+declare global {
+  // eslint-disable-next-line
+  namespace JSX {
+    interface IntrinsicElements {
+      'counter-web': any
+    }
+  }
+  interface HTMLElementTagNameMap {
+    'counter-web': Counter
+  }
+}
