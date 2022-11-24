@@ -2420,6 +2420,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/vanilla@workspace:apps/vanilla"
   dependencies:
+    "@propeldata/wc-counter": "workspace:^"
     "@propeldata/wc-time-series": "workspace:^"
     typescript: ^4.6.4
     vite: ^3.2.3
