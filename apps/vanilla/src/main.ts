@@ -1,6 +1,18 @@
 import '@propeldata/wc-time-series'
 
+const labels = [
+  '2022-10-25T00:00:00.000Z',
+  '2022-10-26T00:00:00.000Z',
+  '2022-10-27T00:00:00.000Z',
+  '2022-10-28T00:00:00.000Z',
+  '2022-10-29T00:00:00.000Z',
+  '2022-10-30T00:00:00.000Z',
+  '2022-10-31T00:00:00.000Z'
+]
+
+const values = [0, 100, 200, 300, 400, 500, 700]
+
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <wc-time-series metric="queryCount" accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2Njg2OTE2NTIsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjY4Njk1MjUyLCJpYXQiOjE2Njg2OTE2NTIsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiODk1YjNkN2ItMjFjYi00MmQ3LWI1MTYtYTAwZDdhMTkzNjA4IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.MutIQk55QAMh112i4G1EY3weZkMxJaMUzti0yg3qnwA"></wc-time-series>  
+  <wc-time-series labels='${JSON.stringify(labels)}' values='${JSON.stringify(values)}'></wc-time-series>  
 `
