@@ -150,24 +150,27 @@ export class TimeSeries extends LitElement {
     `
   }
 
+  /**
+   * Checks if the implementation has the required attributes
+   */
   private _checkAttributesError() {
+    const prefixMessage = 'TimeSeriesAttributesError: You should provide at least the following attributes:'
+
     if (!this.attributes.length) {
       console.error(
-        `You should provide at least the following attributes: ${this._requiredDumbAttributes.join(
-          ', '
-        )} or ${this._requiredSmartAttributes.join(', ')}`
+        `${prefixMessage} ${this._requiredDumbAttributes.join(', ')} or ${this._requiredSmartAttributes.join(', ')}`
       )
       return true
     }
 
     if (this._isDumb() && !this._hasRequiredDumbAttributes()) {
-      console.error(`You should provide at least the following attributes: ${this._requiredDumbAttributes.join(', ')}`)
+      console.error(`${prefixMessage} ${this._requiredDumbAttributes.join(', ')}`)
 
       return true
     }
 
     if (!this._isDumb() && !this._hasRequiredSmartAttributes()) {
-      console.error(`You should provide at least the following attributes: ${this._requiredSmartAttributes.join(', ')}`)
+      console.error(`${prefixMessage} ${this._requiredSmartAttributes.join(', ')}`)
 
       return true
     }
@@ -175,20 +178,32 @@ export class TimeSeries extends LitElement {
     return false
   }
 
+  /**
+   * Checks if the current smart attributes match the required ones
+   */
   private _hasRequiredSmartAttributes() {
     return this._requiredSmartAttributes.every((smartAttr) => !!this.attributes.getNamedItem(smartAttr))
   }
 
+  /**
+   * Checks if the current dumb attributes match the required ones
+   */
   private _hasRequiredDumbAttributes() {
     return this._requiredDumbAttributes.every((dumbAttr) => !!this.attributes.getNamedItem(dumbAttr))
   }
 
+  /**
+   * Checks if the component is in `dumb` or `smart` mode
+   */
   private _isDumb() {
     const hasValues = !!this.values && this.values.length > 0
     const hasLabels = !!this.labels && this.labels.length > 0
     return hasValues || hasLabels
   }
 
+  /**
+   * Sets up chart default values
+   */
   private _setupChartDefaults() {
     Chart.defaults.color = this.styles.font?.color as string
     Chart.defaults.font.size = this.styles.font?.size
@@ -198,6 +213,9 @@ export class TimeSeries extends LitElement {
     Chart.defaults.font.lineHeight = this.styles.font?.lineHeight
   }
 
+  /**
+   * Builds chartjs config
+   */
   private _buildChartConfig() {
     const data = {
       labels: this.labels,
@@ -250,6 +268,9 @@ export class TimeSeries extends LitElement {
     } as any
   }
 
+  /**
+   * Sets up chatjs instance
+   */
   private async _setupChart() {
     // If a root element is not found, Chart.js won't be able to render anything
     if (!this._root) return
