@@ -10,7 +10,7 @@
     "build": "tsc",
     "clean": "rimraf dist",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
-    "lint:eslint": "eslint 'lib/**/*.ts'",
+    "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
   },
   "files": [
     "dist",
-    "lib"
+    "src"
   ],
   "engines": {
     "node": ">=10"
