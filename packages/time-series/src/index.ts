@@ -46,7 +46,7 @@ Chart.register(
  */
 type Styles = BarStyles
 
-@customElement('time-series')
+@customElement('wc-time-series')
 export class TimeSeries extends LitElement {
   /**
    * Scoped css. This won't conflict with elements
@@ -229,10 +229,10 @@ declare global {
   // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicElements {
-      'time-series': any
+      'wc-time-series': any
     }
   }
   interface HTMLElementTagNameMap {
-    'time-series': TimeSeries
+    'wc-time-series': TimeSeries
   }
 }
