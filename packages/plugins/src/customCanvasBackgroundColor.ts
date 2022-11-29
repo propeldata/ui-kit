@@ -1,5 +1,6 @@
 import { Chart } from 'chart.js'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const customCanvasBackgroundColor: any = {
   id: 'customCanvasBackgroundColor',
   beforeDraw: (chart: Chart, _args: { cancelable: true }, options: { color: string }) => {

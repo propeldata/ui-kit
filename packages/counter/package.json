@@ -1,13 +1,26 @@
 {
   "name": "@propeldata/wc-counter",
   "version": "0.1.0",
-  "module": "dist/counter.js",
-  "main": "dist/counter.js",
-  "types": "dist/counter.d.ts",
-  "type": "module",
+  "source": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc",
+    "dev": "tsc -p tsconfig.cjs.json --watch",
+    "build": "yarn build:cjs && yarn build:esm",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "clean": "rimraf dist",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'lib/**/*.ts'",
@@ -26,12 +39,11 @@
     "graphql-request": "^5.0.0",
     "lit": "^2.4.1"
   },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "engines": {
-    "node": ">=10"
+  "peerDependencies": {
+    "@propeldata/wc-plugins": "workspace:^",
+    "chart.js": "^4.0.1",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0"
   },
   "customElements": "custom-elements.json"
 }

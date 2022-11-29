@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { request } from 'graphql-request'
@@ -238,6 +237,7 @@ export class TimeSeries extends LitElement {
         customCanvasBackgroundColor: {
           color: this.styles.canvas?.backgroundColor
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any,
       layout: {
         padding: this.styles.canvas?.padding
@@ -247,6 +247,7 @@ export class TimeSeries extends LitElement {
           grid: { drawOnChartArea: false },
           beginAtZero: true,
           ticks: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             callback: (_: any, index: number) => {
               const labelDate = new Date(this.labels[index])
               const month = labelDate.getUTCMonth() + 1
@@ -265,6 +266,7 @@ export class TimeSeries extends LitElement {
       data,
       options,
       plugins: this._plugins
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any
   }
 
@@ -318,6 +320,7 @@ declare global {
   // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicElements {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       'wc-time-series': any
     }
   }

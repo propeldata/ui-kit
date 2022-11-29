@@ -59,5 +59,5 @@ export const getAlignItemsByPosition = (position: Position) => {
 export const getValueWithPrefixAndSufix = (params: { prefix?: string; value: string; sufix?: string }) => {
   const { prefix, value, sufix } = params
 
-  return prefix || '' + value + sufix || ''
+  return (prefix ? prefix + ' ' : '') + value + (sufix ? ' ' + sufix : '')
 }
