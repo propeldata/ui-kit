@@ -3,6 +3,7 @@ dist
 .vercel
 storybook-static
 build-storybook.log
+custom-elements.json
 
 
 # Editor directories and files
