@@ -1,5 +1,5 @@
 import { html } from 'lit'
-import '../../packages/time-series/dist/esm/index'
+import '../../packages/time-series/dist/esm/index.js'
 
 export default {
   title: 'WebComponents/TimeSeries',
