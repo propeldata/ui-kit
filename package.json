@@ -16,7 +16,7 @@
     "postinstall": "husky install",
     "commit": "cz",
     "storybook": "rimraf .storybook/dist && yarn build && tsc --p .storybook/tsconfig.storybook.json && wds -c .storybook/server.mjs",
-    "storybook:build": "build-storybook"
+    "storybook:build": "yarn build && tsc --p .storybook/tsconfig.storybook.json && build-storybook"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.6.6",
