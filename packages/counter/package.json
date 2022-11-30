@@ -19,8 +19,8 @@
   "scripts": {
     "dev": "tsc -p tsconfig.cjs.json --watch",
     "build": "yarn build:cjs && yarn build:esm",
-    "build:esm": "rimraf dist/esm tsc -p tsconfig.esm.json",
-    "build:cjs": "rimraf dist/cjs tsc -p tsconfig.cjs.json",
+    "build:esm": "rimraf dist/esm && tsc -p tsconfig.esm.json",
+    "build:cjs": "rimraf dist/cjs && tsc -p tsconfig.cjs.json",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'lib/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer"

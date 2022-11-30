@@ -2,10 +2,13 @@
 node_modules
 dist
 .vercel
-storybook-static
-build-storybook.log
+
 custom-elements.json
 
+# Storybook
+storybook-static
+build-storybook.log
+tsconfig.storybook.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
