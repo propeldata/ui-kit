@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
-import { request } from 'graphql-request'
+// import { request } from 'graphql-request'
 import { customCanvasBackgroundColor } from '@propeldata/wc-plugins'
 import {
   BarController,
@@ -15,7 +15,7 @@ import {
 } from 'chart.js'
 import { scopedStyles, stylesInitialState } from './styles'
 import { BarStyles } from './types'
-import { QUERY, DEFAULT_PROPEL_API } from './utils'
+// import { QUERY, DEFAULT_PROPEL_API } from './utils'
 
 /**
  * It registers only the modules that will be used
@@ -134,9 +134,9 @@ export class TimeSeries extends LitElement {
      * If the user passes `values` and `labels` attributes, it
      * should behave as a dumb component without any graphql operation performed
      */
-    if (!this._isDumb()) {
-      await this.fetchData()
-    }
+    // if (!this._isDumb()) {
+    //   await this.fetchData()
+    // }
 
     await this._setupChart()
   }
@@ -291,29 +291,29 @@ export class TimeSeries extends LitElement {
    * when the user doesn't provide
    * its on `labels` and `values`
    */
-  async fetchData() {
-    const response = await request(
-      DEFAULT_PROPEL_API,
-      QUERY,
-      {
-        uniqueName: this.metric,
-        timeSeriesInput: {
-          timeRange: {
-            relative: this.relativeTimeRange
-          },
-          granularity: this.granularity
-        }
-      },
-      {
-        authorization: `Bearer ${this.accessToken}`
-      }
-    )
+  // async fetchData() {
+  //   const response = await request(
+  //     DEFAULT_PROPEL_API,
+  //     QUERY,
+  //     {
+  //       uniqueName: this.metric,
+  //       timeSeriesInput: {
+  //         timeRange: {
+  //           relative: this.relativeTimeRange
+  //         },
+  //         granularity: this.granularity
+  //       }
+  //     },
+  //     {
+  //       authorization: `Bearer ${this.accessToken}`
+  //     }
+  //   )
 
-    const metricData = response.metricByName.timeSeries
+  //   const metricData = response.metricByName.timeSeries
 
-    this.labels = [...metricData.labels]
-    this.values = [...metricData.values]
-  }
+  //   this.labels = [...metricData.labels]
+  //   this.values = [...metricData.values]
+  // }
 }
 
 declare global {

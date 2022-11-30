@@ -2,7 +2,7 @@ import { html } from 'lit'
 import '../../packages/time-series/dist/esm/index.js'
 
 export default {
-  title: 'WebComponents/TimeSeries',
+  title: 'WebComponents/wc-time-series',
   component: 'wc-time-series'
 }
 
@@ -18,6 +18,7 @@ const labels = [
 
 const values = ['0', '100', '200', '300', '400', '500', '700']
 
-const Template = () => html` <wc-time-series .labels=${labels} .values=${values}></wc-time-series> `
+const Template = () =>
+  html` <wc-time-series labels="${JSON.stringify(labels)}" values="${JSON.stringify(values)}"></wc-time-series> `
 
-export const Default = Template.bind({})
+export const Basic = Template.bind({})
