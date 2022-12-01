@@ -136,8 +136,6 @@ export class TimeSeries extends LitElement {
      */
     this.styles.variant = this.variant
 
-    console.log(this.styles)
-
     /**
      * It gets the node where the chart will be rendered
      */
