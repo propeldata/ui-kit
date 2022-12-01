@@ -8,6 +8,7 @@ import {
   LineController,
   BarElement,
   LineElement,
+  PointElement,
   Colors,
   LinearScale,
   CategoryScale,
@@ -15,8 +16,8 @@ import {
   Chart
 } from 'chart.js'
 import { scopedStyles, stylesInitialState } from './styles'
-import { BarStyles } from './types'
-import { QUERY, DEFAULT_PROPEL_API } from './utils'
+import { BarStyles, LineStyles, Variant } from './types'
+import { QUERY, DEFAULT_PROPEL_API, chartStylesConverter } from './utils'
 
 /**
  * It registers only the modules that will be used
@@ -30,7 +31,8 @@ Chart.register(
   },
   {
     BarElement,
-    LineElement
+    LineElement,
+    PointElement
   },
   {
     Colors,
@@ -45,7 +47,7 @@ Chart.register(
 /**
  * `styles` attribute can be either `BarStyles` or `LineStyles`
  */
-type Styles = BarStyles
+type Styles = BarStyles | LineStyles
 
 @customElement('wc-time-series')
 export class TimeSeries extends LitElement {
@@ -117,14 +119,24 @@ export class TimeSeries extends LitElement {
   @property()
   accessToken = ''
 
+  @property()
+  variant: Variant = 'bar'
+
   /**
    * Basic styles initial state
    */
-  @property({ type: Object })
+  @property({ type: Object, converter: chartStylesConverter })
   styles: Styles = stylesInitialState
 
   protected override async firstUpdated(): Promise<void> {
     if (this._checkAttributesError()) return
+
+    /**
+     * It sets chart styles variant
+     */
+    this.styles.variant = this.variant
+
+    console.log(this.styles)
 
     /**
      * It gets the node where the chart will be rendered
@@ -214,10 +226,39 @@ export class TimeSeries extends LitElement {
   }
 
   /**
-   * Builds chartjs config
+   * creates chart data according to its type, `line` or `chart`
    */
-  private _buildChartConfig() {
-    const data = {
+  private _getChartData() {
+    const chartType = this.styles.variant
+
+    if (chartType === 'line') {
+      return {
+        labels: this.labels,
+        datasets: [
+          {
+            data: this.values,
+            borderWidth: this.styles.border?.width,
+            borderColor: this.styles.border?.color,
+            hoverBorderColor: this.styles.border?.hoverColor,
+            backgroundColor: this.styles.background?.color,
+            hoverBackgroundColor: this.styles.background?.hoverColor,
+            pointBackgroundColor: this.styles.point?.background?.color,
+            pointBorderColor: this.styles.point?.border?.color,
+            pointBorderWidth: this.styles.point?.border?.width,
+            pointHoverBorderColor: this.styles.point?.border?.hoverColor,
+            pointHoverBackgroundColor: this.styles.point?.background?.color,
+            pointHoverBorderWidth: this.styles.border?.width,
+            pointHitRadius: this.styles.point?.hit?.radius,
+            pointRadius: this.styles.point?.radius,
+            pointHoverRadius: this.styles.point?.hoverRadius,
+            pointRotation: this.styles.point?.rotation,
+            pointStyle: this.styles.point?.style
+          }
+        ]
+      }
+    }
+
+    return {
       labels: this.labels,
       datasets: [
         {
@@ -231,16 +272,25 @@ export class TimeSeries extends LitElement {
         }
       ]
     }
+  }
+
+  /**
+   * Builds chartjs config
+   */
+  private _buildChartConfig() {
+    const { canvas: defaultCanvas } = stylesInitialState
+
+    const data = this._getChartData()
 
     const options = {
       maintainAspectRatio: false,
       plugins: {
         customCanvasBackgroundColor: {
-          color: this.styles.canvas?.backgroundColor
+          color: this.styles.canvas?.backgroundColor || defaultCanvas.backgroundColor
         }
       } as any,
       layout: {
-        padding: this.styles.canvas?.padding
+        padding: this.styles.canvas?.padding || defaultCanvas.padding
       },
       scales: {
         x: {
@@ -260,7 +310,7 @@ export class TimeSeries extends LitElement {
     }
 
     return {
-      type: 'bar',
+      type: this.variant,
       responsive: true,
       data,
       options,

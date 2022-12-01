@@ -1,8 +1,9 @@
 import { css } from 'lit'
 
 export const stylesInitialState = {
+  variant: 'bar',
   border: {
-    width: 1,
+    width: 10,
     radius: 2,
     color: '#94A3B8',
     hoverColor: '#64748B'
