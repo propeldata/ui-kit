@@ -22,7 +22,10 @@ const IndexPage = () => (
           border: {
             width: 5,
             radius: 2,
-            color: 'red'
+            color: '#0CC8FF'
+          },
+          point: {
+            style: 'rect'
           }
         })}
         labels={JSON.stringify(labels)}
@@ -31,14 +34,7 @@ const IndexPage = () => (
     </div>
     <div className="h-52 justify-center max-w-xs gap-4 p-5 shadow-2xl">
       <h1 className="text-2xl font-semibold">Counter</h1>
-      <wc-counter
-        // metric="queryCount"
-        // styles={JSON.stringify({ position: 'center-right' })}
-        // sufixValue="%"
-        value="123"
-        // accessToken={process.env.NEXT_PUBLIC_ACCESS_TOKEN}
-        // relativeTimeRange="LAST_90_DAYS"
-      ></wc-counter>
+      <wc-counter value="123"></wc-counter>
     </div>
   </div>
 )
