@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LitElement, html, adoptStyles, css, unsafeCSS } from 'lit'
 import { request } from 'graphql-request'
 import { customElement, property } from 'lit/decorators.js'
@@ -28,6 +29,16 @@ export class Counter extends LitElement {
    */
   @property()
   metric = ''
+
+  /**
+   * Required attribute when smart variant is identified
+   */
+  private _requiredSmartAttributes = ['metric', 'accessToken']
+
+  /**
+   * Required attribute when smart variant is identified
+   */
+  private _requiredDumbAttributes = ['value']
 
   /**
    * Relative time range that the chart
@@ -64,7 +75,9 @@ export class Counter extends LitElement {
   styles: CounterStyles = stylesInitialState
 
   protected override async firstUpdated(): Promise<void> {
-    this.setupStyles()
+    if (this._checkAttributesError()) return
+
+    this._setupStyles()
 
     /**
      * If the user passes `value` attribute, it
@@ -102,7 +115,7 @@ export class Counter extends LitElement {
     this.value = metricData.value
   }
 
-  setupStyles() {
+  _setupStyles() {
     const {
       width = stylesInitialState.width,
       height = stylesInitialState.height,
@@ -155,6 +168,56 @@ export class Counter extends LitElement {
         `
       ])
     }
+  }
+
+  /**
+   * Checks if the implementation has the required attributes
+   */
+  private _checkAttributesError() {
+    const prefixMessage = 'CounterAttributesError: You should provide at least the following attributes:'
+
+    if (!this.attributes.length) {
+      console.error(
+        `${prefixMessage} ${this._requiredDumbAttributes.join(', ')} or ${this._requiredSmartAttributes.join(', ')}`
+      )
+      return true
+    }
+
+    if (this._isDumb() && !this._hasRequiredDumbAttributes()) {
+      console.error(`${prefixMessage} ${this._requiredDumbAttributes.join(', ')}`)
+
+      return true
+    }
+
+    if (!this._isDumb() && !this._hasRequiredSmartAttributes()) {
+      console.error(`${prefixMessage} ${this._requiredSmartAttributes.join(', ')}`)
+
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Checks if the current smart attributes match the required ones
+   */
+  private _hasRequiredSmartAttributes() {
+    return this._requiredSmartAttributes.every((smartAttr) => !!this.attributes.getNamedItem(smartAttr))
+  }
+
+  /**
+   * Checks if the current dumb attributes match the required ones
+   */
+  private _hasRequiredDumbAttributes() {
+    return this._requiredDumbAttributes.every((dumbAttr) => !!this.attributes.getNamedItem(dumbAttr))
+  }
+
+  /**
+   * If the user passes `value` attribute, it
+   * should behave as a dumb component without any graphql operation performed
+   */
+  private _isDumb() {
+    return !!this.value
   }
 
   override render() {
