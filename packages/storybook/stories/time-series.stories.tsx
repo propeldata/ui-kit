@@ -1,9 +1,8 @@
-import { html } from 'lit'
-import '../../packages/time-series/dist/esm/index.js'
+import React from 'react'
+import '@propeldata/wc-time-series'
 
 export default {
-  title: 'wc-time-series',
-  component: 'wc-time-series'
+  title: 'wc-time-series'
 }
 
 const labels = [
@@ -18,7 +17,6 @@ const labels = [
 
 const values = ['0', '100', '200', '300', '400', '500', '700']
 
-const Template = () =>
-  html` <wc-time-series labels="${JSON.stringify(labels)}" values="${JSON.stringify(values)}"></wc-time-series> `
+const Template = () => <wc-time-series labels={JSON.stringify(labels)} values={JSON.stringify(values)}></wc-time-series>
 
 export const Basic = Template.bind({})

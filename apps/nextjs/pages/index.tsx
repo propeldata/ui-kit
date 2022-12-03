@@ -37,7 +37,7 @@ const IndexPage = () => (
     <div className="h-[400px] w-full p-5 shadow bg-white">
       <h1 className="text-2xl font-semibold m-3">Total Sales</h1>
       <div className="h-[300px] w-full">
-        <wc-time-series labels={JSON.stringify(labels)} values={JSON.stringify(values)}></wc-time-series>
+        <wc-time-series labels={labels} values={values}></wc-time-series>
       </div>
     </div>
   </div>

@@ -34,8 +34,8 @@
   "dependencies": {
     "@propeldata/wc-plugins": "workspace:^",
     "chart.js": "^4.0.1",
-    "graphql": "^16.6.0",
-    "graphql-request": "^5.0.0",
+    "graphql": "^16.0.1",
+    "graphql-request": "^3.6.1",
     "lit": "^2.4.1"
   },
   "peerDependencies": {

@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "lib": ["ES2020", "DOM"],
+    "lib": ["ES2020", "DOM", "dom.iterable"],
     "module": "CommonJS",
     "target": "ES6",
     "outDir": "dist/cjs"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["dist"]
+  "exclude": ["node_modules", "dist"]
 }
