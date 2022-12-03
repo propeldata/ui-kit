@@ -1,1 +1,1 @@
-# counter
+# @propeldata/wc-counter

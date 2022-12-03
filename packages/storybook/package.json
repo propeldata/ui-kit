@@ -1,0 +1,25 @@
+{
+  "name": "@propeldata/wc-storybook",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "@propeldata/wc-counter": "workspace:^",
+    "@propeldata/wc-time-series": "workspace:^"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-actions": "^6.5.14",
+    "@storybook/addon-docs": "^6.5.14",
+    "@storybook/addon-essentials": "^6.5.14",
+    "@storybook/addon-interactions": "^6.5.14",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/builder-webpack5": "^6.5.14",
+    "@storybook/manager-webpack5": "^6.5.14",
+    "@storybook/react": "^6.5.14",
+    "@storybook/testing-library": "^0.0.13",
+    "babel-loader": "^8.3.0"
+  }
+}

@@ -237,6 +237,7 @@ declare global {
   // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicElements {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       'wc-counter': any
     }
   }
