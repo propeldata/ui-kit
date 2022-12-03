@@ -71,7 +71,7 @@ export class TimeSeries extends LitElement {
   private _requiredSmartAttributes = ['metric', 'accessToken']
 
   /**
-   * Required attribute when smart variant is identified
+   * Required attribute when dumb variant is identified
    */
   private _requiredDumbAttributes = ['labels', 'values']
 
