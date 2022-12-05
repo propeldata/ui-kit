@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/wc-plugins",
-  "version": "0.2.2",
+  "version": "0.1.23",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
