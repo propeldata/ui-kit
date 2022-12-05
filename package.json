@@ -2,6 +2,7 @@
   "name": "@propeldata/wc-monorepo",
   "version": "0.0.0",
   "private": true,
+  "license": "UNLICENSED",
   "workspaces": [
     "packages/*",
     "apps/*"
@@ -15,18 +16,13 @@
     "test": "echo 'No tests yet'",
     "postinstall": "husky install",
     "commit": "cz",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook"
+    "wc-counter": "turbo run dev --filter=counter",
+    "wc-time-series": "turbo run dev --filter=time-series",
+    "storybook": "cd packages/storybook && yarn storybook",
+    "build-storybook": "cd packages/storybook && yarn storybook"
   },
   "devDependencies": {
     "@propeldata/release": "^1.9.31",
-    "@storybook/addon-actions": "^6.5.13",
-    "@storybook/addon-essentials": "^6.5.13",
-    "@storybook/addon-interactions": "^6.5.13",
-    "@storybook/addon-links": "^6.5.13",
-    "@storybook/builder-webpack4": "^6.5.13",
-    "@storybook/manager-webpack4": "^6.5.13",
-    "@storybook/react": "^6.5.13",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "commitizen": "^4.2.5",
@@ -41,6 +37,7 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
     "turbo": "^1.5.5",
     "typescript": "^4.8.4"
   },

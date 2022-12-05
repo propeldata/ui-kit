@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LitElement, html } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 import { request } from 'graphql-request'
@@ -74,7 +73,7 @@ export class TimeSeries extends LitElement {
   private _requiredSmartAttributes = ['metric', 'accessToken']
 
   /**
-   * Required attribute when smart variant is identified
+   * Required attribute when dumb variant is identified
    */
   private _requiredDumbAttributes = ['labels', 'values']
 
@@ -129,8 +128,6 @@ export class TimeSeries extends LitElement {
   styles: Styles = stylesInitialState
 
   protected override async firstUpdated(): Promise<void> {
-    if (this._checkAttributesError()) return
-
     /**
      * It sets chart styles variant
      */
@@ -158,34 +155,6 @@ export class TimeSeries extends LitElement {
         <canvas id="chart-root"> </canvas>
       </div>
     `
-  }
-
-  /**
-   * Checks if the implementation has the required attributes
-   */
-  private _checkAttributesError() {
-    const prefixMessage = 'TimeSeriesAttributesError: You should provide at least the following attributes:'
-
-    if (!this.attributes.length) {
-      console.error(
-        `${prefixMessage} ${this._requiredDumbAttributes.join(', ')} or ${this._requiredSmartAttributes.join(', ')}`
-      )
-      return true
-    }
-
-    if (this._isDumb() && !this._hasRequiredDumbAttributes()) {
-      console.error(`${prefixMessage} ${this._requiredDumbAttributes.join(', ')}`)
-
-      return true
-    }
-
-    if (!this._isDumb() && !this._hasRequiredSmartAttributes()) {
-      console.error(`${prefixMessage} ${this._requiredSmartAttributes.join(', ')}`)
-
-      return true
-    }
-
-    return false
   }
 
   /**
@@ -286,6 +255,7 @@ export class TimeSeries extends LitElement {
         customCanvasBackgroundColor: {
           color: this.styles.canvas?.backgroundColor || defaultCanvas.backgroundColor
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any,
       layout: {
         padding: this.styles.canvas?.padding || defaultCanvas.padding
@@ -295,6 +265,7 @@ export class TimeSeries extends LitElement {
           grid: { drawOnChartArea: false },
           beginAtZero: true,
           ticks: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             callback: (_: any, index: number) => {
               const labelDate = new Date(this.labels[index])
               const month = labelDate.getUTCMonth() + 1
@@ -313,6 +284,7 @@ export class TimeSeries extends LitElement {
       data,
       options,
       plugins: this._plugins
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any
   }
 
@@ -366,6 +338,7 @@ declare global {
   // eslint-disable-next-line
   namespace JSX {
     interface IntrinsicElements {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       'wc-time-series': any
     }
   }
