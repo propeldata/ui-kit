@@ -3,5 +3,5 @@
   "buildCommand": "yarn build-storybook",
   "installCommand": "sh scripts/vercel-pre-install.sh && yarn install",
   "framework": null,
-  "outputDirectory": "./packages/storybook/storybook-static"
+  "outputDirectory": "./apps/storybook/storybook-static"
 }
