@@ -2,6 +2,7 @@
   "name": "@propeldata/wc-monorepo",
   "version": "0.0.0",
   "private": true,
+  "license": "UNLICENSED",
   "workspaces": [
     "packages/*",
     "apps/*"
