@@ -16,8 +16,8 @@
     "test": "echo 'No tests yet'",
     "postinstall": "husky install",
     "commit": "cz",
-    "wc-counter": "turbo run dev --filter=counter",
-    "wc-time-series": "turbo run dev --filter=time-series",
+    "wc-counter": "turbo run dev --filter=@propeldata/wc-counter",
+    "wc-time-series": "turbo run dev --filter=@propeldata/wc-time-series",
     "storybook": "turbo run dev --filter=@propeldata/wc-storybook",
     "build-storybook": "turbo run build --filter=@propeldata/wc-storybook"
   },
