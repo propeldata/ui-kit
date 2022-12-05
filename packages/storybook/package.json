@@ -5,8 +5,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@propeldata/wc-counter": "^0.1.0",
-    "@propeldata/wc-time-series": "^0.4.0"
+    "@propeldata/wc-counter": "workspace:^",
+    "@propeldata/wc-time-series": "workspace:^"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
