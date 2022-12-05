@@ -1,5 +1,6 @@
 {
   "name": "@propeldata/wc-storybook",
+  "private": true,
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
