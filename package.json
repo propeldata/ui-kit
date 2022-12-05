@@ -18,6 +18,7 @@
     "commit": "cz",
     "wc-counter": "turbo run dev --filter=counter",
     "wc-time-series": "turbo run dev --filter=time-series",
+    "storybook": "turbo run dev --filter=@propeldata/wc-storybook",
     "build-storybook": "turbo run build --filter=@propeldata/wc-storybook"
   },
   "devDependencies": {
