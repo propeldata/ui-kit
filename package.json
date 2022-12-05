@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "prepare": "yarn build",
+    "prepare": "yarn build && yarn build-storybook",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "release": "propel-release",
