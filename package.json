@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "prepare": "yarn build && yarn build-storybook",
+    "prepare": "yarn build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "release": "propel-release",
@@ -18,7 +18,7 @@
     "commit": "cz",
     "wc-counter": "turbo run dev --filter=counter",
     "wc-time-series": "turbo run dev --filter=time-series",
-    "build-storybook": "yarn workspace @propeldata/wc-storybook build-storybook"
+    "build-storybook": "turbo run build --filter=@propeldata/wc-storybook"
   },
   "devDependencies": {
     "@propeldata/release": "^1.9.31",
