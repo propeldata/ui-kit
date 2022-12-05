@@ -19,7 +19,8 @@
     "wc-counter": "turbo run dev --filter=counter",
     "wc-time-series": "turbo run dev --filter=time-series",
     "storybook": "cd packages/storybook && yarn storybook",
-    "build-storybook": "cd packages/storybook && yarn storybook"
+    "build-storybook": "cd packages/storybook && yarn storybook",
+    "vercel:install": "sh ./scripts/vercel-pre-install.sh && yarn install"
   },
   "devDependencies": {
     "@propeldata/release": "^1.9.31",
