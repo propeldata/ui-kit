@@ -2485,9 +2485,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/wc-storybook@workspace:packages/storybook":
+"@propeldata/wc-storybook@workspace:apps/storybook":
   version: 0.0.0-use.local
-  resolution: "@propeldata/wc-storybook@workspace:packages/storybook"
+  resolution: "@propeldata/wc-storybook@workspace:apps/storybook"
   dependencies:
     "@babel/core": ^7.20.5
     "@mdx-js/react": ^1.6.22

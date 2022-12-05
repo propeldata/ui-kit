@@ -18,8 +18,7 @@
     "commit": "cz",
     "wc-counter": "turbo run dev --filter=counter",
     "wc-time-series": "turbo run dev --filter=time-series",
-    "storybook": "cd packages/storybook && yarn storybook",
-    "build-storybook": "cd packages/storybook && yarn storybook"
+    "build-storybook": "yarn workspace @propeldata/wc-storybook build-storybook"
   },
   "devDependencies": {
     "@propeldata/release": "^1.9.31",
