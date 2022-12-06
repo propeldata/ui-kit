@@ -2424,7 +2424,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-counter@workspace:packages/counter"
   dependencies:
-    "@propeldata/wc-plugins": "workspace:^0.1.23"
+    "@propeldata/wc-plugins": "workspace:^0.1.24"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.0.1
@@ -2434,7 +2434,7 @@ __metadata:
     rimraf: ^3.0.2
     typescript: ^4.9.3
   peerDependencies:
-    "@propeldata/wc-plugins": "workspace:^0.1.23"
+    "@propeldata/wc-plugins": "workspace:^0.1.24"
     chart.js: ^4.0.1
     graphql: ^16.6.0
     graphql-request: ^3.6.1
@@ -2466,7 +2466,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/wc-plugins@workspace:^0.1.23, @propeldata/wc-plugins@workspace:packages/plugins":
+"@propeldata/wc-plugins@workspace:^0.1.24, @propeldata/wc-plugins@workspace:packages/plugins":
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-plugins@workspace:packages/plugins"
   dependencies:
@@ -2501,7 +2501,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/wc-time-series@workspace:packages/time-series"
   dependencies:
-    "@propeldata/wc-plugins": "workspace:^0.1.23"
+    "@propeldata/wc-plugins": "workspace:^0.1.24"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.6.0
