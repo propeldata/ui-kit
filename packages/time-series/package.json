@@ -1,27 +1,12 @@
 {
   "name": "@propeldata/wc-time-series",
   "version": "0.25.0",
-  "source": "src/index.ts",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      }
-    }
-  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "dev": "tsc -p tsconfig.cjs.json --watch",
-    "build": "yarn build:cjs && yarn build:esm",
-    "build:esm": "rimraf dist/esm && tsc -p tsconfig.esm.json",
-    "build:cjs": "rimraf dist/cjs && tsc -p tsconfig.cjs.json",
+    "dev": "yarn build --watch",
+    "build": "tsup --config tsup.config.ts",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer"
@@ -30,6 +15,7 @@
     "eslint": "^8.27.0",
     "lit-analyzer": "^1.2.1",
     "rimraf": "^3.0.2",
+    "tsup": "^6.5.0",
     "typescript": "^4.9.3"
   },
   "dependencies": {
