@@ -1803,15 +1803,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-typed-document-node/core@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@graphql-typed-document-node/core@npm:3.1.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.1.1.tgz"
-  peerDependencies:
-    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 87ff4cee308f1075f4472b80f9f9409667979940f8f701e87f0aa35ce5cf104d94b41258ea8192d05a0893475cd0f086a3929a07663b4fe8d0e805a277f07ed5
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.11.6":
   version: 0.11.7
   resolution: "@humanwhocodes/config-array@npm:0.11.7::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40humanwhocodes%2Fconfig-array%2F-%2Fconfig-array-0.11.7.tgz"
@@ -2446,7 +2437,7 @@ __metadata:
     "@propeldata/wc-plugins": "workspace:^0.1.23"
     chart.js: ^4.0.1
     graphql: ^16.6.0
-    graphql-request: ^5.0.0
+    graphql-request: ^3.6.1
   languageName: unknown
   linkType: soft
 
@@ -2514,7 +2505,7 @@ __metadata:
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.6.0
-    graphql-request: ^5.0.0
+    graphql-request: ^3.6.1
     lit: ^2.4.1
     lit-analyzer: ^1.2.1
     rimraf: ^3.0.2
@@ -7573,7 +7564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:^3.0.6, cross-fetch@npm:^3.1.5":
+"cross-fetch@npm:^3.0.6":
   version: 3.1.5
   resolution: "cross-fetch@npm:3.1.5::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcross-fetch%2F-%2Fcross-fetch-3.1.5.tgz"
   dependencies:
@@ -10153,20 +10144,6 @@ __metadata:
   peerDependencies:
     graphql: 14 - 16
   checksum: db3800cc4ee884cd1514d7d5eafafb9ed27694278fdddd7402345754a7d25e7d713246c72aa510b439b6df2633b74f2cf74fb36864a22a857d5fb2de1cf0b4d8
-  languageName: node
-  linkType: hard
-
-"graphql-request@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "graphql-request@npm:5.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fgraphql-request%2F-%2Fgraphql-request-5.0.0.tgz"
-  dependencies:
-    "@graphql-typed-document-node/core": ^3.1.1
-    cross-fetch: ^3.1.5
-    extract-files: ^9.0.0
-    form-data: ^3.0.0
-  peerDependencies:
-    graphql: 14 - 16
-  checksum: 2e8900d10cded401b253a05650719321123e3b0ad5bc57523288892e0226dccf43668ec937753420084f649fb4e3f998f2547c884b746a3e91fa0a43f93e62d4
   languageName: node
   linkType: hard
 

@@ -2,26 +2,13 @@
   "name": "@propeldata/wc-time-series",
   "version": "0.25.0",
   "source": "src/index.ts",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      }
-    }
-  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "dev": "tsc -p tsconfig.cjs.json --watch",
-    "build": "yarn build:cjs && yarn build:esm",
-    "build:esm": "rimraf dist/esm && tsc -p tsconfig.esm.json",
-    "build:cjs": "rimraf dist/cjs && tsc -p tsconfig.cjs.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "build": "rimraf dist && tsc -p tsconfig.json",
     "lint": "npm run lint:lit-analyzer && npm run lint:eslint",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "lint:lit-analyzer": "lit-analyzer"
@@ -36,7 +23,7 @@
     "@propeldata/wc-plugins": "workspace:^0.1.23",
     "chart.js": "^4.0.1",
     "graphql": "^16.6.0",
-    "graphql-request": "^5.0.0",
+    "graphql-request": "^3.6.1",
     "lit": "^2.4.1"
   },
   "customElements": "custom-elements.json"

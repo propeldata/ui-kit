@@ -1,6 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "lib": ["ES2019", "DOM"],
+    "module": "ES2015",
+    "target": "ES2019",
+    "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
