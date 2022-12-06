@@ -30,7 +30,7 @@
     "@propeldata/wc-plugins": "workspace:^0.1.23",
     "chart.js": "^4.0.1",
     "graphql": "^16.6.0",
-    "graphql-request": "^5.0.0"
+    "graphql-request": "^3.6.1"
   },
   "customElements": "custom-elements.json"
 }
