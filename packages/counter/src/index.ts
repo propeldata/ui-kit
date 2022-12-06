@@ -3,7 +3,7 @@ import { LitElement, html, adoptStyles, css, unsafeCSS } from 'lit'
 import { request } from 'graphql-request'
 import { customElement, property } from 'lit/decorators.js'
 
-import { CounterStyles } from './types'
+import { CounterStyles } from './types.js'
 import {
   QUERY,
   DEFAULT_PROPEL_API,
@@ -11,8 +11,8 @@ import {
   getValueWithPrefixAndSufix,
   getJustifyContentByPosition,
   getAlignItemsByPosition
-} from './utils'
-import { stylesInitialState } from './styles'
+} from './utils.js'
+import { stylesInitialState } from './styles.js'
 
 @customElement('wc-counter')
 export class Counter extends LitElement {

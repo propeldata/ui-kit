@@ -1,1 +1,1 @@
-export * from './customCanvasBackgroundColor'
+export * from './customCanvasBackgroundColor.js'

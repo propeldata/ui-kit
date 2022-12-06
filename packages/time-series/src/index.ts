@@ -13,9 +13,9 @@ import {
   Tooltip,
   Chart
 } from 'chart.js'
-import { scopedStyles, stylesInitialState } from './styles'
-import { BarStyles } from './types'
-import { QUERY, DEFAULT_PROPEL_API } from './utils'
+import { scopedStyles, stylesInitialState } from './styles.js'
+import { BarStyles } from './types.js'
+import { QUERY, DEFAULT_PROPEL_API } from './utils.js'
 
 /**
  * It registers only the modules that will be used
