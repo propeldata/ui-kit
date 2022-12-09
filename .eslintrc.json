@@ -6,19 +6,19 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:storybook/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react-hooks", "jsx-a11y", "prettier"],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module"
+  "plugins": ["@typescript-eslint", "react-hooks", "prettier"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "rules": {
     "import/no-anonymous-default-export": "off",
