@@ -2336,16 +2336,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/react-time-series@workspace:packages/react/time-series":
+"@propeldata/react-time-series@workspace:packages/react/TimeSeries":
   version: 0.0.0-use.local
-  resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
+  resolution: "@propeldata/react-time-series@workspace:packages/react/TimeSeries"
   dependencies:
     "@propeldata/propel-ui-plugins": "workspace:^0.1.24"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.6.0
     graphql-request: ^3.6.1
-    lit-analyzer: ^1.2.1
     rimraf: ^3.0.2
     tsup: ^6.5.0
     typescript: ^4.9.3

@@ -1,5 +1,3 @@
-import { css } from 'lit'
-
 export const stylesInitialState = {
   border: {
     width: 1,
@@ -26,10 +24,3 @@ export const stylesInitialState = {
     lineHeight: 1
   }
 } as const
-
-export const scopedStyles = css`
-  .chart-container {
-    height: 100%;
-    width: 100%;
-  }
-`
