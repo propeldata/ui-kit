@@ -1,4 +1,4 @@
-import { Position } from './types.js'
+import { Position } from './types'
 
 export const stylesInitialState = {
   width: '100%',

@@ -51,14 +51,22 @@ Chart.register(
 type Styles = BarStyles | LineStyles
 
 interface Props {
+  /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: Variant
+  /** `styles` attribute can be either `BarStyles` or `LineStyles` */
   styles?: Styles
+  /** Metric unique name */
   metric?: string
+  /** Relative time range that the chart will respond to */
   relativeTimeRange?: RelativeTimeRange
   n?: number
+  /** Granularity that the chart will respond to */
   granularity?: TimeSeriesGranularity
+  /** If passed along with `values` the component will ignore the built-in graphql operations */
   labels?: string[]
+  /** If passed along with `labels` the component will ignore the built-in graphql operations  */
   values?: string[]
+  /** This should eventually be replaced to customer's app credentials */
   accessToken?: string
 }
 

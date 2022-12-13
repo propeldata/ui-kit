@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request'
 
-import { Position } from './types.js'
+import { Position } from './types'
 
 export const DEFAULT_PROPEL_API = 'https://api.us-east-2.dev.propeldata.com/graphql'
 
