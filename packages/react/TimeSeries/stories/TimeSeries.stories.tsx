@@ -1,3 +1,4 @@
+import { Story } from '@storybook/react'
 import React from 'react'
 
 import { TimeSeries } from '../src'
@@ -19,16 +20,27 @@ const labels = [
 
 const values = ['0', '100', '200', '300', '400', '500', '700']
 
-const DumbTemplate = () => <TimeSeries labels={labels} values={values} />
-export const Dumb = DumbTemplate.bind({})
-
 const accessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzA4NjU1NDksImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjcwODY5MTQ5LCJpYXQiOjE2NzA4NjU1NDksImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiYWM2ODdmMGYtNGRiNy00MTE1LWFkZjAtNGVmNjE0MjRlM2Y3IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.8ujgTqdFmMTqWMyXWkHl7TW-tHgTFd_RS38qZEb6YYk'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzA5NDc5OTIsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjcwOTUxNTkyLCJpYXQiOjE2NzA5NDc5OTIsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiNDRlMTQyMTEtN2FjYy00N2Q0LWE5MDAtNzc2YmYxOGFmNzk5IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.gxh6xQaMAGfWgwUR2_YIteGjCbLSz4L_h7U-1CQPypg'
 
-const SmartTemplate = () => (
-  <TimeSeries accessToken={accessToken} metric="queryCount" relativeTimeRange={RelativeTimeRange.LastNDays} n={7} />
-)
-export const Smart = SmartTemplate.bind({})
+const Template: Story = (args) => <TimeSeries {...args} />
+export const Dumb = Template.bind({})
+Dumb.args = {
+  labels,
+  values
+}
 
-const LineTemplate = () => <TimeSeries variant="line" labels={labels} values={values} />
-export const Line = LineTemplate.bind({})
+export const Smart = Template.bind({})
+Smart.args = {
+  accessToken,
+  metric: 'queryCount',
+  RelativeTimeRange: RelativeTimeRange.LastNDays,
+  n: 7
+}
+
+export const Line = Template.bind({})
+Line.args = {
+  variant: 'line',
+  labels,
+  values
+}

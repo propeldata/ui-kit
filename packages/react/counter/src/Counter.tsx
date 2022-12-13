@@ -114,7 +114,7 @@ export function Counter(props: Props) {
   return (
     <div ref={containerRef} className="counter-container">
       <div ref={valueRef} className="counter-value">
-        ${getValueWithPrefixAndSufix({ prefix: prefixValue, value: value || fetchedValue, sufix: sufixValue })}
+        {getValueWithPrefixAndSufix({ prefix: prefixValue, value: value || fetchedValue, sufix: sufixValue })}
       </div>
     </div>
   )
