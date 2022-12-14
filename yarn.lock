@@ -1969,13 +1969,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit/reactive-element@npm:^1.3.0, @lit/reactive-element@npm:^1.4.0":
-  version: 1.4.2
-  resolution: "@lit/reactive-element@npm:1.4.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40lit%2Freactive-element%2F-%2Freactive-element-1.4.2.tgz"
-  checksum: b93eadc195b7da8b93f552d01891f0537b573acb35daa866b3bb9a495972c4e7568a540a9a413df18f92922dbb2f86fa0cdd76412e70f073df4dc4999d86bb30
-  languageName: node
-  linkType: hard
-
 "@mdx-js/mdx@npm:^1.6.22":
   version: 1.6.22
   resolution: "@mdx-js/mdx@npm:1.6.22::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40mdx-js%2Fmdx%2F-%2Fmdx-1.6.22.tgz"
@@ -2336,9 +2329,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/react-time-series@workspace:packages/react/TimeSeries":
+"@propeldata/react-time-series@workspace:packages/react/time-series":
   version: 0.0.0-use.local
-  resolution: "@propeldata/react-time-series@workspace:packages/react/TimeSeries"
+  resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
   dependencies:
     "@propeldata/propel-ui-plugins": "workspace:^0.1.24"
     chart.js: ^4.0.1
@@ -2367,17 +2360,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/wc-counter@workspace:packages/react/Counter":
+"@propeldata/wc-counter@workspace:packages/react/counter":
   version: 0.0.0-use.local
-  resolution: "@propeldata/wc-counter@workspace:packages/react/Counter"
+  resolution: "@propeldata/wc-counter@workspace:packages/react/counter"
   dependencies:
     "@propeldata/propel-ui-plugins": "workspace:^0.1.24"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.0.1
     graphql-request: ^3.6.1
-    lit: ^2.4.1
-    lit-analyzer: ^1.2.1
     rimraf: ^3.0.2
     tsup: ^6.5.0
     typescript: ^4.9.3
@@ -4096,13 +4087,6 @@ __metadata:
   version: 1.0.0
   resolution: "@types/treeify@npm:1.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40types%2Ftreeify%2F-%2Ftreeify-1.0.0.tgz"
   checksum: 1b2397030d13beee7f82b878ca80feeddb0d550a6b00d8be30082a370c0ac5985ecf7b9378cf93ea278ff00c3e900b416ae8d9379f2c7e8caecdece1dfc77380
-  languageName: node
-  linkType: hard
-
-"@types/trusted-types@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@types/trusted-types@npm:2.0.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40types%2Ftrusted-types%2F-%2Ftrusted-types-2.0.2.tgz"
-  checksum: 3371eef5f1c50e1c3c07a127c1207b262ba65b83dd167a1c460fc1b135a3fb0c97b9f508efebd383f239cc5dd5b7169093686a692a501fde9c3f7208657d9b0d
   languageName: node
   linkType: hard
 
@@ -6539,7 +6523,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"camelcase@npm:^5.0.0, camelcase@npm:^5.3.1":
+"camelcase@npm:^5.3.1":
   version: 5.3.1
   resolution: "camelcase@npm:5.3.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcamelcase%2F-%2Fcamelcase-5.3.1.tgz"
   checksum: e6effce26b9404e3c0f301498184f243811c30dfe6d0b9051863bd8e4034d09c8c2923794f280d6827e5aa055f6c434115ff97864a16a963366fb35fd673024b
@@ -6583,7 +6567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^2.0.0, chalk@npm:^2.4.1, chalk@npm:^2.4.2":
+"chalk@npm:^2.0.0, chalk@npm:^2.4.1":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fchalk%2F-%2Fchalk-2.4.2.tgz"
   dependencies:
@@ -6855,17 +6839,6 @@ __metadata:
   peerDependencies:
     typanion: "*"
   checksum: c9d8ba9e16dca3016c32f42107a7602c52c9176626e0c815113c32b614ca125a9707221ec9df9c0a06e9741a23e0664153db1522c4f80b29f4b4d427fba002be
-  languageName: node
-  linkType: hard
-
-"cliui@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "cliui@npm:6.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcliui%2F-%2Fcliui-6.0.0.tgz"
-  dependencies:
-    string-width: ^4.2.0
-    strip-ansi: ^6.0.0
-    wrap-ansi: ^6.2.0
-  checksum: 4fcfd26d292c9f00238117f39fc797608292ae36bac2168cfee4c85923817d0607fe21b3329a8621e01aedf512c99b7eaa60e363a671ffd378df6649fb48ae42
   languageName: node
   linkType: hard
 
@@ -7652,7 +7625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decamelize@npm:^1.1.0, decamelize@npm:^1.1.2, decamelize@npm:^1.2.0":
+"decamelize@npm:^1.1.0, decamelize@npm:^1.1.2":
   version: 1.2.0
   resolution: "decamelize@npm:1.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fdecamelize%2F-%2Fdecamelize-1.2.0.tgz"
   checksum: ad8c51a7e7e0720c70ec2eeb1163b66da03e7616d7b98c9ef43cce2416395e84c1e9548dd94f5f6ffecfee9f8b94251fc57121a8b021f2ff2469b2bae247b8aa
@@ -7880,17 +7853,6 @@ __metadata:
     detect: bin/detect-port.js
     detect-port: bin/detect-port.js
   checksum: b48da9340481742547263d5d985e65d078592557863402ecf538511735e83575867e94f91fe74405ea19b61351feb99efccae7e55de9a151d5654e3417cea05b
-  languageName: node
-  linkType: hard
-
-"didyoumean2@npm:4.1.0":
-  version: 4.1.0
-  resolution: "didyoumean2@npm:4.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fdidyoumean2%2F-%2Fdidyoumean2-4.1.0.tgz"
-  dependencies:
-    "@babel/runtime": ^7.10.2
-    leven: ^3.1.0
-    lodash.deburr: ^4.1.0
-  checksum: 56ca4ea577042c70e12b5fa57638ca928db39d3d21afa9263fcb01529f9a70646f2c32751b1fc5eab53ddb576e4ad2f485f0c5a02377f107ce139738065f4583
   languageName: node
   linkType: hard
 
@@ -9676,7 +9638,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-caller-file@npm:^2.0.1, get-caller-file@npm:^2.0.5":
+"get-caller-file@npm:^2.0.5":
   version: 2.0.5
   resolution: "get-caller-file@npm:2.0.5::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fget-caller-file%2F-%2Fget-caller-file-2.0.5.tgz"
   checksum: b9769a836d2a98c3ee734a88ba712e62703f1df31b94b784762c433c27a386dd6029ff55c2a920c392e33657d80191edbf18c61487e198844844516f843496b9
@@ -11771,13 +11733,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"leven@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "leven@npm:3.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fleven%2F-%2Fleven-3.1.0.tgz"
-  checksum: 638401d534585261b6003db9d99afd244dfe82d75ddb6db5c0df412842d5ab30b2ef18de471aaec70fe69a46f17b4ae3c7f01d8a4e6580ef7adb9f4273ad1e55
-  languageName: node
-  linkType: hard
-
 "levn@npm:^0.4.1":
   version: 0.4.1
   resolution: "levn@npm:0.4.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flevn%2F-%2Flevn-0.4.1.tgz"
@@ -11853,54 +11808,6 @@ __metadata:
     enquirer:
       optional: true
   checksum: 18975d690988aa2cce18fea9bacfc12c2607948ff9f7b7fd5b3e2b64d059b6e1961f8d06b4e1400d4c6bc18af84c7c145c2d22a1d392464fdb197c53b062e3d5
-  languageName: node
-  linkType: hard
-
-"lit-analyzer@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "lit-analyzer@npm:1.2.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flit-analyzer%2F-%2Flit-analyzer-1.2.1.tgz"
-  dependencies:
-    chalk: ^2.4.2
-    didyoumean2: 4.1.0
-    fast-glob: ^2.2.6
-    parse5: 5.1.0
-    ts-simple-type: ~1.0.5
-    vscode-css-languageservice: 4.3.0
-    vscode-html-languageservice: 3.1.0
-    web-component-analyzer: ~1.1.1
-  bin:
-    lit-analyzer: cli.js
-  checksum: b89646033b45262a863bf32d8bf177bfa4f22cde4e2c3f2cd006abdd68aeab434505f67c3c5ed213d8a5936d063ec2845efb15b0968ec9cf9e0863e53e6c118c
-  languageName: node
-  linkType: hard
-
-"lit-element@npm:^3.2.0":
-  version: 3.2.2
-  resolution: "lit-element@npm:3.2.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flit-element%2F-%2Flit-element-3.2.2.tgz"
-  dependencies:
-    "@lit/reactive-element": ^1.3.0
-    lit-html: ^2.2.0
-  checksum: e1df57c02ad5ae4c42b49a5066b3b623bccf7fa6610bbc3f65bc22cbbe1546ecd6a7f717b1f01863929262f416c4b8b7a39ff166114215f93cc22f4e5b3825c3
-  languageName: node
-  linkType: hard
-
-"lit-html@npm:^2.2.0, lit-html@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "lit-html@npm:2.4.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flit-html%2F-%2Flit-html-2.4.0.tgz"
-  dependencies:
-    "@types/trusted-types": ^2.0.2
-  checksum: fb2ff513a23ce35783c231d3c184103b681f62792e2fa500b17f0bbd93b1a3168153b3fd52ccaca2c25ee5bb7f4006b657fc15ae893fa5dc733774c01eda5dce
-  languageName: node
-  linkType: hard
-
-"lit@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "lit@npm:2.4.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flit%2F-%2Flit-2.4.1.tgz"
-  dependencies:
-    "@lit/reactive-element": ^1.4.0
-    lit-element: ^3.2.0
-    lit-html: ^2.4.0
-  checksum: 0f0673bd8f7c31d3f00cef0be26683f46e34048466c54b8663e8f13a7dbb6038f06aafa9abf3f0a6635c2d702fde7319d4f88b2bd9e2bd512f81c95fb691ca87
   languageName: node
   linkType: hard
 
@@ -11999,13 +11906,6 @@ __metadata:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flodash.debounce%2F-%2Flodash.debounce-4.0.8.tgz"
   checksum: a3f527d22c548f43ae31c861ada88b2637eb48ac6aa3eb56e82d44917971b8aa96fbb37aa60efea674dc4ee8c42074f90f7b1f772e9db375435f6c83a19b3bc6
-  languageName: node
-  linkType: hard
-
-"lodash.deburr@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "lodash.deburr@npm:4.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Flodash.deburr%2F-%2Flodash.deburr-4.1.0.tgz"
-  checksum: 6e2012315c20a4d8ed4f1884ed4b8e6b0093c6355a87bfd95ecf25a5243c8c88d747d67375d52cb87ebc99d090935ed8dc3814c8e661e3275a6dbe02b68efc99
   languageName: node
   linkType: hard
 
@@ -13683,13 +13583,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5@npm:5.1.0":
-  version: 5.1.0
-  resolution: "parse5@npm:5.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fparse5%2F-%2Fparse5-5.1.0.tgz"
-  checksum: 13c44c6d47035a3cc75303655ae5630dc264f9b9ab8344feb3f79ca195d8b57a2a246af902abef1d780ad1eee92eb9b88cd03098a7ee7dd111f032152ebaf0a6
-  languageName: node
-  linkType: hard
-
 "parse5@npm:^6.0.0":
   version: 6.0.1
   resolution: "parse5@npm:6.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fparse5%2F-%2Fparse5-6.0.1.tgz"
@@ -15019,13 +14912,6 @@ __metadata:
   version: 2.0.2
   resolution: "require-from-string@npm:2.0.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Frequire-from-string%2F-%2Frequire-from-string-2.0.2.tgz"
   checksum: a03ef6895445f33a4015300c426699bc66b2b044ba7b670aa238610381b56d3f07c686251740d575e22f4c87531ba662d06937508f0f3c0f1ddc04db3130560b
-  languageName: node
-  linkType: hard
-
-"require-main-filename@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "require-main-filename@npm:2.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Frequire-main-filename%2F-%2Frequire-main-filename-2.0.0.tgz"
-  checksum: e9e294695fea08b076457e9ddff854e81bffbe248ed34c1eec348b7abbd22a0d02e8d75506559e2265e96978f3c4720bd77a6dad84755de8162b357eb6c778c7
   languageName: node
   linkType: hard
 
@@ -16745,13 +16631,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-simple-type@npm:~1.0.5":
-  version: 1.0.7
-  resolution: "ts-simple-type@npm:1.0.7::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fts-simple-type%2F-%2Fts-simple-type-1.0.7.tgz"
-  checksum: 3cffb45eab7ab7fd963e2765914c41488d9611dc0619334ac1cf01bc2b02cf9746adf12172d785894474c6c5f3cfbf8212e675e456362373a0c2a61441ad8572
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^1.13.0, tslib@npm:^1.8.1, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Ftslib%2F-%2Ftslib-1.14.1.tgz"
@@ -16984,16 +16863,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^3.8.3":
-  version: 3.9.10
-  resolution: "typescript@npm:3.9.10::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Ftypescript%2F-%2Ftypescript-3.9.10.tgz"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 46c842e2cd4797b88b66ef06c9c41dd21da48b95787072ccf39d5f2aa3124361bc4c966aa1c7f709fae0509614d76751455b5231b12dbb72eb97a31369e1ff92
-  languageName: node
-  linkType: hard
-
 "typescript@npm:^4.6.4, typescript@npm:^4.8.4, typescript@npm:^4.9.3":
   version: 4.9.3
   resolution: "typescript@npm:4.9.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Ftypescript%2F-%2Ftypescript-4.9.3.tgz"
@@ -17001,16 +16870,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 17b8f816050b412403e38d48eef0e893deb6be522d6dc7caf105e54a72e34daf6835c447735fd2b28b66784e72bfbf87f627abb4818a8e43d1fa8106396128dc
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@^3.8.3#~builtin<compat/typescript>":
-  version: 3.9.10
-  resolution: "typescript@patch:typescript@npm%3A3.9.10%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-3.9.10.tgz#~builtin<compat/typescript>::version=3.9.10&hash=3bd3d3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: dc7141ab555b23a8650a6787f98845fc11692063d02b75ff49433091b3af2fe3d773650dea18389d7c21f47d620fb3b110ea363dab4ab039417a6ccbbaf96fc2
   languageName: node
   linkType: hard
 
@@ -17471,58 +17330,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vscode-css-languageservice@npm:4.3.0":
-  version: 4.3.0
-  resolution: "vscode-css-languageservice@npm:4.3.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvscode-css-languageservice%2F-%2Fvscode-css-languageservice-4.3.0.tgz"
-  dependencies:
-    vscode-languageserver-textdocument: ^1.0.1
-    vscode-languageserver-types: 3.16.0-next.2
-    vscode-nls: ^4.1.2
-    vscode-uri: ^2.1.2
-  checksum: 321645601039b3de9d8900b831401c3981438c65a27572be46a88c310c7d9abc5c02d9531bf3556dd9f2ad4e10176ca48ea1eac7458a01c878544513bb8589d5
-  languageName: node
-  linkType: hard
-
-"vscode-html-languageservice@npm:3.1.0":
-  version: 3.1.0
-  resolution: "vscode-html-languageservice@npm:3.1.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvscode-html-languageservice%2F-%2Fvscode-html-languageservice-3.1.0.tgz"
-  dependencies:
-    vscode-languageserver-textdocument: ^1.0.1
-    vscode-languageserver-types: 3.16.0-next.2
-    vscode-nls: ^4.1.2
-    vscode-uri: ^2.1.2
-  checksum: f12b4d004f8a845da1e5dccb2548820c2e413a37ff759aa97dfd1e7fcbe8cf9de4d21db24d52d30bb78a0a961bcc03c5afcc553df6950908b7eb9caa9bbd210b
-  languageName: node
-  linkType: hard
-
-"vscode-languageserver-textdocument@npm:^1.0.1":
-  version: 1.0.7
-  resolution: "vscode-languageserver-textdocument@npm:1.0.7::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvscode-languageserver-textdocument%2F-%2Fvscode-languageserver-textdocument-1.0.7.tgz"
-  checksum: 6018a8b2c87aeb6441419431909e9161e9659d214814193b029ca2b30d8b097d23538e4930942ef78f1440f52c57a93f7597144736b79ba1abd9f1a53c2ffbc0
-  languageName: node
-  linkType: hard
-
-"vscode-languageserver-types@npm:3.16.0-next.2":
-  version: 3.16.0-next.2
-  resolution: "vscode-languageserver-types@npm:3.16.0-next.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvscode-languageserver-types%2F-%2Fvscode-languageserver-types-3.16.0-next.2.tgz"
-  checksum: e7c30204082cd41847b7487b61f3c7375a1ab824cd5c74dfd511a3d68171128c88074071c7cc439faa949352b4dd5524b82a824d49a6af02b4e5c127f60f9712
-  languageName: node
-  linkType: hard
-
-"vscode-nls@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "vscode-nls@npm:4.1.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvscode-nls%2F-%2Fvscode-nls-4.1.2.tgz"
-  checksum: ad2059d732bd8964210a205158614986d278ecd86c44f610d0f962471961db43b9f5dd1f0962d28ac9f8347f679f3d0a5d6d8ea4e90a7fccf45bfbf9ccc4ab3c
-  languageName: node
-  linkType: hard
-
-"vscode-uri@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "vscode-uri@npm:2.1.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fvscode-uri%2F-%2Fvscode-uri-2.1.2.tgz"
-  checksum: 58c2d21018b86825b5a7f65f8879f837828a367bbf31d07ed59268fb2b56c9621a6996547d5e8f966d6ac05f0f921a7005f4541927007f788c2e4c6e5d6735e0
-  languageName: node
-  linkType: hard
-
 "walker@npm:^1.0.7, walker@npm:~1.0.5":
   version: 1.0.8
   resolution: "walker@npm:1.0.8::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fwalker%2F-%2Fwalker-1.0.8.tgz"
@@ -17574,21 +17381,6 @@ __metadata:
   dependencies:
     defaults: ^1.0.3
   checksum: 814e9d1ddcc9798f7377ffa448a5a3892232b9275ebb30a41b529607691c0491de47cba426e917a4d08ded3ee7e9ba2f3fe32e62ee3cd9c7d3bafb7754bd553c
-  languageName: node
-  linkType: hard
-
-"web-component-analyzer@npm:~1.1.1":
-  version: 1.1.6
-  resolution: "web-component-analyzer@npm:1.1.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fweb-component-analyzer%2F-%2Fweb-component-analyzer-1.1.6.tgz"
-  dependencies:
-    fast-glob: ^3.2.2
-    ts-simple-type: ~1.0.5
-    typescript: ^3.8.3
-    yargs: ^15.3.1
-  bin:
-    wca: cli.js
-    web-component-analyzer: cli.js
-  checksum: 8071b348ffc8e40ff024fc63490e9c7a0d9b929aa88b44548ccb559110ba926cf2063cefe864a7060c73d515a35496f6d8990bed9a743a819e6b4b26e93a9042
   languageName: node
   linkType: hard
 
@@ -17828,13 +17620,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"which-module@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "which-module@npm:2.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fwhich-module%2F-%2Fwhich-module-2.0.0.tgz"
-  checksum: 809f7fd3dfcb2cdbe0180b60d68100c88785084f8f9492b0998c051d7a8efe56784492609d3f09ac161635b78ea29219eb1418a98c15ce87d085bce905705c9c
-  languageName: node
-  linkType: hard
-
 "which-typed-array@npm:^1.1.8":
   version: 1.1.9
   resolution: "which-typed-array@npm:1.1.9::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fwhich-typed-array%2F-%2Fwhich-typed-array-1.1.9.tgz"
@@ -18040,39 +17825,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs-parser@npm:^18.1.2":
-  version: 18.1.3
-  resolution: "yargs-parser@npm:18.1.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fyargs-parser%2F-%2Fyargs-parser-18.1.3.tgz"
-  dependencies:
-    camelcase: ^5.0.0
-    decamelize: ^1.2.0
-  checksum: 60e8c7d1b85814594d3719300ecad4e6ae3796748b0926137bfec1f3042581b8646d67e83c6fc80a692ef08b8390f21ddcacb9464476c39bbdf52e34961dd4d9
-  languageName: node
-  linkType: hard
-
 "yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.3, yargs-parser@npm:^20.2.9":
   version: 20.2.9
   resolution: "yargs-parser@npm:20.2.9::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fyargs-parser%2F-%2Fyargs-parser-20.2.9.tgz"
   checksum: 8bb69015f2b0ff9e17b2c8e6bfe224ab463dd00ca211eece72a4cd8a906224d2703fb8a326d36fdd0e68701e201b2a60ed7cf81ce0fd9b3799f9fe7745977ae3
-  languageName: node
-  linkType: hard
-
-"yargs@npm:^15.3.1":
-  version: 15.4.1
-  resolution: "yargs@npm:15.4.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fyargs%2F-%2Fyargs-15.4.1.tgz"
-  dependencies:
-    cliui: ^6.0.0
-    decamelize: ^1.2.0
-    find-up: ^4.1.0
-    get-caller-file: ^2.0.1
-    require-directory: ^2.1.1
-    require-main-filename: ^2.0.0
-    set-blocking: ^2.0.0
-    string-width: ^4.2.0
-    which-module: ^2.0.0
-    y18n: ^4.0.0
-    yargs-parser: ^18.1.2
-  checksum: 40b974f508d8aed28598087720e086ecd32a5fd3e945e95ea4457da04ee9bdb8bdd17fd91acff36dc5b7f0595a735929c514c40c402416bbb87c03f6fb782373
   languageName: node
   linkType: hard
 
