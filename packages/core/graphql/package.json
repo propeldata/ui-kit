@@ -1,17 +1,25 @@
 {
-  "name": "@propeldata/propel-kit-graphql",
-  "version": "0.1.24",
+  "name": "@propeldata/ui-kit-graphql",
+  "version": "0.1.0",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
-    "dev": "tsc -p tsconfig.json --watch",
-    "build": "tsc -p tsconfig.json"
+    "dev": "yarn gen && tsc -p tsconfig.json --watch",
+    "build": "yarn gen && tsc -p tsconfig.json",
+    "gen": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "devDependencies": {
-    "typescript": "^4.9.3"
+    "@graphql-codegen/cli": "^2.2.2",
+    "@graphql-codegen/typescript": "^2.3.0",
+    "@graphql-codegen/typescript-operations": "^2.2.0",
+    "@propeldata/config-management-api-definitions": "^1.35.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "graphql": "^16.6.0"
   },
   "files": [
     "dist",

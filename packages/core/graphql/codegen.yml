@@ -1,12 +1,12 @@
 overwrite: true
+legacyMode: true
 config:
   fetcher: graphql-request
 generates:
-  src/graphql/generated/config.ts:
+  src/generated/index.ts:
     schema: ../../../node_modules/@propeldata/config-management-api-definitions/dist/private.graphql
     documents:
-      - src/**/*.cms.graphql
+      - src/**/*.graphql
     plugins:
       - typescript
       - typescript-operations
-      - typescript-react-query

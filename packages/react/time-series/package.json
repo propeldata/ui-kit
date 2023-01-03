@@ -19,7 +19,8 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@propeldata/propel-kit-plugins": "workspace:^0.1.24",
+    "@propeldata/ui-kit-graphql": "workspace:^0.1.0",
+    "@propeldata/ui-kit-plugins": "workspace:^0.1.24",
     "chart.js": "^4.0.1",
     "graphql": "^16.6.0",
     "graphql-request": "^3.6.1"
