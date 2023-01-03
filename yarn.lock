@@ -2279,9 +2279,72 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/propel-ui-monorepo@workspace:.":
+"@propeldata/propel-kit-graphql@workspace:packages/core/graphql":
   version: 0.0.0-use.local
-  resolution: "@propeldata/propel-ui-monorepo@workspace:."
+  resolution: "@propeldata/propel-kit-graphql@workspace:packages/core/graphql"
+  dependencies:
+    typescript: ^4.9.3
+  languageName: unknown
+  linkType: soft
+
+"@propeldata/propel-kit-plugins@workspace:^0.1.24, @propeldata/propel-kit-plugins@workspace:packages/core/plugins":
+  version: 0.0.0-use.local
+  resolution: "@propeldata/propel-kit-plugins@workspace:packages/core/plugins"
+  dependencies:
+    chart.js: ^4.0.1
+    typescript: ^4.9.3
+  languageName: unknown
+  linkType: soft
+
+"@propeldata/react-counter@workspace:packages/react/counter":
+  version: 0.0.0-use.local
+  resolution: "@propeldata/react-counter@workspace:packages/react/counter"
+  dependencies:
+    "@propeldata/propel-kit-plugins": "workspace:^0.1.24"
+    chart.js: ^4.0.1
+    eslint: ^8.27.0
+    graphql: ^16.0.1
+    graphql-request: ^3.6.1
+    rimraf: ^3.0.2
+    tsup: ^6.5.0
+    typescript: ^4.9.3
+  languageName: unknown
+  linkType: soft
+
+"@propeldata/react-time-series@workspace:packages/react/time-series":
+  version: 0.0.0-use.local
+  resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
+  dependencies:
+    "@propeldata/propel-kit-plugins": "workspace:^0.1.24"
+    chart.js: ^4.0.1
+    eslint: ^8.27.0
+    graphql: ^16.6.0
+    graphql-request: ^3.6.1
+    rimraf: ^3.0.2
+    tsup: ^6.5.0
+    typescript: ^4.9.3
+  peerDependencies:
+    react: ^17.0 || ^18.0
+    react-dom: ^17.0 || ^18.0
+  languageName: unknown
+  linkType: soft
+
+"@propeldata/release@npm:^1.9.31":
+  version: 1.9.31
+  resolution: "@propeldata/release@npm:1.9.31::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40propeldata%2Frelease%2F-%2Frelease-1.9.31.tgz"
+  dependencies:
+    "@monodeploy/node": ^3.2.0
+    "@monodeploy/types": ^3.2.0
+    conventional-changelog-angular: ^5.0.13
+  bin:
+    propel-release: ./bin/propel-release
+  checksum: 92de01006c2e7288b006368c74e0d527562ae0623b4bafeeea0d8db0cb73d61ff8ccb3ed0479d42a96e95c7ebd6212de8584103cd6849e12aec17512bbabd2e4
+  languageName: node
+  linkType: hard
+
+"@propeldata/ui-kit-monorepo@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@propeldata/ui-kit-monorepo@workspace:."
   dependencies:
     "@babel/core": ^7.20.5
     "@mdx-js/react": ^1.6.22
@@ -2317,61 +2380,6 @@ __metadata:
     react-dom: ^18.0.0
     turbo: ^1.5.5
     typescript: ^4.8.4
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/propel-ui-plugins@workspace:^0.1.24, @propeldata/propel-ui-plugins@workspace:packages/core/plugins":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/propel-ui-plugins@workspace:packages/core/plugins"
-  dependencies:
-    chart.js: ^4.0.1
-    typescript: ^4.9.3
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/react-time-series@workspace:packages/react/time-series":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
-  dependencies:
-    "@propeldata/propel-ui-plugins": "workspace:^0.1.24"
-    chart.js: ^4.0.1
-    eslint: ^8.27.0
-    graphql: ^16.6.0
-    graphql-request: ^3.6.1
-    rimraf: ^3.0.2
-    tsup: ^6.5.0
-    typescript: ^4.9.3
-  peerDependencies:
-    react: ^17.0 || ^18.0
-    react-dom: ^17.0 || ^18.0
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/release@npm:^1.9.31":
-  version: 1.9.31
-  resolution: "@propeldata/release@npm:1.9.31::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40propeldata%2Frelease%2F-%2Frelease-1.9.31.tgz"
-  dependencies:
-    "@monodeploy/node": ^3.2.0
-    "@monodeploy/types": ^3.2.0
-    conventional-changelog-angular: ^5.0.13
-  bin:
-    propel-release: ./bin/propel-release
-  checksum: 92de01006c2e7288b006368c74e0d527562ae0623b4bafeeea0d8db0cb73d61ff8ccb3ed0479d42a96e95c7ebd6212de8584103cd6849e12aec17512bbabd2e4
-  languageName: node
-  linkType: hard
-
-"@propeldata/wc-counter@workspace:packages/react/counter":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/wc-counter@workspace:packages/react/counter"
-  dependencies:
-    "@propeldata/propel-ui-plugins": "workspace:^0.1.24"
-    chart.js: ^4.0.1
-    eslint: ^8.27.0
-    graphql: ^16.0.1
-    graphql-request: ^3.6.1
-    rimraf: ^3.0.2
-    tsup: ^6.5.0
-    typescript: ^4.9.3
   languageName: unknown
   linkType: soft
 

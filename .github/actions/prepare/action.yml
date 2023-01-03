@@ -2,21 +2,21 @@ name: 'prepare'
 description: 'compile the project with all the appropriate caches'
 inputs:
   cache_key_suffix:
-    description: "Suffix to use for the cache key"
+    description: 'Suffix to use for the cache key'
     required: false
-    default: ""
+    default: ''
   cache_fresh_start:
     description: "Restarts the cache, this needs to be done sot that turborepo's cache doesn't grow unbounded https://github.com/vercel/turborepo/issues/863"
     required: false
-    default: "false"
+    default: 'false'
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - name: "Setup Node"
+    - name: 'Setup Node'
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-    - name: "Cache node_modules"
+    - name: 'Cache node_modules'
       uses: actions/cache@v3
       with:
         path: node_modules
@@ -25,19 +25,13 @@ runs:
           ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}${{ inputs.cache_key_suffix }}
           ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           ${{ runner.os }}-yarn-
-    - name: "Prune cache"
+    - name: 'Prune cache'
       shell: bash
       if: ${{ inputs.cache_fresh_start == 'true' }}
       run: rm -rf node_modules/.cache
-    - name: "Cache .clickhouse"
-      uses: actions/cache@v3
-      with:
-        path: .clickhouse
-        key: ${{ runner.os }}-clickhouse-${{ runner.arch }}
-    - name: "Install the project"
+    - name: 'Install the project'
       shell: bash
       run: yarn install
-    - name: "Compile the project"
+    - name: 'Compile the project'
       shell: bash
       run: yarn prepare
-
