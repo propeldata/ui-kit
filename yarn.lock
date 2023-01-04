@@ -3335,7 +3335,6 @@ __metadata:
     "@graphql-codegen/typescript-react-query": ^3.1.0
     "@propeldata/config-management-api-definitions": ^1.35.1
     graphql: ^16.6.0
-    graphql-request: ^3.6.1
     react-query: ^3.39.2
     typescript: ^4.9.4
   languageName: unknown
@@ -3385,6 +3384,8 @@ __metadata:
 "@propeldata/ui-kit-plugins@workspace:^0.1.24, @propeldata/ui-kit-plugins@workspace:packages/core/plugins":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-plugins@workspace:packages/core/plugins"
+  dependencies:
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 

@@ -5,21 +5,20 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
-    "dev": "yarn gen && tsc -p tsconfig.json --watch",
-    "build": "yarn gen && tsc -p tsconfig.json",
+    "dev": "yarn gen && tsc -p tsconfig.build.json --watch",
+    "build": "yarn gen && tsc -p tsconfig.build.json",
     "gen": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.2.2",
     "@graphql-codegen/typescript": "^2.3.0",
     "@graphql-codegen/typescript-operations": "^2.2.0",
+    "@graphql-codegen/typescript-react-query": "^3.1.0",
     "@propeldata/config-management-api-definitions": "^1.35.1",
+    "graphql": "^16.6.0",
+    "react-query": "^3.39.2",
     "typescript": "^4.9.4"
-  },
-  "dependencies": {
-    "graphql": "^16.6.0"
   },
   "files": [
     "dist",

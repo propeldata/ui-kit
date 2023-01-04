@@ -5,7 +5,6 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "module": "dist/index.js",
-  "type": "module",
   "scripts": {
     "dev": "yarn build --watch",
     "build": "tsup --config tsup.config.ts",

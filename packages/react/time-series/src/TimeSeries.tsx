@@ -1,6 +1,12 @@
 import React from 'react'
 import request from 'graphql-request'
-import { customCanvasBackgroundColor } from '@propeldata/propel-ui-plugins'
+import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
+import {
+  RelativeTimeRange,
+  TimeSeriesGranularity,
+  TimeSeriesDocument,
+  PROPEL_GRAPHQL_API_ENDPOINT
+} from '@propeldata/ui-kit-graphql'
 import {
   BarController,
   LineController,
@@ -14,10 +20,9 @@ import {
   PointElement
 } from 'chart.js'
 
-import { BarStyles, LineStyles, RelativeTimeRange, TimeSeriesData, TimeSeriesGranularity, Variant } from './types'
+import { BarStyles, LineStyles, TimeSeriesData, Variant } from './types'
 import { stylesInitialState } from './styles'
-import { DEFAULT_PROPEL_API, QUERY } from './utils'
-import './styles.css'
+import './scoped.css'
 
 /**
  * It registers only the modules that will be used
@@ -204,8 +209,8 @@ export function TimeSeries(props: Props) {
    */
   const fetchData = React.useCallback(async () => {
     const response = await request(
-      DEFAULT_PROPEL_API,
-      QUERY,
+      PROPEL_GRAPHQL_API_ENDPOINT,
+      TimeSeriesDocument,
       {
         uniqueName: metric,
         timeSeriesInput: {
@@ -241,8 +246,8 @@ export function TimeSeries(props: Props) {
   }, [accessToken, isDumb, granularity, metric, n, relativeTimeRange, setupChart, fetchData, labels, values])
 
   return (
-    <div className="chart-container">
-      <canvas ref={rootRef} id="chart-root"></canvas>
+    <div className="propel_time_series_chart-container">
+      <canvas ref={rootRef}></canvas>
     </div>
   )
 }

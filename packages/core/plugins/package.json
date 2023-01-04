@@ -5,13 +5,15 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
-    "dev": "tsc -p tsconfig.json --watch",
-    "build": "tsc -p tsconfig.json"
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json"
   },
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
 }
