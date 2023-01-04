@@ -1,22 +1,17 @@
 name: check-pull-request
 on:
   pull_request:
-
+env:
+  PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
+  BUILD_AWS_ACCESS_KEY_ID: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
+  BUILD_AWS_SECRET_ACCESS_KEY: ${{ secrets.BUILD_AWS_SECRET_ACCESS_KEY }}
+  BUILD_AWS_DEFAULT_REGION: ${{ secrets.BUILD_AWS_DEFAULT_REGION }}
 jobs:
   unit-test:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
-        with:
-          repository: propeldata/actions
-          token: ${{ secrets.PROPELDATA_CI_TOKEN }}
-          path: actions
-      - uses: ./actions/propel-code-artifact
-        with:
-          aws_access_key_id: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.BUILD_AWS_SECRET_ACCESS_KEY }}
-          aws_default_region: ${{ secrets.BUILD_AWS_DEFAULT_REGION }}
       - uses: ./.github/actions/prepare
         with:
           cache_key_suffix: '-unit-test'

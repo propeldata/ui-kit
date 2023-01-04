@@ -29,6 +29,17 @@ runs:
       shell: bash
       if: ${{ inputs.cache_fresh_start == 'true' }}
       run: rm -rf node_modules/.cache
+    - name: 'Checkout Propel actions'
+      uses: actions/checkout@v3
+      with:
+        repository: propeldata/actions
+        token: ${{ env.PROPELDATA_CI_TOKEN }}
+        path: actions
+    - uses: ./actions/propel-code-artifact
+      with:
+        aws_access_key_id: ${{ env.BUILD_AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ env.BUILD_AWS_SECRET_ACCESS_KEY }}
+        aws_default_region: ${{ env.BUILD_AWS_DEFAULT_REGION }}
     - name: 'Install the project'
       shell: bash
       run: yarn install
