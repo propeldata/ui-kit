@@ -16,7 +16,7 @@
     "postinstall": "husky install",
     "commit": "cz",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "yarn prepare && build-storybook"
   },
   "dependencies": {
     "react": "^18.0.0",
