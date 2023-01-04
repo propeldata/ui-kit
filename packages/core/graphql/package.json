@@ -6,8 +6,8 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "yarn gen && tsc -p tsconfig.build.json --watch",
-    "build": "yarn gen && tsc -p tsconfig.build.json",
+    "dev": "yarn gen && yarn build --watch",
+    "build": "yarn gen && tsup --config tsup.config.ts",
     "gen": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "devDependencies": {
@@ -18,6 +18,7 @@
     "@propeldata/config-management-api-definitions": "^1.35.1",
     "graphql": "^16.6.0",
     "react-query": "^3.39.2",
+    "tsup": "^6.5.0",
     "typescript": "^4.9.4"
   },
   "files": [

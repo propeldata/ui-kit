@@ -6,14 +6,15 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "tsc -p tsconfig.build.json --watch",
-    "build": "tsc -p tsconfig.build.json"
+    "dev": "yarn build --watch",
+    "build": "tsup --config tsup.config.ts"
   },
   "files": [
     "dist",
     "src"
   ],
   "devDependencies": {
+    "tsup": "^6.5.0",
     "typescript": "^4.9.4"
   }
 }

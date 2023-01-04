@@ -6,7 +6,7 @@ generates:
   src/generated/index.ts:
     schema: ../../../node_modules/@propeldata/config-management-api-definitions/dist/private.graphql
     documents:
-      - src/**/*.graphql
+      - ./**/*.graphql
     plugins:
       - typescript
       - typescript-operations
