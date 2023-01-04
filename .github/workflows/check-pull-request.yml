@@ -20,7 +20,7 @@ jobs:
       - uses: ./.github/actions/prepare
         with:
           cache_key_suffix: '-unit-test'
-      - run: echo "no tests yet"
+      - run: yarn test
 
   # lint:
   #   runs-on: ubuntu-latest
