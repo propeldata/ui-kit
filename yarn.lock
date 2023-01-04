@@ -3282,7 +3282,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/react-counter@workspace:packages/react/counter"
   dependencies:
-    "@propeldata/ui-kit-plugins": "workspace:^0.1.24"
+    "@propeldata/ui-kit-plugins": "workspace:^"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.0.1
@@ -3297,8 +3297,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
   dependencies:
-    "@propeldata/ui-kit-graphql": "workspace:^0.1.0"
-    "@propeldata/ui-kit-plugins": "workspace:^0.1.24"
+    "@propeldata/ui-kit-graphql": "workspace:^"
+    "@propeldata/ui-kit-plugins": "workspace:^"
     chart.js: ^4.0.1
     eslint: ^8.27.0
     graphql: ^16.6.0
@@ -3325,7 +3325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/ui-kit-graphql@workspace:^0.1.0, @propeldata/ui-kit-graphql@workspace:packages/core/graphql":
+"@propeldata/ui-kit-graphql@workspace:^, @propeldata/ui-kit-graphql@workspace:packages/core/graphql":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-graphql@workspace:packages/core/graphql"
   dependencies:
@@ -3381,7 +3381,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/ui-kit-plugins@workspace:^0.1.24, @propeldata/ui-kit-plugins@workspace:packages/core/plugins":
+"@propeldata/ui-kit-plugins@workspace:^, @propeldata/ui-kit-plugins@workspace:packages/core/plugins":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-plugins@workspace:packages/core/plugins"
   dependencies:
