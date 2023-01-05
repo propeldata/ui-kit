@@ -1,4 +1,4 @@
-export type PaddingOptions =
+export type ChartPaddingOptions =
   | number
   | {
       top?: number
@@ -34,7 +34,7 @@ export type BarStyles = {
   }
   canvas?: {
     backgroundColor?: string
-    padding?: PaddingOptions
+    padding?: ChartPaddingOptions
     borderRadius?: string
   }
 }
@@ -80,9 +80,9 @@ export type LineStyles = {
   }
   canvas?: {
     backgroundColor?: string
-    padding?: PaddingOptions
+    padding?: ChartPaddingOptions
     borderRadius?: string
   }
 }
 
-export type Variant = 'bar' | 'line'
+export type ChartVariant = 'bar' | 'line'

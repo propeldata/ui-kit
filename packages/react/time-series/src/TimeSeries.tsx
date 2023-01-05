@@ -12,17 +12,17 @@ import {
   LineController,
   BarElement,
   LineElement,
-  Colors,
   LinearScale,
   CategoryScale,
   Tooltip,
   Chart,
-  PointElement
+  PointElement,
+  Colors
 } from 'chart.js'
 
-import { BarStyles, LineStyles, TimeSeriesData, Variant } from './types'
-import { stylesInitialState } from './styles'
-import './main.css'
+import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './types'
+import { stylesInitialState } from './defaults'
+import * as scopedStyles from './TimeSeries.module.css'
 
 /**
  * It registers only the modules that will be used
@@ -30,24 +30,15 @@ import './main.css'
  * we reduce bundle weight
  */
 Chart.register(
-  {
-    BarController,
-    LineController,
-    PointElement
-  },
-  {
-    BarElement,
-    LineElement,
-    PointElement
-  },
-  {
-    Colors,
-    Tooltip
-  },
-  {
-    LinearScale,
-    CategoryScale
-  }
+  BarController,
+  LineController,
+  PointElement,
+  BarElement,
+  LineElement,
+  Tooltip,
+  LinearScale,
+  CategoryScale,
+  Colors
 )
 
 /**
@@ -57,7 +48,7 @@ type Styles = BarStyles | LineStyles
 
 interface Props {
   /** The variant the chart will respond to, can be either `bar` or `line` */
-  variant?: Variant
+  variant?: ChartVariant
 
   /** `styles` attribute can be either `BarStyles` or `LineStyles` */
   styles?: Styles
@@ -246,7 +237,7 @@ export function TimeSeries(props: Props) {
   }, [accessToken, isDumb, granularity, metric, n, relativeTimeRange, setupChart, fetchData, labels, values])
 
   return (
-    <div className="propel_time_series_chart-container">
+    <div className={scopedStyles.chartContainer}>
       <canvas ref={rootRef}></canvas>
     </div>
   )

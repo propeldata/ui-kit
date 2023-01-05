@@ -3,18 +3,18 @@
   "version": "0.1.24",
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/index.js",
+  "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "yarn build --watch",
-    "build": "tsup --config tsup.config.ts"
+    "dev": "parcel watch",
+    "build": "parcel build"
   },
   "files": [
     "dist",
     "src"
   ],
   "devDependencies": {
-    "tsup": "^6.5.0",
+    "parcel": "^2.8.2",
     "typescript": "^4.9.4"
   }
 }
