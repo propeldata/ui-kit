@@ -1,0 +1,8 @@
+.counter-container {
+  display: flex;
+}
+
+.counter-value {
+  width: 100%;
+  margin: 0;
+}

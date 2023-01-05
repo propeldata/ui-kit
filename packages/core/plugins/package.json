@@ -1,0 +1,20 @@
+{
+  "name": "@propeldata/ui-kit-plugins",
+  "version": "0.1.24",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "parcel watch",
+    "build": "parcel build"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "typescript": "^4.9.4"
+  }
+}
