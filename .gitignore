@@ -2,6 +2,7 @@
 node_modules
 dist
 .vercel
+.parcel-cache
 
 # Storybook
 storybook-static
