@@ -1,2 +1,2 @@
 export { TimeSeries } from './TimeSeries'
-export * from './types'
+export * from './__types__'

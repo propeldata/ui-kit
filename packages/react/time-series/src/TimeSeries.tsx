@@ -22,8 +22,8 @@ import {
   Colors
 } from 'chart.js'
 
-import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './types'
-import { stylesInitialState } from './defaults'
+import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './__types__'
+import { stylesInitialState } from './__defaults__'
 import scopedStyles from './TimeSeries.module.css'
 
 /**
