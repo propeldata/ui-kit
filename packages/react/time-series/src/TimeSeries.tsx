@@ -22,7 +22,7 @@ import {
 
 import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './types'
 import { stylesInitialState } from './defaults'
-import * as scopedStyles from './TimeSeries.module.css'
+import scopedStyles from './TimeSeries.module.css'
 
 /**
  * It registers only the modules that will be used

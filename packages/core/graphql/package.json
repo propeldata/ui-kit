@@ -6,8 +6,9 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "parcel watch",
-    "build": "parcel build"
+    "dev": "yarn gen && parcel watch",
+    "build": "yarn gen && parcel build",
+    "gen": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "dependencies": {
     "graphql": "^16.6.0",
