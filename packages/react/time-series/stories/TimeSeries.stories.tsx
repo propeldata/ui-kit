@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 
-import { TimeSeries } from '../src'
+import { TimeSeries, Props } from '../src'
 
 export default {
   title: 'React/TimeSeries'
@@ -19,7 +19,8 @@ const labels = [
 
 const values = ['0', '100', '200', '300', '400', '500', '700']
 
-const Template: Story = (args) => <TimeSeries {...args} />
+const Template: Story<Props> = (args) => <TimeSeries {...args} />
+
 export const Default = Template.bind({})
 Default.args = {
   labels,

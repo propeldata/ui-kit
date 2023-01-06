@@ -2,10 +2,12 @@ import React from 'react'
 import request from 'graphql-request'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import {
-  RelativeTimeRange,
   TimeSeriesGranularity,
   TimeSeriesDocument,
-  PROPEL_GRAPHQL_API_ENDPOINT
+  TimeRangeInput,
+  FilterInput,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  Propeller
 } from '@propeldata/ui-kit-graphql'
 import {
   BarController,
@@ -46,22 +48,26 @@ Chart.register(
  */
 type Styles = BarStyles | LineStyles
 
-interface Props {
-  /** The variant the chart will respond to, can be either `bar` or `line` */
-  variant?: ChartVariant
+export interface Props {
+  /** Time range that the chart will respond to */
+  timeRange?: TimeRangeInput
 
   /** `styles` attribute can be either `BarStyles` or `LineStyles` */
   styles?: Styles
 
+  /** The variant the chart will respond to, can be either `bar` or `line` */
+  variant?: ChartVariant
+
   /** Metric unique name */
   metric?: string
 
-  /** Relative time range that the chart will respond to */
-  relativeTimeRange?: RelativeTimeRange
-  n?: number
-
   /** Granularity that the chart will respond to */
   granularity?: TimeSeriesGranularity
+
+  /** Filters that the chart will respond to */
+  filters?: FilterInput[]
+
+  propeller?: Propeller
 
   /** If passed along with `values` the component will ignore the built-in graphql operations */
   labels?: string[]
@@ -78,8 +84,7 @@ export function TimeSeries(props: Props) {
     styles = stylesInitialState,
     variant = 'bar',
     metric,
-    relativeTimeRange = RelativeTimeRange.LastNDays,
-    n = 30,
+    timeRange,
     granularity = TimeSeriesGranularity.Day,
     labels,
     values,
@@ -94,11 +99,9 @@ export function TimeSeries(props: Props) {
   /**
    * Checks if the component is in `dumb` or `smart` mode
    */
-  const isDumb = React.useMemo(() => {
-    const hasValues = !!values && values.length > 0
-    const hasLabels = !!labels && labels.length > 0
-    return hasValues || hasLabels
-  }, [labels, values])
+  const hasValues = values && values.length > 0
+  const hasLabels = labels && labels.length > 0
+  const isDumb = React.useMemo(() => hasValues || hasLabels, [hasValues, hasLabels])
 
   /**
    * Sets up chart default values
@@ -205,10 +208,7 @@ export function TimeSeries(props: Props) {
       {
         uniqueName: metric,
         timeSeriesInput: {
-          timeRange: {
-            relative: relativeTimeRange,
-            n: n
-          },
+          timeRange,
           granularity
         }
       },
@@ -222,19 +222,15 @@ export function TimeSeries(props: Props) {
     const labels: string[] = [...metricData.labels]
     const values: string[] = [...metricData.values]
     return { labels, values }
-  }, [accessToken, granularity, metric, n, relativeTimeRange])
+  }, [accessToken, granularity, metric, timeRange])
 
   React.useEffect(() => {
-    async function setup() {
-      if (!isDumb) {
-        const { labels, values } = await fetchData()
-        setupChart({ labels, values })
-      } else {
-        setupChart({ labels, values })
-      }
+    const setup = async () => {
+      const data = isDumb ? { labels, values } : await fetchData()
+      setupChart(data)
     }
     setup()
-  }, [accessToken, isDumb, granularity, metric, n, relativeTimeRange, setupChart, fetchData, labels, values])
+  }, [isDumb, metric, setupChart, fetchData, labels, values])
 
   return (
     <div className={scopedStyles.chartContainer}>
