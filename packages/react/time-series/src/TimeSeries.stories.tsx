@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 
-import { TimeSeries, Props } from '../src'
+import { TimeSeries, Props } from './TimeSeries'
 
 export default {
   title: 'React/TimeSeries'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Story } from '@storybook/react'
-import { Counter } from '../src'
+import { Counter } from './Counter'
 
 export default {
   title: 'React/Counter'
