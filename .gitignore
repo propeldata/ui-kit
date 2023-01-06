@@ -3,6 +3,7 @@ node_modules
 dist
 .vercel
 .parcel-cache
+packages/*/generated
 
 # Storybook
 storybook-static
