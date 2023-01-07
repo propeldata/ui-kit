@@ -1,1 +1,1 @@
-# @propeldata/wc-counter
+# @propeldata/react-counter

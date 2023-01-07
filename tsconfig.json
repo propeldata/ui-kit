@@ -3,10 +3,11 @@
   "exclude": ["node_modules", "actions"],
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ESNext",
+    "target": "ES2018",
     "moduleResolution": "node",
     "lib": ["dom", "dom.iterable", "esnext"],
     "declaration": true,
+    "types": ["node", "css-modules"],
     "typeRoots": ["./node_modules/@types", "./types"],
     "noEmit": true,
     "strict": true,
