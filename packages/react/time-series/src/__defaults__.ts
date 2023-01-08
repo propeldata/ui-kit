@@ -1,16 +1,16 @@
-export const stylesInitialState = {
-  border: {
-    width: 1,
-    radius: 2,
-    color: '#94A3B8',
-    hoverColor: '#64748B'
-  },
-  background: {
-    color: '#CBD5E1',
-    hoverColor: '#64748B'
+import { BarStyles } from './__types__'
+
+export const stylesInitialState: BarStyles = {
+  bar: {
+    thickness: 20,
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#94A3B8',
+    hoverBorderColor: '#64748B',
+    backgroundColor: '#CBD5E1',
+    hoverBackgroundColor: '#64748B'
   },
   canvas: {
-    width: '100%',
     backgroundColor: '#ffffff',
     padding: 12,
     borderRadius: '0px'
@@ -23,4 +23,4 @@ export const stylesInitialState = {
     style: 'normal',
     lineHeight: 1
   }
-} as const
+}

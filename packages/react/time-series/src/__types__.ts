@@ -12,18 +12,9 @@ export type TimeSeriesData = {
   labels?: string[]
 }
 
-export type BarStyles = {
-  variant: 'bar'
-  border?: {
-    width?: number
-    radius?: number
-    color?: string
-    hoverColor?: string
-  }
-  background?: {
-    color?: string
-    hoverColor?: string
-  }
+export type ChartVariant = 'bar' | 'line'
+
+export type BaseStyles = {
   font?: {
     color?: string
     family?: string
@@ -33,31 +24,33 @@ export type BarStyles = {
     lineHeight?: number | string
   }
   canvas?: {
+    hideGridLines?: boolean
     backgroundColor?: string
     padding?: ChartPaddingOptions
     borderRadius?: string
   }
 }
 
-export type LineStyles = {
-  variant: 'line'
-  border?: {
-    width?: number
-    radius?: number
-    color?: string
-    hoverColor?: string
+export interface BarStyles extends BaseStyles {
+  bar?: {
+    thickness?: number
+    borderWidth?: number
+    borderRadius?: number
+    borderColor?: string
+    hoverBorderColor?: string
+    backgroundColor?: string
+    hoverBackgroundColor?: string
   }
-  background?: {
-    color?: string
-    hoverColor?: string
-  }
-  font?: {
-    color?: string
-    family?: string
-    size?: number
-    style?: 'normal' | 'italic' | 'oblique' | 'initial' | 'inherit'
-    weight?: string
-    lineHeight?: number | string
+}
+
+export interface LineStyles extends BaseStyles {
+  line?: {
+    borderWidth?: number
+    borderRadius?: number
+    borderColor?: string
+    hoverBorderColor?: string
+    backgroundColor?: string
+    hoverBackgroundColor?: string
   }
   point?: {
     style?: 'circle' | 'cross' | 'crossRot' | 'dash' | 'line' | 'rect' | 'rectRounded' | 'rectRot' | 'star' | 'triangle'
@@ -78,11 +71,4 @@ export type LineStyles = {
     hoverRadius?: string
     rotation?: string
   }
-  canvas?: {
-    backgroundColor?: string
-    padding?: ChartPaddingOptions
-    borderRadius?: string
-  }
 }
-
-export type ChartVariant = 'bar' | 'line'

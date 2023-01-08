@@ -19,12 +19,15 @@ import {
   Tooltip,
   Chart,
   PointElement,
-  Colors
+  Colors,
+  ChartTypeRegistry,
+  ElementOptionsByType
 } from 'chart.js'
 
 import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './__types__'
 import { stylesInitialState } from './__defaults__'
 import scopedStyles from './TimeSeries.module.css'
+import { generateBarConfig } from './__utils__'
 
 /**
  * It registers only the modules that will be used
@@ -42,6 +45,8 @@ Chart.register(
   CategoryScale,
   Colors
 )
+
+type ElementOptions = ElementOptionsByType<keyof ChartTypeRegistry>
 
 /**
  * `styles` attribute can be either `BarStyles` or `LineStyles`
@@ -91,6 +96,7 @@ export function TimeSeries(props: Props) {
     accessToken
   } = props
 
+  const barStyles = variant === 'bar' ? (styles as BarStyles) : undefined
   /**
    * The html node where the chart will render
    */
@@ -107,13 +113,97 @@ export function TimeSeries(props: Props) {
    * Sets up chart default values
    */
   const setupChartDefaults = React.useCallback(() => {
-    Chart.defaults.color = styles.font?.color as string
-    Chart.defaults.font.size = styles.font?.size
-    Chart.defaults.font.family = styles.font?.family
-    Chart.defaults.font.weight = styles.font?.weight
-    Chart.defaults.font.style = styles.font?.style
-    Chart.defaults.font.lineHeight = styles.font?.lineHeight
-  }, [styles])
+    const pointOptions: ElementOptions['point'] = {
+      radius: 3,
+      backgroundColor: '#fff',
+      borderColor: '#000',
+      borderWidth: 1,
+      hitRadius: 1,
+      hoverRadius: 4,
+      hoverBorderWidth: 1,
+      pointStyle: 'circle',
+      rotation: 0,
+      hoverBorderColor: 'rgba(0,0,0,0)',
+      hoverBackgroundColor: 'rgba(0,0,0,0)',
+      drawActiveElementsOnTop: true
+    }
+
+    const barOptions: ElementOptions['bar'] = {
+      backgroundColor: '#000',
+      borderWidth: 3,
+      borderRadius: 10,
+      borderColor: 'orange',
+      borderSkipped: 'bottom',
+      hoverBackgroundColor: 'green',
+      hoverBorderColor: 'red',
+      hoverBorderWidth: 6,
+      hoverBorderRadius: 2,
+      base: 0,
+      inflateAmount: 0
+    }
+
+    const lineOptions: ElementOptions['line'] = {
+      tension: 0.4,
+      backgroundColor: 'rgba(0,0,0,0)',
+      borderWidth: 2,
+      borderColor: '#000',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      capBezierPoints: true,
+      fill: true,
+      segment: {
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderWidth: 2,
+        borderColor: '#000',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter'
+      },
+      stepped: false,
+      cubicInterpolationMode: 'default',
+      spanGaps: false,
+      hoverBackgroundColor: 'rgba(0,0,0,0)',
+      hoverBorderCapStyle: 'butt',
+      hoverBorderDash: [],
+      hoverBorderDashOffset: 0.0,
+      hoverBorderJoinStyle: 'miter',
+      hoverBorderColor: 'rgba(0,0,0,0)',
+      hoverBorderWidth: 2
+    }
+
+    Chart.defaults.elements.bar = barOptions
+    Chart.defaults.elements.line = lineOptions
+    Chart.defaults.elements.point = pointOptions
+
+    Chart.defaults.plugins.tooltip.enabled = true
+    Chart.defaults.plugins.tooltip.padding = 8
+    Chart.defaults.plugins.tooltip.backgroundColor = 'white'
+    Chart.defaults.plugins.tooltip.bodyColor = 'cornflowerblue'
+    Chart.defaults.plugins.tooltip.titleColor = 'cornflowerblue'
+    Chart.defaults.plugins.tooltip.borderColor = 'cornflowerblue'
+    Chart.defaults.plugins.tooltip.borderWidth = 2
+    Chart.defaults.plugins.tooltip.titleFont = {
+      family: 'Helvetica Neue',
+      size: 14,
+      style: 'normal',
+      lineHeight: 1.2
+    }
+    Chart.defaults.plugins.tooltip.titleAlign = 'right'
+    Chart.defaults.plugins.tooltip.bodyFont = {
+      family: 'Helvetica Neue',
+      size: 12,
+      style: 'normal',
+      lineHeight: 1.2
+    }
+
+    Chart.defaults.plugins.tooltip.bodyAlign = 'right'
+    Chart.defaults.plugins.tooltip.caretSize = 2
+
+    Chart.defaults.plugins.tooltip.cornerRadius = 6
+  }, [])
 
   /**
    * Builds chartjs config
@@ -127,12 +217,13 @@ export function TimeSeries(props: Props) {
         datasets: [
           {
             data: values,
-            borderWidth: styles.border?.width,
-            borderRadius: styles.border?.radius,
-            borderColor: styles.border?.color,
-            hoverBorderColor: styles.border?.hoverColor,
-            backgroundColor: styles.background?.color,
-            hoverBackgroundColor: styles.background?.hoverColor
+            borderWidth: barStyles?.bar?.borderWidth,
+            borderRadius: barStyles?.bar?.borderRadius,
+            borderColor: barStyles?.bar?.borderColor,
+            hoverBorderColor: barStyles?.bar?.hoverBorderColor,
+            backgroundColor: barStyles?.bar?.backgroundColor,
+            hoverBackgroundColor: barStyles?.bar?.hoverBackgroundColor,
+            barThickness: barStyles?.bar?.thickness
           }
         ]
       }
@@ -172,7 +263,7 @@ export function TimeSeries(props: Props) {
         plugins: [customCanvasBackgroundColor]
       } as never
     },
-    [styles, variant]
+    [barStyles, variant, styles]
   )
 
   /**
@@ -189,7 +280,7 @@ export function TimeSeries(props: Props) {
 
       const config = buildChartConfig({ labels, values })
 
-      new Chart(rootRef.current, config)
+      new Chart(rootRef.current, generateBarConfig(styles) as never)
 
       rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
     },
