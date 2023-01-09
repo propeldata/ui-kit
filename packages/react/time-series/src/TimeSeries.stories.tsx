@@ -7,17 +7,9 @@ export default {
   title: 'React/TimeSeries'
 }
 
-const labels = [
-  '2022-10-25T00:00:00.000Z',
-  '2022-10-26T00:00:00.000Z',
-  '2022-10-27T00:00:00.000Z',
-  '2022-10-28T00:00:00.000Z',
-  '2022-10-29T00:00:00.000Z',
-  '2022-10-30T00:00:00.000Z',
-  '2022-10-31T00:00:00.000Z'
-]
+const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-const values = ['0', '100', '200', '300', '400', '500', '700']
+const values = [0, 100, 200, 300, 400, 500, 700]
 
 const Template: Story<Props> = (args) => <TimeSeries {...args} />
 
@@ -26,7 +18,6 @@ Default.args = {
   labels,
   values,
   styles: {
-    // variant: 'bar',
     bar: {
       thickness: 20,
       borderWidth: 1,

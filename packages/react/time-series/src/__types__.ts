@@ -1,3 +1,10 @@
+export type ChartVariant = 'bar' | 'line'
+
+export type TimeSeriesData = {
+  values?: number[]
+  labels?: string[]
+}
+
 export type ChartPaddingOptions =
   | number
   | {
@@ -6,13 +13,6 @@ export type ChartPaddingOptions =
       right?: number
       left?: number
     }
-
-export type TimeSeriesData = {
-  values?: string[]
-  labels?: string[]
-}
-
-export type ChartVariant = 'bar' | 'line'
 
 export type BaseStyles = {
   font?: {
