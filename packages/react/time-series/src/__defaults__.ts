@@ -1,6 +1,6 @@
-import { BarStyles } from './__types__'
+import { BarStyles, LineStyles } from './__types__'
 
-export const stylesInitialState: BarStyles = {
+export const stylesInitialState: BarStyles & LineStyles = {
   bar: {
     thickness: 20,
     borderWidth: 1,
@@ -9,6 +9,12 @@ export const stylesInitialState: BarStyles = {
     hoverBorderColor: '#64748B',
     backgroundColor: '#CBD5E1',
     hoverBackgroundColor: '#64748B'
+  },
+  line: {
+    tension: 0.4,
+    borderColor: '#94A3B8',
+    borderWidth: 2,
+    stepped: false
   },
   canvas: {
     backgroundColor: '#ffffff',
@@ -22,5 +28,16 @@ export const stylesInitialState: BarStyles = {
     weight: '500',
     style: 'normal',
     lineHeight: 1
+  },
+  tooltip: {
+    display: true,
+    backgroundColor: 'white',
+    borderRadius: 6,
+    borderColor: 'cornflowerblue',
+    borderWidth: 2,
+    color: 'cornflowerblue',
+    padding: 8,
+    alignContent: 'left',
+    caretSize: 2
   }
 }

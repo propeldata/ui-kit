@@ -23,7 +23,7 @@ import {
 
 import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './__types__'
 import { stylesInitialState } from './__defaults__'
-import { generateBarConfig, useSetupDefaultStyles } from './__utils__'
+import { generateBarConfig, generateLineConfig, useSetupDefaultStyles } from './__utils__'
 import scopedStyles from './TimeSeries.module.css'
 
 /**
@@ -86,6 +86,7 @@ export function TimeSeries(props: Props) {
   const { variant = 'bar', styles = stylesInitialState, labels, values, query } = props
 
   const barStyles = variant === 'bar' ? (styles as BarStyles) : undefined
+  const lineStyles = variant === 'line' ? (styles as LineStyles) : undefined
 
   /**
    * The html node where the chart will render
@@ -99,7 +100,7 @@ export function TimeSeries(props: Props) {
   const hasLabels = labels && labels.length > 0
   const isDumb = React.useMemo(() => hasValues || hasLabels, [hasValues, hasLabels])
 
-  useSetupDefaultStyles(styles, barStyles)
+  useSetupDefaultStyles(styles, barStyles, lineStyles)
 
   /**
    * Sets up chatjs instance
@@ -115,9 +116,9 @@ export function TimeSeries(props: Props) {
           barStyles,
           data: params
         }),
-        line: generateBarConfig({
+        line: generateLineConfig({
           styles,
-          barStyles,
+          lineStyles,
           data: params
         })
       }[variant]
@@ -125,8 +126,10 @@ export function TimeSeries(props: Props) {
       new Chart(rootRef.current, config)
 
       rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
+      rootRef.current.style.height = `${styles.canvas?.height}px`
+      rootRef.current.style.width = `${styles.canvas?.width}px`
     },
-    [styles, variant, barStyles]
+    [styles, variant, barStyles, lineStyles]
   )
 
   /**

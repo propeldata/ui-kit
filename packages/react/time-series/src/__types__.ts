@@ -1,3 +1,5 @@
+import { ChartTypeRegistry, PointStyle, ScriptableAndArray, ScriptableContext } from 'chart.js'
+
 export type ChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
@@ -24,10 +26,23 @@ export type BaseStyles = {
     lineHeight?: number | string
   }
   canvas?: {
+    width?: number
+    height?: number
     hideGridLines?: boolean
     backgroundColor?: string
     padding?: ChartPaddingOptions
     borderRadius?: string
+  }
+  tooltip?: {
+    display?: boolean
+    backgroundColor?: string
+    borderRadius?: number
+    borderColor?: string
+    borderWidth?: number
+    color?: string
+    padding?: number
+    alignContent?: 'left' | 'center' | 'right'
+    caretSize?: number
   }
 }
 
@@ -45,6 +60,8 @@ export interface BarStyles extends BaseStyles {
 
 export interface LineStyles extends BaseStyles {
   line?: {
+    tension?: number
+    stepped?: boolean
     borderWidth?: number
     borderRadius?: number
     borderColor?: string
@@ -53,22 +70,12 @@ export interface LineStyles extends BaseStyles {
     hoverBackgroundColor?: string
   }
   point?: {
-    style?: 'circle' | 'cross' | 'crossRot' | 'dash' | 'line' | 'rect' | 'rectRounded' | 'rectRot' | 'star' | 'triangle'
-    background?: {
-      color?: string
-      hoverColor?: string
-    }
-    border?: {
-      color?: string
-      width?: string
-      hoverColor?: string
-      hoverWidth?: string
-    }
-    hit?: {
-      radius?: string
-    }
-    radius?: string
-    hoverRadius?: string
-    rotation?: string
+    style?: ScriptableAndArray<PointStyle, ScriptableContext<keyof ChartTypeRegistry>>
+    radius?: number
+    borderWidth?: number
+    borderColor?: string
+    hoverBorderColor?: string
+    backgroundColor?: string
+    hoverBackgroundColor?: string
   }
 }
