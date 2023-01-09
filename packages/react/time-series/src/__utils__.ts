@@ -41,8 +41,6 @@ function generateCommonOptions(styles: Styles) {
     }
   } as _DeepPartialObject<PluginOptionsByType<keyof ChartTypeRegistry>>
 
-  console.log(styles.canvas?.width, styles.canvas?.height)
-
   return {
     responsive: !styles.canvas?.width && !styles.canvas?.height,
     maintainAspectRatio: false,
