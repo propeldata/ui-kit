@@ -1,6 +1,5 @@
 import React from 'react'
 import request from 'graphql-request'
-import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -22,8 +21,9 @@ import {
   Colors
 } from 'chart.js'
 
-import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './__types__'
-import { stylesInitialState } from './__defaults__'
+import { Styles, TimeSeriesData, ChartVariant } from './__types__'
+import { defaultStyles } from './__defaults__'
+import { generateConfig, useSetupDefaultStyles } from './__utils__'
 import scopedStyles from './TimeSeries.module.css'
 
 /**
@@ -43,53 +43,42 @@ Chart.register(
   Colors
 )
 
-/**
- * `styles` attribute can be either `BarStyles` or `LineStyles`
- */
-type Styles = BarStyles | LineStyles
-
 export interface Props {
-  /** Time range that the chart will respond to */
-  timeRange?: TimeRangeInput
+  /** The variant the chart will respond to, can be either `bar` or `line` */
+  variant?: ChartVariant
 
   /** `styles` attribute can be either `BarStyles` or `LineStyles` */
   styles?: Styles
 
-  /** The variant the chart will respond to, can be either `bar` or `line` */
-  variant?: ChartVariant
-
-  /** Metric unique name */
-  metric?: string
-
-  /** Granularity that the chart will respond to */
-  granularity?: TimeSeriesGranularity
-
-  /** Filters that the chart will respond to */
-  filters?: FilterInput[]
-
-  propeller?: Propeller
-
   /** If passed along with `values` the component will ignore the built-in graphql operations */
-  labels?: string[]
+  labels?: TimeSeriesData['labels']
 
   /** If passed along with `labels` the component will ignore the built-in graphql operations  */
-  values?: string[]
+  values?: TimeSeriesData['values']
 
-  /** This should eventually be replaced to customer's app credentials */
-  accessToken?: string
+  query?: {
+    /** This should eventually be replaced to customer's app credentials */
+    accessToken?: string
+
+    /** Metric unique name */
+    metric?: string
+
+    /** Time range that the chart will respond to */
+    timeRange?: TimeRangeInput
+
+    /** Granularity that the chart will respond to */
+    granularity?: TimeSeriesGranularity
+
+    /** Filters that the chart will respond to */
+    filters?: FilterInput[]
+
+    /** Propeller that the chart will respond to */
+    propeller?: Propeller
+  }
 }
 
 export function TimeSeries(props: Props) {
-  const {
-    styles = stylesInitialState,
-    variant = 'bar',
-    metric,
-    timeRange,
-    granularity = TimeSeriesGranularity.Day,
-    labels,
-    values,
-    accessToken
-  } = props
+  const { variant = 'bar', styles = defaultStyles, labels, values, query } = props
 
   /**
    * The html node where the chart will render
@@ -103,97 +92,23 @@ export function TimeSeries(props: Props) {
   const hasLabels = labels && labels.length > 0
   const isDumb = React.useMemo(() => hasValues || hasLabels, [hasValues, hasLabels])
 
-  /**
-   * Sets up chart default values
-   */
-  const setupChartDefaults = React.useCallback(() => {
-    Chart.defaults.color = styles.font?.color as string
-    Chart.defaults.font.size = styles.font?.size
-    Chart.defaults.font.family = styles.font?.family
-    Chart.defaults.font.weight = styles.font?.weight
-    Chart.defaults.font.style = styles.font?.style
-    Chart.defaults.font.lineHeight = styles.font?.lineHeight
-  }, [styles])
-
-  /**
-   * Builds chartjs config
-   */
-  const buildChartConfig = React.useCallback(
-    (params: TimeSeriesData) => {
-      const { labels, values } = params
-
-      const data = {
-        labels,
-        datasets: [
-          {
-            data: values,
-            borderWidth: styles.border?.width,
-            borderRadius: styles.border?.radius,
-            borderColor: styles.border?.color,
-            hoverBorderColor: styles.border?.hoverColor,
-            backgroundColor: styles.background?.color,
-            hoverBackgroundColor: styles.background?.hoverColor
-          }
-        ]
-      }
-
-      const options = {
-        maintainAspectRatio: false,
-        plugins: {
-          customCanvasBackgroundColor: {
-            color: styles.canvas?.backgroundColor
-          }
-        },
-        layout: {
-          padding: styles.canvas?.padding
-        },
-        scales: {
-          x: {
-            grid: { drawOnChartArea: false },
-            beginAtZero: true,
-            ticks: {
-              callback: (_: unknown, index: number) => {
-                const labelDate = new Date(labels?.[index] as string)
-                const month = labelDate.getUTCMonth() + 1
-                const day = labelDate.getUTCDate()
-
-                return `${month}/${day}`
-              }
-            }
-          }
-        }
-      }
-
-      return {
-        type: variant,
-        responsive: true,
-        data,
-        options,
-        plugins: [customCanvasBackgroundColor]
-      } as never
-    },
-    [styles, variant]
-  )
+  useSetupDefaultStyles(styles)
 
   /**
    * Sets up chatjs instance
    */
   const setupChart = React.useCallback(
     (params: TimeSeriesData) => {
-      const { labels, values } = params
-
       // If a root element is not found, Chart.js won't be able to render anything
       if (!rootRef.current) return
 
-      setupChartDefaults()
-
-      const config = buildChartConfig({ labels, values })
-
-      new Chart(rootRef.current, config)
+      new Chart(rootRef.current, generateConfig({ variant, styles, data: params }))
 
       rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
+      rootRef.current.style.height = `${styles.canvas?.height}px`
+      rootRef.current.style.width = `${styles.canvas?.width}px`
     },
-    [buildChartConfig, setupChartDefaults, styles]
+    [styles, variant]
   )
 
   /**
@@ -206,23 +121,23 @@ export function TimeSeries(props: Props) {
       PROPEL_GRAPHQL_API_ENDPOINT,
       TimeSeriesDocument,
       {
-        uniqueName: metric,
+        uniqueName: query?.metric,
         timeSeriesInput: {
-          timeRange,
-          granularity
+          timeRange: query?.timeRange,
+          granularity: query?.granularity
         }
       },
       {
-        authorization: `Bearer ${accessToken}`
+        authorization: `Bearer ${query?.accessToken}`
       }
     )
 
     const metricData = response.metricByName.timeSeries
 
     const labels: string[] = [...metricData.labels]
-    const values: string[] = [...metricData.values]
+    const values: number[] = [...metricData.values]
     return { labels, values }
-  }, [accessToken, granularity, metric, timeRange])
+  }, [query])
 
   React.useEffect(() => {
     const setup = async () => {
@@ -230,7 +145,7 @@ export function TimeSeries(props: Props) {
       setupChart(data)
     }
     setup()
-  }, [isDumb, metric, setupChart, fetchData, labels, values])
+  }, [isDumb, setupChart, fetchData, labels, values])
 
   return (
     <div className={scopedStyles.chartContainer}>

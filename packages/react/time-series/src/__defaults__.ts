@@ -1,16 +1,22 @@
-export const stylesInitialState = {
-  border: {
-    width: 1,
-    radius: 2,
-    color: '#94A3B8',
-    hoverColor: '#64748B'
+import { Styles } from './__types__'
+
+export const defaultStyles: Styles = {
+  bar: {
+    thickness: 20,
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#94A3B8',
+    hoverBorderColor: '#64748B',
+    backgroundColor: '#CBD5E1',
+    hoverBackgroundColor: '#64748B'
   },
-  background: {
-    color: '#CBD5E1',
-    hoverColor: '#64748B'
+  line: {
+    tension: 0.4,
+    borderColor: '#94A3B8',
+    borderWidth: 2,
+    stepped: false
   },
   canvas: {
-    width: '100%',
     backgroundColor: '#ffffff',
     padding: 12,
     borderRadius: '0px'
@@ -22,5 +28,19 @@ export const stylesInitialState = {
     weight: '500',
     style: 'normal',
     lineHeight: 1
+  },
+  tooltip: {
+    display: true,
+    backgroundColor: 'white',
+    borderRadius: 6,
+    borderColor: 'cornflowerblue',
+    borderWidth: 2,
+    color: 'cornflowerblue',
+    padding: 8,
+    alignContent: 'left',
+    caretSize: 2
+  },
+  point: {
+    style: 'circle'
   }
-} as const
+}

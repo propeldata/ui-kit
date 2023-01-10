@@ -1,2 +1,2 @@
 export { TimeSeries } from './TimeSeries'
-export * from './__types__'
+export type { Styles, ChartVariant, TimeSeriesData } from './__types__'

@@ -1,3 +1,12 @@
+import { ChartTypeRegistry, PluginOptionsByType, PointStyle, ScriptableAndArray, ScriptableContext } from 'chart.js'
+
+export type ChartVariant = 'bar' | 'line'
+
+export type TimeSeriesData = {
+  values?: number[]
+  labels?: string[]
+}
+
 export type ChartPaddingOptions =
   | number
   | {
@@ -7,23 +16,7 @@ export type ChartPaddingOptions =
       left?: number
     }
 
-export type TimeSeriesData = {
-  values?: string[]
-  labels?: string[]
-}
-
-export type BarStyles = {
-  variant: 'bar'
-  border?: {
-    width?: number
-    radius?: number
-    color?: string
-    hoverColor?: string
-  }
-  background?: {
-    color?: string
-    hoverColor?: string
-  }
+export type Styles = {
   font?: {
     color?: string
     family?: string
@@ -33,56 +26,68 @@ export type BarStyles = {
     lineHeight?: number | string
   }
   canvas?: {
+    width?: number
+    height?: number
+    hideGridLines?: boolean
     backgroundColor?: string
     padding?: ChartPaddingOptions
     borderRadius?: string
   }
-}
-
-export type LineStyles = {
-  variant: 'line'
-  border?: {
-    width?: number
-    radius?: number
+  tooltip?: {
+    display?: boolean
+    backgroundColor?: string
+    borderRadius?: number
+    borderColor?: string
+    borderWidth?: number
     color?: string
-    hoverColor?: string
+    padding?: number
+    alignContent?: 'left' | 'center' | 'right'
+    caretSize?: number
   }
-  background?: {
-    color?: string
-    hoverColor?: string
+  bar?: {
+    thickness?: number
+    borderWidth?: number
+    borderRadius?: number
+    borderColor?: string
+    hoverBorderColor?: string
+    backgroundColor?: string
+    hoverBackgroundColor?: string
   }
-  font?: {
-    color?: string
-    family?: string
-    size?: number
-    style?: 'normal' | 'italic' | 'oblique' | 'initial' | 'inherit'
-    weight?: string
-    lineHeight?: number | string
+  line?: {
+    tension?: number
+    stepped?: boolean
+    borderWidth?: number
+    borderRadius?: number
+    borderColor?: string
+    hoverBorderColor?: string
+    backgroundColor?: string
+    hoverBackgroundColor?: string
   }
   point?: {
-    style?: 'circle' | 'cross' | 'crossRot' | 'dash' | 'line' | 'rect' | 'rectRounded' | 'rectRot' | 'star' | 'triangle'
-    background?: {
-      color?: string
-      hoverColor?: string
-    }
-    border?: {
-      color?: string
-      width?: string
-      hoverColor?: string
-      hoverWidth?: string
-    }
-    hit?: {
-      radius?: string
-    }
-    radius?: string
-    hoverRadius?: string
-    rotation?: string
-  }
-  canvas?: {
+    style?: ScriptableAndArray<PointStyle, ScriptableContext<keyof ChartTypeRegistry>>
+    radius?: number
+    borderWidth?: number
+    borderColor?: string
+    hoverBorderColor?: string
     backgroundColor?: string
-    padding?: ChartPaddingOptions
-    borderRadius?: string
+    hoverBackgroundColor?: string
   }
 }
 
-export type ChartVariant = 'bar' | 'line'
+/**
+ * Workaround to make custom plugin types to work
+ */
+type _DeepPartialArray<T> = Array<DeepPartial<T>>
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+type DeepPartial<T> = T extends Function
+  ? T
+  : T extends Array<infer U>
+  ? _DeepPartialArray<U>
+  : T extends object
+  ? _DeepPartialObject<T>
+  : T | undefined
+
+type _DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> }
+
+export type CustomPlugins = _DeepPartialObject<PluginOptionsByType<keyof ChartTypeRegistry>>
