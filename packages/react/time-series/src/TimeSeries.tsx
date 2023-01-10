@@ -21,9 +21,9 @@ import {
   Colors
 } from 'chart.js'
 
-import { BarStyles, LineStyles, TimeSeriesData, ChartVariant } from './__types__'
-import { stylesInitialState } from './__defaults__'
-import { generateBarConfig, generateLineConfig, useSetupDefaultStyles } from './__utils__'
+import { Styles, TimeSeriesData, ChartVariant } from './__types__'
+import { defaultStyles } from './__defaults__'
+import { generateConfig, useSetupDefaultStyles } from './__utils__'
 import scopedStyles from './TimeSeries.module.css'
 
 /**
@@ -42,11 +42,6 @@ Chart.register(
   CategoryScale,
   Colors
 )
-
-/**
- * `styles` attribute can be either `BarStyles` or `LineStyles`
- */
-export type Styles = BarStyles | LineStyles
 
 export interface Props {
   /** The variant the chart will respond to, can be either `bar` or `line` */
@@ -83,10 +78,7 @@ export interface Props {
 }
 
 export function TimeSeries(props: Props) {
-  const { variant = 'bar', styles = stylesInitialState, labels, values, query } = props
-
-  const barStyles = variant === 'bar' ? (styles as BarStyles) : undefined
-  const lineStyles = variant === 'line' ? (styles as LineStyles) : undefined
+  const { variant = 'bar', styles = defaultStyles, labels, values, query } = props
 
   /**
    * The html node where the chart will render
@@ -100,7 +92,7 @@ export function TimeSeries(props: Props) {
   const hasLabels = labels && labels.length > 0
   const isDumb = React.useMemo(() => hasValues || hasLabels, [hasValues, hasLabels])
 
-  useSetupDefaultStyles(styles, barStyles, lineStyles)
+  useSetupDefaultStyles(styles)
 
   /**
    * Sets up chatjs instance
@@ -110,26 +102,13 @@ export function TimeSeries(props: Props) {
       // If a root element is not found, Chart.js won't be able to render anything
       if (!rootRef.current) return
 
-      const config = {
-        bar: generateBarConfig({
-          styles,
-          barStyles,
-          data: params
-        }),
-        line: generateLineConfig({
-          styles,
-          lineStyles,
-          data: params
-        })
-      }[variant]
-
-      new Chart(rootRef.current, config)
+      new Chart(rootRef.current, generateConfig({ variant, styles, data: params }))
 
       rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
       rootRef.current.style.height = `${styles.canvas?.height}px`
       rootRef.current.style.width = `${styles.canvas?.width}px`
     },
-    [styles, variant, barStyles, lineStyles]
+    [styles, variant]
   )
 
   /**

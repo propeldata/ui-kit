@@ -86,16 +86,8 @@ IngestionActivity.args = {
     canvas: {
       width: 100,
       height: 45,
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
       hideGridLines: true
-    },
-    font: {
-      color: '#475569',
-      family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-      size: 12,
-      weight: '500',
-      style: 'normal',
-      lineHeight: 1
     }
   }
 }

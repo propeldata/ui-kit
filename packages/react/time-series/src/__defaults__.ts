@@ -1,6 +1,6 @@
-import { BarStyles, LineStyles } from './__types__'
+import { Styles } from './__types__'
 
-export const stylesInitialState: BarStyles & LineStyles = {
+export const defaultStyles: Styles = {
   bar: {
     thickness: 20,
     borderWidth: 1,
@@ -39,5 +39,8 @@ export const stylesInitialState: BarStyles & LineStyles = {
     padding: 8,
     alignContent: 'left',
     caretSize: 2
+  },
+  point: {
+    style: 'circle'
   }
 }
