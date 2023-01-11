@@ -24,7 +24,7 @@ import {
 import { Styles, TimeSeriesData, ChartVariant } from './__types__'
 import { defaultStyles } from './__defaults__'
 import { generateConfig, useSetupDefaultStyles } from './__utils__'
-import scopedStyles from './TimeSeries.module.css'
+// import scopedStyles from './TimeSeries.module.css'
 
 /**
  * It registers only the modules that will be used
@@ -80,6 +80,7 @@ export interface Props {
 export function TimeSeries(props: Props) {
   const { variant = 'bar', styles = defaultStyles, labels, values, query } = props
 
+  const [chart, setChart] = React.useState<Chart>()
   /**
    * The html node where the chart will render
    */
@@ -90,7 +91,7 @@ export function TimeSeries(props: Props) {
    */
   const hasValues = values && values.length > 0
   const hasLabels = labels && labels.length > 0
-  const isDumb = React.useMemo(() => hasValues || hasLabels, [hasValues, hasLabels])
+  const isDumb = hasValues && hasLabels
 
   useSetupDefaultStyles(styles)
 
@@ -102,7 +103,7 @@ export function TimeSeries(props: Props) {
       // If a root element is not found, Chart.js won't be able to render anything
       if (!rootRef.current) return
 
-      new Chart(rootRef.current, generateConfig({ variant, styles, data: params }))
+      setChart(new Chart(rootRef.current, generateConfig({ variant, styles, data: params })))
 
       rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
       rootRef.current.style.height = `${styles.canvas?.height}px`
@@ -117,6 +118,11 @@ export function TimeSeries(props: Props) {
    * its on `labels` and `values`
    */
   const fetchData = React.useCallback(async () => {
+    if (!query?.accessToken || !query?.metric || !query?.timeRange) {
+      console.error('error')
+      return
+    }
+
     const response = await request(
       PROPEL_GRAPHQL_API_ENDPOINT,
       TimeSeriesDocument,
@@ -141,14 +147,24 @@ export function TimeSeries(props: Props) {
 
   React.useEffect(() => {
     const setup = async () => {
+      console.log('SETUP:', labels, values)
       const data = isDumb ? { labels, values } : await fetchData()
-      setupChart(data)
+      if (data) {
+        setupChart(data)
+      }
     }
     setup()
-  }, [isDumb, setupChart, fetchData, labels, values])
+
+    return () => {
+      if (chart) {
+        chart.destroy()
+      }
+    }
+  }, [isDumb, setupChart, fetchData, labels, values, chart])
 
   return (
-    <div className={scopedStyles.chartContainer}>
+    // <div className={scopedStyles.chartContainer}>
+    <div>
       <canvas ref={rootRef}></canvas>
     </div>
   )
