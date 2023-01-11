@@ -80,6 +80,8 @@ export interface Props {
 export function TimeSeries(props: Props) {
   const { variant = 'bar', styles = defaultStyles, labels, values, query } = props
 
+  const id = React.useId()
+
   const [chart, setChart] = React.useState<Chart>()
   /**
    * The html node where the chart will render
@@ -147,7 +149,6 @@ export function TimeSeries(props: Props) {
 
   React.useEffect(() => {
     const setup = async () => {
-      console.log('SETUP:', labels, values)
       const data = isDumb ? { labels, values } : await fetchData()
       if (data) {
         setupChart(data)
@@ -165,7 +166,7 @@ export function TimeSeries(props: Props) {
   return (
     // <div className={scopedStyles.chartContainer}>
     <div>
-      <canvas ref={rootRef}></canvas>
+      <canvas id={id} ref={rootRef}></canvas>
     </div>
   )
 }
