@@ -105,13 +105,15 @@ export function TimeSeries(props: Props) {
       // If a root element is not found, Chart.js won't be able to render anything
       if (!rootRef.current) return
 
-      setChart(new Chart(rootRef.current, generateConfig({ variant, styles, data: params })))
+      if (!chart) {
+        setChart(new Chart(rootRef.current, generateConfig({ variant, styles, data: params })))
 
-      rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
-      rootRef.current.style.height = `${styles.canvas?.height}px`
-      rootRef.current.style.width = `${styles.canvas?.width}px`
+        rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
+        rootRef.current.style.height = `${styles.canvas?.height}px`
+        rootRef.current.style.width = `${styles.canvas?.width}px`
+      }
     },
-    [styles, variant]
+    [styles, variant, chart]
   )
 
   /**
