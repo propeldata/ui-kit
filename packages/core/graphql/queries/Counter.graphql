@@ -1,0 +1,7 @@
+query Counter($counterInput: CounterInput!, $uniqueName: String!) {
+  metricByName(uniqueName: $uniqueName) {
+    counter(input: $counterInput) {
+      value
+    }
+  }
+}
