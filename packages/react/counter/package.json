@@ -10,6 +10,7 @@
     "build": "parcel build"
   },
   "dependencies": {
+    "@propeldata/ui-kit-graphql": "workspace:^0.2.0",
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0",
     "graphql": "^16.0.1",
     "graphql-request": "^3.6.1"

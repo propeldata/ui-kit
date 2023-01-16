@@ -1,8 +1,9 @@
 import React from 'react'
 import request from 'graphql-request'
+import { PROPEL_GRAPHQL_API_ENDPOINT, CounterDocument } from '@propeldata/ui-kit-graphql'
 
+import { getValueWithPrefixAndSufix } from './__utils__'
 import type { Styles } from './__types__'
-import { DEFAULT_PROPEL_API, getValueWithPrefixAndSufix, QUERY } from './__utils__'
 import { defaultStyles } from './__defaults__'
 
 interface Props {
@@ -44,8 +45,8 @@ export function Counter(props: Props) {
    */
   const fetchData = React.useCallback(async () => {
     const response = await request(
-      DEFAULT_PROPEL_API,
-      QUERY,
+      PROPEL_GRAPHQL_API_ENDPOINT,
+      CounterDocument,
       {
         uniqueName: query?.metric,
         counterInput: {
