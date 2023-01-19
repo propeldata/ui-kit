@@ -1,4 +1,4 @@
-import { Styles } from './__types__'
+import { Styles } from './types'
 
 export const defaultStyles: Styles = {
   bar: {

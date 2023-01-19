@@ -21,9 +21,9 @@ import {
   Colors
 } from 'chart.js'
 
-import { Styles, TimeSeriesData, ChartVariant } from './__types__'
-import { defaultStyles } from './__defaults__'
-import { generateConfig, useSetupDefaultStyles } from './__utils__'
+import { Styles, TimeSeriesData, ChartVariant } from './types'
+import { defaultStyles } from './defaults'
+import { generateConfig, useSetupDefaultStyles } from './utils'
 
 /**
  * It registers only the modules that will be used

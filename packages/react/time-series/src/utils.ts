@@ -2,7 +2,7 @@ import React from 'react'
 import { Chart, ChartTypeRegistry, TextAlign, Scriptable, ScriptableTooltipContext, ChartConfiguration } from 'chart.js'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 
-import { TimeSeriesData, Styles, ChartVariant, CustomPlugins } from './__types__'
+import { TimeSeriesData, Styles, ChartVariant, CustomPlugins } from './types'
 
 interface GenereateConfigOptions {
   variant: ChartVariant
