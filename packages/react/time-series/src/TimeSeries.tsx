@@ -24,7 +24,6 @@ import {
 import { Styles, TimeSeriesData, ChartVariant } from './__types__'
 import { defaultStyles } from './__defaults__'
 import { generateConfig, useSetupDefaultStyles } from './__utils__'
-// import scopedStyles from './TimeSeries.module.css'
 
 /**
  * It registers only the modules that will be used
@@ -166,8 +165,7 @@ export function TimeSeries(props: Props) {
   }, [isDumb, setupChart, fetchData, labels, values, chart])
 
   return (
-    // <div className={scopedStyles.chartContainer}>
-    <div>
+    <div style={{ height: '100%', width: '100%' }}>
       <canvas id={id} ref={rootRef}></canvas>
     </div>
   )
