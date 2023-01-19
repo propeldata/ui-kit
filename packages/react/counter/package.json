@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/react-counter",
-  "version": "0.25.1",
+  "version": "0.25.2",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
@@ -10,7 +10,7 @@
     "build": "parcel build"
   },
   "dependencies": {
-    "@propeldata/ui-kit-graphql": "workspace:^0.2.1",
+    "@propeldata/ui-kit-graphql": "workspace:^0.2.2",
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0",
     "graphql": "^16.0.1",
     "graphql-request": "^3.6.1"
