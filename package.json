@@ -25,8 +25,8 @@
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@mdx-js/react": "^1.6.22",
-    "@parcel/packager-ts": "2.8.2",
-    "@parcel/transformer-typescript-types": "2.8.2",
+    "@parcel/packager-ts": "^2.8.3",
+    "@parcel/transformer-typescript-types": "2.8.3",
     "@propeldata/release": "^1.9.31",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-docs": "^6.5.14",

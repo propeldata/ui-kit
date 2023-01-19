@@ -3011,20 +3011,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/cache@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/cache@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fcache%2F-%2Fcache-2.8.2.tgz"
-  dependencies:
-    "@parcel/fs": 2.8.2
-    "@parcel/logger": 2.8.2
-    "@parcel/utils": 2.8.2
-    lmdb: 2.5.2
-  peerDependencies:
-    "@parcel/core": ^2.8.2
-  checksum: 7d1c951e3f1f270621d369a8b9ba18bf8df397e39adfbfa8d0a55d7ae888353d62b9fa64c2edf79efceefbb7be452b02cdfc1bf086e9e65720080ef0988d3ecf
-  languageName: node
-  linkType: hard
-
 "@parcel/cache@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/cache@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fcache%2F-%2Fcache-2.8.3.tgz"
@@ -3036,15 +3022,6 @@ __metadata:
   peerDependencies:
     "@parcel/core": ^2.8.3
   checksum: cd679053d229f8d06536a8fc9d857e5fa58905492e1a97c4f6b1da82de0dcef202a609c1e36206d3cdb32e5da3a214525f868b98dfd7aa671a53dacceb004fd9
-  languageName: node
-  linkType: hard
-
-"@parcel/codeframe@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/codeframe@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fcodeframe%2F-%2Fcodeframe-2.8.2.tgz"
-  dependencies:
-    chalk: ^4.1.0
-  checksum: a2638353c60808434c5553af552561b4792e28ef34d0ecaf063adcddddfb023b5920568c36f2c23f0fe7535f254c83b17ebf80740745c5368b99ab6a300bf912
   languageName: node
   linkType: hard
 
@@ -3138,16 +3115,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/diagnostic@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/diagnostic@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fdiagnostic%2F-%2Fdiagnostic-2.8.2.tgz"
-  dependencies:
-    "@mischnic/json-sourcemap": ^0.1.0
-    nullthrows: ^1.1.1
-  checksum: 91ca29cce40c82f17e42193bdd34a3cacd78eb54c9b5a688c8f6633a0e8d914a0a9dad3b16da833e5012c8fc1ab14ae5d7f46836a31819343f585582f6cbac5d
-  languageName: node
-  linkType: hard
-
 "@parcel/diagnostic@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/diagnostic@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fdiagnostic%2F-%2Fdiagnostic-2.8.3.tgz"
@@ -3158,26 +3125,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/events@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/events@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fevents%2F-%2Fevents-2.8.2.tgz"
-  checksum: 99aad2e7358b0fad199e779f987bece900f0cbcd404abce1d801b1fa4249d453e71448080765fdc5afd79a9ced8897ced1e26def807c6cb03cdbba5e79661161
-  languageName: node
-  linkType: hard
-
 "@parcel/events@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/events@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fevents%2F-%2Fevents-2.8.3.tgz"
   checksum: 9d23c6663e9afce1d1094c46d38eba0b0171835201140258c1dcd33f63cfbc20bb1abdc163cbb7a01d407a8cf06c8742c10035c8a835ebca261b19d8ee0fbf7e
-  languageName: node
-  linkType: hard
-
-"@parcel/fs-search@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/fs-search@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Ffs-search%2F-%2Ffs-search-2.8.2.tgz"
-  dependencies:
-    detect-libc: ^1.0.3
-  checksum: b6b5956cc1a805c589312a8bff199a009174f2e97db38b03c99fe767105bb6cbe6f7e0796070f8061cd779d1c0f17328983a6c70201702783069153ffa57dfc9
   languageName: node
   linkType: hard
 
@@ -3187,21 +3138,6 @@ __metadata:
   dependencies:
     detect-libc: ^1.0.3
   checksum: 25e8eda6942fbf28e02cef1f5e94acafb3e33275a20b0a3e553402f04d2d24026be796b645728e872949dc8555b03a7d26d615a4f8eeed03a3af76aed535cc10
-  languageName: node
-  linkType: hard
-
-"@parcel/fs@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/fs@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Ffs%2F-%2Ffs-2.8.2.tgz"
-  dependencies:
-    "@parcel/fs-search": 2.8.2
-    "@parcel/types": 2.8.2
-    "@parcel/utils": 2.8.2
-    "@parcel/watcher": ^2.0.7
-    "@parcel/workers": 2.8.2
-  peerDependencies:
-    "@parcel/core": ^2.8.2
-  checksum: c25408fe2d6919312c3194709639bbb58a174f6f0e33aea26da1a5bc12dedf1c30fe164a2cb4536fecdad572c92b8cb94e7c2588f8c4943a7d17df5016f990c5
   languageName: node
   linkType: hard
 
@@ -3229,16 +3165,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/hash@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/hash@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fhash%2F-%2Fhash-2.8.2.tgz"
-  dependencies:
-    detect-libc: ^1.0.3
-    xxhash-wasm: ^0.4.2
-  checksum: 03f11563d2c5f310ebb317ba3f83fea200acc4dca5889a3b4d2a0e1224ec5bd7bfaf709e29d194be41c8967c00bdf29eaf81ff4659295d8b1f19e8d8a72465d5
-  languageName: node
-  linkType: hard
-
 "@parcel/hash@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/hash@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fhash%2F-%2Fhash-2.8.3.tgz"
@@ -3249,16 +3175,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/logger@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/logger@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Flogger%2F-%2Flogger-2.8.2.tgz"
-  dependencies:
-    "@parcel/diagnostic": 2.8.2
-    "@parcel/events": 2.8.2
-  checksum: 8d9b4264cbe97d6cec43e01f8da6910d965bb06bda06481aafb9fdc609bb141be850fcf09b52fc91e6bdd4fadf5b980f02c587989786e03a242674b3c5846188
-  languageName: node
-  linkType: hard
-
 "@parcel/logger@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/logger@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Flogger%2F-%2Flogger-2.8.3.tgz"
@@ -3266,15 +3182,6 @@ __metadata:
     "@parcel/diagnostic": 2.8.3
     "@parcel/events": 2.8.3
   checksum: 04fd46313138ea8e38c5bd051cd79ee245ad0a7bb6d5d12a892cafa79755af81ec1b6ddc83a79224bb74170bc1323f016cf849981326adb391f43920976ec9dc
-  languageName: node
-  linkType: hard
-
-"@parcel/markdown-ansi@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/markdown-ansi@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fmarkdown-ansi%2F-%2Fmarkdown-ansi-2.8.2.tgz"
-  dependencies:
-    chalk: ^4.1.0
-  checksum: aaff302f122f98b8e15436a28cc700ab66c4a3f56f3f092f91f4de65b01e6ec9f64015149b898a1a1f885406610cac65d3c196250c62ba8ff19abb043792c12c
   languageName: node
   linkType: hard
 
@@ -3377,23 +3284,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/package-manager@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/package-manager@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fpackage-manager%2F-%2Fpackage-manager-2.8.2.tgz"
-  dependencies:
-    "@parcel/diagnostic": 2.8.2
-    "@parcel/fs": 2.8.2
-    "@parcel/logger": 2.8.2
-    "@parcel/types": 2.8.2
-    "@parcel/utils": 2.8.2
-    "@parcel/workers": 2.8.2
-    semver: ^5.7.1
-  peerDependencies:
-    "@parcel/core": ^2.8.2
-  checksum: 99d022d3fafd50f899019fa730ddf2536bc04226c713a339861541edef345c8e4674f7b0e0d1395cdb0749c7d9b27d9287e1b98c574c75a4ab818636356eba30
-  languageName: node
-  linkType: hard
-
 "@parcel/package-manager@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/package-manager@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fpackage-manager%2F-%2Fpackage-manager-2.8.3.tgz"
@@ -3472,21 +3362,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/packager-ts@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/packager-ts@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fpackager-ts%2F-%2Fpackager-ts-2.8.2.tgz"
+"@parcel/packager-ts@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "@parcel/packager-ts@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fpackager-ts%2F-%2Fpackager-ts-2.8.3.tgz"
   dependencies:
-    "@parcel/plugin": 2.8.2
-  checksum: 1cd7515339223a2436caaa8226c4ae748fd50d8f77efa833ad2aedca532dc5c12f671e7f7d6cbb9dc8d17082fdaa0182360b03649512da2086e16996a6f352fc
-  languageName: node
-  linkType: hard
-
-"@parcel/plugin@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/plugin@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fplugin%2F-%2Fplugin-2.8.2.tgz"
-  dependencies:
-    "@parcel/types": 2.8.2
-  checksum: 5c9f0ec6ff0bdb547316dfe0f2d6060509e8f9725b7dfc8d9d09a8bc9a68cb34cc43590143be2e24db9c9f9fdffa203d183bbf420c9106b2a5a5f90a202cca99
+    "@parcel/plugin": 2.8.3
+  checksum: 9c000d7cfe558cf0b88e277c857ce1d446662ab22798f2e271d409df563d7137793e1348a62bf3cd0cb69e5bc5a9c5de68f1708c0029e37a71d15652809cd37d
   languageName: node
   linkType: hard
 
@@ -3745,45 +3626,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/transformer-typescript-types@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/transformer-typescript-types@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Ftransformer-typescript-types%2F-%2Ftransformer-typescript-types-2.8.2.tgz"
+"@parcel/transformer-typescript-types@npm:2.8.3":
+  version: 2.8.3
+  resolution: "@parcel/transformer-typescript-types@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Ftransformer-typescript-types%2F-%2Ftransformer-typescript-types-2.8.3.tgz"
   dependencies:
-    "@parcel/diagnostic": 2.8.2
-    "@parcel/plugin": 2.8.2
+    "@parcel/diagnostic": 2.8.3
+    "@parcel/plugin": 2.8.3
     "@parcel/source-map": ^2.1.1
-    "@parcel/ts-utils": 2.8.2
-    "@parcel/utils": 2.8.2
+    "@parcel/ts-utils": 2.8.3
+    "@parcel/utils": 2.8.3
     nullthrows: ^1.1.1
   peerDependencies:
     typescript: ">=3.0.0"
-  checksum: 007dbfce5b9aca7fc5ce17a41873147ff71c38fcf781598f5a33b23f18b4809068a0d1b29579def38d8ca79833dc163b4e6e09b1b0696b9a4b2ba76899e29965
+  checksum: 60d879b25481d22f8588e4b5e499193164393db39f1a4d41a9779b12fd1115b053658370268374b56bc855c2214930a4466cdf845d9d4cd76e54ed1ee1bb6317
   languageName: node
   linkType: hard
 
-"@parcel/ts-utils@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/ts-utils@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fts-utils%2F-%2Fts-utils-2.8.2.tgz"
+"@parcel/ts-utils@npm:2.8.3":
+  version: 2.8.3
+  resolution: "@parcel/ts-utils@npm:2.8.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fts-utils%2F-%2Fts-utils-2.8.3.tgz"
   dependencies:
     nullthrows: ^1.1.1
   peerDependencies:
     typescript: ">=3.0.0"
-  checksum: 718d1d2398606bce21dc80069880d858271593de38b8854894d5d71508234cb1b35439105d6d3894aa991f938e9cd164975ce3bdbffbc39c34ab29deb7875b0f
-  languageName: node
-  linkType: hard
-
-"@parcel/types@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/types@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Ftypes%2F-%2Ftypes-2.8.2.tgz"
-  dependencies:
-    "@parcel/cache": 2.8.2
-    "@parcel/diagnostic": 2.8.2
-    "@parcel/fs": 2.8.2
-    "@parcel/package-manager": 2.8.2
-    "@parcel/source-map": ^2.1.1
-    "@parcel/workers": 2.8.2
-    utility-types: ^3.10.0
-  checksum: 04b3d5f199296392adabbe271b2877f6a4544cd6e8fde7e8b562ca28be8d7fb877df4782d55e0312090e3696646e738a37b705bfe17ffc3252d05880339435d1
+  checksum: 002665a6e890420f15cc257afab814355a84e01a554d184e309c483e5c4fc7d2fda3edf9e8fc138a9f50792e9d3c95b705bc683f582bbc3f8e770f96ed305f24
   languageName: node
   linkType: hard
 
@@ -3799,21 +3665,6 @@ __metadata:
     "@parcel/workers": 2.8.3
     utility-types: ^3.10.0
   checksum: ece0abdd5c7cce32a246155f6828f6a92830341dfbceb81c9aaf7da44e0733b87ea8a607412dfe4b5ec59d7c9a3c1b1463b94ec8a5a82b745541881952003a16
-  languageName: node
-  linkType: hard
-
-"@parcel/utils@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/utils@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Futils%2F-%2Futils-2.8.2.tgz"
-  dependencies:
-    "@parcel/codeframe": 2.8.2
-    "@parcel/diagnostic": 2.8.2
-    "@parcel/hash": 2.8.2
-    "@parcel/logger": 2.8.2
-    "@parcel/markdown-ansi": 2.8.2
-    "@parcel/source-map": ^2.1.1
-    chalk: ^4.1.0
-  checksum: fcbc70426ec7777fee20b684c0719c58ae249fdcbe0b5b0a9998e8d0d28296eb3a781b1e8fe8ac37848139ad220c6440aa66a259f2e9d309e73d4b3f62353716
   languageName: node
   linkType: hard
 
@@ -3842,22 +3693,6 @@ __metadata:
     node-gyp: latest
     node-gyp-build: ^4.3.0
   checksum: 17f512ad6d5dbb40053ceea7091f8af754afc63786b8f050b225b89a8ba24900468aad8bc4edb25c0349b4c0c8d061f50aa19242c0af52cbc30e6ebf50c7bf4c
-  languageName: node
-  linkType: hard
-
-"@parcel/workers@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@parcel/workers@npm:2.8.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40parcel%2Fworkers%2F-%2Fworkers-2.8.2.tgz"
-  dependencies:
-    "@parcel/diagnostic": 2.8.2
-    "@parcel/logger": 2.8.2
-    "@parcel/types": 2.8.2
-    "@parcel/utils": 2.8.2
-    chrome-trace-event: ^1.0.2
-    nullthrows: ^1.1.1
-  peerDependencies:
-    "@parcel/core": ^2.8.2
-  checksum: df3f7933016783c5ef4905c0c0ce8cafbf7b50673c0cdf06cfd275f5799590be91a5252988e9d95b4de2b4fd5ab4a3ee804a8e425cae96cb14ef10220b7a419f
   languageName: node
   linkType: hard
 
@@ -4024,8 +3859,8 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.5
     "@mdx-js/react": ^1.6.22
-    "@parcel/packager-ts": 2.8.2
-    "@parcel/transformer-typescript-types": 2.8.2
+    "@parcel/packager-ts": ^2.8.3
+    "@parcel/transformer-typescript-types": 2.8.3
     "@propeldata/release": ^1.9.31
     "@storybook/addon-actions": ^6.5.14
     "@storybook/addon-docs": ^6.5.14
