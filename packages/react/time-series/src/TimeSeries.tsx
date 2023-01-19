@@ -16,7 +16,7 @@ import {
   LinearScale,
   CategoryScale,
   Tooltip,
-  Chart,
+  Chart as ChartJS,
   PointElement,
   Colors
 } from 'chart.js'
@@ -30,7 +30,7 @@ import { generateConfig, useSetupDefaultStyles } from './__utils__'
  * in the context of a BarChart and LineChart so
  * we reduce bundle weight
  */
-Chart.register(
+ChartJS.register(
   BarController,
   LineController,
   PointElement,
@@ -80,12 +80,12 @@ export function TimeSeries(props: Props) {
   const { variant = 'bar', styles = defaultStyles, labels, values, query } = props
 
   const id = React.useId()
-
-  const [chart, setChart] = React.useState<Chart>()
   /**
    * The html node where the chart will render
    */
-  const rootRef = React.useRef<HTMLCanvasElement>(null)
+  const canvasRef = React.useRef<HTMLCanvasElement>(null)
+
+  const chartRef = React.useRef<ChartJS | null>()
 
   /**
    * Checks if the component is in `dumb` or `smart` mode
@@ -96,24 +96,22 @@ export function TimeSeries(props: Props) {
 
   useSetupDefaultStyles(styles)
 
-  /**
-   * Sets up chatjs instance
-   */
-  const setupChart = React.useCallback(
-    (params: TimeSeriesData) => {
-      // If a root element is not found, Chart.js won't be able to render anything
-      if (!rootRef.current) return
+  const renderChart = (data?: TimeSeriesData) => {
+    if (!canvasRef.current || !data) return
 
-      if (!chart) {
-        setChart(new Chart(rootRef.current, generateConfig({ variant, styles, data: params })))
+    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
 
-        rootRef.current.style.borderRadius = styles.canvas?.borderRadius as string
-        rootRef.current.style.height = `${styles.canvas?.height}px`
-        rootRef.current.style.width = `${styles.canvas?.width}px`
-      }
-    },
-    [styles, variant, chart]
-  )
+    canvasRef.current.style.borderRadius = styles.canvas?.borderRadius as string
+    canvasRef.current.style.height = `${styles.canvas?.height}px`
+    canvasRef.current.style.width = `${styles.canvas?.width}px`
+  }
+
+  const destroyChart = () => {
+    if (chartRef.current) {
+      chartRef.current.destroy()
+      chartRef.current = null
+    }
+  }
 
   /**
    * Fetches the time series data
@@ -149,24 +147,18 @@ export function TimeSeries(props: Props) {
   }, [query])
 
   React.useEffect(() => {
-    const setup = async () => {
+    async function renderChartWithData() {
       const data = isDumb ? { labels, values } : await fetchData()
-      if (data) {
-        setupChart(data)
-      }
+      renderChart(data)
     }
-    setup()
-
-    return () => {
-      if (chart) {
-        chart.destroy()
-      }
-    }
-  }, [isDumb, setupChart, fetchData, labels, values, chart])
+    renderChartWithData()
+    return () => destroyChart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div style={{ height: '100%', width: '100%' }}>
-      <canvas id={id} ref={rootRef}></canvas>
+      <canvas id={id} ref={canvasRef} role="img"></canvas>
     </div>
   )
 }
