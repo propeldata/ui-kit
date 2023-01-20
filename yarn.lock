@@ -3920,6 +3920,7 @@ __metadata:
   resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
   dependencies:
     "@emotion/css": ^11.10.5
+    "@propeldata/ui-kit-components": "workspace:^0.1.0"
     "@propeldata/ui-kit-graphql": "workspace:^0.2.2"
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0"
     chart.js: ^4.1.2
@@ -3946,7 +3947,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/ui-kit-components@workspace:packages/core/components":
+"@propeldata/ui-kit-components@workspace:^0.1.0, @propeldata/ui-kit-components@workspace:packages/core/components":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-components@workspace:packages/core/components"
   dependencies:
@@ -5485,12 +5486,12 @@ __metadata:
   linkType: hard
 
 "@types/glob@npm:*":
-  version: 8.0.0
-  resolution: "@types/glob@npm:8.0.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40types%2Fglob%2F-%2Fglob-8.0.0.tgz"
+  version: 8.0.1
+  resolution: "@types/glob@npm:8.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40types%2Fglob%2F-%2Fglob-8.0.1.tgz"
   dependencies:
-    "@types/minimatch": "*"
+    "@types/minimatch": ^5.1.2
     "@types/node": "*"
-  checksum: 1817b05f5a8aed851d102a65b5e926d5c777bef927ea62b36d635860eef5364f2046bb5a692d135b6f2b28f34e4a9d44ade9396122c0845bcc7636d35f624747
+  checksum: 98f3d0403c09638348a2f3b30aac2a3d6bdc306bce3ceb868f4794fef4f02727ccdf0dab0c7b7d65fd38a1afa1e48f02de56d29d2babe94ee9b204ca54acb31f
   languageName: node
   linkType: hard
 
@@ -5630,7 +5631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/minimatch@npm:*":
+"@types/minimatch@npm:*, @types/minimatch@npm:^5.1.2":
   version: 5.1.2
   resolution: "@types/minimatch@npm:5.1.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40types%2Fminimatch%2F-%2Fminimatch-5.1.2.tgz"
   checksum: 0391a282860c7cb6fe262c12b99564732401bdaa5e395bee9ca323c312c1a0f45efbf34dce974682036e857db59a5c9b1da522f3d6055aeead7097264c8705a8
@@ -8936,8 +8937,8 @@ __metadata:
   linkType: hard
 
 "commitizen@npm:^4.0.3, commitizen@npm:^4.2.5":
-  version: 4.2.6
-  resolution: "commitizen@npm:4.2.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcommitizen%2F-%2Fcommitizen-4.2.6.tgz"
+  version: 4.3.0
+  resolution: "commitizen@npm:4.3.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcommitizen%2F-%2Fcommitizen-4.3.0.tgz"
   dependencies:
     cachedir: 2.3.0
     cz-conventional-changelog: 3.3.0
@@ -8947,17 +8948,17 @@ __metadata:
     find-root: 1.1.0
     fs-extra: 9.1.0
     glob: 7.2.3
-    inquirer: 8.2.4
+    inquirer: 8.2.5
     is-utf8: ^0.2.1
     lodash: 4.17.21
-    minimist: 1.2.6
+    minimist: 1.2.7
     strip-bom: 4.0.0
     strip-json-comments: 3.1.1
   bin:
     commitizen: bin/commitizen
     cz: bin/git-cz
     git-cz: bin/git-cz
-  checksum: 4423b25900a02d10e6a6aa98d58404bad0c0c2a68bbeff1ef2379c1ef04344a1fecdaaac3e773988d460de93c8ed4325d1afc186a01f904f7f27edcffcccfd49
+  checksum: 5a54f81ab7f24b74dd7791ae408796b0ac9ae6675cbe85db71047cee131e627ed5bfb9365de8b5777bedfbcdee1bccf15e5da5dae8b09b3fce93b551baa2cb63
   languageName: node
   linkType: hard
 
@@ -11542,13 +11543,13 @@ __metadata:
   linkType: hard
 
 "get-intrinsic@npm:^1.0.2, get-intrinsic@npm:^1.1.1, get-intrinsic@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "get-intrinsic@npm:1.1.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fget-intrinsic%2F-%2Fget-intrinsic-1.1.3.tgz"
+  version: 1.2.0
+  resolution: "get-intrinsic@npm:1.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fget-intrinsic%2F-%2Fget-intrinsic-1.2.0.tgz"
   dependencies:
     function-bind: ^1.1.1
     has: ^1.0.3
     has-symbols: ^1.0.3
-  checksum: 152d79e87251d536cf880ba75cfc3d6c6c50e12b3a64e1ea960e73a3752b47c69f46034456eae1b0894359ce3bc64c55c186f2811f8a788b75b638b06fab228a
+  checksum: 78fc0487b783f5c58cf2dccafc3ae656ee8d2d8062a8831ce4a95e7057af4587a1d4882246c033aca0a7b4965276f4802b45cc300338d1b77a73d3e3e3f4877d
   languageName: node
   linkType: hard
 
@@ -12645,30 +12646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:8.2.4":
-  version: 8.2.4
-  resolution: "inquirer@npm:8.2.4::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Finquirer%2F-%2Finquirer-8.2.4.tgz"
-  dependencies:
-    ansi-escapes: ^4.2.1
-    chalk: ^4.1.1
-    cli-cursor: ^3.1.0
-    cli-width: ^3.0.0
-    external-editor: ^3.0.3
-    figures: ^3.0.0
-    lodash: ^4.17.21
-    mute-stream: 0.0.8
-    ora: ^5.4.1
-    run-async: ^2.4.0
-    rxjs: ^7.5.5
-    string-width: ^4.1.0
-    strip-ansi: ^6.0.0
-    through: ^2.3.6
-    wrap-ansi: ^7.0.0
-  checksum: dfcb6529d3af443dfea2241cb471508091b51f5121a088fdb8728b23ec9b349ef0a5e13a0ef2c8e19457b0bed22f7cbbcd561f7a4529d084c562a58c605e2655
-  languageName: node
-  linkType: hard
-
-"inquirer@npm:^8.0.0":
+"inquirer@npm:8.2.5, inquirer@npm:^8.0.0":
   version: 8.2.5
   resolution: "inquirer@npm:8.2.5::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Finquirer%2F-%2Finquirer-8.2.5.tgz"
   dependencies:
@@ -13602,9 +13580,9 @@ __metadata:
   linkType: hard
 
 "js-sdsl@npm:^4.1.4":
-  version: 4.2.0
-  resolution: "js-sdsl@npm:4.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fjs-sdsl%2F-%2Fjs-sdsl-4.2.0.tgz"
-  checksum: 2cd0885f7212afb355929d72ca105cb37de7e95ad6031e6a32619eaefa46735a7d0fb682641a0ba666e1519cb138fe76abc1eea8a34e224140c9d94c995171f1
+  version: 4.3.0
+  resolution: "js-sdsl@npm:4.3.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fjs-sdsl%2F-%2Fjs-sdsl-4.3.0.tgz"
+  checksum: ce908257cf6909e213af580af3a691a736f5ee8b16315454768f917a682a4ea0c11bde1b241bbfaecedc0eb67b72101b2c2df2ffaed32aed5d539fca816f054e
   languageName: node
   linkType: hard
 
@@ -14924,14 +14902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimist@npm:1.2.6":
-  version: 1.2.6
-  resolution: "minimist@npm:1.2.6::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fminimist%2F-%2Fminimist-1.2.6.tgz"
-  checksum: d15428cd1e11eb14e1233bcfb88ae07ed7a147de251441d61158619dfb32c4d7e9061d09cab4825fdee18ecd6fce323228c8c47b5ba7cd20af378ca4048fb3fb
-  languageName: node
-  linkType: hard
-
-"minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
+"minimist@npm:1.2.7, minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
   version: 1.2.7
   resolution: "minimist@npm:1.2.7::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fminimist%2F-%2Fminimist-1.2.7.tgz"
   checksum: 7346574a1038ca23c32e02252f603801f09384dd1d78b69a943a4e8c2c28730b80e96193882d3d3b22a063445f460e48316b29b8a25addca2d7e5e8f75478bec
@@ -18937,9 +18908,9 @@ __metadata:
   linkType: hard
 
 "synchronous-promise@npm:^2.0.15":
-  version: 2.0.16
-  resolution: "synchronous-promise@npm:2.0.16::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fsynchronous-promise%2F-%2Fsynchronous-promise-2.0.16.tgz"
-  checksum: 1a3e5dfa9e3b913452366e182d4cae5c2ffb9de8c9753ecb602539a298e82ab82de951a0b0ecd86b2e2e237b1236eb5e82964c8ce13b2d23f7ecd52767a2b74d
+  version: 2.0.17
+  resolution: "synchronous-promise@npm:2.0.17::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fsynchronous-promise%2F-%2Fsynchronous-promise-2.0.17.tgz"
+  checksum: 7b1342c93741f3f92ebde1edf5d6ce8dde2278de948d84e9bd85e232c16c0d77c90c4940f9975be3effcb20f047cfb0f16fa311c3b4e092c22f3bf2889fb0fb4
   languageName: node
   linkType: hard
 
@@ -19593,11 +19564,11 @@ __metadata:
 
 "typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
   version: 4.9.4
-  resolution: "typescript@patch:typescript@npm%3A4.9.4%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-4.9.4.tgz#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"
+  resolution: "typescript@patch:typescript@npm%3A4.9.4%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-4.9.4.tgz#~builtin<compat/typescript>::version=4.9.4&hash=d73830"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 1caaea6cb7f813e64345190fddc4e6c924d0b698ab81189b503763c4a18f7f5501c69362979d36e19c042d89d936443e768a78b0675690b35eb663d19e0eae71
+  checksum: 37f6e2c3c5e2aa5934b85b0fddbf32eeac8b1bacf3a5b51d01946936d03f5377fe86255d4e5a4ae628fd0cd553386355ad362c57f13b4635064400f3e8e05b9d
   languageName: node
   linkType: hard
 
