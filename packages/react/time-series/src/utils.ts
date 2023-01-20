@@ -36,6 +36,9 @@ export function generateConfig(options: GenereateConfigOptions): ChartConfigurat
     }
   } as CustomPlugins
 
+  const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant]?.backgroundColor!
+  const borderColor = styles?.[variant]?.borderColor || defaultStyles?.[variant]?.borderColor!
+
   return {
     type: variant,
     data: {
@@ -43,8 +46,8 @@ export function generateConfig(options: GenereateConfigOptions): ChartConfigurat
       datasets: [
         {
           data: data.values || [],
-          backgroundColor: styles?.[variant]?.backgroundColor,
-          borderColor: styles?.[variant]?.borderColor
+          backgroundColor,
+          borderColor
         }
       ]
     },
@@ -85,8 +88,11 @@ export function useSetupDefaultStyles(styles?: Styles) {
         family: styles?.font?.family,
         size: styles?.font?.size as Scriptable<number | undefined, ScriptableTooltipContext<keyof ChartTypeRegistry>>,
         style: styles?.font?.style,
-        lineHeight: styles?.font?.lineHeight
+        lineHeight: styles?.font?.lineHeight,
+        color: styles?.font?.color || defaultStyles.font?.color!
       }
+
+      Chart.defaults.color = styles?.font?.color || defaultStyles.font?.color!
 
       Chart.defaults.elements.point.pointStyle = pointStyle === undefined ? 'circle' : pointStyle
       Chart.defaults.elements.point.radius = styles?.point?.radius || defaultStyles.point?.radius!

@@ -14,7 +14,7 @@ export const defaultStyles: Styles = {
   },
   line: {
     tension: 0.4,
-    borderColor: '#94A3B8',
+    borderColor: '#000',
     borderWidth: 2,
     stepped: false
   },
@@ -24,7 +24,7 @@ export const defaultStyles: Styles = {
     borderRadius: '0px'
   },
   font: {
-    color: '#475569',
+    color: 'inherit',
     family: 'inherit',
     size: 'inherit',
     weight: 'inherit',
