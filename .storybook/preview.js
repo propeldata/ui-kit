@@ -1,3 +1,6 @@
+import { css } from '@emotion/css'
+import './global.css'
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -7,3 +10,16 @@ export const parameters = {
     }
   }
 }
+
+export const decorators = [
+  (Story) => (
+    <div
+      className={css`
+        font-family: 'Inter';
+        font-size: 12px;
+      `}
+    >
+      <Story />
+    </div>
+  )
+]

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 
-import { TimeSeries, Props } from './TimeSeries'
+import { Container as TimeSeries } from './Container'
+import { TimeSeriesProps } from './TimeSeries'
 
 export default {
   title: 'React/TimeSeries'
@@ -11,7 +12,7 @@ const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 const values = [0, 1000, 200, 3000, 4000, 500, 7000]
 
-const Template: Story<Props> = (args) => <TimeSeries {...args} />
+const Template: Story<TimeSeriesProps> = (args) => <TimeSeries {...args} />
 
 export const Bar = Template.bind({})
 Bar.args = {
@@ -89,5 +90,12 @@ IngestionActivity.args = {
       backgroundColor: 'transparent',
       hideGridLines: true
     }
+  }
+}
+
+export const Error = Template.bind({})
+Error.args = {
+  query: {
+    accessToken: ''
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import request from 'graphql-request'
+import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -24,6 +25,7 @@ import {
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultStyles } from './defaults'
 import { generateConfig, useSetupDefaultStyles } from './utils'
+import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 
 /**
  * It registers only the modules that will be used
@@ -42,7 +44,7 @@ ChartJS.register(
   Colors
 )
 
-export interface Props {
+export interface TimeSeriesProps extends ErrorFallbackProps {
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: ChartVariant
 
@@ -76,10 +78,13 @@ export interface Props {
   }
 }
 
-export function TimeSeries(props: Props) {
-  const { variant = 'bar', styles = defaultStyles, labels, values, query } = props
+export function TimeSeries(props: TimeSeriesProps) {
+  const { variant = 'bar', styles = defaultStyles, labels, values, query, error } = props
+
+  const [hasError, setHasError] = React.useState(false)
 
   const id = React.useId()
+
   /**
    * The html node where the chart will render
    */
@@ -99,7 +104,12 @@ export function TimeSeries(props: Props) {
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data) return
 
-    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
+    try {
+      chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
+      setHasError(false)
+    } catch {
+      setHasError(true)
+    }
 
     canvasRef.current.style.borderRadius = styles.canvas?.borderRadius as string
     canvasRef.current.style.height = `${styles.canvas?.height}px`
@@ -119,31 +129,40 @@ export function TimeSeries(props: Props) {
    * its on `labels` and `values`
    */
   const fetchData = React.useCallback(async () => {
-    if (!query?.accessToken || !query?.metric || !query?.timeRange) {
-      console.error('error')
-      return
-    }
-
-    const response = await request(
-      PROPEL_GRAPHQL_API_ENDPOINT,
-      TimeSeriesDocument,
-      {
-        uniqueName: query?.metric,
-        timeSeriesInput: {
-          timeRange: query?.timeRange,
-          granularity: query?.granularity
-        }
-      },
-      {
-        authorization: `Bearer ${query?.accessToken}`
+    try {
+      if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
+        console.error(
+          'IvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
+        )
+        throw new Error('IvalidPropsError')
       }
-    )
 
-    const metricData = response.metricByName.timeSeries
+      const response = await request(
+        PROPEL_GRAPHQL_API_ENDPOINT,
+        TimeSeriesDocument,
+        {
+          uniqueName: query?.metric,
+          timeSeriesInput: {
+            timeRange: query?.timeRange,
+            granularity: query?.granularity
+          }
+        },
+        {
+          authorization: `Bearer ${query?.accessToken}`
+        }
+      )
 
-    const labels: string[] = [...metricData.labels]
-    const values: number[] = [...metricData.values]
-    return { labels, values }
+      const metricData = response.metricByName.timeSeries
+
+      const labels: string[] = [...metricData.labels]
+      const values: number[] = [...metricData.values]
+
+      setHasError(false)
+
+      return { labels, values }
+    } catch {
+      setHasError(true)
+    }
   }, [query])
 
   React.useEffect(() => {
@@ -156,8 +175,17 @@ export function TimeSeries(props: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  if (hasError) {
+    return <ErrorFallback error={error} styles={styles} />
+  }
+
   return (
-    <div style={{ height: '100%', width: '100%' }}>
+    <div
+      className={css`
+        width: 100%;
+        height: 100%;
+      `}
+    >
       <canvas id={id} ref={canvasRef} role="img"></canvas>
     </div>
   )

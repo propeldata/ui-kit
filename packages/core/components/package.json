@@ -1,6 +1,6 @@
 {
-  "name": "@propeldata/react-time-series",
-  "version": "0.26.8",
+  "name": "@propeldata/ui-kit-components",
+  "version": "0.1.0",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
@@ -8,15 +8,6 @@
   "scripts": {
     "dev": "parcel watch",
     "build": "parcel build"
-  },
-  "dependencies": {
-    "@emotion/css": "^11.10.5",
-    "@propeldata/ui-kit-components": "workspace:^0.1.0",
-    "@propeldata/ui-kit-graphql": "workspace:^0.2.2",
-    "@propeldata/ui-kit-plugins": "workspace:^0.2.0",
-    "chart.js": "^4.1.2",
-    "graphql": "^16.6.0",
-    "graphql-request": "^3.6.1"
   },
   "devDependencies": {
     "parcel": "^2.8.2",
