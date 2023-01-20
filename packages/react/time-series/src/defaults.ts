@@ -1,5 +1,7 @@
 import { Styles } from './types'
 
+export const defaultChartHeight = 200
+
 export const defaultStyles: Styles = {
   bar: {
     thickness: 20,
@@ -23,11 +25,11 @@ export const defaultStyles: Styles = {
   },
   font: {
     color: '#475569',
-    family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-    size: 12,
-    weight: '500',
-    style: 'normal',
-    lineHeight: 1
+    family: 'inherit',
+    size: 'inherit',
+    weight: 'inherit',
+    style: 'inherit',
+    lineHeight: 'inherit'
   },
   tooltip: {
     display: true,
@@ -41,7 +43,13 @@ export const defaultStyles: Styles = {
     caretSize: 2
   },
   point: {
-    style: 'circle'
+    style: 'circle',
+    radius: 3,
+    backgroundColor: '#ffffff',
+    borderColor: '#000',
+    borderWidth: 1,
+    hoverBorderColor: 'rgba(0,0,0,0)',
+    hoverBackgroundColor: 'rgba(0,0,0,0)'
   }
 }
 

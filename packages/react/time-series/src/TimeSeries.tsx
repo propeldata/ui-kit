@@ -1,6 +1,5 @@
 import React from 'react'
 import request from 'graphql-request'
-import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -23,9 +22,10 @@ import {
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultStyles } from './defaults'
+import { defaultChartHeight, defaultStyles } from './defaults'
 import { generateConfig, useSetupDefaultStyles } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
+import { Loader } from './Loader'
 
 /**
  * It registers only the modules that will be used
@@ -57,6 +57,8 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
   /** If passed along with `labels` the component will ignore the built-in graphql operations  */
   values?: TimeSeriesData['values']
 
+  loading?: boolean
+
   query?: {
     /** This should eventually be replaced to customer's app credentials */
     accessToken?: string
@@ -79,9 +81,10 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
 }
 
 export function TimeSeries(props: TimeSeriesProps) {
-  const { variant = 'bar', styles = defaultStyles, labels, values, query, error } = props
+  const { variant = 'bar', styles, labels, values, query, error, loading = false } = props
 
   const [hasError, setHasError] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(loading)
 
   const id = React.useId()
 
@@ -111,9 +114,8 @@ export function TimeSeries(props: TimeSeriesProps) {
       setHasError(true)
     }
 
-    canvasRef.current.style.borderRadius = styles.canvas?.borderRadius as string
-    canvasRef.current.style.height = `${styles.canvas?.height}px`
-    canvasRef.current.style.width = `${styles.canvas?.width}px`
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+    canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
   }
 
   const destroyChart = () => {
@@ -136,6 +138,8 @@ export function TimeSeries(props: TimeSeriesProps) {
         )
         throw new Error('IvalidPropsError')
       }
+
+      setIsLoading(true)
 
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
@@ -162,6 +166,8 @@ export function TimeSeries(props: TimeSeriesProps) {
       return { labels, values }
     } catch {
       setHasError(true)
+    } finally {
+      setIsLoading(false)
     }
   }, [query])
 
@@ -175,18 +181,21 @@ export function TimeSeries(props: TimeSeriesProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  if (isLoading) {
+    return <Loader styles={styles} />
+  }
+
   if (hasError) {
     return <ErrorFallback error={error} styles={styles} />
   }
 
   return (
-    <div
-      className={css`
-        width: 100%;
-        height: 100%;
-      `}
-    >
-      <canvas id={id} ref={canvasRef} role="img"></canvas>
-    </div>
+    <canvas
+      id={id}
+      ref={canvasRef}
+      width={styles?.canvas?.width}
+      height={styles?.canvas?.height || defaultChartHeight}
+      role="img"
+    />
   )
 }

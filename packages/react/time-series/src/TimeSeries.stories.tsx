@@ -14,8 +14,8 @@ const values = [0, 1000, 200, 3000, 4000, 500, 7000]
 
 const Template: Story<TimeSeriesProps> = (args) => <TimeSeries {...args} />
 
-export const Bar = Template.bind({})
-Bar.args = {
+export const UnstyledBar = Template.bind({})
+UnstyledBar.args = {
   variant: 'bar',
   labels,
   values,
@@ -45,8 +45,8 @@ Bar.args = {
   }
 }
 
-export const Line = Template.bind({})
-Line.args = {
+export const UnstyledLine = Template.bind({})
+UnstyledLine.args = {
   variant: 'line',
   labels,
   values,
@@ -70,8 +70,18 @@ Line.args = {
   }
 }
 
-export const IngestionActivity = Template.bind({})
-IngestionActivity.args = {
+export const Error = Template.bind({})
+Error.args = {}
+
+export const Loading = Template.bind({})
+Loading.args = {
+  labels,
+  values,
+  loading: true
+}
+
+export const CustomStyles = Template.bind({})
+CustomStyles.args = {
   variant: 'line',
   labels,
   values,
@@ -79,10 +89,10 @@ IngestionActivity.args = {
     line: {
       tension: 0.1,
       borderColor: '#17B897',
-      borderWidth: 8
+      borderWidth: 3
     },
     point: {
-      style: 'line'
+      style: false
     },
     canvas: {
       width: 100,
@@ -90,12 +100,5 @@ IngestionActivity.args = {
       backgroundColor: 'transparent',
       hideGridLines: true
     }
-  }
-}
-
-export const Error = Template.bind({})
-Error.args = {
-  query: {
-    accessToken: ''
   }
 }

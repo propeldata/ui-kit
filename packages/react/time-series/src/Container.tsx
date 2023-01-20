@@ -7,8 +7,13 @@ import { ErrorFallback } from './ErrorFallback'
 export function Container(props: TimeSeriesProps) {
   const { error, styles } = props
 
+  const errorProps = {
+    error,
+    styles
+  }
+
   return (
-    <ErrorBoundary fallback={<ErrorFallback error={error} styles={styles} />}>
+    <ErrorBoundary fallback={<ErrorFallback {...errorProps} />}>
       <TimeSeries {...props} />
     </ErrorBoundary>
   )
