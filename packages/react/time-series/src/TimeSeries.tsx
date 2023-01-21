@@ -107,12 +107,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data) return
 
-    try {
-      chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
-      setHasError(false)
-    } catch {
-      setHasError(true)
-    }
+    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
     canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
@@ -131,59 +126,62 @@ export function TimeSeries(props: TimeSeriesProps) {
    * its on `labels` and `values`
    */
   const fetchData = async () => {
-    try {
-      if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
-        console.error(
-          'IvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
-        )
-        throw new Error('IvalidPropsError')
-      }
-
-      setIsLoading(true)
-
-      const response = await request(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        TimeSeriesDocument,
-        {
-          uniqueName: query?.metric,
-          timeSeriesInput: {
-            timeRange: query?.timeRange,
-            granularity: query?.granularity
-          }
-        },
-        {
-          authorization: `Bearer ${query?.accessToken}`
-        }
+    if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
+      console.error(
+        'IvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
       )
-
-      const metricData = response.metricByName.timeSeries
-
-      const labels: string[] = [...metricData.labels]
-      const values: number[] = [...metricData.values]
-
-      setHasError(false)
-
-      return { labels, values }
-    } catch {
-      setHasError(true)
-    } finally {
-      setIsLoading(false)
+      throw new Error('IvalidPropsError')
     }
+
+    const response = await request(
+      PROPEL_GRAPHQL_API_ENDPOINT,
+      TimeSeriesDocument,
+      {
+        uniqueName: query?.metric,
+        timeSeriesInput: {
+          timeRange: query?.timeRange,
+          granularity: query?.granularity
+        }
+      },
+      {
+        authorization: `Bearer ${query?.accessToken}`
+      }
+    )
+
+    const metricData = response.metricByName.timeSeries
+
+    const labels: string[] = [...metricData.labels]
+    const values: number[] = [...metricData.values]
+
+    return { labels, values }
   }
 
   React.useEffect(() => {
     async function renderChartWithData() {
-      const data = isDumb ? { labels, values } : await fetchData()
-      renderChart(data)
+      try {
+        if (isDumb) {
+          renderChart({ labels, values })
+          return
+        }
+
+        setIsLoading(true)
+        const data = await fetchData()
+        renderChart(data)
+      } catch {
+        setHasError(true)
+      } finally {
+        setIsLoading(false)
+      }
     }
     renderChartWithData()
+
     return () => {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [labels, values, isDumb])
+  }, [labels, values, isDumb, canvasRef.current])
 
-  if (loading) {
+  if (isLoading || loading) {
     return <Loader styles={styles} />
   }
 

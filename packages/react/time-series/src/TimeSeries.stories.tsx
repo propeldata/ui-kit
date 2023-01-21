@@ -3,6 +3,7 @@ import { Story } from '@storybook/react'
 
 import { Container as TimeSeries } from './Container'
 import { TimeSeriesProps } from './TimeSeries'
+import { RelativeTimeRange, TimeSeriesGranularity } from './'
 
 export default {
   title: 'React/TimeSeries'
@@ -26,6 +27,20 @@ UnstyledLine.args = {
   variant: 'line',
   labels,
   values
+}
+
+export const Smart = Template.bind({})
+Smart.args = {
+  variant: 'line',
+  query: {
+    accessToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQyNzI1MDIsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0Mjc2MTAyLCJpYXQiOjE2NzQyNzI1MDIsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiNGYyNWUyNjQtMTU1NS00MmYxLTg0ODEtMDFjYmRjMTRjN2FiIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.uhUU7gR9x6q1jVkWLgt9VC8K2ApPTB0sPJVnGhu2-sI',
+    metric: 'syncRecordsAdded',
+    timeRange: {
+      relative: RelativeTimeRange.PreviousWeek
+    },
+    granularity: TimeSeriesGranularity.Day
+  }
 }
 
 export const Error = Template.bind({})
