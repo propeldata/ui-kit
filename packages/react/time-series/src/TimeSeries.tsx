@@ -104,8 +104,6 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   useSetupDefaultStyles(styles)
 
-  // Gotta fix this
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data) return
 
@@ -132,7 +130,7 @@ export function TimeSeries(props: TimeSeriesProps) {
    * when the user doesn't provide
    * its on `labels` and `values`
    */
-  const fetchData = React.useCallback(async () => {
+  const fetchData = async () => {
     try {
       if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
         console.error(
@@ -171,7 +169,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [query])
+  }
 
   React.useEffect(() => {
     async function renderChartWithData() {
@@ -182,7 +180,8 @@ export function TimeSeries(props: TimeSeriesProps) {
     return () => {
       destroyChart()
     }
-  }, [labels, values, isDumb, fetchData, renderChart])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [labels, values, isDumb])
 
   if (loading) {
     return <Loader styles={styles} />
