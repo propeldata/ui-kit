@@ -31,11 +31,16 @@ UnstyledLine.args = {
 export const Error = Template.bind({})
 Error.args = {}
 
-export const Loading = Template.bind({})
-Loading.args = {
-  labels,
-  values,
-  loading: true
+export const Loading = () => {
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
+
+  return <TimeSeries loading={loading} labels={labels} values={values} />
 }
 
 export const CustomStyles = Template.bind({})

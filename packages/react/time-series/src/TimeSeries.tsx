@@ -84,7 +84,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   const { variant = 'bar', styles, labels, values, query, error, loading = false } = props
 
   const [hasError, setHasError] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(loading)
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const id = React.useId()
 
@@ -104,6 +104,8 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   useSetupDefaultStyles(styles)
 
+  // Gotta fix this
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data) return
 
@@ -177,11 +179,12 @@ export function TimeSeries(props: TimeSeriesProps) {
       renderChart(data)
     }
     renderChartWithData()
-    return () => destroyChart()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    return () => {
+      destroyChart()
+    }
+  }, [labels, values, isDumb, fetchData, renderChart])
 
-  if (isLoading) {
+  if (loading) {
     return <Loader styles={styles} />
   }
 
