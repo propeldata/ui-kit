@@ -1,5 +1,6 @@
 import React from 'react'
 import request from 'graphql-request'
+import { format } from 'date-fns'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -22,7 +23,7 @@ import {
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultChartHeight, defaultStyles } from './defaults'
+import { defaultChartHeight, defaultStyles, defaultTimestampFormat } from './defaults'
 import { generateConfig, useSetupDefaultStyles } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -77,6 +78,8 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
 
     /** Propeller that the chart will respond to */
     propeller?: Propeller
+
+    timestampFormat?: string
   }
 }
 
@@ -153,7 +156,9 @@ export function TimeSeries(props: TimeSeriesProps) {
 
     const metricData = response.metricByName.timeSeries
 
-    const labels: string[] = [...metricData.labels]
+    const labels: string[] = metricData.labels.map((label: string) =>
+      format(new Date(label), query.timestampFormat || defaultTimestampFormat)
+    )
     const values: number[] = [...metricData.values]
 
     return { labels, values }
@@ -186,7 +191,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb])
+  }, [isDumb, loading])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
@@ -198,8 +203,6 @@ export function TimeSeries(props: TimeSeriesProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serverData, isDumb])
-
-  console.log('rendered', chartRef.current)
 
   if (isLoading || loading) {
     return <Loader styles={styles} />

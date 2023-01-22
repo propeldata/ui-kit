@@ -2,6 +2,8 @@ import { Styles } from './types'
 
 export const defaultChartHeight = 200
 
+export const defaultTimestampFormat = 'MM/dd'
+
 export const defaultStyles: Styles = {
   bar: {
     thickness: 20,

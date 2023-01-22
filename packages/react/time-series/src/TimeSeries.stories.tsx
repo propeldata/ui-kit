@@ -34,12 +34,13 @@ Smart.args = {
   variant: 'line',
   query: {
     accessToken:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQzNDYzNjgsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0MzQ5OTY4LCJpYXQiOjE2NzQzNDYzNjgsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiM2RiNWMxNTYtZTUxZi00ZTg5LTk2ODItODI4OWYwODBjMzUxIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.SEZgKv5qthzEyk8zBo7z9M2xWiBZ-JmI-qOBA_frEK0',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQzNTA5MzQsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0MzU0NTM1LCJpYXQiOjE2NzQzNTA5MzUsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiNDQ2MTAzZjYtOTJkOC00NmYyLWFlYTMtMTJmYzNhZDE1YWM4IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.9ouiMQKmvW_4u_F3RMrf7AphztXgIrhVCOh0IWQ2fT0',
     metric: 'syncRecordsAdded',
     timeRange: {
       relative: RelativeTimeRange.PreviousWeek
     },
-    granularity: TimeSeriesGranularity.Day
+    granularity: TimeSeriesGranularity.Day,
+    timestampFormat: 'MM/dd/yyyy'
   }
 }
 
