@@ -85,6 +85,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
+  const [serverData, setSeverData] = React.useState<TimeSeriesData>()
 
   const id = React.useId()
 
@@ -100,7 +101,9 @@ export function TimeSeries(props: TimeSeriesProps) {
    */
   const hasValues = values && values.length > 0
   const hasLabels = labels && labels.length > 0
-  const isDumb = hasValues && hasLabels
+  const isDumb = React.useMemo(() => {
+    return hasLabels && hasValues
+  }, [hasLabels, hasValues])
 
   useSetupDefaultStyles(styles)
 
@@ -157,29 +160,46 @@ export function TimeSeries(props: TimeSeriesProps) {
   }
 
   React.useEffect(() => {
-    async function renderChartWithData() {
+    async function fetchChartData() {
       try {
-        if (isDumb) {
-          renderChart({ labels, values })
-          return
-        }
-
         setIsLoading(true)
         const data = await fetchData()
-        renderChart(data)
+        setSeverData(data)
       } catch {
         setHasError(true)
       } finally {
         setIsLoading(false)
       }
     }
-    renderChartWithData()
+    if (!isDumb && !serverData) {
+      fetchChartData()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverData, isDumb])
+
+  React.useEffect(() => {
+    if (isDumb) {
+      renderChart({ labels, values })
+    }
 
     return () => {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [labels, values, isDumb, canvasRef.current])
+  }, [isDumb])
+
+  React.useEffect(() => {
+    if (serverData && !isDumb) {
+      renderChart(serverData)
+    }
+
+    return () => {
+      destroyChart()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverData, isDumb])
+
+  console.log('rendered', chartRef.current)
 
   if (isLoading || loading) {
     return <Loader styles={styles} />

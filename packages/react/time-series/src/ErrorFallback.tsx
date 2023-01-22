@@ -41,6 +41,7 @@ export function ErrorFallback(props: ErrorFallbackProps) {
         className={css`
           max-width: 263px;
           text-align: center;
+          text-align: -webkit-center;
         `}
       >
         <Icon color={styles?.font?.color} />

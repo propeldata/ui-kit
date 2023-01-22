@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep -q '^yarn.lock$'; then
+  console.log('yarn.lock file has changed, running yarn install...')
+  yarn install
+  console.log('yarn install completed.')
+else
+  console.log('yarn.lock file has not changed, skipping yarn install.')
+fi
