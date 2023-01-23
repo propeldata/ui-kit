@@ -1,0 +1,10 @@
+{
+  "name": "stories",
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "@propeldata/react-counter": "workspace:^0.25.2",
+    "@propeldata/react-time-series": "workspace:^0.26.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

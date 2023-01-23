@@ -1,18 +1,24 @@
 import React from 'react'
 import { Story } from '@storybook/react'
+import { css } from '@emotion/css'
 
-import { Counter } from './Counter'
+import { Container as Counter } from './Container'
 
 export default {
   title: 'React/Counter'
 }
-const Template: Story = (args) => <Counter {...args} />
 
-export const Default = Template.bind({})
-Default.args = {
-  value: '150'
+const UnstyledTemplate: Story = (args) => (
+  <>
+    We reached <Counter {...args} /> sales last week
+  </>
+)
+export const Unstyled = UnstyledTemplate.bind({})
+Unstyled.args = {
+  value: '1453'
 }
 
+const Template: Story = (args) => <Counter {...args} />
 export const WithPrefix = Template.bind({})
 WithPrefix.args = {
   value: '123,000',
@@ -25,12 +31,61 @@ WithSufix.args = {
   sufixValue: '%'
 }
 
-const InlineTextTemplate: Story = (args) => (
-  <>
-    We reached <Counter {...args} /> sales last week
-  </>
+const CardTemplate: Story = (args) => (
+  <div
+    className={css`
+      width: 300px;
+      height: 150px;
+      font-family: 'Fira Code';
+    `}
+  >
+    <div
+      className={css`
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+
+        border: 1px solid black;
+        border-radius: 10px;
+
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      `}
+    >
+      <div>
+        <h2
+          className={css`
+            margin: 0;
+            font-weight: 100;
+          `}
+        >
+          Counter
+        </h2>
+      </div>
+      <div
+        className={css`
+          display: flex;
+          justify-content: flex-end;
+          font-size: 3rem;
+          font-weight: bold;
+        `}
+      >
+        <Counter {...args} />
+      </div>
+    </div>
+  </div>
 )
-export const InlineText = InlineTextTemplate.bind({})
-InlineText.args = {
-  value: '1453'
+export const Card = CardTemplate.bind({})
+Card.args = {
+  value: '1238'
+}
+
+export const Error = CardTemplate.bind({})
+Error.args = {
+  query: {
+    accessToken: ''
+  }
 }

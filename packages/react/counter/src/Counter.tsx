@@ -2,11 +2,13 @@ import React from 'react'
 import request from 'graphql-request'
 import { PROPEL_GRAPHQL_API_ENDPOINT, CounterDocument } from '@propeldata/ui-kit-graphql'
 
-import { getValueWithPrefixAndSufix } from './__utils__'
-import type { Styles } from './__types__'
-import { defaultStyles } from './__defaults__'
+import { getValueWithPrefixAndSufix } from './utils'
+import type { Styles } from './types'
+import { defaultStyles } from './defaults'
+import { Loader } from './Loader'
+import { ErrorFallback } from './ErrorFallback'
 
-interface Props {
+export interface CounterProps {
   /** If passed, the component will ignore the built-in graphql operations */
   value?: string
   /** Symbol to be shown before the value text */
@@ -23,12 +25,12 @@ interface Props {
     /** Metric unique name will be ignored when value is passed */
     metric?: string
   }
+  /** When true, shows a skeleton loader */
+  isLoading?: boolean
 }
 
-export function Counter(props: Props) {
-  const { value, query, prefixValue, sufixValue, styles } = props
-
-  const [dataValue, setDataValue] = React.useState('')
+export function Counter(props: CounterProps) {
+  const { value, query, prefixValue, sufixValue, styles, isLoading: isLoadingProp } = props
 
   const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -38,31 +40,47 @@ export function Counter(props: Props) {
    */
   const isDumb = !!value
 
+  const [dataValue, setDataValue] = React.useState('')
+  const [hasError, setHasError] = React.useState(false)
+  // const [isLoading, setIsLoading] = React.useState(!isDumb && isLoadingProp)
+
+  const isLoading = isLoadingProp
+
   /**
    * Fetches the counter data
    * when the user doesn't provide
    * its own `value`
    */
   const fetchData = React.useCallback(async () => {
-    const response = await request(
-      PROPEL_GRAPHQL_API_ENDPOINT,
-      CounterDocument,
-      {
-        uniqueName: query?.metric,
-        counterInput: {
-          timeRange: {
-            relative: query?.relativeTimeRange
+    try {
+      // setIsLoading(true)
+
+      const response = await request(
+        PROPEL_GRAPHQL_API_ENDPOINT,
+        CounterDocument,
+        {
+          uniqueName: query?.metric,
+          counterInput: {
+            timeRange: {
+              relative: query?.relativeTimeRange
+            }
           }
+        },
+        {
+          authorization: `Bearer ${query?.accessToken}`
         }
-      },
-      {
-        authorization: `Bearer ${query?.accessToken}`
-      }
-    )
+      )
 
-    const metricData = response.metricByName.counter
+      const metricData = response.metricByName.counter
 
-    return metricData.value
+      setHasError(false)
+
+      return metricData.value
+    } catch {
+      setHasError(true)
+    } finally {
+      // setIsLoading(false)
+    }
   }, [query])
 
   const setupStyles = React.useCallback(() => {
@@ -85,7 +103,11 @@ export function Counter(props: Props) {
     setup()
   }, [setupStyles, fetchData, isDumb, dataValue, value])
 
-  if (!dataValue) return null
+  if (isLoading) return <Loader styles={styles} />
+
+  if (hasError) {
+    return <ErrorFallback styles={styles} />
+  }
 
   return (
     <span ref={containerRef}>

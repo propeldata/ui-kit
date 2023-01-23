@@ -3899,10 +3899,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/react-counter@workspace:packages/react/counter":
+"@propeldata/react-counter@workspace:^0.25.2, @propeldata/react-counter@workspace:packages/react/counter":
   version: 0.0.0-use.local
   resolution: "@propeldata/react-counter@workspace:packages/react/counter"
   dependencies:
+    "@emotion/css": ^11.10.5
+    "@propeldata/ui-kit-components": "workspace:^0.1.0"
     "@propeldata/ui-kit-graphql": "workspace:^0.2.2"
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0"
     graphql: ^16.0.1
@@ -3915,11 +3917,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/react-time-series@workspace:packages/react/time-series":
+"@propeldata/react-time-series@workspace:^0.26.8, @propeldata/react-time-series@workspace:packages/react/time-series":
   version: 0.0.0-use.local
   resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
   dependencies:
     "@emotion/css": ^11.10.5
+    "@propeldata/ui-kit-components": "workspace:^0.1.0"
     "@propeldata/ui-kit-graphql": "workspace:^0.2.2"
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0"
     chart.js: ^4.1.2
@@ -3946,7 +3949,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/ui-kit-components@workspace:packages/core/components":
+"@propeldata/ui-kit-components@workspace:^0.1.0, @propeldata/ui-kit-components@workspace:packages/core/components":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-components@workspace:packages/core/components"
   dependencies:
@@ -17084,7 +17087,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.0.0":
+"react-dom@npm:^18.0.0, react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"
   dependencies:
@@ -17183,7 +17186,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.0.0":
+"react@npm:^18.0.0, react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Freact%2F-%2Freact-18.2.0.tgz"
   dependencies:
@@ -18545,6 +18548,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stories@workspace:stories":
+  version: 0.0.0-use.local
+  resolution: "stories@workspace:stories"
+  dependencies:
+    "@propeldata/react-counter": "workspace:^0.25.2"
+    "@propeldata/react-time-series": "workspace:^0.26.8"
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  languageName: unknown
+  linkType: soft
+
 "stream-browserify@npm:^2.0.1":
   version: 2.0.2
   resolution: "stream-browserify@npm:2.0.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fstream-browserify%2F-%2Fstream-browserify-2.0.2.tgz"
@@ -19593,11 +19607,11 @@ __metadata:
 
 "typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
   version: 4.9.4
-  resolution: "typescript@patch:typescript@npm%3A4.9.4%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-4.9.4.tgz#~builtin<compat/typescript>::version=4.9.4&hash=ad5954"
+  resolution: "typescript@patch:typescript@npm%3A4.9.4%3A%3A__archiveUrl=https%253A%252F%252Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%253A443%252Fnpm%252Fpropel%252Ftypescript%252F-%252Ftypescript-4.9.4.tgz#~builtin<compat/typescript>::version=4.9.4&hash=d73830"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 1caaea6cb7f813e64345190fddc4e6c924d0b698ab81189b503763c4a18f7f5501c69362979d36e19c042d89d936443e768a78b0675690b35eb663d19e0eae71
+  checksum: 37f6e2c3c5e2aa5934b85b0fddbf32eeac8b1bacf3a5b51d01946936d03f5377fe86255d4e5a4ae628fd0cd553386355ad362c57f13b4635064400f3e8e05b9d
   languageName: node
   linkType: hard
 
