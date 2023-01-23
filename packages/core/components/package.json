@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-components",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",

@@ -1,4 +1,4 @@
-import { ChartTypeRegistry, PluginOptionsByType, PointStyle, ScriptableAndArray, ScriptableContext } from 'chart.js'
+import { ChartTypeRegistry, PluginOptionsByType } from 'chart.js'
 
 export type ChartVariant = 'bar' | 'line'
 
@@ -20,7 +20,7 @@ export type Styles = {
   font?: {
     color?: string
     family?: string
-    size?: number
+    size?: number | 'inherit'
     style?: 'normal' | 'italic' | 'oblique' | 'initial' | 'inherit'
     weight?: string
     lineHeight?: number | string
@@ -64,7 +64,7 @@ export type Styles = {
     hoverBackgroundColor?: string
   }
   point?: {
-    style?: ScriptableAndArray<PointStyle, ScriptableContext<keyof ChartTypeRegistry>>
+    style?: string | false
     radius?: number
     borderWidth?: number
     borderColor?: string

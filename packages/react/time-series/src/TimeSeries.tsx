@@ -1,6 +1,6 @@
 import React from 'react'
 import request from 'graphql-request'
-import { css } from '@emotion/css'
+import { format } from 'date-fns'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -23,9 +23,10 @@ import {
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultStyles } from './defaults'
+import { defaultChartHeight, defaultStyles, defaultTimestampFormat } from './defaults'
 import { generateConfig, useSetupDefaultStyles } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
+import { Loader } from './Loader'
 
 /**
  * It registers only the modules that will be used
@@ -57,6 +58,8 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
   /** If passed along with `labels` the component will ignore the built-in graphql operations  */
   values?: TimeSeriesData['values']
 
+  loading?: boolean
+
   query?: {
     /** This should eventually be replaced to customer's app credentials */
     accessToken?: string
@@ -75,13 +78,17 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
 
     /** Propeller that the chart will respond to */
     propeller?: Propeller
+
+    timestampFormat?: string
   }
 }
 
 export function TimeSeries(props: TimeSeriesProps) {
-  const { variant = 'bar', styles = defaultStyles, labels, values, query, error } = props
+  const { variant = 'bar', styles, labels, values, query, error, loading = false } = props
 
   const [hasError, setHasError] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [serverData, setSeverData] = React.useState<TimeSeriesData>()
 
   const id = React.useId()
 
@@ -97,23 +104,19 @@ export function TimeSeries(props: TimeSeriesProps) {
    */
   const hasValues = values && values.length > 0
   const hasLabels = labels && labels.length > 0
-  const isDumb = hasValues && hasLabels
+  const isDumb = React.useMemo(() => {
+    return hasLabels && hasValues
+  }, [hasLabels, hasValues])
 
   useSetupDefaultStyles(styles)
 
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data) return
 
-    try {
-      chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
-      setHasError(false)
-    } catch {
-      setHasError(true)
-    }
+    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
 
-    canvasRef.current.style.borderRadius = styles.canvas?.borderRadius as string
-    canvasRef.current.style.height = `${styles.canvas?.height}px`
-    canvasRef.current.style.width = `${styles.canvas?.width}px`
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+    canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
   }
 
   const destroyChart = () => {
@@ -128,65 +131,94 @@ export function TimeSeries(props: TimeSeriesProps) {
    * when the user doesn't provide
    * its on `labels` and `values`
    */
-  const fetchData = React.useCallback(async () => {
-    try {
-      if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
-        console.error(
-          'IvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
-        )
-        throw new Error('IvalidPropsError')
-      }
-
-      const response = await request(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        TimeSeriesDocument,
-        {
-          uniqueName: query?.metric,
-          timeSeriesInput: {
-            timeRange: query?.timeRange,
-            granularity: query?.granularity
-          }
-        },
-        {
-          authorization: `Bearer ${query?.accessToken}`
-        }
+  const fetchData = async () => {
+    if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
+      console.error(
+        'IvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
       )
-
-      const metricData = response.metricByName.timeSeries
-
-      const labels: string[] = [...metricData.labels]
-      const values: number[] = [...metricData.values]
-
-      setHasError(false)
-
-      return { labels, values }
-    } catch {
-      setHasError(true)
+      throw new Error('IvalidPropsError')
     }
-  }, [query])
+
+    const response = await request(
+      PROPEL_GRAPHQL_API_ENDPOINT,
+      TimeSeriesDocument,
+      {
+        uniqueName: query?.metric,
+        timeSeriesInput: {
+          timeRange: query?.timeRange,
+          granularity: query?.granularity
+        }
+      },
+      {
+        authorization: `Bearer ${query?.accessToken}`
+      }
+    )
+
+    const metricData = response.metricByName.timeSeries
+
+    const labels: string[] = metricData.labels.map((label: string) =>
+      format(new Date(label), query.timestampFormat || defaultTimestampFormat)
+    )
+    const values: number[] = [...metricData.values]
+
+    return { labels, values }
+  }
 
   React.useEffect(() => {
-    async function renderChartWithData() {
-      const data = isDumb ? { labels, values } : await fetchData()
-      renderChart(data)
+    async function fetchChartData() {
+      try {
+        setIsLoading(true)
+        const data = await fetchData()
+        setSeverData(data)
+      } catch {
+        setHasError(true)
+      } finally {
+        setIsLoading(false)
+      }
     }
-    renderChartWithData()
-    return () => destroyChart()
+    if (!isDumb && !serverData) {
+      fetchChartData()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [serverData, isDumb])
+
+  React.useEffect(() => {
+    if (isDumb) {
+      renderChart({ labels, values })
+    }
+
+    return () => {
+      destroyChart()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDumb, loading])
+
+  React.useEffect(() => {
+    if (serverData && !isDumb) {
+      renderChart(serverData)
+    }
+
+    return () => {
+      destroyChart()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverData, isDumb])
+
+  if (isLoading || loading) {
+    return <Loader styles={styles} />
+  }
 
   if (hasError) {
     return <ErrorFallback error={error} styles={styles} />
   }
 
   return (
-    <div
-      className={css`
-        width: 100%;
-        height: 100%;
-      `}
-    >
-      <canvas id={id} ref={canvasRef} role="img"></canvas>
-    </div>
+    <canvas
+      id={id}
+      ref={canvasRef}
+      width={styles?.canvas?.width}
+      height={styles?.canvas?.height || defaultChartHeight}
+      role="img"
+    />
   )
 }

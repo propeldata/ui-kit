@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
 
-import { serverErrorMessage } from './defaults'
+import { defaultChartHeight, serverErrorMessage } from './defaults'
 import { Styles } from './types'
 
 export interface ErrorFallbackProps {
@@ -24,22 +24,24 @@ const Icon = ({ color }: { color?: string }) => (
 export function ErrorFallback(props: ErrorFallbackProps) {
   const { error = serverErrorMessage, styles } = props
 
+  const width = styles?.canvas?.width
+  const height = styles?.canvas?.height || defaultChartHeight
+
   return (
     <div
       className={css`
-        width: ${styles?.canvas?.width};
-        height: ${styles?.canvas?.height};
+        width: ${width ? width + 'px' : '100%'};
+        height: ${height}px;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        color: ${styles?.font?.color};
       `}
     >
       <div
         className={css`
           max-width: 263px;
           text-align: center;
+          text-align: -webkit-center;
         `}
       >
         <Icon color={styles?.font?.color} />
