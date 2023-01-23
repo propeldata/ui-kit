@@ -1,6 +1,7 @@
 import React from 'react'
 import request from 'graphql-request'
 import { format } from 'date-fns'
+import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -213,12 +214,19 @@ export function TimeSeries(props: TimeSeriesProps) {
   console.log(styles?.canvas?.height || defaultChartHeight)
 
   return (
-    <canvas
-      id={id}
-      ref={canvasRef}
-      width={styles?.canvas?.width}
-      height={styles?.canvas?.height || defaultChartHeight}
-      role="img"
-    />
+    <div
+      className={css`
+        width: ${styles?.canvas?.width};
+        height: ${styles?.canvas?.height || defaultChartHeight};
+      `}
+    >
+      <canvas
+        id={id}
+        ref={canvasRef}
+        width={styles?.canvas?.width}
+        height={styles?.canvas?.height || defaultChartHeight}
+        role="img"
+      />
+    </div>
   )
 }
