@@ -51,14 +51,18 @@ Error.args = {
 
 export const Loading = () => {
   const [loading, setLoading] = React.useState(true)
+  const [localLabels, setLocalLabels] = React.useState<string[]>()
+  const [localValues, setLocalValues] = React.useState<number[]>()
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
+      setLocalLabels(labels)
+      setLocalValues(values)
     }, 1000)
   }, [])
 
-  return <TimeSeries loading={loading} labels={labels} values={values} />
+  return <TimeSeries loading={loading} labels={localLabels} values={localValues} />
 }
 
 export const CustomStyles = Template.bind({})

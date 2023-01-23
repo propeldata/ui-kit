@@ -2,3 +2,13 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn lint-staged
+
+if git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep -q '^yarn.lock$'; then
+  echo 'yarn.lock file has changed, running yarn install...'
+  yarn install
+  echo 'yarn install completed.'
+  echo 'Adding yarn.lock to commit...'
+  git add yarn.lock
+else
+  echo 'yarn.lock file has not changed, skipping yarn install.'
+fi

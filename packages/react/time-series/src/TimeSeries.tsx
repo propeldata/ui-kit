@@ -208,6 +208,8 @@ export function TimeSeries(props: TimeSeriesProps) {
     return <ErrorFallback error={error} styles={styles} />
   }
 
+  console.log()
+
   return (
     <canvas
       id={id}
