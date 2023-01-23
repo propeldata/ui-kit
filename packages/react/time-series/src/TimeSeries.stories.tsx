@@ -34,7 +34,7 @@ Smart.args = {
   variant: 'line',
   query: {
     accessToken:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQzNTA5MzQsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0MzU0NTM1LCJpYXQiOjE2NzQzNTA5MzUsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiNDQ2MTAzZjYtOTJkOC00NmYyLWFlYTMtMTJmYzNhZDE1YWM4IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.9ouiMQKmvW_4u_F3RMrf7AphztXgIrhVCOh0IWQ2fT0',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1MDcyNDgsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTEwODQ4LCJpYXQiOjE2NzQ1MDcyNDgsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMzVkOGNjZDQtNmYzMS00MzQ2LTg3MmQtMWFkZjYzZDc2YmJiIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.cmHnvgAHa_ziXoRrJ1-KmJHICnfO7ZE6gxDyUuwOQIU',
     metric: 'syncRecordsAdded',
     timeRange: {
       relative: RelativeTimeRange.PreviousWeek
@@ -45,18 +45,24 @@ Smart.args = {
 }
 
 export const Error = Template.bind({})
-Error.args = {}
+Error.args = {
+  query: {}
+}
 
 export const Loading = () => {
   const [loading, setLoading] = React.useState(true)
+  const [localLabels, setLocalLabels] = React.useState<string[]>()
+  const [localValues, setLocalValues] = React.useState<number[]>()
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
+      setLocalLabels(labels)
+      setLocalValues(values)
     }, 1000)
   }, [])
 
-  return <TimeSeries loading={loading} labels={labels} values={values} />
+  return <TimeSeries loading={loading} labels={localLabels} values={localValues} />
 }
 
 export const CustomStyles = Template.bind({})

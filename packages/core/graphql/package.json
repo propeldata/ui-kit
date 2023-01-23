@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-graphql",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
@@ -13,6 +13,9 @@
   "dependencies": {
     "graphql": "^16.6.0",
     "react-query": "^3.39.2"
+  },
+  "peerDependencies": {
+    "graphql": "^16.6"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.2.2",

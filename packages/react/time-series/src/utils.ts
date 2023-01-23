@@ -52,8 +52,9 @@ export function generateConfig(options: GenereateConfigOptions): ChartConfigurat
       ]
     },
     options: {
-      responsive: !styles?.canvas?.width && !styles?.canvas?.height,
+      responsive: !styles?.canvas?.width,
       maintainAspectRatio: false,
+      animation: false,
       layout: {
         padding: styles?.canvas?.padding
       },

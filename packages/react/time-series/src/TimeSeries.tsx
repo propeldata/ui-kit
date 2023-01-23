@@ -1,6 +1,7 @@
 import React from 'react'
 import request from 'graphql-request'
 import { format } from 'date-fns'
+import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -102,11 +103,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   /**
    * Checks if the component is in `dumb` or `smart` mode
    */
-  const hasValues = values && values.length > 0
-  const hasLabels = labels && labels.length > 0
-  const isDumb = React.useMemo(() => {
-    return hasLabels && hasValues
-  }, [hasLabels, hasValues])
+  const isDumb = !query
 
   useSetupDefaultStyles(styles)
 
@@ -191,7 +188,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading])
+  }, [isDumb, loading, labels, values])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
@@ -213,12 +210,19 @@ export function TimeSeries(props: TimeSeriesProps) {
   }
 
   return (
-    <canvas
-      id={id}
-      ref={canvasRef}
-      width={styles?.canvas?.width}
-      height={styles?.canvas?.height || defaultChartHeight}
-      role="img"
-    />
+    <div
+      className={css`
+        width: ${styles?.canvas?.width};
+        height: ${styles?.canvas?.height || defaultChartHeight};
+      `}
+    >
+      <canvas
+        id={id}
+        ref={canvasRef}
+        width={styles?.canvas?.width}
+        height={styles?.canvas?.height || defaultChartHeight}
+        role="img"
+      />
+    </div>
   )
 }
