@@ -20,8 +20,10 @@
     "build-storybook": "yarn prepare && build-storybook"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.26",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

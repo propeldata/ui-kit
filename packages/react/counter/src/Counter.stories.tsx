@@ -1,6 +1,7 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
+import { RelativeTimeRange } from '@propeldata/ui-kit-graphql'
 
 import { Container as Counter } from './Container'
 
@@ -53,6 +54,14 @@ const CardTemplate: Story = (args) => (
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        padding: 30px;
+        border-radius: 4px;
+
+        overflow: hidden;
+
+        background-color: var(--color-background);
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
       `}
     >
       <div>
@@ -78,6 +87,20 @@ const CardTemplate: Story = (args) => (
     </div>
   </div>
 )
+
+export const Smart = CardTemplate.bind({})
+Smart.args = {
+  query: {
+    accessToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1MDc2NjMsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTExMjYzLCJpYXQiOjE2NzQ1MDc2NjMsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiOWRjMzM3YjktMDY0OS00ZWFiLWE4ZDctY2Q0ZThlYjRmNzAwIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.KLQEjKY4b7AOKLNCLx-gY1H37PjV5YGVBGK0ivDXMHI',
+    metric: 'queryCount',
+    timeRange: {
+      relative: RelativeTimeRange.LastNDays,
+      n: 30
+    }
+  }
+}
+
 export const Card = CardTemplate.bind({})
 Card.args = {
   value: '1238'
@@ -88,4 +111,16 @@ Error.args = {
   query: {
     accessToken: ''
   }
+}
+
+export const Loading = () => {
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
+
+  return <Counter loading={loading} value="123" />
 }
