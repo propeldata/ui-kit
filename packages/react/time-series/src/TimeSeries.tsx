@@ -208,7 +208,9 @@ export function TimeSeries(props: TimeSeriesProps) {
     return <ErrorFallback error={error} styles={styles} />
   }
 
-  console.log()
+  console.log(defaultChartHeight)
+  console.log(styles?.canvas?.height)
+  console.log(styles?.canvas?.height || defaultChartHeight)
 
   return (
     <canvas
