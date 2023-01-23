@@ -197,14 +197,20 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
-      renderChart(serverData)
+      if (chart) {
+        chart.data.labels = serverData.labels || []
+        chart.data.datasets[0].data = serverData.values || []
+        chart.update()
+      } else {
+        renderChart(serverData)
+      }
     }
 
     return () => {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isDumb])
+  }, [serverData, isDumb, chart])
 
   if (isLoading || loading) {
     return <Loader styles={styles} />
