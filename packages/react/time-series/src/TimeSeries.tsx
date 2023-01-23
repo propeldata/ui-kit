@@ -184,6 +184,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       if (chartRef.current) {
         chartRef.current.data.labels = labels || []
         chartRef.current.data.datasets[0].data = values || []
+        chartRef.current.update()
       } else {
         renderChart({ labels, values })
       }
