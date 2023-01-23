@@ -181,7 +181,12 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (isDumb) {
-      renderChart({ labels, values })
+      if (chartRef.current) {
+        chartRef.current.data.labels = labels || []
+        chartRef.current.data.datasets[0].data = values || []
+      } else {
+        renderChart({ labels, values })
+      }
     }
 
     return () => {
@@ -208,10 +213,6 @@ export function TimeSeries(props: TimeSeriesProps) {
   if (hasError) {
     return <ErrorFallback error={error} styles={styles} />
   }
-
-  console.log(defaultChartHeight)
-  console.log(styles?.canvas?.height)
-  console.log(styles?.canvas?.height || defaultChartHeight)
 
   return (
     <div
