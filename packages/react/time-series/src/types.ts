@@ -64,7 +64,7 @@ export type Styles = {
     hoverBackgroundColor?: string
   }
   point?: {
-    style?: string | false
+    style?: string | boolean
     radius?: number
     borderWidth?: number
     borderColor?: string
