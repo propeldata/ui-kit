@@ -45,7 +45,9 @@ Smart.args = {
 }
 
 export const Error = Template.bind({})
-Error.args = {}
+Error.args = {
+  query: {}
+}
 
 export const Loading = () => {
   const [loading, setLoading] = React.useState(true)

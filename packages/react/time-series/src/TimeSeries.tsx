@@ -102,11 +102,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   /**
    * Checks if the component is in `dumb` or `smart` mode
    */
-  const hasValues = values && values.length > 0
-  const hasLabels = labels && labels.length > 0
-  const isDumb = React.useMemo(() => {
-    return hasLabels && hasValues
-  }, [hasLabels, hasValues])
+  const isDumb = !query
 
   useSetupDefaultStyles(styles)
 
@@ -191,7 +187,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading])
+  }, [isDumb, loading, labels, values])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
