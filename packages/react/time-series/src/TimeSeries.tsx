@@ -90,6 +90,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setSeverData] = React.useState<TimeSeriesData>()
+  const [chart, setChart] = React.useState<ChartJS | null>(null)
 
   const id = React.useId()
 
@@ -97,8 +98,6 @@ export function TimeSeries(props: TimeSeriesProps) {
    * The html node where the chart will render
    */
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
-
-  const chartRef = React.useRef<ChartJS | null>()
 
   /**
    * Checks if the component is in `dumb` or `smart` mode
@@ -110,16 +109,16 @@ export function TimeSeries(props: TimeSeriesProps) {
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data) return
 
-    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
+    setChart(new ChartJS(canvasRef.current, generateConfig({ variant, styles, data })))
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
     canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
   }
 
   const destroyChart = () => {
-    if (chartRef.current) {
-      chartRef.current.destroy()
-      chartRef.current = null
+    if (chart) {
+      chart.destroy()
+      setChart(null)
     }
   }
 
@@ -181,10 +180,10 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (isDumb) {
-      if (chartRef.current) {
-        chartRef.current.data.labels = labels || []
-        chartRef.current.data.datasets[0].data = values || []
-        chartRef.current.update()
+      if (chart) {
+        chart.data.labels = labels || []
+        chart.data.datasets[0].data = values || []
+        chart.update()
       } else {
         renderChart({ labels, values })
       }
@@ -194,7 +193,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading, labels, values])
+  }, [isDumb, loading, labels, values, chart])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
