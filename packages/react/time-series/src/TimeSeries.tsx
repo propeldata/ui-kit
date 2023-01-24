@@ -143,7 +143,9 @@ export function TimeSeries(props: TimeSeriesProps) {
         uniqueName: query?.metric,
         timeSeriesInput: {
           timeRange: query?.timeRange,
-          granularity: query?.granularity
+          granularity: query?.granularity,
+          filters: query.filters,
+          propeller: query.propeller
         }
       },
       {
