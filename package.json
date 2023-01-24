@@ -4,8 +4,7 @@
   "private": true,
   "license": "UNLICENSED",
   "workspaces": [
-    "packages/*/**",
-    "stories"
+    "packages/*/**"
   ],
   "scripts": {
     "build": "turbo run build",
@@ -20,10 +19,10 @@
     "build-storybook": "yarn prepare && build-storybook"
   },
   "dependencies": {
-    "@types/styled-components": "^5.1.26",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "styled-components": "^5.3.6"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

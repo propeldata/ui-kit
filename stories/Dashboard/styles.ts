@@ -1,4 +1,8 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
+
+export const Body = styled.div`
+  background-color: #f8f8f8;
+`
 
 export const Card = styled.div`
   padding: 10px;
@@ -65,12 +69,6 @@ export const SelectedBar = styled.div`
 
   position: absolute;
   top: 65px;
-`
-
-export const Body = styled.div`
-  background-color: #f8f9fb;
-
-  height: max-content;
 `
 
 export const Main = styled.main`

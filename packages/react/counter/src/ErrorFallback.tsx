@@ -4,10 +4,6 @@ import { Styles } from './types'
 
 export interface ErrorFallbackProps {
   styles?: Styles
-  error?: {
-    title: string
-    body: string
-  }
 }
 
 const Icon = ({ color }: { color?: string }) => (

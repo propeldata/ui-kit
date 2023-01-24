@@ -1,19 +1,28 @@
 import React from 'react'
 import { Story } from '@storybook/react'
-import { Counter } from '../packages/react/counter'
-import { TimeSeries } from '../packages/react/time-series'
-import { RelativeTimeRange, TimeSeriesGranularity } from '../packages/core/graphql'
+import { RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
+
+import { Counter } from '../../packages/react/counter/dist'
+import { TimeSeries } from '../../packages/react/time-series/dist'
 
 import * as S from './styles'
 
-import './main.css'
-
 export default {
-  title: 'Examples/Dashboard'
+  title: 'Examples/Dashboard',
+  parameters: {
+    layout: 'fullscreen'
+  },
+  decorators: [
+    (Story) => (
+      <S.Body>
+        <Story />
+      </S.Body>
+    )
+  ]
 }
 
 const accessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1MjExNjAsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTI0NzYxLCJpYXQiOjE2NzQ1MjExNjEsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiYTMyMDU2ZGUtM2YwMi00YjMwLWEyMjgtZWMzMDM1OTk3Nzc0IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.uBNCOqMEwFlICRmUqU8fLnmOvony74ryhP8rvlo8i5g'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1NzMxOTYsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTc2Nzk2LCJpYXQiOjE2NzQ1NzMxOTYsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMjk4MDI3NzctZGNhNi00OWIwLWFiOTctMzM1YzEyNGVkNWQ2IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.6Oy7QNjhbuC9PC_ZiCt0roIkgC_BLUf9ZW3xe9qQaZE'
 
 const queryBase = {
   accessToken,
