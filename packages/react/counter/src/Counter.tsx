@@ -7,6 +7,7 @@ import {
   FilterInput,
   Propeller
 } from '@propeldata/ui-kit-graphql'
+import { css } from '@emotion/css'
 
 import { getValueWithPrefixAndSufix } from './utils'
 import type { Styles } from './types'
@@ -41,8 +42,6 @@ export interface CounterProps {
 
 export function Counter(props: CounterProps) {
   const { value, query, prefixValue, sufixValue, styles, loading } = props
-
-  const containerRef = React.useRef<HTMLDivElement>(null)
 
   /**
    * If the user passes `value` attribute, it
@@ -91,25 +90,13 @@ export function Counter(props: CounterProps) {
     }
   }, [query])
 
-  const setupStyles = React.useCallback(() => {
-    const { font } = styles || {}
-
-    const containerElement = containerRef.current
-
-    if (containerElement) {
-      containerElement.style.color = font?.color || defaultStyles.font.color
-      containerElement.style.fontSize = font?.size || defaultStyles.font.size
-    }
-  }, [styles])
-
   React.useEffect(() => {
     async function setup() {
       setDataValue(isDumb ? value : await fetchData())
-      setupStyles()
     }
 
     setup()
-  }, [setupStyles, fetchData, isDumb, dataValue, value])
+  }, [fetchData, isDumb, dataValue, value])
 
   if (isLoading || loading) return <Loader styles={styles} />
 
@@ -118,7 +105,12 @@ export function Counter(props: CounterProps) {
   }
 
   return (
-    <span ref={containerRef}>
+    <span
+      className={css`
+        color: ${styles?.font?.color || defaultStyles.font.color};
+        font-size: ${styles?.font?.size || defaultStyles.font.size};
+      `}
+    >
       {getValueWithPrefixAndSufix({ prefix: prefixValue, value: dataValue, sufix: sufixValue })}
     </span>
   )

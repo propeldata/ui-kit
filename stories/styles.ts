@@ -105,8 +105,18 @@ export const TopStoresCard = styled(Card)`
 
 export const TargetCard = styled(Card)`
   grid-area: target;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 200px;
 `
 
 export const SalesVolumeCard = styled(Card)`
   grid-area: sales-volume;
+`
+
+export const SalesVolumeChartContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `

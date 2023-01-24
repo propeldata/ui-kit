@@ -13,20 +13,16 @@ export default {
 }
 
 const accessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1MTY1ODYsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTIwMTg2LCJpYXQiOjE2NzQ1MTY1ODYsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiNDNjOWQ1NGYtOTlmMS00MjZiLWI2YzgtYzU0MmQ0MGE1YWI4IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.2dZr-Y2EdIDpesaQq87uWdl8w6VlqvP9bhrG-_WBvOA'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1MjExNjAsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTI0NzYxLCJpYXQiOjE2NzQ1MjExNjEsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiYTMyMDU2ZGUtM2YwMi00YjMwLWEyMjgtZWMzMDM1OTk3Nzc0IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.uBNCOqMEwFlICRmUqU8fLnmOvony74ryhP8rvlo8i5g'
 
 const queryBase = {
   accessToken,
   metric: 'syncRecordsAdded',
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
-    n: 3
+    n: 30
   }
 }
-
-const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
-const values = [0, 1000, 200, 3000, 4000, 500, 7000]
 
 const Template: Story = () => (
   <>
@@ -95,11 +91,26 @@ const Template: Story = () => (
       <S.DashboardGrid>
         <S.SalesCard>
           <h2>Sales</h2>
-          <TimeSeries query={{ ...queryBase, granularity: TimeSeriesGranularity.Week }} />
+          <TimeSeries
+            query={{ ...queryBase, granularity: TimeSeriesGranularity.Week }}
+            variant="line"
+            styles={{ line: { borderColor: '#2566EA' } }}
+          />
         </S.SalesCard>
-        <S.TopStoresCard></S.TopStoresCard>
-        <S.TargetCard></S.TargetCard>
-        <S.SalesVolumeCard></S.SalesVolumeCard>
+        <S.TopStoresCard>Leaderboard</S.TopStoresCard>
+        <S.TargetCard>
+          <Counter query={{ ...queryBase }} styles={{ font: { size: '3rem' } }} />
+          <h3>Sales</h3>
+        </S.TargetCard>
+        <S.SalesVolumeCard>
+          <h3>Sales Volume</h3>
+          <S.SalesVolumeChartContainer>
+            <TimeSeries
+              query={{ ...queryBase, granularity: TimeSeriesGranularity.Week }}
+              styles={{ canvas: { width: 500 }, bar: { borderColor: '#2566EA', backgroundColor: '#2566EA' } }}
+            />
+          </S.SalesVolumeChartContainer>
+        </S.SalesVolumeCard>
       </S.DashboardGrid>
     </S.Main>
   </>
