@@ -1,1 +1,1 @@
-export { Container } from './Container'
+export { Container as Leaderboard } from './Container'

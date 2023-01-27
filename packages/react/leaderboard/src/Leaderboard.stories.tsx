@@ -2,7 +2,8 @@ import React from 'react'
 import { Story } from '@storybook/react'
 import { RelativeTimeRange, Sort } from '@propeldata/ui-kit-graphql'
 
-import { Leaderboard, LeaderboardProps } from './Leaderboard'
+import { LeaderboardProps } from './Leaderboard'
+import { Container as Leaderboard } from './Container'
 
 export default {
   title: 'React/Leaderboard'
