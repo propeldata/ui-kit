@@ -59,6 +59,7 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
   /** If passed along with `labels` the component will ignore the built-in graphql operations  */
   values?: TimeSeriesData['values']
 
+  /** When true, shows a skeleton loader */
   loading?: boolean
 
   query?: {
@@ -89,7 +90,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
-  const [serverData, setSeverData] = React.useState<TimeSeriesData>()
+  const [serverData, setServerData] = React.useState<TimeSeriesData>()
 
   const id = React.useId()
 
@@ -131,9 +132,9 @@ export function TimeSeries(props: TimeSeriesProps) {
   const fetchData = async () => {
     if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
       console.error(
-        'IvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
+        'InvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
       )
-      throw new Error('IvalidPropsError')
+      throw new Error('InvalidPropsError')
     }
 
     const response = await request(
@@ -168,7 +169,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       try {
         setIsLoading(true)
         const data = await fetchData()
-        setSeverData(data)
+        setServerData(data)
       } catch {
         setHasError(true)
       } finally {
