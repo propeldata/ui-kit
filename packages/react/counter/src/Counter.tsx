@@ -117,7 +117,12 @@ export function Counter(props: CounterProps) {
         line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
       `}
     >
-      {getValueWithPrefixAndSufix({ prefix: prefixValue, value: dataValue, sufix: sufixValue })}
+      {getValueWithPrefixAndSufix({
+        prefix: prefixValue,
+        value: dataValue,
+        sufix: sufixValue,
+        locale: styles?.locale || defaultStyles.locale
+      })}
     </span>
   )
 }

@@ -57,6 +57,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 1</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -68,6 +69,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 2</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -79,6 +81,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 3</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -90,6 +93,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 4</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
