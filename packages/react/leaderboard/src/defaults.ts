@@ -37,7 +37,11 @@ export const defaultStyles: Styles = {
     caretSize: 2
   },
   table: {
-    ordered: false,
+    width: '100%',
+    height: '100%',
+    isOrdered: false,
+    hasValueBar: false,
+    stickyHeader: false,
     backgroundColor: '#FFFFFF',
     padding: '5px',
     header: {
@@ -56,11 +60,16 @@ export const defaultStyles: Styles = {
       }
     },
     valueColumn: {
+      locale: false,
       align: 'right',
       font: {
         color: '#475569',
         weight: '700'
       }
+    },
+    valueBar: {
+      color: '#334155',
+      backgroundColor: '#F1F5F9'
     }
   }
 }

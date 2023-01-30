@@ -54,7 +54,11 @@ export type Styles = {
     hoverBackgroundColor?: string
   }
   table?: {
-    ordered?: boolean
+    width?: string
+    height?: string
+    stickyHeader?: boolean
+    isOrdered?: boolean
+    hasValueBar?: boolean
     backgroundColor?: string
     padding?: string
     header?: {
@@ -82,6 +86,7 @@ export type Styles = {
       }
     }
     valueColumn?: {
+      locale?: boolean
       backgroundColor?: string
       align?: 'left' | 'center' | 'right'
       font?: {
@@ -92,6 +97,10 @@ export type Styles = {
         weight?: string
         lineHeight?: number | string
       }
+    }
+    valueBar?: {
+      color?: string
+      backgroundColor?: string
     }
   }
 }
