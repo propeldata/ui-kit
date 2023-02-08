@@ -26,7 +26,7 @@ import { ValueBar } from './ValueBar'
  */
 ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale, Colors)
 
-export interface LeaderboardProps extends ErrorFallbackProps {
+export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: ChartVariant
   /** `styles` attribute can be either `BarStyles` or `TableStyles` */
@@ -65,7 +65,7 @@ export interface LeaderboardProps extends ErrorFallbackProps {
 }
 
 export function Leaderboard(props: LeaderboardProps) {
-  const { variant = 'bar', styles, headers, rows, query, error, loading = false } = props
+  const { variant = 'bar', styles, headers, rows, query, error, loading = false, ...rest } = props
 
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
@@ -217,6 +217,7 @@ export function Leaderboard(props: LeaderboardProps) {
           width={styles?.canvas?.width}
           height={styles?.canvas?.height || defaultChartHeight}
           role="img"
+          {...rest}
         />
       </div>
     )

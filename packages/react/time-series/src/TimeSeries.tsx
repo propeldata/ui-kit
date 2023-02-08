@@ -46,7 +46,7 @@ ChartJS.register(
   Colors
 )
 
-export interface TimeSeriesProps extends ErrorFallbackProps {
+export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: ChartVariant
 
@@ -86,7 +86,7 @@ export interface TimeSeriesProps extends ErrorFallbackProps {
 }
 
 export function TimeSeries(props: TimeSeriesProps) {
-  const { variant = 'bar', styles, labels, values, query, error, loading = false } = props
+  const { variant = 'bar', styles, labels, values, query, error, loading = false, ...rest } = props
 
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
@@ -225,6 +225,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         width={styles?.canvas?.width}
         height={styles?.canvas?.height || defaultChartHeight}
         role="img"
+        {...rest}
       />
     </div>
   )
