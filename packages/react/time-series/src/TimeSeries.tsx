@@ -183,6 +183,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (isDumb) {
+      destroyChart()
       renderChart({ labels, values })
     }
 
@@ -190,10 +191,11 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading, labels, values])
+  }, [isDumb, loading, styles, labels, values])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
+      destroyChart()
       renderChart(serverData)
     }
 
@@ -201,7 +203,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isDumb])
+  }, [serverData, styles, isDumb])
 
   if (isLoading || loading) {
     return <Loader styles={styles} />
