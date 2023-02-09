@@ -109,7 +109,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   useSetupDefaultStyles(styles)
 
   const renderChart = (data?: TimeSeriesData) => {
-    if (!canvasRef.current || !data) return
+    if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
 
     chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
 
@@ -184,6 +184,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (isDumb) {
+      destroyChart()
       renderChart({ labels, values })
     }
 
@@ -191,10 +192,11 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading, labels, values])
+  }, [isDumb, loading, styles, variant, labels, values])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
+      destroyChart()
       renderChart(serverData)
     }
 
@@ -202,7 +204,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isDumb])
+  }, [serverData, variant, styles, isDumb])
 
   if (isLoading || loading) {
     return <Loader styles={styles} />
