@@ -163,6 +163,7 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     if (isDumb) {
+      destroyChart()
       renderChart({ headers, rows })
     }
 
@@ -170,10 +171,11 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading, headers, rows, variant])
+  }, [isDumb, loading, styles, variant, headers, rows, variant])
 
   React.useEffect(() => {
     if (serverData && !isDumb) {
+      destroyChart()
       renderChart(serverData)
     }
 
@@ -181,7 +183,7 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isDumb, variant])
+  }, [serverData, styles, variant, isDumb, variant])
 
   React.useEffect(() => {
     try {
