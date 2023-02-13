@@ -116,7 +116,7 @@ export function Counter(props: CounterProps) {
   )
 }
 
-const getFontStyles = (styles: Styles) => css`
+const getFontStyles = (styles?: Styles) => css`
   color: ${styles?.font?.color || defaultStyles.font.color};
   font-size: ${styles?.font?.size || defaultStyles.font.size};
   font-family: ${styles?.font?.family || defaultStyles.font.family};
