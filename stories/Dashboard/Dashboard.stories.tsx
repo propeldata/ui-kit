@@ -4,6 +4,7 @@ import { RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/ui-kit-gra
 
 import { Counter } from '../../packages/react/counter/dist'
 import { TimeSeries } from '../../packages/react/time-series/dist'
+import { Leaderboard } from '../../packages/react/leaderboard/dist'
 
 import * as S from './styles'
 
@@ -22,7 +23,7 @@ export default {
 }
 
 const accessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1NzMxOTYsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTc2Nzk2LCJpYXQiOjE2NzQ1NzMxOTYsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMjk4MDI3NzctZGNhNi00OWIwLWFiOTctMzM1YzEyNGVkNWQ2IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.6Oy7QNjhbuC9PC_ZiCt0roIkgC_BLUf9ZW3xe9qQaZE'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzU5NzEyMjAsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc1OTc0ODIwLCJpYXQiOjE2NzU5NzEyMjAsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMWRmMGM0MTktNDRjMi00N2ZiLWIzMjEtODQ4MDk3YTc5Y2UxIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.YLXK4gcgGeU5-Nz6o2rjZYe8CSVH-ZA9pWIxzKvX2NQ'
 
 const queryBase = {
   accessToken,
@@ -56,6 +57,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 1</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -67,6 +69,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 2</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -78,6 +81,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 3</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -89,6 +93,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 4</S.CardHeader>
           <S.ProdValue>
             <Counter
+              styles={{ locale: true }}
               prefixValue="$"
               query={{
                 ...queryBase
@@ -106,7 +111,20 @@ const Template: Story = () => (
             styles={{ line: { borderColor: '#2566EA' } }}
           />
         </S.SalesCard>
-        <S.TopStoresCard>Leaderboard</S.TopStoresCard>
+        <S.TopStoresCard>
+          <Leaderboard
+            query={{
+              ...queryBase,
+              rowLimit: 10,
+              dimensions: [
+                {
+                  columnName: 'DATA_POOL_UNIQUE_NAME'
+                }
+              ]
+            }}
+            styles={{ canvas: { height: 500 }, bar: { borderColor: '#2566EA', backgroundColor: '#2566EA' } }}
+          />
+        </S.TopStoresCard>
         <S.TargetCard>
           <Counter query={{ ...queryBase }} styles={{ font: { size: '3rem' } }} />
           <h3>Sales</h3>

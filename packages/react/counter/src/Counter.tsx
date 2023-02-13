@@ -15,7 +15,7 @@ import { defaultStyles } from './defaults'
 import { Loader } from './Loader'
 import { ErrorFallback } from './ErrorFallback'
 
-export interface CounterProps {
+export interface CounterProps extends React.ComponentProps<'span'> {
   /** If passed, the component will ignore the built-in graphql operations */
   value?: string
   /** Symbol to be shown before the value text */
@@ -41,7 +41,7 @@ export interface CounterProps {
 }
 
 export function Counter(props: CounterProps) {
-  const { value, query, prefixValue, sufixValue, styles, loading } = props
+  const { value, query, prefixValue, sufixValue, styles, loading, ...rest } = props
 
   /**
    * If the user passes `value` attribute, it
@@ -49,7 +49,7 @@ export function Counter(props: CounterProps) {
    */
   const isDumb = !!value
 
-  const [dataValue, setDataValue] = React.useState('')
+  const [dataValue, setDataValue] = React.useState<string>()
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -96,7 +96,7 @@ export function Counter(props: CounterProps) {
     }
 
     setup()
-  }, [fetchData, isDumb, dataValue, value])
+  }, [fetchData, isDumb, value])
 
   if (isLoading || loading) return <Loader styles={styles} />
 
@@ -106,6 +106,7 @@ export function Counter(props: CounterProps) {
 
   return (
     <span
+      {...rest}
       className={css`
         color: ${styles?.font?.color || defaultStyles.font.color};
         font-size: ${styles?.font?.size || defaultStyles.font.size};
@@ -115,9 +116,16 @@ export function Counter(props: CounterProps) {
         font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
         font-style: ${styles?.font?.style || defaultStyles.font.style};
         line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
+
+        white-space: nowrap;
       `}
     >
-      {getValueWithPrefixAndSufix({ prefix: prefixValue, value: dataValue, sufix: sufixValue })}
+      {getValueWithPrefixAndSufix({
+        prefix: prefixValue,
+        value: dataValue,
+        sufix: sufixValue,
+        locale: styles?.locale || defaultStyles.locale
+      })}
     </span>
   )
 }

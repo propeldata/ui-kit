@@ -1,4 +1,5 @@
 export const defaultStyles = {
+  locale: false,
   font: {
     color: '#000',
     size: 'inherit',
