@@ -105,21 +105,7 @@ export function Counter(props: CounterProps) {
   }
 
   return (
-    <span
-      {...rest}
-      className={css`
-        color: ${styles?.font?.color || defaultStyles.font.color};
-        font-size: ${styles?.font?.size || defaultStyles.font.size};
-        font-family: ${styles?.font?.family || defaultStyles.font.family};
-        font-weight: ${styles?.font?.weight || defaultStyles.font.weight};
-        font-stretch: ${styles?.font?.stretch || defaultStyles.font.stretch};
-        font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
-        font-style: ${styles?.font?.style || defaultStyles.font.style};
-        line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
-
-        white-space: nowrap;
-      `}
-    >
+    <span {...rest} className={getFontStyles(styles)}>
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,
         value: dataValue,
@@ -129,3 +115,16 @@ export function Counter(props: CounterProps) {
     </span>
   )
 }
+
+const getFontStyles = (styles: Styles) => css`
+  color: ${styles?.font?.color || defaultStyles.font.color};
+  font-size: ${styles?.font?.size || defaultStyles.font.size};
+  font-family: ${styles?.font?.family || defaultStyles.font.family};
+  font-weight: ${styles?.font?.weight || defaultStyles.font.weight};
+  font-stretch: ${styles?.font?.stretch || defaultStyles.font.stretch};
+  font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
+  font-style: ${styles?.font?.style || defaultStyles.font.style};
+  line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
+
+  white-space: nowrap;
+`
