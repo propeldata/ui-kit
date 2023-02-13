@@ -215,12 +215,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   }
 
   return (
-    <div
-      className={css`
-        width: ${styles?.canvas?.width};
-        height: ${styles?.canvas?.height || defaultChartHeight};
-      `}
-    >
+    <div className={getContainerStyles(styles)}>
       <canvas
         id={id}
         ref={canvasRef}
@@ -232,3 +227,8 @@ export function TimeSeries(props: TimeSeriesProps) {
     </div>
   )
 }
+
+const getContainerStyles = (styles?: Styles) => css`
+  width: ${styles?.canvas?.width};
+  height: ${styles?.canvas?.height || defaultChartHeight};
+`

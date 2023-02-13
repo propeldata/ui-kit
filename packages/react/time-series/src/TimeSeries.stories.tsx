@@ -33,8 +33,7 @@ export const Smart = Template.bind({})
 Smart.args = {
   variant: 'line',
   query: {
-    accessToken:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1MDcyNDgsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTEwODQ4LCJpYXQiOjE2NzQ1MDcyNDgsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMzVkOGNjZDQtNmYzMS00MzQ2LTg3MmQtMWFkZjYzZDc2YmJiIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.cmHnvgAHa_ziXoRrJ1-KmJHICnfO7ZE6gxDyUuwOQIU',
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'syncRecordsAdded',
     timeRange: {
       relative: RelativeTimeRange.PreviousWeek

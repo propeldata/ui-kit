@@ -12,6 +12,23 @@ export interface ErrorFallbackProps {
   }
 }
 
+export function ErrorFallback(props: ErrorFallbackProps) {
+  const { error = serverErrorMessage, styles } = props
+
+  const width = styles?.canvas?.width
+  const height = styles?.canvas?.height || defaultChartHeight
+
+  return (
+    <div className={getContainerStyles(height, width)}>
+      <div className={textWrapperStyles}>
+        <Icon color={styles?.font?.color} />
+        <p className={textStyles}>{error.title}</p>
+        <p>{error.body}</p>
+      </div>
+    </div>
+  )
+}
+
 const Icon = ({ color }: { color?: string }) => (
   <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -21,39 +38,20 @@ const Icon = ({ color }: { color?: string }) => (
   </svg>
 )
 
-export function ErrorFallback(props: ErrorFallbackProps) {
-  const { error = serverErrorMessage, styles } = props
+const getContainerStyles = (height: number, width?: number) => css`
+  width: ${width ? width + 'px' : '100%'};
+  height: ${height}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
-  const width = styles?.canvas?.width
-  const height = styles?.canvas?.height || defaultChartHeight
+const textWrapperStyles = css`
+  max-width: 263px;
+  text-align: center;
+  text-align: -webkit-center;
+`
 
-  return (
-    <div
-      className={css`
-        width: ${width ? width + 'px' : '100%'};
-        height: ${height}px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      `}
-    >
-      <div
-        className={css`
-          max-width: 263px;
-          text-align: center;
-          text-align: -webkit-center;
-        `}
-      >
-        <Icon color={styles?.font?.color} />
-        <p
-          className={css`
-            font-weight: 500;
-          `}
-        >
-          {error.title}
-        </p>
-        <p>{error.body}</p>
-      </div>
-    </div>
-  )
-}
+const textStyles = css`
+  font-weight: 500;
+`
