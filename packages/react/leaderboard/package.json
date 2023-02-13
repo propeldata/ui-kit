@@ -1,7 +1,7 @@
 {
   "name": "@propeldata/react-leaderboard",
   "packageManager": "yarn@3.3.0",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
@@ -13,7 +13,7 @@
   "dependencies": {
     "@emotion/css": "^11.10.5",
     "@propeldata/ui-kit-components": "workspace:^0.2.1",
-    "@propeldata/ui-kit-graphql": "workspace:^0.2.3",
+    "@propeldata/ui-kit-graphql": "workspace:^0.2.5",
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0",
     "chart.js": "^4.1.2",
     "graphql": "^16.6.0",
