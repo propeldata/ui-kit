@@ -24,6 +24,8 @@ export interface CounterProps extends React.ComponentProps<'span'> {
   sufixValue?: string
   /** Basic styles initial state */
   styles?: Styles
+  /** When true, formats value to locale string */
+  localize?: boolean
   query?: {
     /** Time range that the chart will respond to. Will be ignored when value is passed */
     timeRange?: TimeRangeInput
@@ -41,7 +43,7 @@ export interface CounterProps extends React.ComponentProps<'span'> {
 }
 
 export function Counter(props: CounterProps) {
-  const { value, query, prefixValue, sufixValue, styles, loading, ...rest } = props
+  const { value, query, prefixValue, sufixValue, styles, loading, localize, ...rest } = props
 
   /**
    * If the user passes `value` attribute, it
@@ -105,27 +107,26 @@ export function Counter(props: CounterProps) {
   }
 
   return (
-    <span
-      {...rest}
-      className={css`
-        color: ${styles?.font?.color || defaultStyles.font.color};
-        font-size: ${styles?.font?.size || defaultStyles.font.size};
-        font-family: ${styles?.font?.family || defaultStyles.font.family};
-        font-weight: ${styles?.font?.weight || defaultStyles.font.weight};
-        font-stretch: ${styles?.font?.stretch || defaultStyles.font.stretch};
-        font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
-        font-style: ${styles?.font?.style || defaultStyles.font.style};
-        line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
-
-        white-space: nowrap;
-      `}
-    >
+    <span {...rest} className={getFontStyles(styles)}>
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,
         value: dataValue,
         sufix: sufixValue,
-        locale: styles?.locale || defaultStyles.locale
+        localize
       })}
     </span>
   )
 }
+
+const getFontStyles = (styles?: Styles) => css`
+  color: ${styles?.font?.color || defaultStyles.font.color};
+  font-size: ${styles?.font?.size || defaultStyles.font.size};
+  font-family: ${styles?.font?.family || defaultStyles.font.family};
+  font-weight: ${styles?.font?.weight || defaultStyles.font.weight};
+  font-stretch: ${styles?.font?.stretch || defaultStyles.font.stretch};
+  font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
+  font-style: ${styles?.font?.style || defaultStyles.font.style};
+  line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
+
+  white-space: nowrap;
+`

@@ -1,5 +1,4 @@
 export type Styles = {
-  locale?: boolean
   font?: {
     color?: string
     size?: string
