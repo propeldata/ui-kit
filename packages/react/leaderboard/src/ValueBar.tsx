@@ -1,15 +1,16 @@
 import React from 'react'
 import { css } from '@emotion/css'
 
+import { Styles } from './types'
+
 interface Props {
   value: number
   maxValue: number
-  color?: string
-  backgroundColor?: string
+  styles?: Styles
 }
 
 export function ValueBar(props: Props) {
-  const { value, maxValue, color, backgroundColor } = props
+  const { value, maxValue, styles } = props
 
   const barWidth = `${Math.max(3, Math.ceil((value * 100) / maxValue))}%`
 
@@ -23,12 +24,12 @@ export function ValueBar(props: Props) {
 
         border-radius: 10px;
 
-        background-color: ${backgroundColor};
+        background-color: ${styles?.table?.valueBar?.backgroundColor};
       `}
     >
       <div
         className={css`
-          background-color: ${color};
+          background-color: ${styles?.table?.valueBar?.color};
           height: 6px;
           border-radius: ${barWidth === '100%' ? '10px' : '10px 0 0 10px'};
           width: ${barWidth};
