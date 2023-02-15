@@ -93,6 +93,26 @@ export function Counter(props: CounterProps) {
   }, [query])
 
   React.useEffect(() => {
+    function handleErrors() {
+      if (isDumb && !value) {
+        console.error('InvalidPropsError: You must pass either `value` or `query` props')
+        setHasError(true)
+        return
+      }
+
+      if (!isDumb && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
+        console.error(
+          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+        )
+        setHasError(true)
+        return
+      }
+    }
+
+    handleErrors()
+  }, [isDumb, value, query, props])
+
+  React.useEffect(() => {
     async function setup() {
       setDataValue(isDumb ? value : await fetchData())
     }
