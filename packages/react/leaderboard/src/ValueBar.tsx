@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
 
+import { defaultStyles } from './defaults'
 import { Styles } from './types'
 
 interface Props {
@@ -24,12 +25,14 @@ export function ValueBar(props: Props) {
 
         border-radius: 10px;
 
-        background-color: ${styles?.table?.valueBar?.backgroundColor};
+        background-color: ${styles?.table?.valueBar?.backgroundColor || defaultStyles.table?.valueBar?.backgroundColor};
       `}
     >
       <div
         className={css`
-          background-color: ${styles?.table?.valueBar?.color};
+          background-color: ${styles?.table?.valueBar?.color ||
+          styles?.font?.color ||
+          defaultStyles.table?.valueBar?.color};
           height: 6px;
           border-radius: ${barWidth === '100%' ? '10px' : '10px 0 0 10px'};
           width: ${barWidth};

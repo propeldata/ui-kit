@@ -23,7 +23,7 @@ export default {
 }
 
 const accessToken =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzU5NzEyMjAsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc1OTc0ODIwLCJpYXQiOjE2NzU5NzEyMjAsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMWRmMGM0MTktNDRjMi00N2ZiLWIzMjEtODQ4MDk3YTc5Y2UxIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.YLXK4gcgGeU5-Nz6o2rjZYe8CSVH-ZA9pWIxzKvX2NQ'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzY1ODkzMDUsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc2NTkyOTA1LCJpYXQiOjE2NzY1ODkzMDUsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMTZkMWMxODUtZGNmYi00ODk4LWI1MTItYjg3YTJkODRiMzZiIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.KMqp0wt2K5YjAiGdsSGnXRu4sY8JIV2abHAS7hcAkyo'
 
 const queryBase = {
   accessToken,
@@ -57,7 +57,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 1</S.CardHeader>
           <S.ProdValue>
             <Counter
-              styles={{ locale: true }}
+              localize
               prefixValue="$"
               query={{
                 ...queryBase
@@ -69,7 +69,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 2</S.CardHeader>
           <S.ProdValue>
             <Counter
-              styles={{ locale: true }}
+              localize
               prefixValue="$"
               query={{
                 ...queryBase
@@ -81,7 +81,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 3</S.CardHeader>
           <S.ProdValue>
             <Counter
-              styles={{ locale: true }}
+              localize
               prefixValue="$"
               query={{
                 ...queryBase
@@ -93,7 +93,7 @@ const Template: Story = () => (
           <S.CardHeader>Prod 4</S.CardHeader>
           <S.ProdValue>
             <Counter
-              styles={{ locale: true }}
+              localize
               prefixValue="$"
               query={{
                 ...queryBase

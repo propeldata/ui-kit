@@ -83,6 +83,9 @@ CustomStyles.args = {
       height: 45,
       backgroundColor: 'transparent',
       hideGridLines: true
+    },
+    tooltip: {
+      display: false
     }
   }
 }
@@ -105,6 +108,11 @@ CustomDark.args = {
     },
     font: {
       color: '#f0f2f0'
+    },
+    tooltip: {
+      color: '#1db954',
+      borderColor: '#ffffff',
+      backgroundColor: '#212121'
     }
   }
 }

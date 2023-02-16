@@ -29,9 +29,9 @@ export const defaultStyles: Styles = {
     display: true,
     backgroundColor: 'white',
     borderRadius: 6,
-    borderColor: 'cornflowerblue',
+    borderColor: '#94A3B8',
     borderWidth: 2,
-    color: 'cornflowerblue',
+    color: '#94A3B8',
     padding: 8,
     alignContent: 'left',
     caretSize: 2
