@@ -142,6 +142,8 @@ This will display a custom error message with a title and body text, as shown in
 
 By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that fit seamlessly into your front-end applications.
 
+Made with :purple_heart: and [Chart.js](https://www.chartjs.org/)
+
 ## Licence
 
 Propel license
