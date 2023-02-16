@@ -1,6 +1,10 @@
-# Propel UI Kit
+![React email cover](https://react.email/static/covers/react-email.png)
 
-> Building Better Data Visualizations with Ease
+<div align="center"><strong>Propel UI Kit</strong></div>
+<div align="center">Building Better Data Visualizations with Ease.</div>
+<br />
+
+## Introduction
 
 Propel UI Kit is a set of customer-facing components that are powered by Propel APIs. The aim of this project is to simplify the process of creating data visualizations for our customers, even for those who may not have much front-end development experience. This is particularly useful for teams that don't want to allocate resources to building user interfaces that will connect with Propel.
 
@@ -8,11 +12,27 @@ Each component in the Propel UI Kit is connected to one metric and can automatic
 
 Another advantage of the Propel UI Kit is that users can apply their own styles and custom error messages, giving them complete control over the look and feel of their data visualizations.
 
+## Getting Started
+
+To leverage the full power of Propel, you'll need a Propel account and a metric to work with. If you don't have an account yet, you can follow the instructions in [this article](https://propeldata.com/docs/metrics) to get started.
+
+Once you have your account set up, you'll need to provide your account's access token to use Propel APIs. You can authenticate and generate an access token by following the steps outlined in [this article](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
+
+With your metric and access token in hand, it's time to start using Propel UI Kit. Currently, the UI Kit is available for React only and supports the following metric components:
+
+- [Time Series](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series)
+- [Counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/counter)
+- [Leaderboard](https://github.com/propeldata/ui-kit/tree/main/packages/react/leaderboard)
+
+Now let's understand how you can integrate Propel UI Kit with your front-end application.
+
+## Usage
+
 The components in the Propel UI Kit are available in two modes: "dumb" and "smart". The "dumb" mode is a simpler version of the component, suitable for users who want to quickly build basic visualizations. The "smart" mode is a more advanced version of the component, which offers more flexibility and customization options for more complex visualizations.
 
 Overall, the Propel UI Kit is a powerful tool for front-end developers who want to create engaging, user-friendly data visualizations with ease.
 
-## Dumb Mode
+### Dumb Mode
 
 In the "dumb" mode, the component will only display the data you provide and won't fetch any additional data in the background. Let's take our [@propeldata/react-time-series](link to time series readme) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
 
@@ -30,23 +50,36 @@ function MyComponent() {
 
 This approach makes the component simpler and more efficient, as it only displays the data you provide. You can still customize the component using your own styles.
 
-## Smart Mode: The Power of Propel at one import away
+### Smart Mode: The Power of Propel at one import away
 
-In the "smart" mode, the component will fetch and render the Propel data for you. To use this mode, all you need to do is pass the query prop, which configures the metric query. Here is an example using our [@propeldata/react-time-series](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
+In the "smart" mode, the component will fetch and render the Propel data for you. To use this mode, all you need to do is pass the query prop, which configures the metric query. Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
 
 ```javascript
-import { TimeSeries } from '@propeldata/react-time-series'
+import { Counter } from '@propeldata/react-counter'
 
-const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+function SalesCountLabel() {
+  const queryOptions = {
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
+    metric: 'salesCount',
+    timeRange: {
+      relative: 'PREVIOUS_WEEK'
+    },
+    granularity: 'DAY'
+  }
 
-const values = [0, 1000, 200, 3000, 4000, 500, 7000]
-
-function MyComponent() {
-  return <TimeSeries labels={labels} values={values} />
+  return (
+    <p>
+      We reached <Counter query={queryOptions} /> last week.
+    </p>
+  )
 }
 ```
 
 In this mode, our component will handle the loading and error states for you, making it even easier to use.
+
+<p align="center">
+  <img src="/path/to/gif.gif">
+</p>
 
 Wanna see more examples? Checkout our [Storybook](https://ui-kit-propeldata.vercel.app/)!
 
@@ -56,104 +89,9 @@ The Propel UI Kit was designed to be highly customizable and easy to incorporate
 
 ### Styles
 
-You can apply your own custom styles to each component using the Styles interface. This interface includes a wide range of properties to customize your charts, such as font, canvas, tooltip, bar, line, and point. Here is a list of the available properties and their types in our Time Series component:
+You can apply your own custom styles to each component using the Styles interface. This interface includes a wide range of properties to customize your charts, such as font, canvas, tooltip, bar, line, and point. Check out how to do it in out [Time Series]() component
 
-#### **`font` Property**
-
-| Property   | Type                                                  | Description                                             |
-| ---------- | ----------------------------------------------------- | ------------------------------------------------------- |
-| color      | string                                                | The color of the font.                                  |
-| family     | string                                                | The font family.                                        |
-| size       | number or 'inherit'                                   | The font size or 'inherit' to use the parent font size. |
-| style      | 'normal', 'italic', 'oblique', 'initial' or 'inherit' | The font style.                                         |
-| weight     | string                                                | The font weight.                                        |
-| lineHeight | number or string                                      | The line height of the text.                            |
-
-This table describes the **`font`** property, which is used to customize the font of the chart elements.
-
-#### **`canvas` Property**
-
-| Property        | Type                | Description                         |
-| --------------- | ------------------- | ----------------------------------- |
-| width           | number              | The width of the canvas.            |
-| height          | number              | The height of the canvas.           |
-| hideGridLines   | boolean             | Whether to hide the grid lines.     |
-| backgroundColor | string              | The background color of the canvas. |
-| padding         | ChartPaddingOptions | The padding of the canvas.          |
-| borderRadius    | string              | The border radius of the canvas.    |
-
-This table describes the **`canvas`** property, which is used to customize the appearance of the chart's canvas.
-
-#### **`tooltip` Property**
-
-| Property        | Type                        | Description                           |
-| --------------- | --------------------------- | ------------------------------------- |
-| display         | boolean                     | Whether to display the tooltip.       |
-| backgroundColor | string                      | The background color of the tooltip.  |
-| borderRadius    | number                      | The border radius of the tooltip.     |
-| borderColor     | string                      | The border color of the tooltip.      |
-| borderWidth     | number                      | The border width of the tooltip.      |
-| color           | string                      | The color of the tooltip text.        |
-| padding         | number                      | The padding of the tooltip.           |
-| alignContent    | 'left', 'center' or 'right' | The alignment of the tooltip content. |
-| caretSize       | number                      | The size of the tooltip caret.        |
-
-This table describes the **`tooltip`** property, which is used to customize the appearance of the chart's tooltip.
-
-#### **`bar` Property**
-
-| Property             | Type   | Description                                     |
-| -------------------- | ------ | ----------------------------------------------- |
-| thickness            | number | The thickness of the bars.                      |
-| borderWidth          | number | The border width of the bars.                   |
-| borderRadius         | number | The border radius of the bars.                  |
-| borderColor          | string | The border color of the bars.                   |
-| hoverBorderColor     | string | The border color of the bars when hovering.     |
-| backgroundColor      | string | The background color of the bars.               |
-| hoverBackgroundColor | string | The background color of the bars when hovering. |
-
-This table describes the **`bar`** property, which is used to customize the appearance of the bars in a bar chart.
-
-#### **`line` Property**
-
-| Property             | Type    | Description                                     |
-| -------------------- | ------- | ----------------------------------------------- |
-| tension              | number  | The tension of the line.                        |
-| stepped              | boolean | Whether to use a stepped line.                  |
-| borderWidth          | number  | The border width of the line.                   |
-| borderRadius         | number  | The border radius of the line.                  |
-| borderColor          | string  | The border color of the line.                   |
-| hoverBorderColor     | string  | The border color of the line when hovering.     |
-| backgroundColor      | string  | The background color of the line.               |
-| hoverBackgroundColor | string  | The background color of the line when hovering. |
-
-This table describes the **`line`** property, which is used to customize the appearance of the lines in a line chart.
-
-#### **`point` Property**
-
-| Property             | Type              | Description                                       |
-| -------------------- | ----------------- | ------------------------------------------------- |
-| style                | string or boolean | The style of the points.                          |
-| radius               | number            | The radius of the points.                         |
-| borderWidth          | number            | The border width of the points.                   |
-| borderColor          | string            | The border color of the points.                   |
-| hoverBorderColor     | string            | The border color of the points when hovering.     |
-| backgroundColor      | string            | The background color of the points.               |
-| hoverBackgroundColor | string            | The background color of the points when hovering. |
-
-### Error
-
-to be defined...
-
-### Components
-
-To leverage the full power of Propel, check out our currently supported metric components, available for `React` only:
-
-- Time Series
-- Counter
-- Leaderboard
-
-Built with :purple_heart: and [Chart.js](https://www.chartjs.org/).
+### Error handling
 
 ## Licence
 
