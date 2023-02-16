@@ -43,12 +43,16 @@ const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 const values = [0, 1000, 200, 3000, 4000, 500, 7000]
 
-function MyComponent() {
+function WeekSalesChart() {
   return <TimeSeries labels={labels} values={values} />
 }
 ```
 
 This approach makes the component simpler and more efficient, as it only displays the data you provide. You can still customize the component using your own styles.
+
+<p align="center">
+  <img src="time-series">
+</p>
 
 ### Smart Mode: The Power of Propel at one import away
 
@@ -78,7 +82,7 @@ function SalesCountLabel() {
 In this mode, our component will handle the loading and error states for you, making it even easier to use.
 
 <p align="center">
-  <img src="/path/to/gif.gif">
+  <img src="counter">
 </p>
 
 Wanna see more examples? Checkout our [Storybook](https://ui-kit-propeldata.vercel.app/)!
@@ -89,9 +93,54 @@ The Propel UI Kit was designed to be highly customizable and easy to incorporate
 
 ### Styles
 
-You can apply your own custom styles to each component using the Styles interface. This interface includes a wide range of properties to customize your charts, such as font, canvas, tooltip, bar, line, and point. Check out how to do it in out [Time Series]() component
+You can apply your own custom styles to each component using the Styles interface. This interface includes a wide range of properties to customize your charts, such as font, canvas, tooltip, bar, line, and point.
 
-### Error handling
+For example, to change the color of the bars in your time series chart, you can use the following JavaScript code:
+
+```javascript
+function MyChart() {
+  // source code
+
+  const styles = {
+    bar: {
+      backgroundColor: '#532AB4'
+    }
+  }
+
+  return <TimeSeries styles={styles} />
+}
+```
+
+This will change the color of the bars to a shade of purple, as shown in the following image:
+
+<p align="center">
+  <img src="purple-time-series">
+</p>
+
+### Errors
+
+You can also provide your own custom error messages by using the error prop. This will enable you to provide more accurate feedback to your users in case of technical errors or other issues.
+
+For example, to display a custom error message when the chart data cannot be loaded, you can use the following JavaScript code:
+
+```javascript
+function MyChart() {
+  // source code
+
+  const title = 'Unable to connect'
+  const body = 'Sorry we are not able to connect at this time due to a technical error.'
+
+  return <TimeSeries error={{ title, body }} />
+}
+```
+
+This will display a custom error message with a title and body text, as shown in the following image:
+
+<p align="center">
+  <img src="custom-error">
+</p>
+
+By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that fit seamlessly into your front-end applications.
 
 ## Licence
 
