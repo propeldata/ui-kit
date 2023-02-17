@@ -1,5 +1,3 @@
-![React email cover](https://react.email/static/covers/react-email.png)
-
 <div align="center"><strong>Propel UI Kit</strong></div>
 <div align="center">Building Better Data Visualizations with Ease.</div>
 <br />
