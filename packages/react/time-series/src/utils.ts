@@ -15,6 +15,7 @@ import {
 } from 'chart.js'
 
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
+import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
 import { TimeSeriesData, Styles, ChartVariant, CustomPlugins } from './types'
 import { defaultStyles } from './defaults'
@@ -142,4 +143,54 @@ export function useSetupDefaultStyles(styles?: Styles) {
 
     setupDefaultStyles()
   }, [styles])
+}
+
+export function getDefaultGranularity(timeRange?: TimeRangeInput) {
+  const relative = timeRange?.relative
+
+  if (!relative) {
+    return null
+  }
+
+  return {
+    [RelativeTimeRange.LastNDays]: TimeSeriesGranularity.Day,
+    [RelativeTimeRange.LastNHours]: TimeSeriesGranularity.Hour,
+    [RelativeTimeRange.LastNMinutes]: TimeSeriesGranularity.Minute,
+    [RelativeTimeRange.LastNMonths]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.LastNQuarters]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.LastNWeeks]: TimeSeriesGranularity.Year,
+    [RelativeTimeRange.LastNYears]: TimeSeriesGranularity.Year,
+    [RelativeTimeRange.Today]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.Yesterday]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.Tomorrow]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.NextHour]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.NextMonth]: TimeSeriesGranularity.Week,
+    [RelativeTimeRange.NextQuarter]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.NextWeek]: TimeSeriesGranularity.Day,
+    [RelativeTimeRange.NextYear]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.PreviousHour]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.PreviousMonth]: TimeSeriesGranularity.Week,
+    [RelativeTimeRange.PreviousQuarter]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.PreviousWeek]: TimeSeriesGranularity.Day,
+    [RelativeTimeRange.PreviousYear]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.ThisHour]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.ThisMonth]: TimeSeriesGranularity.Week,
+    [RelativeTimeRange.ThisQuarter]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.ThisWeek]: TimeSeriesGranularity.Day,
+    [RelativeTimeRange.ThisYear]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.LastHour]: TimeSeriesGranularity.FifteenMinutes,
+    [RelativeTimeRange.LastYear]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.Last_12Hours]: TimeSeriesGranularity.Hour,
+    [RelativeTimeRange.Last_15Minutes]: TimeSeriesGranularity.Minute,
+    [RelativeTimeRange.Last_24Hours]: TimeSeriesGranularity.Hour,
+    [RelativeTimeRange.Last_2Years]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.Last_30Days]: TimeSeriesGranularity.Day,
+    [RelativeTimeRange.Last_30Minutes]: TimeSeriesGranularity.Minute,
+    [RelativeTimeRange.Last_3Months]: TimeSeriesGranularity.Week,
+    [RelativeTimeRange.Last_4Hours]: TimeSeriesGranularity.Hour,
+    [RelativeTimeRange.Last_5Years]: TimeSeriesGranularity.Year,
+    [RelativeTimeRange.Last_6Months]: TimeSeriesGranularity.Month,
+    [RelativeTimeRange.Last_7Days]: TimeSeriesGranularity.Day,
+    [RelativeTimeRange.Last_90Days]: TimeSeriesGranularity.Day
+  }[relative]
 }

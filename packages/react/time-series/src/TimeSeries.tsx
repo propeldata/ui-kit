@@ -25,7 +25,7 @@ import {
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultChartHeight, defaultStyles, defaultTimestampFormat } from './defaults'
-import { generateConfig, useSetupDefaultStyles } from './utils'
+import { generateConfig, useSetupDefaultStyles, getDefaultGranularity } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
 
@@ -137,7 +137,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         uniqueName: query?.metric,
         timeSeriesInput: {
           timeRange: query?.timeRange,
-          granularity: query?.granularity,
+          granularity: query?.granularity || getDefaultGranularity(query?.timeRange),
           filters: query?.filters,
           propeller: query?.propeller
         }
