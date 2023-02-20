@@ -8416,9 +8416,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001449":
-  version: 1.0.30001456
-  resolution: "caniuse-lite@npm:1.0.30001456::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcaniuse-lite%2F-%2Fcaniuse-lite-1.0.30001456.tgz"
-  checksum: c2cc479962149abd09a25b64699ee7484d9c433db2bad0a489f7b51b09a463c991f6efd7b8e201bc1a1ccf3294263f88503a3adf0a57db9046939ee7e58b76a6
+  version: 1.0.30001457
+  resolution: "caniuse-lite@npm:1.0.30001457::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fcaniuse-lite%2F-%2Fcaniuse-lite-1.0.30001457.tgz"
+  checksum: f311a7c5098681962402a86a0a367014ee91c3135395ee68bbfaf45caf0e36d581e42d7c5b1526ce99484a228e6cf5cf0e400678292c65f5a21512a3fc7a5fb6
   languageName: node
   linkType: hard
 
@@ -15844,13 +15844,13 @@ __metadata:
   linkType: hard
 
 "open@npm:^8.4.0":
-  version: 8.4.1
-  resolution: "open@npm:8.4.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fopen%2F-%2Fopen-8.4.1.tgz"
+  version: 8.4.2
+  resolution: "open@npm:8.4.2::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Fopen%2F-%2Fopen-8.4.2.tgz"
   dependencies:
     define-lazy-prop: ^2.0.0
     is-docker: ^2.1.1
     is-wsl: ^2.2.0
-  checksum: dbe8e1d98889df60b5179eab8b94b9591744d1f0033bce1a9a10738ba140bd9d625d6bcde7ff9f043e379aafb918975c2daa03b87cef13eb046ac18ed807f06d
+  checksum: 6388bfff21b40cb9bd8f913f9130d107f2ed4724ea81a8fd29798ee322b361ca31fa2cdfb491a5c31e43a3996cfe9566741238c7a741ada8d7af1cb78d85cf26
   languageName: node
   linkType: hard
 
