@@ -33,13 +33,14 @@ export const Smart = Template.bind({})
 Smart.args = {
   variant: 'line',
   query: {
-    accessToken: '<PROPEL_ACCESS_TOKEN>',
+    accessToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzY5MDE3MDMsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc2OTA1MzAzLCJpYXQiOjE2NzY5MDE3MDMsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiM2RjMzcyM2UtNDI2Ny00NjVmLWExMzYtM2ZkZWRlMTM5MTY0IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxRlgzNjA2UjJLUUZRWVhYMzRBOTZRNlpSIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.c1aE8fHD7JnHshI4DuHHt5Um_aarHLmgFdJbT89KrEk',
     metric: 'syncRecordsAdded',
     timeRange: {
-      relative: RelativeTimeRange.PreviousWeek
+      relative: RelativeTimeRange.PreviousMonth
     },
     granularity: TimeSeriesGranularity.Day,
-    timestampFormat: 'MM/dd/yyyy'
+    timestampFormat: 'MM/dd'
   }
 }
 

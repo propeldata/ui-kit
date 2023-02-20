@@ -50,8 +50,8 @@ export const defaultStyles: Styles = {
     backgroundColor: '#ffffff',
     borderColor: '#000',
     borderWidth: 1,
-    hoverBorderColor: 'rgba(0,0,0,0)',
-    hoverBackgroundColor: 'rgba(0,0,0,0)'
+    hoverBorderColor: '#000',
+    hoverBackgroundColor: '#000'
   }
 }
 

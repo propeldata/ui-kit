@@ -26,7 +26,7 @@ Now let's understand how you can integrate Propel UI Kit with your front-end app
 
 ## Usage
 
-The components in the Propel UI Kit are available in two modes: "Static" and "Connected". The "Static" mode is a simpler version of the component, suitable for users who want to quickly build basic visualizations. The "Connected" mode is a more advanced version of the component, which offers more flexibility and customization options for more complex visualizations.
+The components in the Propel UI Kit are available in two modes: "Static" and "Connected". The "Static" mode is a simpler version of the component, suitable for users who want to quickly build basic visualizations or handle server data themselves. The "Connected" mode is a more advanced version of the component, which offers out-of-the-box integration with propel APIs. You don't need to configure a GraphQL client, handle loading and error states. You don't even need to know what the Propel API endpoint is.
 
 Overall, the Propel UI Kit is a powerful tool for front-end developers who want to create engaging, user-friendly data visualizations with ease.
 
