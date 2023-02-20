@@ -118,19 +118,31 @@ export function useSetupDefaultStyles(styles?: Styles) {
       Chart.defaults.elements.line.stepped = styles?.line?.stepped || defaultStyles.line?.stepped!
       Chart.defaults.elements.line.borderColor = styles?.line?.borderColor || defaultStyles.line?.borderColor!
 
-      Chart.defaults.plugins.tooltip.enabled = styles?.tooltip?.display || defaultStyles.tooltip?.display!
+      Chart.defaults.plugins.tooltip.enabled =
+        styles?.tooltip?.display !== undefined ? styles?.tooltip?.display : defaultStyles.tooltip?.display!
       Chart.defaults.plugins.tooltip.padding = styles?.tooltip?.padding || defaultStyles.tooltip?.padding!
       Chart.defaults.plugins.tooltip.backgroundColor =
         styles?.tooltip?.backgroundColor || defaultStyles.tooltip?.backgroundColor!
-      Chart.defaults.plugins.tooltip.bodyColor = styles?.tooltip?.color || defaultStyles.tooltip?.color!
-      Chart.defaults.plugins.tooltip.titleColor = styles?.tooltip?.color || defaultStyles.tooltip?.color!
-      Chart.defaults.plugins.tooltip.borderColor = styles?.tooltip?.borderColor || defaultStyles.tooltip?.borderColor!
+      Chart.defaults.plugins.tooltip.bodyColor =
+        styles?.tooltip?.color ||
+        styles?.bar?.backgroundColor ||
+        styles?.line?.backgroundColor ||
+        defaultStyles.tooltip?.color!
+      Chart.defaults.plugins.tooltip.titleColor =
+        styles?.tooltip?.color ||
+        styles?.bar?.backgroundColor ||
+        styles?.line?.backgroundColor ||
+        defaultStyles.tooltip?.color!
+      Chart.defaults.plugins.tooltip.borderColor =
+        styles?.tooltip?.borderColor ||
+        styles?.bar?.borderColor ||
+        styles?.line?.borderColor ||
+        defaultStyles.tooltip?.borderColor!
       Chart.defaults.plugins.tooltip.borderWidth = styles?.tooltip?.borderWidth || defaultStyles.tooltip?.borderWidth!
       Chart.defaults.plugins.tooltip.caretSize = styles?.tooltip?.caretSize || defaultStyles.tooltip?.caretSize!
       Chart.defaults.plugins.tooltip.cornerRadius =
         styles?.tooltip?.borderRadius || defaultStyles.tooltip?.borderRadius!
       Chart.defaults.plugins.tooltip.titleFont = font
-      Chart.defaults.plugins.tooltip.bodyFont = font
       Chart.defaults.plugins.tooltip.titleAlign = styles?.tooltip?.alignContent as Scriptable<
         TextAlign,
         ScriptableTooltipContext<keyof ChartTypeRegistry>
