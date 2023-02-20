@@ -25,7 +25,6 @@ import { TimeSeries } from '@propeldata/react-time-series'
 
 function MonthSalesChart() {
   const queryOptions = {
-    variant: 'line',
     accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'salesCount',
     timeRange: {
@@ -34,7 +33,7 @@ function MonthSalesChart() {
     granularity: 'DAY',
     timestampFormat: 'MM/dd'
   }
-  return <TimeSeries query={queryOptions} />
+  return <TimeSeries query={queryOptions} variant="line" />
 }
 ```
 
@@ -44,7 +43,7 @@ This will generate a time series chart as shown below:
   <img src="https://ui-kit-propeldata.vercel.app/images/time-series-line.png">
 </p>
 
-As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different timse series chart now. Here's how you can access the style props:
+As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different time series chart now. Here's how you can access the style props:
 
 ```javascript
 function CustomChart() {
@@ -86,7 +85,7 @@ The following table describes the props available for the Time Series component:
 | **Name** | **Type**                  | **Required**                                        | **Default**        | **Description**                                                                         |
 | -------- | ------------------------- | --------------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------- |
 | variant  | `ChartVariant`            | **No**                                              | `"bar"`            | The variant the chart will respond to, can be either `bar` or `line`                    |
-| styles   | `Styles`                  | **No**                                              | _See next section_ | Check the styles table below for more infromation                                       |
+| styles   | `Styles`                  | **No**                                              | _See next section_ | Check the styles table below for more information                                       |
 | labels   | `Array<string>`           | **Yes** _If `query` is not provided_                | `undefined`        | If passed along with `values` the component will ignore the built-in graphql operations |
 | values   | `Array<number>`           | **Yes** _If `query` is not provided_                | `undefined`        | If passed along with `labels` the component will ignore the built-in graphql operations |
 | loading  | `boolean`                 | **No**                                              | `false`            | When true, shows a skeleton loader                                                      |
@@ -94,15 +93,15 @@ The following table describes the props available for the Time Series component:
 
 ### `query` sub props
 
-| **Name**        | **Type**                                                                                                                       | **Required** | **Default** | **Description**                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
-| accessToken     | `string`                                                                                                                       | **Yes**      | `undefined` | You account's access token                                                                           |
-| metric          | `string`                                                                                                                       | **Yes**      | `undefined` | Metric unique name                                                                                   |
-| timeRange       | [TimeRangeInput](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/TimeRangeInput?variant=production)  | **Yes**      | `undefined` | Time range that the chart will respond to                                                            |
-| granularity     | `string`                                                                                                                       | **No**       | `undefined` | Granularity that the chart will respond to                                                           |
-| filters         | Array<[FilterInput](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/FilterInput?variant=production)> | **No**       | `undefined` | Filters that the chart will respond to                                                               |
-| propeller       | [Propeller](https://studio.apollographql.com/graph/Propel-API/schema/reference/enums/Propeller?variant=production)             | **No**       | `undefined` | Propeller that the chart will respond to                                                             |
-| timestampFormat | `ISO 8601`                                                                                                                     | **No**       | `"MM/dd"`   | A string representing the format of the timestamps in the data. Default value is ISO 8601 timestamp. |
+| **Name**        | **Type**                                                                                                                       | **Required** | **Default** | **Description**                                                                                     |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------ | ----------- | --------------------------------------------------------------------------------------------------- |
+| accessToken     | `string`                                                                                                                       | **Yes**      | `undefined` | You account's access token                                                                          |
+| metric          | `string`                                                                                                                       | **Yes**      | `undefined` | Metric unique name                                                                                  |
+| timeRange       | [TimeRangeInput](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/TimeRangeInput?variant=production)  | **Yes**      | `undefined` | Time range that the chart will respond to                                                           |
+| granularity     | `string`                                                                                                                       | **No**       | `undefined` | Granularity that the chart will respond to                                                          |
+| filters         | Array<[FilterInput](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/FilterInput?variant=production)> | **No**       | `undefined` | Filters that the chart will respond to                                                              |
+| propeller       | [Propeller](https://studio.apollographql.com/graph/Propel-API/schema/reference/enums/Propeller?variant=production)             | **No**       | `undefined` | Propeller that the chart will respond to                                                            |
+| timestampFormat | `ISO 8601`                                                                                                                     | **No**       | `"MM/dd"`   | A string representing the format of the timestamps in the data. Default value is ISO 8601 timestamp |
 
 ## Styles API
 

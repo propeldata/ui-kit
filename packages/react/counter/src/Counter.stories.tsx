@@ -91,8 +91,7 @@ const CardTemplate: Story = (args) => (
 export const Smart = CardTemplate.bind({})
 Smart.args = {
   query: {
-    accessToken:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzQ1NzMxOTYsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc0NTc2Nzk2LCJpYXQiOjE2NzQ1NzMxOTYsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMjk4MDI3NzctZGNhNi00OWIwLWFiOTctMzM1YzEyNGVkNWQ2IiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgcHJvcGVsL21ldHJpYzpxdWVyeSIsInN1YiI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.6Oy7QNjhbuC9PC_ZiCt0roIkgC_BLUf9ZW3xe9qQaZE',
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'queryCount',
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
