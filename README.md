@@ -112,7 +112,7 @@ function MyChart() {
 This will change the color of the bars to a shade of purple, as shown in the following image:
 
 <p align="center">
-  <img src="purple-time-series">
+  <img src="https://ui-kit-propeldata.vercel.app/images/time-series-purple.png">
 </p>
 
 ### Errors
