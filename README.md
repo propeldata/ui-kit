@@ -26,13 +26,13 @@ Now let's understand how you can integrate Propel UI Kit with your front-end app
 
 ## Usage
 
-The components in the Propel UI Kit are available in two modes: "dumb" and "smart". The "dumb" mode is a simpler version of the component, suitable for users who want to quickly build basic visualizations. The "smart" mode is a more advanced version of the component, which offers more flexibility and customization options for more complex visualizations.
+The components in the Propel UI Kit are available in two modes: "Static" and "Connected". The "Static" mode is a simpler version of the component, suitable for users who want to quickly build basic visualizations. The "Connected" mode is a more advanced version of the component, which offers more flexibility and customization options for more complex visualizations.
 
 Overall, the Propel UI Kit is a powerful tool for front-end developers who want to create engaging, user-friendly data visualizations with ease.
 
-### Dumb Mode
+### Static Mode
 
-In the "dumb" mode, the component will only display the data you provide and won't fetch any additional data in the background. Let's take our [@propeldata/react-time-series](link to time series readme) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
+In the "Static" mode, the component will only display the data you provide and won't fetch any additional data in the background. Let's take our [@propeldata/react-time-series](link to time series readme) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
 
 ```javascript
 import { TimeSeries } from '@propeldata/react-time-series'
@@ -49,12 +49,12 @@ function WeekSalesChart() {
 This approach makes the component simpler and more efficient, as it only displays the data you provide. You can still customize the component using your own styles.
 
 <p align="center">
-  <img src="time-series">
+  <img src="https://ui-kit-propeldata.vercel.app/images/time-series.png">
 </p>
 
-### Smart Mode: The Power of Propel at one import away
+### Connected Mode: The Power of Propel at one import away
 
-In the "smart" mode, the component will fetch and render the Propel data for you. To use this mode, all you need to do is pass the query prop, which configures the metric query. Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
+In the "Connected" mode, the component will fetch and render the Propel data for you. To use this mode, all you need to do is pass the query prop, which configures the metric query. Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
 
 ```javascript
 import { Counter } from '@propeldata/react-counter'
@@ -80,7 +80,7 @@ function SalesCountLabel() {
 In this mode, our component will handle the loading and error states for you, making it even easier to use.
 
 <p align="center">
-  <img src="counter">
+  <img src="https://ui-kit-propeldata.vercel.app/images/counter.gif">
 </p>
 
 Wanna see more examples? Checkout our [Storybook](https://ui-kit-propeldata.vercel.app/)!
@@ -135,12 +135,12 @@ function MyChart() {
 This will display a custom error message with a title and body text, as shown in the following image:
 
 <p align="center">
-  <img src="custom-error">
+  <img src="https://ui-kit-propeldata.vercel.app/images/error.png">
 </p>
 
 By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that fit seamlessly into your front-end applications.
 
-Made with :purple_heart: and [Chart.js](https://www.chartjs.org/)
+Made with :purple_heart: and [Chart.js](https://www.chartjs.org/). Powered by Propel! :rocket:
 
 ## Licence
 

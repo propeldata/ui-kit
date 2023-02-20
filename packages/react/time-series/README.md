@@ -1,6 +1,6 @@
 # Time Series
 
-The Time Series component is designed to create Propel time series metric visualizations for your front-end applications. With two props in dumb mode, `labels` and `values`, the Time Series component provides a simple, no-frills way to display your data. If you opt for the smart mode, the component will accept the query prop, which loads the data automatically based on [Propel specifications]().
+The Time Series component is designed to create Propel time series metric visualizations for your front-end applications. With two props in Static mode, `labels` and `values`, the Time Series component provides a simple, no-frills way to display your data. If you opt for the Connected mode, the component will accept the query prop, which loads the data automatically based on [Propel specifications]().
 
 ## Installation
 
@@ -23,11 +23,7 @@ This will add the component to your `node_modules` folder. You can then import t
 ```javascript
 import { TimeSeries } from '@propeldata/react-time-series'
 
-const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
-const values = [0, 1000, 200, 3000, 4000, 500, 7000]
-
-function WeekSalesChart() {
+function MonthSalesChart() {
   const queryOptions = {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'salesCount',
