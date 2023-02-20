@@ -43,7 +43,7 @@ This will generate a time series chart as shown below:
   <img src="https://ui-kit-propeldata.vercel.app/images/time-series-line.png">
 </p>
 
-As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different leaderboard chart now. Here's how you can access the style props:
+As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different time series chart now. Here's how you can access the style props:
 
 ```javascript
 function CustomChart() {
