@@ -115,3 +115,27 @@ export function useSetupDefaultStyles(styles?: Styles) {
     setupDefaultStyles()
   }, [styles])
 }
+
+interface GetTableSettingsOptions {
+  headers?: string[]
+  rows?: string[][]
+  styles?: Styles
+}
+
+export function getTableSettings(options: GetTableSettingsOptions) {
+  const { headers, rows, styles } = options
+
+  const headersWithoutValue = headers?.slice(0, headers.length - 1)
+  const valueHeader = headers?.[headers.length - 1]
+
+  const rowsWithoutValue = rows?.map((row) => row.slice(0, row.length - 1))
+
+  const valuesByRow = rows?.map((row) => parseInt(row[row.length - 1]))
+  const maxValue = Math.max(...(valuesByRow || []))
+
+  const isOrdered = styles?.table?.isOrdered || defaultStyles.table?.isOrdered
+
+  const hasValueBar = styles?.table?.hasValueBar || defaultStyles.table?.hasValueBar
+
+  return { headersWithoutValue, valueHeader, valuesByRow, rowsWithoutValue, maxValue, isOrdered, hasValueBar }
+}

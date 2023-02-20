@@ -130,13 +130,6 @@ export function TimeSeries(props: TimeSeriesProps) {
    * its on `labels` and `values`
    */
   const fetchData = async () => {
-    if (!query?.accessToken || !query?.metric || !query?.timeRange || !query?.granularity) {
-      console.error(
-        'InvalidPropsError: When not passing `labels` and `values` you must provide `accessToken`, `metric`, `timeRange` and `granularity in the `query` prop'
-      )
-      throw new Error('InvalidPropsError')
-    }
-
     const response = await request(
       PROPEL_GRAPHQL_API_ENDPOINT,
       TimeSeriesDocument,
@@ -145,8 +138,8 @@ export function TimeSeries(props: TimeSeriesProps) {
         timeSeriesInput: {
           timeRange: query?.timeRange,
           granularity: query?.granularity,
-          filters: query.filters,
-          propeller: query.propeller
+          filters: query?.filters,
+          propeller: query?.propeller
         }
       },
       {
@@ -157,12 +150,37 @@ export function TimeSeries(props: TimeSeriesProps) {
     const metricData = response.metricByName.timeSeries
 
     const labels: string[] = metricData.labels.map((label: string) =>
-      format(new Date(label), query.timestampFormat || defaultTimestampFormat)
+      format(new Date(label), query?.timestampFormat || defaultTimestampFormat)
     )
     const values: number[] = [...metricData.values]
 
     return { labels, values }
   }
+
+  React.useEffect(() => {
+    function handleErrors() {
+      if (isDumb && !labels && !values) {
+        console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
+        setHasError(true)
+        return
+      }
+
+      if (isDumb && (!labels || !values)) {
+        console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`')
+        setHasError(true)
+        return
+      }
+      if (!isDumb && (!query.accessToken || !query.metric || !query.timeRange)) {
+        console.error(
+          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+        )
+        setHasError(true)
+        return
+      }
+    }
+
+    handleErrors()
+  }, [isDumb, labels, values, query, props])
 
   React.useEffect(() => {
     async function fetchChartData() {

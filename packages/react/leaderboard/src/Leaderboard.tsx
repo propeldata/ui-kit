@@ -15,7 +15,7 @@ import { css } from '@emotion/css'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import type { ChartVariant, LeaderboardData, Styles } from './types'
 import { defaultChartHeight, defaultStyles } from './defaults'
-import { generateConfig, useSetupDefaultStyles } from './utils'
+import { generateConfig, getTableSettings, useSetupDefaultStyles } from './utils'
 import { Loader } from './Loader'
 import { ValueBar } from './ValueBar'
 
@@ -109,25 +109,18 @@ export function Leaderboard(props: LeaderboardProps) {
    * its on `headers` and `rows`
    */
   const fetchData = async () => {
-    if (!query?.accessToken || !query?.metric || !query?.timeRange) {
-      console.error(
-        'InvalidPropsError: When not passing `headers` and `rows` you must provide `accessToken`, `metric`, `timeRange`, `dimensions` and `rowLimit` in the `query` prop'
-      )
-      throw new Error('InvalidPropsError')
-    }
-
     const response = await request(
       PROPEL_GRAPHQL_API_ENDPOINT,
       LeaderboardDocument,
       {
-        uniqueName: query.metric,
+        uniqueName: query?.metric,
         leaderboardInput: {
-          timeRange: query.timeRange,
-          filters: query.filters,
-          propeller: query.propeller,
-          sort: query.sort,
-          rowLimit: query.rowLimit,
-          dimensions: query.dimensions
+          timeRange: query?.timeRange,
+          filters: query?.filters,
+          propeller: query?.propeller,
+          sort: query?.sort,
+          rowLimit: query?.rowLimit,
+          dimensions: query?.dimensions
         }
       },
       {
@@ -142,6 +135,34 @@ export function Leaderboard(props: LeaderboardProps) {
 
     return { headers, rows }
   }
+
+  React.useEffect(() => {
+    function handleErrors() {
+      if (isDumb && !headers && !rows) {
+        console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
+        setHasError(true)
+        return
+      }
+
+      if (isDumb && (!headers || !rows)) {
+        console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
+        setHasError(true)
+        return
+      }
+      if (
+        !isDumb &&
+        (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
+      ) {
+        console.error(
+          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
+        )
+        setHasError(true)
+        return
+      }
+    }
+
+    handleErrors()
+  }, [isDumb, headers, rows, query, props])
 
   React.useEffect(() => {
     async function fetchChartData() {
@@ -225,203 +246,189 @@ export function Leaderboard(props: LeaderboardProps) {
     )
   }
 
-  if (variant === 'table') {
-    const tableHeaders = isDumb ? headers : serverData?.headers
-    const tableRows = isDumb ? rows : serverData?.rows
+  const tableHeaders = isDumb ? headers : serverData?.headers
+  const tableRows = isDumb ? rows : serverData?.rows
 
-    const headersWithoutValue = tableHeaders?.slice(0, tableHeaders.length - 1)
-    const valueHeader = tableHeaders?.[tableHeaders.length - 1]
+  const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
+    getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
 
-    const rowsWithoutValue = tableRows?.map((row) => row.slice(0, row.length - 1))
-    const valuesByRow = tableRows?.map((row) => parseInt(row[row.length - 1]))
-    const maxValue = Math.max(...(valuesByRow || []))
-
-    const isOrdered = styles?.table?.isOrdered || defaultStyles.table?.isOrdered
-
-    const hasValueBar = styles?.table?.hasValueBar || defaultStyles.table?.hasValueBar
-
-    return (
-      <div
-        className={css`
-          overflow: auto;
-          font-size: ${styles?.font?.size || defaultStyles.font?.size};
-          width: ${styles?.table?.width || defaultStyles.table?.width};
-          height: ${styles?.table?.height || defaultStyles.table?.height};
-        `}
-      >
-        <table
-          cellSpacing={0}
-          className={css`
-            width: 100%;
-          `}
-        >
-          <thead
-            className={css`
-              font-size: ${styles?.table?.header?.font?.size ||
-              styles?.font?.size ||
-              defaultStyles.table?.header?.font?.size};
-              font-family: ${styles?.table?.header?.font?.family ||
-              styles?.font?.family ||
-              defaultStyles.table?.header?.font?.family};
-              font-weight: ${styles?.table?.header?.font?.weight ||
-              styles?.font?.weight ||
-              defaultStyles.table?.header?.font?.weight};
-              font-style: ${styles?.table?.header?.font?.style ||
-              styles?.font?.style ||
-              defaultStyles.table?.header?.font?.style};
-              line-height: ${styles?.table?.header?.font?.lineHeight ||
-              styles?.font?.lineHeight ||
-              defaultStyles.table?.header?.font?.lineHeight};
-              background-color: ${styles?.table?.header?.backgroundColor ||
-              styles?.table?.backgroundColor ||
-              defaultStyles.table?.header?.backgroundColor};
-              text-align: ${styles?.table?.header?.align ||
-              styles?.table?.columns?.align ||
-              defaultStyles.table?.header?.align};
-              color: ${styles?.table?.header?.font?.color ||
-              styles?.font?.color ||
-              defaultStyles.table?.header?.font?.color};
-              ${styles?.table?.stickyHeader &&
-              css`
-                position: sticky;
-                top: 0;
-                z-index: 9999;
-              `}
-            `}
-          >
-            <tr>
-              {headersWithoutValue?.map((header, index) => (
-                <th
-                  className={css`
-                    padding: ${styles?.table?.padding || defaultStyles.table?.padding};
-                    font-weight: ${styles?.table?.header?.font?.weight ||
-                    styles?.table?.columns?.font?.weight ||
-                    defaultStyles.table?.header?.font?.weight};
-                  `}
-                  key={`${header}-${index}`}
-                >
-                  {header}
-                </th>
-              ))}
-              <th
-                className={css`
-                  position: sticky;
-                  right: 0;
-                  text-align: ${styles?.table?.valueColumn?.align ||
-                  styles?.table?.columns?.align ||
-                  defaultStyles.table?.valueColumn?.align};
-                  padding: ${styles?.table?.padding || defaultStyles.table?.padding};
-                  font-weight: ${styles?.table?.header?.font?.weight ||
-                  styles?.table?.columns?.font?.weight ||
-                  defaultStyles.table?.header?.font?.weight};
-                  background-color: ${styles?.table?.header?.backgroundColor ||
-                  defaultStyles.table?.header?.backgroundColor};
-                `}
-              >
-                {valueHeader}
+  return (
+    <div className={getContainerStyles(styles)}>
+      <table cellSpacing={0} className={tableStyles}>
+        <thead className={getTableHeadStyles(styles)}>
+          <tr>
+            {headersWithoutValue?.map((header, index) => (
+              <th className={getTableHeaderStyles(styles)} key={`${header}-${index}`}>
+                {header}
               </th>
-              {hasValueBar && <th />}
-            </tr>
-          </thead>
-          <tbody
-            className={css`
-              text-align: ${styles?.table?.columns?.align || defaultStyles.table?.columns?.align};
-              color: ${styles?.table?.columns?.font?.color ||
-              styles?.font?.color ||
-              defaultStyles.table?.columns?.font?.color};
-              font-size: ${styles?.table?.columns?.font?.size ||
-              styles?.font?.size ||
-              defaultStyles.table?.columns?.font?.size};
-              font-family: ${styles?.table?.columns?.font?.family ||
-              styles?.font?.family ||
-              defaultStyles.table?.columns?.font?.family};
-              font-weight: ${styles?.table?.columns?.font?.weight ||
-              styles?.font?.weight ||
-              defaultStyles.table?.columns?.font?.weight};
-              font-style: ${styles?.table?.columns?.font?.style ||
-              styles?.font?.style ||
-              defaultStyles.table?.columns?.font?.style};
-              line-height: ${styles?.table?.columns?.font?.lineHeight ||
-              styles?.font?.lineHeight ||
-              defaultStyles.table?.columns?.font?.lineHeight};
-            `}
-          >
-            {rowsWithoutValue?.map((cells, rowIndex) => (
-              <tr key={rowIndex}>
-                {cells.map((cell, cellIndex) => (
-                  <td
-                    className={css`
-                      padding: ${styles?.table?.padding || defaultStyles.table?.padding};
-                      background-color: ${styles?.table?.backgroundColor || defaultStyles.table?.backgroundColor};
-                      border-top: 1px solid #e6e8f0;
-                    `}
-                    key={`${cell}-${cellIndex}`}
-                  >
-                    {isOrdered && cellIndex === 0 && `${rowIndex + 1}. `}
-                    {cell}
-                  </td>
-                ))}
-                <td
-                  className={css`
-                    font-size: ${styles?.table?.valueColumn?.font?.size ||
-                    styles?.font?.size ||
-                    defaultStyles.table?.valueColumn?.font?.size};
-                    font-family: ${styles?.table?.valueColumn?.font?.family ||
-                    styles?.font?.family ||
-                    defaultStyles.table?.valueColumn?.font?.family};
-                    font-weight: ${styles?.table?.valueColumn?.font?.weight ||
-                    styles?.font?.weight ||
-                    defaultStyles.table?.valueColumn?.font?.weight};
-                    font-style: ${styles?.table?.valueColumn?.font?.style ||
-                    styles?.font?.style ||
-                    defaultStyles.table?.valueColumn?.font?.style};
-                    line-height: ${styles?.table?.valueColumn?.font?.lineHeight ||
-                    styles?.font?.lineHeight ||
-                    defaultStyles.table?.valueColumn?.font?.lineHeight};
-
-                    position: sticky;
-                    right: 0;
-                    border-top: 1px solid #e6e8f0;
-                    color: ${styles?.table?.valueColumn?.font?.color ||
-                    styles?.font?.color ||
-                    defaultStyles.table?.valueColumn?.font?.color};
-                    text-align: ${styles?.table?.valueColumn?.align ||
-                    styles?.table?.columns?.align ||
-                    defaultStyles.table?.valueColumn?.align};
-                    padding: ${styles?.table?.padding || defaultStyles.table?.padding};
-                    background-color: ${styles?.table?.backgroundColor || defaultStyles.table?.backgroundColor};
-                  `}
-                >
-                  {styles?.table?.valueColumn?.locale
-                    ? valuesByRow?.[rowIndex].toLocaleString()
-                    : valuesByRow?.[rowIndex]}
-                </td>
-                {hasValueBar && (
-                  <td
-                    className={css`
-                      width: 20%;
-                      border-top: 1px solid #e6e8f0;
-                    `}
-                  >
-                    <ValueBar
-                      value={valuesByRow?.[rowIndex] || 0}
-                      maxValue={maxValue || 0}
-                      color={
-                        styles?.table?.valueBar?.color || styles?.font?.color || defaultStyles.table?.valueBar?.color
-                      }
-                      backgroundColor={
-                        styles?.table?.valueBar?.backgroundColor || defaultStyles.table?.valueBar?.backgroundColor
-                      }
-                    />
-                  </td>
-                )}
-              </tr>
             ))}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
-
-  return <ErrorFallback error={error} styles={styles} />
+            <th className={getTableValueHeaderStyles(styles)}>{valueHeader}</th>
+            {hasValueBar && <th />}
+          </tr>
+        </thead>
+        <tbody className={getTableBodyStyles(styles)}>
+          {rowsWithoutValue?.map((cells, rowIndex) => (
+            <tr key={rowIndex}>
+              {cells.map((cell, cellIndex) => (
+                <td className={getTableCellStyles(styles)} key={`${cell}-${cellIndex}`}>
+                  {isOrdered && cellIndex === 0 && `${rowIndex + 1}. `}
+                  {cell}
+                </td>
+              ))}
+              <td className={getTableValueCellStyles(styles)}>
+                {styles?.table?.valueColumn?.locale
+                  ? valuesByRow?.[rowIndex].toLocaleString()
+                  : valuesByRow?.[rowIndex]}
+              </td>
+              {hasValueBar && (
+                <td className={valueBarCellStyles}>
+                  <ValueBar value={valuesByRow?.[rowIndex] || 0} maxValue={maxValue || 0} styles={styles} />
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
 }
+
+const getContainerStyles = (styles?: Styles) => css`
+  overflow: auto;
+  font-size: ${styles?.font?.size || defaultStyles.font?.size};
+  width: ${styles?.table?.width || defaultStyles.table?.width};
+  height: ${styles?.table?.height || defaultStyles.table?.height};
+`
+
+const tableStyles = css`
+  width: 100%;
+`
+
+const getTableHeadStyles = (styles?: Styles) => css`
+  font-size: ${styles?.table?.header?.font?.size || styles?.font?.size || defaultStyles.table?.header?.font?.size};
+
+  font-family: ${styles?.table?.header?.font?.family ||
+  styles?.font?.family ||
+  defaultStyles.table?.header?.font?.family};
+
+  font-weight: ${styles?.table?.header?.font?.weight ||
+  styles?.font?.weight ||
+  defaultStyles.table?.header?.font?.weight};
+
+  font-style: ${styles?.table?.header?.font?.style || styles?.font?.style || defaultStyles.table?.header?.font?.style};
+
+  line-height: ${styles?.table?.header?.font?.lineHeight ||
+  styles?.font?.lineHeight ||
+  defaultStyles.table?.header?.font?.lineHeight};
+
+  background-color: ${styles?.table?.header?.backgroundColor ||
+  styles?.table?.backgroundColor ||
+  defaultStyles.table?.header?.backgroundColor};
+
+  text-align: ${styles?.table?.header?.align || styles?.table?.columns?.align || defaultStyles.table?.header?.align};
+
+  color: ${styles?.table?.header?.font?.color || styles?.font?.color || defaultStyles.table?.header?.font?.color};
+
+  ${styles?.table?.stickyHeader && stickyHeaderStyles}
+`
+
+const stickyHeaderStyles = css`
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+`
+
+const getTableHeaderStyles = (styles?: Styles) => css`
+  padding: ${styles?.table?.padding || defaultStyles.table?.padding};
+  font-weight: ${styles?.table?.header?.font?.weight ||
+  styles?.table?.columns?.font?.weight ||
+  defaultStyles.table?.header?.font?.weight};
+`
+
+const getTableValueHeaderStyles = (styles?: Styles) => css`
+  position: sticky;
+  right: 0;
+  text-align: ${styles?.table?.valueColumn?.align ||
+  styles?.table?.columns?.align ||
+  defaultStyles.table?.valueColumn?.align};
+
+  padding: ${styles?.table?.padding || defaultStyles.table?.padding};
+
+  font-weight: ${styles?.table?.header?.font?.weight ||
+  styles?.table?.columns?.font?.weight ||
+  defaultStyles.table?.header?.font?.weight};
+
+  background-color: ${styles?.table?.header?.backgroundColor || defaultStyles.table?.header?.backgroundColor};
+`
+
+const getTableBodyStyles = (styles?: Styles) => css`
+  text-align: ${styles?.table?.columns?.align || defaultStyles.table?.columns?.align};
+
+  color: ${styles?.table?.columns?.font?.color || styles?.font?.color || defaultStyles.table?.columns?.font?.color};
+
+  font-size: ${styles?.table?.columns?.font?.size || styles?.font?.size || defaultStyles.table?.columns?.font?.size};
+
+  font-family: ${styles?.table?.columns?.font?.family ||
+  styles?.font?.family ||
+  defaultStyles.table?.columns?.font?.family};
+
+  font-weight: ${styles?.table?.columns?.font?.weight ||
+  styles?.font?.weight ||
+  defaultStyles.table?.columns?.font?.weight};
+
+  font-style: ${styles?.table?.columns?.font?.style ||
+  styles?.font?.style ||
+  defaultStyles.table?.columns?.font?.style};
+
+  line-height: ${styles?.table?.columns?.font?.lineHeight ||
+  styles?.font?.lineHeight ||
+  defaultStyles.table?.columns?.font?.lineHeight};
+`
+
+const getTableCellStyles = (styles?: Styles) => css`
+  padding: ${styles?.table?.padding || defaultStyles.table?.padding};
+  background-color: ${styles?.table?.backgroundColor || defaultStyles.table?.backgroundColor};
+  border-top: 1px solid #e6e8f0;
+`
+
+const getTableValueCellStyles = (styles?: Styles) => css`
+  font-size: ${styles?.table?.valueColumn?.font?.size ||
+  styles?.font?.size ||
+  defaultStyles.table?.valueColumn?.font?.size};
+
+  font-family: ${styles?.table?.valueColumn?.font?.family ||
+  styles?.font?.family ||
+  defaultStyles.table?.valueColumn?.font?.family};
+
+  font-weight: ${styles?.table?.valueColumn?.font?.weight ||
+  styles?.font?.weight ||
+  defaultStyles.table?.valueColumn?.font?.weight};
+
+  font-style: ${styles?.table?.valueColumn?.font?.style ||
+  styles?.font?.style ||
+  defaultStyles.table?.valueColumn?.font?.style};
+
+  line-height: ${styles?.table?.valueColumn?.font?.lineHeight ||
+  styles?.font?.lineHeight ||
+  defaultStyles.table?.valueColumn?.font?.lineHeight};
+
+  position: sticky;
+  right: 0;
+  border-top: 1px solid #e6e8f0;
+  color: ${styles?.table?.valueColumn?.font?.color ||
+  styles?.font?.color ||
+  defaultStyles.table?.valueColumn?.font?.color};
+
+  text-align: ${styles?.table?.valueColumn?.align ||
+  styles?.table?.columns?.align ||
+  defaultStyles.table?.valueColumn?.align};
+
+  padding: ${styles?.table?.padding || defaultStyles.table?.padding};
+
+  background-color: ${styles?.table?.backgroundColor || defaultStyles.table?.backgroundColor};
+`
+
+const valueBarCellStyles = css`
+  width: 20%;
+  border-top: 1px solid #e6e8f0;
+`
