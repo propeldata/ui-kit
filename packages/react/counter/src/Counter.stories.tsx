@@ -88,8 +88,8 @@ const CardTemplate: Story = (args) => (
   </div>
 )
 
-export const Smart = CardTemplate.bind({})
-Smart.args = {
+export const Connected = CardTemplate.bind({})
+Connected.args = {
   query: {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'queryCount',
