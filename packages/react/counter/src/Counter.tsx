@@ -47,9 +47,9 @@ export function Counter(props: CounterProps) {
 
   /**
    * If the user passes `value` attribute, it
-   * should behave as a dumb component without any graphql operation performed
+   * should behave as a static component without any graphql operation performed
    */
-  const isDumb = !!value
+  const isStatic = !!value
 
   const [dataValue, setDataValue] = React.useState<string>()
   const [hasError, setHasError] = React.useState(false)
@@ -94,13 +94,13 @@ export function Counter(props: CounterProps) {
 
   React.useEffect(() => {
     function handleErrors() {
-      if (isDumb && !value) {
+      if (isStatic && !value) {
         console.error('InvalidPropsError: You must pass either `value` or `query` props')
         setHasError(true)
         return
       }
 
-      if (!isDumb && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
+      if (!isStatic && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
         console.error(
           'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         )
@@ -110,15 +110,15 @@ export function Counter(props: CounterProps) {
     }
 
     handleErrors()
-  }, [isDumb, value, query, props])
+  }, [isStatic, value, query, props])
 
   React.useEffect(() => {
     async function setup() {
-      setDataValue(isDumb ? value : await fetchData())
+      setDataValue(isStatic ? value : await fetchData())
     }
 
     setup()
-  }, [fetchData, isDumb, value])
+  }, [fetchData, isStatic, value])
 
   if (isLoading || loading) return <Loader styles={styles} />
 

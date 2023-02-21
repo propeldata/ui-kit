@@ -102,9 +102,9 @@ export function TimeSeries(props: TimeSeriesProps) {
   const chartRef = React.useRef<ChartJS | null>()
 
   /**
-   * Checks if the component is in `dumb` or `smart` mode
+   * Checks if the component is in `static` or `connected` mode
    */
-  const isDumb = !query
+  const isStatic = !query
 
   useSetupDefaultStyles(styles)
 
@@ -159,18 +159,18 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     function handleErrors() {
-      if (isDumb && !labels && !values) {
+      if (isStatic && !labels && !values) {
         console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
         setHasError(true)
         return
       }
 
-      if (isDumb && (!labels || !values)) {
+      if (isStatic && (!labels || !values)) {
         console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`')
         setHasError(true)
         return
       }
-      if (!isDumb && (!query.accessToken || !query.metric || !query.timeRange)) {
+      if (!isStatic && (!query.accessToken || !query.metric || !query.timeRange)) {
         console.error(
           'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         )
@@ -180,7 +180,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     }
 
     handleErrors()
-  }, [isDumb, labels, values, query, props])
+  }, [isStatic, labels, values, query, props])
 
   React.useEffect(() => {
     async function fetchChartData() {
@@ -194,14 +194,14 @@ export function TimeSeries(props: TimeSeriesProps) {
         setIsLoading(false)
       }
     }
-    if (!isDumb && !serverData) {
+    if (!isStatic && !serverData) {
       fetchChartData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isDumb])
+  }, [serverData, isStatic])
 
   React.useEffect(() => {
-    if (isDumb) {
+    if (isStatic) {
       destroyChart()
       renderChart({ labels, values })
     }
@@ -210,10 +210,10 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading, styles, variant, labels, values])
+  }, [isStatic, loading, styles, variant, labels, values])
 
   React.useEffect(() => {
-    if (serverData && !isDumb) {
+    if (serverData && !isStatic) {
       destroyChart()
       renderChart(serverData)
     }
@@ -222,7 +222,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, variant, styles, isDumb])
+  }, [serverData, variant, styles, isStatic])
 
   if (isLoading || loading) {
     return <Loader styles={styles} />

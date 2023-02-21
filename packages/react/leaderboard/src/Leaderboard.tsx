@@ -81,9 +81,9 @@ export function Leaderboard(props: LeaderboardProps) {
   const chartRef = React.useRef<ChartJS | null>()
 
   /**
-   * Checks if the component is in `dumb` or `smart` mode
+   * Checks if the component is in `static` or `connected` mode
    */
-  const isDumb = !query
+  const isStatic = !query
 
   useSetupDefaultStyles(styles)
 
@@ -138,19 +138,19 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     function handleErrors() {
-      if (isDumb && !headers && !rows) {
+      if (isStatic && !headers && !rows) {
         console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
         setHasError(true)
         return
       }
 
-      if (isDumb && (!headers || !rows)) {
+      if (isStatic && (!headers || !rows)) {
         console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
         setHasError(true)
         return
       }
       if (
-        !isDumb &&
+        !isStatic &&
         (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
       ) {
         console.error(
@@ -162,7 +162,7 @@ export function Leaderboard(props: LeaderboardProps) {
     }
 
     handleErrors()
-  }, [isDumb, headers, rows, query, props])
+  }, [isStatic, headers, rows, query, props])
 
   React.useEffect(() => {
     async function fetchChartData() {
@@ -176,14 +176,14 @@ export function Leaderboard(props: LeaderboardProps) {
         setIsLoading(false)
       }
     }
-    if (!isDumb && !serverData) {
+    if (!isStatic && !serverData) {
       fetchChartData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isDumb])
+  }, [serverData, isStatic])
 
   React.useEffect(() => {
-    if (isDumb) {
+    if (isStatic) {
       destroyChart()
       renderChart({ headers, rows })
     }
@@ -192,10 +192,10 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDumb, loading, styles, variant, headers, rows, variant])
+  }, [isStatic, loading, styles, variant, headers, rows, variant])
 
   React.useEffect(() => {
-    if (serverData && !isDumb) {
+    if (serverData && !isStatic) {
       destroyChart()
       renderChart(serverData)
     }
@@ -204,7 +204,7 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, styles, variant, isDumb, variant])
+  }, [serverData, styles, variant, isStatic, variant])
 
   React.useEffect(() => {
     try {
@@ -246,8 +246,8 @@ export function Leaderboard(props: LeaderboardProps) {
     )
   }
 
-  const tableHeaders = isDumb ? headers : serverData?.headers
-  const tableRows = isDumb ? rows : serverData?.rows
+  const tableHeaders = isStatic ? headers : serverData?.headers
+  const tableRows = isStatic ? rows : serverData?.rows
 
   const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
     getTableSettings({ headers: tableHeaders, rows: tableRows, styles })

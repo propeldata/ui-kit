@@ -75,8 +75,8 @@ ValueBarTable.args = {
   }
 }
 
-export const Smart = Template.bind({})
-Smart.args = {
+export const Connected = Template.bind({})
+Connected.args = {
   variant: 'table',
   query: {
     accessToken,

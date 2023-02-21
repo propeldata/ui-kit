@@ -29,8 +29,8 @@ UnstyledLine.args = {
   values
 }
 
-export const Smart = Template.bind({})
-Smart.args = {
+export const Connected = Template.bind({})
+Connected.args = {
   variant: 'line',
   query: {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
