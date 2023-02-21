@@ -40,7 +40,7 @@ function MonthSalesChart() {
 This will generate a time series chart as shown below:
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/time-series-line.png">
+  <img src="https://storybook.propeldata.com/images/time-series-line.png">
 </p>
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different time series chart now. Here's how you can access the style props:
@@ -71,7 +71,7 @@ function CustomChart() {
 ```
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/time-series-custom.png">
+  <img src="https://storybook.propeldata.com/images/time-series-custom.png">
 </p>
 
 In this example, we built a minimalistic chart where you could use on small viewports or in a mobile design maybe. Up to you! You can adjust these and other style properties to create a unique look for your time series chart.
