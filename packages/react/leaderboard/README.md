@@ -46,7 +46,7 @@ function MonthSalesChart() {
 This will generate a leaderboard chart as shown below:
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/leaderboard.png">
+  <img src="https://storybook.propeldata.com/images/leaderboard.png">
 </p>
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different leaderboard chart now. Here's how you can access the style props:
@@ -86,7 +86,7 @@ function CustomChart() {
 ```
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/leaderboard-custom.png">
+  <img src="https://storybook.propeldata.com/images/leaderboard-custom.png">
 </p>
 
 In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe. Up to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.

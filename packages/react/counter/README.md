@@ -38,7 +38,7 @@ function MonthSalesCount() {
 This will generate a counter component as shown below:
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/counter.png">
+  <img src="https://storybook.propeldata.com/images/counter.png">
 </p>
 
 As you can see, the component comes unstyled. However, you can customize its styles to your liking. Here's how you can access the style props:
@@ -59,7 +59,7 @@ function CustomCounter() {
 ```
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/counter-custom.png">
+  <img src="https://storybook.propeldata.com/images/counter-custom.png">
 </p>
 
 In this example, we have built a simple span element that can be wrapped into any custom component of your preference. You can adjust these and other style properties to create a unique look for your Counter component.
@@ -67,7 +67,7 @@ In this example, we have built a simple span element that can be wrapped into an
 Here's an example of how you can wrap the Counter component inside a Card to give it a unique look.
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/counter-card.png">
+  <img src="https://storybook.propeldata.com/images/counter-card.png">
 </p>
 
 Now let's look at what all you can do with the component. The next 2 topics will cover all the props and styles you can configure to have a nice chart experience.

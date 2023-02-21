@@ -49,7 +49,7 @@ function WeekSalesChart() {
 This approach makes the component simpler and more efficient, as it only displays the data you provide. You can still customize the component using your own styles.
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/time-series.png">
+  <img src="https://storybook.propeldata.com/images/time-series.png">
 </p>
 
 ### Connected Mode: The Power of Propel at one import away
@@ -80,10 +80,10 @@ function SalesCountLabel() {
 In this mode, our component will handle the loading and error states for you, making it even easier to use.
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/counter.gif">
+  <img src="https://storybook.propeldata.com/images/counter.gif">
 </p>
 
-Wanna see more examples? Checkout our [Storybook](https://ui-kit-propeldata.vercel.app/)!
+Wanna see more examples? Checkout our [Storybook](https://storybook.propeldata.com/)!
 
 ## Customization: Making It Your Own
 
@@ -112,7 +112,7 @@ function MyChart() {
 This will change the color of the bars to a shade of purple, as shown in the following image:
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/time-series-purple.png">
+  <img src="https://storybook.propeldata.com/images/time-series-purple.png">
 </p>
 
 ### Errors
@@ -135,7 +135,7 @@ function MyChart() {
 This will display a custom error message with a title and body text, as shown in the following image:
 
 <p align="center">
-  <img src="https://ui-kit-propeldata.vercel.app/images/error.png">
+  <img src="https://storybook.propeldata.com/images/error.png">
 </p>
 
 By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that fit seamlessly into your front-end applications.
