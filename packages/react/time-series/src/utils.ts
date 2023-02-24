@@ -13,7 +13,7 @@ import {
   // ChartConfiguration,
   ScriptableContext
 } from 'chart.js'
-import { dateFns as dateFnsAdapter } from 'chartjs-adapter-date-fns'
+import 'chartjs-adapter-date-fns'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
@@ -26,6 +26,7 @@ interface GenereateConfigOptions {
   data: TimeSeriesData
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generateConfig(options: GenereateConfigOptions): any {
   const { styles, data, variant } = options
 
@@ -55,9 +56,6 @@ export function generateConfig(options: GenereateConfigOptions): any {
   const scales = {
     x: {
       type: 'timeseries',
-      adapters: {
-        date: dateFnsAdapter
-      },
       display: !hideGridLines,
       grid: {
         drawOnChartArea: false

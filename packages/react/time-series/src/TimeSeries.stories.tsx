@@ -9,32 +9,53 @@ export default {
   title: 'React/TimeSeries'
 }
 
-const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
-const values = [0, 1000, 200, 3000, 4000, 500, 7000]
+const dataset = {
+  labels: [
+    '2022-01-01T00:00:00.000Z',
+    '2022-02-01T00:00:00.000Z',
+    '2022-03-01T00:00:00.000Z',
+    '2022-04-01T00:00:00.000Z',
+    '2022-05-01T00:00:00.000Z',
+    '2022-06-01T00:00:00.000Z',
+    '2022-07-01T00:00:00.000Z',
+    '2022-08-01T00:00:00.000Z',
+    '2022-09-01T00:00:00.000Z',
+    '2022-10-01T00:00:00.000Z',
+    '2022-11-01T00:00:00.000Z',
+    '2022-12-01T00:00:00.000Z',
+    '2023-01-01T00:00:00.000Z',
+    '2023-02-01T00:00:00.000Z',
+    '2023-03-01T00:00:00.000Z',
+    '2023-04-01T00:00:00.000Z',
+    '2023-05-01T00:00:00.000Z',
+    '2023-06-01T00:00:00.000Z',
+    '2023-07-01T00:00:00.000Z',
+    '2023-08-01T00:00:00.000Z'
+  ],
+  values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
+}
 
 const Template: Story<TimeSeriesProps> = (args) => <TimeSeries {...args} />
 
 export const UnstyledBar = Template.bind({})
 UnstyledBar.args = {
   variant: 'bar',
-  labels,
-  values
+  ...dataset
 }
 
 export const UnstyledLine = Template.bind({})
 UnstyledLine.args = {
   variant: 'line',
-  labels,
-  values
+  ...dataset
 }
 
 export const Connected = Template.bind({})
 Connected.args = {
   variant: 'line',
   query: {
-    accessToken: '<PROPEL_ACCESS_TOKEN>',
-    metric: 'syncRecordsAdded',
+    accessToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzcyNzE4NTIsImNsaWVudF9pZCI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwiZXhwIjoxNjc3Mjc1NDUyLCJpYXQiOjE2NzcyNzE4NTIsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiJhMzcwZjJmNS0zYWQzLTRjYTQtYWU0My1kMzk4ZWI3OGRmOWQiLCJwcm9wZWwvdGVuYW50IjoiRU5WMDFGWEpKRlJOSDhKMVJCWDdDQ1YyQVBEMU4iLCJzY29wZSI6Im1ldHJpYzpxdWVyeSBwcm9wZWwvbWV0cmljOnF1ZXJ5Iiwic3ViIjoiMzVyMXVwaWpraGdqbTA5czExaHJkNGMycHUiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJ2ZXJzaW9uIjoxfQ.kqfiwbsF54Pi07jcGxJRADcdmorJqxotV0sYP8_iU8U',
+    metric: 'queryCount',
     timeRange: {
       relative: RelativeTimeRange.PreviousMonth
     },
@@ -55,8 +76,8 @@ export const Loading = () => {
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-      setLocalLabels(labels)
-      setLocalValues(values)
+      setLocalLabels(dataset.labels)
+      setLocalValues(dataset.values)
     }, 1000)
   }, [])
 
@@ -66,8 +87,7 @@ export const Loading = () => {
 export const CustomStyles = Template.bind({})
 CustomStyles.args = {
   variant: 'line',
-  labels,
-  values,
+  ...dataset,
   styles: {
     line: {
       tension: 0.1,
@@ -92,8 +112,7 @@ CustomStyles.args = {
 export const CustomDark = Template.bind({})
 CustomDark.args = {
   variant: 'line',
-  labels,
-  values,
+  ...dataset,
   styles: {
     canvas: {
       width: 400,
