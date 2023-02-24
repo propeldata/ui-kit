@@ -15,7 +15,7 @@ runs:
     - name: 'Setup Node'
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '18'
     - name: 'Cache node_modules'
       uses: actions/cache@v3
       with:
@@ -35,7 +35,7 @@ runs:
         repository: propeldata/actions
         token: ${{ env.PROPELDATA_CI_TOKEN }}
         path: actions
-    - uses: ./.github/actions/custom-propel-code-artifact
+    - uses: ./actions/propel-code-artifact
       with:
         aws_access_key_id: ${{ env.BUILD_AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ env.BUILD_AWS_SECRET_ACCESS_KEY }}
