@@ -1,6 +1,7 @@
 import React from 'react'
 import request from 'graphql-request'
 import { css } from '@emotion/css'
+import { format } from 'date-fns'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -23,7 +24,7 @@ import {
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultChartHeight, defaultStyles } from './defaults'
+import { defaultChartHeight, defaultStyles, defaultTimestampFormat } from './defaults'
 import { generateConfig, useSetupDefaultStyles, getDefaultGranularity } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -79,6 +80,9 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 
     /** Propeller that the chart will respond to */
     propeller?: Propeller
+
+    /** Timestamp format that the chart will respond to */
+    timestampFormat?: string
   }
 }
 
@@ -144,7 +148,12 @@ export function TimeSeries(props: TimeSeriesProps) {
       }
     )
 
-    const { labels, values } = response.metricByName.timeSeries
+    const metricData = response.metricByName.timeSeries
+
+    const labels: string[] = metricData.labels.map((label: string) =>
+      format(new Date(label), query?.timestampFormat || defaultTimestampFormat)
+    )
+    const values: number[] = [...metricData.values]
 
     return { labels, values }
   }

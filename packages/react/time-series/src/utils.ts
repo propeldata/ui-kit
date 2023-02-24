@@ -13,7 +13,7 @@ import {
   // ChartConfiguration,
   ScriptableContext
 } from 'chart.js'
-import 'chartjs-adapter-date-fns'
+// import 'chartjs-adapter-date-fns'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
@@ -55,7 +55,7 @@ export function generateConfig(options: GenereateConfigOptions): any {
 
   const scales = {
     x: {
-      type: 'timeseries',
+      // type: 'timeseries',
       display: !hideGridLines,
       grid: {
         drawOnChartArea: false
