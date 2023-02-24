@@ -10,7 +10,7 @@ export const getValueWithPrefixAndSufix = (params: {
 
   return (
     (prefix ? prefix + ' ' : '') +
-    (localize ? parseInt(value).toFixed(2).toLocaleString() : value) +
+    (localize ? parseFloat(value).toFixed(2).toLocaleString() : parseFloat(value).toFixed(2)) +
     (sufix ? ' ' + sufix : '')
   )
 }
