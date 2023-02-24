@@ -9,6 +9,8 @@ export const getValueWithPrefixAndSufix = (params: {
   if (!value) return
 
   return (
-    (prefix ? prefix + ' ' : '') + (localize ? parseInt(value).toLocaleString() : value) + (sufix ? ' ' + sufix : '')
+    (prefix ? prefix + ' ' : '') +
+    (localize ? parseInt(value).toFixed(2).toLocaleString() : value) +
+    (sufix ? ' ' + sufix : '')
   )
 }
