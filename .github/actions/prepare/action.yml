@@ -35,7 +35,7 @@ runs:
         repository: propeldata/actions
         token: ${{ env.PROPELDATA_CI_TOKEN }}
         path: actions
-    - uses: ./actions/propel-code-artifact
+    - uses: ./.github/actions/custom-propel-code-artifact
       with:
         aws_access_key_id: ${{ env.BUILD_AWS_ACCESS_KEY_ID }}
         aws_secret_access_key: ${{ env.BUILD_AWS_SECRET_ACCESS_KEY }}
