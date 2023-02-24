@@ -178,11 +178,11 @@ export function Leaderboard(props: LeaderboardProps) {
         setIsLoading(false)
       }
     }
-    if (!isStatic && !serverData) {
+    if (!isStatic) {
       fetchChartData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, isStatic])
+  }, [isStatic, query?.timeRange])
 
   React.useEffect(() => {
     if (isStatic) {
