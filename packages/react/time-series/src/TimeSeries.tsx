@@ -1,6 +1,5 @@
 import React from 'react'
 import request from 'graphql-request'
-import { format } from 'date-fns'
 import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
@@ -15,16 +14,16 @@ import {
   LineController,
   BarElement,
   LineElement,
-  LinearScale,
   CategoryScale,
   Tooltip,
   Chart as ChartJS,
   PointElement,
-  Colors
+  Colors,
+  TimeSeriesScale
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultChartHeight, defaultStyles, defaultTimestampFormat } from './defaults'
+import { defaultChartHeight, defaultStyles } from './defaults'
 import { generateConfig, useSetupDefaultStyles, getDefaultGranularity } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -35,15 +34,15 @@ import { Loader } from './Loader'
  * we reduce bundle weight
  */
 ChartJS.register(
-  BarController,
-  LineController,
+  Tooltip,
+  Colors,
   PointElement,
   BarElement,
   LineElement,
-  Tooltip,
-  LinearScale,
-  CategoryScale,
-  Colors
+  BarController,
+  LineController,
+  TimeSeriesScale,
+  CategoryScale
 )
 
 export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
@@ -80,8 +79,6 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 
     /** Propeller that the chart will respond to */
     propeller?: Propeller
-
-    timestampFormat?: string
   }
 }
 
@@ -147,18 +144,13 @@ export function TimeSeries(props: TimeSeriesProps) {
       }
     )
 
-    const metricData = response.metricByName.timeSeries
-
-    const labels: string[] = metricData.labels.map((label: string) =>
-      format(new Date(label), query?.timestampFormat || defaultTimestampFormat)
-    )
-    const values: number[] = [...metricData.values]
+    const { labels, values } = response.metricByName.timeSeries
 
     return { labels, values }
   }
 
   React.useEffect(() => {
-    function handleErrors() {
+    function handlePropsMismatch() {
       if (isStatic && !labels && !values) {
         console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
         setHasError(true)
@@ -179,8 +171,10 @@ export function TimeSeries(props: TimeSeriesProps) {
       }
     }
 
-    handleErrors()
-  }, [isStatic, labels, values, query, props])
+    if (!loading) {
+      handlePropsMismatch()
+    }
+  }, [isStatic, labels, values, query, loading])
 
   React.useEffect(() => {
     async function fetchChartData() {

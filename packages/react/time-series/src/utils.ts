@@ -8,12 +8,12 @@ import {
   TextAlign,
   Scriptable,
   ScriptableTooltipContext,
-  ChartConfiguration,
   PointStyle,
   ScriptableAndArray,
+  // ChartConfiguration,
   ScriptableContext
 } from 'chart.js'
-
+import { dateFns as dateFnsAdapter } from 'chartjs-adapter-date-fns'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
@@ -26,10 +26,14 @@ interface GenereateConfigOptions {
   data: TimeSeriesData
 }
 
-export function generateConfig(options: GenereateConfigOptions): ChartConfiguration {
+export function generateConfig(options: GenereateConfigOptions): any {
   const { styles, data, variant } = options
 
-  const hideGridLines = styles?.canvas?.hideGridLines || false
+  const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas?.hideGridLines
+  const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant]?.backgroundColor!
+  const borderColor = styles?.[variant]?.borderColor || defaultStyles?.[variant]?.borderColor!
+
+  const plugins = [customCanvasBackgroundColor]
 
   const customPlugins = {
     customCanvasBackgroundColor: {
@@ -37,44 +41,49 @@ export function generateConfig(options: GenereateConfigOptions): ChartConfigurat
     }
   } as CustomPlugins
 
-  const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant]?.backgroundColor!
-  const borderColor = styles?.[variant]?.borderColor || defaultStyles?.[variant]?.borderColor!
+  const dataset = {
+    labels: data.labels || [],
+    datasets: [
+      {
+        data: data.values || [],
+        backgroundColor,
+        borderColor
+      }
+    ]
+  }
+
+  const scales = {
+    x: {
+      type: 'timeseries',
+      adapters: {
+        date: dateFnsAdapter
+      },
+      display: !hideGridLines,
+      grid: {
+        drawOnChartArea: false
+      },
+      beginAtZero: true
+    },
+    y: {
+      display: !hideGridLines,
+      grid: { drawOnChartArea: true }
+    }
+  }
 
   return {
     type: variant,
-    data: {
-      labels: data.labels || [],
-      datasets: [
-        {
-          data: data.values || [],
-          backgroundColor,
-          borderColor
-        }
-      ]
-    },
+    data: dataset,
     options: {
       responsive: !styles?.canvas?.width,
       maintainAspectRatio: false,
       animation: false,
+      plugins: customPlugins,
       layout: {
         padding: styles?.canvas?.padding
       },
-      plugins: customPlugins,
-      scales: {
-        x: {
-          display: !hideGridLines,
-          grid: {
-            drawOnChartArea: false
-          },
-          beginAtZero: true
-        },
-        y: {
-          display: !hideGridLines,
-          grid: { drawOnChartArea: true }
-        }
-      }
+      scales
     },
-    plugins: [customCanvasBackgroundColor]
+    plugins
   }
 }
 

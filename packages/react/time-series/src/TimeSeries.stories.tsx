@@ -38,8 +38,7 @@ Connected.args = {
     timeRange: {
       relative: RelativeTimeRange.PreviousMonth
     },
-    granularity: TimeSeriesGranularity.Day,
-    timestampFormat: 'MM/dd'
+    granularity: TimeSeriesGranularity.Day
   }
 }
 
