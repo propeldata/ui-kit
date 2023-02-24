@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/react-time-series",
-  "version": "0.29.1",
+  "version": "0.29.2",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/css": "^11.10.5",
     "@propeldata/ui-kit-components": "workspace:^0.2.1",
-    "@propeldata/ui-kit-graphql": "workspace:^0.2.5",
+    "@propeldata/ui-kit-graphql": "workspace:^0.2.6",
     "@propeldata/ui-kit-plugins": "workspace:^0.2.0",
     "chart.js": "^4.1.2",
     "date-fns": "^2.29.3",
