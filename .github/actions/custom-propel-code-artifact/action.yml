@@ -23,6 +23,8 @@ runs:
         # NOTE(mroberts): Don't do this, since we have lockfiles...
         # sed -i -e 's/^registry=/@propeldata:registry=/' ~/.npmrc
 
+        npm config set ${{$CODEARTIFACT_REPO}}:_authToken=${{ $CODEARTIFACT_AUTH_TOKEN }}
+
         # NOTE(mroberts): This is for Yarn v2 and above.
         export AWS_ACCESS_KEY_ID=${{ inputs.aws_access_key_id }}
         export AWS_SECRET_ACCESS_KEY=${{ inputs.aws_secret_access_key }}
