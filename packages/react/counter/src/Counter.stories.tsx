@@ -114,12 +114,14 @@ Error.args = {
 
 export const Loading = () => {
   const [loading, setLoading] = React.useState(true)
+  const [value, setValue] = React.useState<string>()
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false)
+      setValue('123')
     }, 1000)
   }, [])
 
-  return <Counter loading={loading} value="123" />
+  return <Counter loading={loading} value={value} />
 }

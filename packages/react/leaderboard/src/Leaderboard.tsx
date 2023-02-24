@@ -137,7 +137,7 @@ export function Leaderboard(props: LeaderboardProps) {
   }
 
   React.useEffect(() => {
-    function handleErrors() {
+    function handlePropsMismatch() {
       if (isStatic && !headers && !rows) {
         console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
         setHasError(true)
@@ -161,8 +161,10 @@ export function Leaderboard(props: LeaderboardProps) {
       }
     }
 
-    handleErrors()
-  }, [isStatic, headers, rows, query, props])
+    if (!loading) {
+      handlePropsMismatch()
+    }
+  }, [isStatic, headers, rows, query, loading])
 
   React.useEffect(() => {
     async function fetchChartData() {

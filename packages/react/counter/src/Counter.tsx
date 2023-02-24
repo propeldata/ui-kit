@@ -43,13 +43,13 @@ export interface CounterProps extends React.ComponentProps<'span'> {
 }
 
 export function Counter(props: CounterProps) {
-  const { value, query, prefixValue, sufixValue, styles, loading, localize, ...rest } = props
+  const { value, query, prefixValue, sufixValue, styles, loading = false, localize, ...rest } = props
 
   /**
    * If the user passes `value` attribute, it
    * should behave as a static component without any graphql operation performed
    */
-  const isStatic = !!value
+  const isStatic = !query
 
   const [dataValue, setDataValue] = React.useState<string>()
   const [hasError, setHasError] = React.useState(false)
@@ -93,7 +93,7 @@ export function Counter(props: CounterProps) {
   }, [query])
 
   React.useEffect(() => {
-    function handleErrors() {
+    function handlePropsMismatch() {
       if (isStatic && !value) {
         console.error('InvalidPropsError: You must pass either `value` or `query` props')
         setHasError(true)
@@ -109,8 +109,10 @@ export function Counter(props: CounterProps) {
       }
     }
 
-    handleErrors()
-  }, [isStatic, value, query, props])
+    if (!loading) {
+      handlePropsMismatch()
+    }
+  }, [isStatic, value, query, loading])
 
   React.useEffect(() => {
     async function setup() {
