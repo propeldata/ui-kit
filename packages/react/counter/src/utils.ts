@@ -1,3 +1,20 @@
+interface getValueOptions {
+  value: string
+  localize?: boolean
+}
+
+const getValue = (options: getValueOptions) => {
+  const { value, localize } = options
+
+  const isInteger = Number.isInteger(parseFloat(value))
+
+  if (isInteger) {
+    return localize ? parseInt(value).toLocaleString() : parseInt(value)
+  }
+
+  return localize ? parseFloat(value).toFixed(2).toLocaleString() : parseFloat(value).toFixed(2)
+}
+
 export const getValueWithPrefixAndSufix = (params: {
   prefix?: string
   value?: string
@@ -8,9 +25,5 @@ export const getValueWithPrefixAndSufix = (params: {
 
   if (!value) return
 
-  return (
-    (prefix ? prefix + ' ' : '') +
-    (localize ? parseFloat(value).toFixed(2).toLocaleString() : parseFloat(value).toFixed(2)) +
-    (sufix ? ' ' + sufix : '')
-  )
+  return (prefix ? prefix + ' ' : '') + getValue({ value, localize }) + (sufix ? ' ' + sufix : '')
 }
