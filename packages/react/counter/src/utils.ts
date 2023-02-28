@@ -12,7 +12,9 @@ const getValue = (options: getValueOptions) => {
     return localize ? parseInt(value).toLocaleString() : parseInt(value)
   }
 
-  return localize ? parseFloat(value).toFixed(2).toLocaleString() : parseFloat(value).toFixed(2)
+  return localize
+    ? parseFloat(parseFloat(value).toFixed(2).toLocaleString()).toLocaleString()
+    : parseFloat(value).toFixed(2)
 }
 
 export const getValueWithPrefixAndSufix = (params: {
