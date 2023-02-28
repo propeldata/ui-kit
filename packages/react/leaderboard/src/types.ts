@@ -86,7 +86,9 @@ export type Styles = {
       }
     }
     valueColumn?: {
-      locale?: boolean
+      localize?: boolean
+      prefixValue?: string
+      sufixValue?: string
       backgroundColor?: string
       align?: 'left' | 'center' | 'right'
       font?: {

@@ -15,7 +15,7 @@ import { css } from '@emotion/css'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import type { ChartVariant, LeaderboardData, Styles } from './types'
 import { defaultChartHeight, defaultStyles } from './defaults'
-import { generateConfig, getTableSettings, useSetupDefaultStyles } from './utils'
+import { generateConfig, getTableSettings, getValueWithPrefixAndSufix, useSetupDefaultStyles } from './utils'
 import { Loader } from './Loader'
 import { ValueBar } from './ValueBar'
 
@@ -248,7 +248,7 @@ export function Leaderboard(props: LeaderboardProps) {
     )
   }
 
-  const tableHeaders = isStatic ? headers : serverData?.headers
+  const tableHeaders = headers?.length ? headers : serverData?.headers
   const tableRows = isStatic ? rows : serverData?.rows
 
   const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
@@ -278,9 +278,12 @@ export function Leaderboard(props: LeaderboardProps) {
                 </td>
               ))}
               <td className={getTableValueCellStyles(styles)}>
-                {styles?.table?.valueColumn?.locale
-                  ? valuesByRow?.[rowIndex].toLocaleString()
-                  : valuesByRow?.[rowIndex]}
+                {getValueWithPrefixAndSufix({
+                  localize: styles?.table?.valueColumn?.localize,
+                  prefix: styles?.table?.valueColumn?.prefixValue,
+                  sufix: styles?.table?.valueColumn?.sufixValue,
+                  value: valuesByRow?.[rowIndex]
+                })}
               </td>
               {hasValueBar && (
                 <td className={valueBarCellStyles}>
