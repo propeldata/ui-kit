@@ -10,7 +10,8 @@ export default {
   title: 'React/Leaderboard'
 }
 
-const accessToken = '<PROPEL_ACCESS_TOKEN>'
+const accessToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2Nzc2MTkyOTEsImNsaWVudF9pZCI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwiZXhwIjoxNjc3NjIyODkxLCJpYXQiOjE2Nzc2MTkyOTEsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI0ODk3YWY4NS0yZmRmLTRlY2UtYjY1ZC00YTA5NzYxYTM5MzYiLCJwcm9wZWwvdGVuYW50IjoiRU5WMDFGWEpKRlJOSDhKMVJCWDdDQ1YyQVBEMU4iLCJzY29wZSI6Im1ldHJpYzpxdWVyeSBwcm9wZWwvbWV0cmljOnF1ZXJ5Iiwic3ViIjoiMzVyMXVwaWpraGdqbTA5czExaHJkNGMycHUiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJ2ZXJzaW9uIjoxfQ.Dk1GA9oH56AqEn_SqwIIoaSuB1HAWJHd2QsZ-o-GftI'
 
 const barHeaders = ['DATA_SOURCE_TYPE', 'value']
 
@@ -69,7 +70,7 @@ ValueBarTable.args = {
     table: {
       hasValueBar: true,
       valueColumn: {
-        locale: true
+        localize: true
       }
     }
   }
@@ -78,6 +79,17 @@ ValueBarTable.args = {
 export const Connected = Template.bind({})
 Connected.args = {
   variant: 'table',
+  headers: [
+    'account',
+    'environment',
+    'regionnnnnnnnn',
+    'data pool id',
+    'data pool name',
+    'data source id',
+    'type',
+    'data source unique name',
+    'revenue'
+  ],
   query: {
     accessToken,
     metric: 'syncRecordsAdded',
@@ -186,7 +198,8 @@ CustomStyles.args = {
         backgroundColor: '#545454'
       },
       valueColumn: {
-        align: 'center'
+        align: 'center',
+        localize: true
       },
       columns: {
         align: 'center'

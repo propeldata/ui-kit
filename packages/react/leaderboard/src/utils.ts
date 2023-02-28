@@ -142,3 +142,33 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   return { headersWithoutValue, valueHeader, valuesByRow, rowsWithoutValue, maxValue, isOrdered, hasValueBar }
 }
+
+interface getValueOptions {
+  value: number
+  localize?: boolean
+}
+
+const getValue = (options: getValueOptions) => {
+  const { value, localize } = options
+
+  const isInteger = Number.isInteger(value)
+
+  if (isInteger) {
+    return localize ? value.toLocaleString() : value
+  }
+
+  return localize ? value.toFixed(2).toLocaleString() : value.toFixed(2)
+}
+
+export const getValueWithPrefixAndSufix = (params: {
+  prefix?: string
+  value?: number
+  sufix?: string
+  localize?: boolean
+}) => {
+  const { prefix, value, sufix, localize } = params
+
+  if (!value) return
+
+  return (prefix ? prefix + ' ' : '') + getValue({ value, localize }) + (sufix ? ' ' + sufix : '')
+}
