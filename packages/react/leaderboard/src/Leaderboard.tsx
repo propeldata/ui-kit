@@ -182,7 +182,7 @@ export function Leaderboard(props: LeaderboardProps) {
       fetchChartData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isStatic, query?.timeRange])
+  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.sort, query?.rowLimit, query?.dimensions])
 
   React.useEffect(() => {
     if (isStatic) {
