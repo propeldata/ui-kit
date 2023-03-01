@@ -116,10 +116,24 @@ export function Counter(props: CounterProps) {
 
   React.useEffect(() => {
     async function setup() {
-      setDataValue(isStatic ? value : await fetchData())
+      if (isStatic && value) {
+        setDataValue(value)
+        return
+      }
+
+      const fetchedValue = await fetchData()
+
+      if (!fetchedValue) {
+        setHasError(true)
+        console.error(`QueryError: Your metric ${query?.metric} returned undefined or a \`null\` value.`)
+        return
+      }
+
+      setDataValue(fetchedValue)
     }
 
     setup()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData, isStatic, value])
 
   if (isLoading || loading) return <Loader styles={styles} />
