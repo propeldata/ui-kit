@@ -201,7 +201,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       fetchChartData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isStatic, query?.timeRange])
+  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.granularity])
 
   React.useEffect(() => {
     if (isStatic) {
