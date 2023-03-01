@@ -436,4 +436,5 @@ const getTableValueCellStyles = (styles?: Styles) => css`
 const valueBarCellStyles = css`
   width: 20%;
   border-top: 1px solid #e6e8f0;
+  padding-right: 6px;
 `
