@@ -125,7 +125,7 @@ export function Counter(props: CounterProps) {
 
       if (!fetchedValue) {
         setHasError(true)
-        console.error(`QueryError: Your query ${query?.metric} returned undefined or a \`null\` value.`)
+        console.error(`QueryError: Your metric ${query?.metric} returned undefined or a \`null\` value.`)
         return
       }
 
