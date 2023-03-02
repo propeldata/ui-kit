@@ -1,0 +1,32 @@
+{
+  "name": "@propeldata/release",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Propel's release script",
+  "repository": "https://github.com/propeldata/ui-kit",
+  "author": "<engineering@propeldata.com>",
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "prepare": "yarn lint && yarn build"
+  },
+  "bin": {
+    "propel-release": "./bin/propel-release"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "devDependencies": {
+    "@tsconfig/node18": "^1.0.1",
+    "eslint": "^8.32.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@monodeploy/node": "^3.6.0",
+    "@monodeploy/types": "^3.6.0",
+    "conventional-changelog-angular": "^5.0.13"
+  }
+}

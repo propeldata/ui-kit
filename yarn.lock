@@ -3965,18 +3965,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/release@npm:^1.9.31":
-  version: 1.9.34
-  resolution: "@propeldata/release@npm:1.9.34::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40propeldata%2Frelease%2F-%2Frelease-1.9.34.tgz"
+"@propeldata/release@workspace:^, @propeldata/release@workspace:packages/core/release":
+  version: 0.0.0-use.local
+  resolution: "@propeldata/release@workspace:packages/core/release"
   dependencies:
     "@monodeploy/node": ^3.6.0
     "@monodeploy/types": ^3.6.0
+    "@tsconfig/node18": ^1.0.1
     conventional-changelog-angular: ^5.0.13
+    eslint: ^8.32.0
+    typescript: ^4.9.4
   bin:
     propel-release: ./bin/propel-release
-  checksum: f6f87e101667273ca696bd7af93f706b2a9991df92a07ef78e393c8d5ae7916b0eb764fae2a921dac7fcafaab643e074dc6bd1df9265cee4d50de2b4516d1a4b
-  languageName: node
-  linkType: hard
+  languageName: unknown
+  linkType: soft
 
 "@propeldata/ui-kit-components@workspace:^0.2.1, @propeldata/ui-kit-components@workspace:packages/core/components":
   version: 0.0.0-use.local
@@ -4017,7 +4019,7 @@ __metadata:
     "@mdx-js/react": ^1.6.22
     "@parcel/packager-ts": ^2.8.3
     "@parcel/transformer-typescript-types": 2.8.3
-    "@propeldata/release": ^1.9.31
+    "@propeldata/release": "workspace:^"
     "@storybook/addon-actions": ^6.5.14
     "@storybook/addon-docs": ^6.5.14
     "@storybook/addon-essentials": ^6.5.14
@@ -5439,6 +5441,13 @@ __metadata:
   version: 1.0.3
   resolution: "@tsconfig/node16@npm:1.0.3::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40tsconfig%2Fnode16%2F-%2Fnode16-1.0.3.tgz"
   checksum: 3a8b657dd047495b7ad23437d6afd20297ce90380ff0bdee93fc7d39a900dbd8d9e26e53ff6b465e7967ce2adf0b218782590ce9013285121e6a5928fbd6819f
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node18@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@tsconfig/node18@npm:1.0.1::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2F%40tsconfig%2Fnode18%2F-%2Fnode18-1.0.1.tgz"
+  checksum: aba11b453e40b03a33321e5b2bd51ba2d5213503bb95f1ecd56a5dd0be31eef1ab9ddfe06b4eae99075692641de905d57a38d671a9288bacac82327d393de1e2
   languageName: node
   linkType: hard
 
@@ -10658,7 +10667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.28.0":
+"eslint@npm:^8.28.0, eslint@npm:^8.32.0":
   version: 8.35.0
   resolution: "eslint@npm:8.35.0::__archiveUrl=https%3A%2F%2Fpropel-493852367691.d.codeartifact.us-east-2.amazonaws.com%3A443%2Fnpm%2Fpropel%2Feslint%2F-%2Feslint-8.35.0.tgz"
   dependencies:
