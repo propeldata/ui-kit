@@ -4,7 +4,7 @@ config:
   fetcher: graphql-request
 generates:
   src/generated/index.ts:
-    schema: ../../../node_modules/@propeldata/config-management-api-definitions/dist/private.graphql
+    schema: public.graphql
     documents:
       - ./**/*.graphql
     plugins:
