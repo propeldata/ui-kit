@@ -1,11 +1,6 @@
 name: check-pull-request
 on:
   pull_request:
-env:
-  PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
-  BUILD_AWS_ACCESS_KEY_ID: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
-  BUILD_AWS_SECRET_ACCESS_KEY: ${{ secrets.BUILD_AWS_SECRET_ACCESS_KEY }}
-  BUILD_AWS_DEFAULT_REGION: ${{ secrets.BUILD_AWS_DEFAULT_REGION }}
 jobs:
   unit-test:
     runs-on: ubuntu-latest
