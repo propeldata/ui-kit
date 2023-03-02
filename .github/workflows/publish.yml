@@ -59,6 +59,7 @@ jobs:
 
       # Release
       - run: |
+          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
           git config --global user.email "engineering@propeldata.com"
           git config --global user.name "Propel Data Cloud, LLC." 
           COMMIT_MESSAGE=release yarn release
