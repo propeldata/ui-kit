@@ -144,4 +144,4 @@ Made with :purple_heart: and [Chart.js](https://www.chartjs.org/). Powered by Pr
 
 ## Licence
 
-Propel license
+MIT License
