@@ -1,0 +1,13 @@
+name: check-pull-request
+on:
+  pull_request:
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/prepare
+        with:
+          cache_key_suffix: '-unit-test'
+      - run: yarn test

@@ -1,0 +1,65 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+env:
+  PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
+
+jobs:
+  publish:
+    if: github.event.head_commit.message != 'release'
+    runs-on: ubuntu-latest
+    steps:
+      # Setup
+      - uses: actions/checkout@v3
+        with:
+          # so that when we push tags, workflows are released, which does not happen with the default token
+          token: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          # NOTE(mroberts): https://github.com/actions/checkout/issues/217
+          fetch-depth: '0'
+      - uses: actions/checkout@v3
+        with:
+          repository: propeldata/actions
+          token: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          path: actions
+      - uses: ./actions/honeycomb-trace-job
+        with:
+          api_key: ${{ secrets.BUILDEVENTS_APIKEY }}
+      - uses: ./actions/propel-slack
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          slack_signing_secret: ${{ secrets.SLACK_SIGNING_SECRET }}
+          message_type: 'pipeline'
+      - uses: ./actions/propel-slack
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          slack_signing_secret: ${{ secrets.SLACK_SIGNING_SECRET }}
+          message_type: 'publish'
+
+      # Build
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.13.0'
+      - uses: ./actions/propel-slack
+        with:
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          slack_signing_secret: ${{ secrets.SLACK_SIGNING_SECRET }}
+          message_type: 'build'
+      - uses: ./actions/propel-code-artifact
+        with:
+          aws_access_key_id: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.BUILD_AWS_SECRET_ACCESS_KEY }}
+          aws_default_region: ${{ secrets.BUILD_AWS_DEFAULT_REGION }}
+      - uses: ./.github/actions/prepare
+        with:
+          cache_fresh_start: 'true'
+      - run: yarn build
+
+      # Release
+      - run: |
+          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+          git config --global user.email "engineering@propeldata.com"
+          git config --global user.name "Propel Data Cloud, LLC." 
+          COMMIT_MESSAGE=release yarn release

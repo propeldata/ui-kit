@@ -1,0 +1,24 @@
+{
+  "name": "@propeldata/ui-kit-components",
+  "version": "0.2.2",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "parcel watch",
+    "build": "parcel build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8 || ^17.0 || ^18.0",
+    "react-dom": "^16.8 || ^17.0 || ^18.0"
+  }
+}

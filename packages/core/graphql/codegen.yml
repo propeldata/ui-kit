@@ -1,0 +1,13 @@
+overwrite: true
+legacyMode: true
+config:
+  fetcher: graphql-request
+generates:
+  src/generated/index.ts:
+    schema: public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query

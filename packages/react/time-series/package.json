@@ -1,0 +1,34 @@
+{
+  "name": "@propeldata/react-time-series",
+  "version": "0.29.9",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "parcel watch",
+    "build": "parcel build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.10.5",
+    "@propeldata/ui-kit-components": "workspace:^0.2.2",
+    "@propeldata/ui-kit-graphql": "workspace:^0.2.7",
+    "@propeldata/ui-kit-plugins": "workspace:^0.2.1",
+    "chart.js": "^4.2.1",
+    "date-fns": "^2.29.3",
+    "graphql": "^16.6.0",
+    "graphql-request": "^3.6.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8 || ^17.0 || ^18.0",
+    "react-dom": "^16.8 || ^17.0 || ^18.0"
+  }
+}
