@@ -13,22 +13,36 @@ import {
   // ChartConfiguration,
   ScriptableContext
 } from 'chart.js'
-// import 'chartjs-adapter-date-fns'
+import 'chartjs-adapter-date-fns'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
-import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
+import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
 import { TimeSeriesData, Styles, ChartVariant, CustomPlugins } from './types'
 import { defaultStyles } from './defaults'
 
-interface GenereateConfigOptions {
+function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): string | false {
+  const unitByGranularity = {
+    [TimeSeriesGranularity.Year]: 'year',
+    [TimeSeriesGranularity.Month]: 'month',
+    [TimeSeriesGranularity.Week]: 'week',
+    [TimeSeriesGranularity.Day]: 'day',
+    [TimeSeriesGranularity.Hour]: 'hour',
+    [TimeSeriesGranularity.Minute]: 'minute'
+  } as Record<TimeSeriesGranularity, string>
+
+  return granularity ? unitByGranularity[granularity] || false : false
+}
+
+interface GenerateConfigOptions {
   variant: ChartVariant
   styles?: Styles
   data: TimeSeriesData
+  granularity: Maybe<TimeSeriesGranularity>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function generateConfig(options: GenereateConfigOptions): any {
-  const { styles, data, variant } = options
+export function generateConfig(options: GenerateConfigOptions): any {
+  const { styles, data, variant, granularity } = options
 
   const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas?.hideGridLines
   const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant]?.backgroundColor!
@@ -55,12 +69,15 @@ export function generateConfig(options: GenereateConfigOptions): any {
 
   const scales = {
     x: {
-      // type: 'timeseries',
+      type: 'timeseries',
       display: !hideGridLines,
       grid: {
         drawOnChartArea: false
       },
-      beginAtZero: true
+      beginAtZero: true,
+      time: {
+        unit: getGranularityBasedUnit(granularity)
+      }
     },
     y: {
       display: !hideGridLines,

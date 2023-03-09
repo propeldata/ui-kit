@@ -1,7 +1,6 @@
 import React from 'react'
 import request from 'graphql-request'
 import { css } from '@emotion/css'
-import { format } from 'date-fns'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -25,7 +24,7 @@ import {
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultChartHeight, defaultStyles, defaultTimestampFormat } from './defaults'
+import { defaultChartHeight, defaultStyles } from './defaults'
 import { generateConfig, useSetupDefaultStyles, getDefaultGranularity } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -91,6 +90,7 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 export function TimeSeries(props: TimeSeriesProps) {
   const { variant = 'bar', styles, labels, values, query, error, loading = false, ...rest } = props
 
+  const granularity = query?.granularity || getDefaultGranularity(query?.timeRange)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<TimeSeriesData>()
@@ -114,7 +114,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
 
-    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data }))
+    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data, granularity }))
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
     canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
@@ -140,7 +140,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         uniqueName: query?.metric,
         timeSeriesInput: {
           timeRange: query?.timeRange,
-          granularity: query?.granularity || getDefaultGranularity(query?.timeRange),
+          granularity,
           filters: query?.filters,
           propeller: query?.propeller
         }
@@ -152,9 +152,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
     const metricData = response.metricByName.timeSeries
 
-    const labels: string[] = metricData.labels.map((label: string) =>
-      format(new Date(label), query?.timestampFormat || defaultTimestampFormat)
-    )
+    const labels: string[] = [...metricData.labels]
     const values: number[] = [...metricData.values]
 
     return { labels, values }
