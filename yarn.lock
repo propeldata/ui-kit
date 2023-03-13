@@ -3954,6 +3954,7 @@ __metadata:
     "@propeldata/ui-kit-graphql": "workspace:^0.2.7"
     "@propeldata/ui-kit-plugins": "workspace:^0.2.1"
     chart.js: ^4.2.1
+    chartjs-adapter-date-fns: ^3.0.0
     date-fns: ^2.29.3
     graphql: ^16.6.0
     graphql-request: ^3.6.1
@@ -8586,6 +8587,16 @@ __metadata:
   dependencies:
     "@kurkle/color": ^0.3.0
   checksum: 7319fdfd1e29812e87bbc07737e8c9072ff659bbc09ade8dd262f83424cd7e48f89afe5220e11e002c9f236883fae3f3adb8adc16acb4682b0ddcc0b661c3af9
+  languageName: node
+  linkType: hard
+
+"chartjs-adapter-date-fns@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "chartjs-adapter-date-fns@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-date-fns%2F-%2Fchartjs-adapter-date-fns-3.0.0.tgz"
+  peerDependencies:
+    chart.js: ">=2.8.0"
+    date-fns: ">=2.0.0"
+  checksum: c39bfdf490749faa589fba6e0dc0a2c5a467a5f06aaa52c5180e10fd9c83414807a064f6950538448bffee354c8064c0ce9d957bccbf2048e7ee2257aa95f138
   languageName: node
   linkType: hard
 
