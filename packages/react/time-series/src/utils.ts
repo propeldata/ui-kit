@@ -13,26 +13,30 @@ import {
   // ChartConfiguration,
   ScriptableContext
 } from 'chart.js'
-// import 'chartjs-adapter-date-fns'
+import 'chartjs-adapter-date-fns'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
 import { TimeSeriesData, Styles, ChartVariant, CustomPlugins } from './types'
 import { defaultStyles } from './defaults'
 
-interface GenereateConfigOptions {
+interface GenerateConfigOptions {
   variant: ChartVariant
   styles?: Styles
   data: TimeSeriesData
+  isFormatted: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function generateConfig(options: GenereateConfigOptions): any {
-  const { styles, data, variant } = options
+export function generateConfig(options: GenerateConfigOptions): any {
+  const { styles, data, variant, isFormatted } = options
 
   const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas?.hideGridLines
   const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant]?.backgroundColor!
   const borderColor = styles?.[variant]?.borderColor || defaultStyles?.[variant]?.borderColor!
+
+  const labels = data.labels || []
+  const values = data.values || []
 
   const plugins = [customCanvasBackgroundColor]
 
@@ -43,19 +47,18 @@ export function generateConfig(options: GenereateConfigOptions): any {
   } as CustomPlugins
 
   const dataset = {
-    labels: data.labels || [],
+    labels,
     datasets: [
       {
-        data: data.values || [],
+        data: values,
         backgroundColor,
         borderColor
       }
     ]
   }
 
-  const scales = {
+  const scalesBase = {
     x: {
-      // type: 'timeseries',
       display: !hideGridLines,
       grid: {
         drawOnChartArea: false
@@ -65,6 +68,18 @@ export function generateConfig(options: GenereateConfigOptions): any {
     y: {
       display: !hideGridLines,
       grid: { drawOnChartArea: true }
+    }
+  }
+
+  const customFormatScales = {
+    ...scalesBase
+  }
+
+  const autoFormatScales = {
+    ...scalesBase,
+    x: {
+      ...scalesBase.x,
+      type: 'timeseries'
     }
   }
 
@@ -79,7 +94,7 @@ export function generateConfig(options: GenereateConfigOptions): any {
       layout: {
         padding: styles?.canvas?.padding
       },
-      scales
+      scales: isFormatted ? customFormatScales : autoFormatScales
     },
     plugins
   }
@@ -212,4 +227,19 @@ export function getDefaultGranularity(timeRange?: TimeRangeInput) {
     [RelativeTimeRange.Last_7Days]: TimeSeriesGranularity.Day,
     [RelativeTimeRange.Last_90Days]: TimeSeriesGranularity.Day
   }[relative]
+}
+
+interface FormatLabelsOptions {
+  labels?: string[]
+  formatter?: (labels: string[]) => string[]
+}
+
+export function formatLabels(options: FormatLabelsOptions): string[] {
+  const { labels = [], formatter } = options
+
+  if (formatter && typeof formatter !== 'function') {
+    throw new Error('`labelFormatter` prop must be a formatter function')
+  }
+
+  return formatter ? formatter(labels) : labels
 }
