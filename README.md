@@ -142,6 +142,10 @@ By customizing your Propel UI Kit components in this way, you can create unique,
 
 Made with :purple_heart: and [Chart.js](https://www.chartjs.org/). Powered by Propel! :rocket:
 
+## Contributing
+
+If you notice any bugs or have suggestions for new features, please [open an issue](https://github.com/propeldata/ui-kit/issues) on GitHub. We welcome feedback and contributions from the community!
+
 ## Licence
 
 MIT License

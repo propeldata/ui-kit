@@ -25,7 +25,7 @@ import {
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultChartHeight, defaultStyles } from './defaults'
-import { generateConfig, useSetupDefaultStyles, getDefaultGranularity } from './utils'
+import { generateConfig, useSetupDefaultStyles, getDefaultGranularity, formatLabels } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
 
@@ -85,10 +85,12 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
     /** Timestamp format that the chart will respond to */
     timestampFormat?: string
   }
+  /** Format function for labels, must return an array with the new labels */
+  labelFormatter?: (labels: string[]) => string[]
 }
 
 export function TimeSeries(props: TimeSeriesProps) {
-  const { variant = 'bar', styles, labels, values, query, error, loading = false, ...rest } = props
+  const { variant = 'bar', styles, labels, values, query, error, loading = false, labelFormatter, ...rest } = props
 
   const granularity = query?.granularity || getDefaultGranularity(query?.timeRange)
   const [hasError, setHasError] = React.useState(false)
@@ -109,12 +111,26 @@ export function TimeSeries(props: TimeSeriesProps) {
    */
   const isStatic = !query
 
+  const isFormatted = !!labelFormatter
+
   useSetupDefaultStyles(styles)
 
   const renderChart = (data?: TimeSeriesData) => {
     if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
 
-    chartRef.current = new ChartJS(canvasRef.current, generateConfig({ variant, styles, data, granularity }))
+    chartRef.current = new ChartJS(
+      canvasRef.current,
+      generateConfig({
+        variant,
+        styles,
+        data: {
+          ...data,
+          labels: formatLabels({ labels, formatter: labelFormatter })
+        },
+        isFormatted,
+        granularity
+      })
+    )
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
     canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
@@ -206,7 +222,8 @@ export function TimeSeries(props: TimeSeriesProps) {
   React.useEffect(() => {
     if (isStatic) {
       destroyChart()
-      renderChart({ labels, values })
+      const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
+      renderChart({ labels: formattedLabels, values })
     }
 
     return () => {

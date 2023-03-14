@@ -1,5 +1,6 @@
 import React from 'react'
 import { Story } from '@storybook/react'
+import { format } from 'date-fns'
 
 import { Container as TimeSeries } from './Container'
 import { TimeSeriesProps } from './TimeSeries'
@@ -133,5 +134,16 @@ CustomDark.args = {
       borderColor: '#ffffff',
       backgroundColor: '#212121'
     }
+  }
+}
+
+export const FormattedLabels = Template.bind({})
+FormattedLabels.args = {
+  variant: 'bar',
+  ...dataset,
+  labelFormatter: (labels) => {
+    return labels.map((label) => {
+      return format(new Date(label), 'MM/dd/yy')
+    })
   }
 }
