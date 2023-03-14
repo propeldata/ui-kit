@@ -55,11 +55,10 @@ Connected.args = {
   variant: 'line',
   query: {
     accessToken:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzgzODQzNDgsImNsaWVudF9pZCI6Ijd0dDVpbDE5MmhsYmthZGYwY2NnNGk3c3Q2IiwiZXhwIjoxNjc4Mzg3OTQ4LCJpYXQiOjE2NzgzODQzNDgsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiNmUxOTQ4YzctZThmYy00ODM1LTg0OTEtNmRlZDQ2ZDRlNzlmIiwicHJvcGVsL3RlbmFudCI6IkVOVjAxR0paRzIyNlk3SFlISjNGQkg1NzAwR1I5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkiLCJzdWIiOiI3dHQ1aWwxOTJobGJrYWRmMGNjZzRpN3N0NiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.eAYZz2qDAeG6CSXYcfHvW3MCXJIYkAG0k3MBcSj_wgY',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzcyNzE4NTIsImNsaWVudF9pZCI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwiZXhwIjoxNjc3Mjc1NDUyLCJpYXQiOjE2NzcyNzE4NTIsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiJhMzcwZjJmNS0zYWQzLTRjYTQtYWU0My1kMzk4ZWI3OGRmOWQiLCJwcm9wZWwvdGVuYW50IjoiRU5WMDFGWEpKRlJOSDhKMVJCWDdDQ1YyQVBEMU4iLCJzY29wZSI6Im1ldHJpYzpxdWVyeSBwcm9wZWwvbWV0cmljOnF1ZXJ5Iiwic3ViIjoiMzVyMXVwaWpraGdqbTA5czExaHJkNGMycHUiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJ2ZXJzaW9uIjoxfQ.kqfiwbsF54Pi07jcGxJRADcdmorJqxotV0sYP8_iU8U',
     metric: 'queryCount',
     timeRange: {
-      relative: RelativeTimeRange.LastNDays,
-      n: 30
+      relative: RelativeTimeRange.PreviousMonth
     },
     granularity: TimeSeriesGranularity.Day
   }

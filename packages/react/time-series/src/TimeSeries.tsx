@@ -123,10 +123,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       generateConfig({
         variant,
         styles,
-        data: {
-          ...data,
-          labels: formatLabels({ labels, formatter: labelFormatter })
-        },
+        data,
         isFormatted,
         granularity
       })
@@ -234,8 +231,11 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
+      const { labels, values } = serverData
+
       destroyChart()
-      renderChart(serverData)
+      const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
+      renderChart({ labels: formattedLabels, values })
     }
 
     return () => {
