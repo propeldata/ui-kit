@@ -4037,6 +4037,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0
     babel-loader: ^8.3.0
+    chartjs-adapter-date-fns: ^3.0.0
     commitizen: ^4.2.5
     cz-conventional-changelog: ^3.3.0
     eslint: ^8.28.0

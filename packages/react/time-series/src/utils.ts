@@ -15,21 +15,35 @@ import {
 } from 'chart.js'
 import 'chartjs-adapter-date-fns'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
-import { RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
+import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
 import { TimeSeriesData, Styles, ChartVariant, CustomPlugins } from './types'
 import { defaultStyles } from './defaults'
+
+function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): string | false {
+  const unitByGranularity = {
+    [TimeSeriesGranularity.Year]: 'year',
+    [TimeSeriesGranularity.Month]: 'month',
+    [TimeSeriesGranularity.Week]: 'week',
+    [TimeSeriesGranularity.Day]: 'day',
+    [TimeSeriesGranularity.Hour]: 'hour',
+    [TimeSeriesGranularity.Minute]: 'minute'
+  } as Record<TimeSeriesGranularity, string>
+
+  return granularity ? unitByGranularity[granularity] || false : false
+}
 
 interface GenerateConfigOptions {
   variant: ChartVariant
   styles?: Styles
   data: TimeSeriesData
+  granularity: Maybe<TimeSeriesGranularity>
   isFormatted: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function generateConfig(options: GenerateConfigOptions): any {
-  const { styles, data, variant, isFormatted } = options
+  const { styles, data, variant, granularity, isFormatted } = options
 
   const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas?.hideGridLines
   const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant]?.backgroundColor!
@@ -79,7 +93,10 @@ export function generateConfig(options: GenerateConfigOptions): any {
     ...scalesBase,
     x: {
       ...scalesBase.x,
-      type: 'timeseries'
+      type: 'timeseries',
+      time: {
+        unit: getGranularityBasedUnit(granularity)
+      }
     }
   }
 

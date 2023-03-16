@@ -92,6 +92,7 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 export function TimeSeries(props: TimeSeriesProps) {
   const { variant = 'bar', styles, labels, values, query, error, loading = false, labelFormatter, ...rest } = props
 
+  const granularity = query?.granularity || getDefaultGranularity(query?.timeRange)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<TimeSeriesData>()
@@ -122,11 +123,9 @@ export function TimeSeries(props: TimeSeriesProps) {
       generateConfig({
         variant,
         styles,
-        data: {
-          ...data,
-          labels: formatLabels({ labels, formatter: labelFormatter })
-        },
-        isFormatted
+        data,
+        isFormatted,
+        granularity
       })
     )
 
@@ -154,7 +153,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         uniqueName: query?.metric,
         timeSeriesInput: {
           timeRange: query?.timeRange,
-          granularity: query?.granularity || getDefaultGranularity(query?.timeRange),
+          granularity,
           filters: query?.filters,
           propeller: query?.propeller
         }
@@ -232,8 +231,11 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
+      const { labels, values } = serverData
+
       destroyChart()
-      renderChart(serverData)
+      const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
+      renderChart({ labels: formattedLabels, values })
     }
 
     return () => {
