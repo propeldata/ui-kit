@@ -115,23 +115,25 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   useSetupDefaultStyles(styles)
 
-  const renderChart = (data?: TimeSeriesData) => {
-    if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
+  const renderChart = React.useCallback(
+    (data?: TimeSeriesData) => {
+      if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
 
-    chartRef.current = new ChartJS(
-      canvasRef.current,
-      generateConfig({
-        variant,
-        styles,
-        data,
-        isFormatted,
-        granularity
-      })
-    )
+      chartRef.current = new ChartJS(
+        canvasRef.current,
+        generateConfig({
+          variant,
+          styles,
+          data,
+          isFormatted,
+          granularity
+        })
+      )
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
-    canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas?.borderRadius!
-  }
+      canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
+    },
+    [granularity, isFormatted, styles, variant]
+  )
 
   const destroyChart = () => {
     if (chartRef.current) {
@@ -145,7 +147,7 @@ export function TimeSeries(props: TimeSeriesProps) {
    * when the user doesn't provide
    * its on `labels` and `values`
    */
-  const fetchData = async () => {
+  const fetchData = React.useCallback(async () => {
     const response = await request(
       PROPEL_GRAPHQL_API_ENDPOINT,
       TimeSeriesDocument,
@@ -169,7 +171,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     const values: number[] = [...metricData.values]
 
     return { labels, values }
-  }
+  }, [granularity, query?.accessToken, query?.filters, query?.metric, query?.propeller, query?.timeRange])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -213,8 +215,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     if (!isStatic) {
       fetchChartData()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.granularity])
+  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.granularity, query?.accessToken, fetchData])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -226,8 +227,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     return () => {
       destroyChart()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isStatic, loading, styles, variant, labels, values])
+  }, [isStatic, loading, styles, variant, labels, values, labelFormatter, renderChart])
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
@@ -241,8 +241,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     return () => {
       destroyChart()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serverData, variant, styles, isStatic])
+  }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
 
   if (isLoading || loading) {
     return <Loader styles={styles} />
