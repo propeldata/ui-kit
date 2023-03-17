@@ -1,10 +1,8 @@
-import { Styles } from './types'
-
 export const defaultChartHeight = 200
 
 export const defaultTimestampFormat = 'MM/dd'
 
-export const defaultStyles: Styles = {
+export const defaultStyles = {
   bar: {
     thickness: 20,
     borderWidth: 1,
@@ -18,7 +16,8 @@ export const defaultStyles: Styles = {
     tension: 0.4,
     borderColor: '#000',
     borderWidth: 2,
-    stepped: false
+    stepped: false,
+    backgroundColor: '#CBD5E1'
   },
   canvas: {
     backgroundColor: '#ffffff',
