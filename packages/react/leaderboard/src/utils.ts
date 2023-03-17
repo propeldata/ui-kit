@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import React from 'react'
 import { Chart, ChartConfiguration, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
@@ -27,8 +24,8 @@ export function generateConfig(options: GenereateConfigOptions): ChartConfigurat
     }
   } as CustomPlugins
 
-  const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar?.backgroundColor
-  const borderColor = styles?.bar?.borderColor || defaultStyles?.bar?.borderColor
+  const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
+  const borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
 
   return {
     type: 'bar',
@@ -73,38 +70,40 @@ export function useSetupDefaultStyles(styles?: Styles) {
   React.useEffect(() => {
     async function setupDefaultStyles() {
       const font = {
-        family: styles?.font?.family,
-        size: styles?.font?.size as Scriptable<number | undefined, ScriptableTooltipContext<keyof ChartTypeRegistry>>,
-        style: styles?.font?.style,
-        lineHeight: styles?.font?.lineHeight,
-        color: styles?.font?.color || defaultStyles.font?.color
+        family: styles?.font?.family || defaultStyles.font.family,
+        size: styles?.font?.size || defaultStyles.font.size,
+        style: styles?.font?.style || defaultStyles.font.style,
+        lineHeight: styles?.font?.lineHeight || defaultStyles.font.lineHeight,
+        color: styles?.font?.color || defaultStyles.font.color
       }
 
-      Chart.defaults.color = styles?.font?.color || defaultStyles.font?.color!
+      Chart.defaults.color = styles?.font?.color || defaultStyles.font.color
 
-      Chart.defaults.elements.bar.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar?.borderWidth!
-      Chart.defaults.elements.bar.borderRadius = styles?.bar?.borderRadius || defaultStyles.bar?.borderRadius!
-      Chart.defaults.elements.bar.borderColor = styles?.bar?.borderColor || styles?.bar?.backgroundColor!
+      Chart.defaults.elements.bar.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
+      Chart.defaults.elements.bar.borderRadius = styles?.bar?.borderRadius || defaultStyles.bar.borderRadius
+      Chart.defaults.elements.bar.borderColor = styles?.bar?.borderColor || defaultStyles.bar.backgroundColor
       Chart.defaults.elements.bar.hoverBackgroundColor =
-        styles?.bar?.hoverBackgroundColor || styles?.bar?.backgroundColor!
-      Chart.defaults.elements.bar.hoverBorderColor = styles?.bar?.hoverBorderColor || styles?.bar?.borderColor!
+        styles?.bar?.hoverBackgroundColor || defaultStyles.bar.backgroundColor
+      Chart.defaults.elements.bar.hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.borderColor
 
       Chart.defaults.plugins.tooltip.enabled =
-        styles?.tooltip?.display !== undefined ? styles?.tooltip?.display : defaultStyles.tooltip?.display!
-      Chart.defaults.plugins.tooltip.padding = styles?.tooltip?.padding || defaultStyles.tooltip?.padding!
+        styles?.tooltip?.display !== undefined ? styles?.tooltip?.display : defaultStyles.tooltip.display
+      Chart.defaults.plugins.tooltip.padding = styles?.tooltip?.padding || defaultStyles.tooltip.padding
       Chart.defaults.plugins.tooltip.backgroundColor =
-        styles?.tooltip?.backgroundColor || defaultStyles.tooltip?.backgroundColor!
+        styles?.tooltip?.backgroundColor || defaultStyles.tooltip.backgroundColor
       Chart.defaults.plugins.tooltip.bodyColor =
-        styles?.tooltip?.color || styles?.bar?.backgroundColor || defaultStyles.tooltip?.color!
+        styles?.tooltip?.color || styles?.bar?.backgroundColor || defaultStyles.tooltip.color
       Chart.defaults.plugins.tooltip.titleColor =
-        styles?.tooltip?.color || styles?.bar?.backgroundColor || defaultStyles.tooltip?.color!
+        styles?.tooltip?.color || styles?.bar?.backgroundColor || defaultStyles.tooltip.color
       Chart.defaults.plugins.tooltip.borderColor =
-        styles?.tooltip?.borderColor || styles?.bar?.borderColor || defaultStyles.tooltip?.borderColor!
-      Chart.defaults.plugins.tooltip.borderWidth = styles?.tooltip?.borderWidth || defaultStyles.tooltip?.borderWidth!
-      Chart.defaults.plugins.tooltip.caretSize = styles?.tooltip?.caretSize || defaultStyles.tooltip?.caretSize!
-      Chart.defaults.plugins.tooltip.cornerRadius =
-        styles?.tooltip?.borderRadius || defaultStyles.tooltip?.borderRadius!
-      Chart.defaults.plugins.tooltip.titleFont = font
+        styles?.tooltip?.borderColor || styles?.bar?.borderColor || defaultStyles.tooltip.borderColor
+      Chart.defaults.plugins.tooltip.borderWidth = styles?.tooltip?.borderWidth || defaultStyles.tooltip.borderWidth
+      Chart.defaults.plugins.tooltip.caretSize = styles?.tooltip?.caretSize || defaultStyles.tooltip.caretSize
+      Chart.defaults.plugins.tooltip.cornerRadius = styles?.tooltip?.borderRadius || defaultStyles.tooltip.borderRadius
+      Chart.defaults.plugins.tooltip.titleFont = {
+        family: font.family,
+        lineHeight: font.lineHeight
+      }
       Chart.defaults.plugins.tooltip.titleAlign = styles?.tooltip?.alignContent as Scriptable<
         TextAlign,
         ScriptableTooltipContext<keyof ChartTypeRegistry>
@@ -136,9 +135,9 @@ export function getTableSettings(options: GetTableSettingsOptions) {
   const valuesByRow = rows?.map((row) => parseInt(row[row.length - 1]))
   const maxValue = Math.max(...(valuesByRow || []))
 
-  const isOrdered = styles?.table?.isOrdered || defaultStyles.table?.isOrdered
+  const isOrdered = styles?.table?.isOrdered || defaultStyles.table.isOrdered
 
-  const hasValueBar = styles?.table?.hasValueBar || defaultStyles.table?.hasValueBar
+  const hasValueBar = styles?.table?.hasValueBar || defaultStyles.table.hasValueBar
 
   return { headersWithoutValue, valueHeader, valuesByRow, rowsWithoutValue, maxValue, isOrdered, hasValueBar }
 }
