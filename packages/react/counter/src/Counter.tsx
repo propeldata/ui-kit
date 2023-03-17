@@ -133,8 +133,7 @@ export function Counter(props: CounterProps) {
     }
 
     setup()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchData, isStatic, value])
+  }, [fetchData, isStatic, query?.metric, value])
 
   if (isLoading || loading) return <Loader styles={styles} />
 
