@@ -54,8 +54,7 @@ export const Connected = Template.bind({})
 Connected.args = {
   variant: 'line',
   query: {
-    accessToken:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2NzcyNzE4NTIsImNsaWVudF9pZCI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwiZXhwIjoxNjc3Mjc1NDUyLCJpYXQiOjE2NzcyNzE4NTIsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiJhMzcwZjJmNS0zYWQzLTRjYTQtYWU0My1kMzk4ZWI3OGRmOWQiLCJwcm9wZWwvdGVuYW50IjoiRU5WMDFGWEpKRlJOSDhKMVJCWDdDQ1YyQVBEMU4iLCJzY29wZSI6Im1ldHJpYzpxdWVyeSBwcm9wZWwvbWV0cmljOnF1ZXJ5Iiwic3ViIjoiMzVyMXVwaWpraGdqbTA5czExaHJkNGMycHUiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJ2ZXJzaW9uIjoxfQ.kqfiwbsF54Pi07jcGxJRADcdmorJqxotV0sYP8_iU8U',
+    accessToken: '<ACCESS_TOKEN>',
     metric: 'queryCount',
     timeRange: {
       relative: RelativeTimeRange.PreviousMonth
