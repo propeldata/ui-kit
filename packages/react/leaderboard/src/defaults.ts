@@ -1,8 +1,6 @@
-import { Styles } from './types'
-
 export const defaultChartHeight = 200
 
-export const defaultStyles: Styles = {
+export const defaultStyles = {
   bar: {
     thickness: 20,
     borderWidth: 1,
@@ -49,14 +47,22 @@ export const defaultStyles: Styles = {
       align: 'left',
       font: {
         color: '#64748B',
-        weight: '400'
+        weight: '400',
+        family: 'inherit',
+        size: 'inherit',
+        style: 'inherit',
+        lineHeight: 'inherit'
       }
     },
     columns: {
       align: 'left',
       font: {
         color: '#1E293B',
-        weight: '500'
+        weight: '500',
+        family: 'inherit',
+        size: 'inherit',
+        style: 'inherit',
+        lineHeight: 'inherit'
       }
     },
     valueColumn: {
@@ -64,7 +70,11 @@ export const defaultStyles: Styles = {
       align: 'right',
       font: {
         color: '#475569',
-        weight: '700'
+        weight: '700',
+        family: 'inherit',
+        size: 'inherit',
+        style: 'inherit',
+        lineHeight: 'inherit'
       }
     },
     valueBar: {
