@@ -9,6 +9,7 @@ import {
   PROPEL_GRAPHQL_API_ENDPOINT,
   Propeller
 } from '@propeldata/ui-kit-graphql'
+import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import {
   BarController,
   LineController,
@@ -25,7 +26,7 @@ import {
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultChartHeight, defaultStyles } from './defaults'
-import { generateConfig, useSetupDefaultStyles, getDefaultGranularity, formatLabels } from './utils'
+import { getGranularityBasedUnit, useSetupDefaultStyles, getDefaultGranularity, formatLabels } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
 
@@ -119,16 +120,77 @@ export function TimeSeries(props: TimeSeriesProps) {
     (data?: TimeSeriesData) => {
       if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
 
-      chartRef.current = new ChartJS(
-        canvasRef.current,
-        generateConfig({
-          variant,
-          styles,
-          data,
-          isFormatted,
-          granularity
-        })
-      )
+      const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
+      const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
+      const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
+
+      const labels = data.labels || []
+      const values = data.values || []
+
+      const plugins = [customCanvasBackgroundColor]
+
+      const customPlugins = {
+        customCanvasBackgroundColor: {
+          color: styles?.canvas?.backgroundColor
+        }
+        // TODO (jonatassales): fix this type issue
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any
+
+      const dataset = {
+        labels,
+        datasets: [
+          {
+            data: values,
+            backgroundColor,
+            borderColor
+          }
+        ]
+      }
+
+      const scalesBase = {
+        x: {
+          display: !hideGridLines,
+          grid: {
+            drawOnChartArea: false
+          },
+          beginAtZero: true
+        },
+        y: {
+          display: !hideGridLines,
+          grid: { drawOnChartArea: true }
+        }
+      }
+
+      const customFormatScales = {
+        ...scalesBase
+      }
+
+      const autoFormatScales = {
+        ...scalesBase,
+        x: {
+          ...scalesBase.x,
+          type: 'timeseries',
+          time: {
+            unit: getGranularityBasedUnit(granularity)
+          }
+        }
+      }
+
+      chartRef.current = new ChartJS(canvasRef.current, {
+        type: variant,
+        data: dataset,
+        options: {
+          responsive: !styles?.canvas?.width,
+          maintainAspectRatio: false,
+          plugins: customPlugins,
+          layout: {
+            padding: styles?.canvas?.padding
+          },
+          scales: isFormatted ? customFormatScales : autoFormatScales
+        },
+        plugins
+      })
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
