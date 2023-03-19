@@ -9,13 +9,14 @@ import {
   Sort,
   DimensionInput
 } from '@propeldata/ui-kit-graphql'
+import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import { BarController, BarElement, LinearScale, CategoryScale, Tooltip, Chart as ChartJS, Colors } from 'chart.js'
 import { css } from '@emotion/css'
 
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import type { ChartVariant, LeaderboardData, Styles } from './types'
 import { defaultChartHeight, defaultStyles } from './defaults'
-import { generateConfig, getTableSettings, getValueWithPrefixAndSufix, useSetupDefaultStyles } from './utils'
+import { getTableSettings, getValueWithPrefixAndSufix, useSetupDefaultStyles } from './utils'
 import { Loader } from './Loader'
 import { ValueBar } from './ValueBar'
 
@@ -29,14 +30,19 @@ ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale,
 export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: ChartVariant
+
   /** `styles` attribute can be either `BarStyles` or `TableStyles` */
   styles?: Styles
+
   /** If passed along with `rows` the component will ignore the built-in graphql operations */
   headers?: string[]
+
   /** If passed along with `headers` the component will ignore the built-in graphql operations */
   rows?: string[][]
+
   /** When true, shows a skeleton loader */
   loading?: boolean
+
   query?: {
     /** This should eventually be replaced to customer's app credentials */
     accessToken?: string
@@ -91,7 +97,58 @@ export function Leaderboard(props: LeaderboardProps) {
     (data?: LeaderboardData) => {
       if (!canvasRef.current || !data || variant === 'table') return
 
-      chartRef.current = new ChartJS(canvasRef.current, generateConfig({ styles, data }))
+      const labels = data.rows?.map((row) => row[0])
+      const values = data.rows?.map((row) => parseInt(row[row.length - 1]))
+
+      const hideGridLines = styles?.canvas?.hideGridLines || false
+
+      const customPlugins = {
+        customCanvasBackgroundColor: {
+          color: styles?.canvas?.backgroundColor
+        }
+        // TODO (jonatassales): remove this eslint-disable when the ChartJS types are updated
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any
+
+      const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
+      const borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
+
+      chartRef.current = new ChartJS(canvasRef.current, {
+        type: 'bar',
+        data: {
+          labels: labels || [],
+          datasets: [
+            {
+              data: values || [],
+              backgroundColor,
+              borderColor
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: !styles?.canvas?.width,
+          maintainAspectRatio: false,
+          layout: {
+            padding: styles?.canvas?.padding
+          },
+          plugins: customPlugins,
+          scales: {
+            x: {
+              display: !hideGridLines,
+              grid: {
+                drawOnChartArea: false
+              },
+              beginAtZero: true
+            },
+            y: {
+              display: !hideGridLines,
+              grid: { drawOnChartArea: true }
+            }
+          }
+        },
+        plugins: [customCanvasBackgroundColor]
+      })
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },

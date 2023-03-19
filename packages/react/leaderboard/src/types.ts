@@ -1,5 +1,3 @@
-import { ChartTypeRegistry, PluginOptionsByType } from 'chart.js'
-
 export type ChartVariant = 'bar' | 'table'
 
 export type LeaderboardData = {
@@ -106,21 +104,3 @@ export type Styles = {
     }
   }
 }
-
-/**
- * Workaround to make custom plugin types to work
- */
-type _DeepPartialArray<T> = Array<DeepPartial<T>>
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-type DeepPartial<T> = T extends Function
-  ? T
-  : T extends Array<infer U>
-  ? _DeepPartialArray<U>
-  : T extends object
-  ? _DeepPartialObject<T>
-  : T | undefined
-
-type _DeepPartialObject<T> = { [P in keyof T]?: DeepPartial<T[P]> }
-
-export type CustomPlugins = _DeepPartialObject<PluginOptionsByType<keyof ChartTypeRegistry>>
