@@ -9,6 +9,7 @@ import {
   PROPEL_GRAPHQL_API_ENDPOINT,
   Propeller
 } from '@propeldata/ui-kit-graphql'
+import 'chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.esm.js'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import {
   BarController,
