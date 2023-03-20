@@ -14,7 +14,7 @@ export function Loader(props: LoaderProps) {
   const width = styles?.canvas?.width
   const height = styles?.canvas?.height || defaultChartHeight
 
-  return <div className={getContainerStyles(height, width)} />
+  return <div role="alert" aria-live="assertive" className={getContainerStyles(height, width)} />
 }
 
 const getContainerStyles = (height: number, width?: number) => css`

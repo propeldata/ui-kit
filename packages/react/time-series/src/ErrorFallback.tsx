@@ -19,11 +19,15 @@ export function ErrorFallback(props: ErrorFallbackProps) {
   const height = styles?.canvas?.height || defaultChartHeight
 
   return (
-    <div className={getContainerStyles(height, width)}>
+    <div className={getContainerStyles(height, width)} role="alert">
       <div className={textWrapperStyles}>
         <Icon color={styles?.font?.color} />
-        <p className={textStyles}>{error.title}</p>
-        <p>{error.body}</p>
+        <div aria-live="assertive">
+          <p className={textStyles}>{error.title}</p>
+        </div>
+        <div aria-live="assertive">
+          <p>{error.body}</p>
+        </div>
       </div>
     </div>
   )

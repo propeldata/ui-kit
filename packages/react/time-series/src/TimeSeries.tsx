@@ -25,7 +25,7 @@ import {
 } from 'chart.js'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
-import { defaultChartHeight, defaultStyles } from './defaults'
+import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
 import { getGranularityBasedUnit, useSetupDefaultStyles, getDefaultGranularity, formatLabels } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -64,6 +64,12 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   /** When true, shows a skeleton loader */
   loading?: boolean
 
+  /** Canvas aria-label prop, if not passed we handle it */
+  ariaLabel?: string
+
+  /** Canvas role prop, if not passed we handle it */
+  role?: string
+
   query?: {
     /** This should eventually be replaced to customer's app credentials */
     accessToken?: string
@@ -91,7 +97,19 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 }
 
 export function TimeSeries(props: TimeSeriesProps) {
-  const { variant = 'bar', styles, labels, values, query, error, loading = false, labelFormatter, ...rest } = props
+  const {
+    variant = 'bar',
+    styles,
+    labels,
+    values,
+    query,
+    error,
+    loading = false,
+    labelFormatter,
+    ariaLabel,
+    role,
+    ...rest
+  } = props
 
   const granularity = query?.granularity || getDefaultGranularity(query?.timeRange)
   const [hasError, setHasError] = React.useState(false)
@@ -320,7 +338,8 @@ export function TimeSeries(props: TimeSeriesProps) {
         ref={canvasRef}
         width={styles?.canvas?.width}
         height={styles?.canvas?.height || defaultChartHeight}
-        role="img"
+        role={role || 'img'}
+        aria-label={ariaLabel || defaultAriaLabel}
         {...rest}
       />
     </div>

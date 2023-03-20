@@ -59,3 +59,5 @@ export const serverErrorMessage = {
   title: 'Unable to connect',
   body: 'Sorry we are not able to connect at this time due to a technical error.'
 }
+
+export const defaultAriaLabel = ''

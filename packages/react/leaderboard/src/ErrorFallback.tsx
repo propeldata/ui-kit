@@ -49,10 +49,14 @@ export function ErrorFallback(props: ErrorFallbackProps) {
           className={css`
             font-weight: 500;
           `}
+          role="alert"
+          aria-live="assertive"
         >
           {error.title}
         </p>
-        <p>{error.body}</p>
+        <p role="alert" aria-live="assertive">
+          {error.body}
+        </p>
       </div>
     </div>
   )
