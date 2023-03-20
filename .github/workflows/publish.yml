@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
 
 jobs:
   publish:
@@ -16,13 +16,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           # so that when we push tags, workflows are released, which does not happen with the default token
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.PROPELDATA_CI_TOKEN }}
           # NOTE(mroberts): https://github.com/actions/checkout/issues/217
           fetch-depth: '0'
       - uses: actions/checkout@v3
         with:
           repository: propeldata/actions
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.PROPELDATA_CI_TOKEN }}
           path: actions
       - uses: ./actions/honeycomb-trace-job
         with:
