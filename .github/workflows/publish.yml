@@ -24,9 +24,6 @@ jobs:
           repository: propeldata/actions
           token: ${{ secrets.PROPELDATA_CI_TOKEN }}
           path: actions
-      - uses: ./actions/honeycomb-trace-job
-        with:
-          api_key: ${{ secrets.BUILDEVENTS_APIKEY }}
       - uses: ./actions/propel-slack
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
@@ -47,11 +44,6 @@ jobs:
           slack_token: ${{ secrets.SLACK_TOKEN }}
           slack_signing_secret: ${{ secrets.SLACK_SIGNING_SECRET }}
           message_type: 'build'
-      - uses: ./actions/propel-code-artifact
-        with:
-          aws_access_key_id: ${{ secrets.BUILD_AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.BUILD_AWS_SECRET_ACCESS_KEY }}
-          aws_default_region: ${{ secrets.BUILD_AWS_DEFAULT_REGION }}
       - uses: ./.github/actions/prepare
         with:
           cache_fresh_start: 'true'
