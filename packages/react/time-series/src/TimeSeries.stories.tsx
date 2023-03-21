@@ -57,9 +57,10 @@ Connected.args = {
     accessToken: '<ACCESS_TOKEN>',
     metric: 'queryCount',
     timeRange: {
-      relative: RelativeTimeRange.PreviousMonth
+      relative: RelativeTimeRange.LastNDays,
+      n: 30
     },
-    granularity: TimeSeriesGranularity.Day
+    granularity: TimeSeriesGranularity.Week
   }
 }
 
