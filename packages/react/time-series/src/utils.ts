@@ -9,7 +9,6 @@ import {
   ScriptableAndArray,
   ScriptableContext
 } from 'chart.js'
-import 'chartjs-adapter-date-fns'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
 import { Styles } from './types'
