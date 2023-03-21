@@ -24,6 +24,9 @@ import {
   LinearScale
 } from 'chart.js'
 
+// TODO (jonatassales): uncomment this once this is solved: https://linear.app/propel/issue/PRO-1961/chartjs-adapter-date-fns-exporting-esm-and-ui-kit-using-commonjs
+// import 'chartjs-adapter-date-fns'
+
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
 import { getGranularityBasedUnit, useSetupDefaultStyles, getDefaultGranularity, formatLabels } from './utils'
@@ -188,7 +191,9 @@ export function TimeSeries(props: TimeSeriesProps) {
         ...scalesBase,
         x: {
           ...scalesBase.x,
-          type: 'timeseries',
+          // TODO (jonatassales): uncomment this once this is solved: https://linear.app/propel/issue/PRO-1961/chartjs-adapter-date-fns-exporting-esm-and-ui-kit-using-commonjs
+          // type: 'timeseries',
+          type: 'time',
           time: {
             unit: getGranularityBasedUnit(granularity)
           }

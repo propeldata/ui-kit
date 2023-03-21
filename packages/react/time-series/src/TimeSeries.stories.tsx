@@ -54,12 +54,14 @@ export const Connected = Template.bind({})
 Connected.args = {
   variant: 'line',
   query: {
-    accessToken: '<ACCESS_TOKEN>',
+    accessToken:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2Nzk0Mjk4OTAsImNsaWVudF9pZCI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwiZXhwIjoxNjc5NDMzNDkxLCJpYXQiOjE2Nzk0Mjk4OTEsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI2ZjU1YWRkNi02NzliLTQ2NGItYjhmNS1kMGU0NDJhNGUwNzYiLCJwcm9wZWwvdGVuYW50IjoiRU5WMDFGWEpKRlJOSDhKMVJCWDdDQ1YyQVBEMU4iLCJzY29wZSI6Im1ldHJpYzpxdWVyeSIsInN1YiI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.itbrWgbrTy3IsfriQW3TIsveUbr9cspXjD85weNAL94',
     metric: 'queryCount',
     timeRange: {
-      relative: RelativeTimeRange.PreviousMonth
+      relative: RelativeTimeRange.LastNDays,
+      n: 30
     },
-    granularity: TimeSeriesGranularity.Day
+    granularity: TimeSeriesGranularity.Week
   }
 }
 
