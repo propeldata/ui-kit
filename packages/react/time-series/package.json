@@ -19,7 +19,6 @@
     "@propeldata/ui-kit-graphql": "workspace:^0.2.7",
     "@propeldata/ui-kit-plugins": "workspace:^0.2.1",
     "chart.js": "^4.2.1",
-    "chartjs-adapter-date-fns": "^3.0.0",
     "date-fns": "^2.29.3",
     "graphql": "^16.6.0",
     "graphql-request": "^3.6.1"
