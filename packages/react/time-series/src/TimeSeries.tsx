@@ -139,12 +139,19 @@ export function TimeSeries(props: TimeSeriesProps) {
     (data?: TimeSeriesData) => {
       if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
 
+      const labels = data.labels || []
+      const values = data.values || []
+
+      if (chartRef.current) {
+        chartRef.current.data.labels = labels
+        chartRef.current.data.datasets[0].data = values
+        chartRef.current.update()
+        return
+      }
+
       const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
-
-      const labels = data.labels || []
-      const values = data.values || []
 
       const plugins = [customCanvasBackgroundColor]
 
