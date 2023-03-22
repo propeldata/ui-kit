@@ -23,13 +23,11 @@ import {
   TimeSeriesScale,
   LinearScale
 } from 'chart.js'
-
-// TODO (jonatassales): uncomment this once this is solved: https://linear.app/propel/issue/PRO-1961/chartjs-adapter-date-fns-exporting-esm-and-ui-kit-using-commonjs
-// import 'chartjs-adapter-date-fns'
+import 'chartjs-adapter-date-fns'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
-import { useSetupDefaultStyles, getDefaultGranularity, formatLabels } from './utils'
+import { useSetupDefaultStyles, getDefaultGranularity, formatLabels, getGranularityBasedUnit } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
 
@@ -190,13 +188,11 @@ export function TimeSeries(props: TimeSeriesProps) {
       const autoFormatScales = {
         ...scalesBase,
         x: {
-          ...scalesBase.x
-          // TODO (jonatassales): uncomment this once this is solved: https://linear.app/propel/issue/PRO-1961/chartjs-adapter-date-fns-exporting-esm-and-ui-kit-using-commonjs
-          // type: 'timeseries',
-          // type: 'time',
-          // time: {
-          //   unit: getGranularityBasedUnit(granularity)
-          // }
+          ...scalesBase.x,
+          type: 'timeseries',
+          time: {
+            unit: getGranularityBasedUnit(granularity)
+          }
         }
       }
 
@@ -217,7 +213,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [isFormatted, styles, variant]
+    [granularity, isFormatted, styles, variant]
   )
 
   const destroyChart = () => {
