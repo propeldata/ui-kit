@@ -206,14 +206,14 @@ export function TimeSeries(props: TimeSeriesProps) {
           layout: {
             padding: styles?.canvas?.padding
           },
-          scales: isFormatted ? customFormatScales : autoFormatScales
+          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales
         },
         plugins
       })
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, isFormatted, styles, variant]
+    [granularity, isFormatted, isStatic, styles, variant]
   )
 
   const destroyChart = () => {
