@@ -125,6 +125,7 @@ export function useSetupDefaultStyles(styles?: Styles) {
       Chart.defaults.elements.point.hoverBackgroundColor =
         styles?.point?.hoverBackgroundColor || defaultStyles.point.hoverBackgroundColor
 
+      Chart.defaults.elements.bar.backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
       Chart.defaults.elements.bar.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
       Chart.defaults.elements.bar.borderRadius = styles?.bar?.borderRadius || defaultStyles.bar.borderRadius
       Chart.defaults.elements.bar.borderColor = styles?.bar?.borderColor || defaultStyles.bar.borderColor

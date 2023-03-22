@@ -1,6 +1,7 @@
 # project
 node_modules
 packages/**/*/generated
+packages/nextjs/**
 
 # parcel
 .parcel-cache
