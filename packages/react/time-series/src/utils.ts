@@ -7,18 +7,20 @@ import {
   ScriptableTooltipContext,
   PointStyle,
   ScriptableAndArray,
-  ScriptableContext
+  ScriptableContext,
+  ScaleOptions,
+  TimeUnit
 } from 'chart.js'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
-import { Styles } from './types'
+import { ChartVariant, Styles } from './types'
 import { defaultStyles } from './defaults'
 
 export function cssvar(name: string) {
   return getComputedStyle(document.body).getPropertyValue(name)
 }
 
-export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): string | false {
+export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
     [TimeSeriesGranularity.Year]: 'year',
     [TimeSeriesGranularity.Month]: 'month',
@@ -26,7 +28,7 @@ export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularit
     [TimeSeriesGranularity.Day]: 'day',
     [TimeSeriesGranularity.Hour]: 'hour',
     [TimeSeriesGranularity.Minute]: 'minute'
-  } as Record<TimeSeriesGranularity, string>
+  } as Record<TimeSeriesGranularity, TimeUnit>
 
   return granularity ? unitByGranularity[granularity] || false : false
 }
@@ -162,4 +164,53 @@ export function useSetupDefaultStyles(styles?: Styles) {
 
     setupDefaultStyles()
   }, [styles])
+}
+
+interface UpdateChartStylesOptions {
+  chart: Chart
+  styles?: Styles
+  variant: ChartVariant
+}
+
+export function updateChartStyles(options: UpdateChartStylesOptions) {
+  const { chart, styles, variant } = options
+
+  const dataset = chart.data.datasets[0]
+
+  if (variant === 'bar') {
+    dataset.backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
+    dataset.borderColor = styles?.bar?.borderColor || defaultStyles.bar.borderColor
+    dataset.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
+    dataset.hoverBackgroundColor = styles?.bar?.hoverBackgroundColor || defaultStyles.bar.hoverBackgroundColor
+    dataset.hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
+  } else {
+    dataset.backgroundColor = styles?.line?.backgroundColor || defaultStyles.line.backgroundColor
+    dataset.borderColor = styles?.line?.borderColor || defaultStyles.line.borderColor
+    dataset.borderWidth = styles?.line?.borderWidth || defaultStyles.line.borderWidth
+    dataset.hoverBackgroundColor = styles?.line?.hoverBackgroundColor || defaultStyles.line.hoverBackgroundColor
+    dataset.hoverBorderColor = styles?.line?.hoverBorderColor || defaultStyles.line.hoverBorderColor
+  }
+
+  if (chart.options.layout?.padding) {
+    chart.options.layout.padding = styles?.canvas?.padding || defaultStyles.canvas.padding
+  }
+}
+
+interface UpdateChartConfig {
+  chart: Chart
+  values: number[]
+  labels: string[]
+  scales: Record<string, Partial<ScaleOptions>>
+  variant: ChartVariant
+}
+
+export function updateChartConfig(options: UpdateChartConfig) {
+  const { chart, labels, values, scales, variant } = options
+
+  const dataset = chart.data.datasets[0]
+
+  chart.data.labels = labels
+  dataset.data = values
+  chart.options.scales = scales
+  dataset.type = variant
 }

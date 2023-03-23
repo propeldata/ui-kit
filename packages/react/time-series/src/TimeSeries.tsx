@@ -27,7 +27,14 @@ import 'chartjs-adapter-date-fns'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
-import { useSetupDefaultStyles, getDefaultGranularity, formatLabels, getGranularityBasedUnit } from './utils'
+import {
+  useSetupDefaultStyles,
+  getDefaultGranularity,
+  formatLabels,
+  getGranularityBasedUnit,
+  updateChartStyles,
+  updateChartConfig
+} from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
 
@@ -197,26 +204,15 @@ export function TimeSeries(props: TimeSeriesProps) {
       }
 
       if (chartRef.current) {
-        const datasetRef = chartRef.current.data.datasets[0]
+        updateChartConfig({
+          chart: chartRef.current,
+          labels,
+          values,
+          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales,
+          variant
+        })
 
-        chartRef.current.data.labels = labels
-        datasetRef.data = values
-        if (chartRef.current.options.layout?.padding) {
-          chartRef.current.options.layout.padding = styles?.canvas?.padding
-        }
-        chartRef.current.options.scales = isFormatted || isStatic ? customFormatScales : autoFormatScales
-
-        datasetRef.type = variant
-        datasetRef.backgroundColor =
-          styles?.bar?.backgroundColor || styles?.line?.backgroundColor || defaultStyles.bar.backgroundColor
-        datasetRef.borderColor = styles?.bar?.borderColor || styles?.line?.borderColor || defaultStyles.bar.borderColor
-        datasetRef.borderWidth = styles?.bar?.borderWidth || styles?.line?.borderWidth || defaultStyles.bar.borderWidth
-        datasetRef.hoverBackgroundColor =
-          styles?.bar?.hoverBackgroundColor ||
-          styles?.line?.hoverBackgroundColor ||
-          defaultStyles.bar.hoverBackgroundColor
-        datasetRef.hoverBorderColor =
-          styles?.bar?.hoverBorderColor || styles?.line?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
+        updateChartStyles({ chart: chartRef.current, styles, variant })
 
         chartRef.current.update()
         return
