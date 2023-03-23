@@ -226,7 +226,7 @@ export function TimeSeries(props: TimeSeriesProps) {
           maintainAspectRatio: false,
           plugins: customPlugins,
           layout: {
-            padding: styles?.canvas?.padding
+            padding: styles?.canvas?.padding || defaultStyles.canvas.padding
           },
           scales: isFormatted || isStatic ? customFormatScales : autoFormatScales
         },

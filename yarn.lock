@@ -3074,6 +3074,104 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/env@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/env@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fenv%2F-%2Fenv-13.2.4.tgz"
+  checksum: 4123e08a79e66d6144006972027a9ceb8f3fdd782c4a869df1eb3b91b59ad9f4a44082d3f8e421f4df5214c6bc7190b52b94881369452d65eb4580485f33b9e6
+  languageName: node
+  linkType: hard
+
+"@next/swc-android-arm-eabi@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-android-arm-eabi@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-android-arm-eabi%2F-%2Fswc-android-arm-eabi-13.2.4.tgz"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@next/swc-android-arm64@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-android-arm64@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-android-arm64%2F-%2Fswc-android-arm64-13.2.4.tgz"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@next/swc-darwin-arm64@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-darwin-arm64@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-darwin-arm64%2F-%2Fswc-darwin-arm64-13.2.4.tgz"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@next/swc-darwin-x64@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-darwin-x64@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-darwin-x64%2F-%2Fswc-darwin-x64-13.2.4.tgz"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/swc-freebsd-x64@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-freebsd-x64@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-freebsd-x64%2F-%2Fswc-freebsd-x64-13.2.4.tgz"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-arm-gnueabihf@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-linux-arm-gnueabihf@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-linux-arm-gnueabihf%2F-%2Fswc-linux-arm-gnueabihf-13.2.4.tgz"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-arm64-gnu@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-linux-arm64-gnu@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-linux-arm64-gnu%2F-%2Fswc-linux-arm64-gnu-13.2.4.tgz"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-arm64-musl@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-linux-arm64-musl@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-linux-arm64-musl%2F-%2Fswc-linux-arm64-musl-13.2.4.tgz"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-x64-gnu@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-linux-x64-gnu@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-linux-x64-gnu%2F-%2Fswc-linux-x64-gnu-13.2.4.tgz"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@next/swc-linux-x64-musl@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-linux-x64-musl@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-linux-x64-musl%2F-%2Fswc-linux-x64-musl-13.2.4.tgz"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-arm64-msvc@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-win32-arm64-msvc@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-win32-arm64-msvc%2F-%2Fswc-win32-arm64-msvc-13.2.4.tgz"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-ia32-msvc@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-win32-ia32-msvc@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-win32-ia32-msvc%2F-%2Fswc-win32-ia32-msvc-13.2.4.tgz"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@next/swc-win32-x64-msvc@npm:13.2.4":
+  version: 13.2.4
+  resolution: "@next/swc-win32-x64-msvc@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40next%2Fswc-win32-x64-msvc%2F-%2Fswc-win32-x64-msvc-13.2.4.tgz"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40nodelib%2Ffs.scandir%2F-%2Ffs.scandir-2.1.5.tgz"
@@ -3972,7 +4070,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/react-time-series@workspace:packages/react/time-series":
+"@propeldata/react-time-series@workspace:^0.30.3, @propeldata/react-time-series@workspace:packages/react/time-series":
   version: 0.0.0-use.local
   resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
   dependencies:
@@ -5386,7 +5484,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/helpers@npm:^0.4.12":
+"@swc/helpers@npm:0.4.14, @swc/helpers@npm:^0.4.12":
   version: 0.4.14
   resolution: "@swc/helpers@npm:0.4.14::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40swc%2Fhelpers%2F-%2Fhelpers-0.4.14.tgz"
   dependencies:
@@ -5718,7 +5816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:18.15.5":
   version: 18.15.5
   resolution: "@types/node@npm:18.15.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-18.15.5.tgz"
   checksum: 5fbf3453bd5ce1402bb2964e55d928fc8a8a7de5451b1b0fe66587fecb8a3eb86854ca9cefa5076a5971e2cff00e1773ceeb5d872a54f6c6ddfbbc1064b4e91a
@@ -5788,7 +5886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:18.0.11, @types/react-dom@npm:^18.0.0":
   version: 18.0.11
   resolution: "@types/react-dom@npm:18.0.11::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.0.11.tgz"
   dependencies:
@@ -5797,7 +5895,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.5":
+"@types/react@npm:*, @types/react@npm:18.0.28, @types/react@npm:^18.0.5":
   version: 18.0.28
   resolution: "@types/react@npm:18.0.28::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.0.28.tgz"
   dependencies:
@@ -8445,7 +8543,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001449":
+"caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001406, caniuse-lite@npm:^1.0.30001449":
   version: 1.0.30001469
   resolution: "caniuse-lite@npm:1.0.30001469::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcaniuse-lite%2F-%2Fcaniuse-lite-1.0.30001469.tgz"
   checksum: 8e496509d7e9ff189c72205675b5db0c5f1b6a09917027441e835efae0848a468a8c4e7d2b409ffc202438fcd23ae53e017f976a03c22c04d12d3c0e1e33e5de
@@ -8831,6 +8929,13 @@ __metadata:
   version: 3.0.0
   resolution: "cli-width@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcli-width%2F-%2Fcli-width-3.0.0.tgz"
   checksum: 4c94af3769367a70e11ed69aa6095f1c600c0ff510f3921ab4045af961820d57c0233acfa8b6396037391f31b4c397e1f614d234294f979ff61430a6c166c3f6
+  languageName: node
+  linkType: hard
+
+"client-only@npm:0.0.1":
+  version: 0.0.1
+  resolution: "client-only@npm:0.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclient-only%2F-%2Fclient-only-0.0.1.tgz"
+  checksum: 0c16bf660dadb90610553c1d8946a7fdfb81d624adea073b8440b7d795d5b5b08beb3c950c6a2cf16279365a3265158a236876d92bce16423c485c322d7dfaf8
   languageName: node
   linkType: hard
 
@@ -10826,6 +10931,21 @@ __metadata:
   checksum: ad4e1577f1a6b721c7800dcc7c733fe01f6c310732bb5bf2240245c2a5b45a38518b91d8be2c610611623160b9d1c0e91f1ce96d639f8b53e8894625cf20fa45
   languageName: node
   linkType: hard
+
+"example@workspace:packages/nextjs/example":
+  version: 0.0.0-use.local
+  resolution: "example@workspace:packages/nextjs/example"
+  dependencies:
+    "@propeldata/react-time-series": "workspace:^0.30.3"
+    "@types/node": 18.15.5
+    "@types/react": 18.0.28
+    "@types/react-dom": 18.0.11
+    next: 13.2.4
+    react: 18.2.0
+    react-dom: 18.2.0
+    typescript: 5.0.2
+  languageName: unknown
+  linkType: soft
 
 "exec-sh@npm:^0.3.2":
   version: 0.3.6
@@ -15338,6 +15458,77 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next@npm:13.2.4":
+  version: 13.2.4
+  resolution: "next@npm:13.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnext%2F-%2Fnext-13.2.4.tgz"
+  dependencies:
+    "@next/env": 13.2.4
+    "@next/swc-android-arm-eabi": 13.2.4
+    "@next/swc-android-arm64": 13.2.4
+    "@next/swc-darwin-arm64": 13.2.4
+    "@next/swc-darwin-x64": 13.2.4
+    "@next/swc-freebsd-x64": 13.2.4
+    "@next/swc-linux-arm-gnueabihf": 13.2.4
+    "@next/swc-linux-arm64-gnu": 13.2.4
+    "@next/swc-linux-arm64-musl": 13.2.4
+    "@next/swc-linux-x64-gnu": 13.2.4
+    "@next/swc-linux-x64-musl": 13.2.4
+    "@next/swc-win32-arm64-msvc": 13.2.4
+    "@next/swc-win32-ia32-msvc": 13.2.4
+    "@next/swc-win32-x64-msvc": 13.2.4
+    "@swc/helpers": 0.4.14
+    caniuse-lite: ^1.0.30001406
+    postcss: 8.4.14
+    styled-jsx: 5.1.1
+  peerDependencies:
+    "@opentelemetry/api": ^1.4.0
+    fibers: ">= 3.1.0"
+    node-sass: ^6.0.0 || ^7.0.0
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    sass: ^1.3.0
+  dependenciesMeta:
+    "@next/swc-android-arm-eabi":
+      optional: true
+    "@next/swc-android-arm64":
+      optional: true
+    "@next/swc-darwin-arm64":
+      optional: true
+    "@next/swc-darwin-x64":
+      optional: true
+    "@next/swc-freebsd-x64":
+      optional: true
+    "@next/swc-linux-arm-gnueabihf":
+      optional: true
+    "@next/swc-linux-arm64-gnu":
+      optional: true
+    "@next/swc-linux-arm64-musl":
+      optional: true
+    "@next/swc-linux-x64-gnu":
+      optional: true
+    "@next/swc-linux-x64-musl":
+      optional: true
+    "@next/swc-win32-arm64-msvc":
+      optional: true
+    "@next/swc-win32-ia32-msvc":
+      optional: true
+    "@next/swc-win32-x64-msvc":
+      optional: true
+  peerDependenciesMeta:
+    "@opentelemetry/api":
+      optional: true
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+  bin:
+    next: dist/bin/next
+  checksum: 8531dee41b60181b582f5ee80858907b102f083ef8808ff9352d589dd39e6b3a96f7a11b3776a03eef3a28430cff768336fa2e3ff2c6f8fcd699fbc891749051
+  languageName: node
+  linkType: hard
+
 "nice-try@npm:^1.0.4":
   version: 1.0.5
   resolution: "nice-try@npm:1.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnice-try%2F-%2Fnice-try-1.0.5.tgz"
@@ -16666,6 +16857,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:8.4.14":
+  version: 8.4.14
+  resolution: "postcss@npm:8.4.14::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fpostcss%2F-%2Fpostcss-8.4.14.tgz"
+  dependencies:
+    nanoid: ^3.3.4
+    picocolors: ^1.0.0
+    source-map-js: ^1.0.2
+  checksum: fe58766ff32e4becf65a7d57678995cfd239df6deed2fe0557f038b47c94e4132e7e5f68b5aa820c13adfec32e523b693efaeb65798efb995ce49ccd83953816
+  languageName: node
+  linkType: hard
+
 "postcss@npm:^7.0.14, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.36, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
   version: 7.0.39
   resolution: "postcss@npm:7.0.39::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fpostcss%2F-%2Fpostcss-7.0.39.tgz"
@@ -17183,7 +17385,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.0.0":
+"react-dom@npm:18.2.0, react-dom@npm:^18.0.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"
   dependencies:
@@ -17282,7 +17484,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.0.0":
+"react@npm:18.2.0, react@npm:^18.0.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"
   dependencies:
@@ -18953,6 +19155,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"styled-jsx@npm:5.1.1":
+  version: 5.1.1
+  resolution: "styled-jsx@npm:5.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstyled-jsx%2F-%2Fstyled-jsx-5.1.1.tgz"
+  dependencies:
+    client-only: 0.0.1
+  peerDependencies:
+    react: ">= 16.8.0 || 17.x.x || ^18.0.0-0"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    babel-plugin-macros:
+      optional: true
+  checksum: 523a33b38603492547e861b98e29c873939b04e15fbe5ef16132c6f1e15958126647983c7d4675325038b428a5e91183d996e90141b18bdd1bbadf6e2c45b2fa
+  languageName: node
+  linkType: hard
+
 "stylis@npm:4.1.3":
   version: 4.1.3
   resolution: "stylis@npm:4.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstylis%2F-%2Fstylis-4.1.3.tgz"
@@ -19684,7 +19902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4 || ^5.0.0":
+"typescript@npm:5.0.2, typescript@npm:^4.6.4 || ^5.0.0":
   version: 5.0.2
   resolution: "typescript@npm:5.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftypescript%2F-%2Ftypescript-5.0.2.tgz"
   bin:
@@ -19704,23 +19922,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>":
+"typescript@patch:typescript@5.0.2#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4 || ^5.0.0#~builtin<compat/typescript>":
   version: 5.0.2
-  resolution: "typescript@patch:typescript@npm%3A5.0.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.0.2.tgz#~builtin<compat/typescript>::version=5.0.2&hash=85af82"
+  resolution: "typescript@patch:typescript@npm%3A5.0.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.0.2.tgz#~builtin<compat/typescript>::version=5.0.2&hash=d73830"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: b63cb742fbb9aeb3085e002ad8f10d5fd963606aa4d6b3b65b4e76c396ff09739f03b5dbae08e1698c3bce9d5619d3f67aeb7ee470ed4016bd345b3cfe37b54a
+  checksum: bdbf3d0aac0d6cf010fbe0536753dc19f278eb4aba88140dcd25487dfe1c56ca8b33abc0dcd42078790a939b08ebc4046f3e9bb961d77d3d2c3cfa9829da4d53
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=d73830"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
+  checksum: 2eee5c37cad4390385db5db5a8e81470e42e8f1401b0358d7390095d6f681b410f2c4a0c496c6ff9ebd775423c7785cdace7bcdad76c7bee283df3d9718c0f20
   languageName: node
   linkType: hard
 
