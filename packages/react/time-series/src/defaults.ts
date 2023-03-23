@@ -1,7 +1,5 @@
 export const defaultChartHeight = 200
 
-export const defaultTimestampFormat = 'MM/dd'
-
 export const defaultStyles = {
   bar: {
     thickness: 20,
@@ -17,7 +15,9 @@ export const defaultStyles = {
     borderColor: '#000',
     borderWidth: 2,
     stepped: false,
-    backgroundColor: '#CBD5E1'
+    backgroundColor: '#CBD5E1',
+    hoverBorderColor: '#64748B',
+    hoverBackgroundColor: '#64748B'
   },
   canvas: {
     backgroundColor: '#ffffff',

@@ -27,7 +27,14 @@ import 'chartjs-adapter-date-fns'
 
 import { Styles, TimeSeriesData, ChartVariant } from './types'
 import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
-import { useSetupDefaultStyles, getDefaultGranularity, formatLabels, getGranularityBasedUnit } from './utils'
+import {
+  useSetupDefaultStyles,
+  getDefaultGranularity,
+  formatLabels,
+  getGranularityBasedUnit,
+  updateChartStyles,
+  updateChartConfig
+} from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
 
@@ -142,13 +149,6 @@ export function TimeSeries(props: TimeSeriesProps) {
       const labels = data.labels || []
       const values = data.values || []
 
-      if (chartRef.current) {
-        chartRef.current.data.labels = labels
-        chartRef.current.data.datasets[0].data = values
-        chartRef.current.update()
-        return
-      }
-
       const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
@@ -201,6 +201,21 @@ export function TimeSeries(props: TimeSeriesProps) {
             unit: getGranularityBasedUnit(granularity)
           }
         }
+      }
+
+      if (chartRef.current) {
+        updateChartConfig({
+          chart: chartRef.current,
+          labels,
+          values,
+          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales,
+          variant
+        })
+
+        updateChartStyles({ chart: chartRef.current, styles, variant })
+
+        chartRef.current.update()
+        return
       }
 
       chartRef.current = new ChartJS(canvasRef.current, {
@@ -307,13 +322,8 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (isStatic) {
-      destroyChart()
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
       renderChart({ labels: formattedLabels, values })
-    }
-
-    return () => {
-      destroyChart()
     }
   }, [isStatic, loading, styles, variant, labels, values, labelFormatter, renderChart])
 
@@ -321,15 +331,16 @@ export function TimeSeries(props: TimeSeriesProps) {
     if (serverData && !isStatic) {
       const { labels, values } = serverData
 
-      destroyChart()
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
       renderChart({ labels: formattedLabels, values })
     }
+  }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
 
+  React.useEffect(() => {
     return () => {
       destroyChart()
     }
-  }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
+  }, [])
 
   if (isLoading || loading) {
     return <Loader styles={styles} />
