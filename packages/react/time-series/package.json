@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/react-time-series",
-  "version": "0.30.6",
+  "version": "0.30.7",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
