@@ -144,7 +144,8 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
-      if (!canvasRef.current || !data || (variant !== 'bar' && variant !== 'line')) return
+      if (!canvasRef.current || !data?.labels || !data.values || hasError || (variant !== 'bar' && variant !== 'line'))
+        return
 
       const labels = data.labels || []
       const values = data.values || []
@@ -235,7 +236,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, isFormatted, isStatic, styles, variant]
+    [granularity, hasError, isFormatted, isStatic, styles, variant]
   )
 
   const destroyChart = () => {
@@ -296,6 +297,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         setHasError(true)
         return
       }
+      setHasError(false)
     }
 
     if (!loading) {
@@ -343,10 +345,12 @@ export function TimeSeries(props: TimeSeriesProps) {
   }, [])
 
   if (isLoading || loading) {
+    destroyChart()
     return <Loader styles={styles} />
   }
 
   if (hasError) {
+    destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 
