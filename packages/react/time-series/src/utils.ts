@@ -38,14 +38,14 @@ interface FormatLabelsOptions {
   formatter?: (labels: string[]) => string[]
 }
 
-export function formatLabels(options: FormatLabelsOptions): string[] {
-  const { labels = [], formatter } = options
+export function formatLabels(options: FormatLabelsOptions): string[] | undefined {
+  const { labels, formatter } = options
 
   if (formatter && typeof formatter !== 'function') {
     throw new Error('`labelFormatter` prop must be a formatter function')
   }
 
-  return formatter ? formatter(labels) : labels
+  return formatter ? formatter(labels || []) : labels
 }
 
 export function getDefaultGranularity(timeRange?: TimeRangeInput) {
