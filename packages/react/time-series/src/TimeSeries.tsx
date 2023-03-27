@@ -25,7 +25,7 @@ import {
 } from 'chart.js'
 import 'chartjs-adapter-date-fns'
 
-import { Styles, TimeSeriesData, ChartVariant } from './types'
+import { Styles, TimeSeriesData, ChartVariant, ChartPlugins } from './types'
 import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
 import {
   useSetupDefaultStyles,
@@ -156,13 +156,11 @@ export function TimeSeries(props: TimeSeriesProps) {
 
       const plugins = [customCanvasBackgroundColor]
 
-      const customPlugins = {
+      const customPlugins: ChartPlugins = {
         customCanvasBackgroundColor: {
           color: styles?.canvas?.backgroundColor
         }
-        // TODO (jonatassales): fix this type issue
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any
+      }
 
       const dataset = {
         labels,
@@ -210,7 +208,8 @@ export function TimeSeries(props: TimeSeriesProps) {
           labels,
           values,
           scales: isFormatted || isStatic ? customFormatScales : autoFormatScales,
-          variant
+          variant,
+          customPlugins
         })
 
         updateChartStyles({ chart: chartRef.current, styles, variant })
