@@ -1,7 +1,7 @@
 import React from 'react'
 import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
 
-import { Styles } from './types'
+import { ChartPlugins, Styles } from './types'
 import { defaultStyles } from './defaults'
 
 interface GetTableSettingsOptions {
@@ -108,4 +108,42 @@ export function useSetupDefaultStyles(styles?: Styles) {
 
     setupDefaultStyles()
   }, [styles])
+}
+
+interface UpdateChartConfigOptions {
+  chart: Chart
+  labels: string[]
+  values: number[]
+  customPlugins: ChartPlugins
+}
+
+export function updateChartConfig(options: UpdateChartConfigOptions) {
+  const { chart, labels, values, customPlugins } = options
+
+  const dataset = chart.data.datasets[0]
+
+  chart.data.labels = labels
+  dataset.data = values
+
+  chart.options.plugins = customPlugins
+}
+
+interface UpdateChartStylesConfig {
+  chart: Chart
+  styles?: Styles
+}
+
+export function updateChartStyles(options: UpdateChartStylesConfig) {
+  const { chart, styles } = options
+
+  const dataset = chart.data.datasets[0]
+
+  dataset.backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
+  dataset.borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
+  dataset.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
+  dataset.hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
+
+  if (chart.options.layout) {
+    chart.options.layout.padding = styles?.canvas?.padding || defaultStyles.canvas.padding
+  }
 }

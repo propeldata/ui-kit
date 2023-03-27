@@ -14,9 +14,15 @@ import { BarController, BarElement, LinearScale, CategoryScale, Tooltip, Chart a
 import { css } from '@emotion/css'
 
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
-import type { ChartVariant, LeaderboardData, Styles } from './types'
+import type { ChartPlugins, ChartVariant, LeaderboardData, Styles } from './types'
 import { defaultChartHeight, defaultStyles } from './defaults'
-import { getTableSettings, getValueWithPrefixAndSufix, useSetupDefaultStyles } from './utils'
+import {
+  getTableSettings,
+  getValueWithPrefixAndSufix,
+  updateChartConfig,
+  updateChartStyles,
+  useSetupDefaultStyles
+} from './utils'
 import { Loader } from './Loader'
 import { ValueBar } from './ValueBar'
 
@@ -97,31 +103,47 @@ export function Leaderboard(props: LeaderboardProps) {
     (data?: LeaderboardData) => {
       if (!canvasRef.current || !data || variant === 'table') return
 
-      const labels = data.rows?.map((row) => row[0])
-      const values = data.rows?.map((row) => parseInt(row[row.length - 1]))
+      const labels = data.rows?.map((row) => row[0]) || []
+      const values = data.rows?.map((row) => parseInt(row[row.length - 1])) || []
 
       const hideGridLines = styles?.canvas?.hideGridLines || false
 
-      const customPlugins = {
+      const customPlugins: ChartPlugins = {
         customCanvasBackgroundColor: {
           color: styles?.canvas?.backgroundColor
         }
-        // TODO (jonatassales): remove this eslint-disable when the ChartJS types are updated
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any
+      }
 
       const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
       const borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
+      const borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
+      const hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
+
+      if (chartRef.current) {
+        updateChartConfig({
+          chart: chartRef.current,
+          labels: labels,
+          values: values,
+          customPlugins
+        })
+
+        updateChartStyles({ chart: chartRef.current, styles })
+
+        chartRef.current.update()
+        return
+      }
 
       chartRef.current = new ChartJS(canvasRef.current, {
         type: 'bar',
         data: {
-          labels: labels || [],
+          labels: labels,
           datasets: [
             {
-              data: values || [],
+              data: values,
               backgroundColor,
-              borderColor
+              borderColor,
+              borderWidth,
+              hoverBorderColor
             }
           ]
         },
@@ -130,7 +152,7 @@ export function Leaderboard(props: LeaderboardProps) {
           responsive: !styles?.canvas?.width,
           maintainAspectRatio: false,
           layout: {
-            padding: styles?.canvas?.padding
+            padding: styles?.canvas?.padding || defaultStyles.canvas.padding
           },
           plugins: customPlugins,
           scales: {
@@ -263,23 +285,13 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     if (isStatic) {
-      destroyChart()
       renderChart({ headers, rows })
-    }
-
-    return () => {
-      destroyChart()
     }
   }, [isStatic, loading, styles, variant, headers, rows, renderChart])
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
-      destroyChart()
       renderChart(serverData)
-    }
-
-    return () => {
-      destroyChart()
     }
   }, [serverData, styles, variant, isStatic, renderChart])
 
@@ -295,11 +307,19 @@ export function Leaderboard(props: LeaderboardProps) {
     }
   }, [variant])
 
+  React.useEffect(() => {
+    return () => {
+      destroyChart()
+    }
+  }, [])
+
   if (isLoading || loading) {
+    destroyChart()
     return <Loader styles={styles} />
   }
 
   if (hasError) {
+    destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 

@@ -14,6 +14,12 @@ export type ChartPaddingOptions =
       left?: number
     }
 
+export type ChartPlugins = {
+  [pluginName: string]: {
+    [optionName: string]: string | undefined
+  }
+}
+
 export type Styles = {
   font?: {
     color?: string

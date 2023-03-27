@@ -13,7 +13,7 @@ import {
 } from 'chart.js'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
-import { ChartVariant, Styles } from './types'
+import { ChartPlugins, ChartVariant, Styles } from './types'
 import { defaultStyles } from './defaults'
 
 export function cssvar(name: string) {
@@ -191,7 +191,7 @@ export function updateChartStyles(options: UpdateChartStylesOptions) {
     dataset.hoverBorderColor = styles?.line?.hoverBorderColor || defaultStyles.line.hoverBorderColor
   }
 
-  if (chart.options.layout?.padding) {
+  if (chart.options.layout) {
     chart.options.layout.padding = styles?.canvas?.padding || defaultStyles.canvas.padding
   }
 }
@@ -202,10 +202,11 @@ interface UpdateChartConfig {
   labels: string[]
   scales: Record<string, Partial<ScaleOptions>>
   variant: ChartVariant
+  customPlugins: ChartPlugins
 }
 
 export function updateChartConfig(options: UpdateChartConfig) {
-  const { chart, labels, values, scales, variant } = options
+  const { chart, labels, values, scales, variant, customPlugins } = options
 
   const dataset = chart.data.datasets[0]
 
@@ -213,4 +214,6 @@ export function updateChartConfig(options: UpdateChartConfig) {
   dataset.data = values
   chart.options.scales = scales
   dataset.type = variant
+
+  chart.options.plugins = customPlugins
 }
