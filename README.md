@@ -1,5 +1,6 @@
-<div align="center"><strong>Propel UI Kit</strong></div>
-<div align="center">Building Better Data Visualizations with Ease.</div>
+<div align="center"><h1>Propel UI Kit</h1>
+<h2>Building Better Data Visualizations with Ease.</h2>
+</div>
 <br />
 
 ## Introduction
