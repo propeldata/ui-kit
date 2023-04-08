@@ -6,7 +6,7 @@
 </div>
 <br />
 
-The Propel UI Kit is an open-source library of React components to quickly build great-looking dashboards and data visualizations.
+The Propel UI Kit is an open-source library of React components to quickly build awesome-looking dashboards and data visualizations.
 
 ## Why the Propel UI Kit?
 
