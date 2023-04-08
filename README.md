@@ -1,39 +1,78 @@
-<div align="center"><h1>Propel UI Kit</h1>
-<h2>Building Better Data Visualizations with Ease.</h2>
+<br />
+<div align="center">
+<h1>Propel UI Kit</h1>
+    <h2>React components for dashboards and data visualizations</h2>
+  <img src="public/images/UI-kit-header.png"/>
 </div>
 <br />
 
-## Introduction
+The Propel UI Kit is an open-source library of React components to quickly build great-looking dashboards and data visualizations.
 
-Propel UI Kit is a set of customer-facing components that are powered by Propel APIs. The aim of this project is to simplify the process of creating data visualizations for our customers, even for those who may not have much front-end development experience. This is particularly useful for teams that don't want to allocate resources to building user interfaces that will connect with Propel.
+## Why the Propel UI Kit?
 
-Each component in the Propel UI Kit is connected to one metric and can automatically fetch that metric's data, making it easy for users to create visualizations without having to write custom code. Additionally, the components come with a variety of props that can be used to configure queries based on our [Propel GraphQL API](https://propeldata.com/docs/api/about-the-graphql-api). This enables users to customize the components to suit their specific needs.
+Building data visualization UIs is never easy. Implementing designs from scratch is time-consuming, fetching data requires a lot of backend logic, and there are always a lot of edge cases to deal with, like the intricacies of the different time ranges, or handling the loading and error states.
 
-Another advantage of the Propel UI Kit is that users can apply their own styles and custom error messages, giving them complete control over the look and feel of their data visualizations.
+Charting libraries like ChartJS, Echarts, Highcharts, or D3 are great but still need a lot of work to build them into elegant and cohesive product experiences. On the flip side, embedding third-party chart widgets via iFrames into your customer-facing product results in an inflexible, slow, and inelegant product experience.
 
-## Getting Started
+That's why we built the Propel UI Kit. Its component-based approach allows you to move fast, look great, and focus your efforts on building components that are unique to your product.
 
-To leverage the full power of Propel, you'll need a Propel account and a metric to work with. If you don't have an account yet, you can follow the instructions in [this article](https://propeldata.com/docs/metrics) to get started.
+## Core principles
 
-Once you have your account set up, you'll need to provide your account's access token to use Propel APIs. You can authenticate and generate an access token by following the steps outlined in [this article](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
+The Propel UI Kit is an open-source project built on five core principles:
 
-With your metric and access token in hand, it's time to start using Propel UI Kit. Currently, the UI Kit is available for React only and supports the following metric components:
+- **Don't reinvent the wheel.** Charting libraries are great, let's make them better. We built the UI Kit on top of all the power and efficiency of ChartJS.
+
+- **Work and look great out-of-box.** The components work and look great out of the box. You can drop them into your app with minor color customizations and you'll be off to a great start.
+
+- **Extremely customizable.** You can customize their styles, look and feel, and error and loading experience to always feel native to your product.
+
+- **Built in React for React.** We built them in React for React frontends. No cross-framework abstractions and no unnecessary baggage.
+
+- **They work with or without Propel's APIs.** You can use them by themselves in static mode or with the Propel API in connected mode.
+
+## Key features
+
+All components share the same set of key features:
+
+- **They are responsive.** Components are responsive out of the box. They render well on desktops and laptops as well as phones and tablets.
+
+- **They handle loading and error states for you.** No need to sweat the details of handling the different states. We've done that for you.
+
+- **They fetch the data for you.** Components can automatically fetch the data from the Propel API when used in connected mode.
+
+Individual components have other key features that we highlight on the component documentation pages.
+
+## Components
+
+Check out the different components and their documentation:
 
 - [Time Series](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series)
 - [Counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/counter)
 - [Leaderboard](https://github.com/propeldata/ui-kit/tree/main/packages/react/leaderboard)
 
-Now let's understand how you can integrate Propel UI Kit with your front-end application.
+Please [open a feature request](https://github.com/propeldata/ui-kit/issues) on GitHub for other components you'd like to have. Also, PRs are welcome 😊.
+
+## Getting Started with Propel
+
+To leverage the full power of Propel UI Kit + API, you'll need a Propel Account. If you don't have a Propel Account yet, you can [try Propel for free](https://propeldata.com/get-started).
+
+You can learn more about Propel by reading our [API docs](https://propeldata.com/docs).
+
+Once you have your account set up, you'll need to provide your account's access token to use Propel APIs. You can authenticate and generate an access token by following the steps outlined in [the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
 
 ## Usage
 
-The components in the Propel UI Kit are available in two modes: "Static" and "Connected". The "Static" mode is a simpler version of the component, suitable for users who want to quickly build basic visualizations or handle server data themselves. The "Connected" mode is a more advanced version of the component, which offers out-of-the-box integration with propel APIs. You don't need to configure a GraphQL client, handle loading and error states. You don't even need to know what the Propel API endpoint is.
+The components in the Propel UI Kit are available in two modes: "Static" and "Connected".
 
-Overall, the Propel UI Kit is a powerful tool for front-end developers who want to create engaging, user-friendly data visualizations with ease.
+In the "Static" mode, you fetch the data yourself and provide it to the component.
+
+In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need to configure a GraphQL client or handle loading and error states.
 
 ### Static Mode
 
-In the "Static" mode, the component will only display the data you provide and won't fetch any additional data in the background. Let's take our [@propeldata/react-time-series](link to time series readme) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
+In the "Static" mode, the component will display the data you provide.
+
+Let's take our [@propeldata/react-time-series](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
 
 ```javascript
 import { TimeSeries } from '@propeldata/react-time-series'
@@ -47,15 +86,17 @@ function WeekSalesChart() {
 }
 ```
 
-This approach makes the component simpler and more efficient, as it only displays the data you provide. You can still customize the component using your own styles.
+You can customize the component using your own styles.
 
 <p align="center">
-  <img src="https://storybook.propeldata.com/images/time-series.png">
+  <img src="https://storybook.propeldata.com/images/time-series.png"/>
 </p>
 
 ### Connected Mode: The Power of Propel at one import away
 
-In the "Connected" mode, the component will fetch and render the Propel data for you. To use this mode, all you need to do is pass the query prop, which configures the metric query. Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
+In the "Connected" mode, the component will fetch and render the Propel data for you. To use this mode, all you need to do is pass the query prop, which configures the Metric query.
+
+Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
 
 ```javascript
 import { Counter } from '@propeldata/react-counter'
@@ -78,17 +119,17 @@ function SalesCountLabel() {
 }
 ```
 
-In this mode, our component will handle the loading and error states for you, making it even easier to use.
+In this mode, the component will handle the loading and error states for you, making it even easier to use.
 
 <p align="center">
-  <img src="https://storybook.propeldata.com/images/counter.gif">
+  <img src="https://storybook.propeldata.com/images/counter.gif"/>
 </p>
 
-Wanna see more examples? Checkout our [Storybook](https://storybook.propeldata.com/)!
+Wanna see more examples? Check out our [Storybook](https://storybook.propeldata.com/)!
 
 ## Customization: Making It Your Own
 
-The Propel UI Kit was designed to be highly customizable and easy to incorporate into your front-end applications. Here are some of the customization options available to you:
+We designed the Propel UI Kit to be highly customizable and easy to incorporate into your front-end applications. Here are some of the customization options available to you:
 
 ### Styles
 
@@ -113,7 +154,7 @@ function MyChart() {
 This will change the color of the bars to a shade of purple, as shown in the following image:
 
 <p align="center">
-  <img src="https://storybook.propeldata.com/images/time-series-purple.png">
+  <img src="https://storybook.propeldata.com/images/time-series-purple.png"/>
 </p>
 
 ### Errors
@@ -136,17 +177,17 @@ function MyChart() {
 This will display a custom error message with a title and body text, as shown in the following image:
 
 <p align="center">
-  <img src="https://storybook.propeldata.com/images/error.png">
+  <img src="https://storybook.propeldata.com/images/error.png"/>
 </p>
 
 By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that fit seamlessly into your front-end applications.
 
-Made with :purple_heart: and [Chart.js](https://www.chartjs.org/). Powered by Propel! :rocket:
+Made with :purple_heart: and [Chart.js](https://www.chartjs.org/). Powered by [Propel](https://www.propeldata.com)! 🚀
 
 ## Contributing
 
 If you notice any bugs or have suggestions for new features, please [open an issue](https://github.com/propeldata/ui-kit/issues) on GitHub. We welcome feedback and contributions from the community!
 
-## Licence
+## License
 
 MIT License
