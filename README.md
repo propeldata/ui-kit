@@ -82,8 +82,6 @@ To leverage the full power of Propel UI Kit, you'll need a Propel Account. If yo
 
 You can learn more about Propel by reading our [API docs](https://propeldata.com/docs).
 
-Once you have your account set up, you'll need to provide your Account's access token to use Propel APIs. You can authenticate and generate an access token by following the steps outlined in [the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
-
 ## Usage: Connected vs Static mode
 
 The Propel UI Kit components are available in two modes: "Static" and "Connected".
@@ -117,6 +115,8 @@ You can customize the component using your own styles.
 In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, configure a GraphQL client, or handle loading and error states.
 
 To learn more about querying data with Propel, read the [Metric query documentation](https://www.propeldata.com/docs/metrics).
+
+For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs. You can authenticate and generate an access token by following the steps outlined in [the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
 
 Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
 
