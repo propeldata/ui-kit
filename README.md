@@ -1,7 +1,7 @@
 <br />
 <div align="center">
 <h1>Propel UI Kit</h1>
-    <h2>React components for dashboards and data visualizations</h2>
+    <h2> Data visualization and dashboard React components </h2>
   <img src="public/images/UI-kit-header.png"/>
   <h3 align="center">
     <a href="https://propelify.propeldata.com" target="_blank">Demo Dashboard</a> |&nbsp; 
@@ -10,7 +10,7 @@
 </div>
 <br />
 
-The Propel UI Kit is an open-source React component library to quickly build awesome-looking dashboards and data visualizations.
+The Propel UI Kit is a Data visualization and dashboard React components library to quickly build awesome-looking analytics into your apps.
 
 ## Quick Install
 
