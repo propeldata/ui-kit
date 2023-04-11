@@ -14,23 +14,11 @@ The Propel UI Kit is an open-source library of React components to quickly build
 
 ## Quick Install
 
-To install the Propel UI Kit components, use your preferred package manager and run the following command:
+To install the Propel UI Kit components, run the following command:
 
-With `yarn`:
-
-```shell
-yarn add @propeldata/react-counter
-yarn add @propeldata/react-time-series
-yarn add @propeldata/react-leaderboard
-```
-
-or `npm`:
-
-```shell
-npm install @propeldata/react-counter
-npm install @propeldata/react-time-series
-npm install @propeldata/react-leaderboard
-```
+\```shell
+npm install @propeldata/react-counter @propeldata/react-time-series @propeldata/react-leaderboard
+\```
 
 ## Why the Propel UI Kit?
 
