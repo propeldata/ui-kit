@@ -14,23 +14,11 @@ The Propel UI Kit is a Data visualization and dashboard React components library
 
 ## Quick Install
 
-To install the Propel UI Kit components, use your preferred package manager and run the following command:
+To install the Propel UI Kit components, run the following command:
 
-With `yarn`:
-
-```shell
-yarn add @propeldata/react-counter
-yarn add @propeldata/react-time-series
-yarn add @propeldata/react-leaderboard
-```
-
-or `npm`:
-
-```shell
-npm install @propeldata/react-counter
-npm install @propeldata/react-time-series
-npm install @propeldata/react-leaderboard
-```
+\```shell
+npm install @propeldata/react-counter @propeldata/react-time-series @propeldata/react-leaderboard
+\```
 
 ## Why the Propel UI Kit?
 
@@ -82,7 +70,7 @@ To leverage the full power of Propel UI Kit, you'll need a Propel Account. If yo
 
 You can learn more about Propel by reading our [API docs](https://propeldata.com/docs).
 
-## Usage: Connected vs Static mode
+## Usage
 
 The Propel UI Kit components are available in two modes: "Static" and "Connected".
 
