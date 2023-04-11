@@ -82,7 +82,7 @@ To leverage the full power of Propel UI Kit, you'll need a Propel Account. If yo
 
 You can learn more about Propel by reading our [API docs](https://propeldata.com/docs).
 
-## Usage: Connected vs Static mode
+## Usage
 
 The Propel UI Kit components are available in two modes: "Static" and "Connected".
 
