@@ -14,8 +14,6 @@ The Propel UI Kit is a data visualization and dashboard React component library 
 
 ## Install
 
-You can use the components with or without [Propel](https://www.propeldata.com). If you don't have a Propel Account yet, you can [try Propel for free](https://propeldata.com/get-started) and learn more by reading our [API docs](https://propeldata.com/docs).
-
 To install the Propel UI Kit components, run the following command:
 
 ```shell
@@ -23,6 +21,8 @@ npm install @propeldata/react-counter @propeldata/react-time-series @propeldata/
 ```
 
 You can read more about the [why and core principles](PRINCIPLES.md) behind the Propel UI Kit.
+
+You can use the components with or without [Propel](https://www.propeldata.com). If you don't have a Propel Account yet, you can [try Propel for free](https://propeldata.com/get-started) and learn more by reading our [API docs](https://propeldata.com/docs).
 
 ## Key features
 
