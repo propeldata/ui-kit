@@ -113,7 +113,7 @@ In this mode, the component will handle the loading and error states for you, ma
 
 Want to see more examples? Check out our [Storybook](https://storybook.propeldata.com)!
 
-## Customization: Making It Your Own
+## Customization
 
 We designed the Propel UI Kit to be highly customizable and easy to incorporate into your front-end applications. Here are some of the customization options available to you:
 
