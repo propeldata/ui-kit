@@ -20,4 +20,4 @@ The Propel UI Kit is an open-source project built on five core principles:
 
 - **They work with or without Propel's APIs.** You can use them by themselves in Static mode or with the Propel API in Connected mode.
 
-Back to the [README](README.md)
+[Back to the README](README.md)
