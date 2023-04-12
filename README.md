@@ -76,7 +76,7 @@ You can customize the component using your own styles.
 
 ### Connected Mode
 
-In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, configure a GraphQL client, or handle loading and error states.
+In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, to configure a GraphQL client, or handle loading and error states.
 
 To learn more about querying data with Propel, read the [Metric query documentation](https://www.propeldata.com/docs/metrics).
 
