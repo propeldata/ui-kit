@@ -33,6 +33,8 @@ import { ValueBar } from './ValueBar'
  */
 ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale, Colors)
 
+let idCounter = 0
+
 export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: ChartVariant
@@ -83,7 +85,8 @@ export function Leaderboard(props: LeaderboardProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<LeaderboardData>()
 
-  const id = React.useId()
+  const idRef = React.useRef(idCounter++)
+  const id = `leaderboard-${idRef.current}`
 
   /**
    * The html node where the chart will render
