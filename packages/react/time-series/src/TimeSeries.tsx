@@ -56,6 +56,8 @@ ChartJS.register(
   LinearScale
 )
 
+let idCounter = 0
+
 export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: ChartVariant
@@ -124,7 +126,8 @@ export function TimeSeries(props: TimeSeriesProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<TimeSeriesData>()
 
-  const id = React.useId()
+  const idRef = React.useRef(idCounter++)
+  const id = `time-series-${idRef.current}`
 
   /**
    * The html node where the chart will render
