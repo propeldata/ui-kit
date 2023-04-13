@@ -86,7 +86,7 @@ export function Leaderboard(props: LeaderboardProps) {
   const [serverData, setServerData] = React.useState<LeaderboardData>()
 
   const idRef = React.useRef(idCounter++)
-  const id = `time-series-${idRef.current}`
+  const id = `leaderboard-${idRef.current}`
 
   /**
    * The html node where the chart will render
