@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@emotion/css": "^11.10.5",
-    "@propeldata/ui-kit-components": "workspace:^0.2.2",
-    "@propeldata/ui-kit-graphql": "workspace:^0.2.7",
-    "@propeldata/ui-kit-plugins": "workspace:^0.2.1",
+    "@propeldata/ui-kit-components": "workspace:^",
+    "@propeldata/ui-kit-graphql": "workspace:^",
+    "@propeldata/ui-kit-plugins": "workspace:^",
     "chart.js": "^4.2.1",
     "chartjs-adapter-date-fns": "2.0.1",
     "date-fns": "^2.29.3",
@@ -29,7 +29,7 @@
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
-    "react": "^16.8 || ^17.0 || ^18.0",
-    "react-dom": "^16.8 || ^17.0 || ^18.0"
+    "react": "^16.8 || ^17 || ^18",
+    "react-dom": "^16.8 || ^17 || ^18"
   }
 }

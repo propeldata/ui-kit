@@ -36,7 +36,7 @@ export const defaultStyles = {
   },
   table: {
     width: '100%',
-    height: '100%',
+    height: 'inherit',
     isOrdered: false,
     hasValueBar: false,
     stickyHeader: false,

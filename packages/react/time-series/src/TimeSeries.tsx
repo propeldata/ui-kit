@@ -254,16 +254,30 @@ export function TimeSeries(props: TimeSeriesProps) {
    * its on `labels` and `values`
    */
   const fetchData = React.useCallback(async () => {
+    const withTimeRange = query?.timeRange?.relative
+      ? {
+          timeRange: {
+            relative: query.timeRange.relative,
+            n: query.timeRange.n
+          }
+        }
+      : {
+          timeRange: {
+            start: query?.timeRange?.start,
+            stop: query?.timeRange?.stop
+          }
+        }
+
     const response = await request(
       PROPEL_GRAPHQL_API_ENDPOINT,
       TimeSeriesDocument,
       {
         uniqueName: query?.metric,
         timeSeriesInput: {
-          timeRange: query?.timeRange,
           granularity,
           filters: query?.filters,
-          propeller: query?.propeller
+          propeller: query?.propeller,
+          ...withTimeRange
         }
       },
       {
@@ -277,7 +291,17 @@ export function TimeSeries(props: TimeSeriesProps) {
     const values: number[] = [...metricData.values]
 
     return { labels, values }
-  }, [granularity, query?.accessToken, query?.filters, query?.metric, query?.propeller, query?.timeRange])
+  }, [
+    granularity,
+    query?.accessToken,
+    query?.filters,
+    query?.metric,
+    query?.propeller,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop
+  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -319,10 +343,22 @@ export function TimeSeries(props: TimeSeriesProps) {
         setIsLoading(false)
       }
     }
+
     if (!isStatic) {
       fetchChartData()
     }
-  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.granularity, query?.accessToken, fetchData])
+  }, [
+    isStatic,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop,
+    query?.filters,
+    query?.propeller,
+    query?.granularity,
+    query?.accessToken,
+    fetchData
+  ])
 
   React.useEffect(() => {
     if (isStatic) {

@@ -88,6 +88,9 @@ export function Leaderboard(props: LeaderboardProps) {
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
 
+  const dimensionsString = JSON.stringify(query?.dimensions)
+  const filtersString = JSON.stringify(query?.filters)
+
   /**
    * The html node where the chart will render
    */
@@ -193,18 +196,35 @@ export function Leaderboard(props: LeaderboardProps) {
    * its on `headers` and `rows`
    */
   const fetchData = React.useCallback(async () => {
+    const dimensions = dimensionsString ? JSON.parse(dimensionsString) : null
+    const filters = filtersString ? JSON.parse(filtersString) : null
+
+    const withTimeRange = query?.timeRange?.relative
+      ? {
+          timeRange: {
+            relative: query.timeRange.relative,
+            n: query.timeRange.n
+          }
+        }
+      : {
+          timeRange: {
+            start: query?.timeRange?.start,
+            stop: query?.timeRange?.stop
+          }
+        }
+
     const response = await request(
       PROPEL_GRAPHQL_API_ENDPOINT,
       LeaderboardDocument,
       {
         uniqueName: query?.metric,
         leaderboardInput: {
-          timeRange: query?.timeRange,
-          filters: query?.filters,
+          filters,
           propeller: query?.propeller,
           sort: query?.sort,
           rowLimit: query?.rowLimit,
-          dimensions: query?.dimensions
+          dimensions,
+          ...withTimeRange
         }
       },
       {
@@ -220,13 +240,16 @@ export function Leaderboard(props: LeaderboardProps) {
     return { headers, rows }
   }, [
     query?.accessToken,
-    query?.dimensions,
-    query?.filters,
+    dimensionsString,
+    filtersString,
     query?.metric,
     query?.propeller,
     query?.rowLimit,
     query?.sort,
-    query?.timeRange
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop
   ])
 
   React.useEffect(() => {
@@ -261,6 +284,7 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     async function fetchChartData() {
+      console.log('FETCH')
       try {
         setIsLoading(true)
         const data = await fetchData()
@@ -276,13 +300,15 @@ export function Leaderboard(props: LeaderboardProps) {
     }
   }, [
     isStatic,
-    query?.timeRange,
-    query?.filters,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop,
     query?.propeller,
     query?.sort,
     query?.rowLimit,
-    query?.dimensions,
-    query?.rowLimit,
+    dimensionsString,
+    filtersString,
     fetchData
   ])
 
@@ -315,6 +341,12 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
   }, [])
+
+  React.useEffect(() => {
+    if (variant === 'table' && chartRef.current) {
+      destroyChart()
+    }
+  }, [variant])
 
   if (isLoading || loading) {
     destroyChart()
