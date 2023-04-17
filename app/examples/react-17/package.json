@@ -1,0 +1,29 @@
+{
+  "name": "react-17",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "@propeldata/react-counter": "workspace:^",
+    "@propeldata/react-leaderboard": "workspace:^",
+    "@propeldata/react-time-series": "workspace:^",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

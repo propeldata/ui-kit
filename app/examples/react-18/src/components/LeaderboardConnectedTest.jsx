@@ -7,7 +7,7 @@ export function LeaderboardConnectedTest() {
 
   return (
     <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
-      <h2 className="text-2xl">Leaderboard Static</h2>
+      <h2 className="text-2xl">Leaderboard Connected</h2>
       <Leaderboard
         query={{
           accessToken: '<ACCESS_TOKEN>',
