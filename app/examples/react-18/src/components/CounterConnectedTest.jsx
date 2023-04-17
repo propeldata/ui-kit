@@ -10,7 +10,7 @@ export function CounterConnectedTest() {
       <div className="h-60 flex justify-center items-center">
         <Counter
           query={{
-            accessToken: '<ACCESS_TOKEN>',
+            accessToken: '<PROPEL_ACCESS_TOKEN>',
             metric: '<METRIC_UNIQUE_NAME>',
             timeRange: {
               relative: RelativeTimeRange.LastNDays,

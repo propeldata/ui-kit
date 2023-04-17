@@ -52,7 +52,7 @@ export const Connected = Template.bind({})
 Connected.args = {
   variant: 'line',
   query: {
-    accessToken: '<ACCESS_TOKEN>',
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'queryCount',
     timeRange: {
       relative: RelativeTimeRange.LastNDays,

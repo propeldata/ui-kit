@@ -11,7 +11,7 @@ export function TimeSeriesConnectedTest() {
       <h2 className="text-2xl">TimeSeries Connected</h2>
       <TimeSeries
         query={{
-          accessToken: '<ACCESS_TOKEN>',
+          accessToken: '<PROPEL_ACCESS_TOKEN>',
           metric: '<METRIC_UNIQUE_NAME>',
           timeRange: {
             relative: RelativeTimeRange.LastNDays,

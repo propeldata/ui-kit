@@ -10,7 +10,7 @@ export function LeaderboardConnectedTest() {
       <h2 className="text-2xl">Leaderboard Connected</h2>
       <Leaderboard
         query={{
-          accessToken: '<ACCESS_TOKEN>',
+          accessToken: '<PROPEL_ACCESS_TOKEN>',
           dimensions: [
             {
               columnName: '<DIMENSION_ONE>'

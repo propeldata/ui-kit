@@ -10,8 +10,7 @@ export function LeaderboardConnectedTest() {
       <h2 className="text-2xl">Leaderboard Connected</h2>
       <Leaderboard
         query={{
-          accessToken:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE2ODE1MzQ4MTYsImNsaWVudF9pZCI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwiZXhwIjoxNjgxNTM4NDE2LCJpYXQiOjE2ODE1MzQ4MTYsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI1OGJiOTY2ZS1lNjU0LTRhZjEtYjM3ZC0wYWEyMWZjZWNiZWYiLCJwcm9wZWwvdGVuYW50IjoiRU5WMDFGWEpKRlJOSDhKMVJCWDdDQ1YyQVBEMU4iLCJzY29wZSI6Im1ldHJpYzpxdWVyeSIsInN1YiI6IjM1cjF1cGlqa2hnam0wOXMxMWhyZDRjMnB1IiwidG9rZW5fdXNlIjoiYWNjZXNzIiwidmVyc2lvbiI6MX0.iTekHJoOZ_XM7s9HK-9BgJUw3X1dPbNEo-wi_16GBQE',
+          accessToken: '<PROPEL_ACCESS_TOKEN>',
           dimensions: [
             {
               columnName: 'METRIC_TYPE'
