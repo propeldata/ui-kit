@@ -1,10 +1,9 @@
 import React from 'react'
 import { Story } from '@storybook/react'
-import { RelativeTimeRange, Sort } from '@propeldata/ui-kit-graphql'
 import { css } from '@emotion/css'
 
-import { LeaderboardProps } from './Leaderboard'
-import { Container as Leaderboard } from './Container'
+import { Sort } from '@propeldata/ui-kit-graphql'
+import { Leaderboard, RelativeTimeRange } from '@propeldata/react-leaderboard'
 
 export default {
   title: 'React/Leaderboard'
@@ -46,7 +45,7 @@ const customTableRows = [
   ['The Lean Product Book', 'John Doe', '2222027']
 ]
 
-const Template: Story<LeaderboardProps> = (args) => <Leaderboard {...args} />
+const Template: Story = (args) => <Leaderboard {...args} />
 export const DefaultBar = Template.bind({})
 DefaultBar.args = {
   headers: barHeaders,
@@ -153,7 +152,7 @@ export const Loading = () => {
   return <Leaderboard loading={loading} headers={localHeaders} rows={localRows} />
 }
 
-const CustomTemplate: Story<LeaderboardProps> = (args) => (
+const CustomTemplate: Story = (args) => (
   <div
     className={css`
       width: 500px;

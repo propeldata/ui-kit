@@ -1,9 +1,7 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
-import { RelativeTimeRange } from '@propeldata/ui-kit-graphql'
-
-import { Container as Counter } from './Container'
+import { Counter, RelativeTimeRange } from '@propeldata/react-counter'
 
 export default {
   title: 'React/Counter'

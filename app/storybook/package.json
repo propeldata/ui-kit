@@ -1,0 +1,30 @@
+{
+  "name": "ui-kit-storybook",
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "@propeldata/react-counter": "workspace:^",
+    "@propeldata/react-leaderboard": "workspace:^",
+    "@propeldata/react-time-series": "workspace:^",
+    "@propeldata/ui-kit-graphql": "workspace:^",
+    "date-fns": "^2.29.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.4",
+    "@storybook/addon-essentials": "^6.5.14",
+    "@storybook/addon-interactions": "^6.5.14",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/builder-webpack5": "^6.5.14",
+    "@storybook/manager-webpack5": "^6.5.14",
+    "@storybook/react": "^6.5.14",
+    "prop-types": "^15.8.1",
+    "storybook": "^6.5.14"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "yarn prepare && build-storybook"
+  }
+}

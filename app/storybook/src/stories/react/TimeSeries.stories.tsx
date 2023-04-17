@@ -2,9 +2,7 @@ import React from 'react'
 import { Story } from '@storybook/react'
 import { format } from 'date-fns'
 
-import { Container as TimeSeries } from './Container'
-import { TimeSeriesProps } from './TimeSeries'
-import { RelativeTimeRange, TimeSeriesGranularity } from './'
+import { TimeSeries, RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/react-time-series'
 
 export default {
   title: 'React/TimeSeries'
@@ -36,7 +34,7 @@ const dataset = {
   values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 }
 
-const Template: Story<TimeSeriesProps> = (args) => <TimeSeries {...args} />
+const Template: Story = (args) => <TimeSeries {...args} />
 
 export const UnstyledBar = Template.bind({})
 UnstyledBar.args = {
@@ -140,7 +138,7 @@ export const FormattedLabels = Template.bind({})
 FormattedLabels.args = {
   variant: 'bar',
   ...dataset,
-  labelFormatter: (labels) => {
+  labelFormatter: (labels: string[]) => {
     return labels.map((label) => {
       return format(new Date(label), 'MM/dd/yy')
     })
