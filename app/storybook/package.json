@@ -24,7 +24,20 @@
     "storybook": "^6.5.14"
   },
   "scripts": {
+    "prepare": "yarn build-storybook",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "yarn build-storybook"
+    "build-storybook": "build-storybook"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

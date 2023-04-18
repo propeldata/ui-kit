@@ -2503,11 +2503,11 @@ __metadata:
   linkType: hard
 
 "@graphql-tools/delegate@npm:^9.0.31":
-  version: 9.0.31
-  resolution: "@graphql-tools/delegate@npm:9.0.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fdelegate%2F-%2Fdelegate-9.0.31.tgz"
+  version: 9.0.32
+  resolution: "@graphql-tools/delegate@npm:9.0.32::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fdelegate%2F-%2Fdelegate-9.0.32.tgz"
   dependencies:
     "@graphql-tools/batch-execute": ^8.5.19
-    "@graphql-tools/executor": ^0.0.17
+    "@graphql-tools/executor": ^0.0.18
     "@graphql-tools/schema": ^9.0.18
     "@graphql-tools/utils": ^9.2.1
     dataloader: ^2.2.2
@@ -2515,7 +2515,7 @@ __metadata:
     value-or-promise: ^1.0.12
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 41aaa369ac6bc355ba11fdb99df7e4eb9c77bc5d8e71588a88931e08b33d4982549dd0d57cbc2949f50420fd64811ca614b7f486c2aa7757d02211c18b5536c3
+  checksum: c95dbb06f2e389818d1cd0bfa1e630a186e562fd0aa00926570d0a2a0b28d6f1dca88c6a6dc6950f83dede3015b2a316e35fff06a8f2947644ab06095747a5b6
   languageName: node
   linkType: hard
 
@@ -2569,9 +2569,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/executor@npm:^0.0.17":
-  version: 0.0.17
-  resolution: "@graphql-tools/executor@npm:0.0.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fexecutor%2F-%2Fexecutor-0.0.17.tgz"
+"@graphql-tools/executor@npm:^0.0.18":
+  version: 0.0.18
+  resolution: "@graphql-tools/executor@npm:0.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fexecutor%2F-%2Fexecutor-0.0.18.tgz"
   dependencies:
     "@graphql-tools/utils": ^9.2.1
     "@graphql-typed-document-node/core": 3.2.0
@@ -2580,7 +2580,7 @@ __metadata:
     value-or-promise: 1.0.12
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 8f13337036496b168c415c9014457ebdb727d5e8d0d1f025f82574ef6189de6a81b9985eafa1e284414711dd55bd44c5580a2a09ab492b17ea4bd53b7d92df4f
+  checksum: 7387155d6736455ad0c40c263ff964d734cdd79cdc8a5ddb43c805cabfa3d381d8ea21605a1ec0b0242898d248a909e370433849ffed92a2721aa27f73caf0ab
   languageName: node
   linkType: hard
 
@@ -2713,10 +2713,10 @@ __metadata:
   linkType: hard
 
 "@graphql-tools/prisma-loader@npm:^7.2.49":
-  version: 7.2.70
-  resolution: "@graphql-tools/prisma-loader@npm:7.2.70::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fprisma-loader%2F-%2Fprisma-loader-7.2.70.tgz"
+  version: 7.2.71
+  resolution: "@graphql-tools/prisma-loader@npm:7.2.71::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fprisma-loader%2F-%2Fprisma-loader-7.2.71.tgz"
   dependencies:
-    "@graphql-tools/url-loader": 7.17.18
+    "@graphql-tools/url-loader": ^7.17.18
     "@graphql-tools/utils": ^9.2.1
     "@types/js-yaml": ^4.0.0
     "@types/json-stable-stringify": ^1.0.32
@@ -2736,7 +2736,7 @@ __metadata:
     yaml-ast-parser: ^0.0.43
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 96b1ddcc3dc62fdc02c798444c3579beb7607f89411f223b1d2d46ebcd746bab1541eaefc3a0994888b2b654dc46a900577958722a044d8880a8019f6bfb8922
+  checksum: f76a35d2d0bda15c6baeee58e2b3abcb38681bd6f7d0fbd720fdc372f9a314e22ab72363bfd92b9fa137f1987e3c863ce826fdb3f75ca4b66ec15c0a60b3945d
   languageName: node
   linkType: hard
 
@@ -2767,7 +2767,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/url-loader@npm:7.17.18, @graphql-tools/url-loader@npm:^7.13.2, @graphql-tools/url-loader@npm:^7.9.7":
+"@graphql-tools/url-loader@npm:^7.13.2, @graphql-tools/url-loader@npm:^7.17.18, @graphql-tools/url-loader@npm:^7.9.7":
   version: 7.17.18
   resolution: "@graphql-tools/url-loader@npm:7.17.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Furl-loader%2F-%2Furl-loader-7.17.18.tgz"
   dependencies:
@@ -6242,9 +6242,9 @@ __metadata:
   linkType: hard
 
 "@tsconfig/node18@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@tsconfig/node18@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode18%2F-%2Fnode18-1.0.1.tgz"
-  checksum: aba11b453e40b03a33321e5b2bd51ba2d5213503bb95f1ecd56a5dd0be31eef1ab9ddfe06b4eae99075692641de905d57a38d671a9288bacac82327d393de1e2
+  version: 1.0.2
+  resolution: "@tsconfig/node18@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode18%2F-%2Fnode18-1.0.2.tgz"
+  checksum: 1eddb1b54f2ba969b79e49c18c6d2c35a75438b84195f972f6444db5514377b17b6e411dc7b40eb69b70d95ff8b39bfb18d2e7ffd585d79791220f0d6f2395a4
   languageName: node
   linkType: hard
 
@@ -11724,11 +11724,11 @@ __metadata:
   linkType: hard
 
 "dns-packet@npm:^5.2.2":
-  version: 5.5.0
-  resolution: "dns-packet@npm:5.5.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdns-packet%2F-%2Fdns-packet-5.5.0.tgz"
+  version: 5.6.0
+  resolution: "dns-packet@npm:5.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdns-packet%2F-%2Fdns-packet-5.6.0.tgz"
   dependencies:
     "@leichtgewicht/ip-codec": ^2.0.1
-  checksum: 3aa26bb03a613362937225f786d46b1a39b5002d0a68b40537326b090685d5c53d46e25cc7c610f2a29ea5029c8ce480c368a8b0492932c5fb88ebc377676e84
+  checksum: 1b643814e5947a87620f8a906287079347492282964ce1c236d52c414e3e3941126b96581376b180ba6e66899e70b86b587bc1aa23e3acd9957765be952d83fc
   languageName: node
   linkType: hard
 
@@ -11960,9 +11960,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.284":
-  version: 1.4.366
-  resolution: "electron-to-chromium@npm:1.4.366::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Felectron-to-chromium%2F-%2Felectron-to-chromium-1.4.366.tgz"
-  checksum: e8217ef43a0b2eeefd92bcc9118488f73986b556978952c5ad335c3bb8ad50de8a28a5b85aa8bc18187119a7bf168bcd17324ef1d6f8086534e9b81e9713774f
+  version: 1.4.367
+  resolution: "electron-to-chromium@npm:1.4.367::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Felectron-to-chromium%2F-%2Felectron-to-chromium-1.4.367.tgz"
+  checksum: 721e4958945a16ff21a63896d4e112da7b8f3fd5540a27280d5777c196fe4e1f1b51359f86c6fe83a267e81f127e4753ec9171547f094f86481a421c809473b0
   languageName: node
   linkType: hard
 
@@ -24147,8 +24147,8 @@ __metadata:
   linkType: hard
 
 "terser@npm:^5.0.0, terser@npm:^5.10.0, terser@npm:^5.16.5, terser@npm:^5.2.0, terser@npm:^5.3.4":
-  version: 5.16.9
-  resolution: "terser@npm:5.16.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fterser%2F-%2Fterser-5.16.9.tgz"
+  version: 5.17.0
+  resolution: "terser@npm:5.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fterser%2F-%2Fterser-5.17.0.tgz"
   dependencies:
     "@jridgewell/source-map": ^0.3.2
     acorn: ^8.5.0
@@ -24156,7 +24156,7 @@ __metadata:
     source-map-support: ~0.5.20
   bin:
     terser: bin/terser
-  checksum: b373693ee01ce08cc9b9595d57df889acbbc899d929a7fe53662330ce954d53145582f6715c9cc4839d555f5769a28fbeb203155b54e3a9c6c646db292002edd
+  checksum: 2652b846828dfc0f57d97cf719666cf4c0238345a68775a7016830d6a82636240eb26d5e0fc72e87fbc534a9099c09301ffdf5ee644ddc4686705eba071d72fc
   languageName: node
   linkType: hard
 
