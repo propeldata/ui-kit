@@ -25,6 +25,6 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "yarn prepare && build-storybook"
+    "build-storybook": "yarn build-storybook"
   }
 }
