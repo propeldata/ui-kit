@@ -193,31 +193,39 @@ export function Leaderboard(props: LeaderboardProps) {
    * its on `headers` and `rows`
    */
   const fetchData = React.useCallback(async () => {
-    const response = await request(
-      PROPEL_GRAPHQL_API_ENDPOINT,
-      LeaderboardDocument,
-      {
-        uniqueName: query?.metric,
-        leaderboardInput: {
-          timeRange: query?.timeRange,
-          filters: query?.filters,
-          propeller: query?.propeller,
-          sort: query?.sort,
-          rowLimit: query?.rowLimit,
-          dimensions: query?.dimensions
+    try {
+      setIsLoading(true)
+
+      const response = await request(
+        PROPEL_GRAPHQL_API_ENDPOINT,
+        LeaderboardDocument,
+        {
+          uniqueName: query?.metric,
+          leaderboardInput: {
+            timeRange: query?.timeRange,
+            filters: query?.filters,
+            propeller: query?.propeller,
+            sort: query?.sort,
+            rowLimit: query?.rowLimit,
+            dimensions: query?.dimensions
+          }
+        },
+        {
+          authorization: `Bearer ${query?.accessToken}`
         }
-      },
-      {
-        authorization: `Bearer ${query?.accessToken}`
-      }
-    )
+      )
 
-    const metricData = response.metricByName.leaderboard
+      const metricData = response.metricByName.leaderboard
 
-    const headers = metricData.headers
-    const rows = metricData.rows
+      const headers = metricData.headers
+      const rows = metricData.rows
 
-    return { headers, rows }
+      return { headers, rows }
+    } catch (error) {
+      setHasError(true)
+    } finally {
+      setIsLoading(false)
+    }
   }, [
     query?.accessToken,
     query?.dimensions,
@@ -261,15 +269,8 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     async function fetchChartData() {
-      try {
-        setIsLoading(true)
-        const data = await fetchData()
-        setServerData(data)
-      } catch (error) {
-        setHasError(true)
-      } finally {
-        setIsLoading(false)
-      }
+      const data = await fetchData()
+      setServerData(data)
     }
     if (!isStatic) {
       fetchChartData()

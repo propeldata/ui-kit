@@ -254,29 +254,35 @@ export function TimeSeries(props: TimeSeriesProps) {
    * its on `labels` and `values`
    */
   const fetchData = React.useCallback(async () => {
-    const response = await request(
-      PROPEL_GRAPHQL_API_ENDPOINT,
-      TimeSeriesDocument,
-      {
-        uniqueName: query?.metric,
-        timeSeriesInput: {
-          timeRange: query?.timeRange,
-          granularity,
-          filters: query?.filters,
-          propeller: query?.propeller
+    try {
+      const response = await request(
+        PROPEL_GRAPHQL_API_ENDPOINT,
+        TimeSeriesDocument,
+        {
+          uniqueName: query?.metric,
+          timeSeriesInput: {
+            timeRange: query?.timeRange,
+            granularity,
+            filters: query?.filters,
+            propeller: query?.propeller
+          }
+        },
+        {
+          authorization: `Bearer ${query?.accessToken}`
         }
-      },
-      {
-        authorization: `Bearer ${query?.accessToken}`
-      }
-    )
+      )
 
-    const metricData = response.metricByName.timeSeries
+      const metricData = response.metricByName.timeSeries
 
-    const labels: string[] = [...metricData.labels]
-    const values: number[] = [...metricData.values]
+      const labels: string[] = [...metricData.labels]
+      const values: number[] = [...metricData.values]
 
-    return { labels, values }
+      return { labels, values }
+    } catch {
+      setHasError(true)
+    } finally {
+      setIsLoading(false)
+    }
   }, [granularity, query?.accessToken, query?.filters, query?.metric, query?.propeller, query?.timeRange])
 
   React.useEffect(() => {
@@ -309,15 +315,8 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     async function fetchChartData() {
-      try {
-        setIsLoading(true)
-        const data = await fetchData()
-        setServerData(data)
-      } catch {
-        setHasError(true)
-      } finally {
-        setIsLoading(false)
-      }
+      const data = await fetchData()
+      setServerData(data)
     }
     if (!isStatic) {
       fetchChartData()
