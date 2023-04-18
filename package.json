@@ -19,7 +19,7 @@
     "postinstall": "husky install",
     "commit": "cz",
     "storybook": "yarn workspace ui-kit-storybook storybook",
-    "build-storybook": "yarn workspace ui-kit-storybook build-storybook"
+    "build-storybook": "yarn prepare && yarn workspace ui-kit-storybook build-storybook"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
