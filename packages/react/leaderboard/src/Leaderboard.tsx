@@ -284,7 +284,6 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     async function fetchChartData() {
-      console.log('FETCH')
       try {
         setIsLoading(true)
         const data = await fetchData()
