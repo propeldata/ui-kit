@@ -4502,7 +4502,7 @@ __metadata:
   dependencies:
     "@monodeploy/node": ^3.6.0
     "@monodeploy/types": ^3.6.0
-    "@tsconfig/node18": ^1.0.1
+    "@tsconfig/node18": 1.0.1
     conventional-changelog-angular: ^5.0.13
     eslint: ^8.32.0
     typescript: ^4.9.4
@@ -6241,10 +6241,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node18@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "@tsconfig/node18@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode18%2F-%2Fnode18-1.0.2.tgz"
-  checksum: 1eddb1b54f2ba969b79e49c18c6d2c35a75438b84195f972f6444db5514377b17b6e411dc7b40eb69b70d95ff8b39bfb18d2e7ffd585d79791220f0d6f2395a4
+"@tsconfig/node18@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@tsconfig/node18@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode18%2F-%2Fnode18-1.0.1.tgz"
+  checksum: aba11b453e40b03a33321e5b2bd51ba2d5213503bb95f1ecd56a5dd0be31eef1ab9ddfe06b4eae99075692641de905d57a38d671a9288bacac82327d393de1e2
   languageName: node
   linkType: hard
 
