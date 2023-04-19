@@ -325,7 +325,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   React.useEffect(() => {
     if (isStatic) {
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      renderChart({ labels: formattedLabels, values })
+      setTimeout(() => renderChart({ labels: formattedLabels, values }))
     }
   }, [isStatic, loading, styles, variant, labels, values, labelFormatter, renderChart])
 
@@ -334,7 +334,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       const { labels, values } = serverData
 
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      renderChart({ labels: formattedLabels, values })
+      setTimeout(() => renderChart({ labels: formattedLabels, values }))
     }
   }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
 
