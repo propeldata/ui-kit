@@ -88,9 +88,6 @@ export function Leaderboard(props: LeaderboardProps) {
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
 
-  const dimensionsString = JSON.stringify(query?.dimensions)
-  const filtersString = JSON.stringify(query?.filters)
-
   /**
    * The html node where the chart will render
    */
@@ -196,9 +193,6 @@ export function Leaderboard(props: LeaderboardProps) {
    * its on `headers` and `rows`
    */
   const fetchData = React.useCallback(async () => {
-    const dimensions = dimensionsString ? JSON.parse(dimensionsString) : null
-    const filters = filtersString ? JSON.parse(filtersString) : null
-
     const withTimeRange = query?.timeRange?.relative
       ? {
           timeRange: {
@@ -213,35 +207,43 @@ export function Leaderboard(props: LeaderboardProps) {
           }
         }
 
-    const response = await request(
-      PROPEL_GRAPHQL_API_ENDPOINT,
-      LeaderboardDocument,
-      {
-        uniqueName: query?.metric,
-        leaderboardInput: {
-          filters,
-          propeller: query?.propeller,
-          sort: query?.sort,
-          rowLimit: query?.rowLimit,
-          dimensions,
-          ...withTimeRange
+    try {
+      setIsLoading(true)
+
+      const response = await request(
+        PROPEL_GRAPHQL_API_ENDPOINT,
+        LeaderboardDocument,
+        {
+          uniqueName: query?.metric,
+          leaderboardInput: {
+            filters: query?.filters,
+            propeller: query?.propeller,
+            sort: query?.sort,
+            rowLimit: query?.rowLimit,
+            dimensions: query?.dimensions,
+            ...withTimeRange
+          }
+        },
+        {
+          authorization: `Bearer ${query?.accessToken}`
         }
-      },
-      {
-        authorization: `Bearer ${query?.accessToken}`
-      }
-    )
+      )
 
-    const metricData = response.metricByName.leaderboard
+      const metricData = response.metricByName.leaderboard
 
-    const headers = metricData.headers
-    const rows = metricData.rows
+      const headers = metricData.headers
+      const rows = metricData.rows
 
-    return { headers, rows }
+      return { headers, rows }
+    } catch (error) {
+      setHasError(true)
+    } finally {
+      setIsLoading(false)
+    }
   }, [
     query?.accessToken,
-    dimensionsString,
-    filtersString,
+    query?.dimensions,
+    query?.filters,
     query?.metric,
     query?.propeller,
     query?.rowLimit,
@@ -284,30 +286,21 @@ export function Leaderboard(props: LeaderboardProps) {
 
   React.useEffect(() => {
     async function fetchChartData() {
-      try {
-        setIsLoading(true)
-        const data = await fetchData()
-        setServerData(data)
-      } catch (error) {
-        setHasError(true)
-      } finally {
-        setIsLoading(false)
-      }
+      const data = await fetchData()
+      setServerData(data)
     }
     if (!isStatic) {
       fetchChartData()
     }
   }, [
     isStatic,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop,
+    query?.timeRange,
+    query?.filters,
     query?.propeller,
     query?.sort,
     query?.rowLimit,
-    dimensionsString,
-    filtersString,
+    query?.dimensions,
+    query?.rowLimit,
     fetchData
   ])
 
@@ -340,12 +333,6 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
   }, [])
-
-  React.useEffect(() => {
-    if (variant === 'table' && chartRef.current) {
-      destroyChart()
-    }
-  }, [variant])
 
   if (isLoading || loading) {
     destroyChart()

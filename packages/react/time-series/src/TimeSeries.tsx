@@ -268,29 +268,35 @@ export function TimeSeries(props: TimeSeriesProps) {
           }
         }
 
-    const response = await request(
-      PROPEL_GRAPHQL_API_ENDPOINT,
-      TimeSeriesDocument,
-      {
-        uniqueName: query?.metric,
-        timeSeriesInput: {
-          granularity,
-          filters: query?.filters,
-          propeller: query?.propeller,
-          ...withTimeRange
+    try {
+      const response = await request(
+        PROPEL_GRAPHQL_API_ENDPOINT,
+        TimeSeriesDocument,
+        {
+          uniqueName: query?.metric,
+          timeSeriesInput: {
+            granularity,
+            filters: query?.filters,
+            propeller: query?.propeller,
+            ...withTimeRange
+          }
+        },
+        {
+          authorization: `Bearer ${query?.accessToken}`
         }
-      },
-      {
-        authorization: `Bearer ${query?.accessToken}`
-      }
-    )
+      )
 
-    const metricData = response.metricByName.timeSeries
+      const metricData = response.metricByName.timeSeries
 
-    const labels: string[] = [...metricData.labels]
-    const values: number[] = [...metricData.values]
+      const labels: string[] = [...metricData.labels]
+      const values: number[] = [...metricData.values]
 
-    return { labels, values }
+      return { labels, values }
+    } catch {
+      setHasError(true)
+    } finally {
+      setIsLoading(false)
+    }
   }, [
     granularity,
     query?.accessToken,
@@ -333,17 +339,9 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     async function fetchChartData() {
-      try {
-        setIsLoading(true)
-        const data = await fetchData()
-        setServerData(data)
-      } catch {
-        setHasError(true)
-      } finally {
-        setIsLoading(false)
-      }
+      const data = await fetchData()
+      setServerData(data)
     }
-
     if (!isStatic) {
       fetchChartData()
     }

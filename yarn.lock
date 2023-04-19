@@ -11960,9 +11960,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.284":
-  version: 1.4.367
-  resolution: "electron-to-chromium@npm:1.4.367::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Felectron-to-chromium%2F-%2Felectron-to-chromium-1.4.367.tgz"
-  checksum: 721e4958945a16ff21a63896d4e112da7b8f3fd5540a27280d5777c196fe4e1f1b51359f86c6fe83a267e81f127e4753ec9171547f094f86481a421c809473b0
+  version: 1.4.368
+  resolution: "electron-to-chromium@npm:1.4.368::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Felectron-to-chromium%2F-%2Felectron-to-chromium-1.4.368.tgz"
+  checksum: b8ec4128a81c86c287cb2d677504c64d50f30c3c1d6dd9700a93797c6311f9f94b1c49a3e5112f5cfb3987a9bbade0133f9ec9898dae592db981059d5c2abdbb
   languageName: node
   linkType: hard
 
@@ -24147,8 +24147,8 @@ __metadata:
   linkType: hard
 
 "terser@npm:^5.0.0, terser@npm:^5.10.0, terser@npm:^5.16.5, terser@npm:^5.2.0, terser@npm:^5.3.4":
-  version: 5.17.0
-  resolution: "terser@npm:5.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fterser%2F-%2Fterser-5.17.0.tgz"
+  version: 5.17.1
+  resolution: "terser@npm:5.17.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fterser%2F-%2Fterser-5.17.1.tgz"
   dependencies:
     "@jridgewell/source-map": ^0.3.2
     acorn: ^8.5.0
@@ -24156,7 +24156,7 @@ __metadata:
     source-map-support: ~0.5.20
   bin:
     terser: bin/terser
-  checksum: 2652b846828dfc0f57d97cf719666cf4c0238345a68775a7016830d6a82636240eb26d5e0fc72e87fbc534a9099c09301ffdf5ee644ddc4686705eba071d72fc
+  checksum: 69b0e80e3c4084db2819de4d6ae8a2ba79f2fcd7ed6df40fe4b602ec7bfd8e889cc63c7d5268f30990ffecbf6eeda18f857adad9386fe2c2331b398d58ed855c
   languageName: node
   linkType: hard
 
