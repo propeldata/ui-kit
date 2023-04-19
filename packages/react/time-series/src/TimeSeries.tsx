@@ -1,6 +1,5 @@
 import React from 'react'
 import request from 'graphql-request'
-import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -356,21 +355,14 @@ export function TimeSeries(props: TimeSeriesProps) {
   }
 
   return (
-    <div className={getContainerStyles(styles)}>
-      <canvas
-        id={id}
-        ref={canvasRef}
-        width={styles?.canvas?.width}
-        height={styles?.canvas?.height || defaultChartHeight}
-        role={role || 'img'}
-        aria-label={ariaLabel || defaultAriaLabel}
-        {...rest}
-      />
-    </div>
+    <canvas
+      id={id}
+      ref={canvasRef}
+      width={styles?.canvas?.width}
+      height={styles?.canvas?.height || defaultChartHeight}
+      role={role || 'img'}
+      aria-label={ariaLabel || defaultAriaLabel}
+      {...rest}
+    />
   )
 }
-
-const getContainerStyles = (styles?: Styles) => css`
-  width: ${styles?.canvas?.width};
-  height: ${styles?.canvas?.height || defaultChartHeight};
-`
