@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "yarn gen && parcel watch",
     "build": "yarn gen && parcel build",
-    "gen": "graphql-codegen -r dotenv/config --config codegen.yml"
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "publishConfig": {
     "access": "public"

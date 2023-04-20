@@ -254,6 +254,8 @@ export function TimeSeries(props: TimeSeriesProps) {
    */
   const fetchData = React.useCallback(async () => {
     try {
+      setIsLoading(true)
+
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         TimeSeriesDocument,
