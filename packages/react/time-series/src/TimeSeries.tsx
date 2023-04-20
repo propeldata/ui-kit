@@ -1,5 +1,6 @@
 import React from 'react'
 import request from 'graphql-request'
+import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
@@ -327,7 +328,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   React.useEffect(() => {
     if (isStatic) {
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      setTimeout(() => renderChart({ labels: formattedLabels, values }))
+      renderChart({ labels: formattedLabels, values })
     }
   }, [isStatic, loading, styles, variant, labels, values, labelFormatter, renderChart])
 
@@ -336,7 +337,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       const { labels, values } = serverData
 
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      setTimeout(() => renderChart({ labels: formattedLabels, values }))
+      renderChart({ labels: formattedLabels, values })
     }
   }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
 
@@ -357,14 +358,21 @@ export function TimeSeries(props: TimeSeriesProps) {
   }
 
   return (
-    <canvas
-      id={id}
-      ref={canvasRef}
-      width={styles?.canvas?.width}
-      height={styles?.canvas?.height || defaultChartHeight}
-      role={role || 'img'}
-      aria-label={ariaLabel || defaultAriaLabel}
-      {...rest}
-    />
+    <div className={getContainerStyles(styles)}>
+      <canvas
+        id={id}
+        ref={canvasRef}
+        width={styles?.canvas?.width}
+        height={styles?.canvas?.height || defaultChartHeight}
+        role={role || 'img'}
+        aria-label={ariaLabel || defaultAriaLabel}
+        {...rest}
+      />
+    </div>
   )
 }
+
+const getContainerStyles = (styles?: Styles) => css`
+  width: ${styles?.canvas?.width};
+  height: ${styles?.canvas?.height || defaultChartHeight};
+`
