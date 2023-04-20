@@ -18,7 +18,10 @@
     "access": "public"
   },
   "devDependencies": {
-    "parcel": "^2.8.2",
+    "parcel": "2.8.2",
     "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "chart.js": "^4.2.1"
   }
 }
