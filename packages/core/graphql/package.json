@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-graphql",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "yarn gen && parcel watch",
     "build": "yarn gen && parcel build",
-    "gen": "graphql-codegen -r dotenv/config --config codegen.yml"
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "publishConfig": {
     "access": "public"

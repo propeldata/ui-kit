@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/react-counter",
-  "version": "0.26.7",
+  "version": "0.26.8",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",

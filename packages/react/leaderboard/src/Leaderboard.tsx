@@ -193,20 +193,6 @@ export function Leaderboard(props: LeaderboardProps) {
    * its on `headers` and `rows`
    */
   const fetchData = React.useCallback(async () => {
-    const withTimeRange = query?.timeRange?.relative
-      ? {
-          timeRange: {
-            relative: query.timeRange.relative,
-            n: query.timeRange.n
-          }
-        }
-      : {
-          timeRange: {
-            start: query?.timeRange?.start,
-            stop: query?.timeRange?.stop
-          }
-        }
-
     try {
       setIsLoading(true)
 
@@ -216,12 +202,12 @@ export function Leaderboard(props: LeaderboardProps) {
         {
           uniqueName: query?.metric,
           leaderboardInput: {
+            timeRange: query?.timeRange,
             filters: query?.filters,
             propeller: query?.propeller,
             sort: query?.sort,
             rowLimit: query?.rowLimit,
-            dimensions: query?.dimensions,
-            ...withTimeRange
+            dimensions: query?.dimensions
           }
         },
         {
@@ -248,10 +234,7 @@ export function Leaderboard(props: LeaderboardProps) {
     query?.propeller,
     query?.rowLimit,
     query?.sort,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop
+    query?.timeRange
   ])
 
   React.useEffect(() => {
