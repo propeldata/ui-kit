@@ -64,29 +64,15 @@ export function Counter(props: CounterProps) {
     try {
       setIsLoading(true)
 
-      const withTimeRange = query?.timeRange?.relative
-        ? {
-            timeRange: {
-              relative: query.timeRange.relative,
-              n: query.timeRange.n
-            }
-          }
-        : {
-            timeRange: {
-              start: query?.timeRange?.start,
-              stop: query?.timeRange?.stop
-            }
-          }
-
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         CounterDocument,
         {
           uniqueName: query?.metric,
           counterInput: {
+            timeRange: query?.timeRange,
             filters: query?.filters,
-            propeller: query?.propeller,
-            ...withTimeRange
+            propeller: query?.propeller
           }
         },
         {
@@ -104,16 +90,7 @@ export function Counter(props: CounterProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [
-    query?.accessToken,
-    query?.filters,
-    query?.metric,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop,
-    query?.propeller
-  ])
+  }, [query])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -139,7 +116,7 @@ export function Counter(props: CounterProps) {
 
   React.useEffect(() => {
     async function setup() {
-      if (isStatic) {
+      if (isStatic && value) {
         setDataValue(value)
         return
       }
