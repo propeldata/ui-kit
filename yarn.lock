@@ -4554,6 +4554,8 @@ __metadata:
     "@propeldata/release": "workspace:^"
     "@types/css-modules": ^1.0.2
     "@types/eslint": ^7.28.0
+    "@types/react": ^18.0.37
+    "@types/react-dom": ^18.0.11
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0
     babel-loader: ^8.3.0
@@ -6681,6 +6683,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prop-types@npm:*":
+  version: 15.7.5
+  resolution: "@types/prop-types@npm:15.7.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fprop-types%2F-%2Fprop-types-15.7.5.tgz"
+  checksum: 5b43b8b15415e1f298243165f1d44390403bb2bd42e662bca3b5b5633fdd39c938e91b7fce3a9483699db0f7a715d08cef220c121f723a634972fdf596aec980
+  languageName: node
+  linkType: hard
+
 "@types/q@npm:^1.5.1":
   version: 1.5.5
   resolution: "@types/q@npm:1.5.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fq%2F-%2Fq-1.5.5.tgz"
@@ -6699,6 +6708,26 @@ __metadata:
   version: 1.2.4
   resolution: "@types/range-parser@npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Frange-parser%2F-%2Frange-parser-1.2.4.tgz"
   checksum: b7c0dfd5080a989d6c8bb0b6750fc0933d9acabeb476da6fe71d8bdf1ab65e37c136169d84148034802f48378ab94e3c37bb4ef7656b2bec2cb9c0f8d4146a95
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.0.11":
+  version: 18.0.11
+  resolution: "@types/react-dom@npm:18.0.11::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.0.11.tgz"
+  dependencies:
+    "@types/react": "*"
+  checksum: 579691e4d5ec09688087568037c35edf8cfb1ab3e07f6c60029280733ee7b5c06d66df6fcc90786702c93ac8cb13bc7ff16c79ddfc75d082938fbaa36e1cdbf4
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:*, @types/react@npm:^18.0.37":
+  version: 18.0.37
+  resolution: "@types/react@npm:18.0.37::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.0.37.tgz"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 6a6c8feada1d6aa2d01a38c44ce09598d93688e97ed21511d5e34fd7fe748b760dd957a5ac0725f5643d8d7e1a0ade6478ebd4be96c9605c5d6816b17ad35d2d
   languageName: node
   linkType: hard
 
@@ -6724,6 +6753,13 @@ __metadata:
   version: 0.12.0
   resolution: "@types/retry@npm:0.12.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fretry%2F-%2Fretry-0.12.0.tgz"
   checksum: 61a072c7639f6e8126588bf1eb1ce8835f2cb9c2aba795c4491cf6310e013267b0c8488039857c261c387e9728c1b43205099223f160bb6a76b4374f741b5603
+  languageName: node
+  linkType: hard
+
+"@types/scheduler@npm:*":
+  version: 0.16.3
+  resolution: "@types/scheduler@npm:0.16.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fscheduler%2F-%2Fscheduler-0.16.3.tgz"
+  checksum: 2b0aec39c24268e3ce938c5db2f2e77f5c3dd280e05c262d9c2fe7d890929e4632a6b8e94334017b66b45e4f92a5aa42ba3356640c2a1175fa37bef2f5200767
   languageName: node
   linkType: hard
 
