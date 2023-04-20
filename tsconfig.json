@@ -1,5 +1,5 @@
 {
-  "include": ["packages", "types", "scripts"],
+  "include": ["packages", "types", "scripts", "app/storybook"],
   "exclude": ["node_modules", "actions"],
   "compilerOptions": {
     "baseUrl": ".",
