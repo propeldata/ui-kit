@@ -55,6 +55,8 @@ export function Counter(props: CounterProps) {
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
+  const filtersString = JSON.stringify(query?.filters || [])
+
   /**
    * Fetches the counter data
    * when the user doesn't provide
@@ -64,14 +66,21 @@ export function Counter(props: CounterProps) {
     try {
       setIsLoading(true)
 
+      const filters = JSON.parse(filtersString)
+
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         CounterDocument,
         {
           uniqueName: query?.metric,
           counterInput: {
-            timeRange: query?.timeRange,
-            filters: query?.filters,
+            timeRange: {
+              relative: query?.timeRange?.relative || null,
+              n: query?.timeRange?.n || null,
+              start: query?.timeRange?.start || null,
+              stop: query?.timeRange?.stop || null
+            },
+            filters,
             propeller: query?.propeller
           }
         },
@@ -90,7 +99,16 @@ export function Counter(props: CounterProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [query])
+  }, [
+    query?.metric,
+    query?.accessToken,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop,
+    query?.propeller,
+    filtersString
+  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -123,9 +141,9 @@ export function Counter(props: CounterProps) {
 
       const fetchedValue = await fetchData()
 
-      if (!fetchedValue) {
+      if (typeof fetchedValue === 'undefined') {
         setHasError(true)
-        console.error(`QueryError: Your metric ${query?.metric} returned undefined or a \`null\` value.`)
+        console.error(`QueryError: Your metric ${query?.metric} returned undefined.`)
         return
       }
 
