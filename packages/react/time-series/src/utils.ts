@@ -9,8 +9,7 @@ import {
   ScriptableAndArray,
   ScriptableContext,
   ScaleOptions,
-  TimeUnit,
-  FontSpec
+  TimeUnit
 } from 'chart.js'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
