@@ -136,18 +136,19 @@ export function Counter(props: CounterProps) {
     async function setup() {
       if (isStatic && value) {
         setDataValue(value)
-        return
       }
 
-      const fetchedValue = await fetchData()
+      if (!isStatic) {
+        const fetchedValue = await fetchData()
 
-      if (typeof fetchedValue === 'undefined') {
-        setHasError(true)
-        console.error(`QueryError: Your metric ${query?.metric} returned undefined.`)
-        return
+        if (typeof fetchedValue === 'undefined') {
+          setHasError(true)
+          console.error(`QueryError: Your metric ${query?.metric} returned undefined.`)
+          return
+        }
+
+        setDataValue(fetchedValue)
       }
-
-      setDataValue(fetchedValue)
     }
 
     setup()
