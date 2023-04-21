@@ -9,7 +9,8 @@ import {
   ScriptableAndArray,
   ScriptableContext,
   ScaleOptions,
-  TimeUnit
+  TimeUnit,
+  FontSpec
 } from 'chart.js'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
@@ -115,6 +116,7 @@ export function useSetupDefaultStyles(styles?: Styles) {
       }
 
       Chart.defaults.color = styles?.font?.color || defaultStyles.font.color
+      Chart.defaults.font = font as Partial<FontSpec>
 
       Chart.defaults.elements.point.pointStyle = pointStyle === undefined ? 'circle' : pointStyle
       Chart.defaults.elements.point.radius = styles?.point?.radius || defaultStyles.point.radius

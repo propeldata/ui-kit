@@ -129,6 +129,8 @@ export function TimeSeries(props: TimeSeriesProps) {
   const idRef = React.useRef(idCounter++)
   const id = `time-series-${idRef.current}`
 
+  const filtersString = JSON.stringify(query?.filters || [])
+
   /**
    * The html node where the chart will render
    */
@@ -257,15 +259,22 @@ export function TimeSeries(props: TimeSeriesProps) {
     try {
       setIsLoading(true)
 
+      const filters = JSON.parse(filtersString)
+
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         TimeSeriesDocument,
         {
           uniqueName: query?.metric,
           timeSeriesInput: {
-            timeRange: query?.timeRange,
+            timeRange: {
+              relative: query?.timeRange?.relative || null,
+              n: query?.timeRange?.n || null,
+              start: query?.timeRange?.start || null,
+              stop: query?.timeRange?.stop || null
+            },
             granularity,
-            filters: query?.filters,
+            filters: filters,
             propeller: query?.propeller
           }
         },
@@ -285,7 +294,17 @@ export function TimeSeries(props: TimeSeriesProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [granularity, query?.accessToken, query?.filters, query?.metric, query?.propeller, query?.timeRange])
+  }, [
+    granularity,
+    query?.accessToken,
+    filtersString,
+    query?.metric,
+    query?.propeller,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop
+  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -323,7 +342,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     if (!isStatic) {
       fetchChartData()
     }
-  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.granularity, query?.accessToken, fetchData])
+  }, [isStatic, fetchData])
 
   React.useEffect(() => {
     if (isStatic) {
