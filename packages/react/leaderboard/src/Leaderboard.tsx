@@ -88,6 +88,9 @@ export function Leaderboard(props: LeaderboardProps) {
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
 
+  const filtersString = JSON.stringify(query?.filters || [])
+  const dimensionsString = JSON.stringify(query?.dimensions || [])
+
   /**
    * The html node where the chart will render
    */
@@ -196,18 +199,26 @@ export function Leaderboard(props: LeaderboardProps) {
     try {
       setIsLoading(true)
 
+      const dimensions = JSON.parse(dimensionsString)
+      const filters = JSON.parse(filtersString)
+
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         LeaderboardDocument,
         {
           uniqueName: query?.metric,
           leaderboardInput: {
-            timeRange: query?.timeRange,
-            filters: query?.filters,
+            filters,
             propeller: query?.propeller,
             sort: query?.sort,
             rowLimit: query?.rowLimit,
-            dimensions: query?.dimensions
+            dimensions,
+            timeRange: {
+              relative: query?.timeRange?.relative || null,
+              n: query?.timeRange?.n || null,
+              start: query?.timeRange?.start || null,
+              stop: query?.timeRange?.stop || null
+            }
           }
         },
         {
@@ -228,13 +239,16 @@ export function Leaderboard(props: LeaderboardProps) {
     }
   }, [
     query?.accessToken,
-    query?.dimensions,
-    query?.filters,
+    dimensionsString,
+    filtersString,
     query?.metric,
     query?.propeller,
     query?.rowLimit,
     query?.sort,
-    query?.timeRange
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop
   ])
 
   React.useEffect(() => {
@@ -275,17 +289,7 @@ export function Leaderboard(props: LeaderboardProps) {
     if (!isStatic) {
       fetchChartData()
     }
-  }, [
-    isStatic,
-    query?.timeRange,
-    query?.filters,
-    query?.propeller,
-    query?.sort,
-    query?.rowLimit,
-    query?.dimensions,
-    query?.rowLimit,
-    fetchData
-  ])
+  }, [isStatic, fetchData])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -316,6 +320,12 @@ export function Leaderboard(props: LeaderboardProps) {
       destroyChart()
     }
   }, [])
+
+  React.useEffect(() => {
+    if (variant === 'table') {
+      destroyChart()
+    }
+  }, [variant])
 
   if (isLoading || loading) {
     destroyChart()
