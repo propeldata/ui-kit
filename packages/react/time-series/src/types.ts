@@ -76,4 +76,7 @@ export type Styles = {
     backgroundColor?: string
     hoverBackgroundColor?: string
   }
+  yAxis?: {
+    beginAtZero?: boolean
+  }
 }

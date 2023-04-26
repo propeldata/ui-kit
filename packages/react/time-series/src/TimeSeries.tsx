@@ -186,6 +186,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         },
         y: {
           display: !hideGridLines,
+          beginAtZero: styles?.yAxis?.beginAtZero || defaultStyles.yAxis.beginAtZero,
           grid: { drawOnChartArea: true }
         }
       }
