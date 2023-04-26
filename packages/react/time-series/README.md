@@ -166,13 +166,12 @@ The `styles` prop allows you to customize the appearance of the chart. It accept
 
 ## Line Styles
 
-| Name        | Type      | Default  | Description                                              |
-| ----------- | --------- | -------- | -------------------------------------------------------- |
-| beginAtZero | `boolean` | `false`  | Determines whether the line should begin at zero or not. |
-| tension     | `number`  | `0.4`    | Tension of the line.                                     |
-| borderColor | `string`  | `"#000"` | Border color of the line.                                |
-| borderWidth | `number`  | `2`      | Border width of the line in `px`.                        |
-| stepped     | `boolean` | `false`  | Whether the line should be stepped or not.               |
+| Name        | Type      | Default  | Description                                |
+| ----------- | --------- | -------- | ------------------------------------------ |
+| tension     | `number`  | `0.4`    | Tension of the line.                       |
+| borderColor | `string`  | `"#000"` | Border color of the line.                  |
+| borderWidth | `number`  | `2`      | Border width of the line in `px`.          |
+| stepped     | `boolean` | `false`  | Whether the line should be stepped or not. |
 
 ## Point Styles
 
