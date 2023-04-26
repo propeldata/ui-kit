@@ -12,6 +12,7 @@ export const defaultStyles = {
   },
   line: {
     tension: 0.4,
+    beginAtZero: false,
     borderColor: '#000',
     borderWidth: 2,
     stepped: false,
