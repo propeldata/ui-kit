@@ -58,6 +58,7 @@ export type Styles = {
     hoverBackgroundColor?: string
   }
   line?: {
+    beginAtZero?: boolean
     tension?: number
     stepped?: boolean
     borderWidth?: number
