@@ -52,6 +52,9 @@ export const defaultStyles = {
     borderWidth: 1,
     hoverBorderColor: '#000',
     hoverBackgroundColor: '#000'
+  },
+  yAxis: {
+    beginAtZero: false
   }
 }
 
