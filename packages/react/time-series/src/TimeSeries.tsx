@@ -21,7 +21,8 @@ import {
   PointElement,
   Colors,
   TimeSeriesScale,
-  LinearScale
+  LinearScale,
+  LogarithmicScale
 } from 'chart.js'
 import 'chartjs-adapter-date-fns'
 
@@ -31,9 +32,9 @@ import {
   useSetupDefaultStyles,
   getDefaultGranularity,
   formatLabels,
-  getGranularityBasedUnit,
   updateChartStyles,
-  updateChartConfig
+  updateChartConfig,
+  getScales
 } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -44,6 +45,7 @@ import { Loader } from './Loader'
  * we reduce bundle weight
  */
 ChartJS.register(
+  LogarithmicScale,
   Tooltip,
   Colors,
   PointElement,
@@ -153,7 +155,6 @@ export function TimeSeries(props: TimeSeriesProps) {
       const labels = data.labels || []
       const values = data.values || []
 
-      const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
 
@@ -176,42 +177,14 @@ export function TimeSeries(props: TimeSeriesProps) {
         ]
       }
 
-      const scalesBase = {
-        x: {
-          display: !hideGridLines,
-          grid: {
-            drawOnChartArea: false
-          },
-          beginAtZero: true
-        },
-        y: {
-          display: !hideGridLines,
-          beginAtZero: styles?.yAxis?.beginAtZero || defaultStyles.yAxis.beginAtZero,
-          grid: { drawOnChartArea: true }
-        }
-      }
-
-      const customFormatScales = {
-        ...scalesBase
-      }
-
-      const autoFormatScales = {
-        ...scalesBase,
-        x: {
-          ...scalesBase.x,
-          type: 'timeseries',
-          time: {
-            unit: getGranularityBasedUnit(granularity)
-          }
-        }
-      }
+      const scales = getScales({ granularity, isFormatted, isStatic, styles })
 
       if (chartRef.current) {
         updateChartConfig({
           chart: chartRef.current,
           labels,
           values,
-          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales,
+          scales,
           variant,
           customPlugins
         })
@@ -232,7 +205,7 @@ export function TimeSeries(props: TimeSeriesProps) {
           layout: {
             padding: styles?.canvas?.padding || defaultStyles.canvas.padding
           },
-          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales
+          scales
         },
         plugins
       })
