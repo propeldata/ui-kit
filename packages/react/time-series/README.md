@@ -188,6 +188,7 @@ The `styles` prop allows you to customize the appearance of the chart. It accept
 
 ## yAxis Styles
 
-| Name        | Type      | Default | Description                                     |
-| ----------- | --------- | ------- | ----------------------------------------------- |
-| beginAtZero | `boolean` | `false` | Whether the y axis should begin at zero or not. |
+| Name        | Type                          | Default    | Description                                     |
+| ----------- | ----------------------------- | ---------- | ----------------------------------------------- |
+| beginAtZero | `boolean`                     | `false`    | Whether the y axis should begin at zero or not. |
+| type        | `"linear"` or `"logarithmic"` | `"linear"` | Type of scale for the y axis                    |
