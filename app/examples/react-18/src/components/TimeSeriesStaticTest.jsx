@@ -71,7 +71,7 @@ export function TimeSeriesStaticTest() {
           point: { style: pointStyle },
           yAxis: {
             beginAtZero: true,
-            type: 'logarithmic'
+            scale: 'logarithmic'
           }
         }}
       />

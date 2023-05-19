@@ -227,7 +227,7 @@ interface GetScalesOptions {
 
 export function getScales(options: GetScalesOptions) {
   const { styles, granularity, isFormatted, isStatic } = options
-  const type = styles?.yAxis?.type || defaultStyles.yAxis.type
+  const scale = styles?.yAxis?.scale || defaultStyles.yAxis.scale
 
   const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
 
@@ -286,5 +286,5 @@ export function getScales(options: GetScalesOptions) {
     logarithmic: {
       ...logarithmicScales
     }
-  }[type] as ChartScales
+  }[scale] as ChartScales
 }

@@ -88,6 +88,6 @@ export type Styles = {
   }
   yAxis?: {
     beginAtZero?: boolean
-    type?: 'linear' | 'logarithmic'
+    scale?: 'linear' | 'logarithmic'
   }
 }

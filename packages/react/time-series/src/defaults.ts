@@ -55,7 +55,7 @@ export const defaultStyles = {
   },
   yAxis: {
     beginAtZero: false,
-    type: 'linear'
+    scale: 'linear'
   }
 }
 
