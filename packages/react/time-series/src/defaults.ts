@@ -64,3 +64,5 @@ export const serverErrorMessage = {
 }
 
 export const defaultAriaLabel = ''
+
+export const smallChartSize = 150

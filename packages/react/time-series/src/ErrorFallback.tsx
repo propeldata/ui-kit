@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
 
-import { defaultChartHeight, serverErrorMessage } from './defaults'
+import { defaultChartHeight, serverErrorMessage, smallChartSize } from './defaults'
 import { Styles } from './types'
 
 export interface ErrorFallbackProps {
@@ -26,8 +26,9 @@ export function ErrorFallback(props: ErrorFallbackProps) {
     const containerWidth = containerRef.current?.clientWidth
     const containerHeight = containerRef.current?.clientHeight
 
-    const isContainerSmall = (containerWidth && containerWidth < 150) || (containerHeight && containerHeight < 150)
-    const isCanvasSmall = (canvasWidth && canvasWidth < 150) || canvasHeight < 150
+    const isContainerSmall =
+      (containerWidth && containerWidth < smallChartSize) || (containerHeight && containerHeight < smallChartSize)
+    const isCanvasSmall = (canvasWidth && canvasWidth < smallChartSize) || canvasHeight < smallChartSize
 
     setIsSmall(Boolean(isContainerSmall || isCanvasSmall))
   }, [canvasHeight, canvasWidth])
