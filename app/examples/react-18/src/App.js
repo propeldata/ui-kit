@@ -1,12 +1,13 @@
 import React from 'react'
 
 import {
-  TimeSeriesStaticTest,
+  // TimeSeriesStaticTest,
   TimeSeriesConnectedTest,
   LeaderboardStaticTest,
   LeaderboardConnectedTest,
   CounterStaticTest,
-  CounterConnectedTest
+  CounterConnectedTest,
+  TimeSeriesSmallErrorTest
 } from 'components'
 
 export default function App() {
@@ -15,7 +16,8 @@ export default function App() {
       <h1 className="m-3 text-3xl">React 18 Testing App</h1>
       <hr />
       <div className="grid grid-cols-2 gap-2">
-        <TimeSeriesStaticTest />
+        {/* <TimeSeriesStaticTest /> */}
+        <TimeSeriesSmallErrorTest />
         <TimeSeriesConnectedTest />
         <LeaderboardStaticTest />
         <LeaderboardConnectedTest />
