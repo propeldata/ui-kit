@@ -11,9 +11,10 @@ import {
   TimeUnit,
   ScaleOptionsByType
 } from 'chart.js'
+import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
-import { ChartPlugins, ChartVariant, DeepPartial, Styles, ChartScales } from './types'
+import { ChartPlugins, ChartVariant, Styles, ChartScales } from './types'
 import { defaultStyles } from './defaults'
 
 export function cssvar(name: string) {

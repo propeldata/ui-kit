@@ -1,11 +1,5 @@
 import type { ScaleOptionsByType } from 'chart.js'
 
-export type DeepPartial<T> = T extends object
-  ? {
-      [P in keyof T]?: DeepPartial<T[P]>
-    }
-  : T
-
 export type ChartScales = Partial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
 export type ChartVariant = 'bar' | 'line'
