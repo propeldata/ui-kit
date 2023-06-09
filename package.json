@@ -29,8 +29,8 @@
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@emotion/css": "^11.10.6",
-    "@parcel/packager-ts": "2.8.2",
-    "@parcel/transformer-typescript-types": "2.8.2",
+    "@parcel/packager-ts": "^2.8.2",
+    "@parcel/transformer-typescript-types": "^2.8.2",
     "@propeldata/release": "workspace:^",
     "@types/chartjs": "^0.0.31",
     "@types/css-modules": "^1.0.2",
