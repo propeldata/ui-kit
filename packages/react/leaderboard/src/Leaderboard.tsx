@@ -214,10 +214,10 @@ export function Leaderboard(props: LeaderboardProps) {
             rowLimit: query?.rowLimit,
             dimensions,
             timeRange: {
-              relative: query?.timeRange?.relative || null,
-              n: query?.timeRange?.n || null,
-              start: query?.timeRange?.start || null,
-              stop: query?.timeRange?.stop || null
+              relative: query?.timeRange?.relative ?? null,
+              n: query?.timeRange?.n ?? null,
+              start: query?.timeRange?.start ?? null,
+              stop: query?.timeRange?.stop ?? null
             }
           }
         },

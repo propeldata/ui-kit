@@ -75,10 +75,10 @@ export function Counter(props: CounterProps) {
           uniqueName: query?.metric,
           counterInput: {
             timeRange: {
-              relative: query?.timeRange?.relative || null,
-              n: query?.timeRange?.n || null,
-              start: query?.timeRange?.start || null,
-              stop: query?.timeRange?.stop || null
+              relative: query?.timeRange?.relative ?? null,
+              n: query?.timeRange?.n ?? null,
+              start: query?.timeRange?.start ?? null,
+              stop: query?.timeRange?.stop ?? null
             },
             filters,
             propeller: query?.propeller
@@ -141,7 +141,7 @@ export function Counter(props: CounterProps) {
       if (!isStatic) {
         const fetchedValue = await fetchData()
 
-        if (typeof fetchedValue === 'undefined') {
+        if (fetchedValue === undefined) {
           setHasError(true)
           console.error(`QueryError: Your metric ${query?.metric} returned undefined.`)
           return

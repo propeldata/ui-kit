@@ -29,7 +29,7 @@ export const getValueWithPrefixAndSufix = (params: {
 }) => {
   const { prefix, value, sufix, localize } = params
 
-  if (typeof value === 'undefined') return
+  if (value === undefined) return
 
   return (prefix ? prefix : '') + getValue({ value, localize }) + (sufix ? sufix : '')
 }

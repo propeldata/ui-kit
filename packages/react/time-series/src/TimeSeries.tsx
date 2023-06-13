@@ -268,10 +268,10 @@ export function TimeSeries(props: TimeSeriesProps) {
           uniqueName: query?.metric,
           timeSeriesInput: {
             timeRange: {
-              relative: query?.timeRange?.relative || null,
-              n: query?.timeRange?.n || null,
-              start: query?.timeRange?.start || null,
-              stop: query?.timeRange?.stop || null
+              relative: query?.timeRange?.relative ?? null,
+              n: query?.timeRange?.n ?? null,
+              start: query?.timeRange?.start ?? null,
+              stop: query?.timeRange?.stop ?? null
             },
             granularity,
             filters: filters,
