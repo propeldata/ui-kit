@@ -264,12 +264,16 @@ export function getScales(options: GetScalesOptions) {
 
   const currentFormatScales = isFormatted || isStatic ? customFormatScales : autoFormatScales
 
-  const linearScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }> = {
-    ...currentFormatScales,
-    y: {
-      ...currentFormatScales.y,
-      type: 'linear'
+  if (scale === 'linear') {
+    const linearScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }> = {
+      ...currentFormatScales,
+      y: {
+        ...currentFormatScales.y,
+        type: 'linear'
+      }
     }
+
+    return linearScales
   }
 
   const logarithmicScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'logarithmic'> }> = {
@@ -280,12 +284,5 @@ export function getScales(options: GetScalesOptions) {
     }
   }
 
-  return {
-    linear: {
-      ...linearScales
-    },
-    logarithmic: {
-      ...logarithmicScales
-    }
-  }[scale] as ChartScales
+  return logarithmicScales
 }
