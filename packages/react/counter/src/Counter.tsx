@@ -113,15 +113,15 @@ export function Counter(props: CounterProps) {
   React.useEffect(() => {
     function handlePropsMismatch() {
       if (isStatic && !value) {
-        console.error('InvalidPropsError: You must pass either `value` or `query` props')
+        // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
         setHasError(true)
         return
       }
 
       if (!isStatic && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
-        console.error(
-          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-        )
+        // console.error(
+        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+        // ) we will set logs as a feature later
         setHasError(true)
         return
       }
@@ -143,7 +143,7 @@ export function Counter(props: CounterProps) {
 
         if (fetchedValue === undefined) {
           setHasError(true)
-          console.error(`QueryError: Your metric ${query?.metric} returned undefined.`)
+          // console.error(`QueryError: Your metric ${query?.metric} returned undefined.`) we will set logs as a feature later
           return
         }
 

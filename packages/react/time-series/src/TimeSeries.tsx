@@ -309,20 +309,20 @@ export function TimeSeries(props: TimeSeriesProps) {
   React.useEffect(() => {
     function handlePropsMismatch() {
       if (isStatic && !labels && !values) {
-        console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
+        // console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props') we will set logs as a feature later
         setHasError(true)
         return
       }
 
       if (isStatic && (!labels || !values)) {
-        console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`')
+        // console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`') we will set logs as a feature later
         setHasError(true)
         return
       }
       if (!isStatic && (!query.accessToken || !query.metric || !query.timeRange)) {
-        console.error(
-          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-        )
+        // console.error(
+        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+        // ) we will set logs as a feature later
         setHasError(true)
         return
       }

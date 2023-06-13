@@ -254,13 +254,13 @@ export function Leaderboard(props: LeaderboardProps) {
   React.useEffect(() => {
     function handlePropsMismatch() {
       if (isStatic && !headers && !rows) {
-        console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
+        // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
         setHasError(true)
         return
       }
 
       if (isStatic && (!headers || !rows)) {
-        console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
+        // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
         setHasError(true)
         return
       }
@@ -268,9 +268,9 @@ export function Leaderboard(props: LeaderboardProps) {
         !isStatic &&
         (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
       ) {
-        console.error(
-          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
-        )
+        // console.error(
+        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
+        // ) we will set logs as a feature later
         setHasError(true)
         return
       }
@@ -306,7 +306,7 @@ export function Leaderboard(props: LeaderboardProps) {
   React.useEffect(() => {
     try {
       if (variant !== 'bar' && variant !== 'table') {
-        console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`')
+        // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
         throw new Error('InvalidPropsError')
       }
       setHasError(false)
