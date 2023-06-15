@@ -4,7 +4,7 @@ This PR…
 
 ## Checklist
 
-Before merging to `main` and releasing to prod:
+Before merging to main:
 
 - [ ] Tests
 - [ ] Manually tested in React apps
