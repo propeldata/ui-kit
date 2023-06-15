@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-plugins",
-  "version": "0.2.1",
+  "version": "0.30.15-rc.1",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -15,10 +15,15 @@
     "src"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "group": "@propeldata/ui-kit"
   },
   "devDependencies": {
+    "chart.js": "^4.2.1",
     "parcel": "^2.8.2",
     "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "chart.js": "^4.2.1"
   }
 }

@@ -1,5 +1,6 @@
 {
   "name": "react-16",
+  "private": true,
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
   },

@@ -1,3 +1,7 @@
+import type { ScaleOptionsByType } from 'chart.js'
+
+export type ChartScales = Partial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
+
 export type ChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
@@ -78,5 +82,6 @@ export type Styles = {
   }
   yAxis?: {
     beginAtZero?: boolean
+    scale?: 'linear' | 'logarithmic'
   }
 }

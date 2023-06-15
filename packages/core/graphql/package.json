@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-graphql",
-  "version": "0.2.8",
+  "version": "0.30.15-rc.1",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -12,11 +12,13 @@
     "gen": "graphql-codegen --config codegen.yml"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "group": "@propeldata/ui-kit"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
+    "graphql-request": "^6.0.0",
     "react-query": "^3.39.2"
   },
   "peerDependencies": {

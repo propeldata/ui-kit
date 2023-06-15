@@ -21,7 +21,8 @@ import {
   PointElement,
   Colors,
   TimeSeriesScale,
-  LinearScale
+  LinearScale,
+  LogarithmicScale
 } from 'chart.js'
 import 'chartjs-adapter-date-fns'
 
@@ -31,9 +32,9 @@ import {
   useSetupDefaultStyles,
   getDefaultGranularity,
   formatLabels,
-  getGranularityBasedUnit,
   updateChartStyles,
-  updateChartConfig
+  updateChartConfig,
+  getScales
 } from './utils'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -44,6 +45,7 @@ import { Loader } from './Loader'
  * we reduce bundle weight
  */
 ChartJS.register(
+  LogarithmicScale,
   Tooltip,
   Colors,
   PointElement,
@@ -129,6 +131,8 @@ export function TimeSeries(props: TimeSeriesProps) {
   const idRef = React.useRef(idCounter++)
   const id = `time-series-${idRef.current}`
 
+  const filtersString = JSON.stringify(query?.filters || [])
+
   /**
    * The html node where the chart will render
    */
@@ -153,7 +157,6 @@ export function TimeSeries(props: TimeSeriesProps) {
       const labels = data.labels || []
       const values = data.values || []
 
-      const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
 
@@ -176,42 +179,14 @@ export function TimeSeries(props: TimeSeriesProps) {
         ]
       }
 
-      const scalesBase = {
-        x: {
-          display: !hideGridLines,
-          grid: {
-            drawOnChartArea: false
-          },
-          beginAtZero: true
-        },
-        y: {
-          display: !hideGridLines,
-          beginAtZero: styles?.yAxis?.beginAtZero || defaultStyles.yAxis.beginAtZero,
-          grid: { drawOnChartArea: true }
-        }
-      }
-
-      const customFormatScales = {
-        ...scalesBase
-      }
-
-      const autoFormatScales = {
-        ...scalesBase,
-        x: {
-          ...scalesBase.x,
-          type: 'timeseries',
-          time: {
-            unit: getGranularityBasedUnit(granularity)
-          }
-        }
-      }
+      const scales = getScales({ granularity, isFormatted, isStatic, styles })
 
       if (chartRef.current) {
         updateChartConfig({
           chart: chartRef.current,
           labels,
           values,
-          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales,
+          scales,
           variant,
           customPlugins
         })
@@ -232,7 +207,7 @@ export function TimeSeries(props: TimeSeriesProps) {
           layout: {
             padding: styles?.canvas?.padding || defaultStyles.canvas.padding
           },
-          scales: isFormatted || isStatic ? customFormatScales : autoFormatScales
+          scales
         },
         plugins
       })
@@ -258,15 +233,22 @@ export function TimeSeries(props: TimeSeriesProps) {
     try {
       setIsLoading(true)
 
+      const filters = JSON.parse(filtersString)
+
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         TimeSeriesDocument,
         {
           uniqueName: query?.metric,
           timeSeriesInput: {
-            timeRange: query?.timeRange,
+            timeRange: {
+              relative: query?.timeRange?.relative ?? null,
+              n: query?.timeRange?.n ?? null,
+              start: query?.timeRange?.start ?? null,
+              stop: query?.timeRange?.stop ?? null
+            },
             granularity,
-            filters: query?.filters,
+            filters: filters,
             propeller: query?.propeller
           }
         },
@@ -286,25 +268,35 @@ export function TimeSeries(props: TimeSeriesProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [granularity, query?.accessToken, query?.filters, query?.metric, query?.propeller, query?.timeRange])
+  }, [
+    granularity,
+    query?.accessToken,
+    filtersString,
+    query?.metric,
+    query?.propeller,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop
+  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
       if (isStatic && !labels && !values) {
-        console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
+        // console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props') we will set logs as a feature later
         setHasError(true)
         return
       }
 
       if (isStatic && (!labels || !values)) {
-        console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`')
+        // console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`') we will set logs as a feature later
         setHasError(true)
         return
       }
       if (!isStatic && (!query.accessToken || !query.metric || !query.timeRange)) {
-        console.error(
-          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-        )
+        // console.error(
+        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+        // ) we will set logs as a feature later
         setHasError(true)
         return
       }
@@ -324,7 +316,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     if (!isStatic) {
       fetchChartData()
     }
-  }, [isStatic, query?.timeRange, query?.filters, query?.propeller, query?.granularity, query?.accessToken, fetchData])
+  }, [isStatic, fetchData])
 
   React.useEffect(() => {
     if (isStatic) {

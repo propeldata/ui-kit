@@ -55,6 +55,8 @@ export function Counter(props: CounterProps) {
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
+  const filtersString = JSON.stringify(query?.filters || [])
+
   /**
    * Fetches the counter data
    * when the user doesn't provide
@@ -64,14 +66,21 @@ export function Counter(props: CounterProps) {
     try {
       setIsLoading(true)
 
+      const filters = JSON.parse(filtersString)
+
       const response = await request(
         PROPEL_GRAPHQL_API_ENDPOINT,
         CounterDocument,
         {
           uniqueName: query?.metric,
           counterInput: {
-            timeRange: query?.timeRange,
-            filters: query?.filters,
+            timeRange: {
+              relative: query?.timeRange?.relative ?? null,
+              n: query?.timeRange?.n ?? null,
+              start: query?.timeRange?.start ?? null,
+              stop: query?.timeRange?.stop ?? null
+            },
+            filters,
             propeller: query?.propeller
           }
         },
@@ -90,20 +99,29 @@ export function Counter(props: CounterProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [query])
+  }, [
+    query?.metric,
+    query?.accessToken,
+    query?.timeRange?.n,
+    query?.timeRange?.relative,
+    query?.timeRange?.start,
+    query?.timeRange?.stop,
+    query?.propeller,
+    filtersString
+  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
       if (isStatic && !value) {
-        console.error('InvalidPropsError: You must pass either `value` or `query` props')
+        // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
         setHasError(true)
         return
       }
 
       if (!isStatic && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
-        console.error(
-          'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-        )
+        // console.error(
+        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+        // ) we will set logs as a feature later
         setHasError(true)
         return
       }
@@ -118,18 +136,19 @@ export function Counter(props: CounterProps) {
     async function setup() {
       if (isStatic && value) {
         setDataValue(value)
-        return
       }
 
-      const fetchedValue = await fetchData()
+      if (!isStatic) {
+        const fetchedValue = await fetchData()
 
-      if (!fetchedValue) {
-        setHasError(true)
-        console.error(`QueryError: Your metric ${query?.metric} returned undefined or a \`null\` value.`)
-        return
+        if (fetchedValue === undefined) {
+          setHasError(true)
+          // console.error(`QueryError: Your metric ${query?.metric} returned undefined.`) we will set logs as a feature later
+          return
+        }
+
+        setDataValue(fetchedValue)
       }
-
-      setDataValue(fetchedValue)
     }
 
     setup()

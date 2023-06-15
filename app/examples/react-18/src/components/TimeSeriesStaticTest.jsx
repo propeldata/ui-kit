@@ -31,28 +31,15 @@ const mockData1 = {
 
 const mockData2 = {
   labels: [
-    '01/02',
-    '02/02',
-    '03/02',
-    '04/02',
-    '05/02',
-    '06/02',
-    '07/02',
-    '08/02',
-    '09/02',
-    '10/02',
-    '11/02',
-    '12/02',
-    '13/02',
-    '14/02',
-    '15/02',
-    '16/02',
-    '17/02',
-    '18/02',
-    '19/02',
-    '20/02'
+    '2023-05-11T00:00:00.000Z',
+    '2023-05-12T00:00:00.000Z',
+    '2023-05-13T00:00:00.000Z',
+    '2023-05-14T00:00:00.000Z',
+    '2023-05-15T00:00:00.000Z',
+    '2023-05-16T00:00:00.000Z',
+    '2023-05-17T00:00:00.000Z'
   ],
-  values: [809, 984, 673, 500, 522, 471, 872, 578, 123, 619, 38, 326, 128, 11, 844, 58, 576, 28, 663, 189]
+  values: [0, 200, 300, 400, 79187691, 248679, 131034]
 }
 
 export function TimeSeriesStaticTest() {
@@ -81,7 +68,11 @@ export function TimeSeriesStaticTest() {
         styles={{
           bar: { backgroundColor: barsColor },
           canvas: { backgroundColor: '#f5f5f5' },
-          point: { style: pointStyle }
+          point: { style: pointStyle },
+          yAxis: {
+            beginAtZero: true,
+            scale: 'logarithmic'
+          }
         }}
       />
       <div className="flex items-center gap-2">
