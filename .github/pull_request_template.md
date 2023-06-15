@@ -7,7 +7,7 @@ This PR…
 Before merging to `main` and releasing to prod:
 
 - [ ] Tests
-- [ ] Manual tested in React apps
+- [ ] Manually tested in React apps
 - [ ] Deployment notes
 - [ ] Approved
 
