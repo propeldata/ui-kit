@@ -12,7 +12,7 @@ export function TimeSeriesConnectedTest() {
       <TimeSeries
         query={{
           accessToken: '<PROPEL_ACCESS_TOKEN>',
-          metric: 'queryCount',
+          metric: '<METRIC_UNIQUE_NAME>',
           timeRange: {
             relative: RelativeTimeRange.LastNDays,
             n: 30

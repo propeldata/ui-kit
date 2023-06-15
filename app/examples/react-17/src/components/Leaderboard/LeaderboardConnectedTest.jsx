@@ -13,16 +13,16 @@ export function LeaderboardConnectedTest() {
           accessToken: '<PROPEL_ACCESS_TOKEN>',
           dimensions: [
             {
-              columnName: 'METRIC_TYPE'
+              columnName: '<DIMENSION_ONE>'
             },
             {
-              columnName: 'ENVIRONMENT_ID'
+              columnName: '<DIMENSION_TWO>'
             },
             {
-              columnName: 'ACCOUNT_ID'
+              columnName: '<DIMENSION_THREE>'
             }
           ],
-          metric: 'queryCount',
+          metric: '<METRIC_UNIQUE_NAME>',
           rowLimit: 8,
           timeRange: {
             relative: RelativeTimeRange.LastNDays,
