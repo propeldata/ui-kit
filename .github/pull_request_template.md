@@ -32,7 +32,7 @@ Before merging to main:
 
 ## GraphQL
 
-- Added X query to graphql package
+- Added X query to GraphQL package.
 
 # App changes
 
