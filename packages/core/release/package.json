@@ -19,14 +19,16 @@
     "bin",
     "lib"
   ],
+  "peerDependencies": {
+    "conventional-changelog-angular": "^6.0.0"
+  },
   "devDependencies": {
     "@tsconfig/node18": "1.0.1",
     "eslint": "^8.32.0",
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@monodeploy/node": "^3.6.0",
-    "@monodeploy/types": "^3.6.0",
-    "conventional-changelog-angular": "^5.0.13"
+    "@monodeploy/node": "^4.0.1",
+    "@monodeploy/types": "^4.0.1"
   }
 }
