@@ -57,7 +57,7 @@ async function main(): Promise<void> {
       }
     }
   } catch (error) {
-    console.error(error)
+    // console.error(error) we will set logs as a feature later
     process.exit(1)
   }
 }

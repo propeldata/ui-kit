@@ -7,9 +7,13 @@ const getValue = (options: getValueOptions) => {
   const { value, localize } = options
 
   const isInteger = Number.isInteger(parseFloat(value))
+  const isNull = value === null
 
   if (isInteger) {
     return localize ? parseInt(value).toLocaleString() : parseInt(value)
+  }
+  if (isNull) {
+    return '-'
   }
 
   return localize
@@ -25,7 +29,7 @@ export const getValueWithPrefixAndSufix = (params: {
 }) => {
   const { prefix, value, sufix, localize } = params
 
-  if (!value) return
+  if (value === undefined) return
 
   return (prefix ? prefix : '') + getValue({ value, localize }) + (sufix ? sufix : '')
 }
