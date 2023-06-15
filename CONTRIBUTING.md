@@ -41,4 +41,22 @@ Feel free to customize the React sample apps according to your needs for testing
 
 ### Release Procedure
 
-To release a new version of the UI Kit…
+Every merge to main creates a new release candidate. For example, if we are currently developing 1.2.3, merging to main will create 1.2.3-rc.0. Merging another change to main will create 1.2.3-rc.1, and so on. These release candidates allow us to perform additional testing of the UI Kit in external applications. Once we are satisfied with a release candidate, we will create a proper release for it.
+
+To create a proper release, first
+
+1. **Draft a new Release in GitHub.** You can use [this link](https://github.com/propeldata/ui-kit/releases/new).
+    1. Do not choose a tag yet.
+    2. Set the title to the version of the UI Kit that will be released (for example, "1.2.3").
+    3. Get the list of all pull requests merged since the last release. You can do this by comparing to the last release in GitHub. For example, if the last release was 1.2.2, the following URL will show all the pull requests merged since 1.2.2:
+    
+        ```
+        https://github.com/propeldata/ui-kit/compare/%40propeldata/ui-kit%401.2.3...main
+        ```
+
+    4. Combine the release notes from each of the pull requests.
+    5. Type them into the GitHub Release and click "Save draft".
+
+2. **Manually trigger the "publish-release" workflow.** Go to the "Actions" tab, click on the "publish-release" workflow, and then click "Run workflow". This will release 1.2.3, publish it to NPM, and create its git tag.
+
+3. **Go back to the GitHub Release, set its tag, and publish it.** The "publish-release" workflow will have created the tag "@propeldata/ui-kit@1.2.3". Choose this for the GitHub Release and click "Publish release".
