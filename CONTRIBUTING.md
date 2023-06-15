@@ -35,7 +35,7 @@ The React sample apps are purpose-built UI applications designed for manual comp
 
 ### Manual testing
 
-To thoroughly test your feature or bug fix across different React versions (`16.8.0`, `17.0.0`, and `18.0.0`), utilize the React sample apps. These apps are specifically designed for manual testing of components. It is crucial to ensure compatibility with each React version. Keep in mind that using React 17 or React 18 specific features in the components is not permitted, as it would cause compatibility issues with other versions. Maintaining cross-version support is essential for maintaining the functionality of the components.
+To thoroughly test your feature or bug fix across different React versions (16.8.0, 17.0.0, and 18.0.0), utilize the React sample apps. These apps are specifically designed for manual testing of components. It is crucial to ensure compatibility with each React version. Keep in mind that using React 17 or React 18 specific features in the components is not permitted, as it would cause compatibility issues with other versions. Maintaining cross-version support is essential for maintaining the functionality of the components.
 
 Feel free to customize the React sample apps according to your needs for testing specific features or bug fixes. However, it is crucial to maintain synchronization of these modifications across all React versions.
 
