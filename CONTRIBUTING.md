@@ -20,7 +20,7 @@ The UI components rely on [Chart.js](https://www.chartjs.org/docs/latest/) for v
 
 ### Preview component changes
 
-There are two ways you can preview changes made to a component.
+There are two ways you can preview changes made to a component:
 
 - Storybook
 - React sample apps
