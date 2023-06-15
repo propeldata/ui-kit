@@ -18,7 +18,7 @@ Before merging to main:
 
 ## Time Series
 
-- Added X feature to Time Series bar chart
+- Added X feature to Time Series.
 
 ## Leaderboard
 
