@@ -10,7 +10,7 @@ The rest of this document describes how to get started developing on this reposi
 
 ### Propel API
 
-To enable the `"Connected"` mode in our UI components, we rely on the Propel API. It is important for contributors to understand the functionality of each Propel resource and how the GraphQL API operates. Detailed information about Propel's API can be found in [Propel's documentation](https://www.propeldata.com/docs), which we highly recommend reviewing before making contributions.
+To enable the "Connected" mode in our UI components, we rely on the Propel API. It is important for contributors to understand the functionality of each Propel resource and how the GraphQL API operates. Detailed information about Propel's API can be found in [Propel's documentation](https://www.propeldata.com/docs), which we highly recommend reviewing before making contributions.
 
 ### Chart.js
 
