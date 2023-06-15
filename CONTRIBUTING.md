@@ -31,7 +31,7 @@ To run Storybook, navigate to the root of the project and execute the command `y
 
 #### React sample apps
 
-The React sample apps are purpose-built UI applications designed for manual component testing. These apps allow you to run a React application using versions `16.8.0`, `17.0.0`, or `18.0.0`. To launch a specific app, navigate to its respective folder and run the command yarn start. This will initiate the React application and enable you to explore and interact with the components in the desired React version.
+The React sample apps are purpose-built UI applications designed for manual component testing. These apps allow you to run a React application using versions 16.8.0, 17.0.0, or 18.0.0. To launch a specific app, navigate to its respective folder and run the command `yarn start`. This will initiate the React application and enable you to explore and interact with the components in the desired React version.
 
 ### Manual testing
 
