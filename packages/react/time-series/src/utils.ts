@@ -8,12 +8,13 @@ import {
   PointStyle,
   ScriptableAndArray,
   ScriptableContext,
-  ScaleOptions,
-  TimeUnit
+  TimeUnit,
+  ScaleOptionsByType
 } from 'chart.js'
+import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
-import { ChartPlugins, ChartVariant, Styles } from './types'
+import { ChartPlugins, ChartVariant, Styles, ChartScales } from './types'
 import { defaultStyles } from './defaults'
 
 export function cssvar(name: string) {
@@ -200,7 +201,7 @@ interface UpdateChartConfig {
   chart: Chart
   values: number[]
   labels: string[]
-  scales: Record<string, Partial<ScaleOptions>>
+  scales: ChartScales
   variant: ChartVariant
   customPlugins: ChartPlugins
 }
@@ -216,4 +217,72 @@ export function updateChartConfig(options: UpdateChartConfig) {
   dataset.type = variant
 
   chart.options.plugins = customPlugins
+}
+
+interface GetScalesOptions {
+  styles?: Styles
+  granularity: TimeSeriesGranularity | null
+  isFormatted: boolean
+  isStatic: boolean
+}
+
+export function getScales(options: GetScalesOptions) {
+  const { styles, granularity, isFormatted, isStatic } = options
+  const scale = styles?.yAxis?.scale || defaultStyles.yAxis.scale
+
+  const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
+
+  const scalesBase = {
+    x: {
+      display: !hideGridLines,
+      grid: {
+        drawOnChartArea: false
+      },
+      beginAtZero: true
+    },
+    y: {
+      display: !hideGridLines,
+      beginAtZero: styles?.yAxis?.beginAtZero || defaultStyles.yAxis.beginAtZero,
+      grid: { drawOnChartArea: true }
+    }
+  }
+
+  const customFormatScales = {
+    ...scalesBase
+  }
+
+  const autoFormatScales = {
+    ...scalesBase,
+    x: {
+      ...scalesBase.x,
+      type: 'timeseries',
+      time: {
+        unit: getGranularityBasedUnit(granularity)
+      }
+    }
+  }
+
+  const currentFormatScales = isFormatted || isStatic ? customFormatScales : autoFormatScales
+
+  if (scale === 'linear') {
+    const linearScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }> = {
+      ...currentFormatScales,
+      y: {
+        ...currentFormatScales.y,
+        type: 'linear'
+      }
+    }
+
+    return linearScales
+  }
+
+  const logarithmicScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'logarithmic'> }> = {
+    ...(isFormatted || isStatic ? customFormatScales : autoFormatScales),
+    y: {
+      ...currentFormatScales.y,
+      type: 'logarithmic'
+    }
+  }
+
+  return logarithmicScales
 }

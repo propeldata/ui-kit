@@ -54,7 +54,8 @@ export const defaultStyles = {
     hoverBackgroundColor: '#000'
   },
   yAxis: {
-    beginAtZero: false
+    beginAtZero: false,
+    scale: 'linear'
   }
 }
 
