@@ -12,7 +12,8 @@
     "gen": "graphql-codegen --config codegen.yml"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "group": "@propeldata/ui-kit"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

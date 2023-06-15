@@ -28,7 +28,7 @@ function MonthSalesCount() {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: 'salesCount',
     timeRange: {
-      relative: 'LAST_MONTH'
+      relative: 'PREVIOUS_MONTH'
     }
   }
   return <Counter query={queryOptions} />

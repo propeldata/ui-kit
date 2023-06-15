@@ -1,15 +1,12 @@
-name: publish
+name: publish-release
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
+
 env:
   PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
 
 jobs:
   publish:
-    if: github.event.head_commit.message != 'release'
     runs-on: ubuntu-latest
     steps:
       # Setup
@@ -47,7 +44,6 @@ jobs:
       - uses: ./.github/actions/prepare
         with:
           cache_fresh_start: 'true'
-      - run: yarn build
 
       # Release
       - run: |

@@ -115,6 +115,7 @@ The `styles` prop allows you to customize the appearance of the chart. It accept
 | bar       | `BarStyles`     | Styles for the bars in the chart (only used in `bar` variant)  |
 | line      | `LineStyles`    | Styles for the line in the chart (only used in `line` variant) |
 | point     | `PointStyles`   | Styles for the points in the chart                             |
+| yAxis     | `YAxisStyles`   | Options for the y Axis                                         |
 
 ### FontStyles
 
@@ -184,3 +185,9 @@ The `styles` prop allows you to customize the appearance of the chart. It accept
 | borderWidth          | `number`                                                                                      | `1`         | Border width of the point in `px`.      |
 | hoverBorderColor     | `string`                                                                                      | `"#000"`    | Border color of the point on hover.     |
 | hoverBackgroundColor | `string`                                                                                      | `"#000"`    | Background color of the point on hover. |
+
+## yAxis Styles
+
+| Name        | Type      | Default | Description                                     |
+| ----------- | --------- | ------- | ----------------------------------------------- |
+| beginAtZero | `boolean` | `false` | Whether the y axis should begin at zero or not. |

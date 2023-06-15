@@ -15,7 +15,8 @@
     "src"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "group": "@propeldata/ui-kit"
   },
   "devDependencies": {
     "chart.js": "^4.2.1",
