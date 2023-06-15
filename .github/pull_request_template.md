@@ -8,7 +8,7 @@ Before merging to `main` and releasing to prod:
 
 - [ ] Tests
 - [ ] Manually tested in React apps
-- [ ] Deployment notes
+- [ ] Release notes
 - [ ] Approved
 
 ## Deployment notes
