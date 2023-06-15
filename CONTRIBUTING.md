@@ -46,16 +46,17 @@ Every merge to main creates a new release candidate. For example, if we are curr
 To create a proper release, first
 
 1. **Draft a new Release in GitHub.** You can use [this link](https://github.com/propeldata/ui-kit/releases/new).
-    1. Do not choose a tag yet.
-    2. Set the title to the version of the UI Kit that will be released (for example, "1.2.3").
-    3. Get the list of all pull requests merged since the last release. You can do this by comparing to the last release in GitHub. For example, if the last release was 1.2.2, the following URL will show all the pull requests merged since 1.2.2:
-    
-        ```
-        https://github.com/propeldata/ui-kit/compare/%40propeldata/ui-kit%401.2.3...main
-        ```
 
-    4. Combine the release notes from each of the pull requests.
-    5. Type them into the GitHub Release and click "Save draft".
+   1. Do not choose a tag yet.
+   2. Set the title to the version of the UI Kit that will be released (for example, "1.2.3").
+   3. Get the list of all pull requests merged since the last release. You can do this by comparing to the last release in GitHub. For example, if the last release was 1.2.2, the following URL will show all the pull requests merged since 1.2.2:
+
+      ```
+      https://github.com/propeldata/ui-kit/compare/%40propeldata/ui-kit%401.2.3...main
+      ```
+
+   4. Combine the release notes from each of the pull requests.
+   5. Type them into the GitHub Release and click "Save draft".
 
 2. **Manually trigger the "publish-release" workflow.** Go to the "Actions" tab, click on the "publish-release" workflow, and then click "Run workflow". This will release 1.2.3, publish it to NPM, and create its git tag.
 

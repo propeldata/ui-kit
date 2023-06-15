@@ -43,5 +43,4 @@ Before merging to main:
 ## Storybook
 
 - Added Y story for Time Series.
-
 ```
