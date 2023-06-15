@@ -38,7 +38,7 @@ Before merging to main:
 
 ## React 18 example
 
-- Added X test to React 18 example
+- Added X test to React 18 example.
 
 ## Storybook
 
