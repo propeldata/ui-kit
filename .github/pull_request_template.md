@@ -42,7 +42,7 @@ Before merging to main:
 
 ## Storybook
 
-- Added Y story for Time Series component
+- Added Y story for Time Series.
 
 # Rollback strategy
 
