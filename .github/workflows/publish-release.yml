@@ -44,7 +44,6 @@ jobs:
       - uses: ./.github/actions/prepare
         with:
           cache_fresh_start: 'true'
-      - run: yarn build
 
       # Release
       - run: |
