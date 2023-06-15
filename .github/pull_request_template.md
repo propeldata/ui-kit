@@ -26,7 +26,7 @@ Before merging to main:
 
 ## Counter
 
-- Added Z feature to Counter
+- Added Z feature to Counter.
 
 # Packages changes
 
