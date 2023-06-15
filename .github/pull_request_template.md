@@ -11,7 +11,7 @@ Before merging to main:
 - [ ] Release notes
 - [ ] Approved
 
-## Deployment notes
+## Release notes
 
 ```md
 # Component changes
