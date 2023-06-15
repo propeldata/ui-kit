@@ -27,7 +27,7 @@ There are two ways you can preview changes made to a component:
 
 #### Storybook
 
-To run Storybook, navigate to the root of the project and execute the command `yarn storybook`. Within Storybook, you will find dedicated stories for each component, allowing you to preview changes in real-time. use the command `yarn dev` in the component you are working on to observe the changes instantly.
+To run Storybook, navigate to the root of the project and execute the command `yarn storybook`. Within Storybook, you will find dedicated stories for each component, allowing you to preview changes in real-time. Use the command `yarn dev` in the component you are working on to observe the changes instantly.
 
 #### React sample apps
 
