@@ -44,7 +44,4 @@ Before merging to main:
 
 - Added Y story for Time Series.
 
-# Rollback strategy
-
-Re-deploy the last successful release.
 ```
