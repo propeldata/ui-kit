@@ -22,7 +22,7 @@ Before merging to main:
 
 ## Leaderboard
 
-- Fixed Y bug to Leaderboard table
+- Fixed Y bug to Leaderboard.
 
 ## Counter
 
