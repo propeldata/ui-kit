@@ -15,7 +15,8 @@
     "src"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "group": "@propeldata/ui-kit"
   },
   "devDependencies": {
     "parcel": "^2.8.2",

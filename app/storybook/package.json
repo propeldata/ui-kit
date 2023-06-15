@@ -1,5 +1,6 @@
 {
   "name": "ui-kit-storybook",
+  "private": true,
   "packageManager": "yarn@3.3.0",
   "dependencies": {
     "@propeldata/react-counter": "workspace:^",
