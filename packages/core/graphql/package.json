@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-graphql",
-  "version": "0.2.8",
+  "version": "0.30.15-rc.1",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
