@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "yarn gen && parcel watch",
     "build": "yarn gen && parcel build",
-    "gen": "graphql-codegen --config codegen.yml && ed -s src/generated/index.ts <<< $'2d\nw'"
+    "gen": "graphql-codegen --config codegen.yml && node script.cjs src/generated/index.ts"
   },
   "publishConfig": {
     "access": "public",
