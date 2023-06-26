@@ -1,8 +1,6 @@
-query Leaderboard($uniqueName: String!, $leaderboardInput: LeaderboardInput!) {
-  metricByName(uniqueName: $uniqueName) {
-    leaderboard(input: $leaderboardInput) {
-      headers
-      rows
-    }
+query Leaderboard($leaderboardInput: LeaderboardInput!) {
+  leaderboard(input: $leaderboardInput) {
+    headers
+    rows
   }
 }

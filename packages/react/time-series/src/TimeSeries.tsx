@@ -1,3 +1,4 @@
+import { TimeSeriesQuery, TimeSeriesQueryVariables } from '@propeldata/ui-kit-graphql/dist'
 import React from 'react'
 import request from 'graphql-request'
 import { css } from '@emotion/css'
@@ -123,7 +124,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     ...rest
   } = props
 
-  const granularity = query?.granularity || getDefaultGranularity(query?.timeRange)
+  const granularity = query?.granularity ?? getDefaultGranularity(query?.timeRange)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<TimeSeriesData>()
@@ -235,12 +236,12 @@ export function TimeSeries(props: TimeSeriesProps) {
 
       const filters = JSON.parse(filtersString)
 
-      const response = await request(
+      const response = await request<TimeSeriesQuery, TimeSeriesQueryVariables>(
         PROPEL_GRAPHQL_API_ENDPOINT,
         TimeSeriesDocument,
         {
-          uniqueName: query?.metric,
           timeSeriesInput: {
+            metricName: query?.metric,
             timeRange: {
               relative: query?.timeRange?.relative ?? null,
               n: query?.timeRange?.n ?? null,
@@ -257,10 +258,10 @@ export function TimeSeries(props: TimeSeriesProps) {
         }
       )
 
-      const metricData = response.metricByName.timeSeries
+      const metricData = response.timeSeries
 
-      const labels: string[] = [...metricData.labels]
-      const values: number[] = [...metricData.values]
+      const labels = metricData?.labels ?? []
+      const values = (metricData?.values ?? []).map((value) => (value == null ? null : Number(value)))
 
       return { labels, values }
     } catch {

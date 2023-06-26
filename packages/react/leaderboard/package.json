@@ -21,7 +21,7 @@
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1",
     "chart.js": "^4.1.2",
     "graphql": "^16.6.0",
-    "graphql-request": "^3.6.1"
+    "graphql-request": "^6.1.0"
   },
   "devDependencies": {
     "parcel": "^2.8.2",

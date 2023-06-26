@@ -1,18 +1,15 @@
 interface getValueOptions {
-  value: string
+  value: string | null
   localize?: boolean
 }
 
 const getValue = (options: getValueOptions) => {
   const { value, localize } = options
 
-  const isInteger = Number.isInteger(parseFloat(value))
-  const isNull = value === null
-
-  if (isInteger) {
+  if (value !== null && Number.isInteger(parseFloat(value))) {
     return localize ? parseInt(value).toLocaleString() : parseInt(value)
   }
-  if (isNull) {
+  if (value === null) {
     return '-'
   }
 
@@ -23,7 +20,7 @@ const getValue = (options: getValueOptions) => {
 
 export const getValueWithPrefixAndSufix = (params: {
   prefix?: string
-  value?: string
+  value?: string | null
   sufix?: string
   localize?: boolean
 }) => {

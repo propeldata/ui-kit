@@ -2,7 +2,7 @@ export type ChartVariant = 'bar' | 'table'
 
 export type LeaderboardData = {
   headers?: string[]
-  rows?: string[][]
+  rows?: Array<Array<string | null>>
 }
 
 export type ChartPaddingOptions =
