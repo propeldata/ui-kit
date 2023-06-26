@@ -52,7 +52,7 @@ export function Counter(props: CounterProps) {
    */
   const isStatic = !query
 
-  const [dataValue, setDataValue] = React.useState<string>()
+  const [dataValue, setDataValue] = React.useState<string | null>()
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -94,7 +94,7 @@ export function Counter(props: CounterProps) {
 
       setHasError(false)
 
-      return metricData?.value ?? undefined
+      return metricData?.value
     } catch {
       setHasError(true)
     } finally {
