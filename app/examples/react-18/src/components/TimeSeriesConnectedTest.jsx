@@ -1,6 +1,8 @@
 import React from 'react'
 import { RelativeTimeRange, TimeSeries, TimeSeriesGranularity } from '@propeldata/react-time-series'
 
+const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
+
 export function TimeSeriesConnectedTest() {
   const [barsColor, setBarsColor] = React.useState('#ccc')
   const [chartType, setChartType] = React.useState('bar')
@@ -11,8 +13,8 @@ export function TimeSeriesConnectedTest() {
       <h2 className="text-2xl">TimeSeries Connected</h2>
       <TimeSeries
         query={{
-          accessToken: '<PROPEL_ACCESS_TOKEN>',
-          metric: '<METRIC_UNIQUE_NAME>',
+          accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
+          metric: REACT_APP_METRIC_UNIQUE_NAME_1,
           timeRange: {
             relative: RelativeTimeRange.LastNDays,
             n: 30
@@ -26,7 +28,7 @@ export function TimeSeriesConnectedTest() {
           point: { style: pointStyle }
         }}
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-1">
         <input
           className="border-2 bg-white p-1 h-9"
           type="color"

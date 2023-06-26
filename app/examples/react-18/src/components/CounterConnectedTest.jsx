@@ -1,6 +1,8 @@
 import React from 'react'
 import { Counter, RelativeTimeRange } from '@propeldata/react-counter'
 
+const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
+
 export function CounterConnectedTest() {
   const [fontColor, setFontColor] = React.useState('#000')
 
@@ -10,8 +12,8 @@ export function CounterConnectedTest() {
       <div className="h-60 flex justify-center items-center">
         <Counter
           query={{
-            accessToken: '<PROPEL_ACCESS_TOKEN>',
-            metric: '<METRIC_UNIQUE_NAME>',
+            accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
+            metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             timeRange: {
               relative: RelativeTimeRange.LastNDays,
               n: 30
@@ -20,7 +22,7 @@ export function CounterConnectedTest() {
           styles={{ font: { size: '3rem', color: fontColor } }}
         />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-1">
         <input
           className="border-2 bg-white p-1 h-9"
           type="color"

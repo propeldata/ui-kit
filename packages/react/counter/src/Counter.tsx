@@ -58,6 +58,7 @@ export function Counter(props: CounterProps) {
   const [isLoading, setIsLoading] = React.useState(false)
 
   const filtersString = JSON.stringify(query?.filters || [])
+  const counterRef = React.useRef<HTMLSpanElement>(null)
 
   /**
    * Fetches the counter data
@@ -136,7 +137,7 @@ export function Counter(props: CounterProps) {
 
   React.useEffect(() => {
     async function setup() {
-      if (isStatic && value) {
+      if (isStatic) {
         setDataValue(value)
       }
 
@@ -156,14 +157,24 @@ export function Counter(props: CounterProps) {
     setup()
   }, [fetchData, isStatic, query?.metric, value])
 
-  if (isLoading || loading) return <Loader styles={styles} />
+  if ((isLoading || loading || (!dataValue && !isStatic)) && !counterRef.current) {
+    return <Loader styles={styles} />
+  }
 
   if (hasError) {
     return <ErrorFallback styles={styles} />
   }
 
   return (
-    <span {...rest} className={getFontStyles(styles)}>
+    <span
+      ref={counterRef}
+      style={{
+        opacity: isLoading || loading ? '0.3' : '1',
+        transition: 'opacity 0.2s ease-in-out'
+      }}
+      {...rest}
+      className={getFontStyles(styles)}
+    >
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,
         value: dataValue,

@@ -342,7 +342,8 @@ export function TimeSeries(props: TimeSeriesProps) {
     }
   }, [])
 
-  if (isLoading || loading) {
+  // @TODO: encapsulate this logic in a shared hook/component
+  if ((isLoading || loading || (!serverData && !isStatic)) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }
@@ -361,6 +362,10 @@ export function TimeSeries(props: TimeSeriesProps) {
         height={styles?.canvas?.height || defaultChartHeight}
         role={role || 'img'}
         aria-label={ariaLabel || defaultAriaLabel}
+        style={{
+          opacity: isLoading || loading ? '0.3' : '1',
+          transition: 'opacity 0.2s ease-in-out'
+        }}
         {...rest}
       />
     </div>

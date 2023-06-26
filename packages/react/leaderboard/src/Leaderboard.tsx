@@ -100,6 +100,8 @@ export function Leaderboard(props: LeaderboardProps) {
 
   const chartRef = React.useRef<ChartJS | null>()
 
+  const tableRef = React.useRef<HTMLDivElement>(null)
+
   /**
    * Checks if the component is in `static` or `connected` mode
    */
@@ -190,6 +192,11 @@ export function Leaderboard(props: LeaderboardProps) {
       chartRef.current.destroy()
       chartRef.current = null
     }
+  }
+
+  const loadingStyles = {
+    opacity: isLoading || loading ? '0.3' : '1',
+    transition: 'opacity 0.2s ease-in-out'
   }
 
   /**
@@ -318,6 +325,12 @@ export function Leaderboard(props: LeaderboardProps) {
   }, [variant])
 
   React.useEffect(() => {
+    if (variant === 'table') {
+      destroyChart()
+    }
+  }, [variant])
+
+  React.useEffect(() => {
     return () => {
       destroyChart()
     }
@@ -329,7 +342,10 @@ export function Leaderboard(props: LeaderboardProps) {
     }
   }, [variant])
 
-  if (isLoading || loading) {
+  if (
+    (isLoading || loading || (!serverData && !isStatic)) &&
+    ((variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current))
+  ) {
     destroyChart()
     return <Loader styles={styles} />
   }
@@ -353,6 +369,7 @@ export function Leaderboard(props: LeaderboardProps) {
           width={styles?.canvas?.width}
           height={styles?.canvas?.height || defaultChartHeight}
           role="img"
+          style={loadingStyles}
           {...rest}
         />
       </div>
@@ -366,7 +383,7 @@ export function Leaderboard(props: LeaderboardProps) {
     getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
 
   return (
-    <div className={getContainerStyles(styles)}>
+    <div ref={tableRef} className={getContainerStyles(styles)} style={loadingStyles}>
       <table cellSpacing={0} className={tableStyles}>
         <thead className={getTableHeadStyles(styles)}>
           <tr>

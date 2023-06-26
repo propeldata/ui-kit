@@ -24,6 +24,8 @@ const getContainerStyles = (height: number, width?: number) => css`
   position: relative;
   overflow: hidden;
   background-color: #e9e9e9;
+  margin: 0;
+  vertical-align: top;
 
   &::after {
     position: absolute;
