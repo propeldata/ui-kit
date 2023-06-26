@@ -1,4 +1,4 @@
-import { CounterQuery, CounterQueryVariables } from '@propeldata/ui-kit-graphql/src/generated'
+import { CounterQuery, CounterQueryVariables } from '@propeldata/ui-kit-graphql/dist'
 import React from 'react'
 import request from 'graphql-request'
 import {
