@@ -111,7 +111,7 @@ export function Leaderboard(props: LeaderboardProps) {
       if (!canvasRef.current || !data || variant === 'table') return
 
       const labels = data.rows?.map((row) => row[0]) || []
-      const values = data.rows?.map((row) => parseInt(row[row.length - 1] as string)) || []
+      const values = data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
       const hideGridLines = styles?.canvas?.hideGridLines || false
 
@@ -392,12 +392,12 @@ export function Leaderboard(props: LeaderboardProps) {
                   localize: styles?.table?.valueColumn?.localize,
                   prefix: styles?.table?.valueColumn?.prefixValue,
                   sufix: styles?.table?.valueColumn?.sufixValue,
-                  value: valuesByRow?.[rowIndex]
+                  value: valuesByRow?.[rowIndex] ?? undefined
                 })}
               </td>
               {hasValueBar && (
                 <td className={valueBarCellStyles}>
-                  <ValueBar value={valuesByRow?.[rowIndex] || 0} maxValue={maxValue || 0} styles={styles} />
+                  <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
                 </td>
               )}
             </tr>

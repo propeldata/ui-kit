@@ -18,8 +18,10 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const rowsWithoutValue = rows?.map((row) => row.slice(0, row.length - 1))
 
-  const valuesByRow = rows?.map((row) => parseInt(row[row.length - 1] as string))
-  const maxValue = Math.max(...(valuesByRow || []))
+  const valuesByRow = rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1])))
+  const maxValue = valuesByRow?.some((value) => value !== null)
+    ? Math.max(...(valuesByRow || []).map((value) => value ?? -Infinity))
+    : null
 
   const isOrdered = styles?.table?.isOrdered || defaultStyles.table.isOrdered
 
@@ -30,13 +32,13 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
 export const getValueWithPrefixAndSufix = (params: {
   prefix?: string
-  value?: number
+  value?: number | null
   sufix?: string
   localize?: boolean
 }) => {
   const { prefix, value, sufix, localize } = params
 
-  if (!value) return
+  if (value == null) return
 
   return (prefix ? prefix + ' ' : '') + getValue({ value, localize }) + (sufix ? ' ' + sufix : '')
 }
@@ -113,7 +115,7 @@ export function useSetupDefaultStyles(styles?: Styles) {
 interface UpdateChartConfigOptions {
   chart: Chart
   labels: Array<string | null>
-  values: number[]
+  values: Array<number | null>
   customPlugins: ChartPlugins
 }
 
