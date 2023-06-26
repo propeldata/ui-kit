@@ -261,7 +261,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       const metricData = response.timeSeries
 
       const labels = metricData?.labels ?? []
-      const values = (metricData?.values ?? []).map((value) => (value === null ? null : Number(value)))
+      const values = (metricData?.values ?? []).map((value) => (value == null ? null : Number(value)))
 
       return { labels, values }
     } catch {
