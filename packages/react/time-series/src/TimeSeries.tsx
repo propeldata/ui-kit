@@ -110,6 +110,8 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   labelFormatter?: (labels: string[]) => string[]
 }
 
+// @TODO: refactor due to query and styles causing a re-render even if they are the same
+
 export function TimeSeries(props: TimeSeriesProps) {
   const {
     variant = 'bar',
@@ -126,6 +128,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   } = props
 
   const granularity = query?.granularity ?? getDefaultGranularity(query?.timeRange)
+  const [propsMismatch, setPropsMismatch] = React.useState(false)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<TimeSeriesData>()
@@ -234,6 +237,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   const fetchData = React.useCallback(async () => {
     try {
       setIsLoading(true)
+      setHasError(false)
 
       const filters = JSON.parse(filtersString)
 
@@ -286,23 +290,25 @@ export function TimeSeries(props: TimeSeriesProps) {
     function handlePropsMismatch() {
       if (isStatic && !labels && !values) {
         // console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props') we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
 
       if (isStatic && (!labels || !values)) {
         // console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`') we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
+
       if (!isStatic && (!query.accessToken || !query.metric || !query.timeRange)) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
-      setHasError(false)
+
+      setPropsMismatch(false)
     }
 
     if (!loading) {
@@ -342,15 +348,16 @@ export function TimeSeries(props: TimeSeriesProps) {
     }
   }, [])
 
+  if (hasError || propsMismatch) {
+    destroyChart()
+    return <ErrorFallback error={error} styles={styles} />
+  }
+
   // @TODO: encapsulate this logic in a shared hook/component
+  // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
   if ((isLoading || loading || (!serverData && !isStatic)) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
-  }
-
-  if (hasError) {
-    destroyChart()
-    return <ErrorFallback error={error} styles={styles} />
   }
 
   return (

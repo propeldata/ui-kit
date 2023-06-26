@@ -54,6 +54,7 @@ export function Counter(props: CounterProps) {
   const isStatic = !query
 
   const [dataValue, setDataValue] = React.useState<string | null>()
+  const [propsMismatch, setPropsMismatch] = React.useState(false)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -68,6 +69,7 @@ export function Counter(props: CounterProps) {
   const fetchData = React.useCallback(async () => {
     try {
       setIsLoading(true)
+      setHasError(false)
 
       const filters = JSON.parse(filtersString)
 
@@ -94,8 +96,6 @@ export function Counter(props: CounterProps) {
 
       const metricData = response.counter
 
-      setHasError(false)
-
       return metricData?.value
     } catch {
       setHasError(true)
@@ -117,7 +117,7 @@ export function Counter(props: CounterProps) {
     function handlePropsMismatch() {
       if (isStatic && !value) {
         // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
 
@@ -125,9 +125,11 @@ export function Counter(props: CounterProps) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
+
+      setPropsMismatch(false)
     }
 
     if (!loading) {
@@ -157,12 +159,12 @@ export function Counter(props: CounterProps) {
     setup()
   }, [fetchData, isStatic, query?.metric, value])
 
-  if ((isLoading || loading || (!dataValue && !isStatic)) && !counterRef.current) {
-    return <Loader styles={styles} />
+  if (hasError || propsMismatch) {
+    return <ErrorFallback styles={styles} />
   }
 
-  if (hasError) {
-    return <ErrorFallback styles={styles} />
+  if ((isLoading || loading || (!dataValue && !isStatic)) && !counterRef.current) {
+    return <Loader styles={styles} />
   }
 
   return (

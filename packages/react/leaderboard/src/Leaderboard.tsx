@@ -83,6 +83,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 export function Leaderboard(props: LeaderboardProps) {
   const { variant = 'bar', styles, headers, rows, query, error, loading = false, ...rest } = props
 
+  const [propsMismatch, setPropsMismatch] = React.useState(false)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
   const [serverData, setServerData] = React.useState<LeaderboardData>()
@@ -207,6 +208,7 @@ export function Leaderboard(props: LeaderboardProps) {
   const fetchData = React.useCallback(async () => {
     try {
       setIsLoading(true)
+      setHasError(false)
 
       const dimensions = JSON.parse(dimensionsString)
       const filters = JSON.parse(filtersString)
@@ -264,15 +266,16 @@ export function Leaderboard(props: LeaderboardProps) {
     function handlePropsMismatch() {
       if (isStatic && !headers && !rows) {
         // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
 
       if (isStatic && (!headers || !rows)) {
         // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
+
       if (
         !isStatic &&
         (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
@@ -280,9 +283,11 @@ export function Leaderboard(props: LeaderboardProps) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
+
+      setPropsMismatch(false)
     }
 
     if (!loading) {
@@ -318,9 +323,9 @@ export function Leaderboard(props: LeaderboardProps) {
         // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
         throw new Error('InvalidPropsError')
       }
-      setHasError(false)
+      setPropsMismatch(false)
     } catch {
-      setHasError(true)
+      setPropsMismatch(true)
     }
   }, [variant])
 
@@ -342,17 +347,16 @@ export function Leaderboard(props: LeaderboardProps) {
     }
   }, [variant])
 
-  if (
-    (isLoading || loading || (!serverData && !isStatic)) &&
-    ((variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current))
-  ) {
-    destroyChart()
-    return <Loader styles={styles} />
-  }
-
-  if (hasError) {
+  if (hasError || propsMismatch) {
     destroyChart()
     return <ErrorFallback error={error} styles={styles} />
+  }
+
+  const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
+
+  if ((isLoading || loading || (!serverData && !isStatic)) && isNoContainerRef) {
+    destroyChart()
+    return <Loader styles={styles} />
   }
 
   if (variant === 'bar') {
