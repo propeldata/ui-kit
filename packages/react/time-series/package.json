@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/react-time-series",
-  "version": "0.30.15-rc.1",
+  "version": "0.31.0-rc.0",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@emotion/css": "^11.10.5",
-    "@propeldata/ui-kit-components": "workspace:^0.30.15-rc.1",
-    "@propeldata/ui-kit-graphql": "workspace:^0.30.15-rc.1",
+    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.0",
+    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.0",
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1",
     "chart.js": "^4.2.1",
     "chartjs-adapter-date-fns": "2.0.1",
