@@ -1,25 +1,21 @@
-import React from 'react'
+import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 import {
   Chart,
   ChartTypeRegistry,
-  TextAlign,
-  Scriptable,
-  ScriptableTooltipContext,
   PointStyle,
+  ScaleOptionsByType,
+  Scriptable,
   ScriptableAndArray,
   ScriptableContext,
-  TimeUnit,
-  ScaleOptionsByType
+  ScriptableTooltipContext,
+  TextAlign,
+  TimeUnit
 } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
-import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
-
-import { ChartPlugins, ChartVariant, Styles, ChartScales } from './types'
+import React from 'react'
 import { defaultStyles } from './defaults'
 
-export function cssvar(name: string) {
-  return getComputedStyle(document.body).getPropertyValue(name)
-}
+import { ChartPlugins, ChartScales, ChartVariant, Styles } from './types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -53,7 +49,9 @@ export function getDefaultGranularity(timeRange?: TimeRangeInput) {
   const relative = timeRange?.relative
 
   if (!relative) {
-    return null
+    // TODO(mroberts): In a future release, we should calculate this for absolute ranges, too.
+    //   Actually, all of this logic should move to the backend.
+    return TimeSeriesGranularity.Day
   }
 
   return {
@@ -199,7 +197,7 @@ export function updateChartStyles(options: UpdateChartStylesOptions) {
 
 interface UpdateChartConfig {
   chart: Chart
-  values: number[]
+  values: Array<number | null>
   labels: string[]
   scales: ChartScales
   variant: ChartVariant

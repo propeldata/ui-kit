@@ -1,3 +1,4 @@
+import { LeaderboardQuery, LeaderboardQueryVariables } from '@propeldata/ui-kit-graphql/src/generated'
 import React from 'react'
 import request from 'graphql-request'
 import {
@@ -110,7 +111,7 @@ export function Leaderboard(props: LeaderboardProps) {
       if (!canvasRef.current || !data || variant === 'table') return
 
       const labels = data.rows?.map((row) => row[0]) || []
-      const values = data.rows?.map((row) => parseInt(row[row.length - 1])) || []
+      const values = data.rows?.map((row) => parseInt(row[row.length - 1] as string)) || []
 
       const hideGridLines = styles?.canvas?.hideGridLines || false
 
@@ -128,8 +129,8 @@ export function Leaderboard(props: LeaderboardProps) {
       if (chartRef.current) {
         updateChartConfig({
           chart: chartRef.current,
-          labels: labels,
-          values: values,
+          labels,
+          values,
           customPlugins
         })
 
@@ -202,16 +203,16 @@ export function Leaderboard(props: LeaderboardProps) {
       const dimensions = JSON.parse(dimensionsString)
       const filters = JSON.parse(filtersString)
 
-      const response = await request(
+      const response = await request<LeaderboardQuery, LeaderboardQueryVariables>(
         PROPEL_GRAPHQL_API_ENDPOINT,
         LeaderboardDocument,
         {
-          uniqueName: query?.metric,
           leaderboardInput: {
+            metricName: query?.metric,
             filters,
             propeller: query?.propeller,
             sort: query?.sort,
-            rowLimit: query?.rowLimit,
+            rowLimit: query?.rowLimit ?? 100,
             dimensions,
             timeRange: {
               relative: query?.timeRange?.relative ?? null,
@@ -226,10 +227,10 @@ export function Leaderboard(props: LeaderboardProps) {
         }
       )
 
-      const metricData = response.metricByName.leaderboard
+      const metricData = response.leaderboard
 
-      const headers = metricData.headers
-      const rows = metricData.rows
+      const headers = metricData?.headers ?? []
+      const rows = metricData?.rows ?? []
 
       return { headers, rows }
     } catch (error) {

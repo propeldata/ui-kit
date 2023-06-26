@@ -1,11 +1,12 @@
 import type { ScaleOptionsByType } from 'chart.js'
+import { DeepPartial } from 'chart.js/dist/types/utils'
 
-export type ChartScales = Partial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
+export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
 export type ChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
-  values?: number[]
+  values?: Array<number | null>
   labels?: string[]
 }
 

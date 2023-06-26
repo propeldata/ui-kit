@@ -20,7 +20,7 @@
     "@propeldata/ui-kit-graphql": "workspace:^0.30.15-rc.1",
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1",
     "graphql": "^16.0.1",
-    "graphql-request": "^3.6.1"
+    "graphql-request": "^6.1.0"
   },
   "devDependencies": {
     "parcel": "^2.8.2",

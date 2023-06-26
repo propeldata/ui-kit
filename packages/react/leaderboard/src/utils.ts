@@ -6,7 +6,7 @@ import { defaultStyles } from './defaults'
 
 interface GetTableSettingsOptions {
   headers?: string[]
-  rows?: string[][]
+  rows?: Array<Array<string | null>>
   styles?: Styles
 }
 
@@ -18,7 +18,7 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const rowsWithoutValue = rows?.map((row) => row.slice(0, row.length - 1))
 
-  const valuesByRow = rows?.map((row) => parseInt(row[row.length - 1]))
+  const valuesByRow = rows?.map((row) => parseInt(row[row.length - 1] as string))
   const maxValue = Math.max(...(valuesByRow || []))
 
   const isOrdered = styles?.table?.isOrdered || defaultStyles.table.isOrdered
@@ -112,7 +112,7 @@ export function useSetupDefaultStyles(styles?: Styles) {
 
 interface UpdateChartConfigOptions {
   chart: Chart
-  labels: string[]
+  labels: Array<string | null>
   values: number[]
   customPlugins: ChartPlugins
 }

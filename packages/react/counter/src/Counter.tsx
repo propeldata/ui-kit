@@ -1,3 +1,4 @@
+import { CounterQuery, CounterQueryVariables } from '@propeldata/ui-kit-graphql/src/generated'
 import React from 'react'
 import request from 'graphql-request'
 import {
@@ -68,12 +69,12 @@ export function Counter(props: CounterProps) {
 
       const filters = JSON.parse(filtersString)
 
-      const response = await request(
+      const response = await request<CounterQuery, CounterQueryVariables>(
         PROPEL_GRAPHQL_API_ENDPOINT,
         CounterDocument,
         {
-          uniqueName: query?.metric,
           counterInput: {
+            metricName: query?.metric,
             timeRange: {
               relative: query?.timeRange?.relative ?? null,
               n: query?.timeRange?.n ?? null,
@@ -89,11 +90,11 @@ export function Counter(props: CounterProps) {
         }
       )
 
-      const metricData = response.metricByName.counter
+      const metricData = response.counter
 
       setHasError(false)
 
-      return metricData.value
+      return metricData?.value ?? undefined
     } catch {
       setHasError(true)
     } finally {
