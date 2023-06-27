@@ -8,7 +8,6 @@ export {
   Propeller,
   RelativeTimeRange,
   type Scalars,
-  Sort,
   type TimeRangeInput,
   TimeSeriesGranularity
 } from '@propeldata/ui-kit-graphql'
