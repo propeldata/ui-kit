@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
 
-import { defaultChartHeight, serverErrorMessage } from './defaults'
+import { defaultChartHeight, serverErrorMessage, smallChartSize } from './defaults'
 import { Styles } from './types'
 
 export interface ErrorFallbackProps {
@@ -15,19 +15,38 @@ export interface ErrorFallbackProps {
 export function ErrorFallback(props: ErrorFallbackProps) {
   const { error = serverErrorMessage, styles } = props
 
-  const width = styles?.canvas?.width
-  const height = styles?.canvas?.height || defaultChartHeight
+  const [isSmall, setIsSmall] = React.useState(false)
+
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  const canvasWidth = styles?.canvas?.width
+  const canvasHeight = styles?.canvas?.height || defaultChartHeight
+
+  React.useLayoutEffect(() => {
+    const containerWidth = containerRef.current?.clientWidth
+    const containerHeight = containerRef.current?.clientHeight
+
+    const isContainerSmall =
+      (containerWidth && containerWidth < smallChartSize) || (containerHeight && containerHeight < smallChartSize)
+    const isCanvasSmall = (canvasWidth && canvasWidth < smallChartSize) || canvasHeight < smallChartSize
+
+    setIsSmall(Boolean(isContainerSmall || isCanvasSmall))
+  }, [canvasHeight, canvasWidth])
 
   return (
-    <div className={getContainerStyles(height, width)} role="alert">
+    <div ref={containerRef} className={getContainerStyles(canvasHeight, canvasWidth)} role="alert">
       <div className={textWrapperStyles}>
         <Icon color={styles?.font?.color} />
-        <div aria-live="assertive">
-          <p className={textStyles}>{error.title}</p>
-        </div>
-        <div aria-live="assertive">
-          <p>{error.body}</p>
-        </div>
+        {!isSmall && (
+          <>
+            <div aria-live="assertive">
+              <p className={textStyles}>{error.title}</p>
+            </div>
+            <div aria-live="assertive">
+              <p>{error.body}</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
