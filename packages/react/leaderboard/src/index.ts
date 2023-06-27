@@ -1,2 +1,13 @@
 export { Container as Leaderboard } from './Container'
-export { RelativeTimeRange } from '@propeldata/ui-kit-graphql'
+
+export {
+  type DimensionInput,
+  type FilterInput,
+  FilterOperator,
+  type InputMaybe,
+  Propeller,
+  RelativeTimeRange,
+  type Scalars,
+  Sort,
+  type TimeRangeInput
+} from '@propeldata/ui-kit-graphql'

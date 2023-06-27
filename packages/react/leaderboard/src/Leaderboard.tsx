@@ -1,8 +1,9 @@
-import { LeaderboardQuery, LeaderboardQueryVariables } from '@propeldata/ui-kit-graphql/dist'
 import React from 'react'
 import request from 'graphql-request'
 import {
   LeaderboardDocument,
+  LeaderboardQuery,
+  LeaderboardQueryVariables,
   TimeRangeInput,
   FilterInput,
   Propeller,
