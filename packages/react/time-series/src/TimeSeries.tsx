@@ -1,10 +1,11 @@
-import { TimeSeriesQuery, TimeSeriesQueryVariables } from '@propeldata/ui-kit-graphql/dist'
 import React from 'react'
 import request from 'graphql-request'
 import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
   TimeSeriesDocument,
+  TimeSeriesQuery,
+  TimeSeriesQueryVariables,
   TimeRangeInput,
   FilterInput,
   PROPEL_GRAPHQL_API_ENDPOINT,

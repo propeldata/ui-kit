@@ -1,9 +1,10 @@
-import { CounterQuery, CounterQueryVariables } from '@propeldata/ui-kit-graphql/dist'
 import React from 'react'
 import request from 'graphql-request'
 import {
   PROPEL_GRAPHQL_API_ENDPOINT,
   CounterDocument,
+  CounterQuery,
+  CounterQueryVariables,
   TimeRangeInput,
   FilterInput,
   Propeller
