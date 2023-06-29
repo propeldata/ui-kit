@@ -54,10 +54,12 @@ export function Counter(props: CounterProps) {
   const isStatic = !query
 
   const [dataValue, setDataValue] = React.useState<string | null>()
+  const [propsMismatch, setPropsMismatch] = React.useState(false)
   const [hasError, setHasError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
   const filtersString = JSON.stringify(query?.filters || [])
+  const counterRef = React.useRef<HTMLSpanElement>(null)
 
   /**
    * Fetches the counter data
@@ -67,6 +69,7 @@ export function Counter(props: CounterProps) {
   const fetchData = React.useCallback(async () => {
     try {
       setIsLoading(true)
+      setHasError(false)
 
       const filters = JSON.parse(filtersString)
 
@@ -93,8 +96,6 @@ export function Counter(props: CounterProps) {
 
       const metricData = response.counter
 
-      setHasError(false)
-
       return metricData?.value
     } catch {
       setHasError(true)
@@ -116,7 +117,7 @@ export function Counter(props: CounterProps) {
     function handlePropsMismatch() {
       if (isStatic && !value) {
         // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
 
@@ -124,9 +125,11 @@ export function Counter(props: CounterProps) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
-        setHasError(true)
+        setPropsMismatch(true)
         return
       }
+
+      setPropsMismatch(false)
     }
 
     if (!loading) {
@@ -136,7 +139,7 @@ export function Counter(props: CounterProps) {
 
   React.useEffect(() => {
     async function setup() {
-      if (isStatic && value) {
+      if (isStatic) {
         setDataValue(value)
       }
 
@@ -156,14 +159,24 @@ export function Counter(props: CounterProps) {
     setup()
   }, [fetchData, isStatic, query?.metric, value])
 
-  if (isLoading || loading) return <Loader styles={styles} />
-
-  if (hasError) {
+  if (hasError || propsMismatch) {
     return <ErrorFallback styles={styles} />
   }
 
+  if ((isLoading || loading || (dataValue === undefined && !isStatic)) && !counterRef.current) {
+    return <Loader styles={styles} />
+  }
+
   return (
-    <span {...rest} className={getFontStyles(styles)}>
+    <span
+      ref={counterRef}
+      style={{
+        opacity: isLoading || loading ? '0.3' : '1',
+        transition: 'opacity 0.2s ease-in-out'
+      }}
+      {...rest}
+      className={getFontStyles(styles)}
+    >
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,
         value: dataValue,

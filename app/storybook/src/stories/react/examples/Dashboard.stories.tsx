@@ -22,11 +22,9 @@ export default {
   ]
 }
 
-const accessToken = '<PROPEL_ACCESS_TOKEN>'
-
 const queryBase = {
-  accessToken,
-  metric: 'syncRecordsAdded',
+  accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+  metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
     n: 30
@@ -117,7 +115,7 @@ const Template: Story = () => (
               rowLimit: 10,
               dimensions: [
                 {
-                  columnName: 'DATA_POOL_UNIQUE_NAME'
+                  columnName: process.env.STORYBOOK_DIMENSION_1 as string
                 }
               ]
             }}

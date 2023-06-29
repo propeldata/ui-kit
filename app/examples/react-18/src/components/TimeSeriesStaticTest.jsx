@@ -48,12 +48,13 @@ export function TimeSeriesStaticTest() {
   const [chartType, setChartType] = React.useState('bar')
   const [pointStyle, setPointStyle] = React.useState('cross')
 
-  const { data, isLoading } = useFakeData(mockData)
+  const { data, isLoading, setIsLoading } = useFakeData(mockData)
 
   const handleReFetchMock = () => {
-    setMockData({ labels: undefined, values: undefined })
+    setIsLoading(true)
     setTimeout(() => {
       setMockData(mockData2)
+      setIsLoading(false)
     }, 2000)
   }
 
@@ -64,7 +65,7 @@ export function TimeSeriesStaticTest() {
         variant={chartType}
         labels={data?.labels}
         values={data?.values}
-        loading={isLoading || !data?.labels || !data.values}
+        loading={isLoading}
         styles={{
           bar: { backgroundColor: barsColor },
           canvas: { backgroundColor: '#f5f5f5' },
@@ -75,7 +76,7 @@ export function TimeSeriesStaticTest() {
           }
         }}
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-1">
         <button
           className="border-2 bg-white p-1 h-9"
           onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}

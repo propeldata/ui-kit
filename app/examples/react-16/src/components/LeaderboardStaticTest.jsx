@@ -28,12 +28,13 @@ export function LeaderboardStaticTest() {
   const [barsColor, setBarsColor] = React.useState('#ccc')
   const [chartType, setChartType] = React.useState('bar')
 
-  const { data, isLoading } = useFakeData(mockData)
+  const { data, isLoading, setIsLoading } = useFakeData(mockData)
 
   const handleReFetchMock = () => {
-    setMockData({ headers: undefined, rows: undefined })
+    setIsLoading(true)
     setTimeout(() => {
       setMockData(mockData2)
+      setIsLoading(false)
     }, 2000)
   }
 
@@ -44,14 +45,14 @@ export function LeaderboardStaticTest() {
         headers={data?.headers}
         rows={data?.rows}
         variant={chartType}
-        loading={isLoading || !data?.headers || !data.rows}
+        loading={isLoading}
         styles={{
           bar: { backgroundColor: barsColor },
           table: { height: '200px', backgroundColor: '#f5f5f5', header: { backgroundColor: '#f5f5f5' } },
           canvas: { backgroundColor: '#f5f5f5' }
         }}
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-1">
         <button
           className="border-2 bg-white p-1 h-9"
           onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}

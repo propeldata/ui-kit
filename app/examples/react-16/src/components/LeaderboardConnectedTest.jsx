@@ -1,6 +1,14 @@
 import React from 'react'
 import { Leaderboard, RelativeTimeRange } from '@propeldata/react-leaderboard'
 
+const {
+  REACT_APP_PROPEL_ACCESS_TOKEN,
+  REACT_APP_METRIC_UNIQUE_NAME_1,
+  REACT_APP_DIMENSION_1,
+  REACT_APP_DIMENSION_2,
+  REACT_APP_DIMENSION_3
+} = process.env
+
 export function LeaderboardConnectedTest() {
   const [barsColor, setBarsColor] = React.useState('#ccc')
   const [chartType, setChartType] = React.useState('bar')
@@ -10,19 +18,19 @@ export function LeaderboardConnectedTest() {
       <h2 className="text-2xl">Leaderboard Connected</h2>
       <Leaderboard
         query={{
-          accessToken: '<PROPEL_ACCESS_TOKEN>',
+          accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
           dimensions: [
             {
-              columnName: 'METRIC_TYPE'
+              columnName: REACT_APP_DIMENSION_1
             },
             {
-              columnName: 'ENVIRONMENT_ID'
+              columnName: REACT_APP_DIMENSION_2
             },
             {
-              columnName: 'ACCOUNT_ID'
+              columnName: REACT_APP_DIMENSION_3
             }
           ],
-          metric: 'queryCount',
+          metric: REACT_APP_METRIC_UNIQUE_NAME_1,
           rowLimit: 8,
           timeRange: {
             relative: RelativeTimeRange.LastNDays,
@@ -36,7 +44,7 @@ export function LeaderboardConnectedTest() {
           canvas: { backgroundColor: '#f5f5f5' }
         }}
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-1">
         <input
           className="border-2 bg-white p-1 h-9"
           type="color"

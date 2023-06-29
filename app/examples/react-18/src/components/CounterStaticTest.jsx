@@ -15,12 +15,13 @@ export function CounterStaticTest() {
   const [mockData, setMockData] = React.useState(mockData1)
   const [fontColor, setFontColor] = React.useState('#000')
 
-  const { data, isLoading } = useFakeData(mockData)
+  const { data, isLoading, setIsLoading } = useFakeData(mockData)
 
   const handleReFetchMock = () => {
-    setMockData({ value: undefined })
+    setIsLoading(true)
     setTimeout(() => {
       setMockData(mockData2)
+      setIsLoading(false)
     }, 2000)
   }
 
@@ -28,13 +29,9 @@ export function CounterStaticTest() {
     <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
       <h2 className="text-2xl">Counter Static</h2>
       <div className="h-60 flex justify-center items-center">
-        <Counter
-          value={data?.value}
-          loading={isLoading || !data?.value}
-          styles={{ font: { size: '3rem', color: fontColor } }}
-        />
+        <Counter value={data?.value} loading={isLoading} styles={{ font: { size: '3rem', color: fontColor } }} />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mt-1">
         <button
           className="border-2 bg-white p-1 h-9"
           onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}
