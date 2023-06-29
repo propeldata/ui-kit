@@ -355,7 +355,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if ((isLoading || loading || (!serverData && !isStatic)) && !canvasRef.current) {
+  if ((isLoading || loading || (serverData === undefined && !isStatic)) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }

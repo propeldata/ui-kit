@@ -163,7 +163,7 @@ export function Counter(props: CounterProps) {
     return <ErrorFallback styles={styles} />
   }
 
-  if ((isLoading || loading || (!dataValue && !isStatic)) && !counterRef.current) {
+  if ((isLoading || loading || (dataValue === undefined && !isStatic)) && !counterRef.current) {
     return <Loader styles={styles} />
   }
 

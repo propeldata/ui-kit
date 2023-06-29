@@ -354,7 +354,7 @@ export function Leaderboard(props: LeaderboardProps) {
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if ((isLoading || loading || (!serverData && !isStatic)) && isNoContainerRef) {
+  if ((isLoading || loading || (serverData === undefined && !isStatic)) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }
