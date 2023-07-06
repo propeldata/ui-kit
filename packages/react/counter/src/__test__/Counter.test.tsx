@@ -5,6 +5,7 @@ import { Counter, RelativeTimeRange } from '@/counter'
 import { Dom } from '@/testing'
 
 import { setupHandlers } from './mswHandlers'
+import { counter } from './mockData'
 
 describe('Counter', () => {
   let dom: Dom
@@ -14,9 +15,9 @@ describe('Counter', () => {
   })
 
   it('should render a static counter', async () => {
-    dom = render(<Counter value="123" />)
+    dom = render(<Counter value={counter.value} />)
 
-    await dom.findByText('123')
+    await dom.findByText(counter.value)
   })
 
   it('should show value from server', async () => {
@@ -30,6 +31,6 @@ describe('Counter', () => {
       />
     )
 
-    await dom.findByText('123')
+    await dom.findByText(counter.value)
   })
 })
