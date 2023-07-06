@@ -22,7 +22,9 @@
     "graphql-request": "^6.1.0"
   },
   "peerDependencies": {
-    "graphql": "^16.6"
+    "graphql": "^16.6",
+    "react": "^16.8 || ^17 || ^18",
+    "react-dom": "^16.8 || ^17 || ^18"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^4.0.1",
@@ -30,6 +32,8 @@
     "@graphql-codegen/typescript-operations": "^4.0.1",
     "@graphql-codegen/typescript-react-query": "^4.1.0",
     "parcel": "^2.8.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^4.9.4"
   }
 }

@@ -3,6 +3,9 @@ node_modules
 packages/**/*/generated
 packages/nextjs/**
 
+# testing
+coverage
+
 # parcel
 .parcel-cache
 dist
