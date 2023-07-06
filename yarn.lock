@@ -4842,6 +4842,7 @@ __metadata:
     "@types/jest": ^27.5.1
     "@types/react": latest
     "@types/react-dom": latest
+    "@types/testing-library__jest-dom": ^5.14.7
     chart.js: ^4.2.1
     chartjs-adapter-date-fns: 2.0.1
     date-fns: ^2.29.3
