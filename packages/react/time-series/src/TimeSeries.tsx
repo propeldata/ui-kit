@@ -373,6 +373,7 @@ export function TimeSeries(props: TimeSeriesProps) {
           opacity: isLoading || loading ? '0.3' : '1',
           transition: 'opacity 0.2s ease-in-out'
         }}
+        data-testid="chart-canvas"
         {...rest}
       />
     </div>
