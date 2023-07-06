@@ -7,6 +7,7 @@ import { Dom } from '@/testing'
 import { RelativeTimeRange, TimeSeries, TimeSeriesGranularity } from '@/time-series'
 
 import { setupHandlers } from './mswHandlers'
+import { timeSeries } from './mockData'
 
 describe('TimeSeries', () => {
   let dom: Dom
@@ -16,7 +17,7 @@ describe('TimeSeries', () => {
   })
 
   it('should render static data', () => {
-    dom = render(<TimeSeries labels={['a', 'b', 'c']} values={[100, 200, 300]} />)
+    dom = render(<TimeSeries labels={timeSeries.labels} values={timeSeries.values} />)
 
     const chartElement = dom.getByTestId('chart-canvas') as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
@@ -24,8 +25,8 @@ describe('TimeSeries', () => {
     const chartData = chartInstance?.data.datasets[0].data
     const chartLabels = chartInstance?.data.labels
 
-    expect(chartData).toEqual([100, 200, 300])
-    expect(chartLabels).toEqual(['a', 'b', 'c'])
+    expect(chartLabels).toEqual(timeSeries.labels)
+    expect(chartData).toEqual(timeSeries.values)
   })
 
   it('should render data from server', async () => {
@@ -49,9 +50,7 @@ describe('TimeSeries', () => {
     const chartData = chartInstance?.data.datasets[0].data
     const chartLabels = chartInstance?.data.labels
 
-    await waitFor(() => {
-      expect(chartData).toEqual([100, 200, 300])
-      expect(chartLabels).toEqual(['a', 'b', 'c'])
-    })
+    expect(chartLabels).toEqual(timeSeries.labels)
+    expect(chartData).toEqual(timeSeries.values)
   })
 })
