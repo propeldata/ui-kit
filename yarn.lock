@@ -3517,6 +3517,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@juggle/resize-observer@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@juggle/resize-observer@npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"
+  checksum: 2505028c05cc2e17639fcad06218b1c4b60f932a4ebb4b41ab546ef8c157031ae377e3f560903801f6d01706dbefd4943b6c4704bf19ed86dfa1c62f1473a570
+  languageName: node
+  linkType: hard
+
 "@kurkle/color@npm:^0.3.0":
   version: 0.3.2
   resolution: "@kurkle/color@npm:0.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40kurkle%2Fcolor%2F-%2Fcolor-0.3.2.tgz"
@@ -4783,6 +4790,7 @@ __metadata:
     "@types/jest": ^27.5.1
     "@types/react": latest
     "@types/react-dom": latest
+    "@types/testing-library__jest-dom": ^5.14.7
     graphql: ^16.0.1
     graphql-request: ^6.1.0
     jest: ^27.5.1
@@ -4822,15 +4830,30 @@ __metadata:
   resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
   dependencies:
     "@emotion/css": ^11.10.5
+    "@juggle/resize-observer": ^3.4.0
     "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.0"
     "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.1"
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1"
+    "@swc/core": ^1.3.68
+    "@swc/jest": ^0.2.26
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^14.0.0
+    "@testing-library/user-event": ^14.4.3
+    "@types/jest": ^27.5.1
+    "@types/react": latest
+    "@types/react-dom": latest
     chart.js: ^4.2.1
     chartjs-adapter-date-fns: 2.0.1
     date-fns: ^2.29.3
     graphql: ^16.6.0
     graphql-request: ^6.1.0
+    jest: ^27.5.1
+    jest-canvas-mock: ^2.5.2
+    jest-environment-jsdom: ^27.5.1
+    msw: ^1.2.2
     parcel: ^2.8.2
+    react: ^18.2.0
+    react-dom: ^18.2.0
     typescript: ^4.9.3
   peerDependencies:
     react: ^16.8 || ^17 || ^18
@@ -7608,7 +7631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/testing-library__jest-dom@npm:^5.9.1":
+"@types/testing-library__jest-dom@npm:^5.14.7, @types/testing-library__jest-dom@npm:^5.9.1":
   version: 5.14.7
   resolution: "@types/testing-library__jest-dom@npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"
   dependencies:
@@ -11234,7 +11257,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:~1.1.4":
+"color-name@npm:^1.1.4, color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcolor-name%2F-%2Fcolor-name-1.1.4.tgz"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
@@ -12052,6 +12075,13 @@ __metadata:
   bin:
     cssesc: bin/cssesc
   checksum: f8c4ababffbc5e2ddf2fa9957dda1ee4af6048e22aeda1869d0d00843223c1b13ad3f5d88b51caa46c994225eacb636b764eb807a8883e2fb6f99b4f4e8c48b2
+  languageName: node
+  linkType: hard
+
+"cssfontparser@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "cssfontparser@npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcssfontparser%2F-%2Fcssfontparser-1.2.1.tgz"
+  checksum: 952d487cddab591fb944f2a4c326a7736bc963784a6d92b6ad4051f3bf5ee49a732eff62e29a52ff085197cb07f5bd66525a2245ded7fd356113ac81be9238b9
   languageName: node
   linkType: hard
 
@@ -17083,6 +17113,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-canvas-mock@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "jest-canvas-mock@npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"
+  dependencies:
+    cssfontparser: ^1.2.1
+    moo-color: ^1.0.2
+  checksum: a3004d2e96473049045e49dcf98e5ea6011494048ab42b5422b3089d9ff406aaca8353e79587055d840fa145541668eb8f78613765f252ad5901a8217e91ea5d
+  languageName: node
+  linkType: hard
+
 "jest-changed-files@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-changed-files@npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-changed-files%2F-%2Fjest-changed-files-27.5.1.tgz"
@@ -19421,6 +19461,15 @@ __metadata:
   version: 1.0.1
   resolution: "modify-values@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmodify-values%2F-%2Fmodify-values-1.0.1.tgz"
   checksum: 8296610c608bc97b03c2cf889c6cdf4517e32fa2d836440096374c2209f6b7b3e256c209493a0b32584b9cb32d528e99d0dd19dcd9a14d2d915a312d391cc7e9
+  languageName: node
+  linkType: hard
+
+"moo-color@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "moo-color@npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmoo-color%2F-%2Fmoo-color-1.0.3.tgz"
+  dependencies:
+    color-name: ^1.1.4
+  checksum: 02bf59b6bbd5e86641bc062e2dc0843e6e579e18ef67e1c8e93bfc01945df578f20e66ce16aa9632db2aa0e16806e0914a26eb345a804f45fff1ae12a8906a29
   languageName: node
   linkType: hard
 

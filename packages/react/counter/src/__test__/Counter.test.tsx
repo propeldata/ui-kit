@@ -16,7 +16,6 @@ describe('Counter', () => {
   it('should render a static counter', async () => {
     dom = render(<Counter value="123" />)
 
-    expect(2 + 2).toBe(4)
     await dom.findByText('123')
   })
 

@@ -33,6 +33,7 @@
     "@types/jest": "^27.5.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/testing-library__jest-dom": "^5.14.7",
     "jest": "^27.5.1",
     "jest-environment-jsdom": "^27.5.1",
     "msw": "^1.2.2",
