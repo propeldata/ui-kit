@@ -1,7 +1,7 @@
 import React from 'react'
-
-import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
+
+import { render } from '@testing-library/react'
 
 import { Dom } from '@/testing'
 import { RelativeTimeRange, TimeSeries, TimeSeriesGranularity } from '@/time-series'
