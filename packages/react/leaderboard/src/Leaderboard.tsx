@@ -374,6 +374,7 @@ export function Leaderboard(props: LeaderboardProps) {
           height={styles?.canvas?.height || defaultChartHeight}
           role="img"
           style={loadingStyles}
+          data-testid="chart-canvas"
           {...rest}
         />
       </div>
