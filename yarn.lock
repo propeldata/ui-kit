@@ -4779,8 +4779,8 @@ __metadata:
   resolution: "@propeldata/react-counter@workspace:packages/react/counter"
   dependencies:
     "@emotion/css": ^11.10.5
-    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.0"
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.1"
+    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.3"
+    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.3"
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1"
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
@@ -4812,8 +4812,8 @@ __metadata:
   dependencies:
     "@emotion/css": ^11.10.5
     "@juggle/resize-observer": ^3.4.0
-    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.0"
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.1"
+    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.3"
+    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.3"
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1"
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
@@ -4847,8 +4847,8 @@ __metadata:
   dependencies:
     "@emotion/css": ^11.10.5
     "@juggle/resize-observer": ^3.4.0
-    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.0"
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.1"
+    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.3"
+    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.3"
     "@propeldata/ui-kit-plugins": "workspace:^0.30.15-rc.1"
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
@@ -4894,7 +4894,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/ui-kit-components@workspace:^0.31.0-rc.0, @propeldata/ui-kit-components@workspace:packages/core/components":
+"@propeldata/ui-kit-components@workspace:^0.31.0-rc.3, @propeldata/ui-kit-components@workspace:packages/core/components":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-components@workspace:packages/core/components"
   dependencies:
@@ -4908,7 +4908,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/ui-kit-graphql@workspace:^, @propeldata/ui-kit-graphql@workspace:^0.31.0-rc.1, @propeldata/ui-kit-graphql@workspace:packages/core/graphql":
+"@propeldata/ui-kit-graphql@workspace:^, @propeldata/ui-kit-graphql@workspace:^0.31.0-rc.3, @propeldata/ui-kit-graphql@workspace:packages/core/graphql":
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-graphql@workspace:packages/core/graphql"
   dependencies:
