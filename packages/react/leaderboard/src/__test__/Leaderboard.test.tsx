@@ -18,7 +18,7 @@ describe('Leaderboard', () => {
   it('should render the leaderboard with static data', () => {
     dom = render(<Leaderboard headers={leaderboard.headers} rows={leaderboard.rows} />)
 
-    const chartElement = dom.getByTestId('chart-canvas') as HTMLCanvasElement
+    const chartElement = dom.getByRole('img') as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
 
     const chartData = chartInstance?.data.datasets[0].data
@@ -51,7 +51,7 @@ describe('Leaderboard', () => {
       />
     )
 
-    const chartElement = (await dom.findByTestId('chart-canvas')) as HTMLCanvasElement
+    const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
 
     const chartData = chartInstance?.data.datasets[0].data

@@ -19,7 +19,7 @@ describe('TimeSeries', () => {
   it('should render static data', () => {
     dom = render(<TimeSeries labels={timeSeries.labels} values={timeSeries.values} />)
 
-    const chartElement = dom.getByTestId('chart-canvas') as HTMLCanvasElement
+    const chartElement = dom.getByRole('img') as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
 
     const chartData = chartInstance?.data.datasets[0].data
@@ -44,7 +44,7 @@ describe('TimeSeries', () => {
       />
     )
 
-    const chartElement = (await dom.findByTestId('chart-canvas')) as HTMLCanvasElement
+    const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
 
     const chartData = chartInstance?.data.datasets[0].data
