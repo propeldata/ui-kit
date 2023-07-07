@@ -8,8 +8,6 @@ const handlers = [
   graphql.query('Counter', (req, res, ctx) => {
     const { metricName } = req.variables.counterInput
 
-    console.log(metricName)
-
     if (metricName === 'lack-of-data') {
       return res(
         ctx.data({
