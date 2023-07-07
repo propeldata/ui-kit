@@ -15,7 +15,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "release": "propel-release",
-    "test": "yarn workspaces foreach run test",
+    "test": "turbo run test",
     "postinstall": "husky install",
     "commit": "cz",
     "storybook": "yarn workspace ui-kit-storybook storybook",
