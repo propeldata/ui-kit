@@ -8,7 +8,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "parcel watch",
-    "build": "parcel build"
+    "build": "parcel build",
+    "test": "jest",
+    "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
   },
   "publishConfig": {
     "access": "public",
@@ -24,7 +26,23 @@
     "graphql-request": "^6.1.0"
   },
   "devDependencies": {
+    "@juggle/resize-observer": "^3.4.0",
+    "@swc/core": "^1.3.68",
+    "@swc/jest": "^0.2.26",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^27.5.1",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/testing-library__jest-dom": "^5.14.7",
+    "jest": "^27.5.1",
+    "jest-canvas-mock": "^2.5.2",
+    "jest-environment-jsdom": "^27.5.1",
+    "msw": "^1.2.2",
     "parcel": "^2.8.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {
