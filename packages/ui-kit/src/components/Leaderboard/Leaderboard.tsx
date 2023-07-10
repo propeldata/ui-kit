@@ -10,8 +10,8 @@ import {
   PROPEL_GRAPHQL_API_ENDPOINT,
   Sort,
   DimensionInput
-} from '@propeldata/ui-kit-graphql'
-import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
+} from '../../helpers/graphql'
+import { customCanvasBackgroundColor } from '../../helpers'
 import { BarController, BarElement, LinearScale, CategoryScale, Tooltip, Chart as ChartJS, Colors } from 'chart.js'
 import { css } from '@emotion/css'
 
@@ -114,6 +114,8 @@ export function Leaderboard(props: LeaderboardProps) {
     (data?: LeaderboardData) => {
       if (!canvasRef.current || !data || variant === 'table') return
 
+      // @TODO: fix mutidimensional state
+      // const labels = data.rows?.map((row) => row.slice(0, row.length - 1)) || []
       const labels = data.rows?.map((row) => row[0]) || []
       const values = data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
@@ -165,7 +167,19 @@ export function Leaderboard(props: LeaderboardProps) {
           layout: {
             padding: styles?.canvas?.padding || defaultStyles.canvas.padding
           },
-          plugins: customPlugins,
+          plugins: {
+            ...customPlugins
+            // @TODO: fix mutidimensional state
+            // tooltip: {
+            //   callbacks: {
+            //     label: function (context) {
+            //       console.log({ context })
+            //       const label = context.dataset.label || ''
+            //       return label
+            //     }
+            //   }
+            // }
+          },
           scales: {
             x: {
               display: !hideGridLines,

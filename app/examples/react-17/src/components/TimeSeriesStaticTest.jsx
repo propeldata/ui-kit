@@ -1,5 +1,5 @@
 import React from 'react'
-import { TimeSeries } from '@propeldata/react-time-series'
+import { TimeSeries } from '@propeldata/ui-kit'
 
 import { useFakeData } from 'hooks/useFakeData'
 

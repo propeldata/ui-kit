@@ -3,10 +3,10 @@ legacyMode: true
 config:
   fetcher: graphql-request
 generates:
-  src/generated/index.ts:
-    schema: public.graphql
+  src/helpers/graphql/generated/index.ts:
+    schema: src/helpers/graphql/public.graphql
     documents:
-      - ./**/*.graphql
+      - src/helpers/graphql/**/*.graphql
     plugins:
       - typescript
       - typescript-operations

@@ -10,8 +10,8 @@ import {
   FilterInput,
   PROPEL_GRAPHQL_API_ENDPOINT,
   Propeller
-} from '@propeldata/ui-kit-graphql'
-import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
+} from '../../helpers/graphql'
+import { customCanvasBackgroundColor } from '../../helpers'
 import {
   BarController,
   LineController,

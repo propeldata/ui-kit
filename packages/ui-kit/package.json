@@ -1,0 +1,43 @@
+{
+  "name": "@propeldata/ui-kit",
+  "version": "0.0.1",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "parcel watch",
+    "build": "parcel build",
+    "graphql:dev": "yarn graphql:gen && parcel watch",
+    "graphql:build": "yarn graphql:gen && parcel build",
+    "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts"
+  },
+  "publishConfig": {
+    "access": "public",
+    "group": "@propeldata/ui-kit"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.10.5",
+    "@tanstack/react-query": "^4.29.17",
+    "chart.js": "^4.1.2",
+    "chartjs-adapter-date-fns": "2.0.1",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "graphql-request": "^6.1.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-query": "^4.1.0",
+    "parcel": "^2.8.2",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "graphql": "^16.6",
+    "react": "^16.8 || ^17 || ^18",
+    "react-dom": "^16.8 || ^17 || ^18"
+  }
+}

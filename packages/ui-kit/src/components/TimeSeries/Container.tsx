@@ -1,5 +1,5 @@
 import React from 'react'
-import { ErrorBoundary } from '@propeldata/ui-kit-components'
+import { ErrorBoundary } from '../ErrorBoundary'
 
 import { TimeSeries, TimeSeriesProps } from './TimeSeries'
 import { ErrorFallback } from './ErrorFallback'

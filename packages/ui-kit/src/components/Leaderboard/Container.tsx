@@ -1,5 +1,5 @@
 import React from 'react'
-import { ErrorBoundary } from '@propeldata/ui-kit-components'
+import { ErrorBoundary } from '../ErrorBoundary'
 
 import { Leaderboard, LeaderboardProps } from './Leaderboard'
 import { ErrorFallback } from './ErrorFallback'

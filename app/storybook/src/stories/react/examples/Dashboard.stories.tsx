@@ -2,9 +2,7 @@ import React from 'react'
 import { Story } from '@storybook/react'
 import { RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
 
-import { Counter } from '@propeldata/react-counter'
-import { TimeSeries } from '@propeldata/react-time-series'
-import { Leaderboard } from '@propeldata/react-leaderboard'
+import { Counter, TimeSeries, Leaderboard } from '@propeldata/ui-kit'
 
 import * as S from './styles'
 

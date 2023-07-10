@@ -1,7 +1,7 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
-import { Counter, RelativeTimeRange } from '@propeldata/react-counter'
+import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
 
 export default {
   title: 'React/Counter'

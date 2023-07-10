@@ -5,6 +5,7 @@
   "license": "MIT",
   "workspaces": [
     "packages/*/**",
+    "packages/*",
     "app/*/**",
     "app/storybook"
   ],

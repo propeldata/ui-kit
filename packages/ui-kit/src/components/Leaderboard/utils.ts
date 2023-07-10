@@ -114,6 +114,8 @@ export function useSetupDefaultStyles(styles?: Styles) {
 
 interface UpdateChartConfigOptions {
   chart: Chart
+  // @TODO: fix mutidimensional state
+  // labels: Array<Array<string | null>>
   labels: Array<string | null>
   values: Array<number | null>
   customPlugins: ChartPlugins

@@ -1,4 +1,4 @@
-import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '@propeldata/ui-kit-graphql'
+import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers/graphql'
 import {
   Chart,
   ChartTypeRegistry,
