@@ -1,5 +1,6 @@
 import React from 'react'
 import { ErrorBoundary } from '@propeldata/ui-kit-components'
+import { QueryClientProvider } from '@propeldata/ui-kit-graphql'
 
 import { TimeSeries, TimeSeriesProps } from './TimeSeries'
 import { ErrorFallback } from './ErrorFallback'
@@ -13,8 +14,10 @@ export function Container(props: TimeSeriesProps) {
   }
 
   return (
-    <ErrorBoundary fallback={<ErrorFallback {...errorProps} />}>
-      <TimeSeries {...props} />
-    </ErrorBoundary>
+    <QueryClientProvider>
+      <ErrorBoundary fallback={<ErrorFallback {...errorProps} />}>
+        <TimeSeries {...props} />
+      </ErrorBoundary>
+    </QueryClientProvider>
   )
 }

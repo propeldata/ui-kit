@@ -1,14 +1,5 @@
 import React from 'react'
-import request from 'graphql-request'
-import {
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  CounterDocument,
-  CounterQuery,
-  CounterQueryVariables,
-  TimeRangeInput,
-  FilterInput,
-  Propeller
-} from '@propeldata/ui-kit-graphql'
+import { TimeRangeInput, FilterInput, Propeller, useCounter } from '@propeldata/ui-kit-graphql'
 import { css } from '@emotion/css'
 
 import { getValueWithPrefixAndSufix } from './utils'
@@ -56,62 +47,10 @@ export function Counter(props: CounterProps) {
   const [dataValue, setDataValue] = React.useState<string | null>()
   const [propsMismatch, setPropsMismatch] = React.useState(false)
   const [hasError, setHasError] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
 
-  const filtersString = JSON.stringify(query?.filters || [])
   const counterRef = React.useRef<HTMLSpanElement>(null)
 
-  /**
-   * Fetches the counter data
-   * when the user doesn't provide
-   * its own `value`
-   */
-  const fetchData = React.useCallback(async () => {
-    try {
-      setIsLoading(true)
-      setHasError(false)
-
-      const filters = JSON.parse(filtersString)
-
-      const response = await request<CounterQuery, CounterQueryVariables>(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        CounterDocument,
-        {
-          counterInput: {
-            metricName: query?.metric,
-            timeRange: {
-              relative: query?.timeRange?.relative ?? null,
-              n: query?.timeRange?.n ?? null,
-              start: query?.timeRange?.start ?? null,
-              stop: query?.timeRange?.stop ?? null
-            },
-            filters,
-            propeller: query?.propeller
-          }
-        },
-        {
-          authorization: `Bearer ${query?.accessToken}`
-        }
-      )
-
-      const metricData = response.counter
-
-      return metricData?.value
-    } catch {
-      setHasError(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [
-    query?.metric,
-    query?.accessToken,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop,
-    query?.propeller,
-    filtersString
-  ])
+  const { value: fetchedValue, isLoading, error } = useCounter(query, { enabled: !isStatic })
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -144,9 +83,7 @@ export function Counter(props: CounterProps) {
       }
 
       if (!isStatic) {
-        const fetchedValue = await fetchData()
-
-        if (fetchedValue === undefined) {
+        if (error) {
           setHasError(true)
           // console.error(`QueryError: Your metric ${query?.metric} returned undefined.`) we will set logs as a feature later
           return
@@ -157,7 +94,7 @@ export function Counter(props: CounterProps) {
     }
 
     setup()
-  }, [fetchData, isStatic, query?.metric, value])
+  }, [error, fetchedValue, isStatic, query?.metric, value])
 
   if (hasError || propsMismatch) {
     return <ErrorFallback styles={styles} />

@@ -1,15 +1,11 @@
 import React from 'react'
-import request from 'graphql-request'
 import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
-  TimeSeriesDocument,
-  TimeSeriesQuery,
-  TimeSeriesQueryVariables,
   TimeRangeInput,
   FilterInput,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  Propeller
+  Propeller,
+  useTimeSeries
 } from '@propeldata/ui-kit-graphql'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import {
@@ -129,14 +125,9 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   const granularity = query?.granularity ?? getDefaultGranularity(query?.timeRange)
   const [propsMismatch, setPropsMismatch] = React.useState(false)
-  const [hasError, setHasError] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [serverData, setServerData] = React.useState<TimeSeriesData>()
 
   const idRef = React.useRef(idCounter++)
   const id = `time-series-${idRef.current}`
-
-  const filtersString = JSON.stringify(query?.filters || [])
 
   /**
    * The html node where the chart will render
@@ -152,11 +143,24 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   const isFormatted = !!labelFormatter
 
+  const {
+    labels: fetchedLabels,
+    values: fetchedValues,
+    error: queryError,
+    isLoading
+  } = useTimeSeries({ ...query, granularity }, { enabled: !isStatic })
+
   useSetupDefaultStyles(styles)
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
-      if (!canvasRef.current || !data?.labels || !data.values || hasError || (variant !== 'bar' && variant !== 'line'))
+      if (
+        !canvasRef.current ||
+        !data?.labels ||
+        !data.values ||
+        queryError ||
+        (variant !== 'bar' && variant !== 'line')
+      )
         return
 
       const labels = data.labels || []
@@ -219,7 +223,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, hasError, isFormatted, isStatic, styles, variant]
+    [granularity, isFormatted, isStatic, queryError, styles, variant]
   )
 
   const destroyChart = () => {
@@ -228,63 +232,6 @@ export function TimeSeries(props: TimeSeriesProps) {
       chartRef.current = null
     }
   }
-
-  /**
-   * Fetches the time series data
-   * when the user doesn't provide
-   * its on `labels` and `values`
-   */
-  const fetchData = React.useCallback(async () => {
-    try {
-      setIsLoading(true)
-      setHasError(false)
-
-      const filters = JSON.parse(filtersString)
-
-      const response = await request<TimeSeriesQuery, TimeSeriesQueryVariables>(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        TimeSeriesDocument,
-        {
-          timeSeriesInput: {
-            metricName: query?.metric,
-            timeRange: {
-              relative: query?.timeRange?.relative ?? null,
-              n: query?.timeRange?.n ?? null,
-              start: query?.timeRange?.start ?? null,
-              stop: query?.timeRange?.stop ?? null
-            },
-            granularity,
-            filters: filters,
-            propeller: query?.propeller
-          }
-        },
-        {
-          authorization: `Bearer ${query?.accessToken}`
-        }
-      )
-
-      const metricData = response.timeSeries
-
-      const labels = metricData?.labels ?? []
-      const values = (metricData?.values ?? []).map((value) => (value == null ? null : Number(value)))
-
-      return { labels, values }
-    } catch {
-      setHasError(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [
-    granularity,
-    query?.accessToken,
-    filtersString,
-    query?.metric,
-    query?.propeller,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop
-  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -317,16 +264,6 @@ export function TimeSeries(props: TimeSeriesProps) {
   }, [isStatic, labels, values, query, loading])
 
   React.useEffect(() => {
-    async function fetchChartData() {
-      const data = await fetchData()
-      setServerData(data)
-    }
-    if (!isStatic) {
-      fetchChartData()
-    }
-  }, [isStatic, fetchData])
-
-  React.useEffect(() => {
     if (isStatic) {
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
       renderChart({ labels: formattedLabels, values })
@@ -334,13 +271,11 @@ export function TimeSeries(props: TimeSeriesProps) {
   }, [isStatic, loading, styles, variant, labels, values, labelFormatter, renderChart])
 
   React.useEffect(() => {
-    if (serverData && !isStatic) {
-      const { labels, values } = serverData
-
-      const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      renderChart({ labels: formattedLabels, values })
+    if (fetchedLabels && fetchedValues && !isLoading && !isStatic) {
+      const formattedLabels = formatLabels({ labels: fetchedLabels, formatter: labelFormatter })
+      renderChart({ labels: formattedLabels, values: fetchedValues })
     }
-  }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
+  }, [variant, styles, isStatic, labelFormatter, renderChart, fetchedLabels, fetchedValues, isLoading, labels, values])
 
   React.useEffect(() => {
     return () => {
@@ -348,14 +283,17 @@ export function TimeSeries(props: TimeSeriesProps) {
     }
   }, [])
 
-  if (hasError || propsMismatch) {
+  if (queryError || propsMismatch) {
     destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if ((isLoading || loading || (serverData === undefined && !isStatic)) && !canvasRef.current) {
+  if (
+    (isLoading || loading || ((fetchedLabels === undefined || fetchedValues === undefined) && !isStatic)) &&
+    !canvasRef.current
+  ) {
     destroyChart()
     return <Loader styles={styles} />
   }

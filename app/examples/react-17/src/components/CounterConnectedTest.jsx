@@ -5,6 +5,11 @@ const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = proces
 
 export function CounterConnectedTest() {
   const [fontColor, setFontColor] = React.useState('#000')
+  const [refetchInterval, setRefetchInterval] = React.useState(undefined)
+
+  const handleSwitchRefetchInterval = () => {
+    setRefetchInterval(refetchInterval ? undefined : 1000)
+  }
 
   return (
     <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
@@ -17,7 +22,8 @@ export function CounterConnectedTest() {
             timeRange: {
               relative: RelativeTimeRange.LastNDays,
               n: 30
-            }
+            },
+            refetchInterval
           }}
           styles={{ font: { size: '3rem', color: fontColor } }}
         />
@@ -28,6 +34,9 @@ export function CounterConnectedTest() {
           type="color"
           onChange={(event) => setFontColor(event.target.value)}
         />
+        <button className="border-2 bg-white p-1 h-9" onClick={handleSwitchRefetchInterval}>
+          Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
+        </button>
       </div>
     </div>
   )
