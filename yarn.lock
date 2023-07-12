@@ -5046,6 +5046,8 @@ __metadata:
     "@propeldata/release": "workspace:^"
     "@types/css-modules": ^1.0.2
     "@types/eslint": ^7.28.0
+    "@types/react": ^18.0.37
+    "@types/react-dom": ^18.0.11
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0
     babel-loader: ^8.3.0
@@ -7493,7 +7495,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:latest":
+"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.0.11, @types/react-dom@npm:latest":
   version: 18.2.6
   resolution: "@types/react-dom@npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"
   dependencies:
@@ -7502,7 +7504,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:latest":
+"@types/react@npm:*, @types/react@npm:^18.0.37, @types/react@npm:latest":
   version: 18.2.14
   resolution: "@types/react@npm:18.2.14::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.14.tgz"
   dependencies:
