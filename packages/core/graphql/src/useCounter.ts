@@ -56,7 +56,8 @@ export function useCounter(query?: Query, options?: Options) {
 
   const queryOptions = {
     refetchInterval: query?.refetchInterval,
-    enabled: options?.enabled && !!query
+    enabled: options?.enabled && !!query,
+    retry: false
   }
 
   const cacheKey = ['propel-counter', query]
