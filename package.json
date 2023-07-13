@@ -23,14 +23,11 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "chartjs-adapter-date-fns": "^3.0.0"
+    "@emotion/styled": "^11.10.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@emotion/css": "^11.10.6",
-    "@parcel/packager-ts": "^2.8.2",
-    "@parcel/transformer-typescript-types": "^2.8.2",
     "@propeldata/release": "workspace:^",
     "@types/css-modules": "^1.0.2",
     "@types/eslint": "^7.28.0",

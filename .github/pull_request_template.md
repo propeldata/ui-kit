@@ -28,7 +28,7 @@ Before merging to main:
 
 - Added Z feature to Counter.
 
-# Packages changes
+# Package changes
 
 ## GraphQL
 
