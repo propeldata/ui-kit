@@ -22,8 +22,8 @@ import {
   LinearScale,
   LogarithmicScale
 } from 'chart.js'
-import 'chartjs-adapter-date-fns'
 
+import './chartJsAdapterDateFns'
 import { Styles, TimeSeriesData, ChartVariant, ChartPlugins } from './types'
 import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
 import {

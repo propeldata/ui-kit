@@ -6,6 +6,7 @@
 /** @type {import('jest').Config} */
 const config = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
+  modulePathIgnorePatterns: ['dist'],
   rootDir: '.',
   roots: ['<rootDir>'],
   moduleNameMapper: {
