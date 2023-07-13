@@ -11,6 +11,7 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
+      # https://github.com/dotansimha/graphql-code-generator/issues/9046
       content:
         - // @ts-nocheck
       fetcher: graphql-request
