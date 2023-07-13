@@ -4046,7 +4046,6 @@ __metadata:
     "@types/react-dom": latest
     "@types/testing-library__jest-dom": ^5.14.7
     chart.js: ^4.2.1
-    chartjs-adapter-date-fns: 2.0.1
     date-fns: ^2.29.3
     graphql: ^16.6.0
     graphql-request: ^6.1.0
@@ -4083,6 +4082,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@propeldata/ui-kit-components@workspace:packages/core/components"
   dependencies:
+    "@types/react": latest
+    "@types/react-dom": latest
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^4.9.3
@@ -4131,7 +4132,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0
     babel-loader: ^8.3.0
-    chartjs-adapter-date-fns: ^3.0.0
     commitizen: ^4.2.5
     conventional-changelog-angular: ^6.0.0
     cz-conventional-changelog: ^3.3.0
@@ -9909,25 +9909,6 @@ __metadata:
   dependencies:
     "@kurkle/color": ^0.3.0
   checksum: 157ceaa3815665163cb30ccc221a5af40834dca940faa6ec02cb95406bf3e83c15c5f36ad950a1716c9d199e87f7b9be953227c4d9d445d593536175b47bbab8
-  languageName: node
-  linkType: hard
-
-"chartjs-adapter-date-fns@npm:2.0.1":
-  version: 2.0.1
-  resolution: "chartjs-adapter-date-fns@npm:2.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-date-fns%2F-%2Fchartjs-adapter-date-fns-2.0.1.tgz"
-  peerDependencies:
-    chart.js: ">=2.8.0"
-  checksum: e13fd5357e963ee0b5fc51dd491015df12ff6df286770bdca54bd5481fb6f2d7712b37f5b5638a0fa2058e3551d6bfbb5daa8b73cab3fd8ccf3e684a8a12369e
-  languageName: node
-  linkType: hard
-
-"chartjs-adapter-date-fns@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "chartjs-adapter-date-fns@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-date-fns%2F-%2Fchartjs-adapter-date-fns-3.0.0.tgz"
-  peerDependencies:
-    chart.js: ">=2.8.0"
-    date-fns: ">=2.0.0"
-  checksum: c39bfdf490749faa589fba6e0dc0a2c5a467a5f06aaa52c5180e10fd9c83414807a064f6950538448bffee354c8064c0ce9d957bccbf2048e7ee2257aa95f138
   languageName: node
   linkType: hard
 

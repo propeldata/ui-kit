@@ -7,7 +7,7 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "yarn gen && tsc",
+    "build": "yarn gen && rm -rf dist && tsc",
     "gen": "graphql-codegen --config codegen.yml && node script.cjs src/generated/index.ts"
   },
   "publishConfig": {

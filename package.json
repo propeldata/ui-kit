@@ -23,8 +23,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "chartjs-adapter-date-fns": "^3.0.0"
+    "@emotion/styled": "^11.10.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

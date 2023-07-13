@@ -7,13 +7,15 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "rm -rf dist && tsc"
   },
   "publishConfig": {
     "access": "public",
     "group": "@propeldata/ui-kit"
   },
   "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.9.3"

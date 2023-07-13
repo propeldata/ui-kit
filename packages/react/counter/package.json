@@ -7,7 +7,7 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "test": "jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
   },
