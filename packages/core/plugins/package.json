@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit-plugins",
-  "version": "0.30.15-rc.1",
+  "version": "0.31.0-rc.4",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
