@@ -7,8 +7,7 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "parcel watch",
-    "build": "parcel build",
+    "build": "tsc",
     "test": "jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
   },
@@ -40,7 +39,6 @@
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^27.5.1",
     "msw": "^1.2.2",
-    "parcel": "^2.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.9.3"

@@ -7,8 +7,7 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "parcel watch",
-    "build": "parcel build"
+    "build": "tsc"
   },
   "files": [
     "dist",
@@ -20,7 +19,6 @@
   },
   "devDependencies": {
     "chart.js": "^4.2.1",
-    "parcel": "^2.8.2",
     "typescript": "^4.9.4"
   },
   "peerDependencies": {
