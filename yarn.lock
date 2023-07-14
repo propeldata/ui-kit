@@ -3980,7 +3980,6 @@ __metadata:
     "@types/react-dom": latest
     "@types/testing-library__jest-dom": ^5.14.7
     graphql: ^16.0.1
-    graphql-request: ^6.1.0
     jest: ^27.5.1
     jest-environment-jsdom: ^27.5.1
     msw: ^1.2.2
@@ -4013,7 +4012,6 @@ __metadata:
     "@types/testing-library__jest-dom": ^5.14.7
     chart.js: ^4.1.2
     graphql: ^16.6.0
-    graphql-request: ^6.1.0
     jest: ^27.5.1
     jest-canvas-mock: ^2.5.2
     jest-environment-jsdom: ^27.5.1
@@ -4048,7 +4046,6 @@ __metadata:
     chart.js: ^4.2.1
     date-fns: ^2.29.3
     graphql: ^16.6.0
-    graphql-request: ^6.1.0
     jest: ^27.5.1
     jest-canvas-mock: ^2.5.2
     jest-environment-jsdom: ^27.5.1
@@ -4105,7 +4102,6 @@ __metadata:
     "@tanstack/react-query": ^4.29.17
     dotenv: ^16.0.3
     graphql: ^16.6.0
-    graphql-request: ^6.1.0
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^4.9.4
@@ -14167,7 +14163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-request@npm:^6.0.0, graphql-request@npm:^6.1.0":
+"graphql-request@npm:^6.0.0":
   version: 6.1.0
   resolution: "graphql-request@npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"
   dependencies:

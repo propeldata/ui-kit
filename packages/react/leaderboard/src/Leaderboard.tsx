@@ -1,15 +1,12 @@
 import React from 'react'
-import request from 'graphql-request'
 import {
-  LeaderboardDocument,
-  LeaderboardQuery,
-  LeaderboardQueryVariables,
   TimeRangeInput,
   FilterInput,
   Propeller,
   PROPEL_GRAPHQL_API_ENDPOINT,
   Sort,
-  DimensionInput
+  DimensionInput,
+  useLeaderboardQuery
 } from '@propeldata/ui-kit-graphql'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import { BarController, BarElement, LinearScale, CategoryScale, Tooltip, Chart as ChartJS, Colors } from 'chart.js'
@@ -77,6 +74,9 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 
     /** One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank. */
     dimensions?: DimensionInput[]
+
+    /** Interval in milliseconds for refetching the data */
+    refetchInterval?: number
   }
 }
 
@@ -84,15 +84,9 @@ export function Leaderboard(props: LeaderboardProps) {
   const { variant = 'bar', styles, headers, rows, query, error, loading = false, ...rest } = props
 
   const [propsMismatch, setPropsMismatch] = React.useState(false)
-  const [hasError, setHasError] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [serverData, setServerData] = React.useState<LeaderboardData>()
 
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
-
-  const filtersString = JSON.stringify(query?.filters || [])
-  const dimensionsString = JSON.stringify(query?.dimensions || [])
 
   /**
    * The html node where the chart will render
@@ -195,72 +189,45 @@ export function Leaderboard(props: LeaderboardProps) {
     }
   }
 
+  const {
+    isLoading,
+    error: hasError,
+    data: fetchedData
+  } = useLeaderboardQuery(
+    {
+      endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
+      fetchParams: {
+        headers: {
+          authorization: `Bearer ${query?.accessToken}`
+        }
+      }
+    },
+    {
+      leaderboardInput: {
+        metricName: query?.metric,
+        filters: query?.filters,
+        propeller: query?.propeller,
+        sort: query?.sort,
+        rowLimit: query?.rowLimit ?? 100,
+        dimensions: query?.dimensions,
+        timeRange: {
+          relative: query?.timeRange?.relative ?? null,
+          n: query?.timeRange?.n ?? null,
+          start: query?.timeRange?.start ?? null,
+          stop: query?.timeRange?.stop ?? null
+        }
+      }
+    },
+    {
+      refetchInterval: query?.refetchInterval,
+      enabled: !isStatic
+    }
+  )
+
   const loadingStyles = {
     opacity: isLoading || loading ? '0.3' : '1',
     transition: 'opacity 0.2s ease-in-out'
   }
-
-  /**
-   * Fetches the leaderboard data
-   * when the user doesn't provide
-   * its on `headers` and `rows`
-   */
-  const fetchData = React.useCallback(async () => {
-    try {
-      setIsLoading(true)
-      setHasError(false)
-
-      const dimensions = JSON.parse(dimensionsString)
-      const filters = JSON.parse(filtersString)
-
-      const response = await request<LeaderboardQuery, LeaderboardQueryVariables>(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        LeaderboardDocument,
-        {
-          leaderboardInput: {
-            metricName: query?.metric,
-            filters,
-            propeller: query?.propeller,
-            sort: query?.sort,
-            rowLimit: query?.rowLimit ?? 100,
-            dimensions,
-            timeRange: {
-              relative: query?.timeRange?.relative ?? null,
-              n: query?.timeRange?.n ?? null,
-              start: query?.timeRange?.start ?? null,
-              stop: query?.timeRange?.stop ?? null
-            }
-          }
-        },
-        {
-          authorization: `Bearer ${query?.accessToken}`
-        }
-      )
-
-      const metricData = response.leaderboard
-
-      const headers = metricData?.headers ?? []
-      const rows = metricData?.rows ?? []
-
-      return { headers, rows }
-    } catch (error) {
-      setHasError(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [
-    query?.accessToken,
-    dimensionsString,
-    filtersString,
-    query?.metric,
-    query?.propeller,
-    query?.rowLimit,
-    query?.sort,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop
-  ])
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -296,26 +263,16 @@ export function Leaderboard(props: LeaderboardProps) {
   }, [isStatic, headers, rows, query, loading])
 
   React.useEffect(() => {
-    async function fetchChartData() {
-      const data = await fetchData()
-      setServerData(data)
-    }
-    if (!isStatic) {
-      fetchChartData()
-    }
-  }, [isStatic, fetchData])
-
-  React.useEffect(() => {
     if (isStatic) {
       renderChart({ headers, rows })
     }
   }, [isStatic, loading, styles, variant, headers, rows, renderChart])
 
   React.useEffect(() => {
-    if (serverData && !isStatic) {
-      renderChart(serverData)
+    if (fetchedData && !isStatic) {
+      renderChart(fetchedData.leaderboard)
     }
-  }, [serverData, styles, variant, isStatic, renderChart])
+  }, [fetchedData, styles, variant, isStatic, renderChart])
 
   React.useEffect(() => {
     try {
@@ -354,7 +311,7 @@ export function Leaderboard(props: LeaderboardProps) {
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if ((isLoading || loading || (serverData === undefined && !isStatic)) && isNoContainerRef) {
+  if ((isLoading || loading || (fetchedData === undefined && !isStatic)) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }
@@ -380,8 +337,8 @@ export function Leaderboard(props: LeaderboardProps) {
     )
   }
 
-  const tableHeaders = headers?.length ? headers : serverData?.headers
-  const tableRows = isStatic ? rows : serverData?.rows
+  const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
+  const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
 
   const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
     getTableSettings({ headers: tableHeaders, rows: tableRows, styles })

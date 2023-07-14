@@ -14,4 +14,4 @@ generates:
       # https://github.com/dotansimha/graphql-code-generator/issues/9046
       content:
         - // @ts-nocheck
-      fetcher: graphql-request
+      fetcher: fetch

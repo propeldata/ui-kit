@@ -17,8 +17,7 @@
   "dependencies": {
     "@tanstack/react-query": "^4.29.17",
     "dotenv": "^16.0.3",
-    "graphql": "^16.6.0",
-    "graphql-request": "^6.1.0"
+    "graphql": "^16.6.0"
   },
   "peerDependencies": {
     "graphql": "^16.6",
