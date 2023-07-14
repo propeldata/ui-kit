@@ -62,4 +62,10 @@ describe('Counter', () => {
 
     await dom.findByRole('img')
   })
+
+  it('Should show error fallback on props mismatch', async () => {
+    dom = render(<Counter />)
+
+    await dom.findByRole('img')
+  })
 })

@@ -245,6 +245,7 @@ export function Leaderboard(props: LeaderboardProps) {
       if (isStatic && (!headers || !rows)) {
         // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
         setPropsMismatch(true)
+
         return
       }
 
@@ -259,13 +260,18 @@ export function Leaderboard(props: LeaderboardProps) {
         return
       }
 
+      if (variant !== 'bar' && variant !== 'table') {
+        // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
+        setPropsMismatch(false)
+      }
+
       setPropsMismatch(false)
     }
 
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, headers, rows, query, isLoadingStatic])
+  }, [isStatic, headers, rows, query, isLoadingStatic, variant])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -278,18 +284,6 @@ export function Leaderboard(props: LeaderboardProps) {
       renderChart(fetchedData.leaderboard)
     }
   }, [fetchedData, styles, variant, isStatic, renderChart])
-
-  React.useEffect(() => {
-    try {
-      if (variant !== 'bar' && variant !== 'table') {
-        // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
-        throw new Error('InvalidPropsError')
-      }
-      setPropsMismatch(false)
-    } catch {
-      setPropsMismatch(true)
-    }
-  }, [variant])
 
   React.useEffect(() => {
     if (variant === 'table') {
