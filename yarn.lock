@@ -2584,6 +2584,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/typescript-msw@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "@graphql-codegen/typescript-msw@npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^2.7.2
+    "@graphql-codegen/visitor-plugin-common": 2.13.1
+    auto-bind: ~4.0.0
+    change-case-all: 1.0.14
+    tslib: ~2.4.0
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 85f1b71c01ddf1a397d6ac63fc54a589b9fc98bf40be790b5636daf56faf6ce1462a9462ca265b984e2977f59d81251dc55db153c05f5a8d6941615a94cecd88
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/typescript-operations@npm:^4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript-operations@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"
@@ -4097,6 +4112,7 @@ __metadata:
     "@graphql-codegen/add": ^4.0.0
     "@graphql-codegen/cli": ^4.0.1
     "@graphql-codegen/typescript": ^4.0.1
+    "@graphql-codegen/typescript-msw": ^1.1.6
     "@graphql-codegen/typescript-operations": ^4.0.1
     "@graphql-codegen/typescript-react-query": ^4.1.0
     "@tanstack/react-query": ^4.29.17

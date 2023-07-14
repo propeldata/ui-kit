@@ -38,6 +38,8 @@ export interface CounterProps extends React.ComponentProps<'span'> {
     propeller?: Propeller
     /** Interval in milliseconds for refetching the data */
     refetchInterval?: number
+    /** Whether to retry on errors. */
+    retry?: boolean
   }
   /** When true, shows a skeleton loader */
   loading?: boolean
@@ -65,6 +67,7 @@ export function Counter(props: CounterProps) {
       endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
+          'content-type': 'application/json',
           authorization: `Bearer ${query?.accessToken}`
         }
       }
@@ -83,12 +86,13 @@ export function Counter(props: CounterProps) {
       }
     },
     {
-      refetchInterval: props.query?.refetchInterval,
+      refetchInterval: query?.refetchInterval,
+      retry: query?.retry,
       enabled: !isStatic
     }
   )
 
-  const value = isStatic ? staticValue : fetchedValue.counter.value
+  const value = isStatic ? staticValue : fetchedValue?.counter?.value
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -118,7 +122,7 @@ export function Counter(props: CounterProps) {
     return <ErrorFallback styles={styles} />
   }
 
-  if ((isLoading || loading || (staticValue === undefined && !isStatic)) && !counterRef.current) {
+  if (((isStatic && loading) || (!isStatic && isLoading)) && !counterRef.current) {
     return <Loader styles={styles} />
   }
 

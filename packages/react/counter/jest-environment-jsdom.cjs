@@ -12,6 +12,9 @@ class JSDOMEnvironment extends OriginalJSDOMEnvironment {
     const { global } = super(...args)
     if (!global.TextEncoder) global.TextEncoder = TextEncoder
     if (!global.TextDecoder) global.TextDecoder = TextDecoder
+    if (!global.fetch) global.fetch = fetch
+    if (!global.Request) global.Request = Request
+    if (!global.Response) global.Response = Response
   }
 }
 

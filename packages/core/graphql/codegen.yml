@@ -15,3 +15,27 @@ generates:
       content:
         - // @ts-nocheck
       fetcher: fetch
+  ../../react/counter/src/__test__/mockHandlers.ts:
+    schema: public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-msw
+      - typescript-operations
+  ../../react/leaderboard/src/__test__/mockHandlers.ts:
+    schema: public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-msw
+      - typescript-operations
+  ../../react/time-series/src/__test__/mockHandlers.ts:
+    schema: public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-msw
+      - typescript-operations
