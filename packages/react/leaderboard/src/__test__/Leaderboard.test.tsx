@@ -1,6 +1,6 @@
 import React from 'react'
 import { Chart } from 'chart.js'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 
 import { Dom } from '@/testing'
 import { Leaderboard, RelativeTimeRange } from '@/leaderboard'
@@ -62,5 +62,42 @@ describe('Leaderboard', () => {
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
+  })
+
+  it('should show error fallback when query fails', async () => {
+    dom = render(
+      <Leaderboard
+        query={{
+          accessToken: 'test-token',
+          metric: 'should-fail',
+          dimensions: [
+            {
+              columnName: 'test-column'
+            }
+          ],
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          },
+          retry: false
+        }}
+      />
+    )
+
+    await dom.findByText('Unable to connect')
+
+    await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
+  })
+
+  it('should show error fallback on props mismatch', async () => {
+    dom = render(<Leaderboard headers={['a', 'b', 'c']} />)
+
+    await waitFor(async () => {
+      await dom.findByText('Unable to connect')
+
+      // TODO: this message suggests that the error is due to a network issue when it's not, maybe we should think about changing the message depending on the error
+      await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
+    })
   })
 })
