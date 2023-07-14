@@ -84,7 +84,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 }
 
 export function Leaderboard(props: LeaderboardProps) {
-  const { variant = 'bar', styles, headers, rows, query, error, loading = false, ...rest } = props
+  const { variant = 'bar', styles, headers, rows, query, error, loading: isLoadingStatic = false, ...rest } = props
 
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
@@ -193,7 +193,7 @@ export function Leaderboard(props: LeaderboardProps) {
   }
 
   const {
-    isLoading,
+    isInitialLoading: isLoadingQuery,
     error: hasError,
     data: fetchedData
   } = useLeaderboardQuery(
@@ -230,7 +230,7 @@ export function Leaderboard(props: LeaderboardProps) {
   )
 
   const loadingStyles = {
-    opacity: isLoading || loading ? '0.3' : '1',
+    opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
     transition: 'opacity 0.2s ease-in-out'
   }
 
@@ -262,16 +262,16 @@ export function Leaderboard(props: LeaderboardProps) {
       setPropsMismatch(false)
     }
 
-    if (!loading) {
+    if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, headers, rows, query, loading])
+  }, [isStatic, headers, rows, query, isLoadingStatic])
 
   React.useEffect(() => {
     if (isStatic) {
       renderChart({ headers, rows })
     }
-  }, [isStatic, loading, styles, variant, headers, rows, renderChart])
+  }, [isStatic, isLoadingStatic, styles, variant, headers, rows, renderChart])
 
   React.useEffect(() => {
     if (fetchedData && !isStatic) {
@@ -316,7 +316,7 @@ export function Leaderboard(props: LeaderboardProps) {
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if (((isStatic && loading) || (!isStatic && isLoading)) && isNoContainerRef) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }

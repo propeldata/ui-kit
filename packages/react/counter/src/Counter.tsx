@@ -46,7 +46,16 @@ export interface CounterProps extends React.ComponentProps<'span'> {
 }
 
 export function Counter(props: CounterProps) {
-  const { value: staticValue, query, prefixValue, sufixValue, styles, loading = false, localize, ...rest } = props
+  const {
+    value: staticValue,
+    query,
+    prefixValue,
+    sufixValue,
+    styles,
+    loading: isLoadingStatic = false,
+    localize,
+    ...rest
+  } = props
 
   /**
    * If the user passes `value` attribute, it
@@ -59,7 +68,7 @@ export function Counter(props: CounterProps) {
   const counterRef = React.useRef<HTMLSpanElement>(null)
 
   const {
-    isLoading,
+    isInitialLoading: isLoadingQuery,
     error,
     data: fetchedValue
   } = useCounterQuery(
@@ -113,16 +122,16 @@ export function Counter(props: CounterProps) {
       setPropsMismatch(false)
     }
 
-    if (!loading) {
+    if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, value, query, loading])
+  }, [isStatic, value, query, isLoadingStatic])
 
   if (error || propsMismatch) {
     return <ErrorFallback styles={styles} />
   }
 
-  if (((isStatic && loading) || (!isStatic && isLoading)) && !counterRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !counterRef.current) {
     return <Loader styles={styles} />
   }
 
@@ -130,7 +139,7 @@ export function Counter(props: CounterProps) {
     <span
       ref={counterRef}
       style={{
-        opacity: isLoading || loading ? '0.3' : '1',
+        opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
         transition: 'opacity 0.2s ease-in-out'
       }}
       {...rest}

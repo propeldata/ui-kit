@@ -123,7 +123,7 @@ export function TimeSeries(props: TimeSeriesProps) {
     values,
     query,
     error,
-    loading = false,
+    loading: isLoadingStatic = false,
     labelFormatter,
     ariaLabel,
     role,
@@ -153,7 +153,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   useSetupDefaultStyles(styles)
 
   const {
-    isLoading,
+    isInitialLoading: isLoadingQuery,
     error: hasError,
     data: serverData
   } = useTimeSeriesQuery(
@@ -287,17 +287,17 @@ export function TimeSeries(props: TimeSeriesProps) {
       setPropsMismatch(false)
     }
 
-    if (!loading) {
+    if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, labels, values, query, loading])
+  }, [isStatic, labels, values, query, isLoadingStatic])
 
   React.useEffect(() => {
     if (isStatic) {
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
       renderChart({ labels: formattedLabels, values })
     }
-  }, [isStatic, loading, styles, variant, labels, values, labelFormatter, renderChart])
+  }, [isStatic, isLoadingStatic, styles, variant, labels, values, labelFormatter, renderChart])
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
@@ -322,7 +322,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if (((isStatic && loading) || (!isStatic && isLoading)) && !canvasRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }
@@ -337,7 +337,7 @@ export function TimeSeries(props: TimeSeriesProps) {
         role={role || 'img'}
         aria-label={ariaLabel || defaultAriaLabel}
         style={{
-          opacity: isLoading || loading ? '0.3' : '1',
+          opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
           transition: 'opacity 0.2s ease-in-out'
         }}
         {...rest}

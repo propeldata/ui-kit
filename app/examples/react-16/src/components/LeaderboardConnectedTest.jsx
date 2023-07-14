@@ -1,63 +1,43 @@
 import React from 'react'
-import { Leaderboard, RelativeTimeRange } from '@propeldata/react-leaderboard'
+import { Counter, RelativeTimeRange } from '@propeldata/react-counter'
 
-const {
-  REACT_APP_PROPEL_ACCESS_TOKEN,
-  REACT_APP_METRIC_UNIQUE_NAME_1,
-  REACT_APP_DIMENSION_1,
-  REACT_APP_DIMENSION_2,
-  REACT_APP_DIMENSION_3
-} = process.env
+const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
 
-export function LeaderboardConnectedTest() {
-  const [barsColor, setBarsColor] = React.useState('#ccc')
-  const [chartType, setChartType] = React.useState('bar')
+export function CounterConnectedTest() {
+  const [fontColor, setFontColor] = React.useState('#000')
+  const [refetchInterval, setRefetchInterval] = React.useState(undefined)
+
+  const handleSwitchRefetchInterval = () => {
+    setRefetchInterval(refetchInterval ? undefined : 1000)
+  }
 
   return (
     <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
-      <h2 className="text-2xl">Leaderboard Connected</h2>
-      <Leaderboard
-        query={{
-          accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
-          dimensions: [
-            {
-              columnName: REACT_APP_DIMENSION_1
+      <h2 className="text-2xl">Counter Connected</h2>
+      <div className="h-60 flex justify-center items-center">
+        <Counter
+          query={{
+            accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
+            metric: REACT_APP_METRIC_UNIQUE_NAME_1,
+            timeRange: {
+              relative: RelativeTimeRange.LastNDays,
+              n: 30
             },
-            {
-              columnName: REACT_APP_DIMENSION_2
-            },
-            {
-              columnName: REACT_APP_DIMENSION_3
-            }
-          ],
-          metric: REACT_APP_METRIC_UNIQUE_NAME_1,
-          rowLimit: 8,
-          timeRange: {
-            relative: RelativeTimeRange.LastNDays,
-            n: 30
-          }
-        }}
-        variant={chartType}
-        styles={{
-          bar: { backgroundColor: barsColor },
-          table: { height: '200px', backgroundColor: '#f5f5f5', header: { backgroundColor: '#f5f5f5' } },
-          canvas: { backgroundColor: '#f5f5f5' }
-        }}
-      />
+            refetchInterval,
+            retry: false
+          }}
+          styles={{ font: { size: '3rem', color: fontColor } }}
+        />
+      </div>
       <div className="flex items-center gap-2 mt-1">
         <input
           className="border-2 bg-white p-1 h-9"
           type="color"
-          onChange={(event) => setBarsColor(event.target.value)}
+          onChange={(event) => setFontColor(event.target.value)}
         />
-        <select
-          className="border-2 bg-white p-1 h-9 cursor-pointer"
-          value={chartType}
-          onChange={(event) => setChartType(event.target.value)}
-        >
-          <option value="bar">Bar</option>
-          <option value="table">Table</option>
-        </select>
+        <button className="border-2 bg-white p-1 h-9" onClick={handleSwitchRefetchInterval}>
+          Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
+        </button>
       </div>
     </div>
   )
