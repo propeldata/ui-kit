@@ -6735,7 +6735,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["debug", "virtual:4bc25e11f539838b3b211f11c7fd4f02d2f615caca5670bfba690daf78dcd0e2083aa9b29f16bd338c39f20dbc414fa8ebdf706e864f914d72a1957e34186974#npm:4.3.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdebug%2F-%2Fdebug-4.3.4.tgz"],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
+            ["graphql-request", "virtual:34c97827fbbc7c40b9b241f420cdf2f10a59971421ac74096a0636a57a50e03cb77d9d7cc6ff7b1eb458279d4544b661baa98bc7efca5e3b700c67f32273b773#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["http-proxy-agent", "npm:7.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fhttp-proxy-agent%2F-%2Fhttp-proxy-agent-7.0.0.tgz"],\
             ["https-proxy-agent", "npm:7.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fhttps-proxy-agent%2F-%2Fhttps-proxy-agent-7.0.0.tgz"],\
             ["jose", "npm:4.14.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjose%2F-%2Fjose-4.14.4.tgz"],\
@@ -8241,7 +8241,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["msw", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.2.2.tgz"],\
@@ -8273,7 +8272,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["msw", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.2.2.tgz"],\
@@ -8305,7 +8303,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["msw", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.2.2.tgz"],\
@@ -8337,7 +8334,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["msw", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.2.2.tgz"],\
@@ -8369,7 +8365,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8404,7 +8399,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8439,7 +8433,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8474,7 +8467,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/testing-library__jest-dom", "npm:5.14.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.7.tgz"],\
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8508,7 +8500,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["date-fns", "npm:2.30.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-2.30.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8544,7 +8535,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["date-fns", "npm:2.30.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-2.30.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8580,7 +8570,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["date-fns", "npm:2.30.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-2.30.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8616,7 +8605,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"],\
             ["date-fns", "npm:2.30.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-2.30.0.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["jest", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8762,7 +8750,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", null],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
@@ -8791,7 +8778,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-dom", "virtual:012fba26d05fe2b7968c247fd00f6d703974ceee00be7c6b7c230279d63549afec265694d8efc2797d41b9ae2aaf9f228496e6085795912f7a247c1e609c63b1#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
@@ -8821,7 +8807,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
@@ -8851,7 +8836,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
             ["react-dom", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-16.14.0.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
@@ -8881,7 +8865,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.6.tgz"],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
             ["react-dom", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-17.0.2.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
@@ -8908,7 +8891,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tanstack/react-query", "virtual:46fc6faaec58571090e30e34692911b4e1abbaa431b52c2cb730745fcbf355d9178ef591e75901d89ff98228b359a5757937de2d69117ec94b616b228e28a2be#npm:4.29.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-query%2F-%2Freact-query-4.29.17.tgz"],\
             ["dotenv", "npm:16.1.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.1.4.tgz"],\
             ["graphql", "npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"],\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
@@ -22223,10 +22205,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/graphql-request-virtual-3d95f314a5/0/cache/graphql-request-npm-6.1.0-995737da11-6d62630a01.zip/node_modules/graphql-request/",\
+        ["virtual:34c97827fbbc7c40b9b241f420cdf2f10a59971421ac74096a0636a57a50e03cb77d9d7cc6ff7b1eb458279d4544b661baa98bc7efca5e3b700c67f32273b773#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/graphql-request-virtual-29015e2351/0/cache/graphql-request-npm-6.1.0-995737da11-6d62630a01.zip/node_modules/graphql-request/",\
           "packageDependencies": [\
-            ["graphql-request", "virtual:c33ffabfd17f1555516a2c847eaad8f993355a51df8e83d06fc00c00bd28f184a9069483f0d5d549e90358163e8cd5b53692b818ca39d786c87962d0487e221a#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
+            ["graphql-request", "virtual:34c97827fbbc7c40b9b241f420cdf2f10a59971421ac74096a0636a57a50e03cb77d9d7cc6ff7b1eb458279d4544b661baa98bc7efca5e3b700c67f32273b773#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["@graphql-typed-document-node/core", "virtual:e234f0834604d8b90b6291daa51181f71ac8e96270fd64310acc36508b498d17e2d93a0479600e7ad127b8a2bfc6426bb27ce95fd9ba89e49dc76e99d8689439#npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.2.0.tgz"],\
             ["@types/graphql", null],\
             ["cross-fetch", "npm:3.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcross-fetch%2F-%2Fcross-fetch-3.1.6.tgz"],\

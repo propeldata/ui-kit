@@ -1,13 +1,10 @@
 import React from 'react'
-import request from 'graphql-request'
 import {
   PROPEL_GRAPHQL_API_ENDPOINT,
-  CounterDocument,
-  CounterQuery,
-  CounterQueryVariables,
   TimeRangeInput,
   FilterInput,
-  Propeller
+  Propeller,
+  useCounterQuery
 } from '@propeldata/ui-kit-graphql'
 import { css } from '@emotion/css'
 
@@ -39,13 +36,15 @@ export interface CounterProps extends React.ComponentProps<'span'> {
     filters?: FilterInput[]
     /** Propeller that the chart will respond to */
     propeller?: Propeller
+    /** Interval in milliseconds for refetching the data */
+    refetchInterval?: number
   }
   /** When true, shows a skeleton loader */
   loading?: boolean
 }
 
 export function Counter(props: CounterProps) {
-  const { value, query, prefixValue, sufixValue, styles, loading = false, localize, ...rest } = props
+  const { value: staticValue, query, prefixValue, sufixValue, styles, loading = false, localize, ...rest } = props
 
   /**
    * If the user passes `value` attribute, it
@@ -53,65 +52,43 @@ export function Counter(props: CounterProps) {
    */
   const isStatic = !query
 
-  const [dataValue, setDataValue] = React.useState<string | null>()
   const [propsMismatch, setPropsMismatch] = React.useState(false)
-  const [hasError, setHasError] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
 
-  const filtersString = JSON.stringify(query?.filters || [])
   const counterRef = React.useRef<HTMLSpanElement>(null)
 
-  /**
-   * Fetches the counter data
-   * when the user doesn't provide
-   * its own `value`
-   */
-  const fetchData = React.useCallback(async () => {
-    try {
-      setIsLoading(true)
-      setHasError(false)
-
-      const filters = JSON.parse(filtersString)
-
-      const response = await request<CounterQuery, CounterQueryVariables>(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        CounterDocument,
-        {
-          counterInput: {
-            metricName: query?.metric,
-            timeRange: {
-              relative: query?.timeRange?.relative ?? null,
-              n: query?.timeRange?.n ?? null,
-              start: query?.timeRange?.start ?? null,
-              stop: query?.timeRange?.stop ?? null
-            },
-            filters,
-            propeller: query?.propeller
-          }
-        },
-        {
+  const {
+    isLoading,
+    error,
+    data: fetchedValue
+  } = useCounterQuery(
+    {
+      endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
+      fetchParams: {
+        headers: {
           authorization: `Bearer ${query?.accessToken}`
         }
-      )
-
-      const metricData = response.counter
-
-      return metricData?.value
-    } catch {
-      setHasError(true)
-    } finally {
-      setIsLoading(false)
+      }
+    },
+    {
+      counterInput: {
+        metricName: query?.metric,
+        timeRange: {
+          relative: query?.timeRange?.relative ?? null,
+          n: query?.timeRange?.n ?? null,
+          start: query?.timeRange?.start ?? null,
+          stop: query?.timeRange?.stop ?? null
+        },
+        filters: query?.filters ?? [],
+        propeller: query?.propeller
+      }
+    },
+    {
+      refetchInterval: props.query?.refetchInterval,
+      enabled: !isStatic
     }
-  }, [
-    query?.metric,
-    query?.accessToken,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop,
-    query?.propeller,
-    filtersString
-  ])
+  )
+
+  const value = isStatic ? staticValue : fetchedValue.counter.value
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -137,33 +114,11 @@ export function Counter(props: CounterProps) {
     }
   }, [isStatic, value, query, loading])
 
-  React.useEffect(() => {
-    async function setup() {
-      if (isStatic) {
-        setDataValue(value)
-      }
-
-      if (!isStatic) {
-        const fetchedValue = await fetchData()
-
-        if (fetchedValue === undefined) {
-          setHasError(true)
-          // console.error(`QueryError: Your metric ${query?.metric} returned undefined.`) we will set logs as a feature later
-          return
-        }
-
-        setDataValue(fetchedValue)
-      }
-    }
-
-    setup()
-  }, [fetchData, isStatic, query?.metric, value])
-
-  if (hasError || propsMismatch) {
+  if (error || propsMismatch) {
     return <ErrorFallback styles={styles} />
   }
 
-  if ((isLoading || loading || (dataValue === undefined && !isStatic)) && !counterRef.current) {
+  if ((isLoading || loading || (staticValue === undefined && !isStatic)) && !counterRef.current) {
     return <Loader styles={styles} />
   }
 
@@ -179,7 +134,7 @@ export function Counter(props: CounterProps) {
     >
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,
-        value: dataValue,
+        value,
         sufix: sufixValue,
         localize
       })}

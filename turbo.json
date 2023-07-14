@@ -3,7 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["package.json", "src/**", "tsconfig.json"],
+      "inputs": ["codegen.yml", "package.json", "src/**", "tsconfig.json"],
       "outputs": ["dist/**"]
     },
     "lint": {

@@ -1,15 +1,12 @@
 import React from 'react'
-import request from 'graphql-request'
 import { css } from '@emotion/css'
 import {
   TimeSeriesGranularity,
-  TimeSeriesDocument,
-  TimeSeriesQuery,
-  TimeSeriesQueryVariables,
   TimeRangeInput,
   FilterInput,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  Propeller
+  Propeller,
+  useTimeSeriesQuery
 } from '@propeldata/ui-kit-graphql'
 import { customCanvasBackgroundColor } from '@propeldata/ui-kit-plugins'
 import {
@@ -105,6 +102,9 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 
     /** Timestamp format that the chart will respond to */
     timestampFormat?: string
+
+    /** Interval in milliseconds for refetching the data */
+    refetchInterval?: number
   }
   /** Format function for labels, must return an array with the new labels */
   labelFormatter?: (labels: string[]) => string[]
@@ -129,14 +129,9 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   const granularity = query?.granularity ?? getDefaultGranularity(query?.timeRange)
   const [propsMismatch, setPropsMismatch] = React.useState(false)
-  const [hasError, setHasError] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [serverData, setServerData] = React.useState<TimeSeriesData>()
 
   const idRef = React.useRef(idCounter++)
   const id = `time-series-${idRef.current}`
-
-  const filtersString = JSON.stringify(query?.filters || [])
 
   /**
    * The html node where the chart will render
@@ -153,6 +148,44 @@ export function TimeSeries(props: TimeSeriesProps) {
   const isFormatted = !!labelFormatter
 
   useSetupDefaultStyles(styles)
+
+  const {
+    isLoading,
+    error: hasError,
+    data: serverData
+  } = useTimeSeriesQuery(
+    {
+      endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
+      fetchParams: {
+        headers: {
+          authorization: `Bearer ${query?.accessToken}`
+        }
+      }
+    },
+    {
+      timeSeriesInput: {
+        metricName: query?.metric,
+        timeRange: {
+          relative: query?.timeRange?.relative ?? null,
+          n: query?.timeRange?.n ?? null,
+          start: query?.timeRange?.start ?? null,
+          stop: query?.timeRange?.stop ?? null
+        },
+        granularity,
+        filters: query?.filters,
+        propeller: query?.propeller
+      }
+    },
+    {
+      refetchInterval: query?.refetchInterval,
+      enabled: !isStatic
+    }
+  )
+
+  /*
+      const labels = metricData?.labels ?? []
+      const values = (metricData?.values ?? []).map((value) => (value == null ? null : Number(value)))
+   */
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
@@ -229,63 +262,6 @@ export function TimeSeries(props: TimeSeriesProps) {
     }
   }
 
-  /**
-   * Fetches the time series data
-   * when the user doesn't provide
-   * its on `labels` and `values`
-   */
-  const fetchData = React.useCallback(async () => {
-    try {
-      setIsLoading(true)
-      setHasError(false)
-
-      const filters = JSON.parse(filtersString)
-
-      const response = await request<TimeSeriesQuery, TimeSeriesQueryVariables>(
-        PROPEL_GRAPHQL_API_ENDPOINT,
-        TimeSeriesDocument,
-        {
-          timeSeriesInput: {
-            metricName: query?.metric,
-            timeRange: {
-              relative: query?.timeRange?.relative ?? null,
-              n: query?.timeRange?.n ?? null,
-              start: query?.timeRange?.start ?? null,
-              stop: query?.timeRange?.stop ?? null
-            },
-            granularity,
-            filters: filters,
-            propeller: query?.propeller
-          }
-        },
-        {
-          authorization: `Bearer ${query?.accessToken}`
-        }
-      )
-
-      const metricData = response.timeSeries
-
-      const labels = metricData?.labels ?? []
-      const values = (metricData?.values ?? []).map((value) => (value == null ? null : Number(value)))
-
-      return { labels, values }
-    } catch {
-      setHasError(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [
-    granularity,
-    query?.accessToken,
-    filtersString,
-    query?.metric,
-    query?.propeller,
-    query?.timeRange?.n,
-    query?.timeRange?.relative,
-    query?.timeRange?.start,
-    query?.timeRange?.stop
-  ])
-
   React.useEffect(() => {
     function handlePropsMismatch() {
       if (isStatic && !labels && !values) {
@@ -317,16 +293,6 @@ export function TimeSeries(props: TimeSeriesProps) {
   }, [isStatic, labels, values, query, loading])
 
   React.useEffect(() => {
-    async function fetchChartData() {
-      const data = await fetchData()
-      setServerData(data)
-    }
-    if (!isStatic) {
-      fetchChartData()
-    }
-  }, [isStatic, fetchData])
-
-  React.useEffect(() => {
     if (isStatic) {
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
       renderChart({ labels: formattedLabels, values })
@@ -335,7 +301,8 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
-      const { labels, values } = serverData
+      const labels = serverData.timeSeries.labels ?? []
+      const values = (serverData.timeSeries.values ?? []).map((value) => (value == null ? null : Number(value)))
 
       const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
       renderChart({ labels: formattedLabels, values })

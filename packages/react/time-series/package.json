@@ -22,8 +22,7 @@
     "@propeldata/ui-kit-plugins": "workspace:^0.31.0-rc.4",
     "chart.js": "^4.2.1",
     "date-fns": "^2.29.3",
-    "graphql": "^16.6.0",
-    "graphql-request": "^6.1.0"
+    "graphql": "^16.6.0"
   },
   "devDependencies": {
     "@juggle/resize-observer": "^3.4.0",
