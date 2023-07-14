@@ -1,11 +1,10 @@
-import { graphql } from 'msw'
-
 import { server } from '@/testing/mocks/server'
 
 import { counter } from './mockData'
+import { mockCounterQuery } from './mockHandlers'
 
 const handlers = [
-  graphql.query('Counter', (req, res, ctx) => {
+  mockCounterQuery((req, res, ctx) => {
     const { metricName } = req.variables.counterInput
 
     if (metricName === 'lack-of-data') {

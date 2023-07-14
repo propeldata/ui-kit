@@ -77,6 +77,9 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 
     /** Interval in milliseconds for refetching the data */
     refetchInterval?: number
+
+    /** Whether to retry on errors. */
+    retry?: boolean
   }
 }
 
@@ -198,6 +201,7 @@ export function Leaderboard(props: LeaderboardProps) {
       endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
+          'content-type': 'application/json',
           authorization: `Bearer ${query?.accessToken}`
         }
       }
@@ -220,6 +224,7 @@ export function Leaderboard(props: LeaderboardProps) {
     },
     {
       refetchInterval: query?.refetchInterval,
+      retry: query?.retry,
       enabled: !isStatic
     }
   )
@@ -311,7 +316,7 @@ export function Leaderboard(props: LeaderboardProps) {
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if ((isLoading || loading || (fetchedData === undefined && !isStatic)) && isNoContainerRef) {
+  if (((isStatic && loading) || (!isStatic && isLoading)) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }

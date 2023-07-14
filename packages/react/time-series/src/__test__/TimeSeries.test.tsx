@@ -53,4 +53,6 @@ describe('TimeSeries', () => {
     expect(chartLabels).toEqual(timeSeries.labels)
     expect(chartData).toEqual(timeSeries.values)
   })
+
+  // TODO: Add error tests.
 })

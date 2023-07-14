@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 
 import { Counter, RelativeTimeRange } from '@/counter'
 import { Dom } from '@/testing'
@@ -45,9 +45,7 @@ describe('Counter', () => {
       />
     )
 
-    await waitFor(async () => {
-      await dom.findByText('-')
-    })
+    await dom.findByText('-')
   })
 
   it('Should show error fallback when request fails', async () => {
@@ -56,13 +54,12 @@ describe('Counter', () => {
         query={{
           metric: 'should-fail',
           accessToken: 'test-token',
-          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
+          retry: false
         }}
       />
     )
 
-    await waitFor(async () => {
-      await dom.findByRole('img')
-    })
+    await dom.findByRole('img')
   })
 })

@@ -105,6 +105,9 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 
     /** Interval in milliseconds for refetching the data */
     refetchInterval?: number
+
+    /** Whether to retry on errors. */
+    retry?: boolean
   }
   /** Format function for labels, must return an array with the new labels */
   labelFormatter?: (labels: string[]) => string[]
@@ -158,6 +161,7 @@ export function TimeSeries(props: TimeSeriesProps) {
       endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
+          'content-type': 'application/json',
           authorization: `Bearer ${query?.accessToken}`
         }
       }
@@ -178,14 +182,10 @@ export function TimeSeries(props: TimeSeriesProps) {
     },
     {
       refetchInterval: query?.refetchInterval,
+      retry: query?.retry,
       enabled: !isStatic
     }
   )
-
-  /*
-      const labels = metricData?.labels ?? []
-      const values = (metricData?.values ?? []).map((value) => (value == null ? null : Number(value)))
-   */
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
@@ -322,7 +322,7 @@ export function TimeSeries(props: TimeSeriesProps) {
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if ((isLoading || loading || (serverData === undefined && !isStatic)) && !canvasRef.current) {
+  if (((isStatic && loading) || (!isStatic && isLoading)) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }
