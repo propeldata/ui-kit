@@ -1,2 +1,2 @@
-export * from './graphql'
 export * from './customCanvasBackgroundColor'
+export * from './graphql'

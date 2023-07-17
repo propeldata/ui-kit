@@ -8,7 +8,7 @@ import {
   TimeRangeInput,
   FilterInput,
   Propeller
-} from '../../helpers/graphql'
+} from '../../helpers'
 import { css } from '@emotion/css'
 
 import { getValueWithPrefixAndSufix } from './utils'

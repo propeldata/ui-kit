@@ -1,8 +1,7 @@
 import React from 'react'
 import { ErrorBoundary } from '../ErrorBoundary'
-
-import { Leaderboard, LeaderboardProps } from './Leaderboard'
 import { ErrorFallback } from './ErrorFallback'
+import { Leaderboard, LeaderboardProps } from './Leaderboard'
 
 export function Container(props: LeaderboardProps) {
   const { styles } = props

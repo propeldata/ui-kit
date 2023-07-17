@@ -1,8 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
-
-import { Styles } from './types'
 import { defaultChartHeight } from './defaults'
+import { Styles } from './types'
 
 interface LoaderProps {
   styles?: Styles

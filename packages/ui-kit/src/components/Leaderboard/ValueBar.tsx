@@ -1,6 +1,5 @@
 import React from 'react'
 import { css } from '@emotion/css'
-
 import { defaultStyles } from './defaults'
 import { Styles } from './types'
 

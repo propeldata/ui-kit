@@ -1,8 +1,7 @@
-import React from 'react'
 import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
-
-import { ChartPlugins, Styles } from './types'
+import React from 'react'
 import { defaultStyles } from './defaults'
+import { ChartPlugins, Styles } from './types'
 
 interface GetTableSettingsOptions {
   headers?: string[]

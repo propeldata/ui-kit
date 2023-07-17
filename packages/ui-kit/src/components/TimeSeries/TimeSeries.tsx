@@ -9,9 +9,9 @@ import {
   TimeRangeInput,
   FilterInput,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  Propeller
-} from '../../helpers/graphql'
-import { customCanvasBackgroundColor } from '../../helpers'
+  Propeller,
+  customCanvasBackgroundColor
+} from '../../helpers'
 import {
   BarController,
   LineController,

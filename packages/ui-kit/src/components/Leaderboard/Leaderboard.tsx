@@ -1,23 +1,25 @@
-import React from 'react'
+import { css } from '@emotion/css'
+import { BarController, BarElement, CategoryScale, Chart as ChartJS, Colors, LinearScale, Tooltip } from 'chart.js'
 import request from 'graphql-request'
+import React from 'react'
 import {
+  DimensionInput,
+  FilterInput,
   LeaderboardDocument,
   LeaderboardQuery,
   LeaderboardQueryVariables,
-  TimeRangeInput,
-  FilterInput,
-  Propeller,
   PROPEL_GRAPHQL_API_ENDPOINT,
+  Propeller,
   Sort,
-  DimensionInput
-} from '../../helpers/graphql'
-import { customCanvasBackgroundColor } from '../../helpers'
-import { BarController, BarElement, LinearScale, CategoryScale, Tooltip, Chart as ChartJS, Colors } from 'chart.js'
-import { css } from '@emotion/css'
-
+  TimeRangeInput,
+  customCanvasBackgroundColor
+} from '../../helpers'
+import { withErrorBoundary } from '../withErrorBoundary'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
-import type { ChartPlugins, ChartVariant, LeaderboardData, Styles } from './types'
+import { Loader } from './Loader'
+import { ValueBar } from './ValueBar'
 import { defaultChartHeight, defaultStyles } from './defaults'
+import type { ChartPlugins, ChartVariant, LeaderboardData, Styles } from './types'
 import {
   getTableSettings,
   getValueWithPrefixAndSufix,
@@ -25,8 +27,6 @@ import {
   updateChartStyles,
   useSetupDefaultStyles
 } from './utils'
-import { Loader } from './Loader'
-import { ValueBar } from './ValueBar'
 
 /**
  * It registers only the modules that will be used
@@ -80,7 +80,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   }
 }
 
-export function Leaderboard(props: LeaderboardProps) {
+export function LeaderboardComponent(props: LeaderboardProps) {
   const { variant = 'bar', styles, headers, rows, query, error, loading = false, ...rest } = props
 
   const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -443,6 +443,8 @@ export function Leaderboard(props: LeaderboardProps) {
     </div>
   )
 }
+
+export const Leaderboard = withErrorBoundary(LeaderboardComponent, ErrorFallback)
 
 const getContainerStyles = (styles?: Styles) => css`
   overflow: auto;
