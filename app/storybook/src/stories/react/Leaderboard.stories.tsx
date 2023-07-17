@@ -6,7 +6,14 @@ import { Sort } from '@propeldata/ui-kit-graphql'
 import { Leaderboard, RelativeTimeRange } from '@propeldata/react-leaderboard'
 
 export default {
-  title: 'React/Leaderboard'
+  title: 'React/Leaderboard',
+  argTypes: {
+    query: {
+      table: {
+        disable: true
+      }
+    }
+  }
 }
 
 const accessToken = '<ACCESS_TOKEN>'

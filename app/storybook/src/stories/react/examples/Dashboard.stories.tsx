@@ -19,7 +19,14 @@ export default {
         <Story />
       </S.Body>
     )
-  ]
+  ],
+  argTypes: {
+    query: {
+      table: {
+        disable: true
+      }
+    }
+  }
 }
 
 const queryBase = {
