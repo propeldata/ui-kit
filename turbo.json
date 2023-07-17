@@ -4,7 +4,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["codegen.yml", "package.json", "src/**", "tsconfig.json"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "src/__test__/mockHandlers.ts"]
     },
     "lint": {
       "outputs": []
