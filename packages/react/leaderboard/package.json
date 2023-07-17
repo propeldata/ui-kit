@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/react-leaderboard",
-  "version": "0.31.0-rc.4",
+  "version": "0.31.0-rc.5",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@emotion/css": "^11.10.5",
     "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.4",
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.4",
+    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.5",
     "@propeldata/ui-kit-plugins": "workspace:^0.31.0-rc.4",
     "chart.js": "^4.1.2",
     "graphql": "^16.6.0"
