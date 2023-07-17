@@ -12,7 +12,9 @@
     "dev": {
       "cache": false
     },
-    "test": {}
+    "test": {
+      "dependsOn": ["^build"]
+    }
   },
   "globalDependencies": ["tsconfig.json"]
 }
