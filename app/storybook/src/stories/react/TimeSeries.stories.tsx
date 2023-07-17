@@ -5,7 +5,14 @@ import { format } from 'date-fns'
 import { TimeSeries, RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/react-time-series'
 
 export default {
-  title: 'React/TimeSeries'
+  title: 'React/TimeSeries',
+  argTypes: {
+    query: {
+      table: {
+        disable: true
+      }
+    }
+  }
 }
 
 const dataset = {

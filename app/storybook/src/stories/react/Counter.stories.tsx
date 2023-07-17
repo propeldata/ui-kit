@@ -4,7 +4,14 @@ import { css } from '@emotion/css'
 import { Counter, RelativeTimeRange } from '@propeldata/react-counter'
 
 export default {
-  title: 'React/Counter'
+  title: 'React/Counter',
+  argTypes: {
+    query: {
+      table: {
+        disable: true
+      }
+    }
+  }
 }
 
 const UnstyledTemplate: Story = (args) => (
@@ -86,7 +93,7 @@ const CardTemplate: Story = (args) => (
   </div>
 )
 
-export const Connected = CardTemplate.bind({})
+export const Connected = CardTemplate.bind({ controls: 'disabled' })
 Connected.args = {
   query: {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
