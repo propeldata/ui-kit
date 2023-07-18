@@ -38,7 +38,7 @@ function MonthSalesCount() {
 This will generate a counter component as shown below:
 
 <p align="center">
-  <img src="../../../../../../public/images/counter.png">
+  <img src="../../../public/images/counter.png">
 </p>
 
 As you can see, the component comes unstyled. However, you can customize its styles to your liking. Here's how you can access the style props:
