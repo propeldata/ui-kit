@@ -1,0 +1,41 @@
+overwrite: true
+legacyMode: true
+generates:
+  src/helpers/graphql/generated/index.ts:
+    schema: src/helpers/graphql/public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - add
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      # https://github.com/dotansimha/graphql-code-generator/issues/9046
+      content:
+        - // @ts-nocheck
+      fetcher: fetch
+  src/components/Counter/__test__/mockHandlers.ts:
+    schema: src/helpers/graphql/public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-msw
+      - typescript-operations
+  src/components/Leaderboard/__test__/mockHandlers.ts:
+    schema: src/helpers/graphql/public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-msw
+      - typescript-operations
+  src/components/TimeSeries/__test__/mockHandlers.ts:
+    schema: src/helpers/graphql/public.graphql
+    documents:
+      - ./**/*.graphql
+    plugins:
+      - typescript
+      - typescript-msw
+      - typescript-operations

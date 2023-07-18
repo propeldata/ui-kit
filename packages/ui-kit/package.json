@@ -1,0 +1,60 @@
+{
+  "name": "@propeldata/ui-kit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "graphql:build": "yarn graphql:gen && rm -rf dist && tsc",
+    "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
+    "test": "jest",
+    "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "group": "@propeldata/ui-kit"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.10.5",
+    "@tanstack/react-query": "^4.29.17",
+    "chart.js": "^4.1.2",
+    "chartjs-adapter-date-fns": "2.0.1",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "graphql-request": "^6.1.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/add": "^4.0.0",
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-msw": "^1.1.6",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-query": "^4.1.0",
+    "@juggle/resize-observer": "^3.4.0",
+    "@swc/core": "^1.3.68",
+    "@swc/jest": "^0.2.26",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^27.5.1",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/testing-library__jest-dom": "^5.14.7",
+    "jest": "^27.5.1",
+    "jest-canvas-mock": "^2.5.2",
+    "jest-environment-jsdom": "^27.5.1",
+    "msw": "^1.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "graphql": "^16.6",
+    "react": "^16.8 || ^17 || ^18",
+    "react-dom": "^16.8 || ^17 || ^18"
+  }
+}

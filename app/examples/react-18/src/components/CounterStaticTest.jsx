@@ -1,5 +1,5 @@
 import React from 'react'
-import { Counter } from '@propeldata/react-counter'
+import { Counter } from '@propeldata/ui-kit'
 
 import { useFakeData } from 'hooks/useFakeData'
 

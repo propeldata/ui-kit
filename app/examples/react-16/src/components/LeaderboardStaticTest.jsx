@@ -1,5 +1,5 @@
 import React from 'react'
-import { Leaderboard } from '@propeldata/react-leaderboard'
+import { Leaderboard } from '@propeldata/ui-kit'
 
 import { useFakeData } from 'hooks/useFakeData'
 

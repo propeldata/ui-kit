@@ -2,8 +2,7 @@ import React from 'react'
 import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
 
-import { Sort } from '@propeldata/ui-kit-graphql'
-import { Leaderboard, RelativeTimeRange } from '@propeldata/react-leaderboard'
+import { Sort, Leaderboard, RelativeTimeRange } from '@propeldata/ui-kit'
 
 export default {
   title: 'React/Leaderboard',

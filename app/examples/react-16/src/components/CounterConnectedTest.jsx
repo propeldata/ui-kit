@@ -1,5 +1,5 @@
 import React from 'react'
-import { Counter, RelativeTimeRange } from '@propeldata/react-counter'
+import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
 
 const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
 

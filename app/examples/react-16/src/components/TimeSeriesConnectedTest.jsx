@@ -1,5 +1,5 @@
 import React from 'react'
-import { RelativeTimeRange, TimeSeries, TimeSeriesGranularity } from '@propeldata/react-time-series'
+import { RelativeTimeRange, TimeSeries, TimeSeriesGranularity } from '@propeldata/ui-kit'
 
 const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
 

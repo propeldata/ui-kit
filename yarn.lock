@@ -3977,103 +3977,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@propeldata/react-counter@workspace:^, @propeldata/react-counter@workspace:packages/react/counter":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/react-counter@workspace:packages/react/counter"
-  dependencies:
-    "@emotion/css": ^11.10.5
-    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.4"
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.5"
-    "@propeldata/ui-kit-plugins": "workspace:^0.31.0-rc.4"
-    "@swc/core": ^1.3.68
-    "@swc/jest": ^0.2.26
-    "@testing-library/jest-dom": ^5.16.5
-    "@testing-library/react": ^14.0.0
-    "@testing-library/user-event": ^14.4.3
-    "@types/jest": ^27.5.1
-    "@types/react": latest
-    "@types/react-dom": latest
-    "@types/testing-library__jest-dom": ^5.14.7
-    graphql: ^16.0.1
-    jest: ^27.5.1
-    jest-environment-jsdom: ^27.5.1
-    msw: ^1.2.2
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.3
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/react-leaderboard@workspace:^, @propeldata/react-leaderboard@workspace:packages/react/leaderboard":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/react-leaderboard@workspace:packages/react/leaderboard"
-  dependencies:
-    "@emotion/css": ^11.10.5
-    "@juggle/resize-observer": ^3.4.0
-    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.4"
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.5"
-    "@propeldata/ui-kit-plugins": "workspace:^0.31.0-rc.4"
-    "@swc/core": ^1.3.68
-    "@swc/jest": ^0.2.26
-    "@testing-library/jest-dom": ^5.16.5
-    "@testing-library/react": ^14.0.0
-    "@testing-library/user-event": ^14.4.3
-    "@types/jest": ^27.5.1
-    "@types/react": latest
-    "@types/react-dom": latest
-    "@types/testing-library__jest-dom": ^5.14.7
-    chart.js: ^4.1.2
-    graphql: ^16.6.0
-    jest: ^27.5.1
-    jest-canvas-mock: ^2.5.2
-    jest-environment-jsdom: ^27.5.1
-    msw: ^1.2.2
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.3
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/react-time-series@workspace:^, @propeldata/react-time-series@workspace:packages/react/time-series":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/react-time-series@workspace:packages/react/time-series"
-  dependencies:
-    "@emotion/css": ^11.10.5
-    "@juggle/resize-observer": ^3.4.0
-    "@propeldata/ui-kit-components": "workspace:^0.31.0-rc.4"
-    "@propeldata/ui-kit-graphql": "workspace:^0.31.0-rc.5"
-    "@propeldata/ui-kit-plugins": "workspace:^0.31.0-rc.4"
-    "@swc/core": ^1.3.68
-    "@swc/jest": ^0.2.26
-    "@testing-library/jest-dom": ^5.16.5
-    "@testing-library/react": ^14.0.0
-    "@testing-library/user-event": ^14.4.3
-    "@types/jest": ^27.5.1
-    "@types/react": latest
-    "@types/react-dom": latest
-    "@types/testing-library__jest-dom": ^5.14.7
-    chart.js: ^4.2.1
-    date-fns: ^2.29.3
-    graphql: ^16.6.0
-    jest: ^27.5.1
-    jest-canvas-mock: ^2.5.2
-    jest-environment-jsdom: ^27.5.1
-    msw: ^1.2.2
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.3
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
-  languageName: unknown
-  linkType: soft
-
 "@propeldata/release@workspace:^, @propeldata/release@workspace:packages/core/release":
   version: 0.0.0-use.local
   resolution: "@propeldata/release@workspace:packages/core/release"
@@ -4087,44 +3990,6 @@ __metadata:
     conventional-changelog-angular: ^6.0.0
   bin:
     propel-release: ./bin/propel-release
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/ui-kit-components@workspace:^0.31.0-rc.4, @propeldata/ui-kit-components@workspace:packages/core/components":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/ui-kit-components@workspace:packages/core/components"
-  dependencies:
-    "@types/react": latest
-    "@types/react-dom": latest
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.3
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
-  languageName: unknown
-  linkType: soft
-
-"@propeldata/ui-kit-graphql@workspace:^, @propeldata/ui-kit-graphql@workspace:^0.31.0-rc.5, @propeldata/ui-kit-graphql@workspace:packages/core/graphql":
-  version: 0.0.0-use.local
-  resolution: "@propeldata/ui-kit-graphql@workspace:packages/core/graphql"
-  dependencies:
-    "@graphql-codegen/add": ^4.0.0
-    "@graphql-codegen/cli": ^4.0.1
-    "@graphql-codegen/typescript": ^4.0.1
-    "@graphql-codegen/typescript-msw": ^1.1.6
-    "@graphql-codegen/typescript-operations": ^4.0.1
-    "@graphql-codegen/typescript-react-query": ^4.1.0
-    "@tanstack/react-query": ^4.29.17
-    dotenv: ^16.0.3
-    graphql: ^16.6.0
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    typescript: ^4.9.4
-  peerDependencies:
-    graphql: ^16.6
-    react: ^16.8 || ^17 || ^18
-    react-dom: ^16.8 || ^17 || ^18
   languageName: unknown
   linkType: soft
 
@@ -4163,14 +4028,45 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@propeldata/ui-kit-plugins@workspace:^0.31.0-rc.4, @propeldata/ui-kit-plugins@workspace:packages/core/plugins":
+"@propeldata/ui-kit@workspace:^, @propeldata/ui-kit@workspace:packages/ui-kit":
   version: 0.0.0-use.local
-  resolution: "@propeldata/ui-kit-plugins@workspace:packages/core/plugins"
+  resolution: "@propeldata/ui-kit@workspace:packages/ui-kit"
   dependencies:
-    chart.js: ^4.2.1
-    typescript: ^4.9.4
+    "@emotion/css": ^11.10.5
+    "@graphql-codegen/add": ^4.0.0
+    "@graphql-codegen/cli": ^4.0.1
+    "@graphql-codegen/typescript": ^4.0.1
+    "@graphql-codegen/typescript-msw": ^1.1.6
+    "@graphql-codegen/typescript-operations": ^4.0.1
+    "@graphql-codegen/typescript-react-query": ^4.1.0
+    "@juggle/resize-observer": ^3.4.0
+    "@swc/core": ^1.3.68
+    "@swc/jest": ^0.2.26
+    "@tanstack/react-query": ^4.29.17
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^14.0.0
+    "@testing-library/user-event": ^14.4.3
+    "@types/jest": ^27.5.1
+    "@types/react": latest
+    "@types/react-dom": latest
+    "@types/testing-library__jest-dom": ^5.14.7
+    chart.js: ^4.1.2
+    chartjs-adapter-date-fns: 2.0.1
+    date-fns: ^2.29.3
+    dotenv: ^16.0.3
+    graphql: ^16.6.0
+    graphql-request: ^6.1.0
+    jest: ^27.5.1
+    jest-canvas-mock: ^2.5.2
+    jest-environment-jsdom: ^27.5.1
+    msw: ^1.2.2
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    typescript: ^4.9.3
   peerDependencies:
-    chart.js: ^4.2.1
+    graphql: ^16.6
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
   languageName: unknown
   linkType: soft
 
@@ -9915,12 +9811,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chart.js@npm:^4.1.2, chart.js@npm:^4.2.1":
+"chart.js@npm:^4.1.2":
   version: 4.3.0
   resolution: "chart.js@npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.0.tgz"
   dependencies:
     "@kurkle/color": ^0.3.0
   checksum: 157ceaa3815665163cb30ccc221a5af40834dca940faa6ec02cb95406bf3e83c15c5f36ad950a1716c9d199e87f7b9be953227c4d9d445d593536175b47bbab8
+  languageName: node
+  linkType: hard
+
+"chartjs-adapter-date-fns@npm:2.0.1":
+  version: 2.0.1
+  resolution: "chartjs-adapter-date-fns@npm:2.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-date-fns%2F-%2Fchartjs-adapter-date-fns-2.0.1.tgz"
+  peerDependencies:
+    chart.js: ">=2.8.0"
+  checksum: e13fd5357e963ee0b5fc51dd491015df12ff6df286770bdca54bd5481fb6f2d7712b37f5b5638a0fa2058e3551d6bfbb5daa8b73cab3fd8ccf3e684a8a12369e
   languageName: node
   linkType: hard
 
@@ -14179,7 +14084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-request@npm:^6.0.0":
+"graphql-request@npm:^6.0.0, graphql-request@npm:^6.1.0":
   version: 6.1.0
   resolution: "graphql-request@npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"
   dependencies:
@@ -14218,7 +14123,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.0.1, graphql@npm:^16.6.0":
+"graphql@npm:^16.6.0":
   version: 16.6.0
   resolution: "graphql@npm:16.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.6.0.tgz"
   checksum: bf1d9e3c1938ce3c1a81e909bd3ead1ae4707c577f91cff1ca2eca474bfbc7873d5d7b942e1e9777ff5a8304421dba57a4b76d7a29eb19de8711cb70e3c2415e
@@ -21183,9 +21088,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-16@workspace:app/examples/react-16"
   dependencies:
-    "@propeldata/react-counter": "workspace:^"
-    "@propeldata/react-leaderboard": "workspace:^"
-    "@propeldata/react-time-series": "workspace:^"
+    "@propeldata/ui-kit": "workspace:^"
     react: ^16.8.0
     react-dom: ^16.8.0
     react-scripts: ^5.0.1
@@ -21197,9 +21100,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-17@workspace:app/examples/react-17"
   dependencies:
-    "@propeldata/react-counter": "workspace:^"
-    "@propeldata/react-leaderboard": "workspace:^"
-    "@propeldata/react-time-series": "workspace:^"
+    "@propeldata/ui-kit": "workspace:^"
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: ^5.0.1
@@ -21211,9 +21112,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-18@workspace:app/examples/react-18"
   dependencies:
-    "@propeldata/react-counter": "workspace:^"
-    "@propeldata/react-leaderboard": "workspace:^"
-    "@propeldata/react-time-series": "workspace:^"
+    "@propeldata/ui-kit": "workspace:^"
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: ^5.0.1
@@ -24721,10 +24620,7 @@ __metadata:
     "@babel/preset-env": ^7.21.4
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.21.4
-    "@propeldata/react-counter": "workspace:^"
-    "@propeldata/react-leaderboard": "workspace:^"
-    "@propeldata/react-time-series": "workspace:^"
-    "@propeldata/ui-kit-graphql": "workspace:^"
+    "@propeldata/ui-kit": "workspace:^"
     "@storybook/addon-essentials": ^6.5.14
     "@storybook/addon-interactions": ^6.5.14
     "@storybook/addon-links": ^6.5.14
