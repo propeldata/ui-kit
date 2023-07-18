@@ -18615,7 +18615,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["conventional-commit-types", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fconventional-commit-types%2F-%2Fconventional-commit-types-3.0.0.tgz"],\
             ["lodash.map", "npm:4.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash.map%2F-%2Flodash.map-4.6.0.tgz"],\
             ["longest", "npm:2.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flongest%2F-%2Flongest-2.0.1.tgz"],\
-            ["word-wrap", "npm:1.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.3.tgz"]\
+            ["word-wrap", "npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.4.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27719,7 +27719,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["levn", "npm:0.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flevn%2F-%2Flevn-0.3.0.tgz"],\
             ["prelude-ls", "npm:1.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprelude-ls%2F-%2Fprelude-ls-1.1.2.tgz"],\
             ["type-check", "npm:0.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftype-check%2F-%2Ftype-check-0.3.2.tgz"],\
-            ["word-wrap", "npm:1.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.3.tgz"]\
+            ["word-wrap", "npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.4.tgz"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -27732,7 +27732,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["levn", "npm:0.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flevn%2F-%2Flevn-0.4.1.tgz"],\
             ["prelude-ls", "npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprelude-ls%2F-%2Fprelude-ls-1.2.1.tgz"],\
             ["type-check", "npm:0.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftype-check%2F-%2Ftype-check-0.4.0.tgz"],\
-            ["word-wrap", "npm:1.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.3.tgz"]\
+            ["word-wrap", "npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.4.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -36520,10 +36520,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["word-wrap", [\
-        ["npm:1.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.3.tgz", {\
-          "packageLocation": "./.yarn/cache/word-wrap-npm-1.2.3-4fc3a7adc4-30b48f91fc.zip/node_modules/word-wrap/",\
+        ["npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.4.tgz", {\
+          "packageLocation": "./.yarn/cache/word-wrap-npm-1.2.4-89ab930351-8f1f2e0a39.zip/node_modules/word-wrap/",\
           "packageDependencies": [\
-            ["word-wrap", "npm:1.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.3.tgz"]\
+            ["word-wrap", "npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fword-wrap%2F-%2Fword-wrap-1.2.4.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
