@@ -4040,6 +4040,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": ^4.0.1
     "@graphql-codegen/typescript-react-query": ^4.1.0
     "@juggle/resize-observer": ^3.4.0
+    "@storybook/react": ^6.5.14
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
     "@tanstack/react-query": ^4.29.17
@@ -24620,6 +24621,7 @@ __metadata:
     "@babel/preset-env": ^7.21.4
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.21.4
+    "@emotion/css": ^11.10.5
     "@propeldata/ui-kit": "workspace:^"
     "@storybook/addon-essentials": ^6.5.14
     "@storybook/addon-interactions": ^6.5.14

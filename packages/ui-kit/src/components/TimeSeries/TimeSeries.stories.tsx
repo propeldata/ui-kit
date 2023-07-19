@@ -1,8 +1,8 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 import { format } from 'date-fns'
-
-import { TimeSeries, RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/react-time-series'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
+import { TimeSeries } from './index'
 
 export default {
   title: 'React/TimeSeries',
@@ -59,8 +59,8 @@ export const Connected = Template.bind({})
 Connected.args = {
   variant: 'line',
   query: {
-    accessToken: '<PROPEL_ACCESS_TOKEN>',
-    metric: 'queryCount',
+    accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 30

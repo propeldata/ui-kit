@@ -1,7 +1,8 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
-import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
+import { RelativeTimeRange } from '../../helpers'
+import { Counter } from '../Counter'
 
 export default {
   title: 'React/Counter',
@@ -96,8 +97,8 @@ const CardTemplate: Story = (args) => (
 export const Connected = CardTemplate.bind({ controls: 'disabled' })
 Connected.args = {
   query: {
-    accessToken: '<PROPEL_ACCESS_TOKEN>',
-    metric: 'queryCount',
+    accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 30

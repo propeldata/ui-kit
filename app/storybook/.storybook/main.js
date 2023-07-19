@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ['../src/**/*.stories.@(ts|tsx)'],
+  stories: ['../../../packages/ui-kit/src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
   framework: '@storybook/react',
   reactDocgen: false,
@@ -12,5 +12,18 @@ module.exports = {
       hints: false
     }
     return config
-  }
+  },
+  babel: async (options) => ({
+    ...options,
+    presets: [
+      ...options.presets,
+      [
+        '@babel/preset-react',
+        {
+          runtime: 'automatic'
+        },
+        'preset-react-jsx-transform'
+      ]
+    ]
+  })
 }

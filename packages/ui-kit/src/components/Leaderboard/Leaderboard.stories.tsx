@@ -1,8 +1,8 @@
 import React from 'react'
 import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
-
-import { Sort, Leaderboard, RelativeTimeRange } from '@propeldata/ui-kit'
+import { Sort, RelativeTimeRange } from '../../helpers'
+import { Leaderboard } from './index'
 
 export default {
   title: 'React/Leaderboard',
@@ -14,8 +14,6 @@ export default {
     }
   }
 }
-
-const accessToken = '<ACCESS_TOKEN>'
 
 const barHeaders = ['DATA_SOURCE_TYPE', 'value']
 
@@ -83,20 +81,10 @@ ValueBarTable.args = {
 export const Connected = Template.bind({})
 Connected.args = {
   variant: 'table',
-  headers: [
-    'account',
-    'environment',
-    'regionnnnnnnnn',
-    'data pool id',
-    'data pool name',
-    'data source id',
-    'type',
-    'data source unique name',
-    'revenue'
-  ],
+  headers: [process.env.STORYBOOK_DIMENSION_1, process.env.STORYBOOK_DIMENSION_2, process.env.STORYBOOK_DIMENSION_3],
   query: {
-    accessToken,
-    metric: 'syncRecordsAdded',
+    accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 30
@@ -104,28 +92,13 @@ Connected.args = {
     rowLimit: 10,
     dimensions: [
       {
-        columnName: 'ACCOUNT_ID'
+        columnName: process.env.STORYBOOK_DIMENSION_1
       },
       {
-        columnName: 'ENVIRONMENT_ID'
+        columnName: process.env.STORYBOOK_DIMENSION_2
       },
       {
-        columnName: 'ENVIRONMENT_REGION'
-      },
-      {
-        columnName: 'DATA_POOL_ID'
-      },
-      {
-        columnName: 'DATA_POOL_UNIQUE_NAME'
-      },
-      {
-        columnName: 'DATA_SOURCE_ID'
-      },
-      {
-        columnName: 'DATA_SOURCE_TYPE'
-      },
-      {
-        columnName: 'DATA_SOURCE_UNIQUE_NAME'
+        columnName: process.env.STORYBOOK_DIMENSION_3
       }
     ],
     sort: Sort.Asc
