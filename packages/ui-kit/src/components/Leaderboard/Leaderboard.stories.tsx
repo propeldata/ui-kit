@@ -106,6 +106,9 @@ Connected.args = {
   styles: {
     table: {
       hasValueBar: true
+    },
+    canvas: {
+      height: 500
     }
   }
 }

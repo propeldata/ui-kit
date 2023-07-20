@@ -12,7 +12,7 @@ export const defaultStyles = {
   },
   canvas: {
     backgroundColor: '#ffffff',
-    padding: 0,
+    padding: 10,
     borderRadius: '0px'
   },
   font: {

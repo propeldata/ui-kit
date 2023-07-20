@@ -10,7 +10,16 @@ import {
   useLeaderboardQuery
 } from '../../helpers'
 import { css } from '@emotion/css'
-import { BarController, BarElement, CategoryScale, Chart as ChartJS, Colors, LinearScale, Tooltip } from 'chart.js'
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Colors,
+  LinearScale,
+  Tooltip,
+  Plugin
+} from 'chart.js'
 import { defaultChartHeight, defaultStyles } from './defaults'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import { Loader } from './Loader'
@@ -110,7 +119,7 @@ export function Leaderboard(props: LeaderboardProps) {
     (data?: LeaderboardData) => {
       if (!canvasRef.current || !data || variant === 'table') return
 
-      const labels = data.rows?.map((row) => row[0]) || []
+      const labels = data.rows?.map((row) => row.slice(0, row.length - 1)) || []
       const values = data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
       const hideGridLines = styles?.canvas?.hideGridLines || false
@@ -118,6 +127,31 @@ export function Leaderboard(props: LeaderboardProps) {
       const customPlugins: ChartPlugins = {
         customCanvasBackgroundColor: {
           color: styles?.canvas?.backgroundColor
+        }
+      }
+
+      const customBarLabel: Plugin = {
+        id: 'customBarLabel',
+        afterDatasetDraw(chart) {
+          const {
+            ctx,
+            data,
+            chartArea: { left },
+            scales: { y }
+          } = chart
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const barElement: any = chart.getDatasetMeta(0).data[0]
+
+          ctx.save()
+
+          data.labels.forEach((label: string[], index) => {
+            ctx.font = 'normal 12px sans-serif'
+            ctx.fillStyle = 'grey'
+            ctx.textBaseline = 'bottom'
+            ctx.fillText(label.join(', '), left, y.getPixelForValue(index) - barElement.height / 2 - 2)
+          })
+          ctx.restore()
         }
       }
 
@@ -150,7 +184,8 @@ export function Leaderboard(props: LeaderboardProps) {
               backgroundColor,
               borderColor,
               borderWidth,
-              hoverBorderColor
+              hoverBorderColor,
+              barPercentage: 0.5
             }
           ]
         },
@@ -172,11 +207,19 @@ export function Leaderboard(props: LeaderboardProps) {
             },
             y: {
               display: !hideGridLines,
-              grid: { drawOnChartArea: true }
+              grid: {
+                display: false
+              },
+              ticks: {
+                display: false
+              },
+              border: {
+                display: false
+              }
             }
           }
         },
-        plugins: [customCanvasBackgroundColor]
+        plugins: [customCanvasBackgroundColor, customBarLabel]
       })
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
