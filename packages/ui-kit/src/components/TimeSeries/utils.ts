@@ -13,9 +13,9 @@ import {
 } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import React from 'react'
-import { defaultStyles } from './defaults'
-
-import { ChartPlugins, ChartScales, ChartVariant, Styles } from './types'
+import { defaultStyles } from '../../themes'
+import type { ChartPlugins, ChartStyles } from '../../themes'
+import type { ChartScales, TimeSeriesChartVariant } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -97,7 +97,7 @@ export function getDefaultGranularity(timeRange?: TimeRangeInput) {
   }[relative]
 }
 
-export function useSetupDefaultStyles(styles?: Styles) {
+export function useSetupDefaultStyles(styles?: ChartStyles) {
   React.useEffect(() => {
     async function setupDefaultStyles() {
       const pointStyle = styles?.point?.style as ScriptableAndArray<
@@ -167,8 +167,8 @@ export function useSetupDefaultStyles(styles?: Styles) {
 
 interface UpdateChartStylesOptions {
   chart: Chart
-  styles?: Styles
-  variant: ChartVariant
+  styles?: ChartStyles
+  variant: TimeSeriesChartVariant
 }
 
 export function updateChartStyles(options: UpdateChartStylesOptions) {
@@ -200,7 +200,7 @@ interface UpdateChartConfig {
   values: Array<number | null>
   labels: string[]
   scales: ChartScales
-  variant: ChartVariant
+  variant: TimeSeriesChartVariant
   customPlugins: ChartPlugins
 }
 
@@ -218,7 +218,7 @@ export function updateChartConfig(options: UpdateChartConfig) {
 }
 
 interface GetScalesOptions {
-  styles?: Styles
+  styles?: ChartStyles
   granularity: TimeSeriesGranularity | null
   isFormatted: boolean
   isStatic: boolean

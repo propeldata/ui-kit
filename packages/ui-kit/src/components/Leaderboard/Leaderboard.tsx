@@ -1,3 +1,14 @@
+import { css } from '@emotion/css'
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Colors,
+  LinearScale,
+  Plugin,
+  Tooltip
+} from 'chart.js'
 import React from 'react'
 import {
   customCanvasBackgroundColor,
@@ -9,21 +20,10 @@ import {
   TimeRangeInput,
   useLeaderboardQuery
 } from '../../helpers'
-import { css } from '@emotion/css'
-import {
-  BarController,
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Colors,
-  LinearScale,
-  Tooltip,
-  Plugin
-} from 'chart.js'
-import { defaultChartHeight, defaultStyles } from './defaults'
+import { ChartPlugins, ChartStyles, defaultChartHeight, defaultStyles } from '../../themes'
+import { Loader } from '../Loader'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
-import { Loader } from './Loader'
-import type { ChartPlugins, ChartVariant, LeaderboardData, Styles } from './types'
+import type { LeaderboardChartVariant, LeaderboardData } from './Leaderboard.types'
 import {
   getTableSettings,
   getValueWithPrefixAndSufix,
@@ -44,10 +44,10 @@ let idCounter = 0
 
 export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `table` */
-  variant?: ChartVariant
+  variant?: LeaderboardChartVariant
 
   /** `styles` attribute can be either `BarStyles` or `TableStyles` */
-  styles?: Styles
+  styles?: ChartStyles
 
   /** If passed along with `rows` the component will ignore the built-in graphql operations */
   headers?: string[]
@@ -428,7 +428,7 @@ export function Leaderboard(props: LeaderboardProps) {
   )
 }
 
-const getContainerStyles = (styles?: Styles) => css`
+const getContainerStyles = (styles?: ChartStyles) => css`
   overflow: auto;
   font-size: ${styles?.font?.size || defaultStyles.font?.size};
   width: ${styles?.table?.width || defaultStyles.table?.width};
@@ -439,7 +439,7 @@ const tableStyles = css`
   width: 100%;
 `
 
-const getTableHeadStyles = (styles?: Styles) => css`
+const getTableHeadStyles = (styles?: ChartStyles) => css`
   font-size: ${styles?.table?.header?.font?.size || defaultStyles.table.header.font.size};
   font-family: ${styles?.table?.header?.font?.family || defaultStyles.table.header.font.family};
   font-weight: ${styles?.table?.header?.font?.weight || defaultStyles.table.header.font.weight};
@@ -457,12 +457,12 @@ const stickyHeaderStyles = css`
   z-index: 9999;
 `
 
-const getTableHeaderStyles = (styles?: Styles) => css`
+const getTableHeaderStyles = (styles?: ChartStyles) => css`
   padding: ${styles?.table?.padding || defaultStyles.table.padding};
   font-weight: ${styles?.table?.header?.font?.weight || defaultStyles.table.header.font.weight};
 `
 
-const getTableValueHeaderStyles = (styles?: Styles) => css`
+const getTableValueHeaderStyles = (styles?: ChartStyles) => css`
   position: sticky;
   right: 0;
   text-align: ${styles?.table?.valueColumn?.align || defaultStyles.table.valueColumn.align};
@@ -471,7 +471,7 @@ const getTableValueHeaderStyles = (styles?: Styles) => css`
   background-color: ${styles?.table?.header?.backgroundColor || defaultStyles.table.header.backgroundColor};
 `
 
-const getTableBodyStyles = (styles?: Styles) => css`
+const getTableBodyStyles = (styles?: ChartStyles) => css`
   text-align: ${styles?.table?.columns?.align || defaultStyles.table?.columns?.align};
   color: ${styles?.table?.columns?.font?.color || defaultStyles.table.columns.font.color};
   font-size: ${styles?.table?.columns?.font?.size || defaultStyles.table.columns.font.size};
@@ -481,13 +481,13 @@ const getTableBodyStyles = (styles?: Styles) => css`
   line-height: ${styles?.table?.columns?.font?.lineHeight || defaultStyles.table.columns.font.lineHeight};
 `
 
-const getTableCellStyles = (styles?: Styles) => css`
+const getTableCellStyles = (styles?: ChartStyles) => css`
   padding: ${styles?.table?.padding || defaultStyles.table?.padding};
   background-color: ${styles?.table?.backgroundColor || defaultStyles.table.backgroundColor};
   border-top: 1px solid #e6e8f0;
 `
 
-const getTableValueCellStyles = (styles?: Styles) => css`
+const getTableValueCellStyles = (styles?: ChartStyles) => css`
   font-size: ${styles?.table?.valueColumn?.font?.size || defaultStyles.table.valueColumn.font.size};
   font-family: ${styles?.table?.valueColumn?.font?.family || defaultStyles.table.valueColumn.font.family};
   font-weight: ${styles?.table?.valueColumn?.font?.weight || defaultStyles.table.valueColumn.font.weight};

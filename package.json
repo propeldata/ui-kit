@@ -4,10 +4,10 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
+    "packages/*",
     "packages/*/**",
-    "packages/ui-kit",
-    "app/*/**",
-    "app/storybook"
+    "app/*",
+    "app/*/**"
   ],
   "nmHoistingLimits": "workspaces",
   "scripts": {

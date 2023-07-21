@@ -1,9 +1,8 @@
 import React from 'react'
-
-import { Styles } from './types'
+import type { ChartStyles } from '../../themes'
 
 export interface ErrorFallbackProps {
-  styles?: Styles
+  styles?: ChartStyles
 }
 
 const Icon = ({ color }: { color?: string }) => (

@@ -1,42 +1,43 @@
-import React from 'react'
 import { css } from '@emotion/css'
 import {
-  TimeSeriesGranularity,
-  TimeRangeInput,
-  FilterInput,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  Propeller,
-  useTimeSeriesQuery,
-  customCanvasBackgroundColor
-} from '../../helpers'
-import {
   BarController,
-  LineController,
   BarElement,
-  LineElement,
   CategoryScale,
-  Tooltip,
   Chart as ChartJS,
-  PointElement,
   Colors,
-  TimeSeriesScale,
   LinearScale,
-  LogarithmicScale
+  LineController,
+  LineElement,
+  LogarithmicScale,
+  PointElement,
+  TimeSeriesScale,
+  Tooltip
 } from 'chart.js'
-
-import './chartJsAdapterDateFns'
-import { Styles, TimeSeriesData, ChartVariant, ChartPlugins } from './types'
-import { defaultAriaLabel, defaultChartHeight, defaultStyles } from './defaults'
+import React from 'react'
 import {
-  useSetupDefaultStyles,
-  getDefaultGranularity,
-  formatLabels,
-  updateChartStyles,
-  updateChartConfig,
-  getScales
-} from './utils'
+  customCanvasBackgroundColor,
+  FilterInput,
+  Propeller,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  TimeRangeInput,
+  TimeSeriesGranularity,
+  useTimeSeriesQuery
+} from '../../helpers'
+
+import { ChartPlugins, ChartStyles } from '../../themes'
+import { Loader } from '../Loader'
+import '../../helpers/chartJsAdapterDateFns'
+import { defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
-import { Loader } from './Loader'
+import type { TimeSeriesChartVariant, TimeSeriesData } from './TimeSeries.types'
+import {
+  formatLabels,
+  getDefaultGranularity,
+  getScales,
+  updateChartConfig,
+  updateChartStyles,
+  useSetupDefaultStyles
+} from './utils'
 
 /**
  * It registers only the modules that will be used
@@ -61,10 +62,10 @@ let idCounter = 0
 
 export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `line` */
-  variant?: ChartVariant
+  variant?: TimeSeriesChartVariant
 
   /** `styles` attribute can be either `BarStyles` or `LineStyles` */
-  styles?: Styles
+  styles?: ChartStyles
 
   /** If passed along with `values` the component will ignore the built-in graphql operations */
   labels?: TimeSeriesData['labels']
@@ -346,7 +347,7 @@ export function TimeSeries(props: TimeSeriesProps) {
   )
 }
 
-const getContainerStyles = (styles?: Styles) => css`
+const getContainerStyles = (styles?: ChartStyles) => css`
   width: ${styles?.canvas?.width};
   height: ${styles?.canvas?.height || defaultChartHeight};
 `

@@ -1,2 +1,2 @@
-import { Container } from './Container'
-export const Leaderboard = Container
+export { Container as Leaderboard } from './Container'
+export type { LeaderboardChartVariant, LeaderboardData } from './Leaderboard.types'

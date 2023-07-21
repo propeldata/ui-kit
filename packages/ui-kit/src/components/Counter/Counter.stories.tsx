@@ -83,7 +83,8 @@ const CardTemplate: Story = (args) => (
       <div
         className={css`
           display: flex;
-          justify-content: flex-end;
+          justify-content: center;
+          align-items: center;
           font-size: 3rem;
           font-weight: bold;
         `}

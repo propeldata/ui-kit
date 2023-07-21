@@ -1,12 +1,11 @@
-import React from 'react'
-import { PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, FilterInput, Propeller, useCounterQuery } from '../../helpers'
 import { css } from '@emotion/css'
-
-import { getValueWithPrefixAndSufix } from './utils'
-import type { Styles } from './types'
-import { defaultStyles } from './defaults'
-import { Loader } from './Loader'
+import React from 'react'
+import { FilterInput, Propeller, PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, useCounterQuery } from '../../helpers'
+import type { ChartStyles } from '../../themes'
+import { defaultStyles } from '../../themes'
 import { ErrorFallback } from './ErrorFallback'
+import { Loader } from '../Loader'
+import { getValueWithPrefixAndSufix } from './utils'
 
 export interface CounterProps extends React.ComponentProps<'span'> {
   /** If passed, the component will ignore the built-in graphql operations */
@@ -16,7 +15,7 @@ export interface CounterProps extends React.ComponentProps<'span'> {
   /** Symbol to be shown after the value text */
   sufixValue?: string
   /** Basic styles initial state */
-  styles?: Styles
+  styles?: ChartStyles
   /** When true, formats value to locale string */
   localize?: boolean
   query?: {
@@ -126,7 +125,7 @@ export function Counter(props: CounterProps) {
   }
 
   if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !counterRef.current) {
-    return <Loader styles={styles} />
+    return <Loader styles={styles}>000</Loader>
   }
 
   return (
@@ -149,7 +148,7 @@ export function Counter(props: CounterProps) {
   )
 }
 
-const getFontStyles = (styles?: Styles) => css`
+const getFontStyles = (styles?: ChartStyles) => css`
   color: ${styles?.font?.color || defaultStyles.font.color};
   font-size: ${styles?.font?.size || defaultStyles.font.size};
   font-family: ${styles?.font?.family || defaultStyles.font.family};

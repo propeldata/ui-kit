@@ -2,6 +2,7 @@
 node_modules
 packages/**/*/generated
 packages/nextjs/**
+app/sandbox
 
 # testing
 coverage

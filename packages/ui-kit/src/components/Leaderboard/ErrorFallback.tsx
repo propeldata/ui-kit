@@ -1,10 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/css'
-import { defaultChartHeight, serverErrorMessage } from './defaults'
-import { Styles } from './types'
+import { defaultChartHeight, serverErrorMessage, ChartStyles } from '../../themes'
 
 export interface ErrorFallbackProps {
-  styles?: Styles
+  styles?: ChartStyles
   error?: {
     title: string
     body: string

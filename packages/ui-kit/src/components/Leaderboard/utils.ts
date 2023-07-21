@@ -1,13 +1,11 @@
-import React from 'react'
 import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
-
-import { ChartPlugins, Styles } from './types'
-import { defaultStyles } from './defaults'
+import React from 'react'
+import { defaultStyles, ChartStyles, ChartPlugins } from '../../themes'
 
 interface GetTableSettingsOptions {
   headers?: string[]
   rows?: Array<Array<string | null>>
-  styles?: Styles
+  styles?: ChartStyles
 }
 
 export function getTableSettings(options: GetTableSettingsOptions) {
@@ -60,7 +58,7 @@ const getValue = (options: getValueOptions) => {
   return localize ? value.toFixed(2).toLocaleString() : value.toFixed(2)
 }
 
-export function useSetupDefaultStyles(styles?: Styles) {
+export function useSetupDefaultStyles(styles?: ChartStyles) {
   React.useEffect(() => {
     async function setupDefaultStyles() {
       const font = {
@@ -132,7 +130,7 @@ export function updateChartConfig(options: UpdateChartConfigOptions) {
 
 interface UpdateChartStylesConfig {
   chart: Chart
-  styles?: Styles
+  styles?: ChartStyles
 }
 
 export function updateChartStyles(options: UpdateChartStylesConfig) {

@@ -85,7 +85,7 @@ The following table describes the props available for the Time Series component:
 | **Name** | **Type**                  | **Required**                                        | **Default**        | **Description**                                                                         |
 | -------- | ------------------------- | --------------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------- |
 | variant  | `ChartVariant`            | **No**                                              | `"bar"`            | The variant the chart will respond to, can be either `bar` or `line`                    |
-| styles   | `Styles`                  | **No**                                              | _See next section_ | Check the styles table below for more information                                       |
+| styles   | `TimeSeriesChartVariant`  | **No**                                              | _See next section_ | Check the styles table below for more information                                       |
 | labels   | `Array<string>`           | **Yes** _If `query` is not provided_                | `undefined`        | If passed along with `values` the component will ignore the built-in graphql operations |
 | values   | `Array<number>`           | **Yes** _If `query` is not provided_                | `undefined`        | If passed along with `labels` the component will ignore the built-in graphql operations |
 | loading  | `boolean`                 | **No**                                              | `false`            | When true, shows a skeleton loader                                                      |

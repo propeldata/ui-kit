@@ -99,8 +99,8 @@ The following table describes the props available for the Leaderboard component:
 
 | **Name** | **Type**                  | **Required**                                       | **Default**        | **Description**                                                                          |
 | -------- | ------------------------- | -------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------- |
-| variant  | `ChartVariant`            | **No**                                             | `"bar"`            | The variant the chart will respond to, can be either `bar` or `table`                    |
-| styles   | `Styles`                  | **No**                                             | _See next section_ | Check the styles table below for more information                                        |
+| variant  | `LeaderboardChartVariant` | **No**                                             | `"bar"`            | The variant the chart will respond to, can be either `bar` or `table`                    |
+| styles   | `ChartStyles`             | **No**                                             | _See next section_ | Check the styles table below for more information                                        |
 | headers  | `Array<string>`           | **Yes** _If `query` is not provided_               | `undefined`        | If passed along with `rows` the component will ignore the built-in graphql operations    |
 | rows     | `Array<string>`           | **Yes** _If `query` is not provided_               | `undefined`        | If passed along with `headers` the component will ignore the built-in graphql operations |
 | loading  | `boolean`                 | **No**                                             | `false`            | When true, shows a skeleton loader                                                       |

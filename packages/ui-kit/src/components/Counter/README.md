@@ -79,7 +79,7 @@ The following table describes the props available for the Counter component:
 | **Name**    | **Type**                  | **Required**                                        | **Default**        | **Description**                                                     |
 | ----------- | ------------------------- | --------------------------------------------------- | ------------------ | ------------------------------------------------------------------- |
 | value       | `string`                  | **Yes** _If `query` is not provided_                | `undefined`        | If passed the component will ignore the built-in graphql operations |
-| styles      | `Styles`                  | **No**                                              | _See next section_ | Check the styles table below for more information                   |
+| styles      | `ChartStyles`             | **No**                                              | _See next section_ | Check the styles table below for more information                   |
 | prefixValue | `string`                  | **No**                                              | `undefined`        | Symbol to be shown before the value text                            |
 | sufixValue  | `string`                  | **No**                                              | `undefined`        | Symbol to be shown after the value text                             |
 | loading     | `boolean`                 | **No**                                              | `false`            | When true, shows a skeleton loader                                  |

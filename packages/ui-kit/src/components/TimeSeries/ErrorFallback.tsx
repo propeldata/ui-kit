@@ -1,11 +1,10 @@
-import React from 'react'
 import { css } from '@emotion/css'
-
-import { defaultChartHeight, serverErrorMessage } from './defaults'
-import { Styles } from './types'
+import React from 'react'
+import type { ChartStyles } from '../../themes'
+import { defaultChartHeight, serverErrorMessage } from '../../themes'
 
 export interface ErrorFallbackProps {
-  styles?: Styles
+  styles?: ChartStyles
   error?: {
     title: string
     body: string
@@ -42,9 +41,10 @@ const Icon = ({ color }: { color?: string }) => (
   </svg>
 )
 
-const getContainerStyles = (height: number, width?: number) => css`
+const getContainerStyles = (height: number | string, width?: number) => css`
   width: ${width ? width + 'px' : '100%'};
-  height: ${height}px;
+  /* @TODO: to refactor */
+  height: ${typeof height === 'number' ? `${height}px` : `${height}`};
   display: flex;
   align-items: center;
   justify-content: center;
