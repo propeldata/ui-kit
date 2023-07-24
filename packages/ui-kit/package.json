@@ -7,7 +7,7 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && graphql:build && tsc",
     "graphql:build": "yarn graphql:gen && rm -rf dist && tsc",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "jest",
