@@ -24,11 +24,10 @@ import {
   useTimeSeriesQuery
 } from '../../helpers'
 
-import { ChartPlugins, ChartStyles } from '../../themes'
-import { Loader } from '../Loader'
 import '../../helpers/chartJsAdapterDateFns'
-import { defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
-import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
+import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader } from '../Loader'
 import type { TimeSeriesChartVariant, TimeSeriesData } from './TimeSeries.types'
 import {
   formatLabels,

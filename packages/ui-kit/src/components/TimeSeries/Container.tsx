@@ -2,7 +2,7 @@ import React from 'react'
 import { ErrorBoundary } from '../ErrorBoundary'
 import { QueryClient, QueryClientProvider } from '../../helpers'
 import { TimeSeries, TimeSeriesProps } from './TimeSeries'
-import { ErrorFallback } from './ErrorFallback'
+import { ErrorFallback } from '../ErrorFallback'
 
 const queryClient = new QueryClient()
 

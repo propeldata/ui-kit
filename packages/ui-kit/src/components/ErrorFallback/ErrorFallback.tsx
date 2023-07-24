@@ -7,7 +7,7 @@ export interface ErrorFallbackProps {
   error?: {
     title: string
     body: string
-  }
+  } | null
 }
 
 const Icon = ({ color }: { color?: string }) => (
@@ -23,7 +23,8 @@ export function ErrorFallback(props: ErrorFallbackProps) {
   const { error = serverErrorMessage, styles } = props
 
   const width = styles?.canvas?.width
-  const height = styles?.canvas?.height || defaultChartHeight
+  const defaultHeight = error ? defaultChartHeight : 'auto'
+  const height = styles?.canvas?.height || defaultHeight
 
   return (
     <div
@@ -43,18 +44,22 @@ export function ErrorFallback(props: ErrorFallbackProps) {
         `}
       >
         <Icon color={styles?.font?.color} />
-        <p
-          className={css`
-            font-weight: 500;
-          `}
-          role="alert"
-          aria-live="assertive"
-        >
-          {error.title}
-        </p>
-        <p role="alert" aria-live="assertive">
-          {error.body}
-        </p>
+        {error && (
+          <>
+            <p
+              className={css`
+                font-weight: 500;
+              `}
+              role="alert"
+              aria-live="assertive"
+            >
+              {error.title}
+            </p>
+            <p role="alert" aria-live="assertive">
+              {error.body}
+            </p>
+          </>
+        )}
       </div>
     </div>
   )

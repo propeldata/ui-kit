@@ -21,8 +21,8 @@ import {
   useLeaderboardQuery
 } from '../../helpers'
 import { ChartPlugins, ChartStyles, defaultChartHeight, defaultStyles } from '../../themes'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import { ErrorFallback, ErrorFallbackProps } from './ErrorFallback'
 import type { LeaderboardChartVariant, LeaderboardData } from './Leaderboard.types'
 import {
   getTableSettings,

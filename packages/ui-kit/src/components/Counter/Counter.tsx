@@ -3,7 +3,7 @@ import React from 'react'
 import { FilterInput, Propeller, PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, useCounterQuery } from '../../helpers'
 import type { ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
-import { ErrorFallback } from './ErrorFallback'
+import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { getValueWithPrefixAndSufix } from './utils'
 
@@ -121,7 +121,7 @@ export function Counter(props: CounterProps) {
   }, [isStatic, value, query, isLoadingStatic])
 
   if (error || propsMismatch) {
-    return <ErrorFallback styles={styles} />
+    return <ErrorFallback error={null} styles={styles} />
   }
 
   if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !counterRef.current) {
