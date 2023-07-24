@@ -1,2 +1,2 @@
-export { Container as Counter } from './Container'
+export { Counter } from './Counter'
 export * from './Counter.types'

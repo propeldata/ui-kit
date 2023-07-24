@@ -15,11 +15,11 @@ import {
 } from 'chart.js'
 import React from 'react'
 import { customCanvasBackgroundColor, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery } from '../../helpers'
-
 import '../../helpers/chartJsAdapterDateFns'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
+import { withContainer } from '../withContainer'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import {
   formatLabels,
@@ -53,7 +53,7 @@ let idCounter = 0
 
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
 
-export function TimeSeries(props: TimeSeriesProps) {
+export const TimeSeriesComponent = (props: TimeSeriesProps) => {
   const {
     variant = 'bar',
     styles,
@@ -283,6 +283,8 @@ export function TimeSeries(props: TimeSeriesProps) {
     </div>
   )
 }
+
+export const TimeSeries = withContainer(TimeSeriesComponent, ErrorFallback)
 
 const getContainerStyles = (styles?: ChartStyles) => css`
   width: ${styles?.canvas?.width};

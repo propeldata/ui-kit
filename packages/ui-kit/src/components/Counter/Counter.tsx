@@ -4,11 +4,12 @@ import { PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import type { ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
+import { withContainer } from '../withContainer'
 import { Loader } from '../Loader'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
 
-export function Counter(props: CounterProps) {
+const CounterComponent = (props: CounterProps) => {
   const {
     value: staticValue,
     query,
@@ -117,6 +118,8 @@ export function Counter(props: CounterProps) {
     </span>
   )
 }
+
+export const Counter = withContainer(CounterComponent, ErrorFallback)
 
 const getFontStyles = (styles?: ChartStyles) => css`
   color: ${styles?.font?.color || defaultStyles.font.color};

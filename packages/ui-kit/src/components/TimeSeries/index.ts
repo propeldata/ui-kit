@@ -1,2 +1,2 @@
-export { Container as TimeSeries } from './Container'
+export { TimeSeries } from './TimeSeries'
 export * from './TimeSeries.types'

@@ -1,2 +1,2 @@
-export { Container as Leaderboard } from './Container'
+export { Leaderboard } from './Leaderboard'
 export * from './Leaderboard.types'

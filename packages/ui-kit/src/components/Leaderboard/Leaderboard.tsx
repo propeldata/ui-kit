@@ -11,10 +11,12 @@ import {
 } from 'chart.js'
 import React from 'react'
 import { customCanvasBackgroundColor, PROPEL_GRAPHQL_API_ENDPOINT, useLeaderboardQuery } from '../../helpers'
-import { ChartPlugins, ChartStyles, defaultChartHeight, defaultStyles } from '../../themes'
+import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import type { LeaderboardData } from './Leaderboard.types'
+import { withContainer } from '../withContainer'
+import * as ComponentStyles from './Leaderboard.styles'
+import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import {
   getTableSettings,
   getValueWithPrefixAndSufix,
@@ -23,7 +25,6 @@ import {
   useSetupDefaultStyles
 } from './utils'
 import { ValueBar } from './ValueBar'
-import type { LeaderboardProps } from './Leaderboard.types'
 
 /**
  * It registers only the modules that will be used
@@ -34,7 +35,7 @@ ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale,
 
 let idCounter = 0
 
-export function Leaderboard(props: LeaderboardProps) {
+const LeaderboardComponent = (props: LeaderboardProps) => {
   const { variant = 'bar', styles, headers, rows, query, error, loading: isLoadingStatic = false, ...rest } = props
 
   const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -328,29 +329,29 @@ export function Leaderboard(props: LeaderboardProps) {
     getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
 
   return (
-    <div ref={tableRef} className={getContainerStyles(styles)} style={loadingStyles}>
-      <table cellSpacing={0} className={tableStyles}>
-        <thead className={getTableHeadStyles(styles)}>
+    <div ref={tableRef} className={ComponentStyles.getContainerStyles(styles)} style={loadingStyles}>
+      <table cellSpacing={0} className={ComponentStyles.tableStyles}>
+        <thead className={ComponentStyles.getTableHeadStyles(styles)}>
           <tr>
             {headersWithoutValue?.map((header, index) => (
-              <th className={getTableHeaderStyles(styles)} key={`${header}-${index}`}>
+              <th className={ComponentStyles.getTableHeaderStyles(styles)} key={`${header}-${index}`}>
                 {header}
               </th>
             ))}
-            <th className={getTableValueHeaderStyles(styles)}>{valueHeader}</th>
+            <th className={ComponentStyles.getTableValueHeaderStyles(styles)}>{valueHeader}</th>
             {hasValueBar && <th />}
           </tr>
         </thead>
-        <tbody className={getTableBodyStyles(styles)}>
+        <tbody className={ComponentStyles.getTableBodyStyles(styles)}>
           {rowsWithoutValue?.map((cells, rowIndex) => (
             <tr key={rowIndex}>
               {cells.map((cell, cellIndex) => (
-                <td className={getTableCellStyles(styles)} key={`${cell}-${cellIndex}`}>
+                <td className={ComponentStyles.getTableCellStyles(styles)} key={`${cell}-${cellIndex}`}>
                   {isOrdered && cellIndex === 0 && `${rowIndex + 1}. `}
                   {cell}
                 </td>
               ))}
-              <td className={getTableValueCellStyles(styles)}>
+              <td className={ComponentStyles.getTableValueCellStyles(styles)}>
                 {getValueWithPrefixAndSufix({
                   localize: styles?.table?.valueColumn?.localize,
                   prefix: styles?.table?.valueColumn?.prefixValue,
@@ -359,7 +360,7 @@ export function Leaderboard(props: LeaderboardProps) {
                 })}
               </td>
               {hasValueBar && (
-                <td className={valueBarCellStyles}>
+                <td className={ComponentStyles.valueBarCellStyles}>
                   <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
                 </td>
               )}
@@ -371,82 +372,4 @@ export function Leaderboard(props: LeaderboardProps) {
   )
 }
 
-const getContainerStyles = (styles?: ChartStyles) => css`
-  overflow: auto;
-  font-size: ${styles?.font?.size || defaultStyles.font?.size};
-  width: ${styles?.table?.width || defaultStyles.table?.width};
-  height: ${styles?.table?.height || defaultStyles.table?.height};
-`
-
-const tableStyles = css`
-  width: 100%;
-`
-
-const getTableHeadStyles = (styles?: ChartStyles) => css`
-  font-size: ${styles?.table?.header?.font?.size || defaultStyles.table.header.font.size};
-  font-family: ${styles?.table?.header?.font?.family || defaultStyles.table.header.font.family};
-  font-weight: ${styles?.table?.header?.font?.weight || defaultStyles.table.header.font.weight};
-  font-style: ${styles?.table?.header?.font?.style || defaultStyles.table.header.font.style};
-  line-height: ${styles?.table?.header?.font?.lineHeight || defaultStyles.table.header.font.lineHeight};
-  background-color: ${styles?.table?.header?.backgroundColor || defaultStyles.table.header.backgroundColor};
-  text-align: ${styles?.table?.header?.align || defaultStyles.table.header.align};
-  color: ${styles?.table?.header?.font?.color || defaultStyles.table.header.font.color};
-  ${styles?.table?.stickyHeader && stickyHeaderStyles}
-`
-
-const stickyHeaderStyles = css`
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-`
-
-const getTableHeaderStyles = (styles?: ChartStyles) => css`
-  padding: ${styles?.table?.padding || defaultStyles.table.padding};
-  font-weight: ${styles?.table?.header?.font?.weight || defaultStyles.table.header.font.weight};
-`
-
-const getTableValueHeaderStyles = (styles?: ChartStyles) => css`
-  position: sticky;
-  right: 0;
-  text-align: ${styles?.table?.valueColumn?.align || defaultStyles.table.valueColumn.align};
-  padding: ${styles?.table?.padding || defaultStyles.table.padding};
-  font-weight: ${styles?.table?.header?.font?.weight || defaultStyles.table.header.font.weight};
-  background-color: ${styles?.table?.header?.backgroundColor || defaultStyles.table.header.backgroundColor};
-`
-
-const getTableBodyStyles = (styles?: ChartStyles) => css`
-  text-align: ${styles?.table?.columns?.align || defaultStyles.table?.columns?.align};
-  color: ${styles?.table?.columns?.font?.color || defaultStyles.table.columns.font.color};
-  font-size: ${styles?.table?.columns?.font?.size || defaultStyles.table.columns.font.size};
-  font-family: ${styles?.table?.columns?.font?.family || defaultStyles.table.columns.font.family};
-  font-weight: ${styles?.table?.columns?.font?.weight || defaultStyles.table.columns.font.weight};
-  font-style: ${styles?.table?.columns?.font?.style || defaultStyles.table.columns.font.style};
-  line-height: ${styles?.table?.columns?.font?.lineHeight || defaultStyles.table.columns.font.lineHeight};
-`
-
-const getTableCellStyles = (styles?: ChartStyles) => css`
-  padding: ${styles?.table?.padding || defaultStyles.table?.padding};
-  background-color: ${styles?.table?.backgroundColor || defaultStyles.table.backgroundColor};
-  border-top: 1px solid #e6e8f0;
-`
-
-const getTableValueCellStyles = (styles?: ChartStyles) => css`
-  font-size: ${styles?.table?.valueColumn?.font?.size || defaultStyles.table.valueColumn.font.size};
-  font-family: ${styles?.table?.valueColumn?.font?.family || defaultStyles.table.valueColumn.font.family};
-  font-weight: ${styles?.table?.valueColumn?.font?.weight || defaultStyles.table.valueColumn.font.weight};
-  font-style: ${styles?.table?.valueColumn?.font?.style || defaultStyles.table.valueColumn.font.style};
-  line-height: ${styles?.table?.valueColumn?.font?.lineHeight || defaultStyles.table.valueColumn.font.lineHeight};
-  position: sticky;
-  right: 0;
-  border-top: 1px solid #e6e8f0;
-  color: ${styles?.table?.valueColumn?.font?.color || defaultStyles.table.valueColumn.font.color};
-  text-align: ${styles?.table?.valueColumn?.align || defaultStyles.table.valueColumn.align};
-  padding: ${styles?.table?.padding || defaultStyles.table.padding};
-  background-color: ${styles?.table?.backgroundColor || defaultStyles.table.backgroundColor};
-`
-
-const valueBarCellStyles = css`
-  width: 20%;
-  border-top: 1px solid #e6e8f0;
-  padding-right: 6px;
-`
+export const Leaderboard = withContainer(LeaderboardComponent, ErrorFallback)
