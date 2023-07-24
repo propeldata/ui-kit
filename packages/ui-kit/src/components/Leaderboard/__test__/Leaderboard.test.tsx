@@ -23,7 +23,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = leaderboard.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = leaderboard.rows.map((row) => row[0])
+    const resultingLabels = leaderboard.rows.map((row) => row.slice(0, row.length - 1))
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
@@ -56,7 +56,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = leaderboard.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = leaderboard.rows.map((row) => row[0])
+    const resultingLabels = leaderboard.rows.map((row) => row.slice(0, row.length - 1))
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
