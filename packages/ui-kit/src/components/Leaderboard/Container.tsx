@@ -1,8 +1,9 @@
 import React from 'react'
-import { ErrorBoundary } from '../ErrorBoundary'
 import { QueryClient, QueryClientProvider } from '../../helpers'
-import { Leaderboard, LeaderboardProps } from './Leaderboard'
+import { ErrorBoundary } from '../ErrorBoundary'
 import { ErrorFallback } from '../ErrorFallback'
+import { Leaderboard } from './Leaderboard'
+import type { LeaderboardProps } from './Leaderboard.types'
 
 const queryClient = new QueryClient()
 

@@ -14,21 +14,13 @@ import {
   Tooltip
 } from 'chart.js'
 import React from 'react'
-import {
-  customCanvasBackgroundColor,
-  FilterInput,
-  Propeller,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  TimeRangeInput,
-  TimeSeriesGranularity,
-  useTimeSeriesQuery
-} from '../../helpers'
+import { customCanvasBackgroundColor, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery } from '../../helpers'
 
 import '../../helpers/chartJsAdapterDateFns'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
-import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import type { TimeSeriesChartVariant, TimeSeriesData } from './TimeSeries.types'
+import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import {
   formatLabels,
   getDefaultGranularity,
@@ -58,60 +50,6 @@ ChartJS.register(
 )
 
 let idCounter = 0
-
-export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
-  /** The variant the chart will respond to, can be either `bar` or `line` */
-  variant?: TimeSeriesChartVariant
-
-  /** `styles` attribute can be either `BarStyles` or `LineStyles` */
-  styles?: ChartStyles
-
-  /** If passed along with `values` the component will ignore the built-in graphql operations */
-  labels?: TimeSeriesData['labels']
-
-  /** If passed along with `labels` the component will ignore the built-in graphql operations  */
-  values?: TimeSeriesData['values']
-
-  /** When true, shows a skeleton loader */
-  loading?: boolean
-
-  /** Canvas aria-label prop, if not passed we handle it */
-  ariaLabel?: string
-
-  /** Canvas role prop, if not passed we handle it */
-  role?: string
-
-  query?: {
-    /** This should eventually be replaced to customer's app credentials */
-    accessToken?: string
-
-    /** Metric unique name */
-    metric?: string
-
-    /** Time range that the chart will respond to */
-    timeRange?: TimeRangeInput
-
-    /** Granularity that the chart will respond to */
-    granularity?: TimeSeriesGranularity
-
-    /** Filters that the chart will respond to */
-    filters?: FilterInput[]
-
-    /** Propeller that the chart will respond to */
-    propeller?: Propeller
-
-    /** Timestamp format that the chart will respond to */
-    timestampFormat?: string
-
-    /** Interval in milliseconds for refetching the data */
-    refetchInterval?: number
-
-    /** Whether to retry on errors. */
-    retry?: boolean
-  }
-  /** Format function for labels, must return an array with the new labels */
-  labelFormatter?: (labels: string[]) => string[]
-}
 
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
 

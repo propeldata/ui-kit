@@ -1,8 +1,9 @@
 import React from 'react'
-import { ErrorBoundary } from '../ErrorBoundary'
 import { QueryClient, QueryClientProvider } from '../../helpers'
-import { TimeSeries, TimeSeriesProps } from './TimeSeries'
+import { ErrorBoundary } from '../ErrorBoundary'
 import { ErrorFallback } from '../ErrorFallback'
+import { TimeSeries } from './TimeSeries'
+import type { TimeSeriesProps } from './TimeSeries.types'
 
 const queryClient = new QueryClient()
 

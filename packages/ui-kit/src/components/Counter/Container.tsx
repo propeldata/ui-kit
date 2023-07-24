@@ -1,9 +1,9 @@
 import React from 'react'
-import { ErrorBoundary } from '../ErrorBoundary'
 import { QueryClient, QueryClientProvider } from '../../helpers'
-
-import { Counter, CounterProps } from './Counter'
+import { ErrorBoundary } from '../ErrorBoundary'
 import { ErrorFallback } from '../ErrorFallback'
+import { Counter } from './Counter'
+import type { CounterProps } from './Counter.types'
 
 const queryClient = new QueryClient()
 
