@@ -9,19 +9,19 @@ To install the Counter component in your project, use your preferred package man
 With `yarn`:
 
 ```shell
-yarn add @propeldata/react-counter
+yarn add @propeldata/ui-kit
 ```
 
 or `npm`:
 
 ```shell
-npm install @propeldata/react-counter
+npm install @propeldata/ui-kit
 ```
 
 This will add the component to your `node_modules` folder. You can then import the component in your `React` file and use it as shown in the following example:
 
 ```javascript
-import { Counter } from '@propeldata/react-counter'
+import { Counter } from '@propeldata/ui-kit'
 
 function MonthSalesCount() {
   const queryOptions = {
@@ -38,7 +38,7 @@ function MonthSalesCount() {
 This will generate a counter component as shown below:
 
 <p align="center">
-  <img src="../../../public/images/counter.png">
+  <img src="../../../../../public/images/counter.png">
 </p>
 
 As you can see, the component comes unstyled. However, you can customize its styles to your liking. Here's how you can access the style props:
@@ -59,7 +59,7 @@ function CustomCounter() {
 ```
 
 <p align="center">
-  <img src="../../../public/images/counter-custom.png">
+  <img src="../../../../../public/images/counter-custom.png">
 </p>
 
 In this example, we have built a simple span element that can be wrapped into any custom component of your preference. You can adjust these and other style properties to create a unique look for your Counter component.
@@ -67,7 +67,7 @@ In this example, we have built a simple span element that can be wrapped into an
 Here's an example of how you can wrap the Counter component inside a Card to give it a unique look.
 
 <p align="center">
-  <img src="../../../public/images/counter-card.png">
+  <img src="../../../../../public/images/counter-card.png">
 </p>
 
 Now let's look at what all you can do with the component. The next 2 topics will cover all the props and styles you can configure to have a nice chart experience.

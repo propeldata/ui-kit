@@ -9,19 +9,19 @@ To install the Leaderboard component in your project, use your preferred package
 With `yarn`:
 
 ```shell
-yarn add @propeldata/react-leaderboard
+yarn add @propeldata/ui-kit
 ```
 
 or `npm`:
 
 ```shell
-npm install @propeldata/react-leaderboard
+npm install @propeldata/ui-kit
 ```
 
 This will add the component to your `node_modules` folder. You can then import the component in your `React` file and use it as shown in the following example:
 
 ```javascript
-import { Leaderboard } from '@propeldata/react-leaderboard'
+import { Leaderboard } from '@propeldata/ui-kit'
 
 function MonthSalesChart() {
   const queryOptions = {
@@ -46,7 +46,7 @@ function MonthSalesChart() {
 This will generate a leaderboard chart as shown below:
 
 <p align="center">
-  <img src="../../../public/images/leaderboard.png">
+  <img src="../../../../../public/images/leaderboard.png">
 </p>
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a totally different leaderboard chart now. Here's how you can access the style props:
@@ -86,7 +86,7 @@ function CustomChart() {
 ```
 
 <p align="center">
-  <img src="../../../public/images/leaderboard-custom.png">
+  <img src="../../../../../public/images/leaderboard-custom.png">
 </p>
 
 In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe. Up to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.

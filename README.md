@@ -16,8 +16,16 @@ The Propel UI Kit is a data visualization and dashboard React component library 
 
 To install the Propel UI Kit components, run the following command:
 
+With `yarn`:
+
 ```shell
-npm install @propeldata/react-counter @propeldata/react-time-series @propeldata/react-leaderboard
+yarn add @propeldata/ui-kit
+```
+
+or `npm`:
+
+```shell
+npm install @propeldata/ui-kit
 ```
 
 You can read more about the [why and core principles](PRINCIPLES.md) behind the Propel UI Kit.
@@ -40,9 +48,9 @@ Individual components have other key features that we highlight on the component
 
 Check out the different components and their documentation:
 
-- [Time Series](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series)
-- [Counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/counter)
-- [Leaderboard](https://github.com/propeldata/ui-kit/tree/main/packages/react/leaderboard)
+- [Time Series](/packages/ui-kit/src/components/TimeSeries/README.md)
+- [Counter](/packages/ui-kit/src/components/Counter/README.md)
+- [Leaderboard](/packages/ui-kit/src/components/Leaderboard/README.md)
 
 Please [open a feature request](https://github.com/propeldata/ui-kit/issues) on GitHub for other components you'd like to have. Also, PRs are welcome 😊.
 
@@ -54,10 +62,10 @@ The Propel UI Kit components are available in two modes: "Static" and "Connected
 
 In the "Static" mode, the component will display the data you provide.
 
-Let's take our [@propeldata/react-time-series](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
+Let's take our [TimeSeries](/packages/ui-kit/src/components/TimeSeries/README.md) component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
 
 ```javascript
-import { TimeSeries } from '@propeldata/react-time-series'
+import { TimeSeries } from '@propeldata/ui-kit'
 
 const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -82,10 +90,10 @@ To learn more about querying data with Propel, read the [Metric query documentat
 
 For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs. You can authenticate and generate an access token by following the steps outlined in [the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
 
-Here is an example using our [@propeldata/react-counter](https://github.com/propeldata/ui-kit/tree/main/packages/react/time-series) component:
+Here is an example using our [Counter](/packages/ui-kit/src/components/Counter/README.md) component:
 
 ```javascript
-import { Counter } from '@propeldata/react-counter'
+import { Counter } from '@propeldata/ui-kit'
 
 function SalesCountLabel() {
   const queryOptions = {
