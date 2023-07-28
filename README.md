@@ -14,6 +14,8 @@ The Propel UI Kit is a data visualization and dashboard React component library 
 
 ## Install
 
+Note: check the [Migration guide](#migration-guide) in case you installed any of @propeldata/react-prefixed dependencies before.
+
 To install the Propel UI Kit components, run the following command:
 
 With `yarn`:
@@ -175,6 +177,50 @@ This will display a custom error message with a title and body text, as shown in
 </p>
 
 By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that fit seamlessly into your front-end applications.
+
+## Migration guide
+
+### 1. Update your dependencis
+
+Remove any existing @propeldata/react-prefixed dependencies (for example, `@propeldata/react-counter`, `@propeldata/react-leaderboard`, and `@propeldata/react-time-series`). Then, add a new dependency on `@propeldata/ui-kit`, using npm or yarn.
+
+**npm**
+
+```
+npm i @propeldata/ui-kit
+```
+
+**yarn**
+
+```
+yarn add @propeldata/ui-kit
+```
+
+### 2. Update your imports
+
+Wherever you previously imported from `@propeldata/react-counter`, `@propeldata/react-leaderboard`, or `@propeldata/react-time-series`, you can now import from `@propeldata/ui-kit`. Note that `Styles` has been renamed to `ChartStyles` and is shared by all three components.
+
+**Before**
+
+```ts
+import { Counter, CounterProps, Styles as CounterStyles } from '@propeldata/react-counter'
+import { Leaderboard, LeaderboardProps, Styles as LeaderboardStyles } from '@propeldata/react-leaderboard'
+import { TimeSeries, TimeSeriesProps, Styles as TimeSeriesStyles } from '@propeldata/react-time-series'
+```
+
+**After**
+
+```ts
+import {
+  ChartStyles,
+  Counter,
+  CounterProps,
+  Leaderboard,
+  LeaderboardProps,
+  TimeSeries,
+  TimeSeriesProps
+} from '@propeldata/ui-kit'
+```
 
 ## Contributing
 
