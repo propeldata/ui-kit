@@ -1,7 +1,7 @@
-import React from 'react'
-import { Story } from '@storybook/react'
 import { css } from '@emotion/css'
-import { Sort, RelativeTimeRange } from '../../helpers'
+import { Story } from '@storybook/react'
+import React from 'react'
+import { RelativeTimeRange, Sort } from '../../helpers'
 import { Leaderboard } from './index'
 
 export default {

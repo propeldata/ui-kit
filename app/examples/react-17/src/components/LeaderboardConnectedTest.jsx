@@ -37,7 +37,7 @@ export function LeaderboardConnectedTest() {
             }
           ],
           metric: REACT_APP_METRIC_UNIQUE_NAME_1,
-          rowLimit: 8,
+          rowLimit: 4,
           timeRange: {
             relative: RelativeTimeRange.LastNDays,
             n: 30

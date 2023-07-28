@@ -2,6 +2,11 @@ import { DimensionInput, FilterInput, Propeller, Sort, TimeRangeInput } from '..
 import { ChartStyles } from '../../themes'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 
+/**
+ * @deprecated the type is deprecated, use LeaderboardChartVariant or TimeSeriesChartVariant instead
+ */
+export type ChartVariant = 'bar' | 'line'
+
 export type LeaderboardChartVariant = 'bar' | 'table'
 
 export type LeaderboardData = {

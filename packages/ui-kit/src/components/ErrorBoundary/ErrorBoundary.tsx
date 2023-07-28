@@ -16,13 +16,11 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   // Will add logs later
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  static getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(_error: Error) {
     return { hasError: true }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(_error: Error, _errorInfo: React.ErrorInfo) {
     // console.error(error, errorInfo) we will set logs as a feature later
   }
 

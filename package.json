@@ -4,10 +4,8 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "packages/*",
-    "packages/*/**",
-    "app/*",
-    "app/*/**"
+    "packages/**",
+    "app/**"
   ],
   "nmHoistingLimits": "workspaces",
   "scripts": {

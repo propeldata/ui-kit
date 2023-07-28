@@ -1,6 +1,6 @@
-import React from 'react'
 import { Story } from '@storybook/react'
 import { format } from 'date-fns'
+import React from 'react'
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
 import { TimeSeries } from './index'
 

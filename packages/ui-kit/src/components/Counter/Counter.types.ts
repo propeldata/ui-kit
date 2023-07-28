@@ -1,5 +1,5 @@
-import type { ChartStyles } from '../../themes'
 import { FilterInput, Propeller, TimeRangeInput } from '../../helpers'
+import type { ChartStyles } from '../../themes'
 
 export interface CounterProps extends React.ComponentProps<'span'> {
   /** If passed, the component will ignore the built-in graphql operations */
