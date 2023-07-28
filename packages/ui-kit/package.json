@@ -7,8 +7,8 @@
   "module": "dist/index.module.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && yarn graphql:build && tsc",
-    "graphql:build": "yarn graphql:gen && rm -rf dist && tsc",
+    "build": "rm -rf dist && yarn graphql:build && tsc -p tsconfig.build.json",
+    "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
