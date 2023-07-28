@@ -1,21 +1,56 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { RelativeTimeRange } from '../../../helpers'
-import { Counter } from '../index'
-import { counter } from './mockData'
-import { setupHandlers } from './mswHandlers'
+import { mockCounterQuery, RelativeTimeRange } from '../../helpers'
+import { Dom, setupTestHandlers } from '../../helpers/testing'
+import { Counter } from './Counter'
+
+const mockData = {
+  value: '123'
+}
+
+const handlers = [
+  mockCounterQuery((req, res, ctx) => {
+    const { metricName } = req.variables.counterInput
+
+    if (metricName === 'lack-of-data') {
+      return res(
+        ctx.data({
+          counter: {
+            value: null
+          }
+        })
+      )
+    }
+
+    if (metricName === 'should-fail') {
+      return res(
+        ctx.errors([
+          {
+            message: 'something went wrong'
+          }
+        ])
+      )
+    }
+
+    return res(
+      ctx.data({
+        counter: mockData
+      })
+    )
+  })
+]
 
 describe('Counter', () => {
-  let dom: ReturnType<typeof render>
+  let dom: Dom
 
   beforeEach(() => {
-    setupHandlers()
+    setupTestHandlers(handlers)
   })
 
   it('should render a static counter', async () => {
-    dom = render(<Counter value={counter.value} />)
+    dom = render(<Counter value={mockData.value} />)
 
-    await dom.findByText(counter.value)
+    await dom.findByText(mockData.value)
   })
 
   it('should show value from server', async () => {
@@ -29,7 +64,7 @@ describe('Counter', () => {
       />
     )
 
-    await dom.findByText(counter.value)
+    await dom.findByText(mockData.value)
   })
 
   it('Should show "-" when value is null', async () => {
@@ -47,6 +82,7 @@ describe('Counter', () => {
   })
 
   it('Should show error fallback when request fails', async () => {
+    console.error = jest.fn()
     dom = render(
       <Counter
         query={{
@@ -59,6 +95,8 @@ describe('Counter', () => {
     )
 
     await dom.findByRole('img')
+
+    expect(console.error).toHaveBeenCalled()
   })
 
   it('Should show error fallback on props mismatch', async () => {

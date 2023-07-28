@@ -1,20 +1,50 @@
-import React from 'react'
-import { Chart } from 'chart.js'
 import { render, waitFor } from '@testing-library/react'
-import { RelativeTimeRange } from '../../../helpers'
-import { Leaderboard } from '../index'
-import { setupHandlers } from './mswHandlers'
-import { leaderboard } from './mockData'
+import { Chart } from 'chart.js'
+import React from 'react'
+import { mockLeaderboardQuery, RelativeTimeRange } from '../../helpers'
+import { Dom, setupTestHandlers } from '../../helpers/testing'
+import { Leaderboard } from './Leaderboard'
+
+const mockData = {
+  headers: ['header-1', 'header-2', 'header-3'],
+  rows: [
+    ['dim-1', 'dim-2', '30'],
+    ['dim1', 'dim-2', '60'],
+    ['dim-1', 'dim-2', '90']
+  ]
+}
+
+const handlers = [
+  mockLeaderboardQuery((req, res, ctx) => {
+    const { metricName } = req.variables.leaderboardInput
+
+    if (metricName === 'should-fail') {
+      return res(
+        ctx.errors([
+          {
+            message: 'Something went wrong'
+          }
+        ])
+      )
+    }
+
+    return res(
+      ctx.data({
+        leaderboard: mockData
+      })
+    )
+  })
+]
 
 describe('Leaderboard', () => {
-  let dom: ReturnType<typeof render>
+  let dom: Dom
 
   beforeEach(() => {
-    setupHandlers()
+    setupTestHandlers(handlers)
   })
 
   it('should render the leaderboard with static data', () => {
-    dom = render(<Leaderboard headers={leaderboard.headers} rows={leaderboard.rows} />)
+    dom = render(<Leaderboard headers={mockData.headers} rows={mockData.rows} />)
 
     const chartElement = dom.getByRole('img') as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
@@ -22,8 +52,8 @@ describe('Leaderboard', () => {
     const chartData = chartInstance?.data.datasets[0].data
     const chartLabels = chartInstance?.data.labels
 
-    const resultingRows = leaderboard.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = leaderboard.rows.map((row) => row.slice(0, row.length - 1))
+    const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
+    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
@@ -55,14 +85,15 @@ describe('Leaderboard', () => {
     const chartData = chartInstance?.data.datasets[0].data
     const chartLabels = chartInstance?.data.labels
 
-    const resultingRows = leaderboard.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = leaderboard.rows.map((row) => row.slice(0, row.length - 1))
+    const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
+    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
   })
 
   it('should show error fallback when query fails', async () => {
+    console.error = jest.fn()
     dom = render(
       <Leaderboard
         query={{
@@ -86,6 +117,8 @@ describe('Leaderboard', () => {
     await dom.findByText('Unable to connect')
 
     await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
+
+    expect(console.error).toHaveBeenCalled()
   })
 
   it('should show error fallback on props mismatch', async () => {

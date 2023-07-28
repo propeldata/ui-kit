@@ -1,4 +1,3 @@
-import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import {
   Chart,
   ChartTypeRegistry,
@@ -13,8 +12,9 @@ import {
 } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import React from 'react'
-import { defaultStyles } from '../../themes'
+import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import type { ChartPlugins, ChartStyles } from '../../themes'
+import { defaultStyles } from '../../themes'
 import type { ChartScales, TimeSeriesChartVariant } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {

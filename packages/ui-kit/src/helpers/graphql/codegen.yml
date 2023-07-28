@@ -4,10 +4,11 @@ generates:
   src/helpers/graphql/generated/index.ts:
     schema: src/helpers/graphql/public.graphql
     documents:
-      - ./**/*.graphql
+      - src/helpers/graphql/queries/**/*.graphql
     plugins:
       - add
       - typescript
+      - typescript-msw
       - typescript-operations
       - typescript-react-query
     config:
@@ -15,27 +16,3 @@ generates:
       content:
         - // @ts-nocheck
       fetcher: fetch
-  src/components/Counter/__test__/mockHandlers.ts:
-    schema: src/helpers/graphql/public.graphql
-    documents:
-      - ./**/*.graphql
-    plugins:
-      - typescript
-      - typescript-msw
-      - typescript-operations
-  src/components/Leaderboard/__test__/mockHandlers.ts:
-    schema: src/helpers/graphql/public.graphql
-    documents:
-      - ./**/*.graphql
-    plugins:
-      - typescript
-      - typescript-msw
-      - typescript-operations
-  src/components/TimeSeries/__test__/mockHandlers.ts:
-    schema: src/helpers/graphql/public.graphql
-    documents:
-      - ./**/*.graphql
-    plugins:
-      - typescript
-      - typescript-msw
-      - typescript-operations
