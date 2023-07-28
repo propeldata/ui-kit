@@ -112,7 +112,7 @@ export function useSetupDefaultStyles(styles?: ChartStyles) {
 
 interface UpdateChartConfigOptions {
   chart: Chart
-  labels: Array<Array<string | null>>
+  labels: Array<string | null>
   values: Array<number | null>
   customPlugins: ChartPlugins
 }

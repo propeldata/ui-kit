@@ -53,7 +53,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
+    const resultingLabels = mockData.rows.map((row) => row[0])
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
@@ -86,7 +86,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
+    const resultingLabels = mockData.rows.map((row) => row[0])
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
