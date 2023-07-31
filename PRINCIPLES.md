@@ -4,7 +4,7 @@ Building data visualization UIs is never easy. Implementing designs from scratch
 
 Charting libraries like Chart.js, ECharts, Highcharts, or D3 are great but still need a lot of work to build them into elegant and cohesive product experiences. On the flip side, embedding third-party chart widgets via iframes into your customer-facing product results in an inflexible, slow, and inelegant product experience.
 
-That's why we built the Propel UI Kit. Its component-based approach allows you to move fast, look great, and focus your efforts on building components that are unique to your product.
+That's why we built the Propel UI Kit. Its component-based approach allows you to move fast, make it look great, and focus your efforts on building components that are unique to your product.
 
 ## Core principles
 
