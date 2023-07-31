@@ -4,9 +4,8 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "packages/*/**",
-    "app/*/**",
-    "app/storybook"
+    "packages/**",
+    "app/**"
   ],
   "nmHoistingLimits": "workspaces",
   "scripts": {

@@ -2,10 +2,8 @@
   "name": "ui-kit-storybook",
   "private": true,
   "dependencies": {
-    "@propeldata/react-counter": "workspace:^",
-    "@propeldata/react-leaderboard": "workspace:^",
-    "@propeldata/react-time-series": "workspace:^",
-    "@propeldata/ui-kit-graphql": "workspace:^",
+    "@emotion/css": "^11.10.5",
+    "@propeldata/ui-kit": "workspace:^",
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

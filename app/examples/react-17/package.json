@@ -5,9 +5,7 @@
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
   },
   "dependencies": {
-    "@propeldata/react-counter": "workspace:^",
-    "@propeldata/react-leaderboard": "workspace:^",
-    "@propeldata/react-time-series": "workspace:^",
+    "@propeldata/ui-kit": "workspace:^",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-scripts": "^5.0.1"

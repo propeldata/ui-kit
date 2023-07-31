@@ -1,5 +1,5 @@
 import React from 'react'
-import { Leaderboard, RelativeTimeRange } from '@propeldata/react-leaderboard'
+import { Leaderboard, RelativeTimeRange } from '@propeldata/ui-kit'
 
 const {
   REACT_APP_PROPEL_ACCESS_TOKEN,
