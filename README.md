@@ -180,7 +180,7 @@ By customizing your Propel UI Kit components in this way, you can create unique,
 
 ## Migration guide
 
-### 1. Update your dependencis
+### 1. Update your dependencies
 
 Remove any existing @propeldata/react-prefixed dependencies (for example, `@propeldata/react-counter`, `@propeldata/react-leaderboard`, and `@propeldata/react-time-series`). Then, add a new dependency on `@propeldata/ui-kit`, using npm or yarn.
 
