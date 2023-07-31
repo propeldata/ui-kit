@@ -14,7 +14,7 @@ The Propel UI Kit is a data visualization and dashboard React component library 
 
 ## Install
 
-Note: check the [Migration guide](#migration-guide) in case you installed any of @propeldata/react-prefixed dependencies before.
+Note: check the [Migration guide](#migration-guide) in case you installed any of the "@propeldata/react"-prefixed dependencies before.
 
 To install the Propel UI Kit components, run the following command:
 
