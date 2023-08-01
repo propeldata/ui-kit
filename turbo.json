@@ -10,7 +10,9 @@
       "outputs": []
     },
     "dev": {
-      "cache": false
+      "cache": false,
+      "dependsOn": ["^build"],
+      "inputs": ["apps/**"]
     },
     "test": {
       "dependsOn": ["^build"]

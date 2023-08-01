@@ -9,6 +9,7 @@
   ],
   "nmHoistingLimits": "workspaces",
   "scripts": {
+    "examples": "turbo run dev",
     "build": "turbo run build",
     "prepare": "yarn build",
     "lint": "turbo run lint",

@@ -2,7 +2,7 @@
   "name": "react-16",
   "private": true,
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
+    "dev": "DISABLE_ESLINT_PLUGIN=true PORT=3016 react-scripts start"
   },
   "dependencies": {
     "@propeldata/ui-kit": "workspace:^",
