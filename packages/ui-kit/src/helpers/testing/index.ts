@@ -10,3 +10,4 @@ import { render } from '@testing-library/react'
 export type Dom = ReturnType<typeof render>
 
 export * from './mockServer'
+export * from './generated'

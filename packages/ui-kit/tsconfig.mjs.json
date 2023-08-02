@@ -6,5 +6,5 @@
     "module": "ESNext"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/**/*.stories.*", "src/**/*.test.*"]
+  "exclude": ["src/**/*.stories.*", "src/**/*.test.*", "src/**/__test__/**/*", "src/**/testing/**/*"]
 }

@@ -8,9 +8,24 @@ generates:
     plugins:
       - add
       - typescript
-      - typescript-msw
       - typescript-operations
       - typescript-react-query
+    config:
+      # https://github.com/dotansimha/graphql-code-generator/issues/9046
+      content:
+        - // @ts-nocheck
+      fetcher: fetch
+
+  # Mocks
+
+  src/helpers/testing/generated/index.ts:
+    schema: src/helpers/graphql/public.graphql
+    documents:
+      - src/helpers/graphql/queries/**/*.graphql
+    plugins:
+      - add
+      - typescript
+      - typescript-msw
     config:
       # https://github.com/dotansimha/graphql-code-generator/issues/9046
       content:
