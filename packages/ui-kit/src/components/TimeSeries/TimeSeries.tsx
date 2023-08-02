@@ -15,7 +15,7 @@ import {
 } from 'chart.js'
 import React from 'react'
 import { customCanvasBackgroundColor, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery } from '../../helpers'
-import '../../helpers/chartJsAdapterDateFns'
+import * as chartJsAdapterDateFns from '../../helpers/chartJsAdapterDateFns'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
@@ -54,6 +54,10 @@ let idCounter = 0
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
 
 export const TimeSeriesComponent = (props: TimeSeriesProps) => {
+  React.useEffect(() => {
+    chartJsAdapterDateFns
+  }, [])
+
   const {
     variant = 'bar',
     styles,
