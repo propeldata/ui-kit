@@ -3,11 +3,10 @@
   "version": "0.2.0-rc.0",
   "license": "MIT",
   "source": "src/index.ts",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.module.js",
   "scripts": {
-    "build": "rm -rf dist && yarn graphql:build && tsc -p tsconfig.build.json",
+    "build": "rm -rf dist && yarn graphql:build && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "jest",
@@ -57,5 +56,11 @@
     "graphql": "^16.6",
     "react": "^16.8 || ^17 || ^18",
     "react-dom": "^16.8 || ^17 || ^18"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/index.js",
+      "require": "./dist/cjs/index.js"
+    }
   }
 }
