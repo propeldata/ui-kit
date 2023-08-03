@@ -5,7 +5,7 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import { ResizeObserver as ResizeObserverPolyfill } from '@juggle/resize-observer'
 import '@testing-library/jest-dom/extend-expect'
-import { mockServer } from './src/helpers/testing'
+import { mockServer } from './src/testing'
 
 process.env.NEXT_PUBLIC_ACCOUNT_MANAGEMENT_GRAPHQL_ENDPOINT ??= 'http://localhost:3000/in/graphql'
 process.env.NEXT_PUBLIC_CONFIG_MANAGEMENT_GRAPHQL_ENDPOINT ??= 'http://localhost:3000/graphql'
