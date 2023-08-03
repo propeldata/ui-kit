@@ -1,8 +1,8 @@
 import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
-import { mockLeaderboardQuery, RelativeTimeRange } from '../../helpers'
-import { Dom, setupTestHandlers } from '../../helpers/testing'
+import { RelativeTimeRange } from '../../helpers'
+import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
 import { Leaderboard } from './Leaderboard'
 
 const mockData = {

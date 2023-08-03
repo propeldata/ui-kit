@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
-import { mockTimeSeriesQuery, RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
-import { Dom, setupTestHandlers } from '../../helpers/testing'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
+import { Dom, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
 import { TimeSeries } from '../index'
 
 const mockData = {

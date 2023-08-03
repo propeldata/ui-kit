@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { mockCounterQuery, RelativeTimeRange } from '../../helpers'
-import { Dom, setupTestHandlers } from '../../helpers/testing'
+import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { Counter } from './Counter'
 
 const mockData = {
