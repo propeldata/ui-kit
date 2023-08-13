@@ -1,20 +1,16 @@
-import { Story } from '@storybook/react'
-import { DateTime } from 'luxon'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import { TimeSeries, TimeSeriesComponent } from './TimeSeries'
 
-import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
-import { TimeSeries } from './index'
-
-export default {
-  title: 'React/TimeSeries',
-  argTypes: {
-    query: {
-      table: {
-        disable: true
-      }
-    }
-  }
+const meta: Meta<typeof TimeSeriesComponent> = {
+  title: 'Components/TimeSeries',
+  component: TimeSeriesComponent,
+  render: (args) => <TimeSeries {...args} />
 }
+
+export default meta
+
+type Story = StoryObj<typeof TimeSeriesComponent>
 
 const dataset = {
   labels: [
@@ -42,115 +38,18 @@ const dataset = {
   values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 }
 
-const Template: Story = (args) => <TimeSeries {...args} />
-
-export const UnstyledBar = Template.bind({})
-UnstyledBar.args = {
-  variant: 'bar',
-  timeZone: 'UTC',
-  ...dataset
-}
-
-export const UnstyledLine = Template.bind({})
-UnstyledLine.args = {
-  variant: 'line',
-  timeZone: 'UTC',
-  ...dataset
-}
-
-export const Connected = Template.bind({})
-Connected.args = {
-  variant: 'line',
-  query: {
-    accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-    timeRange: {
-      relative: RelativeTimeRange.LastNDays,
-      n: 30
-    },
-    granularity: TimeSeriesGranularity.Week
+export const LineVariantStory: Story = {
+  name: 'Line variant',
+  args: {
+    variant: 'line',
+    ...dataset
   }
 }
 
-export const Error = Template.bind({})
-Error.args = {
-  query: {}
-}
-
-export const Loading = () => {
-  const [loading, setLoading] = React.useState(true)
-  const [localLabels, setLocalLabels] = React.useState<string[]>()
-  const [localValues, setLocalValues] = React.useState<number[]>()
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-      setLocalLabels(dataset.labels)
-      setLocalValues(dataset.values)
-    }, 1000)
-  }, [])
-
-  return <TimeSeries loading={loading} labels={localLabels} values={localValues} />
-}
-
-export const CustomStyles = Template.bind({})
-CustomStyles.args = {
-  variant: 'line',
-  ...dataset,
-  styles: {
-    line: {
-      tension: 0.1,
-      borderColor: '#17B897',
-      borderWidth: 3
-    },
-    point: {
-      style: false
-    },
-    canvas: {
-      width: 100,
-      height: 45,
-      backgroundColor: 'transparent',
-      hideGridLines: true
-    },
-    tooltip: {
-      display: false
-    }
-  }
-}
-
-export const CustomDark = Template.bind({})
-CustomDark.args = {
-  variant: 'line',
-  ...dataset,
-  styles: {
-    canvas: {
-      width: 400,
-      backgroundColor: '#212121',
-      borderRadius: '0.5rem',
-      padding: 18
-    },
-    line: {
-      backgroundColor: '#1db954',
-      borderColor: '#1db954'
-    },
-    font: {
-      color: '#f0f2f0'
-    },
-    tooltip: {
-      color: '#1db954',
-      borderColor: '#ffffff',
-      backgroundColor: '#212121'
-    }
-  }
-}
-
-export const FormattedLabels = Template.bind({})
-FormattedLabels.args = {
-  variant: 'bar',
-  ...dataset,
-  labelFormatter: (labels: string[]) => {
-    return labels.map((label) => {
-      return DateTime.fromISO(label).toFormat('MM/dd/yy')
-    })
+export const BarVariantStory: Story = {
+  name: 'Bar variant',
+  args: {
+    variant: 'bar',
+    ...dataset
   }
 }

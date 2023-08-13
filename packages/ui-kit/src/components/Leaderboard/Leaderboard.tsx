@@ -31,7 +31,7 @@ ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale,
 
 let idCounter = 0
 
-const LeaderboardComponent = (props: LeaderboardProps) => {
+export const LeaderboardComponent = (props: LeaderboardProps) => {
   const { variant = 'bar', styles, headers, rows, query, error, loading: isLoadingStatic = false, ...rest } = props
 
   const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -335,4 +335,4 @@ const LeaderboardComponent = (props: LeaderboardProps) => {
   )
 }
 
-export const Leaderboard = withContainer(LeaderboardComponent, ErrorFallback)
+export const Leaderboard = withContainer(LeaderboardComponent, ErrorFallback) as typeof LeaderboardComponent

@@ -1,19 +1,16 @@
-import { css } from '@emotion/css'
-import { Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { RelativeTimeRange, Sort } from '../../helpers'
-import { Leaderboard } from './index'
+import { Leaderboard, LeaderboardComponent } from './Leaderboard'
 
-export default {
-  title: 'React/Leaderboard',
-  argTypes: {
-    query: {
-      table: {
-        disable: true
-      }
-    }
-  }
+const meta: Meta<typeof LeaderboardComponent> = {
+  title: 'Components/Leaderboard',
+  component: LeaderboardComponent,
+  render: (args) => <Leaderboard {...args} />
 }
+
+export default meta
+
+type Story = StoryObj<typeof LeaderboardComponent>
 
 const barHeaders = ['DATA_SOURCE_TYPE', 'value']
 
@@ -49,140 +46,35 @@ const customTableRows = [
   ['The Lean Product Book', 'John Doe', '2222027']
 ]
 
-const Template: Story = (args) => <Leaderboard {...args} />
-export const DefaultBar = Template.bind({})
-DefaultBar.args = {
-  headers: barHeaders,
-  rows: barRows
-}
-
-export const DefaultTable = Template.bind({})
-DefaultTable.args = {
-  variant: 'table',
-  headers: tableHeaders,
-  rows: tableRows
-}
-
-export const ValueBarTable = Template.bind({})
-ValueBarTable.args = {
-  variant: 'table',
-  headers: tableHeaders,
-  rows: tableRows,
-  styles: {
-    table: {
-      hasValueBar: true,
-      valueColumn: {
-        localize: true
-      }
-    }
+export const SingleDimensionStory: Story = {
+  name: 'Single dimension',
+  args: {
+    headers: barHeaders,
+    rows: barRows
   }
 }
 
-export const Connected = Template.bind({})
-Connected.args = {
-  variant: 'table',
-  headers: [process.env.STORYBOOK_DIMENSION_1, process.env.STORYBOOK_DIMENSION_2, process.env.STORYBOOK_DIMENSION_3],
-  query: {
-    accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-    timeRange: {
-      relative: RelativeTimeRange.LastNDays,
-      n: 30
-    },
-    rowLimit: 10,
-    dimensions: [
-      {
-        columnName: process.env.STORYBOOK_DIMENSION_1
-      },
-      {
-        columnName: process.env.STORYBOOK_DIMENSION_2
-      },
-      {
-        columnName: process.env.STORYBOOK_DIMENSION_3
-      }
-    ],
-    sort: Sort.Asc
-  },
-  styles: {
-    table: {
-      hasValueBar: true
-    },
-    canvas: {
-      height: 500
-    }
+export const SingleDimensionTableVariantStory: Story = {
+  name: 'Single dimension table variant',
+  args: {
+    variant: 'table',
+    headers: tableHeaders,
+    rows: tableRows
   }
 }
 
-export const Error = Template.bind({})
-Error.args = {
-  query: {}
-}
-
-export const Loading = () => {
-  const [loading, setLoading] = React.useState(true)
-  const [localHeaders, setLocalHeaders] = React.useState<string[]>()
-  const [localRows, setLocalRows] = React.useState<string[][]>()
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-      setLocalHeaders(barHeaders)
-      setLocalRows(barRows)
-    }, 1000)
-  }, [])
-
-  return <Leaderboard loading={loading} headers={localHeaders} rows={localRows} />
-}
-
-const CustomTemplate: Story = (args) => (
-  <div
-    className={css`
-      width: 500px;
-      height: 250px;
-      padding: 10px;
-
-      color: #1db954;
-
-      border: 1px solid black;
-      border-radius: 10px;
-
-      background-color: #191414;
-    `}
-  >
-    <h3>Spotify most listened songs</h3>
-    <Leaderboard {...args} />
-  </div>
-)
-export const CustomStyles = CustomTemplate.bind({})
-CustomStyles.args = {
-  variant: 'table',
-  headers: customTableHeaders,
-  rows: customTableRows,
-  styles: {
-    font: {
-      color: '#1DB954'
-    },
-    table: {
-      stickyHeader: true,
-      height: '200px',
-      hasValueBar: true,
-      backgroundColor: '#191414',
-      header: {
-        backgroundColor: '#282828',
-        font: {
-          weight: 'bold',
-          size: '14px'
+export const SingleDimensionTableVariantWithValueBarStory: Story = {
+  name: 'Single dimension table variant with value bar',
+  args: {
+    variant: 'table',
+    headers: tableHeaders,
+    rows: tableRows,
+    styles: {
+      table: {
+        hasValueBar: true,
+        valueColumn: {
+          localize: true
         }
-      },
-      valueBar: {
-        backgroundColor: '#545454'
-      },
-      valueColumn: {
-        align: 'center',
-        localize: true
-      },
-      columns: {
-        align: 'center'
       }
     }
   }

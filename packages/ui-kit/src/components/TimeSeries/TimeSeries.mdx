@@ -1,0 +1,83 @@
+import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import * as TimeSeriesStories from './TimeSeries.stories'
+
+<Meta title="Components/Counter/TimeSeries" of={TimeSeriesStories} />
+
+# Counter overview
+
+The Time Series component is designed to create Propel time series metric visualizations for your front-end applications.
+With two props in Static mode, **labels** and **values**, the Time Series component provides a simple way to display your data.
+If you opt for the Connected mode, the component will accept the query prop, which loads the data automatically based
+on [Propel specifications](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/CounterInput?variant=production).
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { TimeSeries } from '@propeldata/ui-kit'
+
+    function MonthSalesChart() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        metric: 'salesCount',
+        timeRange: {
+          relative: 'PREVIOUS_MONTH'
+        },
+        granularity: 'DAY',
+        timestampFormat: 'MM/dd'
+      }
+      return <TimeSeries query={queryOptions} variant="line" />
+    }
+
+`}
+/>
+
+This will generate a time series chart as shown below:
+
+<Canvas of={TimeSeriesStories.LineVariantStory} sourceState="none" />
+
+As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking.
+Let's build a totally different time series chart now. Here's how you can access the style props:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    function CustomChart() {
+      const styles = {
+        styles: {
+          line: {
+            tension: 0.1,
+            borderColor: '#17B897',
+            borderWidth: 3
+          },
+          point: {
+            style: false
+          },
+          canvas: {
+            width: 100,
+            height: 45,
+            backgroundColor: 'transparent',
+            hideGridLines: true
+          }
+        }
+      }
+
+      return <TimeSeries styles={styles} variant="line" />
+    }
+
+`}
+/>
+
+In this example, we built a minimalistic chart where you could use on small viewports or in a mobile design maybe.
+Up to you! You can adjust these and other style properties to create a unique look for your time series chart.
+
+## API
+
+<ArgTypes of={TimeSeriesStories.LineVariantStory} sort="alpha" />

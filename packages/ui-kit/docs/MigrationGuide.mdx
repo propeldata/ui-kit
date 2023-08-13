@@ -1,0 +1,69 @@
+import { Canvas, Meta, Story, Source } from '@storybook/blocks'
+
+<Meta title="Getting started/Migration guide" />
+
+# Migration guide
+
+## 1. Update your dependencies
+
+Remove any existing "**@propeldata/react**"-prefixed dependencies (for example, **@propeldata/react-counter**, **@propeldata/react-leaderboard**,
+and **@propeldata/react-time-series**). Then, add a new dependency on **@propeldata/ui-kit**, using **npm** or **yarn**.
+
+#### Yarn
+
+<Source
+  language="bash"
+  format="dedent"
+  dark
+  code={`
+    yarn add @propeldata/ui-kit
+  `}
+/>
+
+#### Npm
+
+<Source
+  language="bash"
+  format="dedent"
+  dark
+  code={`
+    npm i @propeldata/ui-kit
+  `}
+/>
+
+## 2. Update your imports
+
+Wherever you previously imported from **@propeldata/react-counter**, **@propeldata/react-leaderboard**, or **@propeldata/react-time-series**,
+you can now import from **@propeldata/ui-kit**. Note that Styles has been renamed to **ChartStyles** and is shared by all three components.
+
+#### Before
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { Counter, CounterProps, Styles as CounterStyles } from '@propeldata/react-counter'
+    import { Leaderboard, LeaderboardProps, Styles as LeaderboardStyles } from '@propeldata/react-leaderboard'
+    import { TimeSeries, TimeSeriesProps, Styles as TimeSeriesStyles } from '@propeldata/react-time-series'
+  `}
+/>
+
+#### After
+
+<Source
+  dark
+  language="tsx"
+  format="dedent"
+  code={`
+    import {
+      ChartStyles,
+      Counter,
+      CounterProps,
+      Leaderboard,
+      LeaderboardProps,
+      TimeSeries,
+      TimeSeriesProps
+    } from '@propeldata/ui-kit'
+  `}
+/>

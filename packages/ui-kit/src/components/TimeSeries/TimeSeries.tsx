@@ -59,7 +59,7 @@ let idCounter = 0
 
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
 
-export const TimeSeriesComponent = (props: TimeSeriesProps) => {
+export const TimeSeriesComponent: React.FC<TimeSeriesProps> = (props) => {
   React.useEffect(() => {
     chartJsAdapterLuxon
   }, [])
@@ -307,7 +307,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
   )
 }
 
-export const TimeSeries = withContainer(TimeSeriesComponent, ErrorFallback)
+export const TimeSeries = withContainer(TimeSeriesComponent, ErrorFallback) as typeof TimeSeriesComponent
 
 const getContainerStyles = (styles?: ChartStyles) => css`
   width: ${styles?.canvas?.width};

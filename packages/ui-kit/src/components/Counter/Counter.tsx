@@ -9,7 +9,7 @@ import { withContainer } from '../withContainer'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
 
-const CounterComponent = (props: CounterProps) => {
+export const CounterComponent = (props: CounterProps) => {
   const {
     value: staticValue,
     query,
@@ -120,7 +120,7 @@ const CounterComponent = (props: CounterProps) => {
   )
 }
 
-export const Counter = withContainer(CounterComponent, ErrorFallback)
+export const Counter = withContainer(CounterComponent, ErrorFallback) as typeof CounterComponent
 
 const getFontStyles = (styles?: ChartStyles) => css`
   color: ${styles?.font?.color || defaultStyles.font.color};

@@ -1,0 +1,46 @@
+import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import * as CounterStories from './Counter.stories'
+
+<Meta title="Components/Counter/Overview" of={CounterStories} />
+
+# Counter overview
+
+The Counter component is designed to create Propel counter metric visualizations for your front-end applications.
+With one prop in Static mode, **value**, the Counter component provides a simple, no-frills way to display your data.
+If you opt for the Connected mode, the component will accept the query prop,
+which loads the data automatically based on [Propel specifications](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/CounterInput?variant=production).
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { Counter } from '@propeldata/ui-kit'
+
+    export const App = () => (
+      <div>
+        <Counter prefixValue="$" value="123000" localize />
+      </div>
+    )
+
+`}
+/>
+
+This will generate a counter component as shown below:
+
+<Canvas of={CounterStories.SingleValueStory} sourceState="none" />
+
+In this example, we have built a simple span element that can be wrapped into any custom component of your preference.
+You can adjust these and other style properties to create a unique look for your Counter component.
+
+Here's an example of how you can wrap the Counter component inside a Card to give it a unique look.
+
+<Canvas of={CounterStories.ValueInCardStory} sourceState="none" />
+
+## API
+
+<ArgTypes of={CounterStories.SingleValueStory} sort="alpha" />

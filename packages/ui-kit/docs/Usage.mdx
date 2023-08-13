@@ -1,0 +1,77 @@
+import { Canvas, Meta, Story, Source } from '@storybook/blocks'
+
+<Meta title="Getting started/Usage" />
+
+# Usage
+
+The Propel UI Kit components are available in two modes: "Static" and "Connected".
+
+## Static Mode
+
+In the "Static" mode, the component will display the data you provide.
+
+Let's take our [TimeSeries]() component as an example. If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { TimeSeries } from '@propeldata/ui-kit'
+
+    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+    const values = [0, 1000, 200, 3000, 4000, 500, 7000]
+
+    function WeekSalesChart() {
+      return <TimeSeries labels={labels} values={values} />
+    }
+
+`}
+/>
+
+You can customize the component using your own styles.
+
+<img src="time-series.png" />
+
+## Connected Mode
+
+In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, to configure a GraphQL client, or handle loading and error states.
+
+To learn more about querying data with Propel, read the [Metric query documentation]().
+
+For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs.
+You can authenticate and generate an access token by following the steps outlined in [the Propel GraphQL Authentication guide]().
+
+Here is an example using our Counter component:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { Counter } from '@propeldata/ui-kit'
+
+    function SalesCountLabel() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        metric: 'salesCount',
+        timeRange: {
+          relative: 'PREVIOUS_WEEK'
+        },
+        granularity: 'DAY'
+      }
+
+      return (
+        <p>
+          We reached <Counter query={queryOptions} /> last week.
+        </p>
+      )
+    }
+
+`}
+/>
+
+In this mode, the component will handle the loading and error states for you, making it even easier to use.
+
+<img src="counter.gif" />

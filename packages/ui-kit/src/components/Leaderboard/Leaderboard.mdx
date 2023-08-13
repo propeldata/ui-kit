@@ -1,0 +1,98 @@
+import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import * as LeaderboardStories from './Leaderboard.stories'
+
+<Meta title="Components/Counter/Leaderboard" of={LeaderboardStories} />
+
+# Counter overview
+
+The Leaderboard component is designed to create Propel leaderboard metric visualizations for your front-end applications.
+With two props in Static mode, **headers** and **rows**, the Leaderboard component provides a simple way to display your data.
+If you opt for the Connected mode, the component will accept the query prop, which loads the data automatically based
+on [Propel specifications](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/CounterInput?variant=production).
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { Leaderboard } from '@propeldata/ui-kit'
+
+    function MonthSalesChart() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        metric: 'syncRecordsAdded',
+        timeRange: {
+          relative: RelativeTimeRange.LastNDays,
+          n: 30
+        },
+        rowLimit: 10,
+        dimensions: [
+          {
+            columnName: 'DATA_SOURCE_TYPE'
+          }
+        ],
+        sort: Sort.Desc
+      }
+      return <Leaderboard query={queryOptions} />
+    }
+
+`}
+/>
+
+This will generate a leaderboard chart as shown below:
+
+<Canvas of={LeaderboardStories.SingleDimensionStory} sourceState="none" />
+
+As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking.
+Let's build a totally different leaderboard chart now. Here's how you can access the style props:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    function CustomChart() {
+      const styles = {
+        font: {
+          color: '#1DB954'
+        },
+        table: {
+          stickyHeader: true,
+          height: '200px',
+          hasValueBar: true,
+          backgroundColor: '#191414',
+          header: {
+            backgroundColor: '#282828',
+            font: {
+              weight: 'bold',
+              size: '14px'
+            }
+          },
+          valueBar: {
+            backgroundColor: '#545454'
+          },
+          valueColumn: {
+            align: 'center'
+          },
+          columns: {
+            align: 'center'
+          }
+        }
+      }
+
+      return <Leaderboard styles={styles} variant="table" />
+    }
+
+`}
+/>
+
+In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe.
+Up to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.
+
+## API
+
+<ArgTypes of={LeaderboardStories.SingleDimensionStory} sort="alpha" />
