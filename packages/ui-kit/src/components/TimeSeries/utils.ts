@@ -45,13 +45,13 @@ export function formatLabels(options: FormatLabelsOptions): string[] | undefined
   return formatter ? formatter(labels || []) : labels
 }
 
-export function getDefaultGranularity(timeRange?: TimeRangeInput): TimeSeriesGranularity | null {
+export function getDefaultGranularity(timeRange?: TimeRangeInput): TimeSeriesGranularity {
   const relative = timeRange?.relative
 
   if (!relative) {
     // TODO(mroberts): In a future release, we should calculate this for absolute ranges, too.
     //   Actually, all of this logic should move to the backend.
-    return null
+    return TimeSeriesGranularity.Day
   }
 
   return {
@@ -225,7 +225,7 @@ interface GetScalesOptions {
 }
 
 export function getScales(options: GetScalesOptions) {
-  const { styles, granularity, isFormatted } = options
+  const { styles, granularity, isFormatted, zone } = options
   const scale = styles?.yAxis?.scale || defaultStyles.yAxis.scale
 
   const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
@@ -260,7 +260,7 @@ export function getScales(options: GetScalesOptions) {
       },
       adapters: {
         date: {
-          zone: options.zone
+          zone
         }
       }
     }
