@@ -21,7 +21,8 @@ export function TimeSeriesConnectedTest() {
           accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
           metric: REACT_APP_METRIC_UNIQUE_NAME_1,
           timeRange: {
-            relative: RelativeTimeRange.Today
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
           },
           granularity: TimeSeriesGranularity.Day,
           refetchInterval,
