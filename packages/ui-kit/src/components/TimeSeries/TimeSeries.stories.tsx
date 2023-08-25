@@ -47,12 +47,14 @@ const Template: Story = (args) => <TimeSeries {...args} />
 export const UnstyledBar = Template.bind({})
 UnstyledBar.args = {
   variant: 'bar',
+  timeZone: 'UTC',
   ...dataset
 }
 
 export const UnstyledLine = Template.bind({})
 UnstyledLine.args = {
   variant: 'line',
+  timeZone: 'UTC',
   ...dataset
 }
 

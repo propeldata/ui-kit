@@ -17,12 +17,12 @@ export function TimeSeriesConnectedTest() {
     <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
       <h2 className="text-2xl">TimeSeries Connected</h2>
       <TimeSeries
+        timeZone="Europe/Berlin"
         query={{
           accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
           metric: REACT_APP_METRIC_UNIQUE_NAME_1,
           timeRange: {
-            relative: RelativeTimeRange.LastNDays,
-            n: 30
+            relative: RelativeTimeRange.Today
           },
           granularity: TimeSeriesGranularity.Day,
           refetchInterval,

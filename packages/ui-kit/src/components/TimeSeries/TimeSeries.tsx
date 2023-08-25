@@ -167,7 +167,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
         ]
       }
 
-      const scales = getScales({ granularity, isFormatted, isStatic, styles, zone })
+      const scales = getScales({ granularity, isFormatted, styles, zone })
 
       if (chartRef.current) {
         updateChartConfig({
@@ -202,7 +202,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, hasError, isFormatted, isStatic, styles, variant, zone]
+    [granularity, hasError, isFormatted, styles, variant, zone]
   )
 
   const destroyChart = () => {
