@@ -35,15 +35,15 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   /** Canvas role prop, if not passed we handle it */
   role?: string
 
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+  timeZone?: string
+
   query?: {
     /** This should eventually be replaced to customer's app credentials */
     accessToken?: string
 
     /** Metric unique name */
     metric?: string
-
-    /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
-    timeZone?: string
 
     /** Time range that the chart will respond to */
     timeRange?: TimeRangeInput

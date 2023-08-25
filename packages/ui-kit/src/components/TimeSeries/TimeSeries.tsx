@@ -97,7 +97,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
 
   const isFormatted = !!labelFormatter
 
-  const zone = query?.timeZone ?? getTimeZone()
+  const zone = props.timeZone ?? getTimeZone()
 
   useSetupDefaultStyles(styles)
 

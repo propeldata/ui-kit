@@ -162,7 +162,7 @@ const LeaderboardComponent = (props: LeaderboardProps) => {
         sort: query?.sort,
         rowLimit: query?.rowLimit ?? 100,
         dimensions: query?.dimensions,
-        timeZone: query?.timeZone ?? getTimeZone(),
+        timeZone: props.timeZone ?? getTimeZone(),
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,

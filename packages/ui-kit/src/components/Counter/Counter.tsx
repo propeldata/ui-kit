@@ -48,7 +48,7 @@ const CounterComponent = (props: CounterProps) => {
     {
       counterInput: {
         metricName: query?.metric,
-        timeZone: query?.timeZone ?? getTimeZone(),
+        timeZone: props.timeZone ?? getTimeZone(),
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,
