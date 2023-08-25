@@ -3,6 +3,7 @@ The Propel GraphQL API schema
 """
 schema {
   query: Query
+  mutation: Mutation
 }
 
 directive @oneOf on INPUT_OBJECT
@@ -86,6 +87,12 @@ input MetricReportInput {
   The time range for calculating the Metric Report.
   """
   timeRange: TimeRangeInput!
+  """
+  The time zone to use. Dates and times are always reported in UTC, but setting the time zone influences relative time ranges and granularities.
+
+  Defaults to "UTC" but you can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database).
+  """
+  timeZone: String
   """
   One or many dimensions to group the Metric values by. Typically, dimensions in a report are what you want to compare and rank.
   """
@@ -256,6 +263,12 @@ input CounterInput {
   """
   timeRange: TimeRangeInput!
   """
+  The time zone to use. Dates and times are always reported in UTC, but setting the time zone influences relative time ranges and granularities.
+
+  Defaults to "UTC" but you can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database).
+  """
+  timeZone: String
+  """
   The Query Filters to apply before retrieving the counter data. If no Query Filters are provided, all data is included.
   """
   filters: [FilterInput!]
@@ -287,6 +300,12 @@ input TimeSeriesInput {
   The time range for calculating the time series.
   """
   timeRange: TimeRangeInput!
+  """
+  The time zone to use. Dates and times are always reported in UTC, but setting the time zone influences relative time ranges and granularities.
+
+  Defaults to "UTC" but you can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database).
+  """
+  timeZone: String
   """
   The time granularity (hour, day, month, etc.) to aggregate the Metric values by.
   """
@@ -323,6 +342,12 @@ input LeaderboardInput {
   The time range for calculating the leaderboard.
   """
   timeRange: TimeRangeInput!
+  """
+  The time zone to use. Dates and times are always reported in UTC, but setting the time zone influences relative time ranges and granularities.
+
+  Defaults to "UTC" but you can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database).
+  """
+  timeZone: String
   """
   One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank.
   """
@@ -858,4 +883,8 @@ type Query {
   Query a Metric in leaderboard format. A table (array of rows) with the selected dimensions and corresponding Metric values for the given time range and filters.
   """
   leaderboard(input: LeaderboardInput!): LeaderboardResponse
+}
+
+type Mutation {
+  noop: ID!
 }

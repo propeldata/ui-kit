@@ -14,8 +14,13 @@ import {
   Tooltip
 } from 'chart.js'
 import React from 'react'
-import { customCanvasBackgroundColor, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery } from '../../helpers'
-import * as chartJsAdapterDateFns from '../../helpers/chartJsAdapterDateFns'
+import {
+  customCanvasBackgroundColor,
+  getTimeZone,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  useTimeSeriesQuery
+} from '../../helpers'
+import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
@@ -55,7 +60,7 @@ let idCounter = 0
 
 export const TimeSeriesComponent = (props: TimeSeriesProps) => {
   React.useEffect(() => {
-    chartJsAdapterDateFns
+    chartJsAdapterLuxon
   }, [])
 
   const {
@@ -92,6 +97,8 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
 
   const isFormatted = !!labelFormatter
 
+  const zone = props.timeZone ?? getTimeZone()
+
   useSetupDefaultStyles(styles)
 
   const {
@@ -111,6 +118,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
     {
       timeSeriesInput: {
         metricName: query?.metric,
+        timeZone: zone,
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,
@@ -159,7 +167,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
         ]
       }
 
-      const scales = getScales({ granularity, isFormatted, isStatic, styles })
+      const scales = getScales({ granularity, isFormatted, styles, zone })
 
       if (chartRef.current) {
         updateChartConfig({
@@ -194,7 +202,7 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, hasError, isFormatted, isStatic, styles, variant]
+    [granularity, hasError, isFormatted, styles, variant, zone]
   )
 
   const destroyChart = () => {

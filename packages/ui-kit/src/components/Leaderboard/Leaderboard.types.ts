@@ -30,6 +30,9 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   /** When true, shows a skeleton loader */
   loading?: boolean
 
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+  timeZone?: string
+
   query?: {
     /** This should eventually be replaced to customer's app credentials */
     accessToken?: string

@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react'
-import { format } from 'date-fns'
+import { DateTime } from 'luxon'
 import React from 'react'
+
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
 import { TimeSeries } from './index'
 
@@ -46,12 +47,14 @@ const Template: Story = (args) => <TimeSeries {...args} />
 export const UnstyledBar = Template.bind({})
 UnstyledBar.args = {
   variant: 'bar',
+  timeZone: 'UTC',
   ...dataset
 }
 
 export const UnstyledLine = Template.bind({})
 UnstyledLine.args = {
   variant: 'line',
+  timeZone: 'UTC',
   ...dataset
 }
 
@@ -147,7 +150,7 @@ FormattedLabels.args = {
   ...dataset,
   labelFormatter: (labels: string[]) => {
     return labels.map((label) => {
-      return format(new Date(label), 'MM/dd/yy')
+      return DateTime.fromISO(label).toFormat('MM/dd/yy')
     })
   }
 }

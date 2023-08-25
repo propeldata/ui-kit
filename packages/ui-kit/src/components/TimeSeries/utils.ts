@@ -45,7 +45,7 @@ export function formatLabels(options: FormatLabelsOptions): string[] | undefined
   return formatter ? formatter(labels || []) : labels
 }
 
-export function getDefaultGranularity(timeRange?: TimeRangeInput) {
+export function getDefaultGranularity(timeRange?: TimeRangeInput): TimeSeriesGranularity {
   const relative = timeRange?.relative
 
   if (!relative) {
@@ -221,11 +221,11 @@ interface GetScalesOptions {
   styles?: ChartStyles
   granularity: TimeSeriesGranularity | null
   isFormatted: boolean
-  isStatic: boolean
+  zone: string
 }
 
 export function getScales(options: GetScalesOptions) {
-  const { styles, granularity, isFormatted, isStatic } = options
+  const { styles, granularity, isFormatted, zone } = options
   const scale = styles?.yAxis?.scale || defaultStyles.yAxis.scale
 
   const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
@@ -255,12 +255,18 @@ export function getScales(options: GetScalesOptions) {
       ...scalesBase.x,
       type: 'timeseries',
       time: {
+        isoWeekday: true,
         unit: getGranularityBasedUnit(granularity)
+      },
+      adapters: {
+        date: {
+          zone
+        }
       }
     }
   }
 
-  const currentFormatScales = isFormatted || isStatic ? customFormatScales : autoFormatScales
+  const currentFormatScales = isFormatted ? customFormatScales : autoFormatScales
 
   if (scale === 'linear') {
     const linearScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }> = {
@@ -275,7 +281,7 @@ export function getScales(options: GetScalesOptions) {
   }
 
   const logarithmicScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'logarithmic'> }> = {
-    ...(isFormatted || isStatic ? customFormatScales : autoFormatScales),
+    ...(isFormatted ? customFormatScales : autoFormatScales),
     y: {
       ...currentFormatScales.y,
       type: 'logarithmic'

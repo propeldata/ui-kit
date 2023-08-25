@@ -1794,7 +1794,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.22.6
   resolution: "@babel/runtime@npm:7.22.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.22.6.tgz"
   dependencies:
@@ -4145,13 +4145,13 @@ __metadata:
     "@types/react-dom": latest
     "@types/testing-library__jest-dom": ^5.14.7
     chart.js: ^4.1.2
-    chartjs-adapter-date-fns: 2.0.1
-    date-fns: ^2.29.3
+    chartjs-adapter-luxon: ^1.3.1
     dotenv: ^16.0.3
     graphql: ^16.6.0
     jest: ^27.5.1
     jest-canvas-mock: ^2.5.2
     jest-environment-jsdom: ^27.5.1
+    luxon: ^3.4.1
     msw: ^1.2.2
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -9842,12 +9842,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chartjs-adapter-date-fns@npm:2.0.1":
-  version: 2.0.1
-  resolution: "chartjs-adapter-date-fns@npm:2.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-date-fns%2F-%2Fchartjs-adapter-date-fns-2.0.1.tgz"
+"chartjs-adapter-luxon@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "chartjs-adapter-luxon@npm:1.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.3.1.tgz"
   peerDependencies:
-    chart.js: ">=2.8.0"
-  checksum: e13fd5357e963ee0b5fc51dd491015df12ff6df286770bdca54bd5481fb6f2d7712b37f5b5638a0fa2058e3551d6bfbb5daa8b73cab3fd8ccf3e684a8a12369e
+    chart.js: ">=3.0.0"
+    luxon: ">=1.0.0"
+  checksum: a36889ea7716396b4fd1533304a92e0dccffe0c9a8e9579983cb55b3a75098b508a244e39f3d2f883f2f98d14dfbec6dea6a58b7b34c7ad78af028c7e9a0458d
   languageName: node
   linkType: hard
 
@@ -11206,15 +11207,6 @@ __metadata:
   version: 2.2.2
   resolution: "dataloader@npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdataloader%2F-%2Fdataloader-2.2.2.tgz"
   checksum: 4dabd247089c29f194e94d5434d504f99156c5c214a03463c20f3f17f40398d7e179edee69a27c16e315519ac8739042a810090087ae26449a0e685156a02c65
-  languageName: node
-  linkType: hard
-
-"date-fns@npm:^2.29.3":
-  version: 2.30.0
-  resolution: "date-fns@npm:2.30.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-2.30.0.tgz"
-  dependencies:
-    "@babel/runtime": ^7.21.0
-  checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
   languageName: node
   linkType: hard
 
@@ -17506,6 +17498,13 @@ __metadata:
   version: 10.0.0
   resolution: "lru-cache@npm:10.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flru-cache%2F-%2Flru-cache-10.0.0.tgz"
   checksum: 18f101675fe283bc09cda0ef1e3cc83781aeb8373b439f086f758d1d91b28730950db785999cd060d3c825a8571c03073e8c14512b6655af2188d623031baf50
+  languageName: node
+  linkType: hard
+
+"luxon@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "luxon@npm:3.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.1.tgz"
+  checksum: cd5e2a407cdc55a10548f6e0c1ca83590574fa3cba4d03da37113cd7dc118e6ce46b2d71ddc32cfd35a0413c15ac9a3cfdef3a2702e6862814b691048ffe0be8
   languageName: node
   linkType: hard
 
@@ -24636,7 +24635,6 @@ __metadata:
     "@storybook/builder-webpack5": ^6.5.14
     "@storybook/manager-webpack5": ^6.5.14
     "@storybook/react": ^6.5.14
-    date-fns: ^2.29.3
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
