@@ -13,6 +13,8 @@ export interface CounterProps extends React.ComponentProps<'span'> {
   /** When true, formats value to locale string */
   localize?: boolean
   query?: {
+    /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+    timeZone?: string
     /** Time range that the chart will respond to. Will be ignored when value is passed */
     timeRange?: TimeRangeInput
     /** This should eventually be replaced to customer's app credentials. Will be ignored when value is passed */

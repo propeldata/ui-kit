@@ -222,6 +222,7 @@ interface GetScalesOptions {
   granularity: TimeSeriesGranularity | null
   isFormatted: boolean
   isStatic: boolean
+  zone: string
 }
 
 export function getScales(options: GetScalesOptions) {
@@ -236,7 +237,12 @@ export function getScales(options: GetScalesOptions) {
       grid: {
         drawOnChartArea: false
       },
-      beginAtZero: true
+      beginAtZero: true,
+      adapters: {
+        date: {
+          zone: options.zone
+        }
+      }
     },
     y: {
       display: !hideGridLines,

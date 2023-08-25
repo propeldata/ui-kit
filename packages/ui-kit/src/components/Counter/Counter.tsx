@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 import React from 'react'
-import { PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
+import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import type { ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
@@ -48,6 +48,7 @@ const CounterComponent = (props: CounterProps) => {
     {
       counterInput: {
         metricName: query?.metric,
+        timeZone: query?.timeZone ?? getTimeZone(),
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,

@@ -1,7 +1,12 @@
 import { css } from '@emotion/css'
 import { BarController, BarElement, CategoryScale, Chart as ChartJS, Colors, LinearScale, Tooltip } from 'chart.js'
 import React from 'react'
-import { customCanvasBackgroundColor, PROPEL_GRAPHQL_API_ENDPOINT, useLeaderboardQuery } from '../../helpers'
+import {
+  customCanvasBackgroundColor,
+  getTimeZone,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  useLeaderboardQuery
+} from '../../helpers'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
@@ -157,6 +162,7 @@ const LeaderboardComponent = (props: LeaderboardProps) => {
         sort: query?.sort,
         rowLimit: query?.rowLimit ?? 100,
         dimensions: query?.dimensions,
+        timeZone: query?.timeZone ?? getTimeZone(),
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,

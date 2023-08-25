@@ -42,6 +42,9 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
     /** Metric unique name */
     metric?: string
 
+    /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+    timeZone?: string
+
     /** Time range that the chart will respond to */
     timeRange?: TimeRangeInput
 
