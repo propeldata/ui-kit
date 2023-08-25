@@ -4145,7 +4145,7 @@ __metadata:
     "@types/react-dom": latest
     "@types/testing-library__jest-dom": ^5.14.7
     chart.js: ^4.1.2
-    chartjs-adapter-luxon: ^1.3.1
+    chartjs-adapter-luxon: 1.2.1
     dotenv: ^16.0.3
     graphql: ^16.6.0
     jest: ^27.5.1
@@ -9842,13 +9842,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chartjs-adapter-luxon@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "chartjs-adapter-luxon@npm:1.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.3.1.tgz"
+"chartjs-adapter-luxon@npm:1.2.1":
+  version: 1.2.1
+  resolution: "chartjs-adapter-luxon@npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"
   peerDependencies:
     chart.js: ">=3.0.0"
     luxon: ">=1.0.0"
-  checksum: a36889ea7716396b4fd1533304a92e0dccffe0c9a8e9579983cb55b3a75098b508a244e39f3d2f883f2f98d14dfbec6dea6a58b7b34c7ad78af028c7e9a0458d
+  checksum: c5e112b8baa62ed858e91892c1a8744125db7a7bdc626a1d72ac9d9e79b17769b570d2c5d8129b1d767e53e254a98a489d4848b5013beeb465188d7adfda6c24
   languageName: node
   linkType: hard
 
