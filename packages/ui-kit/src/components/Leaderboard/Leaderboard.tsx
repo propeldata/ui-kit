@@ -146,7 +146,7 @@ const LeaderboardComponent = (props: LeaderboardProps) => {
     data: fetchedData
   } = useLeaderboardQuery(
     {
-      endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
+      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/json',

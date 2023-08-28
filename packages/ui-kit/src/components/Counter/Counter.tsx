@@ -37,7 +37,7 @@ const CounterComponent = (props: CounterProps) => {
     data: fetchedValue
   } = useCounterQuery(
     {
-      endpoint: PROPEL_GRAPHQL_API_ENDPOINT,
+      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/json',
