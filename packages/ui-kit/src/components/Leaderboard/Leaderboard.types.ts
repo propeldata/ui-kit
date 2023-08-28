@@ -63,7 +63,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 
     /** Whether to retry on errors. */
     retry?: boolean
-    /** The Propel's API URL, defaults to the production API */
+    /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
     propelApiUrl?: string
   }
 }
