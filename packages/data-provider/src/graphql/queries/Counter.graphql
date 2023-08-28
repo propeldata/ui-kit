@@ -1,0 +1,5 @@
+query Counter($counterInput: CounterInput!) {
+  counter(input: $counterInput) {
+    value
+  }
+}

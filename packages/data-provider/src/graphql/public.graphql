@@ -1,0 +1,861 @@
+"""
+The Propel GraphQL API schema
+"""
+schema {
+  query: Query
+}
+
+directive @oneOf on INPUT_OBJECT
+
+"""
+Represents an ISO 8601 date and time in UTC. For example, "2022-08-18T08:53:33Z".
+"""
+scalar DateTime
+
+"""
+The page info object used for pagination.
+"""
+type PageInfo {
+  """
+  Points to the first item returned in the results. Used when paginating backward.
+  """
+  startCursor: String
+  """
+  Points to the last item returned in the results. Used when paginating forward.
+  """
+  endCursor: String
+  """
+  A boolean that indicates whether a next page of results exists. Can be used to display a "next page" button in user interfaces, for example.
+  """
+  hasNextPage: Boolean!
+  """
+  A boolean that indicates whether a previous page of results exists. Can be used to display a "previous page" button in user interfaces, for example.
+  """
+  hasPreviousPage: Boolean!
+}
+
+"""
+A Propeller determines your Application's query processing power. The larger the Propeller, the faster the queries and the higher the cost. Every Propel Application (and therefore every set of API credentials) has a Propeller that determines the speed and cost of queries.
+
+[Learn more about Data Sources](https://www.propeldata.com/docs/applications#propeller).
+"""
+enum Propeller {
+  """
+  Max records per second: 5,000,000 records per second
+  """
+  P1_X_SMALL
+  """
+  Max records per second: 25,000,000 records per second
+  """
+  P1_SMALL
+  """
+  Max records per second: 100,000,000 records per second
+  """
+  P1_MEDIUM
+  """
+  Max records per second: 250,000,000 records per second
+  """
+  P1_LARGE
+  """
+  Max records per second: 500,000,000 records per second
+  """
+  P1_X_LARGE
+}
+
+"""
+The fields for creating or modifying a Dimension.
+"""
+input DimensionInput {
+  """
+  The name of the column to create the Dimension from.
+  """
+  columnName: String!
+}
+
+"""
+The fields for querying a Metric Report.
+
+A Metric Report is a table whose columns include dimensions and Metric values, calculated over a given time range.
+"""
+input MetricReportInput {
+  """
+  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+  """
+  The time range for calculating the Metric Report.
+  """
+  timeRange: TimeRangeInput!
+  """
+  One or many dimensions to group the Metric values by. Typically, dimensions in a report are what you want to compare and rank.
+  """
+  dimensions: [MetricReportDimensionInput!]!
+  """
+  One or more Metrics to include in the Metric Report. These will be broken down by `dimensions`.
+  """
+  metrics: [MetricReportMetricInput!]!
+  """
+  The Query Filters to apply when building the Metric Report. These can be used to filter out rows.
+  """
+  filters: [FilterInput!]
+  """
+  The index of the column to order the Metric Report by. The index is 1-based and defaults to the first Metric column. In other words, by default, reports are ordered by the first Metric; however, you can order by the second Metric, third Metric, etc., by overriding the `orderByColumn` input. You can also order by dimensions this way.
+  """
+  orderByColumn: Int
+  """
+  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+  """
+  first: Int
+  """
+  The cursor to use when paging forward.
+  """
+  after: String
+  """
+  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+  """
+  last: Int
+  """
+  The cursor to use when paging backward.
+  """
+  before: String
+}
+
+"""
+The fields for specifying a dimension to include in a Metric Report.
+"""
+input MetricReportDimensionInput {
+  """
+  The column name of the dimension to include in a Metric Report. This must match the name of a Data Pool column.
+  """
+  columnName: String!
+  """
+  The name to display in the `headers` array when displaying the report. This defaults to the column name if unspecified.
+  """
+  displayName: String
+  """
+  The sort order for the dimension. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to ascending (`ASC`) order when not provided.
+  """
+  sort: Sort
+}
+
+"""
+The fields for specifying a Metric to include in a Metric Report.
+"""
+input MetricReportMetricInput {
+  """
+  The Metric's unique name. If not specified, Propel will lookup the Metric by ID.
+  """
+  uniqueName: String
+  """
+  The Metric's ID. If not specified, Propel will lookup the Metric by unique name.
+  """
+  id: ID
+  """
+  The name to display in the `headers` array when displaying the report. This defaults to the Metric's unique name if unspecified.
+  """
+  displayName: String
+  """
+  The Query Filters to apply when calculating the Metric.
+  """
+  filters: [FilterInput!]
+  """
+  The sort order for the Metric. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
+  """
+  sort: Sort
+}
+
+"""
+The Metric Report connection object.
+
+It includes `headers` and `rows` for a single page of a report. It also allows paging forward and backward to other
+pages of the report.
+
+Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+"""
+type MetricReportConnection {
+  """
+  The report connection's page info.
+  """
+  pageInfo: PageInfo!
+  """
+  The report connection's edges.
+  """
+  edges: [MetricReportEdge!]!
+  """
+  The report connection's nodes.
+  """
+  nodes: [MetricReportNode!]!
+  """
+  An ordered array of display names for your dimensions and Metrics, as defined in the report input. Use this to display your table's header.
+  """
+  headers: [String]!
+  """
+  An ordered array of rows. Each row contains dimension and Metric values, as defined in the report input. Use these to display the rows of your table.
+  """
+  rows: [[String]!]!
+  """
+  The Query statistics and metadata.
+  """
+  query: QueryInfo!
+}
+
+"""
+The Metric Report edge object.
+
+Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+"""
+type MetricReportEdge {
+  """
+  The edge's node.
+  """
+  node: MetricReportNode!
+  """
+  The edge's cursor.
+  """
+  cursor: String!
+}
+
+"""
+The Metric Report node object.
+
+This type represents a single row of a report.
+
+Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+"""
+type MetricReportNode {
+  """
+  An ordered array of display names for your dimensions and Metrics, as defined in the report input. Use this to display your table's header.
+  """
+  headers: [String]!
+  """
+  An ordered array of columns. Each column contains the dimension and Metric values for a single row, as defined in the report input. Use this to display a single row within your table.
+  """
+  row: [String]!
+}
+
+"""
+The fields for querying a Metric in counter format.
+
+A Metric's counter query returns a single value over a given time range.
+"""
+input CounterInput {
+  """
+  The ID of the Metric to query.
+
+  Required if `metricName` is not specified.
+  """
+  metricId: ID
+  """
+  The name of the Metric to query.
+
+  Required if `metricId` is not specified.
+  """
+  metricName: String
+  """
+  The time range for calculating the counter.
+  """
+  timeRange: TimeRangeInput!
+  """
+  The Query Filters to apply before retrieving the counter data. If no Query Filters are provided, all data is included.
+  """
+  filters: [FilterInput!]
+  """
+  Optionally specifies the Propeller to use. This can be set when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+}
+
+"""
+The fields for querying a Metric in time series format.
+
+A Metric's time series query returns the values over a given time range aggregated by a given time granularity; day, month, or year, for example.
+"""
+input TimeSeriesInput {
+  """
+  The ID of the Metric to query.
+
+  Required if `metricName` is not specified.
+  """
+  metricId: ID
+  """
+  The name of the Metric to query.
+
+  Required if `metricId` is not specified.
+  """
+  metricName: String
+  """
+  The time range for calculating the time series.
+  """
+  timeRange: TimeRangeInput!
+  """
+  The time granularity (hour, day, month, etc.) to aggregate the Metric values by.
+  """
+  granularity: TimeSeriesGranularity!
+  """
+  The Query Filters to apply before retrieving the time series data. If no Query Filters are provided, all data is included.
+  """
+  filters: [FilterInput!]
+  """
+  Optionally specifies the Propeller to use. This can be set by Users when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+}
+
+"""
+The fields for querying a Metric in leaderboard format.
+
+A Metric's leaderboard query returns an ordered table of Dimension and Metric values over a given time range.
+"""
+input LeaderboardInput {
+  """
+  The ID of the Metric to query.
+
+  Required if `metricName` is not specified.
+  """
+  metricId: ID
+  """
+  The name of the Metric to query.
+
+  Required if `metricId` is not specified.
+  """
+  metricName: String
+  """
+  The time range for calculating the leaderboard.
+  """
+  timeRange: TimeRangeInput!
+  """
+  One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank.
+  """
+  dimensions: [DimensionInput!]!
+  """
+  The sort order of the rows. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
+  """
+  sort: Sort
+  """
+  The number of rows to be returned. It can be a number between 1 and 1,000.
+  """
+  rowLimit: Int!
+  """
+  The list of filters to apply before retrieving the leaderboard data. If no Query Filters are provided, all data is included.
+  """
+  filters: [FilterInput!]
+  """
+  Optionally specifies the Propeller to use. This can be set by Users when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+}
+
+"""
+The fields required to specify the time range for a time series, counter, or leaderboard Metric query.
+
+If no relative or absolute time ranges are provided, Propel defaults to an absolute time range beginning with the earliest record in the Metric's Data Pool and ending with the latest record.
+
+If both relative and absolute time ranges are provided, the relative time range will take precedence.
+
+If a `LAST_N` relative time period is selected, an `n` ≥ 1 must be provided. If no `n` is provided or `n` < 1, a `BAD_REQUEST` error will be returned.
+"""
+input TimeRangeInput {
+  """
+  The relative time period.
+  """
+  relative: RelativeTimeRange
+  """
+  The number of time units for the `LAST_N` relative periods.
+  """
+  n: Int
+  """
+  The optional start timestamp (inclusive). Defaults to the timestamp of the earliest record in the Data Pool.
+  """
+  start: DateTime
+  """
+  The optional end timestamp (exclusive). Defaults to the timestamp of the latest record in the Data Pool.
+  """
+  stop: DateTime
+}
+
+"""
+The available sort orders.
+"""
+enum Sort {
+  """
+  Sort in ascending order.
+  """
+  ASC
+  """
+  Sort in descending order.
+  """
+  DESC
+}
+
+"""
+The Relative time ranges are based on the current date and time.
+
+`THIS` - The current unit of time. For example, if today is June 8, 2022, and
+`THIS_MONTH` is selected, then data for June 2022 would be returned.
+
+`PREVIOUS` - The previous unit of time. For example, if today is June 8, 2022, and
+`PREVIOUS_MONTH` is selected, then data for May 2022 would be returned. It excludes
+the current unit of time.
+
+`NEXT` - The next unit of time. For example, if today is June 8, 2022, and
+`NEXT_MONTH` is selected, then data for July 2022 would be returned. It excludes
+the current unit of time.
+
+`LAST_N` - The last `n` units of time, including the current one. For example, if today
+is June 8, 2022 and `LAST_N_YEARS` with `n` = 3 is selected, then data for 2020, 2021, and
+2022 will be returned. It will include the current time period.
+"""
+enum RelativeTimeRange {
+  """
+  Starts at the zeroth minute of the current hour and continues for 60 minutes.
+  """
+  THIS_HOUR
+  """
+  Starts at 12:00:00 AM of the current day and continues for 24 hours.
+  """
+  TODAY
+  """
+  Starts on Monday, 12:00:00 AM of the current week and continues for seven days.
+  """
+  THIS_WEEK
+  """
+  Starts at 12:00:00 AM on the first day of the current month and continues for the duration of the month.
+  """
+  THIS_MONTH
+  """
+  Starts at 12:00:00 AM on the first day of the current calendar quarter and continues for the duration of the quarter.
+  """
+  THIS_QUARTER
+  """
+  Starts on January 1st, 12:00:00 AM of the current year and continues for the duration of the year.
+  """
+  THIS_YEAR
+  """
+  Starts at the zeroth minute of the previous hour and continues for 60 minutes.
+  """
+  PREVIOUS_HOUR
+  """
+  Starts at 12:00:00 AM on the day before the today and continues for 24 hours.
+  """
+  YESTERDAY
+  """
+  Starts on Monday, 12:00:00 AM, a week before the current week, and continues for seven days.
+  """
+  PREVIOUS_WEEK
+  """
+  Starts at 12:00:00 AM on the first day of the month before the current month and continues for the duration of the month.
+  """
+  PREVIOUS_MONTH
+  """
+  Starts at 12:00:00 AM on the first day of the calendar quarter before the current quarter and continues for the duration of the quarter.
+  """
+  PREVIOUS_QUARTER
+  """
+  Starts on January 1st, 12:00:00 AM, the year before the current year, and continues for the duration of the year.
+  """
+  PREVIOUS_YEAR
+  """
+  Starts at the zeroth minute of the next hour and continues for 60 minutes.
+  """
+  NEXT_HOUR
+  """
+  " Starts at 12:00:00 AM, the day after the current day, and continues for 24 hours.
+  """
+  TOMORROW
+  """
+  Starts on Monday, 12:00:00 AM, the week after the current week, and continues for the duration of the week.
+  """
+  NEXT_WEEK
+  """
+  Starts at 12:00:00 AM on the first day of the next month and continues for the duration of the month.
+  """
+  NEXT_MONTH
+  """
+  Starts at 12:00:00 AM on the first day of the next calendar quarter and continues for the duration of the quarter.
+  """
+  NEXT_QUARTER
+  """
+  Starts on January 1st, 12:00:00 AM of the next year and continues for the duration of the year.
+  """
+  NEXT_YEAR
+  """
+  Starts at the zeroth second `n` - 1 minute(s) before the current minute and continues through the current minute. It includes this minute.
+  """
+  LAST_N_MINUTES
+  """
+  Starts at the zeroth minute of the `n` - 1 hour(s) before the current hour, and continues through the current hour. It includes this hour.
+  """
+  LAST_N_HOURS
+  """
+  Starts at 12:00:00 AM, `n` - 1 day(s) before the current day, and continues through the current day. It includes today.
+  """
+  LAST_N_DAYS
+  """
+  Starts on Monday, 12:00:00 AM, `n` - 1 week(s) before the current week, and continues through the current week. It includes this week.
+  """
+  LAST_N_WEEKS
+  """
+  Starts at 12:00:00 AM on the first day of the month, `n` - 1 month(s) before the current month, and continues through the current month. It includes this month.
+  """
+  LAST_N_MONTHS
+  """
+  Starts at 12:00:00 AM on the first day of the calendar quarter `n` - 1 quarter(s) before the current quarter and continues through the current quarter. It includes this quarter.
+  """
+  LAST_N_QUARTERS
+  """
+  Starts on January 1st, 12:00:00 AM of the year `n` - 1 year(s) before the current year and continues through the current year. It includes this year.
+  """
+  LAST_N_YEARS
+  LAST_15_MINUTES @deprecated(reason: "Use `LAST_N_MINUTES` instead.")
+  LAST_30_MINUTES @deprecated(reason: "Use `LAST_N_MINUTES` instead.")
+  LAST_HOUR @deprecated(reason: "Use `LAST_N_HOURS` instead.")
+  LAST_4_HOURS @deprecated(reason: "Use `LAST_N_HOURS` instead.")
+  LAST_12_HOURS @deprecated(reason: "Use `LAST_N_HOURS` instead.")
+  LAST_24_HOURS @deprecated(reason: "Use `LAST_N_HOURS` instead.")
+  LAST_7_DAYS @deprecated(reason: "Use `LAST_N_DAYS` instead.")
+  LAST_30_DAYS @deprecated(reason: "Use `LAST_N_DAYS` instead.")
+  LAST_90_DAYS @deprecated(reason: "Use `LAST_N_DAYS` instead.")
+  LAST_3_MONTHS @deprecated(reason: "Use `LAST_N_MONTHS` instead.")
+  LAST_6_MONTHS @deprecated(reason: "Use `LAST_N_MONTHS` instead.")
+  LAST_YEAR @deprecated(reason: "Use `LAST_N_YEARS` instead.")
+  LAST_2_YEARS @deprecated(reason: "Use `LAST_N_YEARS` instead.")
+  LAST_5_YEARS @deprecated(reason: "Use `LAST_N_YEARS` instead.")
+}
+
+"""
+The available time series granularities. Granularities define the unit of time to aggregate the Metric data for a time series query.
+
+For example, if the granularity is set to `DAY`, then the the time series query will return a label and a value for each day.
+
+If there are no records for a given time series granularity, Propel will return the label and a value of "0" so that the time series can be properly visualized.
+"""
+enum TimeSeriesGranularity {
+  """
+  Aggregates values by minute intervals.
+  """
+  MINUTE
+  """
+  Aggregates values by 5-minute intervals.
+  """
+  FIVE_MINUTES
+  """
+  Aggregates values by 10-minute intervals.
+  """
+  TEN_MINUTES
+  """
+  Aggregates values by 15-minute intervals.
+  """
+  FIFTEEN_MINUTES
+  """
+  Aggregates values by hourly intervals.
+  """
+  HOUR
+  """
+  Aggregates values by daily intervals.
+  """
+  DAY
+  """
+  Aggregates values by weekly intervals.
+  """
+  WEEK
+  """
+  Aggregates values by monthly intervals.
+  """
+  MONTH
+  """
+  Aggregates values by yearly intervals.
+  """
+  YEAR
+}
+
+"""
+The fields of a filter.
+
+You can construct more complex filters using `and` and `or`. For example, to construct a filter equivalent to
+
+```
+(value > 0 AND value <= 100) OR status = "confirmed"
+```
+
+you could write
+
+```
+{
+  "column": "value",
+  "operator": "GREATER_THAN",
+  "value": "0",
+  "and": [{
+    "column": "value",
+    "operator": "LESS_THAN_OR_EQUAL_TO",
+    "value": "0"
+  }],
+  "or": [{
+    "column": "status",
+    "operator": "EQUALS",
+    "value": "confirmed"
+  }]
+}
+```
+
+Note that `and` takes precedence over `or`.
+"""
+input FilterInput {
+  """
+  The name of the column to filter on.
+  """
+  column: String!
+  """
+  The operation to perform when comparing the column and filter values.
+  """
+  operator: FilterOperator!
+  """
+  The value to compare the column to.
+  """
+  value: String
+  """
+  Additional filters to AND with this one. AND takes precedence over OR.
+  """
+  and: [FilterInput!]
+  """
+  Additional filters to OR with this one. AND takes precedence over OR.
+  """
+  or: [FilterInput!]
+}
+
+"""
+The available Filter operators.
+"""
+enum FilterOperator {
+  """
+  Selects values that are equal to the specified value.
+  """
+  EQUALS
+  """
+  Selects values that are not equal to the specified value.
+  """
+  NOT_EQUALS
+  """
+  Selects values that are greater than the specified value.
+  """
+  GREATER_THAN
+  """
+  Selects values that are greater or equal to the specified value.
+  """
+  GREATER_THAN_OR_EQUAL_TO
+  """
+  Selects values that are less than the specified value.
+  """
+  LESS_THAN
+  """
+  Selects values that are less or equal to the specified value.
+  """
+  LESS_THAN_OR_EQUAL_TO
+  """
+  Selects values that are null. This operator does not accept a value.
+  """
+  IS_NULL
+  """
+  Selects values that are not null. This operator does not accept a value.
+  """
+  IS_NOT_NULL
+}
+
+"""
+The time series response object. It contains an array of time series labels and an array of Metric values for the given time range and Query Filters.
+"""
+type TimeSeriesResponse {
+  """
+  The time series labels.
+  """
+  labels: [String!]!
+  """
+  The time series values.
+  """
+  values: [String]!
+  """
+  The Query statistics and metadata.
+  """
+  query: QueryInfo!
+}
+
+"""
+The counter response object. It contains a single Metric value for the given time range and Query Filters.
+"""
+type CounterResponse {
+  """
+  The value of the counter.
+  """
+  value: String
+  """
+  The Query statistics and metadata.
+  """
+  query: QueryInfo!
+}
+
+"""
+The leaderboard response object. It contains an array of headers and a table (array of rows) with the selected Dimensions and corresponding Metric values for the given time range and Query Filters.
+"""
+type LeaderboardResponse {
+  """
+  The table headers. It contains the Dimension and Metric names.
+  """
+  headers: [String!]!
+  """
+  An ordered array of rows. Each row contains the Dimension values and the corresponding Metric value. A Dimension value can be empty. A Metric value will never be empty.
+  """
+  rows: [[String]!]!
+  """
+  The Query statistics and metadata.
+  """
+  query: QueryInfo!
+}
+
+"""
+The Query Info object. It contains metadata and statistics about a Query performed.
+"""
+type QueryInfo {
+  """
+  The Query's unique identifier.
+  """
+  id: ID!
+  """
+  The date and time in UTC when the Query was created.
+  """
+  createdAt: DateTime!
+  """
+  The unique identifier of the actor that performed the Query.
+  """
+  createdBy: String!
+  """
+  The date and time in UTC when the Query was last modified.
+  """
+  modifiedAt: DateTime!
+  """
+  The unique identifier of the actor that modified the Query.
+  """
+  modifiedBy: String!
+  """
+  The bytes processed by the Query.
+  """
+  bytesProcessed: String!
+  """
+  The duration of the Query in milliseconds.
+  """
+  durationInMilliseconds: Int!
+  """
+  The number of records processed by the Query.
+  """
+  recordsProcessed: String!
+  """
+  The bytes returned by the Query.
+  """
+  resultingBytes: Int!
+  """
+  The number of records returned by the Query.
+  """
+  resultingRecords: Int!
+  """
+  The Propeller used for this query.
+  """
+  propeller: Propeller
+  """
+  The Query status.
+  """
+  status: QueryStatus!
+  """
+  The Query type.
+  """
+  type: QueryType!
+  """
+  The Query subtype.
+  """
+  subtype: QuerySubtype
+}
+
+"""
+The Query status.
+"""
+enum QueryStatus {
+  """
+  The Query was completed succesfully.
+  """
+  COMPLETED
+  """
+  The Query experienced an error.
+  """
+  ERROR
+  """
+  The Query timed out.
+  """
+  TIMED_OUT
+}
+
+"""
+The Query type.
+"""
+enum QueryType {
+  """
+  Indicates a Metric Query.
+  """
+  METRIC
+  """
+  Indicates a Dimension Stats Query.
+  """
+  STATS
+  """
+  Indicates a Report Query.
+  """
+  REPORT
+  """
+  Indicates a Record Table Query.
+  """
+  RECORDS
+  """
+  Indicates a SelectV1 Query.
+  """
+  SELECT
+}
+
+"""
+The Query subtype.
+"""
+enum QuerySubtype {
+  """
+  Indicates a Metric counter Query.
+  """
+  COUNTER
+  """
+  Indicates a Metric time series Query.
+  """
+  TIME_SERIES
+  """
+  Indicates a Metric leaderboard Query.
+  """
+  LEADERBOARD
+}
+
+type Query {
+  """
+  Build a report, or table, consisting of multiple Metrics broken down by one-or-more dimensions.
+
+  The first few columns of the report are the dimensions you choose to break down by. The subsequent columns are the
+  Metrics you choose to query. By default, the report sorts on the first Metric in descending order, but you can
+  configure this with the `orderByMetric` and `sort` inputs.
+
+  Finally, reports use [cursor-based pagination](/docs/api/pagination). You can control page size with the `first` and
+  `last` inputs.
+  """
+  metricReport(input: MetricReportInput!): MetricReportConnection
+  """
+  Query a Metric in counter format. A single Metric value for the given time range and filters.
+  """
+  counter(input: CounterInput!): CounterResponse
+  """
+  Query a Metric in time series format. Arrays of timestamps and Metric values for the given time range and filters.
+  """
+  timeSeries(input: TimeSeriesInput!): TimeSeriesResponse
+  """
+  Query a Metric in leaderboard format. A table (array of rows) with the selected dimensions and corresponding Metric values for the given time range and filters.
+  """
+  leaderboard(input: LeaderboardInput!): LeaderboardResponse
+}

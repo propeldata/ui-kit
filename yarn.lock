@@ -4070,6 +4070,48 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@propeldata/data-provider@workspace:^, @propeldata/data-provider@workspace:packages/data-provider":
+  version: 0.0.0-use.local
+  resolution: "@propeldata/data-provider@workspace:packages/data-provider"
+  dependencies:
+    "@emotion/css": ^11.10.5
+    "@graphql-codegen/add": ^4.0.0
+    "@graphql-codegen/cli": ^4.0.1
+    "@graphql-codegen/typescript": ^4.0.1
+    "@graphql-codegen/typescript-msw": ^1.1.6
+    "@graphql-codegen/typescript-operations": ^4.0.1
+    "@graphql-codegen/typescript-react-query": ^4.1.0
+    "@juggle/resize-observer": ^3.4.0
+    "@storybook/react": ^6.5.14
+    "@swc/core": ^1.3.68
+    "@swc/jest": ^0.2.26
+    "@tanstack/react-query": ^4.29.17
+    "@testing-library/jest-dom": ^5.16.5
+    "@testing-library/react": ^14.0.0
+    "@testing-library/user-event": ^14.4.3
+    "@types/jest": ^27.5.1
+    "@types/react": latest
+    "@types/react-dom": latest
+    "@types/testing-library__jest-dom": ^5.14.7
+    chart.js: ^4.1.2
+    chartjs-adapter-date-fns: 2.0.1
+    date-fns: ^2.29.3
+    dotenv: ^16.0.3
+    graphql: ^16.6.0
+    jest: ^27.5.1
+    jest-canvas-mock: ^2.5.2
+    jest-environment-jsdom: ^27.5.1
+    msw: ^1.2.2
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    typescript: ^4.9.3
+  peerDependencies:
+    graphql: ^16.6
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  languageName: unknown
+  linkType: soft
+
 "@propeldata/release@workspace:^, @propeldata/release@workspace:packages/core/release":
   version: 0.0.0-use.local
   resolution: "@propeldata/release@workspace:packages/core/release"
@@ -4133,6 +4175,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": ^4.0.1
     "@graphql-codegen/typescript-react-query": ^4.1.0
     "@juggle/resize-observer": ^3.4.0
+    "@propeldata/data-provider": "workspace:^"
     "@storybook/react": ^6.5.14
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
@@ -24629,6 +24672,7 @@ __metadata:
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.21.4
     "@emotion/css": ^11.10.5
+    "@propeldata/data-provider": "workspace:^"
     "@propeldata/ui-kit": "workspace:^"
     "@storybook/addon-essentials": ^6.5.14
     "@storybook/addon-interactions": ^6.5.14

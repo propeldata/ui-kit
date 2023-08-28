@@ -1,0 +1,6 @@
+query TimeSeries($timeSeriesInput: TimeSeriesInput!) {
+  timeSeries(input: $timeSeriesInput) {
+    labels
+    values
+  }
+}

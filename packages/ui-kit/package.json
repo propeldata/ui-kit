@@ -22,6 +22,7 @@
   ],
   "dependencies": {
     "@emotion/css": "^11.10.5",
+    "@propeldata/data-provider": "workspace:^",
     "@tanstack/react-query": "^4.29.17",
     "chart.js": "^4.1.2",
     "chartjs-adapter-date-fns": "2.0.1",

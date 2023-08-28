@@ -1,6 +1,7 @@
 import { css } from '@emotion/css'
 import { Story } from '@storybook/react'
 import React from 'react'
+import { withDataProvider, useCounterData } from '@propeldata/data-provider'
 import { RelativeTimeRange } from '../../helpers'
 import { Counter } from '../Counter'
 
@@ -36,6 +37,47 @@ export const WithSufix = Template.bind({})
 WithSufix.args = {
   value: '99',
   sufixValue: '%'
+}
+
+// @TODO: it's a POC. Remove it before merging.
+const NewCounterComponent = () => {
+  const { fetchedValue } = useCounterData({
+    query: {
+      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      },
+      refetchInterval: 1000,
+      retry: false
+    }
+  })
+  // console.log({ fetchedValue })
+  return <div>{fetchedValue ? fetchedValue.counter?.value : '-'}</div>
+}
+
+// @TODO: it's a POC. Remove it before merging.
+const NewCounter = withDataProvider(NewCounterComponent)
+
+// @TODO: it's a POC. Remove it before merging.
+const DataProviderTemplate: Story = (args) => (
+  <div
+    className={css`
+      width: 300px;
+      height: 150px;
+      font-family: 'Fira Code';
+    `}
+  >
+    New counter value:
+    <NewCounter {...args} />
+  </div>
+)
+
+// @TODO: it's a POC. Remove it before merging.
+export const DataProvider = DataProviderTemplate.bind({})
+DataProvider.args = {
+  value: '1238'
 }
 
 const CardTemplate: Story = (args) => (

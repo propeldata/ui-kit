@@ -1,0 +1,6 @@
+query Leaderboard($leaderboardInput: LeaderboardInput!) {
+  leaderboard(input: $leaderboardInput) {
+    headers
+    rows
+  }
+}
