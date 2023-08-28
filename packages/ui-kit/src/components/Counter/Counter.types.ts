@@ -29,6 +29,8 @@ export interface CounterProps extends React.ComponentProps<'span'> {
     refetchInterval?: number
     /** Whether to retry on errors. */
     retry?: boolean
+    /** The Propel's API URL, defaults to the production API */
+    propelApiUrl?: string
   }
   /** When true, shows a skeleton loader */
   loading?: boolean

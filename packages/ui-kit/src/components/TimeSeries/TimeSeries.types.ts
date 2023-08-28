@@ -65,6 +65,9 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 
     /** Whether to retry on errors. */
     retry?: boolean
+
+    /** The Propel's API URL, defaults to the production API */
+    propelApiUrl?: string
   }
   /** Format function for labels, must return an array with the new labels */
   labelFormatter?: (labels: string[]) => string[]

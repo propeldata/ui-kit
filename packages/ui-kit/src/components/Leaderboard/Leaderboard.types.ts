@@ -63,5 +63,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 
     /** Whether to retry on errors. */
     retry?: boolean
+    /** The Propel's API URL, defaults to the production API */
+    propelApiUrl?: string
   }
 }
