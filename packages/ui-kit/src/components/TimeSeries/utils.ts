@@ -45,13 +45,23 @@ export function formatLabels(options: FormatLabelsOptions): string[] | undefined
   return formatter ? formatter(labels || []) : labels
 }
 
-export function getDefaultGranularity(timeRange?: TimeRangeInput): TimeSeriesGranularity {
-  const relative = timeRange?.relative
+interface GetDefaultGranularityOptions {
+  timeRange?: TimeRangeInput
+  labels?: string[]
+}
 
-  if (!relative) {
+export function getDefaultGranularity(options: GetDefaultGranularityOptions): TimeSeriesGranularity {
+  const relative = options.timeRange?.relative
+  const labels = options.labels
+
+  if (!relative && !labels) {
     // TODO(mroberts): In a future release, we should calculate this for absolute ranges, too.
     //   Actually, all of this logic should move to the backend.
     return TimeSeriesGranularity.Day
+  }
+
+  if (!relative) {
+    return getLabelsBasedGranularity(labels)
   }
 
   return {
@@ -95,6 +105,77 @@ export function getDefaultGranularity(timeRange?: TimeRangeInput): TimeSeriesGra
     [RelativeTimeRange.Last_7Days]: TimeSeriesGranularity.Day,
     [RelativeTimeRange.Last_90Days]: TimeSeriesGranularity.Day
   }[relative]
+}
+
+export function getLabelsBasedGranularity(labels: string[]): TimeSeriesGranularity {
+  let timestamps = [...labels]
+
+  const isAllTimestamps = labels.every((label) => isTimestamp(label))
+
+  if (!isAllTimestamps) {
+    try {
+      timestamps = labels.map((label) => convertToTimestamp(label))
+    } catch {
+      return TimeSeriesGranularity.Day
+    }
+  }
+
+  const granularity = getGranularityByDistance(timestamps)
+
+  return granularity
+}
+
+export function isTimestamp(value: string) {
+  return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(value)
+}
+
+export function convertToTimestamp(value: string) {
+  return new Date(value).toISOString()
+}
+
+export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranularity {
+  const granularityByDistanceDictionary = {
+    '86400000': TimeSeriesGranularity.Day,
+    '900000': TimeSeriesGranularity.FifteenMinutes,
+    '300000': TimeSeriesGranularity.FiveMinutes,
+    '3600000': TimeSeriesGranularity.Hour,
+    '60000': TimeSeriesGranularity.Minute,
+    '2592000000': TimeSeriesGranularity.Month,
+    '604800000': TimeSeriesGranularity.Week,
+    '31536000000': TimeSeriesGranularity.Year,
+    '600000': TimeSeriesGranularity.TenMinutes
+  }
+
+  const timestampsInMilliseconds = timestamps.map((timestamp) => new Date(timestamp).getTime())
+
+  const distances = timestampsInMilliseconds.map((timestamp, index) => {
+    if (index === 0) {
+      return 0
+    }
+
+    return timestamp - timestampsInMilliseconds[index - 1]
+  })
+
+  distances.shift()
+
+  const isSameDistances = distances.every((distance) => distance === distances[0])
+
+  if (!isSameDistances) {
+    const timestampYears = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getFullYear())
+    const timestampMonths = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getMonth())
+
+    const isYearGranularity = timestampYears.every((year, idx) => idx === 0 || year - timestampYears[idx - 1] === 1)
+    if (isYearGranularity) return TimeSeriesGranularity.Year
+
+    const isMonthGranularity = timestampMonths.every(
+      (month, idx) => idx === 0 || month - timestampMonths[idx - 1] === 1
+    )
+    if (isMonthGranularity) return TimeSeriesGranularity.Month
+
+    return TimeSeriesGranularity.Day
+  }
+
+  return granularityByDistanceDictionary[distances[0]]
 }
 
 export function useSetupDefaultStyles(styles?: ChartStyles) {
@@ -249,6 +330,8 @@ export function getScales(options: GetScalesOptions) {
     ...scalesBase
   }
 
+  console.log(granularity)
+
   const autoFormatScales = {
     ...scalesBase,
     x: {
@@ -267,6 +350,8 @@ export function getScales(options: GetScalesOptions) {
   }
 
   const currentFormatScales = isFormatted ? customFormatScales : autoFormatScales
+
+  console.log(currentFormatScales)
 
   if (scale === 'linear') {
     const linearScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }> = {

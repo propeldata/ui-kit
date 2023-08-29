@@ -77,7 +77,12 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
     ...rest
   } = props
 
-  const granularity = query?.granularity ?? getDefaultGranularity(query?.timeRange)
+  const granularity =
+    query?.granularity ??
+    getDefaultGranularity({
+      timeRange: query?.timeRange,
+      labels
+    })
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
   const idRef = React.useRef(idCounter++)
@@ -144,6 +149,8 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
 
       const labels = data.labels || []
       const values = data.values || []
+
+      console.log(labels)
 
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
