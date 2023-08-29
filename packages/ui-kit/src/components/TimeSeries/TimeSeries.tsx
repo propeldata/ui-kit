@@ -150,8 +150,6 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
       const labels = data.labels || []
       const values = data.values || []
 
-      console.log(labels)
-
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
 

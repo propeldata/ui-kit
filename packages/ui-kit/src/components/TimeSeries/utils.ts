@@ -330,8 +330,6 @@ export function getScales(options: GetScalesOptions) {
     ...scalesBase
   }
 
-  console.log(granularity)
-
   const autoFormatScales = {
     ...scalesBase,
     x: {
@@ -350,8 +348,6 @@ export function getScales(options: GetScalesOptions) {
   }
 
   const currentFormatScales = isFormatted ? customFormatScales : autoFormatScales
-
-  console.log(currentFormatScales)
 
   if (scale === 'linear') {
     const linearScales: DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }> = {
