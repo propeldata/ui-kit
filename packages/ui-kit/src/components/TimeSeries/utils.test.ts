@@ -85,9 +85,15 @@ describe('TimeSeries/utils', () => {
     })
 
     it('should return MONTH for month granularity', () => {
-      const labels = ['2023-06-01T00:00:00.000Z', '2023-07-01T00:00:00.000Z', '2023-08-01T00:00:00.000Z']
+      let labels = ['2023-06-01T00:00:00.000Z', '2023-07-01T00:00:00.000Z', '2023-08-01T00:00:00.000Z']
 
-      const result = getLabelsBasedGranularity(labels)
+      let result = getLabelsBasedGranularity(labels)
+
+      expect(result).toEqual(TimeSeriesGranularity.Month)
+
+      labels = ['2023-07-01', '2023-08-01', '2023-09-01']
+
+      result = getLabelsBasedGranularity(labels)
 
       expect(result).toEqual(TimeSeriesGranularity.Month)
     })

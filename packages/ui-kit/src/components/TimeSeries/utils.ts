@@ -159,8 +159,9 @@ export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranul
   distances.shift()
 
   const isSameDistances = distances.every((distance) => distance === distances[0])
+  const granularityInDictionary = granularityByDistanceDictionary[distances[0]]
 
-  if (!isSameDistances) {
+  if (!isSameDistances || !granularityInDictionary) {
     const timestampYears = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getFullYear())
     const timestampMonths = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getMonth())
 
@@ -175,7 +176,7 @@ export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranul
     return TimeSeriesGranularity.Day
   }
 
-  return granularityByDistanceDictionary[distances[0]]
+  return granularityInDictionary
 }
 
 export function useSetupDefaultStyles(styles?: ChartStyles) {
