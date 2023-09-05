@@ -1,4 +1,4 @@
-import { TimeSeriesGranularity } from '../../helpers'
+import { TimeSeriesGranularity } from '../../testing'
 
 import { getLabelsBasedGranularity } from './utils'
 
