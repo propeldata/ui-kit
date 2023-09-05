@@ -163,14 +163,15 @@ export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranul
 
   if (!isSameDistances || !granularityInDictionary) {
     const timestampYears = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getFullYear())
-    const timestampMonths = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getMonth())
+    const timestampMonths = timestampsInMilliseconds.map((timestamp) => new Date(timestamp).getUTCMonth())
 
     const isYearGranularity = timestampYears.every((year, idx) => idx === 0 || year - timestampYears[idx - 1] === 1)
     if (isYearGranularity) return TimeSeriesGranularity.Year
 
     const isMonthGranularity = timestampMonths.every(
-      (month, idx) => idx === 0 || month - timestampMonths[idx - 1] === 1
+      (month, idx) => idx === 0 || month - timestampMonths[idx - 1] === 1 || month - timestampMonths[idx - 1] === -11
     )
+
     if (isMonthGranularity) return TimeSeriesGranularity.Month
 
     return TimeSeriesGranularity.Day
