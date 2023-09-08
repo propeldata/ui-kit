@@ -2,85 +2,12 @@ import { css } from '@emotion/css'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { Counter, CounterComponent } from './Counter'
-// import * as path from 'path';
-// import * as reactDocgenTypescript from 'react-docgen-typescript';
-
-// import YourComponent from './YourComponent'; // Replace with your component path
-
-// const filePath = path.resolve(__dirname, './YourComponent.tsx'); // Replace with the actual file path
-
-// const parser = reactDocgenTypescript.withCustomConfig('./tsconfig.json', {
-//   propFilter: (prop) => {
-//     // Customize prop filtering as needed
-//     return true;
-//   },
-// });
-
-// const componentInfo = parser.parse(filePath);
-
-// console.log({componentInfo})
-
-// type TypeName<T> = T extends infer R ? keyof R : never
-// type TypeName<T> = T extends { query: infer R } ? keyof R & string : never
-
-// function getTypeName<T extends {}>(obj: T): TypeName<T> {
-//   return Object.keys(obj) as TypeName<T>
-// }
-
-// type QueryType = {
-//   title: string
-// }
-
-// type Test = {
-//   query: QueryType
-// }
-
-// type TypeName<T> = T extends { query: infer R } ? keyof R : never
-
-// const nameof = <T,>(name: keyof T) => name
-
-// function getTypeofProperty<T, K extends keyof T>(o: T, name: K) {
-//   return typeof o[name]
-// }
-
-// const queryTypeName: TypeName<Test> = 'title' // This will be "QueryType"
-// console.log(nameof<CounterProps>('query'))
-// console.log(CounterProps['query'])
-
-// // type TypeName<T> = T extends { query: infer R } ? keyof R : never;
-
-// // const queryTypeName: TypeName<CounterProps> = { query: { accessToken: 'test' } };
-
-// const options = {
-//   savePropValueAsString: true
-// }
-
-// Parse a file for docgen info
-// docgen.parse('./Counter.tsx', options)
-
-// console.log({ docgen })
 
 const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
   component: CounterComponent,
-  render: Counter
-  // argTypes: {
-  //   styles: {
-  //     table: {
-  //       // subcategory: 'AAAA',
-  //       // defaultValue: { summary: 'aaa' },
-  //       // type: { detail: 'test', summary: getTypeName(testInstance.query ?? '') }
-  //       type: { summary: 'CounterQueryProps', detail: '<a href="http://google.com">test</a>' },
-  //       expanded: true
-  //     }
-  //     // description: 'SwitchTypeEnum'
-  //     // defaultValue: { summary: 'SwitchTypeEnum.PRIMARY' }
-  //   }
-  //   // table: {
-  //   //   summary: 'SwitchTypeEnum',
-  //   //   defaultValue: { summary: 'SwitchTypeEnum.PRIMARY' }
-  //   // }
-  // }
+  render: Counter,
+  tags: ['tag']
 }
 
 export default meta

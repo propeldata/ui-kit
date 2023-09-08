@@ -1,5 +1,8 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
-import * as CounterStories from './Counter.stories'
+import * as CounterStories from '../../../../../packages/ui-kit/src/components/Counter/Counter.stories'
+import * as CounterQueryPropsStories from '../../../../../packages/ui-kit/src/components/Counter/CounterQueryProps.stories'
+import * as ChartStylesStories from '../../../../../packages/ui-kit/src/components/Counter/ChartStyles.stories'
+// import * as CounterStories from '@ui-kit/components/Counter/Counter.stories'
 
 <Meta title="Components/Counter/Overview" of={CounterStories} />
 
@@ -32,15 +35,23 @@ You can import the component in your React file and use it as shown in the follo
 
 This will generate a counter component as shown below:
 
-<Canvas of={CounterStories.SingleValueStory} sourceState="none" />
+<Story of={CounterStories.SingleValueStory} />
 
 In this example, we have built a simple span element that can be wrapped into any custom component of your preference.
 You can adjust these and other style properties to create a unique look for your Counter component.
 
 Here's an example of how you can wrap the Counter component inside a Card to give it a unique look.
 
-<Canvas of={CounterStories.ValueInCardStory} sourceState="none" />
+<Story of={CounterStories.ValueInCardStory} />
 
 ## API
 
 <ArgTypes of={CounterStories.SingleValueStory} sort="alpha" />
+
+### CounterQuery
+
+<ArgTypes of={CounterQueryPropsStories.Primary} sort="alpha" />
+
+### ChartStyles
+
+<ArgTypes of={ChartStylesStories.Primary} sort="alpha" />

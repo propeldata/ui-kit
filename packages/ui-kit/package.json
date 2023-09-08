@@ -22,6 +22,7 @@
   ],
   "dependencies": {
     "@emotion/css": "^11.10.5",
+    "@storybook/theming": "^7.4.0",
     "@tanstack/react-query": "^4.29.17",
     "chart.js": "^4.1.2",
     "chartjs-adapter-luxon": "1.2.1",

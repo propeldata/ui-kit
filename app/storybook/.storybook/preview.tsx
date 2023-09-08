@@ -1,14 +1,20 @@
-import { ThemeProvider } from '@emotion/react'
-import { withThemeFromJSXProvider } from '@storybook/addon-styling'
-import { Preview } from '@storybook/react'
-import './global.css'
+import { Global, css, ThemeProvider } from '@emotion/react'
+import { withThemeFromJSXProvider } from '@storybook/addon-themes'
+import React from 'react'
+import type { Preview, ReactRenderer } from '@storybook/react'
+
+const GlobalStyles = () => (
+  <Global
+    styles={css`
+      body {
+        font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+    `}
+  />
+)
 
 const preview: Preview = {
   parameters: {
-    docs: {
-      // Table of contents
-      toc: true
-    },
     options: {
       storySort: {
         order: [
@@ -28,32 +34,22 @@ const preview: Preview = {
         date: /Date$/
       }
     }
-  }
+  },
+  decorators: [
+    withThemeFromJSXProvider<ReactRenderer>({
+      themes: {
+        light: {
+          textColor: '#ff0000'
+        },
+        dark: {
+          textColor: '#0000ff'
+        }
+      },
+      defaultTheme: 'light',
+      Provider: ThemeProvider,
+      GlobalStyles: GlobalStyles
+    })
+  ]
 }
 
 export default preview
-
-export const decorators = [
-  withThemeFromJSXProvider({
-    themes: {
-      light: {
-        red: '#ff0000'
-      }
-    },
-    Provider: ThemeProvider
-    // GlobalStyles,
-  })
-]
-
-// export const decorators = [
-//   (Story) => (
-//     <div
-//       className={css`
-//         font-family: 'Inter';
-//         font-size: 12px;
-//       `}
-//     >
-//       <Story />
-//     </div>
-//   )
-// ]
