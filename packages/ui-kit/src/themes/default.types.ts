@@ -9,7 +9,7 @@ export type ChartPaddingOptions =
 
 export type ChartPlugins = {
   [pluginName: string]: {
-    [optionName: string]: string | undefined
+    [optionName: string]: string | undefined | unknown
   }
 }
 

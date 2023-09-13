@@ -30,6 +30,7 @@ import {
   formatLabels,
   getDefaultGranularity,
   getScales,
+  tooltipTitleCallback,
   updateChartConfig,
   updateChartStyles,
   useSetupDefaultStyles
@@ -158,6 +159,11 @@ export const TimeSeriesComponent = (props: TimeSeriesProps) => {
       const customPlugins: ChartPlugins = {
         customCanvasBackgroundColor: {
           color: styles?.canvas?.backgroundColor
+        },
+        tooltip: {
+          callbacks: {
+            title: (context: { label: string }[]) => tooltipTitleCallback(context, granularity)
+          }
         }
       }
 
