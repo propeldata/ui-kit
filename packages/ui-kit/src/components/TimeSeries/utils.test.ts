@@ -1,4 +1,4 @@
-import { TimeSeriesGranularity } from '../../helpers'
+import { TimeSeriesGranularity } from '../../testing'
 
 import { getLabelsBasedGranularity } from './utils'
 
@@ -95,6 +95,30 @@ describe('TimeSeries/utils', () => {
 
       result = getLabelsBasedGranularity(labels)
 
+      expect(result).toEqual(TimeSeriesGranularity.Month)
+
+      labels = [
+        '2023-01-01',
+        '2023-02-01',
+        '2023-03-01',
+        '2023-04-01',
+        '2023-05-01',
+        '2023-06-01',
+        '2023-07-01',
+        '2023-08-01',
+        '2023-09-01',
+        '2023-10-01',
+        '2023-11-01',
+        '2023-12-01'
+      ]
+
+      result = getLabelsBasedGranularity(labels)
+
+      expect(result).toEqual(TimeSeriesGranularity.Month)
+
+      labels = ['2022-11-01', '2022-12-01', '2023-01-01', '2023-02-01', '2023-03-01']
+
+      result = getLabelsBasedGranularity(labels)
       expect(result).toEqual(TimeSeriesGranularity.Month)
     })
 
