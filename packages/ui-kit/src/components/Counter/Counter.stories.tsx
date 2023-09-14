@@ -1,6 +1,7 @@
 import { css } from '@emotion/css'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import { RelativeTimeRange } from '../../helpers'
 import { Counter, CounterComponent } from './Counter'
 
 const meta: Meta<typeof CounterComponent> = {
@@ -110,4 +111,51 @@ export const ValueInCardWithComparisonStory: Story = {
       </div>
     </div>
   )
+}
+
+export const ConnectedStory: Story = {
+  name: 'Connected',
+  args: {
+    localize: true,
+    query: {
+      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      }
+    }
+  },
+  render: (args) => (
+    <div
+      className={css`
+        font-size: 22px;
+        font-weight: 600;
+        display: inline-flex;
+        white-space: nowrap;
+      `}
+    >
+      We reached&#160;
+      <Counter {...args} />
+      &#160;last week.
+    </div>
+  )
+}
+
+export const SingleValueCustomStyleStory: Story = {
+  name: 'Single value custom style',
+  tags: ['pattern'],
+  args: {
+    prefixValue: '$',
+    value: '49291',
+    localize: true,
+    styles: {
+      font: {
+        size: '2rem',
+        style: 'italic',
+        family: 'Arial',
+        weight: 'bold'
+      }
+    }
+  }
 }

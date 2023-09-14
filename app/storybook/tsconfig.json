@@ -19,5 +19,5 @@
       "@ui-kit/*": ["../../packages/ui-kit/src/*"]
     }
   },
-  "include": ["src", "../../packages/ui-kit/src"]
+  "include": ["src", "documentation"]
 }

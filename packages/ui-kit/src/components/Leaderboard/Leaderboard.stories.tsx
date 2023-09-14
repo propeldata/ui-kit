@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import { RelativeTimeRange, Sort } from '../../helpers'
 import { Leaderboard, LeaderboardComponent } from './Leaderboard'
 
 const meta: Meta<typeof LeaderboardComponent> = {
@@ -29,21 +30,6 @@ const tableRows = [
   ['Cell Lost in a Sea of Desert', '622027'],
   ['Flying nowhere special', '462791'],
   ['The Lean Product Book', '1']
-]
-
-const customTableHeaders = ['Song title', 'Artist', 'Total listens']
-
-const customTableRows = [
-  ["John's way or Highway", 'John Doe', '12863002'],
-  ['How to Speak Native Animal', 'John Doe', '10865371'],
-  ['Cell Lost in a Sea of Desert', 'John Doe', '9922027'],
-  ['Flying nowhere special', 'John Doe', '8822027'],
-  ['The Lean Product Book', 'John Doe', '7722027'],
-  ["John's way or Highway", 'John Doe', '6622027'],
-  ['How to Speak Native Animal', 'John Doe', '5522027'],
-  ['Cell Lost in a Sea of Desert', 'John Doe', '4422027'],
-  ['Flying nowhere special', 'John Doe', '3322027'],
-  ['The Lean Product Book', 'John Doe', '2222027']
 ]
 
 export const SingleDimensionStory: Story = {
@@ -76,6 +62,116 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
           localize: true
         }
       }
+    }
+  }
+}
+
+export const ConnectedStory: Story = {
+  name: 'Connected',
+  args: {
+    variant: 'table',
+    headers: [
+      process.env.STORYBOOK_DIMENSION_1,
+      process.env.STORYBOOK_DIMENSION_2,
+      process.env.STORYBOOK_DIMENSION_3
+    ] as string[],
+    query: {
+      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      },
+      rowLimit: 10,
+      dimensions: [
+        {
+          columnName: process.env.STORYBOOK_DIMENSION_1 as string
+        },
+        {
+          columnName: process.env.STORYBOOK_DIMENSION_2 as string
+        },
+        {
+          columnName: process.env.STORYBOOK_DIMENSION_3 as string
+        }
+      ],
+      sort: Sort.Asc
+    },
+    styles: {
+      table: {
+        hasValueBar: true
+      },
+      canvas: {
+        height: 500
+      }
+    }
+  }
+}
+
+export const CustomStyleStory: Story = {
+  name: 'Custom styles',
+  tags: ['pattern'],
+  args: {
+    variant: 'table',
+    headers: tableHeaders,
+    rows: tableRows,
+    styles: {
+      font: {
+        size: '14px'
+      },
+      table: {
+        stickyHeader: true,
+        height: '200px',
+        hasValueBar: true,
+        backgroundColor: '#191414',
+        header: {
+          align: 'center',
+          backgroundColor: '#282828',
+          font: {
+            color: '#1DB954',
+            weight: 'bold',
+            size: '18px'
+          }
+        },
+        valueBar: {
+          color: '#1DB954',
+          backgroundColor: '#545454'
+        },
+        valueColumn: {
+          align: 'center',
+          backgroundColor: '#191414',
+          font: {
+            color: '#1DB954'
+          }
+        },
+        columns: {
+          align: 'center',
+          font: {
+            color: '#1DB954'
+          }
+        }
+      }
+    }
+  }
+}
+
+export const ConnectedBasicStory: Story = {
+  name: 'Connected basic',
+  args: {
+    headers: [process.env.STORYBOOK_DIMENSION_1] as string[],
+    query: {
+      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      },
+      rowLimit: 5,
+      dimensions: [
+        {
+          columnName: process.env.STORYBOOK_DIMENSION_1 as string
+        }
+      ],
+      sort: Sort.Asc
     }
   }
 }

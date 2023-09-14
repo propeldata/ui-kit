@@ -59,24 +59,25 @@ let idCounter = 0
 
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
 
-export const TimeSeriesComponent: React.FC<TimeSeriesProps> = (props) => {
+export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
+  variant = 'bar',
+  styles,
+  labels,
+  values,
+  query,
+  error,
+  loading = false,
+  labelFormatter,
+  ariaLabel,
+  role,
+  timeZone,
+  ...rest
+}) => {
+  const isLoadingStatic = loading
+
   React.useEffect(() => {
     chartJsAdapterLuxon
   }, [])
-
-  const {
-    variant = 'bar',
-    styles,
-    labels,
-    values,
-    query,
-    error,
-    loading: isLoadingStatic = false,
-    labelFormatter,
-    ariaLabel,
-    role,
-    ...rest
-  } = props
 
   const granularity =
     query?.granularity ??
@@ -103,7 +104,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = (props) => {
 
   const isFormatted = !!labelFormatter
 
-  const zone = props.timeZone ?? getTimeZone()
+  const zone = timeZone ?? getTimeZone()
 
   useSetupDefaultStyles(styles)
 

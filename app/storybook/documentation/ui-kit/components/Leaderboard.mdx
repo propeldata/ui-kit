@@ -1,14 +1,17 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
+import * as LeaderboardQueryPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
 
-<Meta title="Components/Counter/Leaderboard" of={LeaderboardStories} />
+<Meta title="Components/Leaderboard" of={LeaderboardStories} />
 
-# Counter overview
+# Leaderboard overview
 
-The Leaderboard component is designed to create Propel leaderboard metric visualizations for your front-end applications.
-With two props in Static mode, **headers** and **rows**, the Leaderboard component provides a simple way to display your data.
-If you opt for the Connected mode, the component will accept the query prop, which loads the data automatically based
-on [Propel specifications](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/CounterInput?variant=production).
+The Leaderboard component is designed to create Propel leaderboard metric visualizations for your front-end
+applications. With two props in Static mode, `headers` and `rows`, the Leaderboard component provides a simple way to
+display your data. If you opt for the Connected mode, the component will accept the query prop, which loads the data
+automatically based on
+[Propel specifications](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/LeaderboardInput?variant=production).
 
 ## Basic usage
 
@@ -19,36 +22,35 @@ You can import the component in your React file and use it as shown in the follo
   format="dedent"
   language="tsx"
   code={`
-    import { Leaderboard } from '@propeldata/ui-kit'
+    import { Leaderboard, RelativeTimeRange } from '@propeldata/ui-kit'
 
-    function MonthSalesChart() {
+    function MonthRevenueChart() {
       const queryOptions = {
         accessToken: '<PROPEL_ACCESS_TOKEN>',
-        metric: 'syncRecordsAdded',
+        metric: 'Revenue',
         timeRange: {
           relative: RelativeTimeRange.LastNDays,
           n: 30
         },
-        rowLimit: 10,
+        rowLimit: 5,
         dimensions: [
           {
             columnName: 'DATA_SOURCE_TYPE'
           }
         ],
-        sort: Sort.Desc
+        sort: Sort.Asc
       }
       return <Leaderboard query={queryOptions} />
     }
 
-`}
-/>
+`} />
 
 This will generate a leaderboard chart as shown below:
 
-<Canvas of={LeaderboardStories.SingleDimensionStory} sourceState="none" />
+<Story of={LeaderboardStories.ConnectedBasicStory} />
 
-As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking.
-Let's build a totally different leaderboard chart now. Here's how you can access the style props:
+As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
+totally different leaderboard chart now. Here's how you can access the style props:
 
 <Source
   dark
@@ -57,8 +59,8 @@ Let's build a totally different leaderboard chart now. Here's how you can access
   code={`
     function CustomChart() {
       const styles = {
-        font: {
-          color: '#1DB954'
+          font: {
+          size: '14px'
         },
         table: {
           stickyHeader: true,
@@ -66,20 +68,30 @@ Let's build a totally different leaderboard chart now. Here's how you can access
           hasValueBar: true,
           backgroundColor: '#191414',
           header: {
+            align: 'center',
             backgroundColor: '#282828',
             font: {
+              color: '#1DB954',
               weight: 'bold',
-              size: '14px'
+              size: '18px'
             }
           },
           valueBar: {
+            color: '#1DB954',
             backgroundColor: '#545454'
           },
           valueColumn: {
-            align: 'center'
+            align: 'center',
+            backgroundColor: '#191414',
+            font: {
+              color: '#1DB954'
+            }
           },
           columns: {
-            align: 'center'
+            align: 'center',
+            font: {
+              color: '#1DB954'
+            }
           }
         }
       }
@@ -87,12 +99,35 @@ Let's build a totally different leaderboard chart now. Here's how you can access
       return <Leaderboard styles={styles} variant="table" />
     }
 
-`}
-/>
+`} />
 
-In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe.
-Up to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.
+<Story of={LeaderboardStories.CustomStyleStory} />
 
-## API
+In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe. Up
+to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.
+
+Now let's look at what all you can do with the component. The next 2 topics will cover all the props and styles you can
+configure to have a nice chart experience
+
+## Props API
+
+The following table describes the props available for the Leaderboard component:
 
 <ArgTypes of={LeaderboardStories.SingleDimensionStory} sort="alpha" />
+
+### `LeaderboardQueryProps`
+
+<ArgTypes of={LeaderboardQueryPropsStories.Primary} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props and classes available to the components
+mentioned here.
+
+- <LinkTo kind="API/ChartStyles" story="overview">
+    ChartStyles
+  </LinkTo>
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>

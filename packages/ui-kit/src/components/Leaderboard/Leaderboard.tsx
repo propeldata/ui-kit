@@ -31,9 +31,17 @@ ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale,
 
 let idCounter = 0
 
-export const LeaderboardComponent = (props: LeaderboardProps) => {
-  const { variant = 'bar', styles, headers, rows, query, error, loading: isLoadingStatic = false, ...rest } = props
-
+export const LeaderboardComponent = ({
+  variant = 'bar',
+  styles,
+  headers,
+  rows,
+  query,
+  error,
+  loading: isLoadingStatic = false,
+  timeZone,
+  ...rest
+}: LeaderboardProps) => {
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
   const idRef = React.useRef(idCounter++)
@@ -162,7 +170,7 @@ export const LeaderboardComponent = (props: LeaderboardProps) => {
         sort: query?.sort,
         rowLimit: query?.rowLimit ?? 100,
         dimensions: query?.dimensions,
-        timeZone: props.timeZone ?? getTimeZone(),
+        timeZone: timeZone ?? getTimeZone(),
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,
@@ -323,7 +331,7 @@ export const LeaderboardComponent = (props: LeaderboardProps) => {
                 })}
               </td>
               {hasValueBar && (
-                <td className={ComponentStyles.valueBarCellStyles}>
+                <td className={ComponentStyles.valueBarCellStyles(styles)}>
                   <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
                 </td>
               )}

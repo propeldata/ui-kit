@@ -9,6 +9,11 @@ const GlobalStyles = () => (
       body {
         font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       }
+      a p {
+        display: inline;
+        /* @TODO: find a way to customize it without !important dominance */
+        color: #2e90fa !important;
+      }
     `}
   />
 )

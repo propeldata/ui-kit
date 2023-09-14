@@ -23,13 +23,14 @@ const config: StorybookConfig = {
     options: {}
   },
   docs: {
-    autodocs: 'tag'
+    autodocs: 'tag',
+    defaultName: 'Overview'
   },
   features: {
     storyStoreV7: true,
     buildStoriesJson: true
   },
-  staticDirs: ['../public/assets', '../documentation/ui-kit/assets'],
+  staticDirs: ['../public/assets'],
   webpackFinal: async (config) => {
     config.module?.rules?.push({
       test: /\.(ts|tsx)$/,
@@ -42,16 +43,11 @@ const config: StorybookConfig = {
 
     if (config.resolve) {
       config.resolve.extensions?.push('.ts', '.tsx', '.mdx')
-      // config.resolve.alias = {
-      //   ...config.resolve.alias,
-      //   '@ui-kit/*': path.resolve(__dirname, '../../../packages/ui-kit/src/*')
-      // }
-      // console.log('config.resolve.alias', config.resolve.alias)
-
       config.resolve.plugins = [
         ...(config.resolve.plugins || []),
         new TsconfigPathsPlugin({
-          extensions: config.resolve.extensions
+          extensions: config.resolve.extensions,
+          configFile: './tsconfig.json'
         })
       ]
     }

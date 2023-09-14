@@ -23,7 +23,7 @@ export const CounterComponent = (props: CounterProps) => {
 
   /**
    * If the user passes `value` attribute, it
-   * should behave as a static component without any graphql operation performed
+   * should behave as a static component without any GraphQL operation performed
    */
   const isStatic = !query
 

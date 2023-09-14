@@ -4,7 +4,7 @@ import type { CounterQueryProps } from './Counter.types'
 export const CounterQueryPropsComponent: React.FC<CounterQueryProps> = () => null
 
 const meta = {
-  title: 'API-CounterQueryProps',
+  title: 'API/CounterQueryProps',
   tags: ['pattern'],
   component: CounterQueryPropsComponent
 } satisfies Meta<typeof CounterQueryPropsComponent>

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
 import { TimeSeries, TimeSeriesComponent } from './TimeSeries'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
@@ -51,5 +52,71 @@ export const BarVariantStory: Story = {
   args: {
     variant: 'bar',
     ...dataset
+  }
+}
+
+export const ConnectedStory: Story = {
+  name: 'Connected',
+  args: {
+    variant: 'line',
+    query: {
+      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      },
+      granularity: TimeSeriesGranularity.Week
+    }
+  }
+}
+
+export const CustomStyleStory: Story = {
+  name: 'Custom style',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    styles: {
+      bar: {
+        backgroundColor: '#532AB4'
+      }
+    },
+    ...dataset
+  }
+}
+
+export const CustomChartStory: Story = {
+  name: 'Custom chart',
+  tags: ['pattern'],
+  args: {
+    variant: 'line',
+    styles: {
+      line: {
+        tension: 0.1,
+        borderColor: '#17B897',
+        borderWidth: 3
+      },
+      point: {
+        style: false
+      },
+      canvas: {
+        width: 100,
+        height: 45,
+        backgroundColor: 'transparent',
+        hideGridLines: true
+      }
+    },
+    ...dataset
+  }
+}
+
+export const ErrorStory: Story = {
+  name: 'Error',
+  tags: ['pattern'],
+  args: {
+    error: {
+      title: 'Unable to connect',
+      body: 'Sorry we are not able to connect at this time due to a technical error.'
+    }
   }
 }

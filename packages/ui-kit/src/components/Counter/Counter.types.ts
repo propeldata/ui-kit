@@ -21,7 +21,7 @@ export type CounterQueryProps = {
 }
 
 export interface CounterProps extends React.ComponentProps<'span'> {
-  /** If passed, the component will ignore the built-in graphql operations */
+  /** If passed, the component will ignore the built-in GraphQL operations */
   value?: string
   /** Symbol to be shown before the value text */
   prefixValue?: string
