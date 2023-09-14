@@ -1,6 +1,6 @@
 import { TimeSeriesGranularity } from '../../testing'
 
-import { getLabelsBasedGranularity } from './utils'
+import { getLabelsBasedGranularity, tooltipTitleCallback } from './utils'
 
 describe('TimeSeries/utils', () => {
   describe('getLabelsBasedGranularity', () => {
@@ -128,6 +128,47 @@ describe('TimeSeries/utils', () => {
       const result = getLabelsBasedGranularity(labels)
 
       expect(result).toEqual(TimeSeriesGranularity.Year)
+    })
+  })
+
+  describe('tooltipTitleCallback', () => {
+    it('should return label unformatted for a granularity lower than DAY', () => {
+      const label = 'Aug 1, 2023, 12:00:00 AM'
+
+      let result: string
+
+      result = tooltipTitleCallback([{ label }], TimeSeriesGranularity.Minute)
+      expect(result).toBe(label)
+
+      result = tooltipTitleCallback([{ label }], TimeSeriesGranularity.FiveMinutes)
+      expect(result).toBe(label)
+
+      result = tooltipTitleCallback([{ label }], TimeSeriesGranularity.TenMinutes)
+      expect(result).toBe(label)
+
+      result = tooltipTitleCallback([{ label }], TimeSeriesGranularity.FifteenMinutes)
+      expect(result).toBe(label)
+
+      result = tooltipTitleCallback([{ label }], TimeSeriesGranularity.Hour)
+      expect(result).toBe(label)
+    })
+
+    it('should format correctly for DAY granularity', () => {
+      const result = tooltipTitleCallback([{ label: 'Aug 1, 2023, 12:00:00 AM' }], TimeSeriesGranularity.Day)
+
+      expect(result).toBe('Aug 1, 2023')
+    })
+
+    it('should format correctly for MONTH granularity', () => {
+      const result = tooltipTitleCallback([{ label: 'Aug 1, 2023, 12:00:00 AM' }], TimeSeriesGranularity.Month)
+
+      expect(result).toBe('August, 2023')
+    })
+
+    it('should format correctly for YEAR granularity', () => {
+      const result = tooltipTitleCallback([{ label: 'Aug 1, 2023, 12:00:00 AM' }], TimeSeriesGranularity.Month)
+
+      expect(result).toBe('August, 2023')
     })
   })
 })

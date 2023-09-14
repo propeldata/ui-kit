@@ -10,6 +10,7 @@ import {
   TextAlign,
   TimeUnit
 } from 'chart.js'
+import { DateTime } from 'luxon'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import React from 'react'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
@@ -372,4 +373,16 @@ export function getScales(options: GetScalesOptions) {
   }
 
   return logarithmicScales
+}
+
+export function tooltipTitleCallback(context: { label: string }[], granularity: TimeSeriesGranularity) {
+  const title = context[0].label
+  const date = new Date(title)
+
+  return {
+    [TimeSeriesGranularity.Day]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
+    [TimeSeriesGranularity.Week]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
+    [TimeSeriesGranularity.Month]: DateTime.fromJSDate(date).toFormat('LLLL, yyyy'),
+    [TimeSeriesGranularity.Year]: DateTime.fromJSDate(date).toFormat('yyyy')
+  }[granularity] ?? title
 }
