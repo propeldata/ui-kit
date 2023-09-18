@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["dom", "es2015"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "target": "es2016",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "rootDir": "src/api",
+    "outDir": "../../api",
+    "module": "CommonJS"
+  },
+  "include": ["src/api/**/*.ts"]
+}

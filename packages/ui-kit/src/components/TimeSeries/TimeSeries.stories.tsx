@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
+import axiosInstance from '../../../../../app/storybook/src/axios'
+import { RelativeTimeRange, TimeSeriesGranularity, useStorybookAccessToken } from '../../helpers'
 import { TimeSeries, TimeSeriesComponent } from './TimeSeries'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
@@ -39,6 +40,30 @@ const dataset = {
   values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 }
 
+const ConnectedTimeSeriesTemplate = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(
+    axiosInstance,
+    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    process.env.STORYBOOK_TOKEN_URL
+  )
+
+  if (accessToken === undefined) {
+    return null
+  }
+
+  return (
+    <TimeSeries
+      {...{
+        ...args,
+        query: {
+          ...args?.query,
+          accessToken
+        }
+      }}
+    />
+  )
+}
+
 export const LineVariantStory: Story = {
   name: 'Line variant',
   args: {
@@ -68,7 +93,8 @@ export const ConnectedStory: Story = {
       },
       granularity: TimeSeriesGranularity.Week
     }
-  }
+  },
+  render: (args) => <ConnectedTimeSeriesTemplate {...args} />
 }
 
 export const CustomStyleStory: Story = {

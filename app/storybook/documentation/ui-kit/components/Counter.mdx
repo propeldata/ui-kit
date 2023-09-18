@@ -21,19 +21,25 @@ You can import the component in your React file and use it as shown in the follo
   format="dedent"
   language="tsx"
   code={`
-    import { Counter } from '@propeldata/ui-kit'
+    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
 
-    export const App = () => (
-      <div>
-        <Counter prefixValue="$" value="49291" localize />
-      </div>
-    )
+    function MonthRevenueCount() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        metric: 'Revenue',
+        timeRange: {
+          relative: RelativeTimeRange.LastNDays,
+          n: 30
+        }
+      }
+      return <Counter query={queryOptions} />
+    }
 
 `} />
 
 This will generate a counter component as shown below:
 
-<Story of={CounterStories.SingleValueStory} />
+<Story of={CounterStories.ConnectedStory} />
 
 As you can see, the component comes unstyled. However, you can customize its styles to your liking. Here's how you can
 access the style props:

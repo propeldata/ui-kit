@@ -1,7 +1,9 @@
-import { Global, css, ThemeProvider } from '@emotion/react'
+import { css, Global, ThemeProvider } from '@emotion/react'
 import { withThemeFromJSXProvider } from '@storybook/addon-themes'
-import React from 'react'
 import type { Preview, ReactRenderer } from '@storybook/react'
+import React from 'react'
+import withAxiosDecorator from 'storybook-axios'
+import axiosInstance from '../src/axios'
 
 const GlobalStyles = () => (
   <Global
@@ -41,6 +43,8 @@ const preview: Preview = {
     }
   },
   decorators: [
+    // @ts-ignore
+    withAxiosDecorator(axiosInstance),
     withThemeFromJSXProvider<ReactRenderer>({
       themes: {
         light: {

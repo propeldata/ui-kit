@@ -1,7 +1,8 @@
 import { css } from '@emotion/css'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { RelativeTimeRange } from '../../helpers'
+import axiosInstance from '../../../../../app/storybook/src/axios'
+import { RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
 import { Counter, CounterComponent } from './Counter'
 
 const meta: Meta<typeof CounterComponent> = {
@@ -14,6 +15,30 @@ const meta: Meta<typeof CounterComponent> = {
 export default meta
 
 type Story = StoryObj<typeof CounterComponent>
+
+const ConnectedCounterTemplate = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(
+    axiosInstance,
+    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    process.env.STORYBOOK_TOKEN_URL
+  )
+
+  if (accessToken === undefined) {
+    return null
+  }
+
+  return (
+    <Counter
+      {...{
+        ...args,
+        query: {
+          ...args?.query,
+          accessToken
+        }
+      }}
+    />
+  )
+}
 
 const styles = {
   container: css`
@@ -118,7 +143,6 @@ export const ConnectedStory: Story = {
   args: {
     localize: true,
     query: {
-      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
       metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
       timeRange: {
         relative: RelativeTimeRange.LastNDays,
@@ -136,7 +160,7 @@ export const ConnectedStory: Story = {
       `}
     >
       We reached&#160;
-      <Counter {...args} />
+      <ConnectedCounterTemplate {...args} />
       &#160;last week.
     </div>
   )

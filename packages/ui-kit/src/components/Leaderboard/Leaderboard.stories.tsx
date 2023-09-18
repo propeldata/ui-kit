@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { RelativeTimeRange, Sort } from '../../helpers'
+import axiosInstance from '../../../../../app/storybook/src/axios'
+import { RelativeTimeRange, Sort, useStorybookAccessToken } from '../../helpers'
 import { Leaderboard, LeaderboardComponent } from './Leaderboard'
 
 const meta: Meta<typeof LeaderboardComponent> = {
@@ -31,6 +32,30 @@ const tableRows = [
   ['Flying nowhere special', '462791'],
   ['The Lean Product Book', '1']
 ]
+
+const ConnectedLeaderboardTemplate = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(
+    axiosInstance,
+    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    process.env.STORYBOOK_TOKEN_URL
+  )
+
+  if (accessToken === undefined) {
+    return null
+  }
+
+  return (
+    <Leaderboard
+      {...{
+        ...args,
+        query: {
+          ...args?.query,
+          accessToken
+        }
+      }}
+    />
+  )
+}
 
 export const SingleDimensionStory: Story = {
   name: 'Single dimension',
@@ -104,7 +129,8 @@ export const ConnectedStory: Story = {
         height: 500
       }
     }
-  }
+  },
+  render: (args) => <ConnectedLeaderboardTemplate {...args} />
 }
 
 export const CustomStyleStory: Story = {
@@ -173,5 +199,6 @@ export const ConnectedBasicStory: Story = {
       ],
       sort: Sort.Asc
     }
-  }
+  },
+  render: (args) => <ConnectedLeaderboardTemplate {...args} />
 }
