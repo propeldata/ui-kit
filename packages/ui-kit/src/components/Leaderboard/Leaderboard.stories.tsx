@@ -182,6 +182,7 @@ export const CustomStyleStory: Story = {
 
 export const ConnectedBasicStory: Story = {
   name: 'Connected basic',
+  tags: ['pattern'],
   args: {
     headers: [process.env.STORYBOOK_DIMENSION_1] as string[],
     query: {

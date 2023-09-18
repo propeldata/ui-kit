@@ -8818,6 +8818,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:14.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40testing-library%2Fuser-event%2F-%2Fuser-event-14.4.3.tgz"],\
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
+            ["@types/luxon", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz"],\
             ["@types/react", "npm:18.2.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.18.tgz"],\
             ["@types/react-dom", "npm:18.2.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.7.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8865,6 +8866,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:14.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40testing-library%2Fuser-event%2F-%2Fuser-event-14.4.3.tgz"],\
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
+            ["@types/luxon", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz"],\
             ["@types/react", "npm:18.2.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.18.tgz"],\
             ["@types/react-dom", "npm:18.2.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.7.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8912,6 +8914,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:14.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40testing-library%2Fuser-event%2F-%2Fuser-event-14.4.3.tgz"],\
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
+            ["@types/luxon", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz"],\
             ["@types/react", "npm:18.2.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.18.tgz"],\
             ["@types/react-dom", "npm:18.2.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.7.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8958,6 +8961,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:1fa1568ab9d83a1f6b4c51482b7c47c9d744c6c6fc43ad711f8e9b5206f0e06e206a7bc0ede48193a25db0b961c4b498ca33c19f23da80fdf67305272d2338ed#npm:14.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40testing-library%2Freact%2F-%2Freact-14.0.0.tgz"],\
             ["@testing-library/user-event", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:14.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40testing-library%2Fuser-event%2F-%2Fuser-event-14.4.3.tgz"],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
+            ["@types/luxon", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz"],\
             ["@types/react", "npm:18.2.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.18.tgz"],\
             ["@types/react-dom", "npm:18.2.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.7.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -15490,6 +15494,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/luxon", [\
+        ["npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz", {\
+          "packageLocation": "./.yarn/cache/@types-luxon-npm-3.3.2-82b4d0826b-b911113272.zip/node_modules/@types/luxon/",\
+          "packageDependencies": [\
+            ["@types/luxon", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/mdx", [\
         ["npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fmdx%2F-%2Fmdx-2.0.5.tgz", {\
           "packageLocation": "./.yarn/cache/@types-mdx-npm-2.0.5-db5c3274b5-1069baff0b.zip/node_modules/@types/mdx/",\
@@ -19408,7 +19421,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["@types/chart.js", null],\
-            ["@types/luxon", null],\
+            ["@types/luxon", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.3.2.tgz"],\
             ["chart.js", "npm:4.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.3.tgz"],\
             ["luxon", "npm:3.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.2.tgz"]\
           ],\
