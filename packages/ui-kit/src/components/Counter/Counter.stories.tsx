@@ -23,7 +23,7 @@ const ConnectedCounterTemplate = (args: Story['args']) => {
     process.env.STORYBOOK_TOKEN_URL
   )
 
-  if (accessToken === undefined) {
+  if (accessToken === '') {
     return null
   }
 
