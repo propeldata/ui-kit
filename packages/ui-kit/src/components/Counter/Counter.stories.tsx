@@ -87,7 +87,7 @@ export const ValueInCardStory: Story = {
   render: (args) => (
     <div className={css([styles.container, { minWidth: 300 }])}>
       <div className={styles.card}>
-        <span className={styles.cardTitle}>Sales</span>
+        <span className={styles.cardTitle}>Revenue</span>
         <Counter {...args} />
       </div>
     </div>
@@ -108,7 +108,7 @@ export const ValueInCardWithComparisonStory: Story = {
   render: (args) => (
     <div className={styles.container}>
       <div className={styles.card}>
-        <span className={css([styles.cardTitle, { color: '#7d89b0' }])}>Sales</span>
+        <span className={css([styles.cardTitle, { color: '#7d89b0' }])}>Revenue</span>
         <div
           className={css`
             display: flex;

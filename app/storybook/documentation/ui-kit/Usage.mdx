@@ -13,8 +13,9 @@ The Propel UI Kit components are available in two modes: "Static" and "Connected
 
 In the "Static" mode, the component will display the data you provide.
 
-Let's take our <LinkTo kind="Components/TimeSeries" story="overview">TimeSeries</LinkTo> component as an example.
-If you want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript code:
+Let's take our <LinkTo kind="Components/TimeSeries" story="overview">TimeSeries</LinkTo> component as an example. If you
+want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript
+code:
 
 <Source
   dark
@@ -48,12 +49,11 @@ If you want to fetch the data on your own instead of delegating it to the librar
 
     const values = [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 
-    function WeekSalesChart() {
+    function TimeSeriesChart() {
       return <TimeSeries labels={labels} values={values} />
     }
 
-`}
-/>
+`} />
 
 You can customize the component using your own styles.
 
@@ -61,12 +61,15 @@ You can customize the component using your own styles.
 
 ## Connected Mode
 
-In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, to configure a GraphQL client, or handle loading and error states.
+In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, to
+configure a GraphQL client, or handle loading and error states.
 
-To learn more about querying data with Propel, read the [Metric query documentation](https://www.propeldata.com/docs/metrics).
+To learn more about querying data with Propel, read the
+[Metric query documentation](https://www.propeldata.com/docs/metrics).
 
-For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs.
-You can authenticate and generate an access token by following the steps outlined in [the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
+For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs. You can
+authenticate and generate an access token by following the steps outlined in
+[the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
 
 Here is an example using our <LinkTo kind="Components/Counter" story="overview">Counter</LinkTo> component:
 
@@ -77,7 +80,7 @@ Here is an example using our <LinkTo kind="Components/Counter" story="overview">
   code={`
     import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
 
-    function SalesCountLabel() {
+    function RevenueCountLabel() {
       const queryOptions = {
         accessToken: '<PROPEL_ACCESS_TOKEN>',
         metric: 'Revenue',
@@ -94,8 +97,7 @@ Here is an example using our <LinkTo kind="Components/Counter" story="overview">
       )
     }
 
-`}
-/>
+`} />
 
 In this mode, the component will handle the loading and error states for you, making it even easier to use.
 
