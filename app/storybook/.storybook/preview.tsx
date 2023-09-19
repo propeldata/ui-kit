@@ -49,10 +49,11 @@ const preview: Preview = {
       themes: {
         light: {
           textColor: '#ff0000'
-        },
-        dark: {
-          textColor: '#0000ff'
         }
+        // @TODO: a full themes support will be added later
+        // dark: {
+        //   textColor: '#0000ff'
+        // }
       },
       defaultTheme: 'light',
       Provider: ThemeProvider,
