@@ -1,0 +1,107 @@
+import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
+import * as TimeSeriesQueryPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
+
+<Meta title="Components/TimeSeries" of={TimeSeriesStories} />
+
+# TimeSeries overview
+
+The Time Series component is designed to create Propel time series metric visualizations for your front-end
+applications. With two props in Static mode, `labels` and `values`, the Time Series component provides a simple way to
+display your data. If you opt for the Connected mode, the component will accept the query prop, which loads the data
+automatically based on
+[Propel specifications](https://studio.apollographql.com/graph/Propel-API/schema/reference/inputs/TimeSeriesInput?variant=production).
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { TimeSeries, RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/ui-kit'
+
+    function RevenueChart() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        timeRange: {
+          relative: RelativeTimeRange.LastNDays,
+          n: 30
+        },
+        granularity: TimeSeriesGranularity.Week
+      }
+      return <TimeSeries query={queryOptions} variant="line" />
+    }
+
+`} />
+
+This will generate a time series chart as shown below:
+
+<Story of={TimeSeriesStories.ConnectedStory} />
+
+As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
+totally different time series chart now. Here's how you can access the style props:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    function CustomChart() {
+      const styles = {
+        styles: {
+          line: {
+            tension: 0.1,
+            borderColor: '#17B897',
+            borderWidth: 3
+          },
+          point: {
+            style: false
+          },
+          canvas: {
+            width: 100,
+            height: 45,
+            backgroundColor: 'transparent',
+            hideGridLines: true
+          }
+        }
+      }
+
+      return <TimeSeries styles={styles} variant="line" />
+    }
+
+`} />
+
+<Story of={TimeSeriesStories.CustomChartStory} />
+
+In this example, we built a minimalistic chart where you could use on small viewports or in a mobile design maybe. Up to
+you! You can adjust these and other style properties to create a unique look for your time series chart.
+
+Now let's look at what all you can do with the component. The next 2 topics will cover all the props and styles you can
+configure to have a nice chart experience
+
+## Props API
+
+The following table describes the props available for the Time Series component:
+
+<ArgTypes of={TimeSeriesStories.LineVariantStory} sort="alpha" style={{ color: 'initial' }} />
+
+### `TimeSeriesQueryProps`
+
+<ArgTypes of={TimeSeriesQueryPropsStories} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props and classes available to the components
+mentioned here.
+
+- <LinkTo kind="API/ChartStyles" story="overview">
+    ChartStyles
+  </LinkTo>
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>

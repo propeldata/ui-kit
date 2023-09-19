@@ -13,17 +13,49 @@ export type TimeSeriesData = {
   labels?: string[]
 }
 
+export type TimeSeriesQueryProps = {
+  /** This should eventually be replaced to customer's app credentials */
+  accessToken?: string
+
+  /** Metric unique name */
+  metric?: string
+
+  /** Time range that the chart will respond to */
+  timeRange?: TimeRangeInput
+
+  /** Granularity that the chart will respond to */
+  granularity?: TimeSeriesGranularity
+
+  /** Filters that the chart will respond to */
+  filters?: FilterInput[]
+
+  /** Propeller that the chart will respond to (see <a href="https://studio.apollographql.com/graph/Propel-API/schema/reference/enums/Propeller?variant=production" target="_blank">Propeller</a>) */
+  propeller?: Propeller
+
+  /** Timestamp format that the chart will respond to */
+  timestampFormat?: string
+
+  /** Interval in milliseconds for refetching the data */
+  refetchInterval?: number
+
+  /** Whether to retry on errors. */
+  retry?: boolean
+
+  /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
+  propelApiUrl?: string
+}
+
 export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: TimeSeriesChartVariant
 
-  /** `styles` attribute can be either `BarStyles` or `LineStyles` */
+  /** Basic styles initial state */
   styles?: ChartStyles
 
-  /** If passed along with `values` the component will ignore the built-in graphql operations */
+  /** If passed along with `values` the component will ignore the built-in GraphQL operations */
   labels?: TimeSeriesData['labels']
 
-  /** If passed along with `labels` the component will ignore the built-in graphql operations  */
+  /** If passed along with `labels` the component will ignore the built-in GraphQL operations  */
   values?: TimeSeriesData['values']
 
   /** When true, shows a skeleton loader */
@@ -38,37 +70,9 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
   timeZone?: string
 
-  query?: {
-    /** This should eventually be replaced to customer's app credentials */
-    accessToken?: string
+  /** TimeSeries query props */
+  query?: TimeSeriesQueryProps
 
-    /** Metric unique name */
-    metric?: string
-
-    /** Time range that the chart will respond to */
-    timeRange?: TimeRangeInput
-
-    /** Granularity that the chart will respond to */
-    granularity?: TimeSeriesGranularity
-
-    /** Filters that the chart will respond to */
-    filters?: FilterInput[]
-
-    /** Propeller that the chart will respond to */
-    propeller?: Propeller
-
-    /** Timestamp format that the chart will respond to */
-    timestampFormat?: string
-
-    /** Interval in milliseconds for refetching the data */
-    refetchInterval?: number
-
-    /** Whether to retry on errors. */
-    retry?: boolean
-
-    /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
-    propelApiUrl?: string
-  }
   /** Format function for labels, must return an array with the new labels */
   labelFormatter?: (labels: string[]) => string[]
 }

@@ -1,0 +1,104 @@
+import { Canvas, Meta, Story, Source } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import * as CounterStories from '../../../../packages/ui-kit/src/components/Counter/Counter.stories'
+import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
+
+<Meta title="Getting started/Usage" />
+
+# Usage
+
+The Propel UI Kit components are available in two modes: "Static" and "Connected".
+
+## Static Mode
+
+In the "Static" mode, the component will display the data you provide.
+
+Let's take our <LinkTo kind="Components/TimeSeries" story="overview">TimeSeries</LinkTo> component as an example. If you
+want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript
+code:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { TimeSeries } from '@propeldata/ui-kit'
+
+    const labels = [
+      '2022-01-01T00:00:00.000Z',
+      '2022-02-01T00:00:00.000Z',
+      '2022-03-01T00:00:00.000Z',
+      '2022-04-01T00:00:00.000Z',
+      '2022-05-01T00:00:00.000Z',
+      '2022-06-01T00:00:00.000Z',
+      '2022-07-01T00:00:00.000Z',
+      '2022-08-01T00:00:00.000Z',
+      '2022-09-01T00:00:00.000Z',
+      '2022-10-01T00:00:00.000Z',
+      '2022-11-01T00:00:00.000Z',
+      '2022-12-01T00:00:00.000Z',
+      '2023-01-01T00:00:00.000Z',
+      '2023-02-01T00:00:00.000Z',
+      '2023-03-01T00:00:00.000Z',
+      '2023-04-01T00:00:00.000Z',
+      '2023-05-01T00:00:00.000Z',
+      '2023-06-01T00:00:00.000Z',
+      '2023-07-01T00:00:00.000Z',
+      '2023-08-01T00:00:00.000Z'
+    ]
+
+    const values = [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
+
+    function TimeSeriesChart() {
+      return <TimeSeries labels={labels} values={values} />
+    }
+
+`} />
+
+You can customize the component using your own styles.
+
+<Story of={TimeSeriesStories.BarVariantStory} />
+
+## Connected Mode
+
+In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, to
+configure a GraphQL client, or handle loading and error states.
+
+To learn more about querying data with Propel, read the
+[Metric query documentation](https://www.propeldata.com/docs/metrics).
+
+For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs. You can
+authenticate and generate an access token by following the steps outlined in
+[the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
+
+Here is an example using our <LinkTo kind="Components/Counter" story="overview">Counter</LinkTo> component:
+
+<Source
+  dark
+  format="dedent"
+  language="tsx"
+  code={`
+    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
+
+    function RevenueCountLabel() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        metric: 'Revenue',
+        timeRange: {
+          relative: RelativeTimeRange.LastNDays,
+          n: 30
+        }
+      }
+
+      return (
+        <div>
+          We reached <Counter query={queryOptions} /> last week.
+        </div>
+      )
+    }
+
+`} />
+
+In this mode, the component will handle the loading and error states for you, making it even easier to use.
+
+<Story of={CounterStories.ConnectedStory} />

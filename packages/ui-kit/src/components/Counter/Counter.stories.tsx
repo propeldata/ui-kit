@@ -1,134 +1,185 @@
 import { css } from '@emotion/css'
-import { Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-import { RelativeTimeRange } from '../../helpers'
-import { Counter } from '../Counter'
+import axiosInstance from '../../../../../app/storybook/src/axios'
+import { RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
+import { Counter, CounterComponent } from './Counter'
 
-export default {
-  title: 'React/Counter',
-  argTypes: {
-    query: {
-      table: {
-        disable: true
-      }
-    }
+const meta: Meta<typeof CounterComponent> = {
+  title: 'Components/Counter',
+  component: CounterComponent,
+  render: Counter,
+  tags: ['tag']
+}
+
+export default meta
+
+type Story = StoryObj<typeof CounterComponent>
+
+const ConnectedCounterTemplate = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(
+    axiosInstance,
+    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+    process.env.STORYBOOK_TOKEN_URL
+  )
+
+  if (accessToken === '') {
+    return null
+  }
+
+  return (
+    <Counter
+      {...{
+        ...args,
+        query: {
+          ...args?.query,
+          accessToken
+        }
+      }}
+    />
+  )
+}
+
+const styles = {
+  container: css`
+    font-family: Inter;
+    display: inline-flex;
+  `,
+  card: css`
+    flex: 1 auto;
+    box-sizing: border-box;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 20px;
+    background-color: var(--color-background);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  `,
+  cardTitle: css`
+    margin: 0;
+    font-weight: 500;
+    color: #2e90fa;
+  `
+}
+
+export const SingleValueStory: Story = {
+  name: 'Single value',
+  args: {
+    prefixValue: '$',
+    value: '49291',
+    localize: true
   }
 }
 
-const UnstyledTemplate: Story = (args) => (
-  <>
-    We reached <Counter {...args} /> sales last week
-  </>
-)
-export const Unstyled = UnstyledTemplate.bind({})
-Unstyled.args = {
-  value: '1453'
-}
-
-const Template: Story = (args) => <Counter {...args} />
-export const WithPrefix = Template.bind({})
-WithPrefix.args = {
-  value: '123,000',
-  prefixValue: '$'
-}
-
-export const WithSufix = Template.bind({})
-WithSufix.args = {
-  value: '99',
-  sufixValue: '%'
-}
-
-const CardTemplate: Story = (args) => (
-  <div
-    className={css`
-      width: 300px;
-      height: 150px;
-      font-family: 'Fira Code';
-    `}
-  >
-    <div
-      className={css`
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-
-        border: 1px solid black;
-        border-radius: 10px;
-
-        padding: 20px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        padding: 30px;
-        border-radius: 4px;
-
-        overflow: hidden;
-
-        background-color: var(--color-background);
-        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
-      `}
-    >
-      <div>
-        <h2
-          className={css`
-            margin: 0;
-            font-weight: 100;
-          `}
-        >
-          Counter
-        </h2>
-      </div>
-      <div
-        className={css`
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 3rem;
-          font-weight: bold;
-        `}
-      >
+export const ValueInCardStory: Story = {
+  name: 'Value in card',
+  args: {
+    prefixValue: '$',
+    value: '49291',
+    localize: true,
+    style: {
+      fontSize: '40px',
+      fontWeight: 600
+    }
+  },
+  render: (args) => (
+    <div className={css([styles.container, { minWidth: 300 }])}>
+      <div className={styles.card}>
+        <span className={styles.cardTitle}>Revenue</span>
         <Counter {...args} />
       </div>
     </div>
-  </div>
-)
+  )
+}
 
-export const Connected = CardTemplate.bind({ controls: 'disabled' })
-Connected.args = {
-  query: {
-    accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-    timeRange: {
-      relative: RelativeTimeRange.LastNDays,
-      n: 30
+export const ValueInCardWithComparisonStory: Story = {
+  name: 'Value in card with comparison',
+  args: {
+    prefixValue: '$',
+    value: '123000',
+    localize: true,
+    style: {
+      fontSize: '32px',
+      fontWeight: 600
+    }
+  },
+  render: (args) => (
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <span className={css([styles.cardTitle, { color: '#7d89b0' }])}>Revenue</span>
+        <div
+          className={css`
+            display: flex;
+            align-items: flex-end;
+            color: #7d89b0;
+          `}
+        >
+          <Counter {...args} />
+          <span
+            className={css`
+              margin: 4px 8px;
+            `}
+          >
+            from{' '}
+            <Counter
+              prefix="$"
+              value="16856"
+              localize
+              style={{
+                color: '#7d89b0'
+              }}
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export const ConnectedStory: Story = {
+  name: 'Connected',
+  args: {
+    localize: true,
+    query: {
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      }
+    }
+  },
+  render: (args) => (
+    <div
+      className={css`
+        font-size: 22px;
+        font-weight: 600;
+        display: inline-flex;
+        white-space: nowrap;
+      `}
+    >
+      We reached&#160;
+      <ConnectedCounterTemplate {...args} />
+      &#160;last week.
+    </div>
+  )
+}
+
+export const SingleValueCustomStyleStory: Story = {
+  name: 'Single value custom style',
+  tags: ['pattern'],
+  args: {
+    prefixValue: '$',
+    value: '49291',
+    localize: true,
+    styles: {
+      font: {
+        size: '2rem',
+        style: 'italic',
+        family: 'Arial',
+        weight: 'bold'
+      }
     }
   }
-}
-
-export const Card = CardTemplate.bind({})
-Card.args = {
-  value: '1238'
-}
-
-export const Error = CardTemplate.bind({})
-Error.args = {
-  query: {
-    accessToken: ''
-  }
-}
-
-export const Loading = () => {
-  const [loading, setLoading] = React.useState(true)
-  const [value, setValue] = React.useState<string>()
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-      setValue('123')
-    }, 1000)
-  }, [])
-
-  return <Counter loading={loading} value={value} />
 }

@@ -75,8 +75,9 @@ export const getTableValueCellStyles = (styles?: ChartStyles) => css`
   background-color: ${styles?.table?.backgroundColor || defaultStyles.table.backgroundColor};
 `
 
-export const valueBarCellStyles = css`
+export const valueBarCellStyles = (styles?: ChartStyles) => css`
   width: 20%;
   border-top: 1px solid #e6e8f0;
   padding-right: 6px;
+  background-color: ${styles?.table?.valueColumn?.backgroundColor || defaultStyles.table.valueColumn.backgroundColor};
 `

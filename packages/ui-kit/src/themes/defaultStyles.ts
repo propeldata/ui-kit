@@ -1,6 +1,8 @@
+import { ChartStyles } from './default.types'
+
 export const defaultChartHeight = 200
 
-export const defaultStyles = {
+export const defaultStyles: ChartStyles = {
   bar: {
     thickness: 20,
     borderWidth: 1,
@@ -87,8 +89,9 @@ export const defaultStyles = {
       }
     },
     valueColumn: {
-      locale: false,
+      localize: false,
       align: 'right',
+      backgroundColor: '#ffffff',
       font: {
         color: '#475569',
         weight: '700',
