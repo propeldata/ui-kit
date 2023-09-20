@@ -1,6 +1,6 @@
 import type { ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { FilterInput, Propeller, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { FilterInput, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import { ChartStyles } from '../../themes'
 import { ErrorFallbackProps } from '../ErrorFallback'
 
@@ -28,9 +28,6 @@ export type TimeSeriesQueryProps = {
 
   /** Filters that the chart will respond to */
   filters?: FilterInput[]
-
-  /** Propeller that the chart will respond to (see <a href="https://studio.apollographql.com/graph/Propel-API/schema/reference/enums/Propeller?variant=production" target="_blank">Propeller</a>) */
-  propeller?: Propeller
 
   /** Timestamp format that the chart will respond to */
   timestampFormat?: string

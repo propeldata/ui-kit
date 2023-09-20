@@ -55,8 +55,7 @@ export const CounterComponent = (props: CounterProps) => {
           start: query?.timeRange?.start ?? null,
           stop: query?.timeRange?.stop ?? null
         },
-        filters: query?.filters ?? [],
-        propeller: query?.propeller
+        filters: query?.filters ?? []
       }
     },
     {

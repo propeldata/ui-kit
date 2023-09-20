@@ -1,4 +1,4 @@
-import { DimensionInput, FilterInput, Propeller, Sort, TimeRangeInput } from '../../helpers'
+import { DimensionInput, FilterInput, Sort, TimeRangeInput } from '../../helpers'
 import { ChartStyles } from '../../themes'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 
@@ -26,9 +26,6 @@ export type LeaderboardQueryProps = {
 
   /** Filters that the chart will respond to */
   filters?: FilterInput[]
-
-  /** Propeller that the chart will respond to */
-  propeller?: Propeller
 
   /** The number of rows to be returned. It can be a number between 1 and 1,000 */
   rowLimit?: number
