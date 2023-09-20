@@ -133,8 +133,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
           stop: query?.timeRange?.stop ?? null
         },
         granularity,
-        filters: query?.filters,
-        propeller: query?.propeller
+        filters: query?.filters
       }
     },
     {

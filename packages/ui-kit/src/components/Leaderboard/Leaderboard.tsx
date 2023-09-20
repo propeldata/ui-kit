@@ -166,7 +166,6 @@ export const LeaderboardComponent = ({
       leaderboardInput: {
         metricName: query?.metric,
         filters: query?.filters,
-        propeller: query?.propeller,
         sort: query?.sort,
         rowLimit: query?.rowLimit ?? 100,
         dimensions: query?.dimensions,
