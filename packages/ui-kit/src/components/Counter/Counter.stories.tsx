@@ -64,6 +64,34 @@ const styles = {
   `
 }
 
+export const ConnectedStory: Story = {
+  name: 'Connected',
+  args: {
+    localize: true,
+    query: {
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      }
+    }
+  },
+  render: (args) => (
+    <div
+      className={css`
+        font-size: 22px;
+        font-weight: 600;
+        display: inline-flex;
+        white-space: nowrap;
+      `}
+    >
+      We reached&#160;
+      <ConnectedCounterTemplate {...args} />
+      &#160;last week.
+    </div>
+  )
+}
+
 export const SingleValueStory: Story = {
   name: 'Single value',
   args: {
@@ -134,34 +162,6 @@ export const ValueInCardWithComparisonStory: Story = {
           </span>
         </div>
       </div>
-    </div>
-  )
-}
-
-export const ConnectedStory: Story = {
-  name: 'Connected',
-  args: {
-    localize: true,
-    query: {
-      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 30
-      }
-    }
-  },
-  render: (args) => (
-    <div
-      className={css`
-        font-size: 22px;
-        font-weight: 600;
-        display: inline-flex;
-        white-space: nowrap;
-      `}
-    >
-      We reached&#160;
-      <ConnectedCounterTemplate {...args} />
-      &#160;last week.
     </div>
   )
 }

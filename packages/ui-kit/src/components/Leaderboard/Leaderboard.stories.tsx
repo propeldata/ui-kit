@@ -57,40 +57,6 @@ const ConnectedLeaderboardTemplate = (args: Story['args']) => {
   )
 }
 
-export const SingleDimensionStory: Story = {
-  name: 'Single dimension',
-  args: {
-    headers: barHeaders,
-    rows: barRows
-  }
-}
-
-export const SingleDimensionTableVariantStory: Story = {
-  name: 'Single dimension table variant',
-  args: {
-    variant: 'table',
-    headers: tableHeaders,
-    rows: tableRows
-  }
-}
-
-export const SingleDimensionTableVariantWithValueBarStory: Story = {
-  name: 'Single dimension table variant with value bar',
-  args: {
-    variant: 'table',
-    headers: tableHeaders,
-    rows: tableRows,
-    styles: {
-      table: {
-        hasValueBar: true,
-        valueColumn: {
-          localize: true
-        }
-      }
-    }
-  }
-}
-
 export const ConnectedStory: Story = {
   name: 'Connected',
   args: {
@@ -131,6 +97,40 @@ export const ConnectedStory: Story = {
     }
   },
   render: (args) => <ConnectedLeaderboardTemplate {...args} />
+}
+
+export const SingleDimensionStory: Story = {
+  name: 'Single dimension',
+  args: {
+    headers: barHeaders,
+    rows: barRows
+  }
+}
+
+export const SingleDimensionTableVariantStory: Story = {
+  name: 'Single dimension table variant',
+  args: {
+    variant: 'table',
+    headers: tableHeaders,
+    rows: tableRows
+  }
+}
+
+export const SingleDimensionTableVariantWithValueBarStory: Story = {
+  name: 'Single dimension table variant with value bar',
+  args: {
+    variant: 'table',
+    headers: tableHeaders,
+    rows: tableRows,
+    styles: {
+      table: {
+        hasValueBar: true,
+        valueColumn: {
+          localize: true
+        }
+      }
+    }
+  }
 }
 
 export const CustomStyleStory: Story = {

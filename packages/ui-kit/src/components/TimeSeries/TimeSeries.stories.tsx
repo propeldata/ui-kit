@@ -64,22 +64,6 @@ const ConnectedTimeSeriesTemplate = (args: Story['args']) => {
   )
 }
 
-export const LineVariantStory: Story = {
-  name: 'Line variant',
-  args: {
-    variant: 'line',
-    ...dataset
-  }
-}
-
-export const BarVariantStory: Story = {
-  name: 'Bar variant',
-  args: {
-    variant: 'bar',
-    ...dataset
-  }
-}
-
 export const ConnectedStory: Story = {
   name: 'Connected',
   args: {
@@ -95,6 +79,22 @@ export const ConnectedStory: Story = {
     }
   },
   render: (args) => <ConnectedTimeSeriesTemplate {...args} />
+}
+
+export const LineVariantStory: Story = {
+  name: 'Line variant',
+  args: {
+    variant: 'line',
+    ...dataset
+  }
+}
+
+export const BarVariantStory: Story = {
+  name: 'Bar variant',
+  args: {
+    variant: 'bar',
+    ...dataset
+  }
 }
 
 export const CustomStyleStory: Story = {

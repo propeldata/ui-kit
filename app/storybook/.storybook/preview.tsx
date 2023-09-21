@@ -28,6 +28,7 @@ const preview: Preview = {
           'Getting started',
           ['Overview', 'Installation', 'Usage', 'Customization', 'Migration guide'],
           'Components',
+          ['Counter', 'TimeSeries', 'Leaderboard'],
           'React'
         ],
         method: 'alphabetical'
