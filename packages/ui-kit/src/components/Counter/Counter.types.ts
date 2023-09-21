@@ -1,4 +1,4 @@
-import { FilterInput, Propeller, TimeRangeInput } from '../../helpers'
+import { FilterInput, TimeRangeInput } from '../../helpers'
 import type { ChartStyles } from '../../themes'
 
 export type CounterQueryProps = {
@@ -10,8 +10,6 @@ export type CounterQueryProps = {
   metric?: string
   /** Filters that the chart will respond to */
   filters?: FilterInput[]
-  /** Propeller that the chart will respond to */
-  propeller?: Propeller
   /** Interval in milliseconds for refetching the data */
   refetchInterval?: number
   /** Whether to retry on errors. */
