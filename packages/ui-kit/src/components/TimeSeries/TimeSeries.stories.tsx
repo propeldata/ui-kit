@@ -40,6 +40,16 @@ const dataset = {
   values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 }
 
+const connectedParams = {
+  accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+  metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+  timeRange: {
+    relative: RelativeTimeRange.LastNDays,
+    n: 30
+  },
+  granularity: TimeSeriesGranularity.Week
+}
+
 const ConnectedTimeSeriesTemplate = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(
     axiosInstance,
@@ -64,35 +74,27 @@ const ConnectedTimeSeriesTemplate = (args: Story['args']) => {
   )
 }
 
-export const ConnectedStory: Story = {
-  name: 'Connected',
-  args: {
-    variant: 'line',
-    query: {
-      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 30
-      },
-      granularity: TimeSeriesGranularity.Week
-    }
-  },
-  render: (args) => <ConnectedTimeSeriesTemplate {...args} />
-}
-
 export const LineVariantStory: Story = {
   name: 'Line variant',
   args: {
     variant: 'line',
-    ...dataset
-  }
+    query: connectedParams
+  },
+  render: (args) => <ConnectedTimeSeriesTemplate {...args} />
 }
 
 export const BarVariantStory: Story = {
   name: 'Bar variant',
   args: {
     variant: 'bar',
+    query: connectedParams
+  }
+}
+
+export const StaticStory: Story = {
+  name: 'Static',
+  args: {
+    variant: 'line',
     ...dataset
   }
 }

@@ -16,6 +16,18 @@ export default meta
 
 type Story = StoryObj<typeof CounterComponent>
 
+const connectedParams = {
+  localize: true,
+  prefixValue: '$',
+  query: {
+    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+    timeRange: {
+      relative: RelativeTimeRange.LastNDays,
+      n: 30
+    }
+  }
+}
+
 const ConnectedCounterTemplate = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(
     axiosInstance,
@@ -64,49 +76,16 @@ const styles = {
   `
 }
 
-export const ConnectedStory: Story = {
-  name: 'Connected',
-  args: {
-    localize: true,
-    query: {
-      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 30
-      }
-    }
-  },
-  render: (args) => (
-    <div
-      className={css`
-        font-size: 22px;
-        font-weight: 600;
-        display: inline-flex;
-        white-space: nowrap;
-      `}
-    >
-      We reached&#160;
-      <ConnectedCounterTemplate {...args} />
-      &#160;last week.
-    </div>
-  )
-}
-
 export const SingleValueStory: Story = {
   name: 'Single value',
-  args: {
-    prefixValue: '$',
-    value: '49291',
-    localize: true
-  }
+  args: connectedParams,
+  render: (args) => <ConnectedCounterTemplate {...args} />
 }
 
 export const ValueInCardStory: Story = {
   name: 'Value in card',
   args: {
-    prefixValue: '$',
-    value: '49291',
-    localize: true,
+    ...connectedParams,
     style: {
       fontSize: '40px',
       fontWeight: 600
@@ -116,7 +95,7 @@ export const ValueInCardStory: Story = {
     <div className={css([styles.container, { minWidth: 300 }])}>
       <div className={styles.card}>
         <span className={styles.cardTitle}>Revenue</span>
-        <Counter {...args} />
+        <ConnectedCounterTemplate {...args} />
       </div>
     </div>
   )
@@ -125,9 +104,7 @@ export const ValueInCardStory: Story = {
 export const ValueInCardWithComparisonStory: Story = {
   name: 'Value in card with comparison',
   args: {
-    prefixValue: '$',
-    value: '123000',
-    localize: true,
+    ...connectedParams,
     style: {
       fontSize: '32px',
       fontWeight: 600
@@ -144,7 +121,7 @@ export const ValueInCardWithComparisonStory: Story = {
             color: #7d89b0;
           `}
         >
-          <Counter {...args} />
+          <ConnectedCounterTemplate {...args} />
           <span
             className={css`
               margin: 4px 8px;
@@ -166,13 +143,20 @@ export const ValueInCardWithComparisonStory: Story = {
   )
 }
 
+export const StaticStory: Story = {
+  name: 'Static',
+  args: {
+    prefixValue: '$',
+    value: '49291',
+    localize: true
+  }
+}
+
 export const SingleValueCustomStyleStory: Story = {
   name: 'Single value custom style',
   tags: ['pattern'],
   args: {
-    prefixValue: '$',
-    value: '49291',
-    localize: true,
+    ...connectedParams,
     styles: {
       font: {
         size: '2rem',

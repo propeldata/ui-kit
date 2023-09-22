@@ -32,14 +32,15 @@ You can import the component in your React file and use it as shown in the follo
           n: 30
         }
       }
-      return <Counter query={queryOptions} />
+
+      return <Counter query={queryOptions} prefixValue="$" localize />
     }
 
 `} />
 
 This will generate a counter component as shown below:
 
-<Story of={CounterStories.ConnectedStory} />
+<Story of={CounterStories.SingleValueStory} />
 
 As you can see, the component comes unstyled. However, you can customize its styles to your liking. Here's how you can
 access the style props:
@@ -49,9 +50,18 @@ access the style props:
   format="dedent"
   language="tsx"
   code={`
-    import { Counter } from '@propeldata/ui-kit'
+    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
 
-    export const App = () => {
+    function MonthRevenueCountStyled() {
+      const queryOptions = {
+        accessToken: '<PROPEL_ACCESS_TOKEN>',
+        metric: 'Revenue',
+        timeRange: {
+          relative: RelativeTimeRange.LastNDays,
+          n: 30
+        }
+      }
+
       const styles = {
         font: {
           size: '2rem',
@@ -60,9 +70,10 @@ access the style props:
           weight: 'bold'
         }
       }
+
       return (
         <div>
-          <Counter prefixValue="$" value="49291" localize styles={styles} />
+          <Counter query={queryOptions} styles={styles} localize />
         </div>
       )
     }
