@@ -35886,12 +35886,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/react", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:7.4.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Freact%2F-%2Freact-7.4.5.tgz"],\
             ["@storybook/react-webpack5", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:7.4.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Freact-webpack5%2F-%2Freact-webpack5-7.4.5.tgz"],\
             ["@storybook/theming", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:7.4.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Ftheming%2F-%2Ftheming-7.4.5.tgz"],\
+            ["@types/prettier", "npm:2.7.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fprettier%2F-%2Fprettier-2.7.3.tgz"],\
             ["@types/react", "npm:18.2.22::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.22.tgz"],\
             ["@types/react-dom", "npm:18.2.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.7.tgz"],\
             ["@vercel/node", "npm:3.0.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40vercel%2Fnode%2F-%2Fnode-3.0.6.tgz"],\
             ["axios", "npm:1.5.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.5.0.tgz"],\
             ["babel-loader", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:9.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fbabel-loader%2F-%2Fbabel-loader-9.1.3.tgz"],\
             ["node-fetch", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
+            ["prettier", "npm:2.8.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprettier%2F-%2Fprettier-2.8.8.tgz"],\
             ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-dom", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\

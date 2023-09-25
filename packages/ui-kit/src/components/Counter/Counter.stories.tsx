@@ -3,23 +3,36 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
-import { Counter, CounterComponent } from './Counter'
+import { Counter as CounterSource, CounterComponent } from './Counter'
 
 const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
   component: CounterComponent,
-  render: (args) => <ConnectedCounterTemplate {...args} />,
-  tags: ['tag']
+  tags: ['tag'],
+  render: (args) => <Counter {...args} />,
+  parameters: { controls: { sort: 'alpha' } },
+  excludeStories: ['codeTemplate']
 }
 
 export default meta
 
 type Story = StoryObj<typeof CounterComponent>
 
+export const codeTemplate = (body) => `
+  import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
+
+  function CounterComponent() {
+    return (
+      ${body.replace("'LAST_N_DAYS'", 'RelativeTimeRange.LastNDays')}
+    )
+  }
+`
+
 const connectedParams = {
   localize: true,
   prefixValue: '$',
   query: {
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
@@ -28,7 +41,7 @@ const connectedParams = {
   }
 }
 
-const ConnectedCounterTemplate = (args: Story['args']) => {
+const Counter = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(
     axiosInstance,
     process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
@@ -40,7 +53,7 @@ const ConnectedCounterTemplate = (args: Story['args']) => {
   }
 
   return (
-    <Counter
+    <CounterSource
       {...{
         ...args,
         query: {
@@ -94,7 +107,7 @@ export const ValueInCardStory: Story = {
     <div className={css([styles.container, { minWidth: 300 }])}>
       <div className={styles.card}>
         <span className={styles.cardTitle}>Revenue</span>
-        <ConnectedCounterTemplate {...args} />
+        <Counter {...args} />
       </div>
     </div>
   )
@@ -120,7 +133,7 @@ export const ValueInCardWithComparisonStory: Story = {
             color: #7d89b0;
           `}
         >
-          <ConnectedCounterTemplate {...args} />
+          <Counter {...args} />
           <span
             className={css`
               margin: 4px 8px;

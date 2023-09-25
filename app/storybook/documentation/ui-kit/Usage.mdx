@@ -1,5 +1,6 @@
 import { Canvas, Meta, Story, Source } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../src/prettier'
 import * as CounterStories from '../../../../packages/ui-kit/src/components/Counter/Counter.stories'
 import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 
@@ -21,37 +22,17 @@ For the Connected mode, you'll need to provide your Propel Application's access 
 authenticate and generate an access token by following the steps outlined in
 [the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
 
-Here is an example using our <LinkTo kind="Components/Counter" story="overview">Counter</LinkTo> component:
-
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
-
-    function RevenueCountLabel() {
-      const queryOptions = {
-        accessToken: '<PROPEL_ACCESS_TOKEN>',
-        metric: 'Revenue',
-        timeRange: {
-          relative: RelativeTimeRange.LastNDays,
-          n: 30
-        }
-      }
-
-      return (
-        <div>
-          We reached <Counter query={queryOptions} /> last week.
-        </div>
-      )
-    }
-
-`} />
-
 In this mode, the component will handle the loading and error states for you, making it even easier to use.
 
-<Story of={CounterStories.SingleValueStory} />
+Here is an example using our <LinkTo kind="Components/Counter" story="overview">Counter</LinkTo> component:
+
+<Canvas
+  of={CounterStories.SingleValueStory}
+  sourceState="shown"
+  source={{
+    transform: (code) => prettier(CounterStories.codeTemplate(code))
+  }}
+/>
 
 ## Static Mode
 
@@ -61,44 +42,12 @@ Let's take our <LinkTo kind="Components/TimeSeries" story="overview">TimeSeries<
 want to fetch the data on your own instead of delegating it to the library, you can do so using the following JavaScript
 code:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { TimeSeries } from '@propeldata/ui-kit'
-
-    const labels = [
-      '2022-01-01T00:00:00.000Z',
-      '2022-02-01T00:00:00.000Z',
-      '2022-03-01T00:00:00.000Z',
-      '2022-04-01T00:00:00.000Z',
-      '2022-05-01T00:00:00.000Z',
-      '2022-06-01T00:00:00.000Z',
-      '2022-07-01T00:00:00.000Z',
-      '2022-08-01T00:00:00.000Z',
-      '2022-09-01T00:00:00.000Z',
-      '2022-10-01T00:00:00.000Z',
-      '2022-11-01T00:00:00.000Z',
-      '2022-12-01T00:00:00.000Z',
-      '2023-01-01T00:00:00.000Z',
-      '2023-02-01T00:00:00.000Z',
-      '2023-03-01T00:00:00.000Z',
-      '2023-04-01T00:00:00.000Z',
-      '2023-05-01T00:00:00.000Z',
-      '2023-06-01T00:00:00.000Z',
-      '2023-07-01T00:00:00.000Z',
-      '2023-08-01T00:00:00.000Z'
-    ]
-
-    const values = [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
-
-    function TimeSeriesChart() {
-      return <TimeSeries labels={labels} values={values} />
-    }
-
-`} />
+<Canvas
+  of={TimeSeriesStories.StaticStory}
+  sourceState="shown"
+  source={{
+    transform: (code) => prettier(TimeSeriesStories.codeTemplate(code, 'TimeSeries'))
+  }}
+/>
 
 You can customize the component using your own styles.
-
-<Story of={TimeSeriesStories.BarVariantStory} />

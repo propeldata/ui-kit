@@ -1,5 +1,6 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/prettier'
 import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 import * as TimeSeriesQueryPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
 
@@ -17,65 +18,24 @@ automatically based on
 
 You can import the component in your React file and use it as shown in the following example:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { TimeSeries, RelativeTimeRange, TimeSeriesGranularity } from '@propeldata/ui-kit'
-
-    function RevenueChart() {
-      const queryOptions = {
-        accessToken: '<PROPEL_ACCESS_TOKEN>',
-        timeRange: {
-          relative: RelativeTimeRange.LastNDays,
-          n: 30
-        },
-        granularity: TimeSeriesGranularity.Week
-      }
-      return <TimeSeries query={queryOptions} variant="line" />
-    }
-
-`} />
-
-This will generate a time series chart as shown below:
-
-<Story of={TimeSeriesStories.LineVariantStory} />
+<Canvas
+  of={TimeSeriesStories.LineVariantStory}
+  sourceState="shown"
+  source={{
+    transform: (code) => prettier(TimeSeriesStories.codeTemplate(code))
+  }}
+/>
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
 totally different time series chart now. Here's how you can access the style props:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    function CustomChart() {
-      const styles = {
-        styles: {
-          line: {
-            tension: 0.1,
-            borderColor: '#17B897',
-            borderWidth: 3
-          },
-          point: {
-            style: false
-          },
-          canvas: {
-            width: 100,
-            height: 45,
-            backgroundColor: 'transparent',
-            hideGridLines: true
-          }
-        }
-      }
-
-      return <TimeSeries styles={styles} variant="line" />
-    }
-
-`} />
-
-<Story of={TimeSeriesStories.CustomChartStory} />
+<Canvas
+  of={TimeSeriesStories.CustomChartStory}
+  sourceState="shown"
+  source={{
+    transform: (code) => prettier(TimeSeriesStories.codeTemplate(code))
+  }}
+/>
 
 In this example, we built a minimalistic chart where you could use on small viewports or in a mobile design maybe. Up to
 you! You can adjust these and other style properties to create a unique look for your time series chart.

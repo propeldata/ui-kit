@@ -7198,7 +7198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2.1.5":
+"@types/prettier@npm:2.7.3, @types/prettier@npm:^2.1.5":
   version: 2.7.3
   resolution: "@types/prettier@npm:2.7.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fprettier%2F-%2Fprettier-2.7.3.tgz"
   checksum: 705384209cea6d1433ff6c187c80dcc0b95d99d5c5ce21a46a9a58060c527973506822e428789d842761e0280d25e3359300f017fbe77b9755bc772ab3dc2f83
@@ -19384,7 +19384,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.7.1, prettier@npm:^2.8.0":
+"prettier@npm:2.8.8, prettier@npm:^2.7.1, prettier@npm:^2.8.0":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprettier%2F-%2Fprettier-2.8.8.tgz"
   bin:
@@ -23472,12 +23472,14 @@ __metadata:
     "@storybook/react": ^7.4.0
     "@storybook/react-webpack5": ^7.4.0
     "@storybook/theming": ^7.4.0
+    "@types/prettier": 2.7.3
     "@types/react": ^18.2.21
     "@types/react-dom": ^18.2.7
     "@vercel/node": ^3.0.5
     axios: ^1.5.0
     babel-loader: ^9.1.3
     node-fetch: ^3.3.2
+    prettier: 2.8.8
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
