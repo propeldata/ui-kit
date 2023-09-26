@@ -49,7 +49,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/testing-library__jest-dom": "^5.14.7",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "jest": "^27.5.1",
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^27.5.1",

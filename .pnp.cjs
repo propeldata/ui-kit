@@ -265,7 +265,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fb-watchman", "npm:2.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffb-watchman%2F-%2Ffb-watchman-2.0.2.tgz"],\
             ["fbjs", "npm:3.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffbjs%2F-%2Ffbjs-3.0.5.tgz"],\
             ["glob", "npm:7.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fglob%2F-%2Fglob-7.2.3.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["immutable", "npm:3.7.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimmutable%2F-%2Fimmutable-3.7.6.tgz"],\
             ["invariant", "npm:2.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Finvariant%2F-%2Finvariant-2.2.4.tgz"],\
             ["nullthrows", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnullthrows%2F-%2Fnullthrows-1.1.1.tgz"],\
@@ -6348,7 +6348,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/add", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.1.tgz"],\
             ["@graphql-codegen/plugin-helpers", "virtual:0e12910cd44369f2097bb4b98a3443144d249f208c72a60e597b958ae9b3a675273173a913cd45a79763f80d8d8b7bae1fb9af3f0e2a9bc59d7fcfe8c954d723#npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-4.2.0.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
           ],\
           "packagePeers": [\
@@ -6392,7 +6392,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cosmiconfig", "npm:8.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcosmiconfig%2F-%2Fcosmiconfig-8.2.0.tgz"],\
             ["debounce", "npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdebounce%2F-%2Fdebounce-1.2.1.tgz"],\
             ["detect-indent", "npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdetect-indent%2F-%2Fdetect-indent-6.1.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["graphql-config", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:5.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-config%2F-%2Fgraphql-config-5.0.2.tgz"],\
             ["inquirer", "npm:8.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Finquirer%2F-%2Finquirer-8.2.6.tgz"],\
             ["is-glob", "npm:4.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-glob%2F-%2Fis-glob-4.0.3.tgz"],\
@@ -6431,7 +6431,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/schema", "virtual:10721299cb8efd103a52973ee96363c2a19990dbb330eb6c5a16d7d418f3712a5a5f04eb1d9dddcdd518ddc0236d807126ec2ff1af702221d6cc8f910ce2f876#npm:10.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fschema%2F-%2Fschema-10.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
           ],\
           "packagePeers": [\
@@ -6478,7 +6478,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
             ["common-tags", "npm:1.8.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcommon-tags%2F-%2Fcommon-tags-1.8.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
             ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
@@ -6497,7 +6497,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
             ["common-tags", "npm:1.8.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcommon-tags%2F-%2Fcommon-tags-1.8.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
             ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
@@ -6516,7 +6516,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
             ["common-tags", "npm:1.8.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcommon-tags%2F-%2Fcommon-tags-1.8.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
             ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
             ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
@@ -6535,7 +6535,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["change-case-all", "npm:1.0.14::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.14.tgz"],\
             ["common-tags", "npm:1.8.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcommon-tags%2F-%2Fcommon-tags-1.8.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
             ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
             ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
@@ -6562,7 +6562,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/plugin-helpers", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:5.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-5.0.1.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
           ],\
           "packagePeers": [\
@@ -6589,7 +6589,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/visitor-plugin-common", "virtual:498a1b4adb7581bcc5170eabc01985f2712595e74abbdc33da4dc1870fe05274c2abf7669eac01623e27c2d07297c9ab5fc8d5f715dfd5dcb4af2a753013570b#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fvisitor-plugin-common%2F-%2Fvisitor-plugin-common-4.0.1.tgz"],\
             ["@types/graphql", null],\
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
           ],\
           "packagePeers": [\
@@ -6616,7 +6616,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
             ["change-case-all", "npm:1.0.14::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.14.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -6643,7 +6643,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/visitor-plugin-common", "virtual:498a1b4adb7581bcc5170eabc01985f2712595e74abbdc33da4dc1870fe05274c2abf7669eac01623e27c2d07297c9ab5fc8d5f715dfd5dcb4af2a753013570b#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fvisitor-plugin-common%2F-%2Fvisitor-plugin-common-4.0.1.tgz"],\
             ["@types/graphql", null],\
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
           ],\
           "packagePeers": [\
@@ -6670,7 +6670,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
             ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -6707,7 +6707,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
             ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
             ["dependency-graph", "npm:0.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdependency-graph%2F-%2Fdependency-graph-0.11.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["graphql-tag", "virtual:47db8b3e91d4a045f2dc6df42a1ad847f119163a1a07b9b3ffeb1e8e20bcb2383fdd4ef35a7885bb489c3fb43c5815f619953891cea8f711745ecc054b30780b#npm:2.12.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-tag%2F-%2Fgraphql-tag-2.12.6.tgz"],\
             ["parse-filepath", "npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fparse-filepath%2F-%2Fparse-filepath-1.0.2.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
@@ -6730,7 +6730,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
             ["change-case-all", "npm:1.0.14::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.14.tgz"],\
             ["dependency-graph", "npm:0.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdependency-graph%2F-%2Fdependency-graph-0.11.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["graphql-tag", "virtual:47db8b3e91d4a045f2dc6df42a1ad847f119163a1a07b9b3ffeb1e8e20bcb2383fdd4ef35a7885bb489c3fb43c5815f619953891cea8f711745ecc054b30780b#npm:2.12.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-tag%2F-%2Fgraphql-tag-2.12.6.tgz"],\
             ["parse-filepath", "npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fparse-filepath%2F-%2Fparse-filepath-1.0.2.tgz"],\
             ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
@@ -6758,7 +6758,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["@whatwg-node/fetch", "npm:0.9.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40whatwg-node%2Ffetch%2F-%2Ffetch-0.9.9.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -6783,7 +6783,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["dataloader", "npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdataloader%2F-%2Fdataloader-2.2.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
           ],\
@@ -6810,7 +6810,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["globby", "npm:11.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fglobby%2F-%2Fglobby-11.1.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["unixify", "npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Funixify%2F-%2Funixify-1.0.0.tgz"]\
           ],\
@@ -6839,7 +6839,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["dataloader", "npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdataloader%2F-%2Fdataloader-2.2.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
           ],\
@@ -6866,7 +6866,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-typed-document-node/core", "virtual:a331a9f4a506f6b2771cfe402ad53d8f476e58ea509034b35a36efed191a46dd8fff9e210ee3d20c1bbf7248d5c196400d88c348ba9bdec8afb5f3f5bd02b5d0#npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.2.0.tgz"],\
             ["@repeaterjs/repeater", "npm:3.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40repeaterjs%2Frepeater%2F-%2Frepeater-3.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
           ],\
@@ -6892,7 +6892,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["@types/ws", "npm:8.5.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fws%2F-%2Fws-8.5.5.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["graphql-ws", "virtual:a4d3861b368561007ddc713131fb5a35d19e3264754d34f6cb0264356ed0da606393bbb75a1080fbcfef34fde861d8deed47fb39462c483763129ff2f79f122a#npm:5.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-ws%2F-%2Fgraphql-ws-5.14.0.tgz"],\
             ["isomorphic-ws", "virtual:7152b3aeea034397b6e3d794c326ad6d1b2962d41f894c5405491806564655d9728f25cac19164a189c06f5374aa42bf69d11c73241ece1a27eb44ebccda691a#npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fisomorphic-ws%2F-%2Fisomorphic-ws-5.0.0.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
@@ -6922,7 +6922,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["@whatwg-node/fetch", "npm:0.9.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40whatwg-node%2Ffetch%2F-%2Ffetch-0.9.9.tgz"],\
             ["extract-files", "npm:11.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fextract-files%2F-%2Fextract-files-11.0.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["meros", "virtual:3ae5c48e0d8d5652e99e8844addf47ef0c0563ae9965aed81e439fc6de5e94c4d9eabb418b645e9f9cc75b4ccb60b36fb47081702d39554f92e39d7d7aa3a888#npm:1.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmeros%2F-%2Fmeros-1.3.0.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
@@ -6949,7 +6949,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["@types/ws", "npm:8.5.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fws%2F-%2Fws-8.5.5.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["isomorphic-ws", "virtual:7152b3aeea034397b6e3d794c326ad6d1b2962d41f894c5405491806564655d9728f25cac19164a189c06f5374aa42bf69d11c73241ece1a27eb44ebccda691a#npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fisomorphic-ws%2F-%2Fisomorphic-ws-5.0.0.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["ws", "virtual:7152b3aeea034397b6e3d794c326ad6d1b2962d41f894c5405491806564655d9728f25cac19164a189c06f5374aa42bf69d11c73241ece1a27eb44ebccda691a#npm:8.13.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fws%2F-%2Fws-8.13.0.tgz"]\
@@ -6976,7 +6976,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/graphql-tag-pluck", "virtual:6255a82b6c7431d7dbb3bf74e3074092aa25cd5914ef97b0a0d91716004cf3877d8718b56f744aeb763deb262b1a3cbe19a246f212ede6a8f62dd3c12954ceb3#npm:8.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fgraphql-tag-pluck%2F-%2Fgraphql-tag-pluck-8.0.2.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["is-glob", "npm:4.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-glob%2F-%2Fis-glob-4.0.3.tgz"],\
             ["micromatch", "npm:4.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmicromatch%2F-%2Fmicromatch-4.0.5.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
@@ -7007,7 +7007,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["@whatwg-node/fetch", "npm:0.9.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40whatwg-node%2Ffetch%2F-%2Ffetch-0.9.9.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
           ],\
@@ -7034,7 +7034,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["globby", "npm:11.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fglobby%2F-%2Fglobby-11.1.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["unixify", "npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Funixify%2F-%2Funixify-1.0.0.tgz"]\
           ],\
@@ -7064,7 +7064,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/types", "npm:7.22.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Ftypes%2F-%2Ftypes-7.22.5.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7088,7 +7088,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/import", "virtual:db584d940d73baf8bcb5ad37c2add789c463218503d43ddae3c54b4aff7e187d7993c8a3eb691c72b7b9373292e9aa97ff90316327b4e853a822574ee967068c#npm:7.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fimport%2F-%2Fimport-7.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["resolve-from", "npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fresolve-from%2F-%2Fresolve-from-5.0.0.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
@@ -7114,7 +7114,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
             ["globby", "npm:11.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fglobby%2F-%2Fglobby-11.1.0.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["unixify", "npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Funixify%2F-%2Funixify-1.0.0.tgz"]\
           ],\
@@ -7140,7 +7140,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/schema", "virtual:10721299cb8efd103a52973ee96363c2a19990dbb330eb6c5a16d7d418f3712a5a5f04eb1d9dddcdd518ddc0236d807126ec2ff1af702221d6cc8f910ce2f876#npm:10.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fschema%2F-%2Fschema-10.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["p-limit", "npm:3.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fp-limit%2F-%2Fp-limit-3.1.0.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
@@ -7165,7 +7165,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/merge", "virtual:11c66f071c691353d83e91b225f0a9371d262378e9331c30172168b7ee45a0f6c4a12b8565bb4e4e5e1d82a0fde37fb885c3a3ca391e62c040f7c626c0d6da9a#npm:9.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fmerge%2F-%2Fmerge-9.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7195,7 +7195,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@graphql-tools/optimize", "virtual:47db8b3e91d4a045f2dc6df42a1ad847f119163a1a07b9b3ffeb1e8e20bcb2383fdd4ef35a7885bb489c3fb43c5815f619953891cea8f711745ecc054b30780b#npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Foptimize%2F-%2Foptimize-2.0.0.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7209,7 +7209,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@graphql-tools/optimize", "virtual:98056fce7a8f0e1ff6e0c38181d87436c82fe75a5585308b0fbb41c4caa1ec1f237b3120b3a6a359a49a3022fe30b480e25d50703a6fe46ec82105a5df94b60f#npm:1.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Foptimize%2F-%2Foptimize-1.4.0.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7240,7 +7240,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchalk%2F-%2Fchalk-4.1.2.tgz"],\
             ["debug", "virtual:1bad9e8970d6a61aa4fd4841de88334c995d061a5fa07d70cad7e4aee82963acfb0fe828afa5b0afb255f972ec5eafc027f5abf4ec03b4d7a12ee5bcab8f41ce#npm:4.3.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdebug%2F-%2Fdebug-4.3.4.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["graphql-request", "virtual:33d3f156c4d930bee34c6d8793e3796256cb85dd8b69baa6f57e2d36e3ad3132e827661a493fd85016da3ebcf9eaa81e7a04cadbcf84cd91d388fb960dfa6f6b#npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-request%2F-%2Fgraphql-request-6.1.0.tgz"],\
             ["http-proxy-agent", "npm:7.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fhttp-proxy-agent%2F-%2Fhttp-proxy-agent-7.0.0.tgz"],\
             ["https-proxy-agent", "npm:7.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fhttps-proxy-agent%2F-%2Fhttps-proxy-agent-7.0.1.tgz"],\
@@ -7281,7 +7281,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ardatan/relay-compiler", "virtual:e4be6663693f23ad7facadf5ee633cb6ae7c2d5bbbe208b5268f0a1be7e48d98d6c193b6355b0490dd28380487df61b0d9645e56c3b2023fc3b3fb2adfe69df8#npm:12.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ardatan%2Frelay-compiler%2F-%2Frelay-compiler-12.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7297,7 +7297,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ardatan/relay-compiler", "virtual:e4be6663693f23ad7facadf5ee633cb6ae7c2d5bbbe208b5268f0a1be7e48d98d6c193b6355b0490dd28380487df61b0d9645e56c3b2023fc3b3fb2adfe69df8#npm:12.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ardatan%2Frelay-compiler%2F-%2Frelay-compiler-12.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:507baaac73fc4c6501b010dbfa5c657863724fbe23ed494b48175e51b9fda50e18da902f5fa093dcd4ca0fcacdd6488ac2327277604840baba10a0bba03c33f1#npm:9.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-9.2.1.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7322,7 +7322,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/merge", "virtual:11c66f071c691353d83e91b225f0a9371d262378e9331c30172168b7ee45a0f6c4a12b8565bb4e4e5e1d82a0fde37fb885c3a3ca391e62c040f7c626c0d6da9a#npm:9.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fmerge%2F-%2Fmerge-9.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
           ],\
@@ -7355,7 +7355,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["@types/ws", "npm:8.5.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fws%2F-%2Fws-8.5.5.tgz"],\
             ["@whatwg-node/fetch", "npm:0.9.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40whatwg-node%2Ffetch%2F-%2Ffetch-0.9.9.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["isomorphic-ws", "virtual:7152b3aeea034397b6e3d794c326ad6d1b2962d41f894c5405491806564655d9728f25cac19164a189c06f5374aa42bf69d11c73241ece1a27eb44ebccda691a#npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fisomorphic-ws%2F-%2Fisomorphic-ws-5.0.0.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"],\
@@ -7397,7 +7397,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-typed-document-node/core", "virtual:a331a9f4a506f6b2771cfe402ad53d8f476e58ea509034b35a36efed191a46dd8fff9e210ee3d20c1bbf7248d5c196400d88c348ba9bdec8afb5f3f5bd02b5d0#npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.2.0.tgz"],\
             ["@types/graphql", null],\
             ["dset", "npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdset%2F-%2Fdset-3.1.2.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7412,7 +7412,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/utils", "virtual:507baaac73fc4c6501b010dbfa5c657863724fbe23ed494b48175e51b9fda50e18da902f5fa093dcd4ca0fcacdd6488ac2327277604840baba10a0bba03c33f1#npm:9.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-9.2.1.tgz"],\
             ["@graphql-typed-document-node/core", "virtual:a331a9f4a506f6b2771cfe402ad53d8f476e58ea509034b35a36efed191a46dd8fff9e210ee3d20c1bbf7248d5c196400d88c348ba9bdec8afb5f3f5bd02b5d0#npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.2.0.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7426,7 +7426,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@graphql-tools/utils", "virtual:70678dd68d6d7f1c2410e3c80e25908ab6e8254c84dba6b1c34ff3fe4cf11c125b10cb7007e82d67682d9e1d9d8544c0b2dac5238a27f6255b87b45eb290a72b#npm:8.13.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-8.13.1.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -7452,7 +7452,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-tools/schema", "virtual:10721299cb8efd103a52973ee96363c2a19990dbb330eb6c5a16d7d418f3712a5a5f04eb1d9dddcdd518ddc0236d807126ec2ff1af702221d6cc8f910ce2f876#npm:10.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Fschema%2F-%2Fschema-10.0.0.tgz"],\
             ["@graphql-tools/utils", "virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:10.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-10.0.4.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"],\
             ["value-or-promise", "npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fvalue-or-promise%2F-%2Fvalue-or-promise-1.0.12.tgz"]\
           ],\
@@ -7476,7 +7476,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@graphql-typed-document-node/core", "virtual:a331a9f4a506f6b2771cfe402ad53d8f476e58ea509034b35a36efed191a46dd8fff9e210ee3d20c1bbf7248d5c196400d88c348ba9bdec8afb5f3f5bd02b5d0#npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.2.0.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"]\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -8825,7 +8825,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.3.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8873,7 +8873,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.3.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8921,7 +8921,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.3.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8968,7 +8968,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chart.js", "npm:4.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.3.3.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -24406,6 +24406,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz", {\
+          "packageLocation": "./.yarn/cache/graphql-npm-16.8.1-78942bcac2-8d304b7b6f.zip/node_modules/graphql/",\
+          "packageDependencies": [\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["graphql-config", [\
@@ -24430,7 +24437,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["cosmiconfig", "npm:8.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcosmiconfig%2F-%2Fcosmiconfig-8.2.0.tgz"],\
             ["cosmiconfig-toml-loader", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["jiti", "npm:1.19.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjiti%2F-%2Fjiti-1.19.1.tgz"],\
             ["minimatch", "npm:4.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fminimatch%2F-%2Fminimatch-4.2.3.tgz"],\
             ["string-env-interpolation", "npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring-env-interpolation%2F-%2Fstring-env-interpolation-1.0.1.tgz"],\
@@ -24460,7 +24467,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-typed-document-node/core", "virtual:a331a9f4a506f6b2771cfe402ad53d8f476e58ea509034b35a36efed191a46dd8fff9e210ee3d20c1bbf7248d5c196400d88c348ba9bdec8afb5f3f5bd02b5d0#npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-typed-document-node%2Fcore%2F-%2Fcore-3.2.0.tgz"],\
             ["@types/graphql", null],\
             ["cross-fetch", "npm:3.1.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcross-fetch%2F-%2Fcross-fetch-3.1.8.tgz"],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"]\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -24482,7 +24489,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["graphql-tag", "virtual:47db8b3e91d4a045f2dc6df42a1ad847f119163a1a07b9b3ffeb1e8e20bcb2383fdd4ef35a7885bb489c3fb43c5815f619953891cea8f711745ecc054b30780b#npm:2.12.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-tag%2F-%2Fgraphql-tag-2.12.6.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
             ["tslib", "npm:2.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.1.tgz"]\
           ],\
           "packagePeers": [\
@@ -24505,7 +24512,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["graphql-ws", "virtual:a4d3861b368561007ddc713131fb5a35d19e3264754d34f6cb0264356ed0da606393bbb75a1080fbcfef34fde861d8deed47fb39462c483763129ff2f79f122a#npm:5.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql-ws%2F-%2Fgraphql-ws-5.14.0.tgz"],\
             ["@types/graphql", null],\
-            ["graphql", "npm:16.7.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.7.1.tgz"]\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -47453,6 +47460,7 @@ function reportRequiredFilesToWatchMode(files) {
 }
 
 function applyPatch(pnpapi, opts) {
+  const defaultCache = {};
   let enableNativeHooks = true;
   process.versions.pnp = String(pnpapi.VERSIONS.std);
   const moduleExports = require$$0__default.default;
@@ -47472,13 +47480,62 @@ function applyPatch(pnpapi, opts) {
   }
   const originalModuleLoad = require$$0.Module._load;
   require$$0.Module._load = function(request, parent, isMain) {
-    if (request === `pnpapi`) {
-      const parentApiPath = opts.manager.getApiPathFromParent(parent);
-      if (parentApiPath) {
-        return opts.manager.getApiEntry(parentApiPath, true).instance;
+    if (!enableNativeHooks)
+      return originalModuleLoad.call(require$$0.Module, request, parent, isMain);
+    if (isBuiltinModule(request)) {
+      try {
+        enableNativeHooks = false;
+        return originalModuleLoad.call(require$$0.Module, request, parent, isMain);
+      } finally {
+        enableNativeHooks = true;
       }
     }
-    return originalModuleLoad.call(require$$0.Module, request, parent, isMain);
+    const parentApiPath = opts.manager.getApiPathFromParent(parent);
+    const parentApi = parentApiPath !== null ? opts.manager.getApiEntry(parentApiPath, true).instance : null;
+    if (parentApi === null)
+      return originalModuleLoad(request, parent, isMain);
+    if (request === `pnpapi`)
+      return parentApi;
+    const modulePath = require$$0.Module._resolveFilename(request, parent, isMain);
+    const isOwnedByRuntime = parentApi !== null ? parentApi.findPackageLocator(modulePath) !== null : false;
+    const moduleApiPath = isOwnedByRuntime ? parentApiPath : opts.manager.findApiPathFor(npath.dirname(modulePath));
+    const entry = moduleApiPath !== null ? opts.manager.getApiEntry(moduleApiPath) : { instance: null, cache: defaultCache };
+    const cacheEntry = entry.cache[modulePath];
+    if (cacheEntry) {
+      if (cacheEntry.loaded === false && cacheEntry.isLoading !== true) {
+        try {
+          cacheEntry.isLoading = true;
+          if (isMain) {
+            process.mainModule = cacheEntry;
+            cacheEntry.id = `.`;
+          }
+          cacheEntry.load(modulePath);
+        } finally {
+          cacheEntry.isLoading = false;
+        }
+      }
+      return cacheEntry.exports;
+    }
+    const module = new require$$0.Module(modulePath, parent != null ? parent : void 0);
+    module.pnpApiPath = moduleApiPath;
+    reportRequiredFilesToWatchMode([modulePath]);
+    entry.cache[modulePath] = module;
+    if (isMain) {
+      process.mainModule = module;
+      module.id = `.`;
+    }
+    let hasThrown = true;
+    try {
+      module.isLoading = true;
+      module.load(modulePath);
+      hasThrown = false;
+    } finally {
+      module.isLoading = false;
+      if (hasThrown) {
+        delete require$$0.Module._cache[modulePath];
+      }
+    }
+    return module.exports;
   };
   function getIssuerSpecsFromPaths(paths) {
     return paths.map((path) => ({
@@ -47546,7 +47603,7 @@ function applyPatch(pnpapi, opts) {
       const parentDirectory = (parent == null ? void 0 : parent.filename) != null ? npath.dirname(parent.filename) : null;
       const absoluteRequest = npath.isAbsolute(request) ? request : parentDirectory !== null ? npath.resolve(parentDirectory, request) : null;
       if (absoluteRequest !== null) {
-        const apiPath = parent && parentDirectory === npath.dirname(absoluteRequest) ? opts.manager.getApiPathFromParent(parent) : opts.manager.findApiPathFor(absoluteRequest);
+        const apiPath = parentDirectory === npath.dirname(absoluteRequest) && (parent == null ? void 0 : parent.pnpApiPath) ? parent.pnpApiPath : opts.manager.findApiPathFor(absoluteRequest);
         if (apiPath !== null) {
           issuerSpecs.unshift({
             apiPath,
@@ -49267,6 +49324,7 @@ function makeManager(pnpapi, opts) {
   const initialApiStats = opts.fakeFs.statSync(npath.toPortablePath(initialApiPath));
   const apiMetadata = /* @__PURE__ */ new Map([
     [initialApiPath, {
+      cache: require$$0.Module._cache,
       instance: pnpapi,
       stats: initialApiStats,
       lastRefreshCheck: Date.now()
@@ -49298,6 +49356,7 @@ function makeManager(pnpapi, opts) {
       }
     } else {
       apiMetadata.set(pnpApiPath, apiEntry = {
+        cache: {},
         instance: loadApiInstance(pnpApiPath),
         stats: opts.fakeFs.statSync(pnpApiPath),
         lastRefreshCheck: Date.now()
@@ -49367,16 +49426,19 @@ ${controlSegment}
     } while (curr !== PortablePath.root);
     return addToCacheAndReturn(start, curr, null);
   }
-  const moduleToApiPathCache = /* @__PURE__ */ new WeakMap();
   function getApiPathFromParent(parent) {
     if (parent == null)
       return initialApiPath;
-    let apiPath = moduleToApiPathCache.get(parent);
-    if (typeof apiPath !== `undefined`)
-      return apiPath;
-    apiPath = parent.filename ? findApiPathFor(parent.filename) : null;
-    moduleToApiPathCache.set(parent, apiPath);
-    return apiPath;
+    if (typeof parent.pnpApiPath === `undefined`) {
+      if (parent.filename !== null) {
+        return parent.pnpApiPath = findApiPathFor(parent.filename);
+      } else {
+        return initialApiPath;
+      }
+    }
+    if (parent.pnpApiPath !== null)
+      return parent.pnpApiPath;
+    return null;
   }
   return {
     getApiPathFromParent,
