@@ -7,7 +7,7 @@ import { TimeSeries, TimeSeriesComponent } from './TimeSeries'
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
   component: TimeSeriesComponent,
-  render: (args) => <TimeSeries {...args} />
+  render: (args) => <ConnectedTimeSeriesTemplate {...args} />
 }
 
 export default meta
@@ -79,8 +79,7 @@ export const LineVariantStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams
-  },
-  render: (args) => <ConnectedTimeSeriesTemplate {...args} />
+  }
 }
 
 export const BarVariantStory: Story = {
@@ -96,7 +95,8 @@ export const StaticStory: Story = {
   args: {
     variant: 'line',
     ...dataset
-  }
+  },
+  render: (args) => <TimeSeries {...args} />
 }
 
 export const CustomStyleStory: Story = {
@@ -110,7 +110,8 @@ export const CustomStyleStory: Story = {
       }
     },
     ...dataset
-  }
+  },
+  render: (args) => <TimeSeries {...args} />
 }
 
 export const CustomChartStory: Story = {
@@ -135,7 +136,8 @@ export const CustomChartStory: Story = {
       }
     },
     ...dataset
-  }
+  },
+  render: (args) => <TimeSeries {...args} />
 }
 
 export const ErrorStory: Story = {
@@ -146,5 +148,6 @@ export const ErrorStory: Story = {
       title: 'Unable to connect',
       body: 'Sorry we are not able to connect at this time due to a technical error.'
     }
-  }
+  },
+  render: (args) => <TimeSeries {...args} />
 }

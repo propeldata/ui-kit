@@ -7,7 +7,7 @@ import { Leaderboard, LeaderboardComponent } from './Leaderboard'
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
   component: LeaderboardComponent,
-  render: (args) => <Leaderboard {...args} />
+  render: (args) => <ConnectedLeaderboardTemplate {...args} />
 }
 
 export default meta
@@ -78,8 +78,7 @@ export const SingleDimensionStory: Story = {
   args: {
     headers: [process.env.STORYBOOK_DIMENSION_1] as string[],
     query: connectedParams
-  },
-  render: (args) => <ConnectedLeaderboardTemplate {...args} />
+  }
 }
 
 export const SingleDimensionTableVariantStory: Story = {
@@ -113,7 +112,8 @@ export const StaticStory: Story = {
   args: {
     headers: barHeaders,
     rows: barRows
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const CustomStyleStory: Story = {
@@ -160,5 +160,6 @@ export const CustomStyleStory: Story = {
         }
       }
     }
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }

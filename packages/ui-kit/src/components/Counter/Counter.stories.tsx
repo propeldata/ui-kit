@@ -8,7 +8,7 @@ import { Counter, CounterComponent } from './Counter'
 const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
   component: CounterComponent,
-  render: Counter,
+  render: (args) => <ConnectedCounterTemplate {...args} />,
   tags: ['tag']
 }
 
@@ -78,8 +78,7 @@ const styles = {
 
 export const SingleValueStory: Story = {
   name: 'Single value',
-  args: connectedParams,
-  render: (args) => <ConnectedCounterTemplate {...args} />
+  args: connectedParams
 }
 
 export const ValueInCardStory: Story = {
@@ -149,7 +148,8 @@ export const StaticStory: Story = {
     prefixValue: '$',
     value: '49291',
     localize: true
-  }
+  },
+  render: Counter
 }
 
 export const SingleValueCustomStyleStory: Story = {
