@@ -53,50 +53,6 @@ In this mode, the component will handle the loading and error states for you, ma
 
 <Story of={CounterStories.SingleValueStory} />
 
-## Connected Mode
-
-In the "Connected" mode, the component automatically fetches the data from the Propel API. You don't need a backend, to
-configure a GraphQL client, or handle loading and error states.
-
-To learn more about querying data with Propel, read the
-[Metric query documentation](https://www.propeldata.com/docs/metrics).
-
-For the Connected mode, you'll need to provide your Propel Application's access token to use Propel APIs. You can
-authenticate and generate an access token by following the steps outlined in
-[the Propel GraphQL Authentication guide](https://propeldata.com/docs/api/authentication#step-2-generate-an-access-token).
-
-Here is an example using our <LinkTo kind="Components/Counter" story="overview">Counter</LinkTo> component:
-
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
-
-    function RevenueCountLabel() {
-      const queryOptions = {
-        accessToken: '<PROPEL_ACCESS_TOKEN>',
-        metric: 'Revenue',
-        timeRange: {
-          relative: RelativeTimeRange.LastNDays,
-          n: 30
-        }
-      }
-
-      return (
-        <div>
-          We reached <Counter query={queryOptions} /> last week.
-        </div>
-      )
-    }
-
-`} />
-
-In this mode, the component will handle the loading and error states for you, making it even easier to use.
-
-<Story of={CounterStories.SingleValueStory} />
-
 ## Static Mode
 
 In the "Static" mode, the component will display the data you provide.
