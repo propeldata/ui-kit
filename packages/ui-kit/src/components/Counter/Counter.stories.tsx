@@ -162,7 +162,7 @@ export const StaticStory: Story = {
     value: '49291',
     localize: true
   },
-  render: Counter
+  render: CounterSource
 }
 
 export const SingleValueCustomStyleStory: Story = {
