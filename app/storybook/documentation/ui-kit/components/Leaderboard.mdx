@@ -1,6 +1,6 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
-import { prettier } from '../../../src/prettier'
+import { prettier } from '../../../src/utils'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
 import * as LeaderboardQueryPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
 
@@ -22,7 +22,7 @@ You can import the component in your React file and use it as shown in the follo
   of={LeaderboardStories.SingleDimensionStory}
   sourceState="shown"
   source={{
-    transform: (code) => prettier(LeaderboardStories.codeTemplate(code))
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
 
@@ -33,7 +33,7 @@ totally different leaderboard chart now. Here's how you can access the style pro
   of={LeaderboardStories.CustomStyleStory}
   sourceState="shown"
   source={{
-    transform: (code) => prettier(LeaderboardStories.codeTemplate(code, 'Leaderboard'))
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
 

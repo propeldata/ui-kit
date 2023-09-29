@@ -1,6 +1,6 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
-import { prettier } from '../../../src/prettier'
+import { prettier } from '../../../src/utils'
 import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 import * as TimeSeriesQueryPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
 
@@ -22,7 +22,7 @@ You can import the component in your React file and use it as shown in the follo
   of={TimeSeriesStories.LineVariantStory}
   sourceState="shown"
   source={{
-    transform: (code) => prettier(TimeSeriesStories.codeTemplate(code))
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
 
@@ -33,7 +33,7 @@ totally different time series chart now. Here's how you can access the style pro
   of={TimeSeriesStories.CustomChartStory}
   sourceState="shown"
   source={{
-    transform: (code) => prettier(TimeSeriesStories.codeTemplate(code))
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
 

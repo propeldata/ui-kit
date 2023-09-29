@@ -1,30 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, Sort, useStorybookAccessToken } from '../../helpers'
+import { RelativeTimeRange, Sort, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
 
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
   component: LeaderboardComponent,
-  render: (args) => <Leaderboard {...args} />,
-  parameters: { controls: { sort: 'alpha' } },
-  excludeStories: ['codeTemplate']
+  parameters: {
+    controls: { sort: 'alpha' },
+    imports: 'Leaderboard, RelativeTimeRange',
+    transformBody: (body: string) => body.replace("'LAST_N_DAYS'", 'RelativeTimeRange.LastNDays'),
+    codeTemplate: storybookCodeTemplate
+  }
 }
 
 export default meta
 
 type Story = StoryObj<typeof LeaderboardComponent>
-
-export const codeTemplate = (body, imports = 'Leaderboard, RelativeTimeRange') => `
-  import { ${imports} } from '@propeldata/ui-kit'
-
-  function LeaderboardComponent() {
-    return (
-      ${body.replace("'LAST_N_DAYS'", 'RelativeTimeRange.LastNDays')}
-    )
-  }
-`
 
 const barHeaders = ['DATA_SOURCE_TYPE', 'value']
 
@@ -52,7 +45,7 @@ const Leaderboard = (args: Story['args']) => {
     process.env.STORYBOOK_TOKEN_URL
   )
 
-  if (accessToken === '' || accessToken === undefined) {
+  if (accessToken === '' && args?.query) {
     return null
   }
 
@@ -60,10 +53,12 @@ const Leaderboard = (args: Story['args']) => {
     <LeaderboardSource
       {...{
         ...args,
-        query: {
-          ...args?.query,
-          accessToken
-        }
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
       }}
     />
   )
@@ -79,7 +74,7 @@ const connectedParams = {
   rowLimit: 5,
   dimensions: [
     {
-      columnName: process.env.STORYBOOK_DIMENSION_1
+      columnName: process.env.STORYBOOK_DIMENSION_1 as string
     }
   ],
   sort: Sort.Asc
@@ -90,23 +85,25 @@ export const SingleDimensionStory: Story = {
   args: {
     // headers: [process.env.STORYBOOK_DIMENSION_1],
     query: connectedParams
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const SingleDimensionTableVariantStory: Story = {
   name: 'Single dimension table variant',
   args: {
     variant: 'table',
-    headers: [process.env.STORYBOOK_DIMENSION_1, 'Value'],
+    headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
     query: connectedParams
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const SingleDimensionTableVariantWithValueBarStory: Story = {
   name: 'Single dimension table variant with value bar',
   args: {
     variant: 'table',
-    headers: [process.env.STORYBOOK_DIMENSION_1, 'Value'],
+    headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
     query: connectedParams,
     styles: {
       table: {
@@ -116,7 +113,8 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
         }
       }
     }
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const StaticStory: Story = {
@@ -125,12 +123,13 @@ export const StaticStory: Story = {
     headers: barHeaders,
     rows: barRows
   },
-  render: (args) => <LeaderboardSource {...args} />
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const CustomStyleStory: Story = {
   name: 'Custom styles',
   tags: ['pattern'],
+  parameters: { imports: 'Leaderboard' },
   args: {
     variant: 'table',
     headers: tableHeaders,
@@ -173,5 +172,5 @@ export const CustomStyleStory: Story = {
       }
     }
   },
-  render: (args) => <LeaderboardSource {...args} />
+  render: (args) => <Leaderboard {...args} />
 }
