@@ -7,7 +7,7 @@ import { Leaderboard, LeaderboardComponent } from './Leaderboard'
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
   component: LeaderboardComponent,
-  render: (args) => <Leaderboard {...args} />
+  render: (args) => <ConnectedLeaderboardTemplate {...args} />
 }
 
 export default meta
@@ -40,7 +40,7 @@ const ConnectedLeaderboardTemplate = (args: Story['args']) => {
     process.env.STORYBOOK_TOKEN_URL
   )
 
-  if (accessToken === '') {
+  if (accessToken === '' || accessToken === undefined) {
     return null
   }
 
@@ -57,53 +57,27 @@ const ConnectedLeaderboardTemplate = (args: Story['args']) => {
   )
 }
 
-export const ConnectedStory: Story = {
-  name: 'Connected',
-  args: {
-    variant: 'table',
-    headers: [
-      process.env.STORYBOOK_DIMENSION_1,
-      process.env.STORYBOOK_DIMENSION_2,
-      process.env.STORYBOOK_DIMENSION_3
-    ] as string[],
-    query: {
-      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 30
-      },
-      rowLimit: 10,
-      dimensions: [
-        {
-          columnName: process.env.STORYBOOK_DIMENSION_1 as string
-        },
-        {
-          columnName: process.env.STORYBOOK_DIMENSION_2 as string
-        },
-        {
-          columnName: process.env.STORYBOOK_DIMENSION_3 as string
-        }
-      ],
-      sort: Sort.Asc
-    },
-    styles: {
-      table: {
-        hasValueBar: true
-      },
-      canvas: {
-        height: 500
-      }
-    }
+const connectedParams = {
+  accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+  metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
+  timeRange: {
+    relative: RelativeTimeRange.LastNDays,
+    n: 30
   },
-  render: (args) => <ConnectedLeaderboardTemplate {...args} />
+  rowLimit: 5,
+  dimensions: [
+    {
+      columnName: process.env.STORYBOOK_DIMENSION_1 as string
+    }
+  ],
+  sort: Sort.Asc
 }
 
 export const SingleDimensionStory: Story = {
   name: 'Single dimension',
   args: {
-    headers: barHeaders,
-    rows: barRows
+    headers: [process.env.STORYBOOK_DIMENSION_1] as string[],
+    query: connectedParams
   }
 }
 
@@ -111,8 +85,8 @@ export const SingleDimensionTableVariantStory: Story = {
   name: 'Single dimension table variant',
   args: {
     variant: 'table',
-    headers: tableHeaders,
-    rows: tableRows
+    headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
+    query: connectedParams
   }
 }
 
@@ -120,8 +94,8 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
   name: 'Single dimension table variant with value bar',
   args: {
     variant: 'table',
-    headers: tableHeaders,
-    rows: tableRows,
+    headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
+    query: connectedParams,
     styles: {
       table: {
         hasValueBar: true,
@@ -131,6 +105,15 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
       }
     }
   }
+}
+
+export const StaticStory: Story = {
+  name: 'Static',
+  args: {
+    headers: barHeaders,
+    rows: barRows
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const CustomStyleStory: Story = {
@@ -177,29 +160,6 @@ export const CustomStyleStory: Story = {
         }
       }
     }
-  }
-}
-
-export const ConnectedBasicStory: Story = {
-  name: 'Connected basic',
-  tags: ['pattern'],
-  args: {
-    headers: [process.env.STORYBOOK_DIMENSION_1] as string[],
-    query: {
-      accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 30
-      },
-      rowLimit: 5,
-      dimensions: [
-        {
-          columnName: process.env.STORYBOOK_DIMENSION_1 as string
-        }
-      ],
-      sort: Sort.Asc
-    }
   },
-  render: (args) => <ConnectedLeaderboardTemplate {...args} />
+  render: (args) => <Leaderboard {...args} />
 }

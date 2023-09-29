@@ -13,7 +13,7 @@ export const useStorybookAccessToken = (axiosInstance, accessTokenValue = '', to
       })
     }
 
-    if (accessTokenValue === '') {
+    if (accessTokenValue === '' || accessTokenValue === undefined) {
       fetchToken()
     }
   }, [axiosInstance, accessTokenValue, tokenUrlValue])
