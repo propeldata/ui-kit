@@ -53,7 +53,8 @@ const withSource = (StoryFn, context) => {
       .replace(/,\s*$/, '')
       .trim('')
 
-    source = prettier(render)
+    // source = prettier(render)
+    source = prettier(context.parameters.codeTemplate(render, context))
   } catch (e) {
     console.warn(e)
   }

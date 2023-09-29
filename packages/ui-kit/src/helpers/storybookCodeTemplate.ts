@@ -5,7 +5,7 @@ export const storybookCodeTemplate = (body: string, context: StoryContext): stri
 
   function ${context?.parameters?.componentName ?? `${context.title.split('/').pop()}Component`}() {
     return (
-        ${context?.parameters?.transformBody(body)}
+        ${context?.parameters?.transformBody ? context?.parameters?.transformBody(body) : body}
     )
   }
 `

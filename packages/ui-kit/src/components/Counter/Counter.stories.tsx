@@ -2,7 +2,7 @@ import { css } from '@emotion/css'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { quotedStringRegex, RelativeTimeRange, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { Counter as CounterSource, CounterComponent } from './Counter'
 
 const meta: Meta<typeof CounterComponent> = {
@@ -12,7 +12,7 @@ const meta: Meta<typeof CounterComponent> = {
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Counter, RelativeTimeRange',
-    transformBody: (body: string) => body.replace("'LAST_N_DAYS'", 'RelativeTimeRange.LastNDays'),
+    transformBody: (body: string) => body.replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays'),
     codeTemplate: storybookCodeTemplate
   }
 }

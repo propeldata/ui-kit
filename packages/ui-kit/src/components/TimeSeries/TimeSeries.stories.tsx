@@ -1,7 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, TimeSeriesGranularity, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import {
+  quotedStringRegex,
+  RelativeTimeRange,
+  storybookCodeTemplate,
+  TimeSeriesGranularity,
+  useStorybookAccessToken
+} from '../../helpers'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
@@ -11,7 +17,9 @@ const meta: Meta<typeof TimeSeriesComponent> = {
     controls: { sort: 'alpha' },
     imports: 'TimeSeries, RelativeTimeRange, TimeSeriesGranularity',
     transformBody: (body: string) =>
-      body.replace("'LAST_N_DAYS'", 'RelativeTimeRange.LastNDays').replace("'WEEK'", 'TimeSeriesGranularity.Week'),
+      body
+        .replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays')
+        .replace(quotedStringRegex('WEEK'), 'TimeSeriesGranularity.Week'),
     codeTemplate: storybookCodeTemplate
   }
 }

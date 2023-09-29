@@ -1,7 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, Sort, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import {
+  quotedStringRegex,
+  RelativeTimeRange,
+  Sort,
+  storybookCodeTemplate,
+  useStorybookAccessToken
+} from '../../helpers'
 import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
 
 const meta: Meta<typeof LeaderboardComponent> = {
@@ -10,7 +16,7 @@ const meta: Meta<typeof LeaderboardComponent> = {
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Leaderboard, RelativeTimeRange',
-    transformBody: (body: string) => body.replace("'LAST_N_DAYS'", 'RelativeTimeRange.LastNDays'),
+    transformBody: (body: string) => body.replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays'),
     codeTemplate: storybookCodeTemplate
   }
 }
