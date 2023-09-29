@@ -89,7 +89,6 @@ const connectedParams = {
 export const SingleDimensionStory: Story = {
   name: 'Single dimension',
   args: {
-    // headers: [process.env.STORYBOOK_DIMENSION_1],
     query: connectedParams
   },
   render: (args) => <Leaderboard {...args} />
