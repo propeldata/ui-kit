@@ -65,13 +65,9 @@ const connectedParams = {
 }
 
 const TimeSeries = (args: Story['args']) => {
-  const { accessToken } = useStorybookAccessToken(
-    axiosInstance,
-    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    process.env.STORYBOOK_TOKEN_URL
-  )
+  const { accessToken } = useStorybookAccessToken(axiosInstance)
 
-  if (accessToken === '' && args?.query) {
+  if (!accessToken && args?.query) {
     return null
   }
 
