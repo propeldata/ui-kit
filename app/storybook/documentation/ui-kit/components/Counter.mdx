@@ -1,5 +1,6 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/utils'
 import * as CounterStories from '../../../../../packages/ui-kit/src/components/Counter/Counter.stories'
 import * as CounterQueryPropsStories from '../../../../../packages/ui-kit/src/components/Counter/CounterQueryProps.stories'
 
@@ -16,78 +17,36 @@ opt for the Connected mode, the component will accept the query prop, which load
 
 You can import the component in your React file and use it as shown in the following example:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
-
-    function MonthRevenueCount() {
-      const queryOptions = {
-        accessToken: '<PROPEL_ACCESS_TOKEN>',
-        metric: 'Revenue',
-        timeRange: {
-          relative: RelativeTimeRange.LastNDays,
-          n: 30
-        }
-      }
-
-      return <Counter query={queryOptions} prefixValue="$" localize />
-    }
-
-`} />
-
-This will generate a counter component as shown below:
-
-<Story of={CounterStories.SingleValueStory} />
+<Canvas
+  of={CounterStories.SingleValueStory}
+  sourceState="shown"
+  source={{
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+  }}
+/>
 
 As you can see, the component comes unstyled. However, you can customize its styles to your liking. Here's how you can
 access the style props:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { Counter, RelativeTimeRange } from '@propeldata/ui-kit'
-
-    function MonthRevenueCountStyled() {
-      const queryOptions = {
-        accessToken: '<PROPEL_ACCESS_TOKEN>',
-        metric: 'Revenue',
-        timeRange: {
-          relative: RelativeTimeRange.LastNDays,
-          n: 30
-        }
-      }
-
-      const styles = {
-        font: {
-          size: '2rem',
-          style: 'italic',
-          family: 'Arial',
-          weight: 'bold'
-        }
-      }
-
-      return (
-        <div>
-          <Counter query={queryOptions} styles={styles} localize />
-        </div>
-      )
-    }
-
-`} />
-
-<Story of={CounterStories.SingleValueCustomStyleStory} />
+<Canvas
+  of={CounterStories.SingleValueCustomStyleStory}
+  sourceState="shown"
+  source={{
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+  }}
+/>
 
 In this example, we have built a simple span element that can be wrapped into any custom component of your preference.
 You can adjust these and other style properties to create a unique look for your Counter component.
 
 Here's an example of how you can wrap the Counter component inside a Card to give it a unique look.
 
-<Story of={CounterStories.ValueInCardStory} />
+<Canvas
+  of={CounterStories.ValueInCardStory}
+  source={{
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+  }}
+/>
 
 Now let's look at what all you can do with the component. The next 2 topics will cover all the props and styles you can
 configure to have a nice chart experience.

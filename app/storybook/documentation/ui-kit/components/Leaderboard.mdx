@@ -1,5 +1,6 @@
 import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/utils'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
 import * as LeaderboardQueryPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
 
@@ -17,91 +18,24 @@ automatically based on
 
 You can import the component in your React file and use it as shown in the following example:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    import { Leaderboard, RelativeTimeRange } from '@propeldata/ui-kit'
-
-    function MonthRevenueChart() {
-      const queryOptions = {
-        accessToken: '<PROPEL_ACCESS_TOKEN>',
-        metric: 'Revenue',
-        timeRange: {
-          relative: RelativeTimeRange.LastNDays,
-          n: 30
-        },
-        rowLimit: 5,
-        dimensions: [
-          {
-            columnName: 'DATA_SOURCE_TYPE'
-          }
-        ],
-        sort: Sort.Asc
-      }
-      return <Leaderboard query={queryOptions} />
-    }
-
-`} />
-
-This will generate a leaderboard chart as shown below:
-
-<Story of={LeaderboardStories.SingleDimensionStory} />
+<Canvas
+  of={LeaderboardStories.SingleDimensionStory}
+  sourceState="shown"
+  source={{
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+  }}
+/>
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
 totally different leaderboard chart now. Here's how you can access the style props:
 
-<Source
-  dark
-  format="dedent"
-  language="tsx"
-  code={`
-    function CustomChart() {
-      const styles = {
-          font: {
-          size: '14px'
-        },
-        table: {
-          stickyHeader: true,
-          height: '200px',
-          hasValueBar: true,
-          backgroundColor: '#191414',
-          header: {
-            align: 'center',
-            backgroundColor: '#282828',
-            font: {
-              color: '#1DB954',
-              weight: 'bold',
-              size: '18px'
-            }
-          },
-          valueBar: {
-            color: '#1DB954',
-            backgroundColor: '#545454'
-          },
-          valueColumn: {
-            align: 'center',
-            backgroundColor: '#191414',
-            font: {
-              color: '#1DB954'
-            }
-          },
-          columns: {
-            align: 'center',
-            font: {
-              color: '#1DB954'
-            }
-          }
-        }
-      }
-
-      return <Leaderboard styles={styles} variant="table" />
-    }
-
-`} />
-
-<Story of={LeaderboardStories.CustomStyleStory} />
+<Canvas
+  of={LeaderboardStories.CustomStyleStory}
+  sourceState="shown"
+  source={{
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+  }}
+/>
 
 In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe. Up
 to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.

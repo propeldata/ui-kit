@@ -2,14 +2,19 @@ import { css } from '@emotion/css'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
-import { Counter, CounterComponent } from './Counter'
+import { quotedStringRegex, RelativeTimeRange, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { Counter as CounterSource, CounterComponent } from './Counter'
 
 const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
   component: CounterComponent,
-  render: (args) => <ConnectedCounterTemplate {...args} />,
-  tags: ['tag']
+  tags: ['tag'],
+  parameters: {
+    controls: { sort: 'alpha' },
+    imports: 'Counter, RelativeTimeRange',
+    transformBody: (body: string) => body.replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays'),
+    codeTemplate: storybookCodeTemplate
+  }
 }
 
 export default meta
@@ -20,6 +25,7 @@ const connectedParams = {
   localize: true,
   prefixValue: '$',
   query: {
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
@@ -28,25 +34,23 @@ const connectedParams = {
   }
 }
 
-const ConnectedCounterTemplate = (args: Story['args']) => {
-  const { accessToken } = useStorybookAccessToken(
-    axiosInstance,
-    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    process.env.STORYBOOK_TOKEN_URL
-  )
+const Counter = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(axiosInstance)
 
-  if (accessToken === '' || accessToken === undefined) {
+  if (!accessToken && args?.query) {
     return null
   }
 
   return (
-    <Counter
+    <CounterSource
       {...{
         ...args,
-        query: {
-          ...args?.query,
-          accessToken
-        }
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
       }}
     />
   )
@@ -56,6 +60,7 @@ const styles = {
   container: css`
     font-family: Inter;
     display: inline-flex;
+    min-width: 300;
   `,
   card: css`
     flex: 1 auto;
@@ -73,12 +78,26 @@ const styles = {
     margin: 0;
     font-weight: 500;
     color: #2e90fa;
+  `,
+  cardComparisonTitle: css`
+    margin: 0;
+    font-weight: 500;
+    color: #7d89b0;
+  `,
+  cardComparisonValues: css`
+    display: flex;
+    align-items: flex-end;
+    color: #7d89b0;
+  `,
+  cardComparisonFrom: css`
+    margin: 0 0 4px 1ch;
   `
 }
 
 export const SingleValueStory: Story = {
   name: 'Single value',
-  args: connectedParams
+  args: connectedParams,
+  render: (args) => <Counter {...args} />
 }
 
 export const ValueInCardStory: Story = {
@@ -91,10 +110,10 @@ export const ValueInCardStory: Story = {
     }
   },
   render: (args) => (
-    <div className={css([styles.container, { minWidth: 300 }])}>
+    <div className={styles.container}>
       <div className={styles.card}>
         <span className={styles.cardTitle}>Revenue</span>
-        <ConnectedCounterTemplate {...args} />
+        <Counter {...args} />
       </div>
     </div>
   )
@@ -112,30 +131,20 @@ export const ValueInCardWithComparisonStory: Story = {
   render: (args) => (
     <div className={styles.container}>
       <div className={styles.card}>
-        <span className={css([styles.cardTitle, { color: '#7d89b0' }])}>Revenue</span>
-        <div
-          className={css`
-            display: flex;
-            align-items: flex-end;
-            color: #7d89b0;
-          `}
-        >
-          <ConnectedCounterTemplate {...args} />
-          <span
-            className={css`
-              margin: 4px 8px;
-            `}
-          >
-            from{' '}
+        <span className={styles.cardComparisonTitle}>Revenue</span>
+        <div className={styles.cardComparisonValues}>
+          <Counter {...args} />
+          <div className={styles.cardComparisonFrom}>
+            <span>from </span>
             <Counter
-              prefix="$"
+              prefixValue="$"
               value="16856"
               localize
               style={{
                 color: '#7d89b0'
               }}
             />
-          </span>
+          </div>
         </div>
       </div>
     </div>
@@ -149,7 +158,7 @@ export const StaticStory: Story = {
     value: '49291',
     localize: true
   },
-  render: Counter
+  render: (args) => <Counter {...args} />
 }
 
 export const SingleValueCustomStyleStory: Story = {
@@ -165,5 +174,6 @@ export const SingleValueCustomStyleStory: Story = {
         weight: 'bold'
       }
     }
-  }
+  },
+  render: (args) => <Counter {...args} />
 }

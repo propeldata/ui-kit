@@ -1,13 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, TimeSeriesGranularity, useStorybookAccessToken } from '../../helpers'
-import { TimeSeries, TimeSeriesComponent } from './TimeSeries'
+import {
+  quotedStringRegex,
+  RelativeTimeRange,
+  storybookCodeTemplate,
+  TimeSeriesGranularity,
+  useStorybookAccessToken
+} from '../../helpers'
+import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
   component: TimeSeriesComponent,
-  render: (args) => <ConnectedTimeSeriesTemplate {...args} />
+  parameters: {
+    controls: { sort: 'alpha' },
+    imports: 'TimeSeries, RelativeTimeRange, TimeSeriesGranularity',
+    transformBody: (body: string) =>
+      body
+        .replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays')
+        .replace(quotedStringRegex('WEEK'), 'TimeSeriesGranularity.Week'),
+    codeTemplate: storybookCodeTemplate
+  }
 }
 
 export default meta
@@ -41,7 +55,7 @@ const dataset = {
 }
 
 const connectedParams = {
-  accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+  accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
@@ -50,25 +64,23 @@ const connectedParams = {
   granularity: TimeSeriesGranularity.Week
 }
 
-const ConnectedTimeSeriesTemplate = (args: Story['args']) => {
-  const { accessToken } = useStorybookAccessToken(
-    axiosInstance,
-    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    process.env.STORYBOOK_TOKEN_URL
-  )
+const TimeSeries = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(axiosInstance)
 
-  if (accessToken === '' || accessToken === undefined) {
+  if (!accessToken && args?.query) {
     return null
   }
 
   return (
-    <TimeSeries
+    <TimeSeriesSource
       {...{
         ...args,
-        query: {
-          ...args?.query,
-          accessToken
-        }
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
       }}
     />
   )
@@ -79,7 +91,8 @@ export const LineVariantStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams
-  }
+  },
+  render: (args) => <TimeSeries {...args} />
 }
 
 export const BarVariantStory: Story = {
@@ -87,29 +100,6 @@ export const BarVariantStory: Story = {
   args: {
     variant: 'bar',
     query: connectedParams
-  }
-}
-
-export const StaticStory: Story = {
-  name: 'Static',
-  args: {
-    variant: 'line',
-    ...dataset
-  },
-  render: (args) => <TimeSeries {...args} />
-}
-
-export const CustomStyleStory: Story = {
-  name: 'Custom style',
-  tags: ['pattern'],
-  args: {
-    variant: 'bar',
-    styles: {
-      bar: {
-        backgroundColor: '#532AB4'
-      }
-    },
-    ...dataset
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -119,6 +109,7 @@ export const CustomChartStory: Story = {
   tags: ['pattern'],
   args: {
     variant: 'line',
+    query: connectedParams,
     styles: {
       line: {
         tension: 0.1,
@@ -134,7 +125,31 @@ export const CustomChartStory: Story = {
         backgroundColor: 'transparent',
         hideGridLines: true
       }
-    },
+    }
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const CustomStyleStory: Story = {
+  name: 'Custom style',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    styles: {
+      bar: {
+        backgroundColor: '#532AB4'
+      }
+    }
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const StaticStory: Story = {
+  name: 'Static',
+  parameters: { imports: 'TimeSeries' },
+  args: {
+    variant: 'line',
     ...dataset
   },
   render: (args) => <TimeSeries {...args} />
@@ -143,6 +158,7 @@ export const CustomChartStory: Story = {
 export const ErrorStory: Story = {
   name: 'Error',
   tags: ['pattern'],
+  parameters: { imports: 'TimeSeries' },
   args: {
     error: {
       title: 'Unable to connect',

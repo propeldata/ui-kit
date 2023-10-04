@@ -1,13 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { RelativeTimeRange, Sort, useStorybookAccessToken } from '../../helpers'
-import { Leaderboard, LeaderboardComponent } from './Leaderboard'
+import {
+  quotedStringRegex,
+  RelativeTimeRange,
+  Sort,
+  storybookCodeTemplate,
+  useStorybookAccessToken
+} from '../../helpers'
+import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
 
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
   component: LeaderboardComponent,
-  render: (args) => <ConnectedLeaderboardTemplate {...args} />
+  parameters: {
+    controls: { sort: 'alpha' },
+    imports: 'Leaderboard, RelativeTimeRange',
+    transformBody: (body: string) => body.replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays'),
+    codeTemplate: storybookCodeTemplate
+  }
 }
 
 export default meta
@@ -33,32 +44,30 @@ const tableRows = [
   ['The Lean Product Book', '1']
 ]
 
-const ConnectedLeaderboardTemplate = (args: Story['args']) => {
-  const { accessToken } = useStorybookAccessToken(
-    axiosInstance,
-    process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
-    process.env.STORYBOOK_TOKEN_URL
-  )
+const Leaderboard = (args: Story['args']) => {
+  const { accessToken } = useStorybookAccessToken(axiosInstance)
 
-  if (accessToken === '' || accessToken === undefined) {
+  if (!accessToken && args?.query) {
     return null
   }
 
   return (
-    <Leaderboard
+    <LeaderboardSource
       {...{
         ...args,
-        query: {
-          ...args?.query,
-          accessToken
-        }
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
       }}
     />
   )
 }
 
 const connectedParams = {
-  accessToken: process.env.STORYBOOK_PROPEL_ACCESS_TOKEN,
+  accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
@@ -76,9 +85,9 @@ const connectedParams = {
 export const SingleDimensionStory: Story = {
   name: 'Single dimension',
   args: {
-    headers: [process.env.STORYBOOK_DIMENSION_1] as string[],
     query: connectedParams
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const SingleDimensionTableVariantStory: Story = {
@@ -87,7 +96,8 @@ export const SingleDimensionTableVariantStory: Story = {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
     query: connectedParams
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const SingleDimensionTableVariantWithValueBarStory: Story = {
@@ -104,7 +114,8 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
         }
       }
     }
-  }
+  },
+  render: (args) => <Leaderboard {...args} />
 }
 
 export const StaticStory: Story = {
@@ -119,6 +130,7 @@ export const StaticStory: Story = {
 export const CustomStyleStory: Story = {
   name: 'Custom styles',
   tags: ['pattern'],
+  parameters: { imports: 'Leaderboard' },
   args: {
     variant: 'table',
     headers: tableHeaders,
