@@ -1,4 +1,5 @@
 export * from './customCanvasBackgroundColor'
+export * from './formatLabels'
 export * from './getTimeZone'
 export * from './graphql'
 export * from './quotedStringRegex'

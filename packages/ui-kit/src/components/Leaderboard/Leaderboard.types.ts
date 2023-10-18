@@ -66,4 +66,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 
   /** Leaderboard query props */
   query?: LeaderboardQueryProps
+
+  /** Format function for labels, must return an array with the new labels */
+  labelFormatter?: (labels: string[]) => string[]
 }
