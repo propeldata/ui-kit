@@ -31,21 +31,6 @@ export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularit
   return granularity ? unitByGranularity[granularity] || false : false
 }
 
-interface FormatLabelsOptions {
-  labels?: string[]
-  formatter?: (labels: string[]) => string[]
-}
-
-export function formatLabels(options: FormatLabelsOptions): string[] | undefined {
-  const { labels, formatter } = options
-
-  if (formatter && typeof formatter !== 'function') {
-    throw new Error('`labelFormatter` prop must be a formatter function')
-  }
-
-  return formatter ? formatter(labels || []) : labels
-}
-
 interface GetDefaultGranularityOptions {
   timeRange?: TimeRangeInput
   labels?: string[]
@@ -379,10 +364,12 @@ export function tooltipTitleCallback(context: { label: string }[], granularity: 
   const title = context[0].label
   const date = new Date(title)
 
-  return {
-    [TimeSeriesGranularity.Day]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
-    [TimeSeriesGranularity.Week]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
-    [TimeSeriesGranularity.Month]: DateTime.fromJSDate(date).toFormat('LLLL, yyyy'),
-    [TimeSeriesGranularity.Year]: DateTime.fromJSDate(date).toFormat('yyyy')
-  }[granularity] ?? title
+  return (
+    {
+      [TimeSeriesGranularity.Day]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
+      [TimeSeriesGranularity.Week]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
+      [TimeSeriesGranularity.Month]: DateTime.fromJSDate(date).toFormat('LLLL, yyyy'),
+      [TimeSeriesGranularity.Year]: DateTime.fromJSDate(date).toFormat('yyyy')
+    }[granularity] ?? title
+  )
 }

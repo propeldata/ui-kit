@@ -18,7 +18,8 @@ import {
   customCanvasBackgroundColor,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useTimeSeriesQuery
+  useTimeSeriesQuery,
+  formatLabels
 } from '../../helpers'
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
@@ -27,7 +28,6 @@ import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import {
-  formatLabels,
   getDefaultGranularity,
   getScales,
   tooltipTitleCallback,
@@ -148,8 +148,12 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
       if (!canvasRef.current || !data?.labels || !data.values || hasError || (variant !== 'bar' && variant !== 'line'))
         return
 
-      const labels = data.labels || []
+      let labels = data.labels || []
       const values = data.values || []
+
+      if (labelFormatter) {
+        labels = formatLabels({ labels, formatter: labelFormatter })
+      }
 
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
@@ -213,7 +217,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, hasError, isFormatted, styles, variant, zone]
+    [granularity, hasError, isFormatted, styles, variant, zone, labelFormatter]
   )
 
   const destroyChart = () => {
@@ -255,20 +259,18 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
   React.useEffect(() => {
     if (isStatic) {
-      const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      renderChart({ labels: formattedLabels, values })
+      renderChart({ labels, values })
     }
-  }, [isStatic, isLoadingStatic, styles, variant, labels, values, labelFormatter, renderChart])
+  }, [isStatic, isLoadingStatic, styles, variant, labels, values, renderChart])
 
   React.useEffect(() => {
     if (serverData && !isStatic) {
       const labels = serverData.timeSeries.labels ?? []
       const values = (serverData.timeSeries.values ?? []).map((value) => (value == null ? null : Number(value)))
 
-      const formattedLabels = formatLabels({ labels, formatter: labelFormatter })
-      renderChart({ labels: formattedLabels, values })
+      renderChart({ labels, values })
     }
-  }, [serverData, variant, styles, isStatic, labelFormatter, renderChart])
+  }, [serverData, variant, styles, isStatic, renderChart])
 
   React.useEffect(() => {
     return () => {

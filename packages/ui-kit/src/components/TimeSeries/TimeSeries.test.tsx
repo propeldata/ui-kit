@@ -114,4 +114,20 @@ describe('TimeSeries', () => {
     // TODO: this message suggests that the error is due to a network issue when it's not, maybe we should think about changing the message depending on the error
     await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
   })
+
+  it('should render static data with custom labelFormatter', () => {
+    dom = render(
+      <TimeSeries
+        labels={mockStaticData.labels}
+        values={mockStaticData.values}
+        labelFormatter={(labels) => labels.map((label) => label.replace('-', '.'))}
+      />
+    )
+
+    const chartElement = dom.getByRole('img') as HTMLCanvasElement
+    const chartInstance = Chart.getChart(chartElement)
+    const chartLabels = chartInstance?.data.labels
+
+    expect(chartLabels).toEqual(mockStaticData.labels.map((label) => label.replace('-', '.')))
+  })
 })
