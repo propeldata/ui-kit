@@ -2697,7 +2697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-react-query@npm:4.1.0":
+"@graphql-codegen/typescript-react-query@npm:^4.1.0":
   version: 4.1.0
   resolution: "@graphql-codegen/typescript-react-query@npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"
   dependencies:
@@ -4176,14 +4176,14 @@ __metadata:
     "@graphql-codegen/typescript": ^4.0.1
     "@graphql-codegen/typescript-msw": ^1.1.6
     "@graphql-codegen/typescript-operations": ^4.0.1
-    "@graphql-codegen/typescript-react-query": 4.1.0
+    "@graphql-codegen/typescript-react-query": ^4.1.0
     "@juggle/resize-observer": ^3.4.0
     "@storybook/blocks": ^7.2.1
     "@storybook/react": ^7.2.0
     "@storybook/theming": ^7.4.0
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
-    "@tanstack/react-query": 4.29.17
+    "@tanstack/react-query": ^4.29.17
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
@@ -6508,19 +6508,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.29.17":
-  version: 4.29.17
-  resolution: "@tanstack/query-core@npm:4.29.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Fquery-core%2F-%2Fquery-core-4.29.17.tgz"
-  checksum: 0440d58a566fc3d6791a27eae439f497acc0142cb629ca0fb6e536f9c0a29d150b816ae33c9375411582da0b849a2ef141ef3b2284b8b313d5a4d6671b2548a3
+"@tanstack/query-core@npm:4.36.1":
+  version: 4.36.1
+  resolution: "@tanstack/query-core@npm:4.36.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Fquery-core%2F-%2Fquery-core-4.36.1.tgz"
+  checksum: 47672094da20d89402d9fe03bb7b0462be73a76ff9ca715169738bc600a719d064d106d083a8eedae22a2c22de22f87d5eb5d31ef447aba771d9190f2117ed10
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.29.17":
-  version: 4.29.17
-  resolution: "@tanstack/react-query@npm:4.29.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-query%2F-%2Freact-query-4.29.17.tgz"
+"@tanstack/react-query@npm:^4.29.17":
+  version: 4.36.1
+  resolution: "@tanstack/react-query@npm:4.36.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-query%2F-%2Freact-query-4.36.1.tgz"
   dependencies:
-    "@tanstack/query-core": 4.29.17
-    client-only: 0.0.1
+    "@tanstack/query-core": 4.36.1
     use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -6531,7 +6530,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 5630dcb93100a48165464188aef2f53ed8e6bcb65669ff919f0916b7a21b58c7e21b06f4e4a331d1b9bfb8a89677266e79bc2a3bc80af62d763b08b3b195f7ea
+  checksum: 1aff0a476859386f8d32253fa0d0bde7b81769a6d4d4d9cbd78778f0f955459a3bdb7ee27a0d2ee7373090f12998b45df80db0b5b313bd0a7a39d36c6e8e51c5
   languageName: node
   linkType: hard
 
@@ -10077,13 +10076,6 @@ __metadata:
   version: 3.0.0
   resolution: "cli-width@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcli-width%2F-%2Fcli-width-3.0.0.tgz"
   checksum: 4c94af3769367a70e11ed69aa6095f1c600c0ff510f3921ab4045af961820d57c0233acfa8b6396037391f31b4c397e1f614d234294f979ff61430a6c166c3f6
-  languageName: node
-  linkType: hard
-
-"client-only@npm:0.0.1":
-  version: 0.0.1
-  resolution: "client-only@npm:0.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclient-only%2F-%2Fclient-only-0.0.1.tgz"
-  checksum: 0c16bf660dadb90610553c1d8946a7fdfb81d624adea073b8440b7d795d5b5b08beb3c950c6a2cf16279365a3265158a236876d92bce16423c485c322d7dfaf8
   languageName: node
   linkType: hard
 
