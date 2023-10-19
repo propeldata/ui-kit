@@ -79,6 +79,7 @@ describe('Leaderboard', () => {
       />
     )
 
+    console.log('------------', await dom.findByRole('img'))
     const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
     const chartInstance = Chart.getChart(chartElement)
 
