@@ -38,8 +38,25 @@ const handlers = [
 
   rest.post('https://api.us-east-2.propeldata.com/graphql', async (req, res, ctx) => {
     const body = await req.json()
+    const variables = body.variables
+    const { metricName } = variables.leaderboardInput
 
-    console.log(body)
+    if (metricName === 'should-fail') {
+      return res(
+        ctx.status(500),
+        ctx.json([
+          {
+            message: 'Something went wrong'
+          }
+        ])
+      )
+    }
+
+    return res(
+      ctx.json({
+        leaderboard: mockData
+      })
+    )
   })
 ]
 
