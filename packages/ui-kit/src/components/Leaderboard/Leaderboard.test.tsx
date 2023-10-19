@@ -36,8 +36,10 @@ const handlers = [
     )
   }),
 
-  rest.post('https://api.us-east-2.propeldata.com/graphql', (req, res, ctx) => {
-    console.log(req.json())
+  rest.post('https://api.us-east-2.propeldata.com/graphql', async (req, res, ctx) => {
+    const body = await req.json()
+
+    console.log(body)
   })
 ]
 
