@@ -4200,7 +4200,7 @@ __metadata:
     jest-canvas-mock: ^2.5.2
     jest-environment-jsdom: ^27.5.1
     luxon: ^3.4.1
-    msw: ^1.2.2
+    msw: ^1.3.2
     react: ^18.2.0
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
@@ -17333,7 +17333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^1.2.2":
+"msw@npm:^1.3.2":
   version: 1.3.2
   resolution: "msw@npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"
   dependencies:
