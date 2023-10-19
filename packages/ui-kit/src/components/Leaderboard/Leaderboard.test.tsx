@@ -1,6 +1,5 @@
 import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
-import { rest } from 'msw'
 import React from 'react'
 import { RelativeTimeRange } from '../../helpers'
 import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
@@ -31,29 +30,6 @@ const handlers = [
 
     return res(
       ctx.data({
-        leaderboard: mockData
-      })
-    )
-  }),
-
-  rest.post('https://api.us-east-2.propeldata.com/graphql', async (req, res, ctx) => {
-    const body = await req.json()
-    const variables = body.variables
-    const { metricName } = variables.leaderboardInput
-
-    if (metricName === 'should-fail') {
-      return res(
-        ctx.status(500),
-        ctx.json([
-          {
-            message: 'Something went wrong'
-          }
-        ])
-      )
-    }
-
-    return res(
-      ctx.json({
         leaderboard: mockData
       })
     )

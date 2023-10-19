@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react'
 import { Chart } from 'chart.js'
-import { rest } from 'msw'
 import React from 'react'
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
 import { Dom, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
@@ -33,29 +32,6 @@ const handlers = [
 
     return res(
       ctx.data({
-        timeSeries: mockData
-      })
-    )
-  }),
-
-  rest.post('https://api.us-east-2.propeldata.com/graphql', async (req, res, ctx) => {
-    const body = await req.json()
-    const variables = body.variables
-    const { metricName } = variables.timeSeriesInput
-
-    if (metricName === 'should-fail') {
-      return res(
-        ctx.status(500),
-        ctx.json([
-          {
-            message: 'Something went wrong'
-          }
-        ])
-      )
-    }
-
-    return res(
-      ctx.json({
         timeSeries: mockData
       })
     )

@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import { rest } from 'msw'
 import React from 'react'
 import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { Counter } from './Counter'
@@ -34,39 +33,6 @@ const handlers = [
 
     return res(
       ctx.data({
-        counter: mockData
-      })
-    )
-  }),
-
-  rest.post('https://api.us-east-2.propeldata.com/graphql', async (req, res, ctx) => {
-    const body = await req.json()
-    const variables = body.variables
-    const { metricName } = variables.counterInput
-
-    if (metricName === 'lack-of-data') {
-      return res(
-        ctx.json({
-          counter: {
-            value: null
-          }
-        })
-      )
-    }
-
-    if (metricName === 'should-fail') {
-      return res(
-        ctx.status(500),
-        ctx.json([
-          {
-            message: 'something went wrong'
-          }
-        ])
-      )
-    }
-
-    return res(
-      ctx.json({
         counter: mockData
       })
     )
