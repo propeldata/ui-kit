@@ -40,6 +40,7 @@ describe('Leaderboard', () => {
   let dom: Dom
 
   beforeEach(() => {
+    console.log('------handlers', handlers)
     setupTestHandlers(handlers)
   })
 
@@ -60,8 +61,6 @@ describe('Leaderboard', () => {
   })
 
   it('should render the leaderboard with server data', async () => {
-    mockServer.listen()
-
     dom = render(
       <Leaderboard
         query={{
