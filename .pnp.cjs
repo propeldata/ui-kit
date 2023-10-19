@@ -8511,6 +8511,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.3.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["node-fetch", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
             ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-17.0.2.tgz"],\
@@ -8559,6 +8560,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.3.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["node-fetch", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
             ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-16.14.0.tgz"],\
@@ -8607,6 +8609,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.3.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["node-fetch", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
@@ -8654,6 +8657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.3.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["node-fetch", "npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fnode-fetch%2F-%2Fnode-fetch-3.3.2.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\

@@ -2,6 +2,7 @@
 
 const { TextEncoder, TextDecoder } = require('util')
 const OriginalJSDOMEnvironment = require('jest-environment-jsdom')
+const fetch = import('node-fetch')
 
 Object.defineProperty(exports, '__esModule', {
   value: true
