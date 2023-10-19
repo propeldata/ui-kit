@@ -159,7 +159,7 @@ export const LeaderboardComponent = ({
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
-          'content-type': 'application/json',
+          'content-type': 'application/graphql+json',
           authorization: `Bearer ${query?.accessToken}`
         }
       }
