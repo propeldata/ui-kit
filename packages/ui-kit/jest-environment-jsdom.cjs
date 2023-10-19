@@ -2,6 +2,7 @@
 
 const { TextEncoder, TextDecoder } = require('util')
 const OriginalJSDOMEnvironment = require('jest-environment-jsdom')
+const fetch = require('whatwg-fetch')
 
 Object.defineProperty(exports, '__esModule', {
   value: true
