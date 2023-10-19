@@ -3,7 +3,6 @@ import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange } from '../../helpers'
 import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
-import { queryClient } from '../withContainer'
 import { Leaderboard } from './Leaderboard'
 
 const mockData = {
@@ -41,7 +40,6 @@ describe('Leaderboard', () => {
   let dom: Dom
 
   beforeEach(() => {
-    queryClient.clear()
     setupTestHandlers(handlers)
   })
 

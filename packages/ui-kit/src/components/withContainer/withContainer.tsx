@@ -2,7 +2,7 @@ import React from 'react'
 import { QueryClient, QueryClientProvider } from '../../helpers'
 import { ErrorBoundary } from '../ErrorBoundary'
 
-export const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 export const withContainer = <P extends object, C extends object>(
   WrappedComponent: React.ComponentType<P>,
