@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange } from '../../helpers'
-import { Dom, mockLeaderboardQuery, setupTestHandlers, mockServer } from '../../testing'
+import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
 import { Leaderboard } from './Leaderboard'
 
 const mockData = {
@@ -41,7 +41,6 @@ describe('Leaderboard', () => {
 
   beforeEach(() => {
     setupTestHandlers(handlers)
-    mockServer.listen({ onUnhandledRequest: 'bypass' })
   })
 
   it('should render the leaderboard with static data', () => {
@@ -81,7 +80,6 @@ describe('Leaderboard', () => {
     )
 
     const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
-    console.log({ chartElement })
     const chartInstance = Chart.getChart(chartElement)
 
     const chartData = chartInstance?.data.datasets[0].data
