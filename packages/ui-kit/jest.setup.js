@@ -13,12 +13,8 @@ process.env.NEXT_PUBLIC_CONFIG_MANAGEMENT_GRAPHQL_ENDPOINT ??= 'http://localhost
 // Establish API mocking before all tests.
 beforeAll(() => {
   window.ResizeObserver = window.ResizeObserver || ResizeObserverPolyfill
-  mockServer.listen({
-    onUnhandledRequest: (request) => {
-      console.log('UNHANDLED REQUEST')
-      console.error(request)
-    }
-  })
+
+  mockServer.listen()
 })
 
 // Reset any request handlers that we may add during the tests,
