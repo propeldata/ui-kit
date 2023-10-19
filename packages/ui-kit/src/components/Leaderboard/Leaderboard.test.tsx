@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
+import { rest } from 'msw'
 import React from 'react'
 import { RelativeTimeRange } from '../../helpers'
 import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
@@ -33,6 +34,10 @@ const handlers = [
         leaderboard: mockData
       })
     )
+  }),
+
+  rest.post('https://api.us-east-2.propeldata.com/graphql', (req, res, ctx) => {
+    console.log(req.json())
   })
 ]
 
