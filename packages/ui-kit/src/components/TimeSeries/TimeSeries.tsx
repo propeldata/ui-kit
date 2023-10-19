@@ -148,12 +148,8 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
       if (!canvasRef.current || !data?.labels || !data.values || hasError || (variant !== 'bar' && variant !== 'line'))
         return
 
-      let labels = data.labels || []
+      const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) || []
       const values = data.values || []
-
-      if (labelFormatter) {
-        labels = formatLabels({ labels, formatter: labelFormatter })
-      }
 
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor

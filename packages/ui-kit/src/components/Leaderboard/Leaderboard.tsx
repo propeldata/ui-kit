@@ -69,12 +69,8 @@ export const LeaderboardComponent = ({
     (data?: LeaderboardData) => {
       if (!canvasRef.current || !data || variant === 'table') return
 
-      let labels = data.rows?.map((row) => row[0]) || []
+      const labels = formatLabels({ labels: data.rows?.map((row) => row[0]), formatter: labelFormatter }) || []
       const values = data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
-
-      if (labelFormatter) {
-        labels = formatLabels({ labels, formatter: labelFormatter })
-      }
 
       const hideGridLines = styles?.canvas?.hideGridLines || false
 
