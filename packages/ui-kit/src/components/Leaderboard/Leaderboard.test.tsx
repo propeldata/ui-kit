@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange } from '../../helpers'
-import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
+import { Dom, mockLeaderboardQuery, setupTestHandlers, mockServer } from '../../testing'
 import { Leaderboard } from './Leaderboard'
 
 const mockData = {
@@ -60,6 +60,8 @@ describe('Leaderboard', () => {
   })
 
   it('should render the leaderboard with server data', async () => {
+    mockServer.listen()
+
     dom = render(
       <Leaderboard
         query={{
