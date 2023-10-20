@@ -64,9 +64,6 @@
     "react": "^16.8 || ^17 || ^18",
     "react-dom": "^16.8 || ^17 || ^18"
   },
-  "resolutions": {
-    "headers-polyfill": "4.0.1"
-  },
   "exports": {
     ".": {
       "import": "./dist/mjs/index.js",

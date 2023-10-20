@@ -29,6 +29,7 @@ const handlers = [
     }
 
     return res(
+      ctx.set('Content-Type', 'application/json'),
       ctx.data({
         leaderboard: mockData
       })
