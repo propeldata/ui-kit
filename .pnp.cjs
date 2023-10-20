@@ -8082,7 +8082,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/debug", "npm:4.1.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fdebug%2F-%2Fdebug-4.1.10.tgz"],\
             ["@xmldom/xmldom", "npm:0.8.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40xmldom%2Fxmldom%2F-%2Fxmldom-0.8.10.tgz"],\
             ["debug", "virtual:b5e3d936f0a7abc76cfbfdcde4ae7ddf34c1fc0891e2733582e3cc0f0146d706e9326a5df3970348146109b50d877868811885065a72537011e54d78c91a168a#npm:4.3.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdebug%2F-%2Fdebug-4.3.4.tgz"],\
-            ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"],\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
             ["outvariant", "npm:1.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Foutvariant%2F-%2Foutvariant-1.4.0.tgz"],\
             ["strict-event-emitter", "npm:0.2.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrict-event-emitter%2F-%2Fstrict-event-emitter-0.2.8.tgz"],\
             ["web-encoding", "npm:1.1.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fweb-encoding%2F-%2Fweb-encoding-1.1.5.tgz"]\
@@ -23613,10 +23613,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["headers-polyfill", [\
-        ["npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz", {\
-          "packageLocation": "./.yarn/cache/headers-polyfill-npm-3.2.5-4f2d43cf48-a3c4bdd661.zip/node_modules/headers-polyfill/",\
+        ["npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz", {\
+          "packageLocation": "./.yarn/cache/headers-polyfill-npm-4.0.2-2f2dc10de6-a95280ed58.zip/node_modules/headers-polyfill/",\
           "packageDependencies": [\
-            ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"]\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27263,7 +27263,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chokidar", "npm:3.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchokidar%2F-%2Fchokidar-3.5.3.tgz"],\
             ["cookie", "npm:0.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcookie%2F-%2Fcookie-0.4.2.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
-            ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"],\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
             ["inquirer", "npm:8.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Finquirer%2F-%2Finquirer-8.2.6.tgz"],\
             ["is-node-process", "npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-node-process%2F-%2Fis-node-process-1.2.0.tgz"],\
             ["js-levenshtein", "npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjs-levenshtein%2F-%2Fjs-levenshtein-1.1.6.tgz"],\

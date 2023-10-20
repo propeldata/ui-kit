@@ -55,6 +55,9 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "resolutions": {
+    "headers-polyfill": "4.0.2"
+  },
   "packageManager": "yarn@3.6.0",
   "config": {
     "commitizen": {
