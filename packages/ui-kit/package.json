@@ -50,7 +50,6 @@
     "@types/react-dom": "latest",
     "@types/testing-library__jest-dom": "^5.14.7",
     "graphql": "^16.6.0",
-    "headers-polyfill": "^4.0.2",
     "jest": "^27.5.1",
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^27.5.1",
@@ -64,6 +63,9 @@
     "graphql": "^16.6",
     "react": "^16.8 || ^17 || ^18",
     "react-dom": "^16.8 || ^17 || ^18"
+  },
+  "resolutions": {
+    "headers-polyfill": "4.0.1"
   },
   "exports": {
     ".": {
