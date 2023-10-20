@@ -8,13 +8,14 @@ Object.defineProperty(exports, '__esModule', {
 })
 
 class JSDOMEnvironment extends OriginalJSDOMEnvironment {
-  constructor (...args) {
+  constructor(...args) {
     const { global } = super(...args)
     if (!global.TextEncoder) global.TextEncoder = TextEncoder
     if (!global.TextDecoder) global.TextDecoder = TextDecoder
     if (!global.fetch) global.fetch = fetch
     if (!global.Request) global.Request = Request
     if (!global.Response) global.Response = Response
+    if (!global.Headers) global.Response = Headers
   }
 }
 

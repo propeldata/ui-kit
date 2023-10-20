@@ -8506,6 +8506,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8554,6 +8555,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8602,6 +8604,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -8649,6 +8652,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["dotenv", "npm:16.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdotenv%2F-%2Fdotenv-16.3.1.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
             ["jest", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest%2F-%2Fjest-27.5.1.tgz"],\
             ["jest-canvas-mock", "npm:2.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-canvas-mock%2F-%2Fjest-canvas-mock-2.5.2.tgz"],\
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
@@ -23613,6 +23617,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/headers-polyfill-npm-3.2.5-4f2d43cf48-a3c4bdd661.zip/node_modules/headers-polyfill/",\
           "packageDependencies": [\
             ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz", {\
+          "packageLocation": "./.yarn/cache/headers-polyfill-npm-4.0.2-2f2dc10de6-a95280ed58.zip/node_modules/headers-polyfill/",\
+          "packageDependencies": [\
+            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
