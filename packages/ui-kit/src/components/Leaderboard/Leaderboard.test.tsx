@@ -131,4 +131,22 @@ describe('Leaderboard', () => {
       await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
     })
   })
+
+  it('should render static data with custom labelFormatter', () => {
+    dom = render(
+      <Leaderboard
+        headers={mockData.headers}
+        rows={mockData.rows}
+        labelFormatter={(labels) => labels.map((label) => label.replace('-', '.'))}
+      />
+    )
+
+    const chartElement = dom.getByRole('img') as HTMLCanvasElement
+    const chartInstance = Chart.getChart(chartElement)
+
+    const chartLabels = chartInstance?.data.labels
+    const resultingLabels = mockData.rows.map((row) => row[0])
+
+    expect(chartLabels).toEqual(resultingLabels.map((label) => label.replace('-', '.')))
+  })
 })

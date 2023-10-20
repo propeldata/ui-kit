@@ -8,7 +8,7 @@ Object.defineProperty(exports, '__esModule', {
 })
 
 class JSDOMEnvironment extends OriginalJSDOMEnvironment {
-  constructor (...args) {
+  constructor(...args) {
     const { global } = super(...args)
     if (!global.TextEncoder) global.TextEncoder = TextEncoder
     if (!global.TextDecoder) global.TextDecoder = TextDecoder

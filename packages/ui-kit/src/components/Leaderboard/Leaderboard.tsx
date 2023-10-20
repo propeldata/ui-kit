@@ -5,7 +5,8 @@ import {
   customCanvasBackgroundColor,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useLeaderboardQuery
+  useLeaderboardQuery,
+  formatLabels
 } from '../../helpers'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
@@ -39,6 +40,7 @@ export const LeaderboardComponent = ({
   query,
   error,
   loading: isLoadingStatic = false,
+  labelFormatter,
   timeZone,
   ...rest
 }: LeaderboardProps) => {
@@ -67,7 +69,7 @@ export const LeaderboardComponent = ({
     (data?: LeaderboardData) => {
       if (!canvasRef.current || !data || variant === 'table') return
 
-      const labels = data.rows?.map((row) => row[0]) || []
+      const labels = formatLabels({ labels: data.rows?.map((row) => row[0]), formatter: labelFormatter }) || []
       const values = data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
       const hideGridLines = styles?.canvas?.hideGridLines || false
@@ -138,7 +140,7 @@ export const LeaderboardComponent = ({
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [styles, variant]
+    [styles, variant, labelFormatter]
   )
 
   const destroyChart = () => {
@@ -157,7 +159,7 @@ export const LeaderboardComponent = ({
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
-          'content-type': 'application/json',
+          'content-type': 'application/graphql+json',
           authorization: `Bearer ${query?.accessToken}`
         }
       }
