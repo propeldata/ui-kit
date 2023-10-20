@@ -1,7 +1,7 @@
 import { setupServer } from 'msw/node'
-import { RequestHandler } from 'msw'
+import { GraphQLHandler, GraphQLRequest, GraphQLVariables } from 'msw'
 
 export const mockServer = setupServer()
-export const setupTestHandlers = (handlers: RequestHandler[]) => {
+export const setupTestHandlers = (handlers: GraphQLHandler<GraphQLRequest<GraphQLVariables>>[]) => {
   mockServer.use(...handlers)
 }

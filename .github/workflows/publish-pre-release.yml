@@ -39,7 +39,7 @@ jobs:
       # Build
       - uses: actions/setup-node@v3
         with:
-          node-version: '18.13.0'
+          node-version: '18.0.0'
       - uses: ./actions/propel-slack
         with:
           slack_token: ${{ secrets.SLACK_TOKEN }}
