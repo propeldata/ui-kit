@@ -61,6 +61,8 @@ describe('Leaderboard', () => {
   })
 
   it.only('should render the leaderboard with server data', async () => {
+    console.log('-------------- Node ver', process.versions.node)
+
     dom = render(
       <Leaderboard
         query={{
