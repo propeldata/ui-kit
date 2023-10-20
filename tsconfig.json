@@ -4,7 +4,7 @@
     "lib": ["dom", "es2015"],
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "target": "es2016",
+    "target": "esnext",
     "declaration": true,
     "experimentalDecorators": true,
     "inlineSourceMap": true,
