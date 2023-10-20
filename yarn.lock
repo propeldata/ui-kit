@@ -2514,19 +2514,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/add@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "@graphql-codegen/add@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.1.tgz"
+"@graphql-codegen/add@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@graphql-codegen/add@npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.0.tgz"
   dependencies:
-    "@graphql-codegen/plugin-helpers": ^4.1.0
-    tslib: ~2.5.0
+    "@graphql-codegen/plugin-helpers": ^4.0.0
+    tslib: ~2.4.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 0a1ee993cda0fd2adbffd79db03007e9eaa32830607ba6d46c12414bd9e0f568cee8c0d9ad976915b35a4647ff3201364383e57e023ab7dfd3b18f7c69c464e8
+  checksum: 16192f8d057669291f83823755e6260ecb4fd23bb2791c2554e612dd9e30ff9b9faf64e441f3602afc11744bf035c295058797ca4a26aded9e91cfb4a8ebef6c
   languageName: node
   linkType: hard
 
-"@graphql-codegen/cli@npm:^4.0.1":
+"@graphql-codegen/cli@npm:4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/cli@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fcli%2F-%2Fcli-4.0.1.tgz"
   dependencies:
@@ -2622,7 +2622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/plugin-helpers@npm:^4.1.0":
+"@graphql-codegen/plugin-helpers@npm:^4.0.0":
   version: 4.2.0
   resolution: "@graphql-codegen/plugin-helpers@npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-4.2.0.tgz"
   dependencies:
@@ -2667,7 +2667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-msw@npm:^1.1.6":
+"@graphql-codegen/typescript-msw@npm:1.1.6":
   version: 1.1.6
   resolution: "@graphql-codegen/typescript-msw@npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"
   dependencies:
@@ -2682,7 +2682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-operations@npm:^4.0.1":
+"@graphql-codegen/typescript-operations@npm:4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript-operations@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"
   dependencies:
@@ -2697,7 +2697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-react-query@npm:^4.1.0":
+"@graphql-codegen/typescript-react-query@npm:4.1.0":
   version: 4.1.0
   resolution: "@graphql-codegen/typescript-react-query@npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"
   dependencies:
@@ -2712,7 +2712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript@npm:^4.0.1":
+"@graphql-codegen/typescript@npm:4.0.1, @graphql-codegen/typescript@npm:^4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript%2F-%2Ftypescript-4.0.1.tgz"
   dependencies:
@@ -4171,12 +4171,12 @@ __metadata:
   resolution: "@propeldata/ui-kit@workspace:packages/ui-kit"
   dependencies:
     "@emotion/css": ^11.10.5
-    "@graphql-codegen/add": ^4.0.0
-    "@graphql-codegen/cli": ^4.0.1
-    "@graphql-codegen/typescript": ^4.0.1
-    "@graphql-codegen/typescript-msw": ^1.1.6
-    "@graphql-codegen/typescript-operations": ^4.0.1
-    "@graphql-codegen/typescript-react-query": ^4.1.0
+    "@graphql-codegen/add": 4.0.0
+    "@graphql-codegen/cli": 4.0.1
+    "@graphql-codegen/typescript": 4.0.1
+    "@graphql-codegen/typescript-msw": 1.1.6
+    "@graphql-codegen/typescript-operations": 4.0.1
+    "@graphql-codegen/typescript-react-query": 4.1.0
     "@juggle/resize-observer": ^3.4.0
     "@storybook/blocks": ^7.2.1
     "@storybook/react": ^7.2.0
@@ -4200,7 +4200,7 @@ __metadata:
     jest-canvas-mock: ^2.5.2
     jest-environment-jsdom: ^27.5.1
     luxon: ^3.4.1
-    msw: ^1.2.2
+    msw: 1.3.2
     react: ^18.2.0
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
@@ -17341,7 +17341,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:^1.2.2":
+"msw@npm:1.3.2":
   version: 1.3.2
   resolution: "msw@npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"
   dependencies:
