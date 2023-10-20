@@ -8082,7 +8082,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/debug", "npm:4.1.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fdebug%2F-%2Fdebug-4.1.10.tgz"],\
             ["@xmldom/xmldom", "npm:0.8.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40xmldom%2Fxmldom%2F-%2Fxmldom-0.8.10.tgz"],\
             ["debug", "virtual:b5e3d936f0a7abc76cfbfdcde4ae7ddf34c1fc0891e2733582e3cc0f0146d706e9326a5df3970348146109b50d877868811885065a72537011e54d78c91a168a#npm:4.3.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdebug%2F-%2Fdebug-4.3.4.tgz"],\
-            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
+            ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"],\
             ["outvariant", "npm:1.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Foutvariant%2F-%2Foutvariant-1.4.0.tgz"],\
             ["strict-event-emitter", "npm:0.2.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrict-event-emitter%2F-%2Fstrict-event-emitter-0.2.8.tgz"],\
             ["web-encoding", "npm:1.1.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fweb-encoding%2F-%2Fweb-encoding-1.1.5.tgz"]\
@@ -8514,8 +8514,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-17.0.2.tgz"],\
-            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"],\
-            ["whatwg-fetch", "npm:3.6.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fwhatwg-fetch%2F-%2Fwhatwg-fetch-3.6.19.tgz"]\
+            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -8563,8 +8562,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-16.14.0.tgz"],\
-            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"],\
-            ["whatwg-fetch", "npm:3.6.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fwhatwg-fetch%2F-%2Fwhatwg-fetch-3.6.19.tgz"]\
+            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -8612,8 +8610,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
-            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"],\
-            ["whatwg-fetch", "npm:3.6.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fwhatwg-fetch%2F-%2Fwhatwg-fetch-3.6.19.tgz"]\
+            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -8660,8 +8657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
             ["react-dom", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"],\
-            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"],\
-            ["whatwg-fetch", "npm:3.6.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fwhatwg-fetch%2F-%2Fwhatwg-fetch-3.6.19.tgz"]\
+            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -23613,10 +23609,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["headers-polyfill", [\
-        ["npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz", {\
-          "packageLocation": "./.yarn/cache/headers-polyfill-npm-4.0.2-2f2dc10de6-a95280ed58.zip/node_modules/headers-polyfill/",\
+        ["npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz", {\
+          "packageLocation": "./.yarn/cache/headers-polyfill-npm-3.2.5-4f2d43cf48-a3c4bdd661.zip/node_modules/headers-polyfill/",\
           "packageDependencies": [\
-            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"]\
+            ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27263,7 +27259,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chokidar", "npm:3.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchokidar%2F-%2Fchokidar-3.5.3.tgz"],\
             ["cookie", "npm:0.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcookie%2F-%2Fcookie-0.4.2.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
-            ["headers-polyfill", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-4.0.2.tgz"],\
+            ["headers-polyfill", "npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"],\
             ["inquirer", "npm:8.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Finquirer%2F-%2Finquirer-8.2.6.tgz"],\
             ["is-node-process", "npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-node-process%2F-%2Fis-node-process-1.2.0.tgz"],\
             ["js-levenshtein", "npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjs-levenshtein%2F-%2Fjs-levenshtein-1.1.6.tgz"],\
