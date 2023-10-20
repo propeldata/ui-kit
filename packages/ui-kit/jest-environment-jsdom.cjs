@@ -15,7 +15,7 @@ class JSDOMEnvironment extends OriginalJSDOMEnvironment {
     if (!global.fetch) global.fetch = fetch
     if (!global.Request) global.Request = Request
     if (!global.Response) global.Response = Response
-    if (!global.Headers) global.Response = Headers
+    if (!global.Headers) global.Headers = Headers
   }
 }
 
