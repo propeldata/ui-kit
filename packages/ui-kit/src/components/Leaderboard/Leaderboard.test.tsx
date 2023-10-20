@@ -59,7 +59,7 @@ describe('Leaderboard', () => {
     expect(chartLabels).toEqual(resultingLabels)
   })
 
-  it('should render the leaderboard with server data', async () => {
+  it.only('should render the leaderboard with server data', async () => {
     dom = render(
       <Leaderboard
         query={{

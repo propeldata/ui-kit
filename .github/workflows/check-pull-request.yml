@@ -10,4 +10,4 @@ jobs:
       - uses: ./.github/actions/prepare
         with:
           cache_key_suffix: '-unit-test'
-      - run: yarn test
+      - run: DEBUG=* yarn test

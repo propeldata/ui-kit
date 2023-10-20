@@ -2514,19 +2514,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/add@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@graphql-codegen/add@npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.0.tgz"
+"@graphql-codegen/add@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "@graphql-codegen/add@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.1.tgz"
   dependencies:
-    "@graphql-codegen/plugin-helpers": ^4.0.0
-    tslib: ~2.4.0
+    "@graphql-codegen/plugin-helpers": ^4.1.0
+    tslib: ~2.5.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 16192f8d057669291f83823755e6260ecb4fd23bb2791c2554e612dd9e30ff9b9faf64e441f3602afc11744bf035c295058797ca4a26aded9e91cfb4a8ebef6c
+  checksum: 0a1ee993cda0fd2adbffd79db03007e9eaa32830607ba6d46c12414bd9e0f568cee8c0d9ad976915b35a4647ff3201364383e57e023ab7dfd3b18f7c69c464e8
   languageName: node
   linkType: hard
 
-"@graphql-codegen/cli@npm:4.0.1":
+"@graphql-codegen/cli@npm:^4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/cli@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fcli%2F-%2Fcli-4.0.1.tgz"
   dependencies:
@@ -2622,7 +2622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/plugin-helpers@npm:^4.0.0":
+"@graphql-codegen/plugin-helpers@npm:^4.1.0":
   version: 4.2.0
   resolution: "@graphql-codegen/plugin-helpers@npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-4.2.0.tgz"
   dependencies:
@@ -2667,7 +2667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-msw@npm:1.1.6":
+"@graphql-codegen/typescript-msw@npm:^1.1.6":
   version: 1.1.6
   resolution: "@graphql-codegen/typescript-msw@npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"
   dependencies:
@@ -2682,7 +2682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-operations@npm:4.0.1":
+"@graphql-codegen/typescript-operations@npm:^4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript-operations@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"
   dependencies:
@@ -2697,7 +2697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-react-query@npm:4.1.0":
+"@graphql-codegen/typescript-react-query@npm:^4.1.0":
   version: 4.1.0
   resolution: "@graphql-codegen/typescript-react-query@npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"
   dependencies:
@@ -2712,7 +2712,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript@npm:4.0.1, @graphql-codegen/typescript@npm:^4.0.1":
+"@graphql-codegen/typescript@npm:^4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/typescript@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript%2F-%2Ftypescript-4.0.1.tgz"
   dependencies:
@@ -3823,7 +3823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.17.5":
+"@mswjs/interceptors@npm:^0.17.10":
   version: 0.17.10
   resolution: "@mswjs/interceptors@npm:0.17.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mswjs%2Finterceptors%2F-%2Finterceptors-0.17.10.tgz"
   dependencies:
@@ -4171,19 +4171,19 @@ __metadata:
   resolution: "@propeldata/ui-kit@workspace:packages/ui-kit"
   dependencies:
     "@emotion/css": ^11.10.5
-    "@graphql-codegen/add": 4.0.0
-    "@graphql-codegen/cli": 4.0.1
-    "@graphql-codegen/typescript": 4.0.1
-    "@graphql-codegen/typescript-msw": 1.1.6
-    "@graphql-codegen/typescript-operations": 4.0.1
-    "@graphql-codegen/typescript-react-query": 4.1.0
+    "@graphql-codegen/add": ^4.0.0
+    "@graphql-codegen/cli": ^4.0.1
+    "@graphql-codegen/typescript": ^4.0.1
+    "@graphql-codegen/typescript-msw": ^1.1.6
+    "@graphql-codegen/typescript-operations": ^4.0.1
+    "@graphql-codegen/typescript-react-query": ^4.1.0
     "@juggle/resize-observer": ^3.4.0
     "@storybook/blocks": ^7.2.1
     "@storybook/react": ^7.2.0
     "@storybook/theming": ^7.4.0
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
-    "@tanstack/react-query": 4.29.17
+    "@tanstack/react-query": ^4.29.17
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
@@ -4200,7 +4200,7 @@ __metadata:
     jest-canvas-mock: ^2.5.2
     jest-environment-jsdom: ^27.5.1
     luxon: ^3.4.1
-    msw: 1.3.0
+    msw: ^1.2.2
     react: ^18.2.0
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
@@ -6507,19 +6507,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.29.17":
-  version: 4.29.17
-  resolution: "@tanstack/query-core@npm:4.29.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Fquery-core%2F-%2Fquery-core-4.29.17.tgz"
-  checksum: 0440d58a566fc3d6791a27eae439f497acc0142cb629ca0fb6e536f9c0a29d150b816ae33c9375411582da0b849a2ef141ef3b2284b8b313d5a4d6671b2548a3
+"@tanstack/query-core@npm:4.36.1":
+  version: 4.36.1
+  resolution: "@tanstack/query-core@npm:4.36.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Fquery-core%2F-%2Fquery-core-4.36.1.tgz"
+  checksum: 47672094da20d89402d9fe03bb7b0462be73a76ff9ca715169738bc600a719d064d106d083a8eedae22a2c22de22f87d5eb5d31ef447aba771d9190f2117ed10
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:4.29.17":
-  version: 4.29.17
-  resolution: "@tanstack/react-query@npm:4.29.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-query%2F-%2Freact-query-4.29.17.tgz"
+"@tanstack/react-query@npm:^4.29.17":
+  version: 4.36.1
+  resolution: "@tanstack/react-query@npm:4.36.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-query%2F-%2Freact-query-4.36.1.tgz"
   dependencies:
-    "@tanstack/query-core": 4.29.17
-    client-only: 0.0.1
+    "@tanstack/query-core": 4.36.1
     use-sync-external-store: ^1.2.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -6530,7 +6529,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 5630dcb93100a48165464188aef2f53ed8e6bcb65669ff919f0916b7a21b58c7e21b06f4e4a331d1b9bfb8a89677266e79bc2a3bc80af62d763b08b3b195f7ea
+  checksum: 1aff0a476859386f8d32253fa0d0bde7b81769a6d4d4d9cbd78778f0f955459a3bdb7ee27a0d2ee7373090f12998b45df80db0b5b313bd0a7a39d36c6e8e51c5
   languageName: node
   linkType: hard
 
@@ -10077,13 +10076,6 @@ __metadata:
   version: 3.0.0
   resolution: "cli-width@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcli-width%2F-%2Fcli-width-3.0.0.tgz"
   checksum: 4c94af3769367a70e11ed69aa6095f1c600c0ff510f3921ab4045af961820d57c0233acfa8b6396037391f31b4c397e1f614d234294f979ff61430a6c166c3f6
-  languageName: node
-  linkType: hard
-
-"client-only@npm:0.0.1":
-  version: 0.0.1
-  resolution: "client-only@npm:0.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclient-only%2F-%2Fclient-only-0.0.1.tgz"
-  checksum: 0c16bf660dadb90610553c1d8946a7fdfb81d624adea073b8440b7d795d5b5b08beb3c950c6a2cf16279365a3265158a236876d92bce16423c485c322d7dfaf8
   languageName: node
   linkType: hard
 
@@ -14029,7 +14021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^15.0.0 || ^16.0.0, graphql@npm:^16.6.0":
+"graphql@npm:^16.6.0, graphql@npm:^16.8.1":
   version: 16.8.1
   resolution: "graphql@npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"
   checksum: 8d304b7b6f708c8c5cc164b06e92467dfe36aff6d4f2cf31dd19c4c2905a0e7b89edac4b7e225871131fd24e21460836b369de0c06532644d15b461d55b1ccc0
@@ -14183,13 +14175,6 @@ __metadata:
   version: 3.2.5
   resolution: "headers-polyfill@npm:3.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.2.5.tgz"
   checksum: a3c4bdd661584fd39e40c0f91412abc514616edfbd20d29a75567e591f90ef5c445c8e209b7f3c2b2375d27e95e4690f33417368a168d4832484a93861ab6a3c
-  languageName: node
-  linkType: hard
-
-"headers-polyfill@npm:^3.2.0":
-  version: 3.3.0
-  resolution: "headers-polyfill@npm:3.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fheaders-polyfill%2F-%2Fheaders-polyfill-3.3.0.tgz"
-  checksum: 6dd010544b7c1a878aa612b49d9e27d273aa9e8a462e1ae05ca212fafa68e6b7cbdec4765f4e443b2fe70d2818f5d9814eab53fa2ba793bf1e5a6b6eff760474
   languageName: node
   linkType: hard
 
@@ -17348,20 +17333,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:1.3.0":
-  version: 1.3.0
-  resolution: "msw@npm:1.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.0.tgz"
+"msw@npm:^1.2.2":
+  version: 1.3.2
+  resolution: "msw@npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"
   dependencies:
     "@mswjs/cookies": ^0.2.2
-    "@mswjs/interceptors": ^0.17.5
+    "@mswjs/interceptors": ^0.17.10
     "@open-draft/until": ^1.0.3
     "@types/cookie": ^0.4.1
     "@types/js-levenshtein": ^1.1.1
     chalk: ^4.1.1
     chokidar: ^3.4.2
     cookie: ^0.4.2
-    graphql: ^15.0.0 || ^16.0.0
-    headers-polyfill: ^3.2.0
+    graphql: ^16.8.1
+    headers-polyfill: 3.2.5
     inquirer: ^8.2.0
     is-node-process: ^1.2.0
     js-levenshtein: ^1.1.6
@@ -17378,7 +17363,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 5ec31d58b0b8841906427738b3f20efd93c45673022f1f8f2221e2880bf76d8ce85902a4f2656727bdcd6d3124d06bb61ff7827a3f9b218ceba6a09d3f6508be
+  checksum: c2d4f7747f5806f0fd8d8cc3ca250ee1c2a7a6cd608de43f95bd072ba1fb13cdce0b52932ce9bf8f4a21b194d2815db535501e224ec8f7052593447fe1c0cb70
   languageName: node
   linkType: hard
 
