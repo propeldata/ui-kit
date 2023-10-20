@@ -4205,6 +4205,7 @@ __metadata:
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
     typescript: ^4.9.3
+    whatwg-fetch: ^3.6.19
   peerDependencies:
     graphql: ^16.6
     react: ^16.8 || ^17 || ^18
@@ -24141,7 +24142,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-fetch@npm:^3.6.2":
+"whatwg-fetch@npm:^3.6.19, whatwg-fetch@npm:^3.6.2":
   version: 3.6.19
   resolution: "whatwg-fetch@npm:3.6.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fwhatwg-fetch%2F-%2Fwhatwg-fetch-3.6.19.tgz"
   checksum: 2896bc9ca867ea514392c73e2a272f65d5c4916248fe0837a9df5b1b92f247047bc76cf7c29c28a01ac6c5fb4314021d2718958c8a08292a96d56f72b2f56806

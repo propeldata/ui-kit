@@ -16,6 +16,7 @@ const mockData = {
 
 const handlers = [
   mockLeaderboardQuery((req, res, ctx) => {
+    // console.log('-----', JSON.stringify(req, null, 2))
     const { metricName } = req.variables.leaderboardInput
 
     if (metricName === 'should-fail') {
@@ -29,7 +30,6 @@ const handlers = [
     }
 
     return res(
-      ctx.set('Content-Type', 'application/json'),
       ctx.data({
         leaderboard: mockData
       })

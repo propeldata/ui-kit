@@ -5,6 +5,7 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import { ResizeObserver as ResizeObserverPolyfill } from '@juggle/resize-observer'
 import '@testing-library/jest-dom/extend-expect'
+import 'whatwg-fetch'
 import { mockServer } from './src/testing'
 
 process.env.NEXT_PUBLIC_ACCOUNT_MANAGEMENT_GRAPHQL_ENDPOINT ??= 'http://localhost:3000/in/graphql'
@@ -13,7 +14,11 @@ process.env.NEXT_PUBLIC_CONFIG_MANAGEMENT_GRAPHQL_ENDPOINT ??= 'http://localhost
 // Establish API mocking before all tests.
 beforeAll(() => {
   window.ResizeObserver = window.ResizeObserver || ResizeObserverPolyfill
-  mockServer.listen()
+  mockServer.listen({
+    onUnhandledRequest(e) {
+      console.trace('=======Here', e)
+    }
+  })
 })
 
 // Reset any request handlers that we may add during the tests,
