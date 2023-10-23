@@ -1,12 +1,11 @@
-import { css } from '@emotion/css'
 import React from 'react'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
-import type { ChartStyles } from '../../themes'
-import { defaultStyles } from '../../themes'
+import '../../themes/light-theme.module.css'
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
+import componentStyles from './Counter.module.css'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
 
@@ -120,7 +119,8 @@ export const CounterComponent = (props: CounterProps) => {
         transition: 'opacity 0.2s ease-in-out'
       }}
       {...rest}
-      className={getFontStyles(styles)}
+      // className={getFontStyles(styles)}
+      className={componentStyles.rootCounter}
     >
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,
@@ -133,16 +133,3 @@ export const CounterComponent = (props: CounterProps) => {
 }
 
 export const Counter = withContainer(CounterComponent, ErrorFallback) as typeof CounterComponent
-
-const getFontStyles = (styles?: ChartStyles) => css`
-  color: ${styles?.font?.color || defaultStyles.font.color};
-  font-size: ${styles?.font?.size || defaultStyles.font.size};
-  font-family: ${styles?.font?.family || defaultStyles.font.family};
-  font-weight: ${styles?.font?.weight || defaultStyles.font.weight};
-  font-stretch: ${styles?.font?.stretch || defaultStyles.font.stretch};
-  font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
-  font-style: ${styles?.font?.style || defaultStyles.font.style};
-  line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
-
-  white-space: nowrap;
-`
