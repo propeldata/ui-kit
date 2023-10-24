@@ -1,15 +1,19 @@
 import React from 'react'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import '../../themes/light-theme.module.css'
+import themes from '../../themes/themes.module.css'
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
+import { useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Counter.module.css'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
 
 export const CounterComponent = (props: CounterProps) => {
+  const theme = useTheme()
+
   const {
     value: staticValue,
     query,
@@ -104,11 +108,9 @@ export const CounterComponent = (props: CounterProps) => {
     return <ErrorFallback error={null} styles={styles} />
   }
 
-  if (
-    ((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) &&
-    !counterRef.current
-  ) {
-    return <Loader styles={styles}>000</Loader>
+
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && !counterRef.current) {
+    return <Loader styles={styles}>&#160;</Loader>
   }
 
   return (
@@ -119,8 +121,7 @@ export const CounterComponent = (props: CounterProps) => {
         transition: 'opacity 0.2s ease-in-out'
       }}
       {...rest}
-      // className={getFontStyles(styles)}
-      className={componentStyles.rootCounter}
+      className={[theme.theme ? undefined : themes.lightTheme, componentStyles.rootCounter].join(' ')}
     >
       {getValueWithPrefixAndSufix({
         prefix: prefixValue,

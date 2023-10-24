@@ -1,0 +1,31 @@
+:root {
+  --propel-font-family: 'Inter';
+  --propel-font-size: 12px;
+  --propel-font-weight: 400;
+  --propel-line-height: 19px;
+  --propel-red: #ff0000;
+}
+
+.typographyBasic {
+  color: var(--propel-text-color);
+  font-size: var(--propel-font-size);
+  font-family: var(--propel-font-family);
+  font-weight: var(--propel-font-weight);
+  line-height: var(--propel-line-height);
+}
+
+.lightTheme {
+  --propel-bg-color: #ffffff;
+  --propel-text-primary: #1d2134;
+  --propel-text-secondary: #4a5578;
+
+  background-color: var(--propel-bg-color);
+}
+
+.darkTheme {
+  --propel-bg-color: #111322;
+  --propel-text-primary: #dcdfea;
+  --propel-text-secondary: #7d89b0;
+
+  background-color: var(--propel-bg-color);
+}

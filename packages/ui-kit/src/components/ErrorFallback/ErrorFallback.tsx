@@ -1,6 +1,6 @@
 import React from 'react'
-import { css } from '@emotion/css'
-import { defaultChartHeight, serverErrorMessage, ChartStyles } from '../../themes'
+// import { defaultChartHeight, serverErrorMessage, ChartStyles } from '../../themes'
+import { serverErrorMessage, ChartStyles } from '../../themes'
 
 export interface ErrorFallbackProps {
   styles?: ChartStyles
@@ -22,34 +22,34 @@ const Icon = ({ color }: { color?: string }) => (
 export function ErrorFallback(props: ErrorFallbackProps) {
   const { error = serverErrorMessage, styles } = props
 
-  const width = styles?.canvas?.width
-  const defaultHeight = error ? defaultChartHeight : 'auto'
-  const height = styles?.canvas?.height || defaultHeight
+  // const width = styles?.canvas?.width
+  // const defaultHeight = error ? defaultChartHeight : 'auto'
+  // const height = styles?.canvas?.height || defaultHeight
 
   return (
     <div
-      className={css`
-        width: ${width ? width + 'px' : '100%'};
-        height: ${height}px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      `}
+    // className={css`
+    //   width: ${width ? width + 'px' : '100%'};
+    //   height: ${height}px;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    // `}
     >
       <div
-        className={css`
-          max-width: 263px;
-          text-align: center;
-          text-align: -webkit-center;
-        `}
+      // className={css`
+      //   max-width: 263px;
+      //   text-align: center;
+      //   text-align: -webkit-center;
+      // `}
       >
         <Icon color={styles?.font?.color} />
         {error && (
           <>
             <p
-              className={css`
-                font-weight: 500;
-              `}
+              // className={css`
+              //   font-weight: 500;
+              // `}
               role="alert"
               aria-live="assertive"
             >

@@ -1,4 +1,3 @@
-import { css } from '@emotion/css'
 import {
   BarController,
   BarElement,
@@ -13,21 +12,25 @@ import {
   TimeSeriesScale,
   Tooltip
 } from 'chart.js'
+import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import React from 'react'
 import {
   customCanvasBackgroundColor,
+  formatLabels,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
   formatLabels,
   useTimeSeriesQuery,
   TimeSeriesQuery
+  useTimeSeriesQuery
 } from '../../helpers'
-import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
-import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
+import { ChartPlugins, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
+// import '../../themes/lightTheme.module.css'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import { useLog } from '../Log'
+import componentStyles from './TimeSeries.module.css'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import {
   getDefaultGranularity,
@@ -305,7 +308,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
   }
 
   return (
-    <div className={getContainerStyles(styles)}>
+    <div className={componentStyles.rootTimeSeries}>
       <canvas
         id={id}
         ref={canvasRef}
@@ -324,8 +327,3 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 }
 
 export const TimeSeries = withContainer(TimeSeriesComponent, ErrorFallback) as typeof TimeSeriesComponent
-
-const getContainerStyles = (styles?: ChartStyles) => css`
-  width: ${styles?.canvas?.width};
-  height: ${styles?.canvas?.height || defaultChartHeight};
-`

@@ -20,13 +20,8 @@
     "storybook": "yarn workspace ui-kit-storybook storybook",
     "build-storybook": "yarn prepare && yarn workspace ui-kit-storybook build-storybook"
   },
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5"
-  },
   "devDependencies": {
     "@babel/core": "^7.20.5",
-    "@emotion/css": "^11.10.6",
     "@propeldata/release": "workspace:^",
     "@types/css-modules": "^1.0.2",
     "@types/eslint": "^7.28.0",

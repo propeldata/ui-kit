@@ -1,8 +1,5 @@
 .rootCounter {
-  color: var(--propel-text-color);
-  font-size: var(--propel-font-size);
-  font-family: var(--propel-font-family);
-  font-weight: var(--propel-font-weight);
-  line-height: var(--propel-line-height);
+  composes: typographyBasic from '../../themes/themes.module.css';
+  color: var(--propel-text-secondary);
   white-space: nowrap;
 }

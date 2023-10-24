@@ -1,8 +1,8 @@
-import { css } from '@emotion/css'
 import { BarController, BarElement, CategoryScale, Chart as ChartJS, Colors, LinearScale, Tooltip } from 'chart.js'
 import React from 'react'
 import {
   customCanvasBackgroundColor,
+  formatLabels,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
   formatLabels,
@@ -11,10 +11,12 @@ import {
 } from '../../helpers'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
+import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
+// import '../../themes/lightTheme.module.css'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
-import * as ComponentStyles from './Leaderboard.styles'
+import componentStyles from './Leaderboard.module.css'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import {
   getTableSettings,
@@ -286,10 +288,10 @@ export const LeaderboardComponent = ({
   if (variant === 'bar') {
     return (
       <div
-        className={css`
-          width: ${styles?.canvas?.width};
-          height: ${styles?.canvas?.height || defaultChartHeight};
-        `}
+      // className={css`
+      //   width: ${styles?.canvas?.width};
+      //   height: ${styles?.canvas?.height || defaultChartHeight};
+      // `}
       >
         <canvas
           id={id}
@@ -319,29 +321,33 @@ export const LeaderboardComponent = ({
   } = getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
 
   return (
-    <div ref={tableRef} className={ComponentStyles.getContainerStyles(styles)} style={loadingStyles}>
-      <table cellSpacing={0} className={ComponentStyles.tableStyles}>
-        <thead className={ComponentStyles.getTableHeadStyles(styles)}>
+    <div ref={tableRef} className={componentStyles.rootLeaderboard} style={loadingStyles}>
+      <table cellSpacing={0}>
+        {/* <thead className={ComponentStyles.getTableHeadStyles(styles)}> */}
+        <thead>
           <tr>
             {headersWithoutValue?.map((header, index) => (
-              <th className={ComponentStyles.getTableHeaderStyles(styles)} key={`${header}-${index}`}>
-                {header}
-              </th>
+              // <th className={ComponentStyles.getTableHeaderStyles(styles)} key={`${header}-${index}`}>
+              <th key={`${header}-${index}`}>{header}</th>
             ))}
-            <th className={ComponentStyles.getTableValueHeaderStyles(styles)}>{valueHeader}</th>
+            {/* <th className={ComponentStyles.getTableValueHeaderStyles(styles)}>{valueHeader}</th> */}
+            <th>{valueHeader}</th>
             {hasValueBar && <th />}
           </tr>
         </thead>
-        <tbody className={ComponentStyles.getTableBodyStyles(styles)}>
+        {/* <tbody className={ComponentStyles.getTableBodyStyles(styles)}> */}
+        <tbody>
           {rowsWithoutValue?.map((cells, rowIndex) => (
             <tr key={rowIndex}>
               {cells.map((cell, cellIndex) => (
-                <td className={ComponentStyles.getTableCellStyles(styles)} key={`${cell}-${cellIndex}`}>
+                // <td className={ComponentStyles.getTableCellStyles(styles)} key={`${cell}-${cellIndex}`}>
+                <td key={`${cell}-${cellIndex}`}>
                   {isOrdered && cellIndex === 0 && `${rowIndex + 1}. `}
                   {cell}
                 </td>
               ))}
-              <td className={ComponentStyles.getTableValueCellStyles(styles)}>
+              {/* <td className={ComponentStyles.getTableValueCellStyles(styles)}> */}
+              <td>
                 {getValueWithPrefixAndSufix({
                   localize: styles?.table?.valueColumn?.localize,
                   prefix: styles?.table?.valueColumn?.prefixValue,
@@ -350,7 +356,8 @@ export const LeaderboardComponent = ({
                 })}
               </td>
               {hasValueBar && (
-                <td className={ComponentStyles.valueBarCellStyles(styles)}>
+                // <td className={ComponentStyles.valueBarCellStyles(styles)}>
+                <td>
                   <ValueBar value={numberValuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
                 </td>
               )}

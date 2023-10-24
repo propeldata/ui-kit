@@ -1,0 +1,13 @@
+.rootLeaderboard {
+  overflow: auto;
+  font-size: var(--propel-font-size);
+  width: var(--propel-leaderboard-table-width, 100%);
+  height: var(--propel-leaderboard-table-height, inherit);
+}
+
+.rootLeaderboard table {
+  width: 100%;
+}
+
+.rootLeaderboard table thead {
+}

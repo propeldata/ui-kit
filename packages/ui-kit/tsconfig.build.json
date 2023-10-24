@@ -5,5 +5,5 @@
     "outDir": "dist"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/**/*.stories.*", "dist", "api"]
+  "exclude": ["src/**/*.stories.*", "api", "src/**/*.test.*", "src/**/testing/**/*"]
 }

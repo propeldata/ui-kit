@@ -31,6 +31,7 @@ module.exports = {
     commonjs(),
     typescript({
       clean: true,
+      tsconfig: 'tsconfig.build.json',
       exclude: ['rollup.config.ts']
     }),
     postcss({

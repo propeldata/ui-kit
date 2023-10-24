@@ -1,32 +1,17 @@
-import { css, Global, ThemeProvider } from '@emotion/react'
-import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 import { Source } from '@storybook/blocks'
-import type { Preview, ReactRenderer } from '@storybook/react'
+import type { Preview } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
+import { ThemeProvider } from '../../../packages/ui-kit/src/components/ThemeProvider'
+import themes from '../../../packages/ui-kit/src/themes/themes.module.css'
 import axiosInstance from '../src/axios'
-import { prettier, getStringAttributes } from '../src/utils'
+import { getStringAttributes, prettier } from '../src/utils'
+import './global.css'
 
-const GlobalStyles = () => (
-  <Global
-    styles={css`
-      body {
-        font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      }
-      a p {
-        display: inline;
-        /* @TODO: find a way to customize it without !important dominance */
-        color: #2e90fa !important;
-      }
-      a.showCodeLink {
-        display: block;
-        margin-top: 20px;
-        cursor: pointer;
-        font-size: 0.9em;
-        color: #2e90fa;
-      }
-    `}
-  />
+const withThemeProvider = (Story, context) => (
+  <ThemeProvider theme={themes[context.globals.theme]}>
+    <Story />
+  </ThemeProvider>
 )
 
 const withSource = (StoryFn, context) => {
@@ -97,24 +82,29 @@ const preview: Preview = {
       }
     }
   },
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      defaultValue: 'light',
+      toolbar: {
+        // The icon for the toolbar item
+        icon: 'circlehollow',
+        // Array of options
+        items: [
+          { value: 'lightTheme', icon: 'circlehollow', title: 'light' },
+          { value: 'darkTheme', icon: 'circle', title: 'dark' }
+        ],
+        // Property that specifies if the name of the item will be displayed
+        showName: true
+      }
+    }
+  },
   decorators: [
     withSource,
     // @ts-ignore
     withAxiosDecorator(axiosInstance),
-    withThemeFromJSXProvider<ReactRenderer>({
-      themes: {
-        light: {
-          textColor: '#ff0000'
-        }
-        // @TODO: a full themes support will be added later
-        // dark: {
-        //   textColor: '#0000ff'
-        // }
-      },
-      defaultTheme: 'light',
-      Provider: ThemeProvider,
-      GlobalStyles: GlobalStyles
-    })
+    withThemeProvider
   ]
 }
 
