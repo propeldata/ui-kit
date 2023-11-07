@@ -1,6 +1,7 @@
+import type { ChartOptions } from 'chart.js'
 import { DimensionInput, FilterInput, Sort, TimeRangeInput } from '../../helpers'
-import { ChartStyles } from '../../themes'
 import type { ErrorFallbackProps } from '../ErrorFallback'
+import type { LoaderProps } from '../Loader'
 
 /**
  * @deprecated the type is deprecated, use LeaderboardChartVariant or TimeSeriesChartVariant instead
@@ -59,9 +60,6 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 
-  /** Basic styles initial state */
-  styles?: ChartStyles
-
   /** If passed along with `rows` the component will ignore the built-in GraphQL operations */
   headers?: string[]
 
@@ -77,6 +75,20 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   /** Leaderboard query props */
   query?: LeaderboardQueryProps
 
-  /** Format function for labels, must return an array with the new labels */
+  /** Whether the table header should remain fixed while scrolling */
+  stickyHeader?: boolean
+
+  hasValueBar?: boolean
+
+  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartProps` instead */
   labelFormatter?: (labels: string[]) => string[]
+
+  /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
+  chartProps?: (options: ChartOptions) => typeof options
+
+  /** Optional porps that are used to configure the Loader component. */
+  loaderProps?: LoaderProps
+
+  /** Optional porps that are used to configure the ErrorFallback component. */
+  errorFallbackProps?: ErrorFallbackProps
 }

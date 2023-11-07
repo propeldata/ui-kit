@@ -1,5 +1,11 @@
 .rootCounter {
-  composes: typographyBasic from '../../themes/themes.module.css';
+  composes: typographyHeading1 from '../../themes/typography.module.css';
   color: var(--propel-text-secondary);
   white-space: nowrap;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.loading {
+  opacity: 0.3;
 }

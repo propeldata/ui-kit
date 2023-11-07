@@ -9,6 +9,7 @@ import {
   useStorybookAccessToken
 } from '../../helpers'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
+import { Chart } from '../../deps-exports'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
@@ -90,7 +91,20 @@ export const LineVariantStory: Story = {
   name: 'Line variant',
   args: {
     variant: 'line',
-    query: connectedParams
+    query: connectedParams,
+    chartProps: (options) => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...options.plugins?.tooltip,
+          backgroundColor: '#0000ff'
+        }
+      },
+      onClick: () => {
+        console.log('Hey Line')
+      }
+    })
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -99,7 +113,20 @@ export const BarVariantStory: Story = {
   name: 'Bar variant',
   args: {
     variant: 'bar',
-    query: connectedParams
+    query: connectedParams,
+    chartProps: (options) => ({
+      ...options,
+      plugins: {
+        ...options.plugins,
+        tooltip: {
+          ...options.plugins?.tooltip,
+          backgroundColor: '#00ff00'
+        }
+      },
+      onClick: () => {
+        console.log('NNNNN')
+      }
+    })
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -109,23 +136,23 @@ export const CustomChartStory: Story = {
   tags: ['pattern'],
   args: {
     variant: 'line',
-    query: connectedParams,
-    styles: {
-      line: {
-        tension: 0.1,
-        borderColor: '#17B897',
-        borderWidth: 3
-      },
-      point: {
-        style: false
-      },
-      canvas: {
-        width: 100,
-        height: 45,
-        backgroundColor: 'transparent',
-        hideGridLines: true
-      }
-    }
+    query: connectedParams
+    // styles: {
+    //   line: {
+    //     tension: 0.1,
+    //     borderColor: '#17B897',
+    //     borderWidth: 3
+    //   },
+    //   point: {
+    //     style: false
+    //   },
+    //   canvas: {
+    //     width: 100,
+    //     height: 45,
+    //     backgroundColor: 'transparent',
+    //     hideGridLines: true
+    //   }
+    // }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -135,12 +162,12 @@ export const CustomStyleStory: Story = {
   tags: ['pattern'],
   args: {
     variant: 'bar',
-    query: connectedParams,
-    styles: {
-      bar: {
-        backgroundColor: '#532AB4'
-      }
-    }
+    query: connectedParams
+    // styles: {
+    //   bar: {
+    //     backgroundColor: '#532AB4'
+    //   }
+    // }
   },
   render: (args) => <TimeSeries {...args} />
 }

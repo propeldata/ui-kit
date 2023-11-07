@@ -1,0 +1,23 @@
+.card-container {
+  font-family: 'Inter';
+  display: inline-flex;
+  min-width: 300px;
+}
+
+.card {
+  flex: 1 auto;
+  box-sizing: border-box;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 20px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card-label {
+  margin: 0;
+  font-weight: 500;
+  color: #2e90fa;
+}

@@ -6,8 +6,9 @@ import { Canvas, Meta, Story, Source } from '@storybook/blocks'
 
 ## 1. Update your dependencies
 
-Remove any existing "**@propeldata/react**"-prefixed dependencies (for example, **@propeldata/react-counter**, **@propeldata/react-leaderboard**,
-and **@propeldata/react-time-series**). Then, add a new dependency on **@propeldata/ui-kit**, using **npm** or **yarn**.
+Remove any existing "**@propeldata/react**"-prefixed dependencies (for example, **@propeldata/react-counter**,
+**@propeldata/react-leaderboard**, and **@propeldata/react-time-series**). Then, add a new dependency on
+**@propeldata/ui-kit**, using **npm** or **yarn**.
 
 #### Yarn
 
@@ -33,8 +34,9 @@ and **@propeldata/react-time-series**). Then, add a new dependency on **@propeld
 
 ## 2. Update your imports
 
-Wherever you previously imported from **@propeldata/react-counter**, **@propeldata/react-leaderboard**, or **@propeldata/react-time-series**,
-you can now import from **@propeldata/ui-kit**. Note that Styles has been renamed to **ChartStyles** and is shared by all three components.
+Wherever you previously imported from **@propeldata/react-counter**, **@propeldata/react-leaderboard**, or
+**@propeldata/react-time-series**, you can now import from **@propeldata/ui-kit**. Note that Styles has been renamed to
+**ChartStyles** and is shared by all three components.
 
 #### Before
 
@@ -57,7 +59,6 @@ you can now import from **@propeldata/ui-kit**. Note that Styles has been rename
   format="dedent"
   code={`
     import {
-      ChartStyles,
       Counter,
       CounterProps,
       Leaderboard,

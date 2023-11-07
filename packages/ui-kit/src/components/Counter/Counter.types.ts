@@ -1,5 +1,6 @@
-import { FilterInput, TimeRangeInput } from '../../helpers'
-import type { ChartStyles } from '../../themes'
+import type { FilterInput, TimeRangeInput } from '../../helpers'
+import type { ErrorFallbackProps } from '../ErrorFallback'
+import type { LoaderProps } from '../Loader'
 
 export type CounterQueryProps = {
   /** Time range that the chart will respond to. Will be ignored when value is passed */
@@ -35,8 +36,6 @@ export interface CounterProps extends React.ComponentProps<'span'> {
   prefixValue?: string
   /** Symbol to be shown after the value text */
   sufixValue?: string
-  /** Basic styles initial state */
-  styles?: ChartStyles
   /** When true, formats value to locale string */
   localize?: boolean
   /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
@@ -45,4 +44,8 @@ export interface CounterProps extends React.ComponentProps<'span'> {
   query?: CounterQueryProps
   /** When true, shows a skeleton loader */
   loading?: boolean
+  /** Optional porps that are used to configure the Loader component. */
+  loaderProps?: LoaderProps
+  /** Optional porps that are used to configure the ErrorFallback component. */
+  errorFallbackProps?: ErrorFallbackProps
 }

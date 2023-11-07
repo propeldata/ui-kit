@@ -1,9 +1,8 @@
 import React from 'react'
-// import { defaultChartHeight, serverErrorMessage, ChartStyles } from '../../themes'
-import { serverErrorMessage, ChartStyles } from '../../themes'
+import { serverErrorMessage } from '../../themes'
+import componentStyles from './ErrorFallback.module.css'
 
 export interface ErrorFallbackProps {
-  styles?: ChartStyles
   error?: {
     title: string
     body: string
@@ -19,40 +18,14 @@ const Icon = ({ color }: { color?: string }) => (
   </svg>
 )
 
-export function ErrorFallback(props: ErrorFallbackProps) {
-  const { error = serverErrorMessage, styles } = props
-
-  // const width = styles?.canvas?.width
-  // const defaultHeight = error ? defaultChartHeight : 'auto'
-  // const height = styles?.canvas?.height || defaultHeight
-
-  return (
-    <div
-    // className={css`
-    //   width: ${width ? width + 'px' : '100%'};
-    //   height: ${height}px;
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    // `}
-    >
-      <div
-      // className={css`
-      //   max-width: 263px;
-      //   text-align: center;
-      //   text-align: -webkit-center;
-      // `}
-      >
-        <Icon color={styles?.font?.color} />
+export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
+  ({ error = serverErrorMessage }, forwardedRef) => (
+    <div ref={forwardedRef} className={componentStyles.rootErrorFallback}>
+      <div className={componentStyles.container}>
+        <Icon />
         {error && (
           <>
-            <p
-              // className={css`
-              //   font-weight: 500;
-              // `}
-              role="alert"
-              aria-live="assertive"
-            >
+            <p role="alert" aria-live="assertive">
               {error.title}
             </p>
             <p role="alert" aria-live="assertive">
@@ -63,4 +36,6 @@ export function ErrorFallback(props: ErrorFallbackProps) {
       </div>
     </div>
   )
-}
+)
+
+ErrorFallback.displayName = 'ErrorFallback'

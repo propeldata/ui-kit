@@ -1,31 +1,29 @@
-:root {
-  --propel-font-family: 'Inter';
-  --propel-font-size: 12px;
-  --propel-font-weight: 400;
-  --propel-line-height: 19px;
-  --propel-red: #ff0000;
-}
+@import './typography.module.css';
 
-.typographyBasic {
-  color: var(--propel-text-color);
-  font-size: var(--propel-font-size);
-  font-family: var(--propel-font-family);
-  font-weight: var(--propel-font-weight);
-  line-height: var(--propel-line-height);
+:root {
+  --propel-component-height: 200px;
 }
 
 .lightTheme {
-  --propel-bg-color: #ffffff;
+  --propel-bg-primary: #ffffff;
+  --propel-bg-secondary: #f9fafb;
   --propel-text-primary: #1d2134;
-  --propel-text-secondary: #4a5578;
+  --propel-text-secondary: #404968;
+  --propel-border-primary: #b1b8d0;
+  --propel-accent: #2e90fa;
+  --propel-accent-hover: #2e90fa;
 
-  background-color: var(--propel-bg-color);
+  background-color: var(--propel-bg-primary);
 }
 
 .darkTheme {
-  --propel-bg-color: #111322;
+  --propel-bg-primary: #1d2134;
+  --propel-bg-secondary: #111322;
   --propel-text-primary: #dcdfea;
   --propel-text-secondary: #7d89b0;
+  --propel-border-primary: #4a5578;
+  --propel-accent: #2e90fa;
+  --propel-accent-hover: #2e90fa;
 
-  background-color: var(--propel-bg-color);
+  background-color: var(--propel-bg-primary);
 }

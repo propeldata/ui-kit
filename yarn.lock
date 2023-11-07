@@ -4043,6 +4043,7 @@ __metadata:
     "@types/testing-library__jest-dom": ^5.14.7
     chart.js: ^4.1.2
     chartjs-adapter-luxon: 1.2.1
+    classnames: ^2.3.2
     dotenv: ^16.0.3
     graphql: ^16.6.0
     jest: ^27.5.1
@@ -5205,6 +5206,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-styling-webpack@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@storybook/addon-styling-webpack@npm:0.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Faddon-styling-webpack%2F-%2Faddon-styling-webpack-0.0.5.tgz"
+  dependencies:
+    "@storybook/node-logger": ^7.0.12
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 43462f6b05b660f9e6a8d70640efeedfaad314ebe65d7a172d84213c9ff9f1f78d69ec5d242914ea704ec6ae9c4fc12cf0a7130d10d29367397e5e2babe2b2ed
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-toolbars@npm:7.5.1":
   version: 7.5.1
   resolution: "@storybook/addon-toolbars@npm:7.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Faddon-toolbars%2F-%2Faddon-toolbars-7.5.1.tgz"
@@ -5896,6 +5908,13 @@ __metadata:
   version: 7.5.1
   resolution: "@storybook/node-logger@npm:7.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Fnode-logger%2F-%2Fnode-logger-7.5.1.tgz"
   checksum: 8c476e49a1ec19adba4c532476d4e5ccf58c8be16f7b70064a127f86a5d8bcf5c5bb947f18b0cb10c59cf3143b1f832379797009071ead5a586060afe9158760
+  languageName: node
+  linkType: hard
+
+"@storybook/node-logger@npm:^7.0.12":
+  version: 7.5.3
+  resolution: "@storybook/node-logger@npm:7.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Fnode-logger%2F-%2Fnode-logger-7.5.3.tgz"
+  checksum: 9dec669a9a0d9862ca5f835a23b1b22b62eee5b74ff9a8759d323a06893baa9bdc2305c62f067ca5cbc80df017e564b8304bc9d161821780f32c77667601f76c
   languageName: node
   linkType: hard
 
@@ -23637,6 +23656,7 @@ __metadata:
     "@storybook/addon-essentials": ^7.4.0
     "@storybook/addon-interactions": ^7.4.0
     "@storybook/addon-links": ^7.4.0
+    "@storybook/addon-styling-webpack": ^0.0.5
     "@storybook/addons": ^7.4.0
     "@storybook/blocks": ^7.4.0
     "@storybook/manager-api": next

@@ -9,7 +9,17 @@ import { getStringAttributes, prettier } from '../src/utils'
 import './global.css'
 
 const withThemeProvider = (Story, context) => (
-  <ThemeProvider theme={themes[context.globals.theme]}>
+  <ThemeProvider
+    theme={themes[context.globals.theme]}
+    // @TODO: remove before PR review
+    globalChartProps={(Chart) => {
+      Chart.defaults.plugins.tooltip.backgroundColor = '#ff0000'
+      Chart.defaults.onClick = () => {
+        console.log('Global onClick handler')
+      }
+      return Chart
+    }}
+  >
     <Story />
   </ThemeProvider>
 )
@@ -29,6 +39,7 @@ const withSource = (StoryFn, context) => {
       (line, index) =>
         index > renderStartIndex && (line === '}' || (line.substr(0, 2) === '  ' && line.charAt(2) !== ' '))
     )
+
     let render = lines
       .splice(renderStartIndex, renderEndIndex - renderStartIndex)
       .join('\n')
@@ -38,14 +49,13 @@ const withSource = (StoryFn, context) => {
       .replace(/,\s*$/, '')
       .trim('')
 
-    // source = prettier(render)
     source = prettier(context.parameters.codeTemplate(render, context))
   } catch (e) {
     console.warn(e)
   }
 
   return (
-    <>
+    <div style={{ padding: 20 }}>
       <StoryFn />
       {context.viewMode === 'story' && source && !showSource && (
         <a className="showCodeLink" onClick={() => setShowSource(true)}>
@@ -55,7 +65,7 @@ const withSource = (StoryFn, context) => {
       {context.viewMode === 'story' && source && showSource && (
         <Source dark format="dedent" language="tsx" code={source} />
       )}
-    </>
+    </div>
   )
 }
 
@@ -86,16 +96,13 @@ const preview: Preview = {
     theme: {
       name: 'Theme',
       description: 'Global theme for components',
-      defaultValue: 'light',
+      defaultValue: 'lightTheme',
       toolbar: {
-        // The icon for the toolbar item
         icon: 'circlehollow',
-        // Array of options
         items: [
           { value: 'lightTheme', icon: 'circlehollow', title: 'light' },
           { value: 'darkTheme', icon: 'circle', title: 'dark' }
         ],
-        // Property that specifies if the name of the item will be displayed
         showName: true
       }
     }

@@ -19,6 +19,7 @@
     "@storybook/addon-essentials": "^7.4.0",
     "@storybook/addon-interactions": "^7.4.0",
     "@storybook/addon-links": "^7.4.0",
+    "@storybook/addon-styling-webpack": "^0.0.5",
     "@storybook/addons": "^7.4.0",
     "@storybook/blocks": "^7.4.0",
     "@storybook/manager-api": "next",

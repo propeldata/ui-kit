@@ -116,14 +116,15 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
     query: connectedParams,
-    styles: {
-      table: {
-        hasValueBar: true,
-        valueColumn: {
-          localize: true
-        }
-      }
-    }
+    hasValueBar: true
+    // styles: {
+    //   table: {
+    //     hasValueBar: true,
+    //     valueColumn: {
+    //       localize: true
+    //     }
+    //   }
+    // }
   },
   render: (args) => <Leaderboard {...args} />
 }

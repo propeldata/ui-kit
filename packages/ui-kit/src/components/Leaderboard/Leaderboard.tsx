@@ -1,372 +1,354 @@
-import { BarController, BarElement, CategoryScale, Chart as ChartJS, Colors, LinearScale, Tooltip } from 'chart.js'
+import { Chart as ChartJS } from 'chart.js'
+import classnames from 'classnames'
 import React from 'react'
 import {
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  formatLabels,
+  useCombinedRefs,
   useLeaderboardQuery,
-  LeaderboardQuery
+  useSetupComponentDefaultChartStyles
 } from '../../helpers'
-import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
-import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
-// import '../../themes/lightTheme.module.css'
+import { ChartPlugins, defaultStyles } from '../../themes'
+import themes from '../../themes/themes.module.css'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
+import { useGlobalChartProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.css'
+import componentStyles2 from './Leaderboard2.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
-import {
-  getTableSettings,
-  getValueWithPrefixAndSufix,
-  updateChartConfig,
-  updateChartStyles,
-  useSetupDefaultStyles
-} from './utils'
+import { getTableSettings, getValueWithPrefixAndSufix, updateChartConfig, updateChartStyles } from './utils'
 import { ValueBar } from './ValueBar'
-
-/**
- * It registers only the modules that will be used
- * in the context of a BarChart and LineChart so
- * we reduce bundle weight
- */
-ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale, Colors)
 
 let idCounter = 0
 
-export const LeaderboardComponent = ({
-  variant = 'bar',
-  styles,
-  headers,
-  rows,
-  query,
-  error,
-  loading: isLoadingStatic = false,
-  labelFormatter,
-  timeZone,
-  ...rest
-}: LeaderboardProps) => {
-  const [propsMismatch, setPropsMismatch] = React.useState(false)
+export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableElement, LeaderboardProps>(
+  (
+    {
+      variant = 'bar',
+      headers,
+      rows,
+      query,
+      error,
+      className,
+      loading: isLoadingStatic = false,
+      stickyHeader,
+      hasValueBar = false,
+      labelFormatter,
+      timeZone,
+      loaderProps,
+      errorFallbackProps,
+      ...rest
+    },
+    forwardedRef
+  ) => {
+    const styles = undefined
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+    const [propsMismatch, setPropsMismatch] = React.useState(false)
+    const theme = useTheme()
+    const globalChartProps = useGlobalChartProps()
+    useSetupComponentDefaultChartStyles({ theme, chartProps: globalChartProps })
 
-  const idRef = React.useRef(idCounter++)
-  const id = `leaderboard-${idRef.current}`
+    const idRef = React.useRef(idCounter++)
+    const id = `leaderboard-${idRef.current}`
 
-  const accessToken = query?.accessToken ?? accessTokenFromProvider
+    /**
+     * The html node where the chart will render
+     */
+    const canvasRef = React.useRef<HTMLCanvasElement>(null)
 
-  /**
-   * The html node where the chart will render
-   */
-  const canvasRef = React.useRef<HTMLCanvasElement>(null)
+    const chartRef = React.useRef<ChartJS | null>()
 
-  const chartRef = React.useRef<ChartJS | null>()
+    const tableRef = React.useRef<HTMLDivElement>(null)
+    const combinedRefs = useCombinedRefs(forwardedRef, tableRef)
 
-  const tableRef = React.useRef<HTMLDivElement>(null)
+    /**
+     * Checks if the component is in `static` or `connected` mode
+     */
+    const isStatic = !query
 
-  /**
-   * Checks if the component is in `static` or `connected` mode
-   */
-  const isStatic = !query
+    const renderChart = React.useCallback(
+      (data?: LeaderboardData) => {
+        if (!canvasRef.current || !data || variant === 'table') return
 
-  useSetupDefaultStyles(styles)
+        const labels = formatLabels({ labels: data.rows?.map((row) => row[0]), formatter: labelFormatter }) || []
+        const values =
+          data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-  const renderChart = React.useCallback(
-    (data?: LeaderboardData) => {
-      if (!canvasRef.current || !data || variant === 'table') return
+        const hideGridLines = styles?.canvas?.hideGridLines || false
 
-      const labels = formatLabels({ labels: data.rows?.map((row) => row[0]), formatter: labelFormatter }) || []
-      const values = data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
-
-      const hideGridLines = styles?.canvas?.hideGridLines || false
-
-      const customPlugins: ChartPlugins = {
-        customCanvasBackgroundColor: {
-          color: styles?.canvas?.backgroundColor
+        const customPlugins: ChartPlugins = {
+          customCanvasBackgroundColor: {
+            color: styles?.canvas?.backgroundColor
+          }
         }
-      }
 
-      const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
-      const borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
-      const borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
-      const hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
+        const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
+        const borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
+        const borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
+        const hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
 
-      if (chartRef.current) {
-        updateChartConfig({
-          chart: chartRef.current,
-          labels,
-          values,
-          customPlugins
+        if (chartRef.current) {
+          updateChartConfig({
+            chart: chartRef.current,
+            labels,
+            values,
+            customPlugins
+          })
+
+          // updateChartStyles({ chart: chartRef.current, styles })
+          updateChartStyles({ chart: chartRef.current })
+
+          chartRef.current.update()
+          return
+        }
+
+        chartRef.current = new ChartJS(canvasRef.current, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                data: values,
+                backgroundColor,
+                borderColor,
+                borderWidth,
+                hoverBorderColor
+              }
+            ]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: !styles?.canvas?.width,
+            maintainAspectRatio: false,
+            layout: {
+              padding: styles?.canvas?.padding || defaultStyles.canvas.padding
+            },
+            plugins: customPlugins,
+            scales: {
+              x: {
+                display: !hideGridLines,
+                grid: {
+                  drawOnChartArea: false
+                },
+                beginAtZero: true
+              },
+              y: {
+                display: !hideGridLines,
+                grid: { drawOnChartArea: true }
+              }
+            }
+          },
+          plugins: [customCanvasBackgroundColor]
         })
 
-        updateChartStyles({ chart: chartRef.current, styles })
+        canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
+      },
+      [styles, variant, labelFormatter]
+    )
 
-        chartRef.current.update()
-        return
+    const destroyChart = () => {
+      if (chartRef.current) {
+        chartRef.current.destroy()
+        chartRef.current = null
       }
+    }
 
-      chartRef.current = new ChartJS(canvasRef.current, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              data: values,
-              backgroundColor,
-              borderColor,
-              borderWidth,
-              hoverBorderColor
-            }
-          ]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: !styles?.canvas?.width,
-          maintainAspectRatio: false,
-          layout: {
-            padding: styles?.canvas?.padding || defaultStyles.canvas.padding
-          },
-          plugins: customPlugins,
-          scales: {
-            x: {
-              display: !hideGridLines,
-              grid: {
-                drawOnChartArea: false
-              },
-              beginAtZero: true
-            },
-            y: {
-              display: !hideGridLines,
-              grid: { drawOnChartArea: true }
-            }
+    const {
+      isInitialLoading: isLoadingQuery,
+      error: hasError,
+      data: fetchedData
+    } = useLeaderboardQuery(
+      {
+        endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
+        fetchParams: {
+          headers: {
+            'content-type': 'application/graphql-response+json',
+            authorization: `Bearer ${query?.accessToken}`
           }
-        },
-        plugins: [customCanvasBackgroundColor]
-      })
-
-      canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
-    },
-    [styles, variant, labelFormatter]
-  )
-
-  const destroyChart = () => {
-    if (chartRef.current) {
-      chartRef.current.destroy()
-      chartRef.current = null
-    }
-  }
-
-  const {
-    isInitialLoading: isLoadingQuery,
-    error: hasError,
-    data: fetchedData
-  } = useLeaderboardQuery<LeaderboardQuery, Error>(
-    {
-      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
-      fetchParams: {
-        headers: {
-          'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${accessToken}`
         }
-      }
-    },
-    {
-      leaderboardInput: {
-        metricName: query?.metric,
-        filters: query?.filters,
-        sort: query?.sort,
-        rowLimit: query?.rowLimit ?? 100,
-        dimensions: query?.dimensions,
-        timeZone: timeZone ?? getTimeZone(),
-        timeRange: {
-          relative: query?.timeRange?.relative ?? null,
-          n: query?.timeRange?.n ?? null,
-          start: query?.timeRange?.start ?? null,
-          stop: query?.timeRange?.stop ?? null
+      },
+      {
+        leaderboardInput: {
+          metricName: query?.metric,
+          filters: query?.filters,
+          sort: query?.sort,
+          rowLimit: query?.rowLimit ?? 100,
+          dimensions: query?.dimensions,
+          timeZone: timeZone ?? getTimeZone(),
+          timeRange: {
+            relative: query?.timeRange?.relative ?? null,
+            n: query?.timeRange?.n ?? null,
+            start: query?.timeRange?.start ?? null,
+            stop: query?.timeRange?.stop ?? null
+          }
         }
+      },
+      {
+        refetchInterval: query?.refetchInterval,
+        retry: query?.retry,
+        enabled: !isStatic
       }
-    },
-    {
-      refetchInterval: query?.refetchInterval,
-      retry: query?.retry,
-      enabled: !isStatic && accessToken != null
+    )
+
+    const loadingStyles = {
+      opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
+      transition: 'opacity 0.2s ease-in-out'
     }
-  )
 
-  const loadingStyles = {
-    opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
-    transition: 'opacity 0.2s ease-in-out'
-  }
+    React.useEffect(() => {
+      function handlePropsMismatch() {
+        if (isStatic && !headers && !rows) {
+          // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
+          setPropsMismatch(true)
+          return
+        }
 
-  React.useEffect(() => {
-    function handlePropsMismatch() {
-      if (isStatic && !headers && !rows) {
-        // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
-        setPropsMismatch(true)
-        return
-      }
+        if (isStatic && (!headers || !rows)) {
+          // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
+          setPropsMismatch(true)
 
-      if (isStatic && (!headers || !rows)) {
-        // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
-        setPropsMismatch(true)
+          return
+        }
 
-        return
-      }
+        if (
+          !isStatic &&
+          (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
+        ) {
+          // console.error(
+          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
+          // ) we will set logs as a feature later
+          setPropsMismatch(true)
+          return
+        }
 
-      if (
-        !isStatic &&
-        ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
-          !query.metric ||
-          !query.timeRange ||
-          !query.dimensions ||
-          !query.rowLimit)
-      ) {
-        // console.error(
-        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
-        // ) we will set logs as a feature later
-        setPropsMismatch(true)
-        return
-      }
+        if (variant !== 'bar' && variant !== 'table') {
+          // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
+          setPropsMismatch(false)
+        }
 
-      if (variant !== 'bar' && variant !== 'table') {
-        // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
         setPropsMismatch(false)
       }
 
-      setPropsMismatch(false)
-    }
+      if (!isLoadingStatic) {
+        handlePropsMismatch()
+      }
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant])
 
-    if (!isLoadingStatic) {
-      handlePropsMismatch()
-    }
-  }, [isStatic, headers, rows, query, isLoadingStatic, variant, accessTokenFromProvider, isLoadingAccessToken])
+    React.useEffect(() => {
+      if (isStatic) {
+        renderChart({ headers, rows })
+      }
+    }, [isStatic, isLoadingStatic, styles, variant, headers, rows, renderChart])
 
-  React.useEffect(() => {
-    if (isStatic) {
-      renderChart({ headers, rows })
-    }
-  }, [isStatic, isLoadingStatic, styles, variant, headers, rows, renderChart])
+    React.useEffect(() => {
+      if (fetchedData && !isStatic) {
+        renderChart(fetchedData.leaderboard)
+      }
+    }, [fetchedData, styles, variant, isStatic, renderChart])
 
-  React.useEffect(() => {
-    if (fetchedData && !isStatic) {
-      renderChart(fetchedData.leaderboard)
-    }
-  }, [fetchedData, styles, variant, isStatic, renderChart])
+    React.useEffect(() => {
+      if (variant === 'table') {
+        destroyChart()
+      }
+    }, [variant])
 
-  React.useEffect(() => {
-    if (variant === 'table') {
+    React.useEffect(() => {
+      return () => {
+        destroyChart()
+      }
+    }, [])
+
+    React.useEffect(() => {
+      if (variant === 'table') {
+        destroyChart()
+      }
+    }, [variant])
+
+    if (hasError || propsMismatch) {
       destroyChart()
+      return <ErrorFallback {...errorFallbackProps} error={error} />
     }
-  }, [variant])
 
-  React.useEffect(() => {
-    return () => {
+    const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
+
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
       destroyChart()
+      return <Loader {...loaderProps} />
     }
-  }, [])
 
-  React.useEffect(() => {
-    if (variant === 'table') {
-      destroyChart()
+    if (variant === 'bar') {
+      return (
+        <div
+          ref={forwardedRef}
+          className={classnames(!theme?.themeClassName && themes.lightTheme, componentStyles.rootTimeSeries, className)}
+        >
+          <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} {...rest} />
+        </div>
+      )
     }
-  }, [variant])
 
-  if (hasError || propsMismatch) {
-    destroyChart()
-    return <ErrorFallback error={error} styles={styles} />
-  }
+    const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
+    const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
 
-  const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
+    const { headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
+      // getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
+      getTableSettings({ headers: tableHeaders, rows: tableRows })
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && isNoContainerRef) {
-    destroyChart()
-    return <Loader styles={styles} />
-  }
-
-  if (variant === 'bar') {
     return (
       <div
-      // className={css`
-      //   width: ${styles?.canvas?.width};
-      //   height: ${styles?.canvas?.height || defaultChartHeight};
-      // `}
+        ref={combinedRefs}
+        className={classnames(componentStyles.rootLeaderboard, stickyHeader && componentStyles.stickyHeader)}
+        style={loadingStyles}
       >
-        <canvas
-          id={id}
-          ref={canvasRef}
-          width={styles?.canvas?.width}
-          height={styles?.canvas?.height || defaultChartHeight}
-          role="img"
-          style={loadingStyles}
-          {...rest}
-        />
+        <div className={componentStyles2.rootLeaderboard2}>Test</div>
+        <table cellSpacing={0}>
+          {/* <thead className={ComponentStyles.getTableHeadStyles(styles)}> */}
+          <thead>
+            <tr>
+              {headersWithoutValue?.map((header, index) => (
+                // <th className={ComponentStyles.getTableHeaderStyles(styles)} key={`${header}-${index}`}>
+                <th key={`${header}-${index}`}>{header}</th>
+              ))}
+              <th className={componentStyles.valueHeader}>{valueHeader}</th>
+              {hasValueBar && <th />}
+            </tr>
+          </thead>
+          <tbody>
+            {rowsWithoutValue?.map((cells, rowIndex) => (
+              <tr key={rowIndex}>
+                {cells.map((cell, cellIndex) => (
+                  <td key={`${cell}-${cellIndex}`}>
+                    {isOrdered && cellIndex === 0 && `${rowIndex + 1}. `}
+                    {cell}
+                  </td>
+                ))}
+                {/* <td className={ComponentStyles.getTableValueCellStyles(styles)}> */}
+                <td className={componentStyles.valueCell}>
+                  {getValueWithPrefixAndSufix({
+                    localize: styles?.table?.valueColumn?.localize,
+                    prefix: styles?.table?.valueColumn?.prefixValue,
+                    sufix: styles?.table?.valueColumn?.sufixValue,
+                    value: valuesByRow?.[rowIndex] ?? undefined
+                  })}
+                </td>
+                {hasValueBar && (
+                  // <td className={ComponentStyles.valueBarCellStyles(styles)}>
+                  <td className={componentStyles.valueBarCell}>
+                    <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} />
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }
+)
 
-  const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
-  const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
-
-  const {
-    hasValueBar,
-    headersWithoutValue,
-    isOrdered,
-    maxValue,
-    rowsWithoutValue,
-    valueHeader,
-    valuesByRow,
-    numberValuesByRow
-  } = getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
-
-  return (
-    <div ref={tableRef} className={componentStyles.rootLeaderboard} style={loadingStyles}>
-      <table cellSpacing={0}>
-        {/* <thead className={ComponentStyles.getTableHeadStyles(styles)}> */}
-        <thead>
-          <tr>
-            {headersWithoutValue?.map((header, index) => (
-              // <th className={ComponentStyles.getTableHeaderStyles(styles)} key={`${header}-${index}`}>
-              <th key={`${header}-${index}`}>{header}</th>
-            ))}
-            {/* <th className={ComponentStyles.getTableValueHeaderStyles(styles)}>{valueHeader}</th> */}
-            <th>{valueHeader}</th>
-            {hasValueBar && <th />}
-          </tr>
-        </thead>
-        {/* <tbody className={ComponentStyles.getTableBodyStyles(styles)}> */}
-        <tbody>
-          {rowsWithoutValue?.map((cells, rowIndex) => (
-            <tr key={rowIndex}>
-              {cells.map((cell, cellIndex) => (
-                // <td className={ComponentStyles.getTableCellStyles(styles)} key={`${cell}-${cellIndex}`}>
-                <td key={`${cell}-${cellIndex}`}>
-                  {isOrdered && cellIndex === 0 && `${rowIndex + 1}. `}
-                  {cell}
-                </td>
-              ))}
-              {/* <td className={ComponentStyles.getTableValueCellStyles(styles)}> */}
-              <td>
-                {getValueWithPrefixAndSufix({
-                  localize: styles?.table?.valueColumn?.localize,
-                  prefix: styles?.table?.valueColumn?.prefixValue,
-                  sufix: styles?.table?.valueColumn?.sufixValue,
-                  value: valuesByRow?.[rowIndex] ?? undefined
-                })}
-              </td>
-              {hasValueBar && (
-                // <td className={ComponentStyles.valueBarCellStyles(styles)}>
-                <td>
-                  <ValueBar value={numberValuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
-                </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
+LeaderboardComponent.displayName = 'LeaderboardComponent'
 
 export const Leaderboard = withContainer(LeaderboardComponent, ErrorFallback) as typeof LeaderboardComponent

@@ -1,8 +1,8 @@
-import type { ScaleOptionsByType } from 'chart.js'
+import type { ChartOptions, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { FilterInput, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
-import { ChartStyles } from '../../themes'
 import { ErrorFallbackProps } from '../ErrorFallback'
+import type { LoaderProps } from '../Loader'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
@@ -56,9 +56,6 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: TimeSeriesChartVariant
 
-  /** Basic styles initial state */
-  styles?: ChartStyles
-
   /** If passed along with `values` the component will ignore the built-in GraphQL operations */
   labels?: TimeSeriesData['labels']
 
@@ -80,6 +77,15 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   /** TimeSeries query props */
   query?: TimeSeriesQueryProps
 
-  /** Format function for labels, must return an array with the new labels */
+  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartProps` instead */
   labelFormatter?: (labels: string[]) => string[]
+
+  /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
+  chartProps?: (options: ChartOptions) => typeof options
+
+  /** Optional porps that are used to configure the Loader component. */
+  loaderProps?: LoaderProps
+
+  /** Optional porps that are used to configure the ErrorFallback component. */
+  errorFallbackProps?: ErrorFallbackProps
 }
