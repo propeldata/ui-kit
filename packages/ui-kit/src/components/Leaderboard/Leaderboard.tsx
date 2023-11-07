@@ -16,8 +16,7 @@ import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useGlobalChartProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
-import componentStyles from './Leaderboard.module.css'
-import componentStyles2 from './Leaderboard2.module.scss'
+import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix, updateChartConfig, updateChartStyles } from './utils'
 import { ValueBar } from './ValueBar'
@@ -283,7 +282,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
       return (
         <div
           ref={forwardedRef}
-          className={classnames(!theme?.themeClassName && themes.lightTheme, componentStyles.rootTimeSeries, className)}
+          className={classnames(
+            !theme?.themeClassName && themes.lightTheme,
+            componentStyles.rootLeaderboard,
+            className
+          )}
         >
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} {...rest} />
         </div>
@@ -303,7 +306,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
         className={classnames(componentStyles.rootLeaderboard, stickyHeader && componentStyles.stickyHeader)}
         style={loadingStyles}
       >
-        <div className={componentStyles2.rootLeaderboard2}>Test</div>
         <table cellSpacing={0}>
           {/* <thead className={ComponentStyles.getTableHeadStyles(styles)}> */}
           <thead>

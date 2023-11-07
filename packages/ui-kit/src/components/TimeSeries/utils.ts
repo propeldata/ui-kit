@@ -177,15 +177,15 @@ export function updateChartStyles(options: UpdateChartStylesOptions) {
   const dataset = chart.data.datasets[0]
 
   if (variant === 'bar') {
-    dataset.backgroundColor = theme?.bgAccent
+    dataset.backgroundColor = theme?.accent
     dataset.borderWidth = 0
-    dataset.hoverBackgroundColor = theme?.bgAccentHover
+    dataset.hoverBackgroundColor = theme?.accentHover
   } else {
-    dataset.backgroundColor = theme.bgAccentHover
-    dataset.borderColor = theme.bgAccentHover
+    dataset.backgroundColor = theme.accentHover
+    dataset.borderColor = theme.accentHover
     dataset.borderWidth = 2
-    dataset.hoverBackgroundColor = theme?.bgAccentHover
-    dataset.hoverBorderColor = theme?.bgAccentHover
+    dataset.hoverBackgroundColor = theme?.accentHover
+    dataset.hoverBorderColor = theme?.accentHover
   }
 
   if (chart.options.layout) {
@@ -203,7 +203,8 @@ interface UpdateChartConfig {
 }
 
 export function updateChartConfig(options: UpdateChartConfig) {
-  const { chart, labels, values, scales, variant, customPlugins } = options
+  // const { chart, labels, values, scales, variant, customPlugins } = options
+  const { chart, labels, values, scales, variant } = options
 
   const dataset = chart.data.datasets[0]
 

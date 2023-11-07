@@ -1,8 +1,9 @@
-import { ChartStyles } from './default.types'
+// import { ChartStyles } from './default.types'
 
 export const defaultChartHeight = 200
 
-export const defaultStyles: ChartStyles = {
+// export const defaultStyles: ChartStyles = {
+export const defaultStyles = {
   bar: {
     thickness: 20,
     borderWidth: 1,

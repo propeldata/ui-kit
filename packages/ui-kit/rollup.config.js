@@ -35,7 +35,7 @@ module.exports = {
       exclude: ['rollup.config.ts']
     }),
     postcss({
-      extensions: ['.scss', '.sass'],
+      extensions: ['.scss', '.sass', '.css'],
       modules: true
     }),
     terser({

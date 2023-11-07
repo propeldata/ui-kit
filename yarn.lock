@@ -4057,6 +4057,7 @@ __metadata:
     rollup: ^4.1.4
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-typescript2: ^0.36.0
+    sass: ^1.69.5
     typescript: ^4.9.3
   peerDependencies:
     graphql: ^16.6
@@ -9945,7 +9946,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.4.2, chokidar@npm:^3.5.3":
+"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.4.2, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchokidar%2F-%2Fchokidar-3.5.3.tgz"
   dependencies:
@@ -10646,7 +10647,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:^8.0.0, cosmiconfig@npm:^8.1.0, cosmiconfig@npm:^8.1.3":
+"cosmiconfig@npm:^8.0.0, cosmiconfig@npm:^8.1.0, cosmiconfig@npm:^8.1.3, cosmiconfig@npm:^8.2.0":
   version: 8.3.6
   resolution: "cosmiconfig@npm:8.3.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcosmiconfig%2F-%2Fcosmiconfig-8.3.6.tgz"
   dependencies:
@@ -10732,7 +10733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^6.5.1, css-loader@npm:^6.7.1":
+"css-loader@npm:^6.5.1, css-loader@npm:^6.7.1, css-loader@npm:^6.8.1":
   version: 6.8.1
   resolution: "css-loader@npm:6.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcss-loader%2F-%2Fcss-loader-6.8.1.tgz"
   dependencies:
@@ -14590,6 +14591,13 @@ __metadata:
   version: 9.0.21
   resolution: "immer@npm:9.0.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimmer%2F-%2Fimmer-9.0.21.tgz"
   checksum: 70e3c274165995352f6936695f0ef4723c52c92c92dd0e9afdfe008175af39fa28e76aafb3a2ca9d57d1fb8f796efc4dd1e1cc36f18d33fa5b74f3dfb0375432
+  languageName: node
+  linkType: hard
+
+"immutable@npm:^4.0.0":
+  version: 4.3.4
+  resolution: "immutable@npm:4.3.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimmutable%2F-%2Fimmutable-4.3.4.tgz"
+  checksum: de3edd964c394bab83432429d3fb0b4816b42f56050f2ca913ba520bd3068ec3e504230d0800332d3abc478616e8f55d3787424a90d0952e6aba864524f1afc3
   languageName: node
   linkType: hard
 
@@ -18942,6 +18950,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-loader@npm:^7.3.3":
+  version: 7.3.3
+  resolution: "postcss-loader@npm:7.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fpostcss-loader%2F-%2Fpostcss-loader-7.3.3.tgz"
+  dependencies:
+    cosmiconfig: ^8.2.0
+    jiti: ^1.18.2
+    semver: ^7.3.8
+  peerDependencies:
+    postcss: ^7.0.0 || ^8.0.1
+    webpack: ^5.0.0
+  checksum: c724044d6ae56334535c26bb4efc9c151431d44d60bc8300157c760747281a242757d8dab32db72738434531175b38a408cb0b270bb96207c07584dcfcd899ff
+  languageName: node
+  linkType: hard
+
 "postcss-logical@npm:^5.0.4":
   version: 5.0.4
   resolution: "postcss-logical@npm:5.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fpostcss-logical%2F-%2Fpostcss-logical-5.0.4.tgz"
@@ -19447,7 +19469,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.3.5, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.4":
+"postcss@npm:^8.3.5, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.31, postcss@npm:^8.4.4":
   version: 8.4.31
   resolution: "postcss@npm:8.4.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fpostcss%2F-%2Fpostcss-8.4.31.tgz"
   dependencies:
@@ -21583,6 +21605,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sass-loader@npm:^13.3.2":
+  version: 13.3.2
+  resolution: "sass-loader@npm:13.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass-loader%2F-%2Fsass-loader-13.3.2.tgz"
+  dependencies:
+    neo-async: ^2.6.2
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+    sass: ^1.3.0
+    sass-embedded: "*"
+    webpack: ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+  checksum: 7394a8d1b818a289b9caabd979543c907b83e28ae08bc80ccb836e0ccabc4ae574c077ab2fa520ba5fb8abb2ec3e7c9822a1cbd8c58a28ff30018be9d1dc6c27
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.69.5":
+  version: 1.69.5
+  resolution: "sass@npm:1.69.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass%2F-%2Fsass-1.69.5.tgz"
+  dependencies:
+    chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: c66f4f02882e7aa7aa49703824dadbb5a174dcd05e3cd96f17f73687889aab6027d078b518e2c04b594dfd89b2f574824bf935c7aee46c770aa6be9aafcc49f2
+  languageName: node
+  linkType: hard
+
 "sax@npm:~1.2.4":
   version: 1.2.4
   resolution: "sax@npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsax%2F-%2Fsax-1.2.4.tgz"
@@ -22072,7 +22131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
+"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsource-map-js%2F-%2Fsource-map-js-1.0.2.tgz"
   checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c
@@ -22620,7 +22679,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^3.3.1":
+"style-loader@npm:^3.3.1, style-loader@npm:^3.3.3":
   version: 3.3.3
   resolution: "style-loader@npm:3.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstyle-loader%2F-%2Fstyle-loader-3.3.3.tgz"
   peerDependencies:
@@ -23669,13 +23728,19 @@ __metadata:
     "@vercel/node": ^3.0.5
     axios: ^1.5.0
     babel-loader: ^9.1.3
+    css-loader: ^6.8.1
     node-fetch: ^3.3.2
+    postcss: ^8.4.31
+    postcss-loader: ^7.3.3
     prettier: 2.8.8
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    sass: ^1.69.5
+    sass-loader: ^13.3.2
     storybook: ^7.4.0
     storybook-axios: ^1.0.1
+    style-loader: ^3.3.3
     tsconfig-paths-webpack-plugin: ^4.1.0
     typescript: ^4.9.5
     webpack: ^5.88.2

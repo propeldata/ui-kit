@@ -1,0 +1,55 @@
+.rootLeaderboard {
+  composes: typographyTiny from '../../themes/typography.module.css';
+  overflow: auto;
+  height: var(--propel-component-height);
+  background-color: var(--propel-bg-primary);
+  padding: 0;
+
+  canvas {
+    height: var(--propel-component-height);
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    th,
+    td {
+      text-align: left;
+      color: var(--propel-text-primary);
+      padding: 15px 8px;
+    }
+
+    td {
+      color: var(--propel-text-primary);
+      background: linear-gradient(to right, var(--propel-border-primary) 15%, var(--propel-bg-primary) 0%);
+      background-position: top;
+      background-size: 6px 1px;
+      background-repeat: repeat-x;
+
+      &.valueBarCell {
+        width: 20%;
+        padding-right: 6px;
+      }
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--propel-text-primary);
+    }
+
+    th.valueHeader,
+    td.valueCell {
+      position: sticky;
+      right: 0;
+      text-align: right;
+    }
+
+    &.stickyHeader th {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+  }
+}
