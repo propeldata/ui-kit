@@ -1,0 +1,13 @@
+@use '../../themes/typography';
+
+.rootCounter {
+  @extend .typographyHeading1;
+  color: var(--propel-text-primary);
+  white-space: nowrap;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+
+  &.loading {
+    opacity: 0.3;
+  }
+}

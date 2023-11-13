@@ -1,20 +1,7 @@
-import {
-  Chart,
-  // ChartTypeRegistry,
-  ScaleOptionsByType,
-  // Scriptable,
-  // ScriptableTooltipContext,
-  // TextAlign,
-  TimeUnit
-} from 'chart.js'
-import { DateTime } from 'luxon'
+import { Chart, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
-// import React from 'react'
+import { DateTime } from 'luxon'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
-import type { ChartPlugins, ThemeProps } from '../../themes'
-import { defaultStyles } from '../../themes'
-import type { ChartScales, TimeSeriesChartVariant } from './TimeSeries.types'
-import { Log } from '../Log'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -164,84 +151,30 @@ export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranul
   return granularityInDictionary
 }
 
-interface UpdateChartStylesOptions {
-  theme: ThemeProps
-  chart: Chart
-  variant: TimeSeriesChartVariant
-}
-
-export function updateChartStyles(options: UpdateChartStylesOptions) {
-  const { theme, chart, variant } = options
-  const styles = undefined
-
-  const dataset = chart.data.datasets[0]
-
-  if (variant === 'bar') {
-    dataset.backgroundColor = theme?.accent
-    dataset.borderWidth = 0
-    dataset.hoverBackgroundColor = theme?.accentHover
-  } else {
-    dataset.backgroundColor = theme.accentHover
-    dataset.borderColor = theme.accentHover
-    dataset.borderWidth = 2
-    dataset.hoverBackgroundColor = theme?.accentHover
-    dataset.hoverBorderColor = theme?.accentHover
-  }
-
-  if (chart.options.layout) {
-    chart.options.layout.padding = styles?.canvas?.padding || defaultStyles.canvas.padding
-  }
-}
-
-interface UpdateChartConfig {
-  chart: Chart
-  values: Array<number | null>
-  labels: string[]
-  scales: ChartScales
-  variant: TimeSeriesChartVariant
-  customPlugins: ChartPlugins
-}
-
-export function updateChartConfig(options: UpdateChartConfig) {
-  // const { chart, labels, values, scales, variant, customPlugins } = options
-  const { chart, labels, values, scales, variant } = options
-
-  const dataset = chart.data.datasets[0]
-
-  chart.data.labels = labels
-  dataset.data = values
-  chart.options.scales = scales
-  dataset.type = variant
-
-  // @TODO: migrate it
-  // chart.options.plugins = customPlugins
-}
-
 interface GetScalesOptions {
   granularity: TimeSeriesGranularity | null
   isFormatted: boolean
   zone: string
+  chart?: Chart
 }
 
-export function getScales(options: GetScalesOptions) {
-  const { granularity, isFormatted, zone } = options
-  const styles = undefined
-  const scale = styles?.yAxis?.scale || defaultStyles.yAxis.scale
-
-  const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
+export function getScales({ granularity, isFormatted, zone, chart }: GetScalesOptions) {
+  const scales = chart?.options?.scales
+  const scale = scales?.y?.type ?? 'linear'
+  const beginAtZero = (scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>)?.y?.beginAtZero ?? false
 
   const scalesBase = {
     x: {
-      display: !hideGridLines,
+      display: scales?.x?.display ?? true,
       grid: {
         drawOnChartArea: false
       },
-      beginAtZero: true
+      beginAtZero
     },
     y: {
-      display: !hideGridLines,
-      beginAtZero: styles?.yAxis?.beginAtZero || defaultStyles.yAxis.beginAtZero,
-      grid: { drawOnChartArea: true }
+      display: scales?.y?.display ?? true,
+      grid: { drawOnChartArea: true },
+      beginAtZero
     }
   }
 

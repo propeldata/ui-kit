@@ -1,4 +1,4 @@
-import type { ChartOptions, ScaleOptionsByType } from 'chart.js'
+import type { Chart, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { FilterInput, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import { ErrorFallbackProps } from '../ErrorFallback'
@@ -52,7 +52,7 @@ export type TimeSeriesQueryProps = {
   propelApiUrl?: string
 }
 
-export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
+export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'div'> {
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: TimeSeriesChartVariant
 
@@ -81,7 +81,7 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   labelFormatter?: (labels: string[]) => string[]
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
-  chartProps?: (options: ChartOptions) => typeof options
+  chartConfigProps?: (config: Chart['config']) => typeof config
 
   /** Optional porps that are used to configure the Loader component. */
   loaderProps?: LoaderProps

@@ -1,8 +1,14 @@
+import classnames from 'classnames'
 import React from 'react'
-import { serverErrorMessage } from '../../themes'
-import componentStyles from './ErrorFallback.module.css'
+import { useTheme } from '../ThemeProvider'
+import componentStyles from './ErrorFallback.module.scss'
 
-export interface ErrorFallbackProps {
+export const serverErrorMessage = {
+  title: 'Unable to connect',
+  body: 'Sorry we are not able to connect at this time due to a technical error.'
+}
+
+export interface ErrorFallbackProps extends React.ComponentPropsWithoutRef<'div'> {
   error?: {
     title: string
     body: string
@@ -19,23 +25,26 @@ const Icon = ({ color }: { color?: string }) => (
 )
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
-  ({ error = serverErrorMessage }, forwardedRef) => (
-    <div ref={forwardedRef} className={componentStyles.rootErrorFallback}>
-      <div className={componentStyles.container}>
-        <Icon />
-        {error && (
-          <>
-            <p role="alert" aria-live="assertive">
-              {error.title}
-            </p>
-            <p role="alert" aria-live="assertive">
-              {error.body}
-            </p>
-          </>
-        )}
+  ({ error = serverErrorMessage, className }, forwardedRef) => {
+    useTheme(className)
+    return (
+      <div ref={forwardedRef} className={componentStyles.rootErrorFallback}>
+        <div className={classnames(componentStyles.container, className)}>
+          <Icon />
+          {error && (
+            <>
+              <p role="alert" aria-live="assertive">
+                {error.title}
+              </p>
+              <p role="alert" aria-live="assertive">
+                {error.body}
+              </p>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 )
 
 ErrorFallback.displayName = 'ErrorFallback'

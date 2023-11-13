@@ -1,5 +1,0 @@
-.rootTimeSeries {
-  width: var(--propel-timeseries-width, 100%);
-  height: var(--propel-timeseries-height, 200);
-  background-color: var(--propel-bg-primary);
-}

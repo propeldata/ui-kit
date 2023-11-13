@@ -7,7 +7,7 @@ import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
-import componentStyles from './Counter.module.css'
+import componentStyles from './Counter.module.scss'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
 
@@ -28,7 +28,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     },
     forwardedRef
   ) => {
-    const theme = useTheme()
+    useTheme(className)
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const combinedRefs = useCombinedRefs(forwardedRef, innerRef)
 
@@ -112,7 +112,6 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       <span
         ref={combinedRefs}
         className={classnames(
-          !theme?.themeClassName && themes.lightTheme,
           componentStyles.rootCounter,
           (isLoadingQuery || isLoadingStatic) && componentStyles.loading,
           className

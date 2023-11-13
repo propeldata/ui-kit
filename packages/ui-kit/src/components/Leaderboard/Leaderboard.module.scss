@@ -1,5 +1,7 @@
+@use '../../themes/typography';
+
 .rootLeaderboard {
-  composes: typographyTiny from '../../themes/typography.module.css';
+  @extend .typographyTiny;
   overflow: auto;
   height: var(--propel-component-height);
   background-color: var(--propel-bg-primary);
@@ -46,10 +48,12 @@
       text-align: right;
     }
 
-    &.stickyHeader th {
-      position: sticky;
-      top: 0;
-      z-index: 9999;
+    &.stickyHeader {
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-// import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
 import {
   Chart,
   BarController,
@@ -45,82 +44,54 @@ export const initChartJs = () => {
 
 // theme: ThemeProps, chartProps?: (chart: typeof Chart) => void
 export const setupChartStyles = ({ theme, chartProps }: ChartJSDefaultStyleProps): typeof Chart => {
-  // @TODO: find out why it's empty sometimes
-  //   if (!Chart.defaults.elements.point) {
-  //     console.log('aaa')
-  //     return
-  //   }
-  //   console.log('setupChartStyles', JSON.stringify(Chart.defaults, null, 2))
-
-  // const pointStyle = styles?.point?.style as ScriptableAndArray<
-  //   PointStyle,
-  //   ScriptableContext<keyof ChartTypeRegistry>
-  // >
-
-  const font = {
-    family: theme?.fontFamily,
-    size: theme?.fontSize,
-    // style: theme.,
-    // lineHeight: theme.,
-    color: theme?.textSecondary
+  if (!theme) {
+    return
   }
-  // const font = {
-  //   family: styles?.font?.family,
-  //   size: styles?.font?.size as Scriptable<number | undefined, ScriptableTooltipContext<keyof ChartTypeRegistry>>,
-  //   style: styles?.font?.style,
-  //   lineHeight: styles?.font?.lineHeight,
-  //   color: styles?.font?.color || defaultStyles.font.color
-  // }
 
-  Chart.defaults.color = theme?.textSecondary
-  Chart.defaults.backgroundColor = theme?.accent
-  Chart.defaults.borderColor = theme?.borderPrimary
+  // Global
+  Chart.defaults.color = theme.textSecondary
+  Chart.defaults.backgroundColor = theme.accent
+  Chart.defaults.borderColor = theme.borderPrimary
 
   // Point
   Chart.defaults.elements.point.pointStyle = 'circle'
-  Chart.defaults.elements.point.radius = 2
-  //   Chart.defaults.elements.point.backgroundColor =
-  //     styles?.point?.backgroundColor || defaultStyles.point.backgroundColor
-  //   Chart.defaults.elements.point.borderColor = styles?.point?.borderColor || defaultStyles.point.borderColor
-  //   Chart.defaults.elements.point.borderWidth = styles?.point?.borderWidth || defaultStyles.point.borderWidth
-  //   Chart.defaults.elements.point.hoverBorderColor =
-  //     styles?.point?.hoverBorderColor || defaultStyles.point.hoverBorderColor
-  //   Chart.defaults.elements.point.hoverBackgroundColor =
-  //     styles?.point?.hoverBackgroundColor || defaultStyles.point.hoverBackgroundColor
+  Chart.defaults.elements.point.hitRadius = 6
+  Chart.defaults.elements.point.radius = 0
+  Chart.defaults.elements.point.borderWidth = 2
+  Chart.defaults.elements.point.hoverRadius = 6
+  Chart.defaults.elements.point.hoverBorderColor = theme.bgPrimary
+  Chart.defaults.elements.point.backgroundColor = theme.accentHover
+  Chart.defaults.elements.point.hoverBackgroundColor = theme.accentHover
 
   // Bar
-  // Chart.defaults.elements.bar.backgroundColor = theme?.bgAccent
   Chart.defaults.elements.bar.borderWidth = 0
-  // Chart.defaults.elements.bar.hoverBackgroundColor = theme?.bgAccentHover
+  Chart.defaults.elements.bar.hoverBackgroundColor = theme.accentHover
+  Chart.defaults.elements.bar.backgroundColor = theme.accent
 
   // Line
-  //   Chart.defaults.elements.line.tension = styles?.line?.tension || defaultStyles.line.tension
-  Chart.defaults.elements.line.borderWidth = 1
-  //   Chart.defaults.elements.line.stepped = styles?.line?.stepped || defaultStyles.line.stepped
-  // Chart.defaults.elements.line.borderColor = '#ff0000'
+  Chart.defaults.elements.line.borderWidth = 3
 
   // Tooltip
-  //   Chart.defaults.plugins.tooltip.enabled =
-  //     styles?.tooltip?.display !== undefined ? styles?.tooltip?.display : defaultStyles.tooltip.display
-  //   Chart.defaults.plugins.tooltip.padding = styles?.tooltip?.padding || defaultStyles.tooltip.padding
-  Chart.defaults.plugins.tooltip.backgroundColor = theme?.bgPrimary
-  //   Chart.defaults.plugins.tooltip.bodyColor = styles?.tooltip?.color || defaultStyles.tooltip.color
-  //   Chart.defaults.plugins.tooltip.titleColor = styles?.tooltip?.color || defaultStyles.tooltip.color
-  //   Chart.defaults.plugins.tooltip.borderColor = styles?.tooltip?.borderColor || defaultStyles.tooltip.borderColor
-  //   Chart.defaults.plugins.tooltip.borderWidth = styles?.tooltip?.borderWidth || defaultStyles.tooltip.borderWidth
-  //   Chart.defaults.plugins.tooltip.caretSize = styles?.tooltip?.caretSize || defaultStyles.tooltip.caretSize
-  //   Chart.defaults.plugins.tooltip.cornerRadius = styles?.tooltip?.borderRadius || defaultStyles.tooltip.borderRadius
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  Chart.defaults.plugins.tooltip.titleFont = font
-  //   Chart.defaults.plugins.tooltip.titleAlign = styles?.tooltip?.alignContent as Scriptable<
-  //     TextAlign,
-  //     ScriptableTooltipContext<keyof ChartTypeRegistry>
-  //   >
-  //   Chart.defaults.plugins.tooltip.bodyAlign = styles?.tooltip?.alignContent as Scriptable<
-  //     TextAlign,
-  //     ScriptableTooltipContext<keyof ChartTypeRegistry>
-  //   >
+  Chart.defaults.plugins.tooltip.padding = parseInt(theme.spaceXs)
+  Chart.defaults.plugins.tooltip.backgroundColor = theme.bgPrimary
+  Chart.defaults.plugins.tooltip.bodyColor = theme.textSecondary
+  Chart.defaults.plugins.tooltip.titleColor = theme.textSecondary
+  Chart.defaults.plugins.tooltip.borderColor = theme.borderPrimary
+  Chart.defaults.plugins.tooltip.borderWidth = 1
+  Chart.defaults.plugins.tooltip.cornerRadius = 4
+
+  const commonFontSettings = {
+    family: theme.fontFamily,
+    color: theme.textSecondary
+  }
+
+  Chart.defaults.plugins.tooltip.titleFont = {
+    ...commonFontSettings,
+    size: parseInt(theme.fontSize) * parseFloat(theme.tinyFontSize),
+    weight: 'bold',
+    lineHeight: theme.tinyFontSize
+  }
+
   if (chartProps) {
     chartProps(Chart)
   }
@@ -130,10 +101,10 @@ export const setupChartStyles = ({ theme, chartProps }: ChartJSDefaultStyleProps
 
 export function useSetupComponentDefaultChartStyles({ theme, chartProps }: ChartJSDefaultStyleProps) {
   React.useEffect(() => {
-    if (theme || Boolean(theme?.themeClassName)) {
+    if (theme) {
       return
     }
-    console.log('useSetupComponentDefaultChartStyles')
+
     initChartJs()
     setupChartStyles({ theme, chartProps })
   }, [theme, chartProps])

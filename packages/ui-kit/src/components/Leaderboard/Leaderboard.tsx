@@ -10,15 +10,14 @@ import {
   useLeaderboardQuery,
   useSetupComponentDefaultChartStyles
 } from '../../helpers'
-import { ChartPlugins, defaultStyles } from '../../themes'
-import themes from '../../themes/themes.module.css'
+import { ChartPlugins } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useGlobalChartProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
-import { getTableSettings, getValueWithPrefixAndSufix, updateChartConfig, updateChartStyles } from './utils'
+import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
 
 let idCounter = 0
@@ -33,8 +32,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
       error,
       className,
       loading: isLoadingStatic = false,
-      stickyHeader,
-      hasValueBar = false,
+      tableProps,
       labelFormatter,
       timeZone,
       loaderProps,
@@ -43,10 +41,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
     },
     forwardedRef
   ) => {
-    const styles = undefined
-
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-    const theme = useTheme()
+    const theme = useTheme(className)
     const globalChartProps = useGlobalChartProps()
     useSetupComponentDefaultChartStyles({ theme, chartProps: globalChartProps })
 
@@ -57,9 +53,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
      * The html node where the chart will render
      */
     const canvasRef = React.useRef<HTMLCanvasElement>(null)
-
     const chartRef = React.useRef<ChartJS | null>()
-
     const tableRef = React.useRef<HTMLDivElement>(null)
     const combinedRefs = useCombinedRefs(forwardedRef, tableRef)
 
@@ -76,31 +70,18 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-        const hideGridLines = styles?.canvas?.hideGridLines || false
-
         const customPlugins: ChartPlugins = {
           customCanvasBackgroundColor: {
-            color: styles?.canvas?.backgroundColor
+            color: theme?.bgPrimary
           }
         }
 
-        const backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
-        const borderColor = styles?.bar?.borderColor || defaultStyles?.bar.borderColor
-        const borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
-        const hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
-
         if (chartRef.current) {
-          updateChartConfig({
-            chart: chartRef.current,
-            labels,
-            values,
-            customPlugins
-          })
+          const chart = chartRef.current
+          chart.data.labels = labels
+          chart.data.datasets[0].data = values
 
-          // updateChartStyles({ chart: chartRef.current, styles })
-          updateChartStyles({ chart: chartRef.current })
-
-          chartRef.current.update()
+          chart.update()
           return
         }
 
@@ -111,31 +92,32 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
             datasets: [
               {
                 data: values,
-                backgroundColor,
-                borderColor,
-                borderWidth,
-                hoverBorderColor
+                backgroundColor: theme?.accent,
+                barThickness: 17,
+                borderColor: theme?.accent,
+                borderWidth: 0,
+                hoverBorderColor: theme?.accentHover
               }
             ]
           },
           options: {
             indexAxis: 'y',
-            responsive: !styles?.canvas?.width,
+            responsive: true,
             maintainAspectRatio: false,
             layout: {
-              padding: styles?.canvas?.padding || defaultStyles.canvas.padding
+              padding: parseInt(theme?.spaceXxs)
             },
             plugins: customPlugins,
             scales: {
               x: {
-                display: !hideGridLines,
+                display: true,
                 grid: {
                   drawOnChartArea: false
                 },
                 beginAtZero: true
               },
               y: {
-                display: !hideGridLines,
+                display: true,
                 grid: { drawOnChartArea: true }
               }
             }
@@ -143,9 +125,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
           plugins: [customCanvasBackgroundColor]
         })
 
-        canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
+        canvasRef.current.style.borderRadius = '0px'
       },
-      [styles, variant, labelFormatter]
+      [variant, labelFormatter, theme]
     )
 
     const destroyChart = () => {
@@ -240,13 +222,13 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
       if (isStatic) {
         renderChart({ headers, rows })
       }
-    }, [isStatic, isLoadingStatic, styles, variant, headers, rows, renderChart])
+    }, [isStatic, isLoadingStatic, variant, headers, rows, renderChart])
 
     React.useEffect(() => {
       if (fetchedData && !isStatic) {
         renderChart(fetchedData.leaderboard)
       }
-    }, [fetchedData, styles, variant, isStatic, renderChart])
+    }, [fetchedData, variant, isStatic, renderChart])
 
     React.useEffect(() => {
       if (variant === 'table') {
@@ -280,15 +262,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
 
     if (variant === 'bar') {
       return (
-        <div
-          ref={forwardedRef}
-          className={classnames(
-            !theme?.themeClassName && themes.lightTheme,
-            componentStyles.rootLeaderboard,
-            className
-          )}
-        >
-          <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} {...rest} />
+        <div ref={forwardedRef} className={classnames(componentStyles.rootLeaderboard, className)} {...rest}>
+          <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
       )
     }
@@ -303,7 +278,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
     return (
       <div
         ref={combinedRefs}
-        className={classnames(componentStyles.rootLeaderboard, stickyHeader && componentStyles.stickyHeader)}
+        className={classnames(
+          componentStyles.rootLeaderboard,
+          tableProps?.stickyHeader && componentStyles.stickyHeader
+        )}
         style={loadingStyles}
       >
         <table cellSpacing={0}>
@@ -315,7 +293,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
                 <th key={`${header}-${index}`}>{header}</th>
               ))}
               <th className={componentStyles.valueHeader}>{valueHeader}</th>
-              {hasValueBar && <th />}
+              {tableProps?.hasValueBar && <th />}
             </tr>
           </thead>
           <tbody>
@@ -330,13 +308,13 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
                 {/* <td className={ComponentStyles.getTableValueCellStyles(styles)}> */}
                 <td className={componentStyles.valueCell}>
                   {getValueWithPrefixAndSufix({
-                    localize: styles?.table?.valueColumn?.localize,
-                    prefix: styles?.table?.valueColumn?.prefixValue,
-                    sufix: styles?.table?.valueColumn?.sufixValue,
+                    localize: tableProps?.localize,
+                    prefix: tableProps?.prefixValue,
+                    sufix: tableProps?.sufixValue,
                     value: valuesByRow?.[rowIndex] ?? undefined
                   })}
                 </td>
-                {hasValueBar && (
+                {tableProps?.hasValueBar && (
                   // <td className={ComponentStyles.valueBarCellStyles(styles)}>
                   <td className={componentStyles.valueBarCell}>
                     <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} />

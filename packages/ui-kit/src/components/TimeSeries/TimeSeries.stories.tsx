@@ -9,7 +9,6 @@ import {
   useStorybookAccessToken
 } from '../../helpers'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
-import { Chart } from '../../deps-exports'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
@@ -92,17 +91,33 @@ export const LineVariantStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams,
-    chartProps: (options) => ({
-      ...options,
-      plugins: {
-        ...options.plugins,
-        tooltip: {
-          ...options.plugins?.tooltip,
-          backgroundColor: '#0000ff'
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        scales: {
+          ...config.options?.scales,
+          x: {
+            ...config.options?.scales?.x
+            // display: true
+          },
+          y: {
+            ...config.options?.scales?.y
+            // display: true,
+            // type: 'linear'
+            // beginAtZero: false
+          }
+        },
+        plugins: {
+          ...config.options?.plugins,
+          tooltip: {
+            ...config.options?.plugins?.tooltip,
+            backgroundColor: '#000000'
+          }
+        },
+        onClick: () => {
+          console.log('Hey Line')
         }
-      },
-      onClick: () => {
-        console.log('Hey Line')
       }
     })
   },
@@ -114,19 +129,23 @@ export const BarVariantStory: Story = {
   args: {
     variant: 'bar',
     query: connectedParams,
-    chartProps: (options) => ({
-      ...options,
-      plugins: {
-        ...options.plugins,
-        tooltip: {
-          ...options.plugins?.tooltip,
-          backgroundColor: '#00ff00'
-        }
-      },
-      onClick: () => {
-        console.log('NNNNN')
-      }
-    })
+    className: 'hey'
+    // chartConfigProps: (config) => ({
+    //   ...config,
+    //   options: {
+    //     ...config.options,
+    //     plugins: {
+    //       ...config.options?.plugins,
+    //       tooltip: {
+    //         ...config.options?.plugins?.tooltip,
+    //         backgroundColor: '#00ff00'
+    //       }
+    //     },
+    //     onClick: () => {
+    //       console.log('NNNNN')
+    //     }
+    //   }
+    // })
   },
   render: (args) => <TimeSeries {...args} />
 }

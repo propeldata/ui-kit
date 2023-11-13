@@ -1,4 +1,4 @@
-import { Chart as ChartJS, ChartOptions } from 'chart.js'
+import { Chart as ChartJS, ChartDataset, ChartOptions } from 'chart.js'
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import classnames from 'classnames'
 import React from 'react'
@@ -10,24 +10,14 @@ import {
   useSetupComponentDefaultChartStyles,
   useTimeSeriesQuery
 } from '../../helpers'
-import { ChartPlugins, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
-import themes from '../../themes/themes.module.css'
+import { ChartPlugins } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useGlobalChartProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
-import { useLog } from '../Log'
-import componentStyles from './TimeSeries.module.css'
+import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
-import {
-  getDefaultGranularity,
-  getNumericValues,
-  getScales,
-  tooltipTitleCallback,
-  updateChartConfig
-  // updateChartStyles,
-} from './utils'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
+import { getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
 
@@ -47,13 +37,14 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       role,
       timeZone,
       className,
-      chartProps,
+      chartConfigProps,
+      loaderProps,
+      errorFallbackProps,
       ...rest
     },
     forwardedRef
   ) => {
-    const styles = undefined
-    const theme = useTheme()
+    const theme = useTheme(className)
     const globalChartProps = useGlobalChartProps()
     const isLoadingStatic = loading
     useSetupComponentDefaultChartStyles({ theme, chartProps: globalChartProps })
@@ -77,7 +68,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
      * The html node where the chart will render
      */
     const canvasRef = React.useRef<HTMLCanvasElement>(null)
-
     const chartRef = React.useRef<ChartJS | null>()
 
     /**
@@ -86,7 +76,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const isStatic = !query
 
     const isFormatted = !!labelFormatter
-
     const zone = timeZone ?? getTimeZone()
 
     const {
@@ -131,23 +120,18 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           !data?.labels ||
           !data.values ||
           hasError ||
-          (variant !== 'bar' && variant !== 'line')
-        )
+          (variant !== 'bar' && variant !== 'line') ||
+          !theme
+        ) {
           return
+        }
 
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) || []
         const values = data.values || []
-
-        // const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
-        const backgroundColor = theme?.accent
-        // console.log({ backgroundColor })
-        const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
-
         const plugins = [customCanvasBackgroundColor]
 
         const customPlugins: ChartPlugins = {
           customCanvasBackgroundColor: {
-            // color: styles?.canvas?.backgroundColor
             color: theme?.bgPrimary
           },
           tooltip: {
@@ -162,65 +146,64 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           datasets: [
             {
               data: values,
-              backgroundColor,
-              borderColor
-            }
+              backgroundColor: theme?.accent,
+              borderColor: theme?.accent,
+              pointBackgroundColor: theme?.accentHover,
+              pointHoverBackgroundColor: theme?.accentHover,
+              pointHoverBorderWidth: 2,
+              pointHoverBorderColor: theme?.bgPrimary
+            } as ChartDataset
           ]
         }
 
-        // const scales = getScales({ granularity, isFormatted, styles, zone })
-        const scales = getScales({ granularity, isFormatted, zone })
+        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current })
 
         if (chartRef.current) {
-          updateChartConfig({
-            chart: chartRef.current,
-            labels,
-            values,
-            scales,
-            variant,
-            customPlugins
-          })
+          const chart = chartRef.current
+          chart.data.labels = labels
+          chart.options.scales = scales
 
-          // updateChartStyles({ theme: theme, chart: chartRef.current, styles, variant })
+          const dataset = chart.data.datasets[0]
+          dataset.data = values
 
-          chartRef.current.update()
+          chart.update()
           return
         }
 
-        let options: ChartOptions = {
-          responsive: !styles?.canvas?.width,
+        const options: ChartOptions = {
+          responsive: true,
           maintainAspectRatio: false,
           plugins: customPlugins,
           layout: {
-            padding: styles?.canvas?.padding || defaultStyles.canvas.padding
+            padding: parseInt(theme?.spaceXxs)
           },
           scales
         }
 
-        if (chartProps) {
-          options = chartProps(options)
-        }
-
-        console.log('Final', options)
-
-        chartRef.current = new ChartJS(canvasRef.current, {
+        let config: ChartJS['config'] = {
           type: variant,
           data: dataset,
           options,
           plugins
-        })
+        }
 
-        canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
+        if (chartConfigProps) {
+          config = chartConfigProps(config)
+        }
+
+        chartRef.current = new ChartJS(canvasRef.current, config)
       },
-      [granularity, hasError, isFormatted, styles, variant, zone, labelFormatter, theme, chartProps]
+      [granularity, hasError, isFormatted, variant, zone, labelFormatter, theme, chartConfigProps]
     )
 
-    const destroyChart = () => {
-      if (chartRef.current) {
-        chartRef.current.destroy()
-        chartRef.current = null
+    const destroyChart = React.useCallback(() => {
+      if (!chartRef.current) {
+        return
       }
-    }
+
+      chartRef.current.destroy()
+      chartRef.current = null
+    }, [chartRef])
 
     React.useEffect(() => {
       function handlePropsMismatch() {
@@ -256,7 +239,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       if (isStatic) {
         renderChart({ labels, values })
       }
-    }, [isStatic, isLoadingStatic, styles, variant, labels, values, renderChart])
+    }, [isStatic, isLoadingStatic, variant, labels, values, renderChart])
 
     React.useEffect(() => {
       if (serverData && !isStatic) {
@@ -265,43 +248,38 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         renderChart({ labels, values })
       }
-    }, [serverData, variant, styles, isStatic, renderChart])
+    }, [serverData, variant, isStatic, renderChart])
 
     React.useEffect(() => {
       return () => {
         destroyChart()
       }
-    }, [])
+    }, [destroyChart])
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback error={error} />
+      return <ErrorFallback error={error} {...errorFallbackProps} />
     }
 
     // @TODO: encapsulate this logic in a shared hook/component
     // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !canvasRef.current) {
       destroyChart()
-      return <Loader />
+      return <Loader {...loaderProps} />
     }
 
     return (
-      <div
-        ref={forwardedRef}
-        className={classnames(!theme?.themeClassName && themes.lightTheme, componentStyles.rootTimeSeries, className)}
-      >
+      <div ref={forwardedRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest}>
         <canvas
           id={id}
           ref={canvasRef}
-          width={styles?.canvas?.width}
-          height={styles?.canvas?.height || defaultChartHeight}
+          height={theme?.componentHeight}
           role={role || 'img'}
-          aria-label={ariaLabel || defaultAriaLabel}
+          aria-label={ariaLabel || ''}
           style={{
             opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
             transition: 'opacity 0.2s ease-in-out'
           }}
-          {...rest}
         />
       </div>
     )

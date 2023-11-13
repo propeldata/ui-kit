@@ -1,8 +1,10 @@
+@use '../../themes/typography';
+
 .rootLoader {
+  @extend .typographyBasic;
   overflow: auto;
-  width: var(--propel-loader-width, 100%);
-  height: var(--propel-loader-height, auto);
-  composes: typographyBasic from '../../themes/themes.module.css';
+  width: 100%;
+  height: auto;
 }
 
 .loaderAnimation {
@@ -20,7 +22,7 @@
 
 .loaderAnimation:empty:not(.emptyText) {
   width: 100%;
-  height: var(--propel-loader-height, 200px);
+  height: var(--propel-component-height);
 }
 
 .emptyText {

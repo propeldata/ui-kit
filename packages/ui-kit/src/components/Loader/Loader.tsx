@@ -1,8 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
-import themes from '../../themes/themes.module.css'
 import { useTheme } from '../ThemeProvider'
-import componentStyles from './Loader.module.css'
+import componentStyles from './Loader.module.scss'
 
 export interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
   isText?: boolean
@@ -10,11 +9,11 @@ export interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
   ({ children, className, isText, ...other }, forwardedRef) => {
-    const theme = useTheme()
+    useTheme(className)
     return (
       <div
         ref={forwardedRef}
-        className={classnames(!theme?.themeClassName && themes.lightTheme, componentStyles.rootLoader, className)}
+        className={classnames(componentStyles.rootLoader, className)}
         role="alert"
         aria-live="polite"
         {...other}

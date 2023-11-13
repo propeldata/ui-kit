@@ -14,33 +14,8 @@
 
   /* Heading 1 */
   --propel-h1-font-size: 3.5rem;
-  --propel-h1-font-weight: 800;
+  --propel-h1-font-weight: 600;
   --propel-h1-line-height: 120%;
-
-  /* Heading 2 */
-  --propel-h2-font-size: 3rem;
-  --propel-h2-font-weight: 800;
-  --propel-h2-line-height: 120%;
-
-  /* Heading 3 */
-  --propel-h3-font-size: 2.5rem;
-  --propel-h3-font-weight: 700;
-  --propel-h3-line-height: 120%;
-
-  /* Heading 4 */
-  --propel-h4-font-size: 2rem;
-  --propel-h4-font-weight: 700;
-  --propel-h4-line-height: 130%;
-
-  /* Heading 5 */
-  --propel-h5-font-size: 1.5rem;
-  --propel-h5-font-weight: 700;
-  --propel-h5-line-height: 140%;
-
-  /* Heading 6 */
-  --propel-h6-font-size: 1.25rem;
-  --propel-h6-font-weight: 700;
-  --propel-h6-line-height: 140%;
 }
 
 .typographyBasic {
@@ -52,14 +27,14 @@
 }
 
 .typographyTiny {
-  composes: typographyBasic;
+  @extend .typographyBasic;
   font-size: var(--propel-tiny-font-size);
   font-weight: var(--propel-tiny-font-weight);
   line-height: var(--propel-tiny-line-height);
 }
 
 .typographyHeading1 {
-  composes: typographyBasic;
+  @extend .typographyBasic;
   font-size: var(--propel-h1-font-size);
   font-weight: var(--propel-h1-font-weight);
   line-height: var(--propel-h1-line-height);

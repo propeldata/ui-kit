@@ -56,7 +56,16 @@ export type LeaderboardQueryProps = {
   propelApiUrl?: string
 }
 
-export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
+export type LeaderboardTableProps = {
+  /** Whether the table header should remain fixed while scrolling */
+  stickyHeader?: boolean
+  hasValueBar?: boolean
+  localize?: boolean
+  prefixValue?: string
+  sufixValue?: string
+}
+
+export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'div'> {
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 
@@ -75,10 +84,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   /** Leaderboard query props */
   query?: LeaderboardQueryProps
 
-  /** Whether the table header should remain fixed while scrolling */
-  stickyHeader?: boolean
-
-  hasValueBar?: boolean
+  tableProps?: LeaderboardTableProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartProps` instead */
   labelFormatter?: (labels: string[]) => string[]

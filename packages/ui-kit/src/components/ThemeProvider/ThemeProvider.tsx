@@ -1,9 +1,10 @@
 import { Chart } from 'chart.js'
+import classnames from 'classnames'
 import React, { createContext, useContext, useState } from 'react'
-import { setupChartStyles, initChartJs } from '../../helpers'
-import { parseComputedStyle, setContainerStyle } from '../../helpers/themeUtils'
+import { initChartJs, setupChartStyles } from '../../helpers'
+import { clearContainerStyle, parseComputedStyle, setContainerStyle } from '../../helpers/themeUtils'
 import type { ThemeProps } from '../../themes/theme.types'
-import themes from '../../themes/themes.module.css'
+import themes from '../../themes/themes.module.scss'
 
 export type ThemeContextProps = {
   theme?: ThemeProps
@@ -12,20 +13,61 @@ export type ThemeContextProps = {
 
 export type ThemeProviderProps = {
   children?: React.ReactNode
+  baseTheme?: 'lightTheme' | 'darkTheme'
   theme?: string | ThemeProps
   globalChartProps?: (chart: typeof Chart) => typeof Chart
 }
 
+type ThemeStateProps = ThemeProps | undefined
+
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
 
-export const useTheme = (): ThemeProps | undefined => {
+export const useTheme = (customClassName?: string): ThemeStateProps => {
+  const [theme, setTheme] = useState<ThemeStateProps>()
   const context = useContext(ThemeContext)
 
-  if (!context) {
-    return parseComputedStyle(document.body)
-  }
+  React.useEffect(() => {
+    if (!(theme && !theme?.chartJsInitiated)) {
+      return
+    }
 
-  return context.theme
+    initChartJs()
+    setupChartStyles({ theme })
+    setTheme((prevTheme) => ({ ...prevTheme, chartJsInitiated: true }))
+  }, [theme])
+
+  React.useEffect(() => {
+    if (context) {
+      setTheme(context.theme)
+      return
+    }
+
+    // If there is no ThemeProvider
+    const themeContainer = document.createElement('div')
+    themeContainer.classList.add(themes.lightTheme)
+
+    let themeContainerElement = themeContainer
+
+    if (customClassName) {
+      // It raises the priority of custom styles
+      const themeInnerContainer = document.createElement('div')
+      themeInnerContainer.classList.add(customClassName)
+      themeContainer.appendChild(themeInnerContainer)
+      themeContainerElement = themeInnerContainer
+    }
+
+    document.body.appendChild(themeContainer)
+
+    setTheme(parseComputedStyle(themeContainerElement))
+
+    return () => {
+      if (document.body.contains(themeContainer)) {
+        document.body.removeChild(themeContainer)
+      }
+    }
+  }, [context, customClassName])
+
+  return theme
 }
 
 export const useGlobalChartProps = (): ((chart: typeof Chart) => typeof Chart) => {
@@ -40,25 +82,30 @@ export const useGlobalChartProps = (): ((chart: typeof Chart) => typeof Chart) =
 
 export const ThemeProvider = ({
   children,
-  theme: initialTheme = themes.lightTheme,
+  baseTheme = 'lightTheme',
+  theme: themeProp = themes.lightTheme,
   globalChartProps
 }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<ThemeProps | undefined>()
+  const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
 
   React.useEffect(() => {
-    if (!(ref.current && initialTheme)) {
+    if (!ref.current) {
       return
     }
 
-    if (typeof initialTheme === 'string') {
-      setTheme({ ...parseComputedStyle(ref.current), themeClassName: initialTheme })
+    clearContainerStyle(ref.current)
+    const baseThemeStyleProps = parseComputedStyle(ref.current)
+
+    if (typeof themeProp === 'string') {
+      setTheme({ ...baseThemeStyleProps, baseTheme })
       return
     }
 
-    setContainerStyle(ref.current, initialTheme)
-    setTheme(initialTheme)
-  }, [ref, initialTheme])
+    const combinedWithBaseProps = { ...baseThemeStyleProps, ...themeProp }
+    setContainerStyle(ref.current, combinedWithBaseProps)
+    setTheme(combinedWithBaseProps)
+  }, [ref, themeProp, baseTheme])
 
   React.useEffect(() => {
     if (!(theme && !theme?.chartJsInitiated)) {
@@ -71,7 +118,7 @@ export const ThemeProvider = ({
   }, [theme, globalChartProps])
 
   return (
-    <div ref={ref} className={typeof initialTheme === 'string' ? initialTheme : undefined}>
+    <div ref={ref} className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}>
       <ThemeContext.Provider value={{ theme, globalChartProps }}>{children}</ThemeContext.Provider>
     </div>
   )

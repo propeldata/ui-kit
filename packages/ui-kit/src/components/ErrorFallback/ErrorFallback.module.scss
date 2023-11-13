@@ -1,0 +1,16 @@
+@use '../../themes/typography';
+
+.rootErrorFallback {
+  width: 100%;
+  height: var(--propel-component-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @extend .typographyBasic;
+
+  &.container {
+    max-width: 263px;
+    text-align: center;
+    text-align: -webkit-center;
+  }
+}

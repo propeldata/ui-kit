@@ -1,23 +1,30 @@
-export type ThemePropValues =
-  | 'fontFamily'
-  | 'fontSize'
-  | 'fontWeight'
-  | 'fontHeight'
-  | 'bgPrimary'
-  | 'bgSecondary'
-  | 'textPrimary'
-  | 'textSecondary'
-  | 'borderPrimary'
-  | 'accent'
-  | 'accentHover'
-
 export type ThemeProps = {
   chartJsInitiated?: boolean
-  themeClassName?: string
+  baseTheme?: 'lightTheme' | 'darkTheme'
+
   fontFamily?: string
   fontSize?: string
   fontWeight?: string
-  fontHeight?: string
+  lineHeight?: string
+
+  tinyFontSize?: string
+  tinyFontWeight?: string
+  tinyLineHeight?: string
+
+  h1FontSize?: string
+  h1FontWeight?: string
+  h1LineHeight?: string
+
+  spaceXxs?: string
+  spaceXs?: string
+
+  componentHeight?: string
+  successPrimary?: string
+  successSecondary?: string
+  errorPrimary?: string
+  errorSecondary?: string
+
+  colorPrimary?: string
   bgPrimary?: string
   bgSecondary?: string
   textPrimary?: string
@@ -25,4 +32,5 @@ export type ThemeProps = {
   borderPrimary?: string
   accent?: string
   accentHover?: string
+  colorGradient?: string
 }
