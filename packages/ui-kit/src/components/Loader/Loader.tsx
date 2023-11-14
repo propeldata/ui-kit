@@ -1,18 +1,23 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useTheme } from '../ThemeProvider'
+import { useCombinedRefsCallback } from '../../helpers'
+import { DefaultThemes, useTheme } from '../ThemeProvider'
 import componentStyles from './Loader.module.scss'
 
 export interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
   isText?: boolean
+  baseTheme?: DefaultThemes
 }
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ children, className, isText, ...other }, forwardedRef) => {
-    useTheme(className)
+  ({ children, className, isText, baseTheme, ...other }, forwardedRef) => {
+    const innerRef = React.useRef<HTMLDivElement>(null)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    useTheme({ componentContainer, baseTheme })
+
     return (
       <div
-        ref={forwardedRef}
+        ref={setRef}
         className={classnames(componentStyles.rootLoader, className)}
         role="alert"
         aria-live="polite"

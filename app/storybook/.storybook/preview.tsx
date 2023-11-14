@@ -9,23 +9,25 @@ import { getStringAttributes, prettier } from '../src/utils'
 import './global.css'
 
 const withThemeProvider = (Story, context) => (
-  <ThemeProvider
-    baseTheme={context.globals.theme}
-    // theme={themes.customTheme}
-    // theme={{
-    //   textSecondary: '#0000ff'
-    // }}
-    // @TODO: remove before PR review
-    // globalChartProps={(Chart) => {
-    //   Chart.defaults.plugins.tooltip.backgroundColor = '#ff0000'
-    //   Chart.defaults.onClick = () => {
-    //     console.log('Global onClick handler')
-    //   }
-    //   return Chart
-    // }}
-  >
-    <Story />
-  </ThemeProvider>
+  <>
+    <ThemeProvider
+      baseTheme={context.globals.theme}
+      // theme={themes.customTheme}
+      // theme={{
+      //   textSecondary: '#0000ff'
+      // }}
+      // @TODO: remove before PR review
+      // globalChartConfigProps={(Chart) => {
+      //   Chart.defaults.plugins.tooltip.backgroundColor = '#ff0000'
+      //   Chart.defaults.onClick = () => {
+      //     console.log('Global onClick handler')
+      //   }
+      //   return Chart
+      // }}
+    >
+      <Story />
+    </ThemeProvider>
+  </>
 )
 
 const withSource = (StoryFn, context) => {

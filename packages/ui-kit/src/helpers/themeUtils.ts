@@ -44,6 +44,41 @@ const themeDict: ThemeDictProps[] = [
   { name: 'colorGradient', cssVarName: '--propel-color-gradient' }
 ]
 
+// const cssVarNames = themeDict.map((item) => ({ [item.cssVarName]: item.cssVarName }))
+// export type ThemeCSSVarNames2 = typeof cssVarNames
+
+// @TODO: improve this type
+export type ThemeCSSVarNames = {
+  '--propel-font-family'?: string
+  '--propel-font-size'?: string
+  '--propel-font-weight'?: string
+  '--propel-font-height'?: string
+  '--propel-tiny-font-size'?: string
+  '--propel-tiny-font-weight'?: string
+  '--propel-tiny-line-height'?: string
+  '--propel-h1-font-size'?: string
+  '--propel-h1-font-weight'?: string
+  '--propel-h1-line-height'?: string
+  '--propel-space-xxs'?: string
+  '--propel-space-xs'?: string
+  '--propel-component-height'?: string
+  '--propel-success-primary'?: string
+  '--propel-success-secondary'?: string
+  '--propel-error-primary'?: string
+  '--propel-error-secondary'?: string
+  '--propel-color-primary'?: string
+  '--propel-bg-primary'?: string
+  '--propel-bg-secondary'?: string
+  '--propel-text-primary'?: string
+  '--propel-text-secondary'?: string
+  '--propel-border-primary'?: string
+  '--propel-accent'?: string
+  '--propel-accent-hover'?: string
+  '--propel-color-gradient'?: string
+}
+
+export interface ThemeCSSProperties extends React.CSSProperties, ThemeCSSVarNames {}
+
 export const parseComputedStyle = (themeContainer: HTMLElement) => {
   const computedStyle = getComputedStyle(themeContainer)
   const theme: Partial<ThemeProps> = {}

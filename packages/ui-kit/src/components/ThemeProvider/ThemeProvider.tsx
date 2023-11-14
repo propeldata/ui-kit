@@ -1,90 +1,83 @@
 import { Chart } from 'chart.js'
 import classnames from 'classnames'
 import React, { createContext, useContext, useState } from 'react'
-import { initChartJs, setupChartStyles } from '../../helpers'
+import { setupChartStyles } from '../../helpers'
 import { clearContainerStyle, parseComputedStyle, setContainerStyle } from '../../helpers/themeUtils'
 import type { ThemeProps } from '../../themes/theme.types'
 import themes from '../../themes/themes.module.scss'
 
 export type ThemeContextProps = {
   theme?: ThemeProps
-  globalChartProps?: (chart: typeof Chart) => typeof Chart
+  globalChartConfigProps?: (chart: typeof Chart) => typeof Chart
 }
+
+export type DefaultThemes = 'lightTheme' | 'darkTheme'
 
 export type ThemeProviderProps = {
   children?: React.ReactNode
-  baseTheme?: 'lightTheme' | 'darkTheme'
+  baseTheme?: DefaultThemes
   theme?: string | ThemeProps
-  globalChartProps?: (chart: typeof Chart) => typeof Chart
+  globalChartConfigProps?: (chart: typeof Chart) => typeof Chart
 }
-
-type ThemeStateProps = ThemeProps | undefined
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
 
-export const useTheme = (customClassName?: string): ThemeStateProps => {
+type ThemeStateProps = ThemeProps | undefined
+type UseThemeProps = {
+  componentContainer?: HTMLElement
+  baseTheme?: DefaultThemes
+}
+
+export const useTheme = ({ componentContainer, baseTheme = 'lightTheme' }: UseThemeProps): ThemeStateProps => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const context = useContext(ThemeContext)
 
   React.useEffect(() => {
-    if (!(theme && !theme?.chartJsInitiated)) {
+    if (!theme) {
       return
     }
 
-    initChartJs()
     setupChartStyles({ theme })
-    setTheme((prevTheme) => ({ ...prevTheme, chartJsInitiated: true }))
   }, [theme])
 
   React.useEffect(() => {
-    if (context) {
-      setTheme(context.theme)
+    if (!componentContainer) {
       return
     }
 
-    // If there is no ThemeProvider
-    const themeContainer = document.createElement('div')
-    themeContainer.classList.add(themes.lightTheme)
-
-    let themeContainerElement = themeContainer
-
-    if (customClassName) {
-      // It raises the priority of custom styles
-      const themeInnerContainer = document.createElement('div')
-      themeInnerContainer.classList.add(customClassName)
-      themeContainer.appendChild(themeInnerContainer)
-      themeContainerElement = themeInnerContainer
+    if (context) {
+      // Merge the theme from the context with the component scope styles
+      setTheme({ ...context.theme, ...parseComputedStyle(componentContainer) })
+      return
     }
 
-    document.body.appendChild(themeContainer)
-
-    setTheme(parseComputedStyle(themeContainerElement))
-
-    return () => {
-      if (document.body.contains(themeContainer)) {
-        document.body.removeChild(themeContainer)
-      }
+    // Set the theme from the component scope styles if there is no ThemeProvider context.
+    // Use light theme as a fallback.
+    if (!componentContainer.classList.contains(themes[baseTheme])) {
+      componentContainer.classList.add(themes[baseTheme])
     }
-  }, [context, customClassName])
+
+    setTheme(parseComputedStyle(componentContainer))
+  }, [context, componentContainer, baseTheme])
 
   return theme
 }
 
-export const useGlobalChartProps = (): ((chart: typeof Chart) => typeof Chart) => {
+export const useGlobalChartConfigProps = (): ((chart: typeof Chart) => typeof Chart) => {
   const context = useContext(ThemeContext)
 
   if (!context) {
     return undefined
   }
 
-  return context.globalChartProps
+  return context.globalChartConfigProps
 }
 
 export const ThemeProvider = ({
   children,
   baseTheme = 'lightTheme',
   theme: themeProp = themes.lightTheme,
-  globalChartProps
+  globalChartConfigProps
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
@@ -108,18 +101,16 @@ export const ThemeProvider = ({
   }, [ref, themeProp, baseTheme])
 
   React.useEffect(() => {
-    if (!(theme && !theme?.chartJsInitiated)) {
+    if (!theme) {
       return
     }
 
-    initChartJs()
-    setupChartStyles({ theme, chartProps: globalChartProps })
-    setTheme((prevTheme) => ({ ...prevTheme, chartJsInitiated: true }))
-  }, [theme, globalChartProps])
+    setupChartStyles({ theme, globalChartConfigProps: globalChartConfigProps })
+  }, [theme, globalChartConfigProps])
 
   return (
     <div ref={ref} className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}>
-      <ThemeContext.Provider value={{ theme, globalChartProps }}>{children}</ThemeContext.Provider>
+      <ThemeContext.Provider value={{ theme, globalChartConfigProps }}>{children}</ThemeContext.Provider>
     </div>
   )
 }

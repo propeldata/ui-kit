@@ -1,8 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
-import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCombinedRefs, useCounterQuery } from '../../helpers'
-import themes from '../../themes/themes.module.css'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
+import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCombinedRefsCallback, useCounterQuery } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useTheme } from '../ThemeProvider'
@@ -21,6 +19,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       loading: isLoadingStatic = false,
       localize,
       className,
+      baseTheme,
       loaderProps,
       errorFallbackProps,
       timeZone,
@@ -28,9 +27,9 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     },
     forwardedRef
   ) => {
-    useTheme(className)
     const innerRef = React.useRef<HTMLSpanElement>(null)
-    const combinedRefs = useCombinedRefs(forwardedRef, innerRef)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    useTheme({ componentContainer, baseTheme })
 
     /**
      * If the user passes `value` attribute, it
@@ -110,7 +109,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
 
     return (
       <span
-        ref={combinedRefs}
+        ref={setRef}
         className={classnames(
           componentStyles.rootCounter,
           (isLoadingQuery || isLoadingStatic) && componentStyles.loading,

@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useTheme } from '../ThemeProvider'
+import { useCombinedRefsCallback } from '../../helpers'
+import { DefaultThemes, useTheme } from '../ThemeProvider'
 import componentStyles from './ErrorFallback.module.scss'
 
 export const serverErrorMessage = {
@@ -9,6 +10,7 @@ export const serverErrorMessage = {
 }
 
 export interface ErrorFallbackProps extends React.ComponentPropsWithoutRef<'div'> {
+  baseTheme?: DefaultThemes
   error?: {
     title: string
     body: string
@@ -25,10 +27,13 @@ const Icon = ({ color }: { color?: string }) => (
 )
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
-  ({ error = serverErrorMessage, className }, forwardedRef) => {
-    useTheme(className)
+  ({ error = serverErrorMessage, className, baseTheme }, forwardedRef) => {
+    const innerRef = React.useRef<HTMLDivElement>(null)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    useTheme({ componentContainer, baseTheme })
+
     return (
-      <div ref={forwardedRef} className={componentStyles.rootErrorFallback}>
+      <div ref={setRef} className={componentStyles.rootErrorFallback}>
         <div className={classnames(componentStyles.container, className)}>
           <Icon />
           {error && (

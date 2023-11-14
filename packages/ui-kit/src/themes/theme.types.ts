@@ -1,5 +1,4 @@
 export type ThemeProps = {
-  chartJsInitiated?: boolean
   baseTheme?: 'lightTheme' | 'darkTheme'
 
   fontFamily?: string

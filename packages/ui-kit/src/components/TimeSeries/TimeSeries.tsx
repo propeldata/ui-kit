@@ -8,12 +8,13 @@ import {
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
   useSetupComponentDefaultChartStyles,
-  useTimeSeriesQuery
+  useTimeSeriesQuery,
+  useCombinedRefsCallback
 } from '../../helpers'
 import { ChartPlugins } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import { useGlobalChartProps, useTheme } from '../ThemeProvider'
+import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
@@ -37,6 +38,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       role,
       timeZone,
       className,
+      baseTheme,
       chartConfigProps,
       loaderProps,
       errorFallbackProps,
@@ -44,10 +46,13 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     },
     forwardedRef
   ) => {
-    const theme = useTheme(className)
-    const globalChartProps = useGlobalChartProps()
+    const innerRef = React.useRef<HTMLDivElement>(null)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const theme = useTheme({ componentContainer, baseTheme })
+
+    const globalChartConfigProps = useGlobalChartConfigProps()
     const isLoadingStatic = loading
-    useSetupComponentDefaultChartStyles({ theme, chartProps: globalChartProps })
+    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps: globalChartConfigProps })
 
     React.useEffect(() => {
       chartJsAdapterLuxon
@@ -162,6 +167,10 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           const chart = chartRef.current
           chart.data.labels = labels
           chart.options.scales = scales
+          chart.options.plugins = {
+            ...chart.options.plugins,
+            ...customPlugins
+          }
 
           const dataset = chart.data.datasets[0]
           dataset.data = values
@@ -269,7 +278,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     }
 
     return (
-      <div ref={forwardedRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest}>
+      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest}>
         <canvas
           id={id}
           ref={canvasRef}

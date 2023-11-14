@@ -17,10 +17,16 @@ import type { ThemeProps } from '../themes'
 
 export type ChartJSDefaultStyleProps = {
   theme: ThemeProps
-  chartProps?: (chart: typeof Chart) => void
+  globalChartConfigProps?: (chart: typeof Chart) => void
 }
 
+let isChartJSRegistered = false
+
 export const initChartJs = () => {
+  if (isChartJSRegistered) {
+    return
+  }
+
   /**
    * It registers only the modules that will be used
    * in the context of a BarChart and LineChart so
@@ -40,12 +46,17 @@ export const initChartJs = () => {
     CategoryScale,
     LinearScale
   )
+
+  isChartJSRegistered = true
 }
 
-// theme: ThemeProps, chartProps?: (chart: typeof Chart) => void
-export const setupChartStyles = ({ theme, chartProps }: ChartJSDefaultStyleProps): typeof Chart => {
+export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefaultStyleProps): typeof Chart => {
   if (!theme) {
     return
+  }
+
+  if (!isChartJSRegistered) {
+    initChartJs()
   }
 
   // Global
@@ -66,7 +77,7 @@ export const setupChartStyles = ({ theme, chartProps }: ChartJSDefaultStyleProps
   // Bar
   Chart.defaults.elements.bar.borderWidth = 0
   Chart.defaults.elements.bar.hoverBackgroundColor = theme.accentHover
-  Chart.defaults.elements.bar.backgroundColor = theme.accent
+  // Chart.defaults.elements.bar.backgroundColor = theme.accent
 
   // Line
   Chart.defaults.elements.line.borderWidth = 3
@@ -92,20 +103,20 @@ export const setupChartStyles = ({ theme, chartProps }: ChartJSDefaultStyleProps
     lineHeight: theme.tinyFontSize
   }
 
-  if (chartProps) {
-    chartProps(Chart)
+  if (globalChartConfigProps) {
+    globalChartConfigProps(Chart)
   }
 
   return Chart
 }
 
-export function useSetupComponentDefaultChartStyles({ theme, chartProps }: ChartJSDefaultStyleProps) {
+export function useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps }: ChartJSDefaultStyleProps) {
   React.useEffect(() => {
     if (theme) {
       return
     }
 
     initChartJs()
-    setupChartStyles({ theme, chartProps })
-  }, [theme, chartProps])
+    setupChartStyles({ theme, globalChartConfigProps })
+  }, [theme, globalChartConfigProps])
 }

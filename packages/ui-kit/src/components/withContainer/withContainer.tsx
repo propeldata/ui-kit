@@ -8,13 +8,20 @@ export const withContainer = <P extends object, C extends object>(
   WrappedComponent: React.ComponentType<P>,
   ErrorFallback: React.ComponentType<C>
 ) => {
-  return function Container(componentProps: P, errorFallbackProps: C) {
+  const WithContainer = React.forwardRef<HTMLDivElement, P & C>((props, ref) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { errorFallbackProps, ...componentProps } = props as any
+
     return (
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary fallback={<ErrorFallback {...errorFallbackProps} />}>
-          <WrappedComponent {...componentProps} />
+          <WrappedComponent ref={ref} {...componentProps} />
         </ErrorBoundary>
       </QueryClientProvider>
     )
-  }
+  })
+
+  WithContainer.displayName = `WithContainer(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`
+
+  return WithContainer
 }

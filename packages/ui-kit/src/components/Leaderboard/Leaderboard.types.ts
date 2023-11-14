@@ -1,7 +1,8 @@
-import type { ChartOptions } from 'chart.js'
-import { DimensionInput, FilterInput, Sort, TimeRangeInput } from '../../helpers'
+import type { Chart } from 'chart.js'
+import { DimensionInput, FilterInput, Sort, ThemeCSSProperties, TimeRangeInput } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { LoaderProps } from '../Loader'
+import type { DefaultThemes } from '../ThemeProvider'
 
 /**
  * @deprecated the type is deprecated, use LeaderboardChartVariant or TimeSeriesChartVariant instead
@@ -66,6 +67,10 @@ export type LeaderboardTableProps = {
 }
 
 export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'div'> {
+  style?: ThemeCSSProperties
+
+  baseTheme?: DefaultThemes
+
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 
@@ -86,11 +91,11 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
 
   tableProps?: LeaderboardTableProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartProps` instead */
+  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
   labelFormatter?: (labels: string[]) => string[]
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
-  chartProps?: (options: ChartOptions) => typeof options
+  chartConfigProps?: (config: Chart['config']) => typeof config
 
   /** Optional porps that are used to configure the Loader component. */
   loaderProps?: LoaderProps

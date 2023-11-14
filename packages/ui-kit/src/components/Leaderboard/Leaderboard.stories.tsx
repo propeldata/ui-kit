@@ -56,23 +56,28 @@ const tableStringRows = [
 
 const Leaderboard = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
+  const ref = React.useRef(null)
 
   if (!accessToken && args?.query) {
     return null
   }
 
   return (
-    <LeaderboardSource
-      {...{
-        ...args,
-        query: args?.query
-          ? {
-              ...args?.query,
-              accessToken
-            }
-          : undefined
-      }}
-    />
+    <>
+      <LeaderboardSource
+        ref={ref}
+        {...{
+          ...args,
+          query: args?.query
+            ? {
+                ...args?.query,
+                accessToken
+              }
+            : undefined
+        }}
+      />
+      {/* <button onClick={() => console.log(ref.current)}>Log ref</button> */}
+    </>
   )
 }
 
@@ -95,7 +100,11 @@ const connectedParams = {
 export const SingleDimensionStory: Story = {
   name: 'Single dimension',
   args: {
-    query: connectedParams
+    query: connectedParams,
+    style: {
+      '--propel-text-primary': '#ff0000',
+      '--propel-text-secondary': '#ff0000'
+    }
   },
   render: (args) => <Leaderboard {...args} />
 }
@@ -116,15 +125,10 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
     query: connectedParams,
-    hasValueBar: true
-    // styles: {
-    //   table: {
-    //     hasValueBar: true,
-    //     valueColumn: {
-    //       localize: true
-    //     }
-    //   }
-    // }
+    tableProps: {
+      hasValueBar: true,
+      localize: true
+    }
   },
   render: (args) => <Leaderboard {...args} />
 }
@@ -146,43 +150,52 @@ export const CustomStyleStory: Story = {
     variant: 'table',
     headers: tableHeaders,
     rows: tableRows,
-    styles: {
-      font: {
-        size: '14px'
-      },
-      table: {
-        stickyHeader: true,
-        height: '200px',
-        hasValueBar: true,
-        backgroundColor: '#191414',
-        header: {
-          align: 'center',
-          backgroundColor: '#282828',
-          font: {
-            color: '#1DB954',
-            weight: 'bold',
-            size: '18px'
-          }
-        },
-        valueBar: {
-          color: '#1DB954',
-          backgroundColor: '#545454'
-        },
-        valueColumn: {
-          align: 'center',
-          backgroundColor: '#191414',
-          font: {
-            color: '#1DB954'
-          }
-        },
-        columns: {
-          align: 'center',
-          font: {
-            color: '#1DB954'
-          }
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        onClick: () => {
+          console.log('Hey Line')
         }
       }
-    }
+    })
+    // styles: {
+    //   font: {
+    //     size: '14px'
+    //   },
+    //   table: {
+    //     stickyHeader: true,
+    //     height: '200px',
+    //     hasValueBar: true,
+    //     backgroundColor: '#191414',
+    //     header: {
+    //       align: 'center',
+    //       backgroundColor: '#282828',
+    //       font: {
+    //         color: '#1DB954',
+    //         weight: 'bold',
+    //         size: '18px'
+    //       }
+    //     },
+    //     valueBar: {
+    //       color: '#1DB954',
+    //       backgroundColor: '#545454'
+    //     },
+    //     valueColumn: {
+    //       align: 'center',
+    //       backgroundColor: '#191414',
+    //       font: {
+    //         color: '#1DB954'
+    //       }
+    //     },
+    //     columns: {
+    //       align: 'center',
+    //       font: {
+    //         color: '#1DB954'
+    //       }
+    //     }
+    //   }
+    // }
   },
   render: (args) => <Leaderboard {...args} />
 }

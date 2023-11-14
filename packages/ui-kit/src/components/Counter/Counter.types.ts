@@ -1,6 +1,7 @@
-import type { FilterInput, TimeRangeInput } from '../../helpers'
+import type { FilterInput, ThemeCSSProperties, TimeRangeInput } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { LoaderProps } from '../Loader'
+import type { DefaultThemes } from '../ThemeProvider'
 
 export type CounterQueryProps = {
   /** Time range that the chart will respond to. Will be ignored when value is passed */
@@ -30,6 +31,9 @@ export type CounterQueryProps = {
 }
 
 export interface CounterProps extends React.ComponentProps<'span'> {
+  style?: ThemeCSSProperties
+  baseTheme?: DefaultThemes
+
   /** If passed, the component will ignore the built-in GraphQL operations */
   value?: string
   /** Symbol to be shown before the value text */

@@ -9,11 +9,6 @@
 
   --propel-space-xxs: 4px;
   --propel-space-xs: 8px;
-  /* --propel-space-sm:   12px;
-  --propel-space-md:   20px;
-  --propel-space-lg:   32px;
-  --propel-space-xl:   52px;
-  --propel-space-xxl:  84px; */
 }
 
 .lightTheme {
@@ -29,11 +24,6 @@
   --propel-color-gradient: linear-gradient(180deg, rgba(46, 144, 250, 0.35) -11.58%, rgba(46, 144, 250, 0.05) 100%);
 
   background-color: var(--propel-bg-primary);
-}
-
-.customTheme {
-  // --propel-text-primary: #0000ff;
-  --propel-text-secondary: #ff0000;
 }
 
 .darkTheme {

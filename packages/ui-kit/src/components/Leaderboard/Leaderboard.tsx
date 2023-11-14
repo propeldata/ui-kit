@@ -6,14 +6,14 @@ import {
   formatLabels,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useCombinedRefs,
+  useCombinedRefsCallback,
   useLeaderboardQuery,
   useSetupComponentDefaultChartStyles
 } from '../../helpers'
 import { ChartPlugins } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import { useGlobalChartProps, useTheme } from '../ThemeProvider'
+import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
@@ -22,7 +22,7 @@ import { ValueBar } from './ValueBar'
 
 let idCounter = 0
 
-export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableElement, LeaderboardProps>(
+export const LeaderboardComponent = React.forwardRef<HTMLDivElement, LeaderboardProps>(
   (
     {
       variant = 'bar',
@@ -31,20 +31,26 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
       query,
       error,
       className,
+      chartConfigProps,
       loading: isLoadingStatic = false,
       tableProps,
+      baseTheme = 'lightTheme',
       labelFormatter,
       timeZone,
       loaderProps,
       errorFallbackProps,
+      style,
       ...rest
     },
     forwardedRef
   ) => {
+    const innerRef = React.useRef<HTMLDivElement>(null)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const theme = useTheme({ componentContainer, baseTheme })
+
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-    const theme = useTheme(className)
-    const globalChartProps = useGlobalChartProps()
-    useSetupComponentDefaultChartStyles({ theme, chartProps: globalChartProps })
+    const globalChartConfigProps = useGlobalChartConfigProps()
+    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps: globalChartConfigProps })
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -54,8 +60,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
      */
     const canvasRef = React.useRef<HTMLCanvasElement>(null)
     const chartRef = React.useRef<ChartJS | null>()
-    const tableRef = React.useRef<HTMLDivElement>(null)
-    const combinedRefs = useCombinedRefs(forwardedRef, tableRef)
 
     /**
      * Checks if the component is in `static` or `connected` mode
@@ -64,7 +68,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
 
     const renderChart = React.useCallback(
       (data?: LeaderboardData) => {
-        if (!canvasRef.current || !data || variant === 'table') return
+        if (!canvasRef.current || !data || variant === 'table' || !theme) {
+          return
+        }
 
         const labels = formatLabels({ labels: data.rows?.map((row) => row[0]), formatter: labelFormatter }) || []
         const values =
@@ -80,12 +86,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
           const chart = chartRef.current
           chart.data.labels = labels
           chart.data.datasets[0].data = values
+          chart.options.plugins = {
+            ...chart.options.plugins,
+            ...customPlugins
+          }
 
           chart.update()
           return
         }
 
-        chartRef.current = new ChartJS(canvasRef.current, {
+        let config: ChartJS['config'] = {
           type: 'bar',
           data: {
             labels: labels,
@@ -94,9 +104,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
                 data: values,
                 backgroundColor: theme?.accent,
                 barThickness: 17,
-                borderColor: theme?.accent,
-                borderWidth: 0,
-                hoverBorderColor: theme?.accentHover
+                borderWidth: 0
               }
             ]
           },
@@ -123,11 +131,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
             }
           },
           plugins: [customCanvasBackgroundColor]
-        })
+        }
 
+        if (chartConfigProps) {
+          config = chartConfigProps(config)
+        }
+
+        chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, labelFormatter, theme]
+      [variant, labelFormatter, theme, chartConfigProps]
     )
 
     const destroyChart = () => {
@@ -253,7 +266,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
       return <ErrorFallback {...errorFallbackProps} error={error} />
     }
 
-    const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
+    const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
       destroyChart()
@@ -262,7 +275,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
 
     if (variant === 'bar') {
       return (
-        <div ref={forwardedRef} className={classnames(componentStyles.rootLeaderboard, className)} {...rest}>
+        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...rest}>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
       )
@@ -271,25 +284,25 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
     const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
     const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
 
-    const { headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
-      // getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
-      getTableSettings({ headers: tableHeaders, rows: tableRows })
+    const { headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } = getTableSettings({
+      headers: tableHeaders,
+      rows: tableRows
+    })
 
     return (
       <div
-        ref={combinedRefs}
+        ref={setRef}
         className={classnames(
           componentStyles.rootLeaderboard,
           tableProps?.stickyHeader && componentStyles.stickyHeader
         )}
-        style={loadingStyles}
+        style={{ ...style, ...loadingStyles }}
+        {...rest}
       >
         <table cellSpacing={0}>
-          {/* <thead className={ComponentStyles.getTableHeadStyles(styles)}> */}
           <thead>
             <tr>
               {headersWithoutValue?.map((header, index) => (
-                // <th className={ComponentStyles.getTableHeaderStyles(styles)} key={`${header}-${index}`}>
                 <th key={`${header}-${index}`}>{header}</th>
               ))}
               <th className={componentStyles.valueHeader}>{valueHeader}</th>
@@ -305,7 +318,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
                     {cell}
                   </td>
                 ))}
-                {/* <td className={ComponentStyles.getTableValueCellStyles(styles)}> */}
                 <td className={componentStyles.valueCell}>
                   {getValueWithPrefixAndSufix({
                     localize: tableProps?.localize,
@@ -315,7 +327,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement | HTMLTableE
                   })}
                 </td>
                 {tableProps?.hasValueBar && (
-                  // <td className={ComponentStyles.valueBarCellStyles(styles)}>
                   <td className={componentStyles.valueBarCell}>
                     <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} />
                   </td>

@@ -90,36 +90,7 @@ export const LineVariantStory: Story = {
   name: 'Line variant',
   args: {
     variant: 'line',
-    query: connectedParams,
-    chartConfigProps: (config) => ({
-      ...config,
-      options: {
-        ...config.options,
-        scales: {
-          ...config.options?.scales,
-          x: {
-            ...config.options?.scales?.x
-            // display: true
-          },
-          y: {
-            ...config.options?.scales?.y
-            // display: true,
-            // type: 'linear'
-            // beginAtZero: false
-          }
-        },
-        plugins: {
-          ...config.options?.plugins,
-          tooltip: {
-            ...config.options?.plugins?.tooltip,
-            backgroundColor: '#000000'
-          }
-        },
-        onClick: () => {
-          console.log('Hey Line')
-        }
-      }
-    })
+    query: connectedParams
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -128,24 +99,7 @@ export const BarVariantStory: Story = {
   name: 'Bar variant',
   args: {
     variant: 'bar',
-    query: connectedParams,
-    className: 'hey'
-    // chartConfigProps: (config) => ({
-    //   ...config,
-    //   options: {
-    //     ...config.options,
-    //     plugins: {
-    //       ...config.options?.plugins,
-    //       tooltip: {
-    //         ...config.options?.plugins?.tooltip,
-    //         backgroundColor: '#00ff00'
-    //       }
-    //     },
-    //     onClick: () => {
-    //       console.log('NNNNN')
-    //     }
-    //   }
-    // })
+    query: connectedParams
   },
   render: (args) => <TimeSeries {...args} />
 }

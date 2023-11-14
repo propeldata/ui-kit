@@ -1,8 +1,9 @@
 import type { Chart, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { FilterInput, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { FilterInput, ThemeCSSProperties, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import { ErrorFallbackProps } from '../ErrorFallback'
 import type { LoaderProps } from '../Loader'
+import type { DefaultThemes } from '../ThemeProvider'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
@@ -53,6 +54,10 @@ export type TimeSeriesQueryProps = {
 }
 
 export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'div'> {
+  style?: ThemeCSSProperties
+
+  baseTheme?: DefaultThemes
+
   /** The variant the chart will respond to, can be either `bar` or `line` */
   variant?: TimeSeriesChartVariant
 
@@ -77,7 +82,7 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
   /** TimeSeries query props */
   query?: TimeSeriesQueryProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartProps` instead */
+  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
   labelFormatter?: (labels: string[]) => string[]
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
