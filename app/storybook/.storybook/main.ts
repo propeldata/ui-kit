@@ -68,6 +68,11 @@ const config: StorybookConfig = {
       }
     })
 
+    config.module?.rules?.push({
+      test: /\.raw\.css$/,
+      use: ['raw-loader']
+    })
+
     if (config.resolve) {
       config.resolve.extensions?.push('.ts', '.tsx', '.mdx')
       config.resolve.plugins = [

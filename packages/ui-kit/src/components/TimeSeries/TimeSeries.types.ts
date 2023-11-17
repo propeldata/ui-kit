@@ -1,9 +1,8 @@
-import type { Chart, ScaleOptionsByType } from 'chart.js'
+import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { FilterInput, ThemeCSSProperties, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
-import { ErrorFallbackProps } from '../ErrorFallback'
-import type { LoaderProps } from '../Loader'
-import type { DefaultThemes } from '../ThemeProvider'
+import { FilterInput, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import type { ErrorFallbackProps } from '../ErrorFallback'
+import type { DataComponentProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
@@ -53,14 +52,7 @@ export type TimeSeriesQueryProps = {
   propelApiUrl?: string
 }
 
-export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProps<'div'> {
-  style?: ThemeCSSProperties
-
-  baseTheme?: DefaultThemes
-
-  /** The variant the chart will respond to, can be either `bar` or `line` */
-  variant?: TimeSeriesChartVariant
-
+export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentProps {
   /** If passed along with `values` the component will ignore the built-in GraphQL operations */
   labels?: TimeSeriesData['labels']
 
@@ -84,13 +76,16 @@ export interface TimeSeriesProps extends ErrorFallbackProps, React.ComponentProp
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
   labelFormatter?: (labels: string[]) => string[]
-
-  /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
-  chartConfigProps?: (config: Chart['config']) => typeof config
-
-  /** Optional porps that are used to configure the Loader component. */
-  loaderProps?: LoaderProps
-
-  /** Optional porps that are used to configure the ErrorFallback component. */
-  errorFallbackProps?: ErrorFallbackProps
 }
+
+export interface TimeSeriesLineProps extends TimeSeriesBaseProps {
+  variant?: 'line'
+  chartConfigProps?: (config: ChartConfiguration<'line'>) => ChartConfiguration<'line'>
+}
+
+export interface TimeSeriesBarProps extends TimeSeriesBaseProps {
+  variant?: 'bar'
+  chartConfigProps?: (config: ChartConfiguration<'bar'>) => ChartConfiguration<'bar'>
+}
+
+export type TimeSeriesProps = TimeSeriesLineProps | TimeSeriesBarProps

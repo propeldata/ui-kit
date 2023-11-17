@@ -1,41 +1,31 @@
-:root {
-  /* Typography */
-  --propel-font-family: 'Inter';
-
-  /* Regular (default) */
-  --propel-font-size: 16px;
-  --propel-font-weight: 400;
-  --propel-line-height: 150%;
-
-  /* Tiny */
-  --propel-tiny-font-size: 0.75rem;
-  --propel-tiny-font-weight: 400;
-  --propel-tiny-line-height: 150%;
-
-  /* Heading 1 */
-  --propel-h1-font-size: 3.5rem;
-  --propel-h1-font-weight: 600;
-  --propel-h1-line-height: 120%;
-}
-
-.typographyBasic {
-  color: var(--propel-text-primary);
-  font-size: var(--propel-font-size);
-  font-family: var(--propel-font-family);
-  font-weight: var(--propel-font-weight);
-  line-height: var(--propel-line-height);
+.typographyRegular {
+  color: var(--propel-text-secondary);
+  font-family: var(--font-family, var(--propel-font-family));
+  font-size: var(--font-size, var(--propel-font-size));
+  font-weight: var(--font-weight, var(--propel-font-weight));
+  line-height: var(--line-height, var(--propel-line-height));
 }
 
 .typographyTiny {
-  @extend .typographyBasic;
-  font-size: var(--propel-tiny-font-size);
-  font-weight: var(--propel-tiny-font-weight);
-  line-height: var(--propel-tiny-line-height);
+  --font-family: var(--propel-tiny-font-family);
+  --font-size: var(--propel-tiny-font-size);
+  --font-weight: var(--propel-tiny-font-weight);
+  --line-height: var(--propel-tiny-line-height);
+  @extend .typographyRegular;
+}
+
+.typographySmall {
+  --font-family: var(--propel-small-font-family);
+  --font-size: var(--propel-small-font-size);
+  --font-weight: var(--propel-small-font-weight);
+  --line-height: var(--propel-small-line-height);
+  @extend .typographyRegular;
 }
 
 .typographyHeading1 {
-  @extend .typographyBasic;
-  font-size: var(--propel-h1-font-size);
-  font-weight: var(--propel-h1-font-weight);
-  line-height: var(--propel-h1-line-height);
+  --font-family: var(--propel-h1-font-family);
+  --font-size: var(--propel-h1-font-size);
+  --font-weight: var(--propel-h1-font-weight);
+  --line-height: var(--propel-h1-line-height);
+  @extend .typographyRegular;
 }

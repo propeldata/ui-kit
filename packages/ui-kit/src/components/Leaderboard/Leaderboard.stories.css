@@ -1,0 +1,29 @@
+.custom-leaderboard {
+  font-size: 14px;
+  height: 200px;
+}
+
+.custom-leaderboard table {
+  height: 200px;
+  --propel-accent: #1db954;
+}
+
+.custom-leaderboard table thead tr th {
+  background-color: #282828;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #1db954;
+}
+
+.custom-leaderboard table tbody tr td {
+  background-color: #191414;
+  text-align: center;
+  color: #1db954;
+}
+
+.custom-leaderboard table tbody tr:hover td {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}

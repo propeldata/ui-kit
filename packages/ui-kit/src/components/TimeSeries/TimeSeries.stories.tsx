@@ -90,7 +90,11 @@ export const LineVariantStory: Story = {
   name: 'Line variant',
   args: {
     variant: 'line',
-    query: connectedParams
+    query: connectedParams,
+    card: true,
+    chartConfigProps: (config) => {
+      return config
+    }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -99,6 +103,7 @@ export const BarVariantStory: Story = {
   name: 'Bar variant',
   args: {
     variant: 'bar',
+    card: true,
     query: connectedParams
   },
   render: (args) => <TimeSeries {...args} />
@@ -109,23 +114,49 @@ export const CustomChartStory: Story = {
   tags: ['pattern'],
   args: {
     variant: 'line',
-    query: connectedParams
-    // styles: {
-    //   line: {
-    //     tension: 0.1,
-    //     borderColor: '#17B897',
-    //     borderWidth: 3
-    //   },
-    //   point: {
-    //     style: false
-    //   },
-    //   canvas: {
-    //     width: 100,
-    //     height: 45,
-    //     backgroundColor: 'transparent',
-    //     hideGridLines: true
-    //   }
-    // }
+    query: connectedParams,
+    chartConfigProps: (config) => {
+      // Change the line style
+      config.data.datasets[0] = {
+        ...config.data.datasets[0],
+        tension: 0.1,
+        borderColor: '#17B897',
+        borderWidth: 3,
+        pointStyle: false
+      }
+
+      // Hide the axes
+      config.options = {
+        ...config.options,
+        scales: {
+          x: {
+            display: false
+          },
+          y: {
+            display: false
+          }
+        }
+      }
+
+      // Style the canvas
+      const backgroundColorPlugin = {
+        id: 'backgroundColorPlugin',
+        beforeDraw: (chart) => {
+          const ctx = chart.canvas.getContext('2d')
+          ctx.save()
+          ctx.fillStyle = 'lightblue'
+          ctx.fillRect(0, 0, chart.width, chart.height)
+          ctx.restore()
+        }
+      }
+      config.plugins = [...(config.plugins || []), backgroundColorPlugin]
+
+      return config
+    },
+    style: {
+      width: '100px',
+      height: '45px'
+    }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -135,12 +166,14 @@ export const CustomStyleStory: Story = {
   tags: ['pattern'],
   args: {
     variant: 'bar',
-    query: connectedParams
-    // styles: {
-    //   bar: {
-    //     backgroundColor: '#532AB4'
-    //   }
-    // }
+    query: connectedParams,
+    chartConfigProps: (config) => {
+      config.data.datasets[0] = {
+        ...config.data.datasets[0],
+        backgroundColor: '#532AB4'
+      }
+      return config
+    }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -150,6 +183,7 @@ export const StaticStory: Story = {
   parameters: { imports: 'TimeSeries' },
   args: {
     variant: 'line',
+    card: true,
     ...dataset
   },
   render: (args) => <TimeSeries {...args} />

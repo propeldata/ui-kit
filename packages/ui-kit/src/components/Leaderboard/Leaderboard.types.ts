@@ -1,13 +1,7 @@
-import type { Chart } from 'chart.js'
-import { DimensionInput, FilterInput, Sort, ThemeCSSProperties, TimeRangeInput } from '../../helpers'
+import type { ChartConfiguration } from 'chart.js'
+import { DimensionInput, FilterInput, Sort, TimeRangeInput } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
-import type { LoaderProps } from '../Loader'
-import type { DefaultThemes } from '../ThemeProvider'
-
-/**
- * @deprecated the type is deprecated, use LeaderboardChartVariant or TimeSeriesChartVariant instead
- */
-export type ChartVariant = 'bar' | 'line'
+import type { DataComponentProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 
@@ -53,6 +47,7 @@ export type LeaderboardQueryProps = {
 
   /** Whether to retry on errors. */
   retry?: boolean
+
   /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
   propelApiUrl?: string
 }
@@ -60,17 +55,21 @@ export type LeaderboardQueryProps = {
 export type LeaderboardTableProps = {
   /** Whether the table header should remain fixed while scrolling */
   stickyHeader?: boolean
+
+  /** Whether the table should have a value bar */
   hasValueBar?: boolean
+
+  /** When true, formats value to locale string */
   localize?: boolean
+
+  /** Symbol to be shown before the value text */
   prefixValue?: string
+
+  /** Symbol to be shown after the value text */
   sufixValue?: string
 }
 
-export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'div'> {
-  style?: ThemeCSSProperties
-
-  baseTheme?: DefaultThemes
-
+export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps {
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 
@@ -89,17 +88,12 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   /** Leaderboard query props */
   query?: LeaderboardQueryProps
 
+  /** Optional props that are used to configure the table component. */
   tableProps?: LeaderboardTableProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
   labelFormatter?: (labels: string[]) => string[]
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
-  chartConfigProps?: (config: Chart['config']) => typeof config
-
-  /** Optional porps that are used to configure the Loader component. */
-  loaderProps?: LoaderProps
-
-  /** Optional porps that are used to configure the ErrorFallback component. */
-  errorFallbackProps?: ErrorFallbackProps
+  chartConfigProps?: (config: ChartConfiguration<'bar'>) => typeof config
 }

@@ -3,30 +3,10 @@ import classnames from 'classnames'
 import React, { createContext, useContext, useState } from 'react'
 import { setupChartStyles } from '../../helpers'
 import { clearContainerStyle, parseComputedStyle, setContainerStyle } from '../../helpers/themeUtils'
-import type { ThemeProps } from '../../themes/theme.types'
 import themes from '../../themes/themes.module.scss'
-
-export type ThemeContextProps = {
-  theme?: ThemeProps
-  globalChartConfigProps?: (chart: typeof Chart) => typeof Chart
-}
-
-export type DefaultThemes = 'lightTheme' | 'darkTheme'
-
-export type ThemeProviderProps = {
-  children?: React.ReactNode
-  baseTheme?: DefaultThemes
-  theme?: string | ThemeProps
-  globalChartConfigProps?: (chart: typeof Chart) => typeof Chart
-}
+import type { ThemeContextProps, ThemeProviderProps, ThemeStateProps, UseThemeProps } from './ThemeProvider.types'
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
-
-type ThemeStateProps = ThemeProps | undefined
-type UseThemeProps = {
-  componentContainer?: HTMLElement
-  baseTheme?: DefaultThemes
-}
 
 export const useTheme = ({ componentContainer, baseTheme = 'lightTheme' }: UseThemeProps): ThemeStateProps => {
   const [theme, setTheme] = useState<ThemeStateProps>()

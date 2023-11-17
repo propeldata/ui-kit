@@ -1,4 +1,4 @@
-import { Chart as ChartJS, ChartDataset, ChartOptions } from 'chart.js'
+import { Chart as ChartJS, ChartDataset, ChartOptions, ChartConfiguration } from 'chart.js'
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import classnames from 'classnames'
 import React from 'react'
@@ -11,13 +11,12 @@ import {
   useTimeSeriesQuery,
   useCombinedRefsCallback
 } from '../../helpers'
-import { ChartPlugins } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
-import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
+import type { TimeSeriesData, TimeSeriesProps, TimeSeriesChartVariant } from './TimeSeries.types'
 import { getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
@@ -42,6 +41,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       chartConfigProps,
       loaderProps,
       errorFallbackProps,
+      card = false,
       ...rest
     },
     forwardedRef
@@ -135,9 +135,9 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const values = data.values || []
         const plugins = [customCanvasBackgroundColor]
 
-        const customPlugins: ChartPlugins = {
+        const customPlugins = {
           customCanvasBackgroundColor: {
-            color: theme?.bgPrimary
+            color: card ? theme?.bgPrimary : 'transparent'
           },
           tooltip: {
             callbacks: {
@@ -157,11 +157,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
               pointHoverBackgroundColor: theme?.accentHover,
               pointHoverBorderWidth: 2,
               pointHoverBorderColor: theme?.bgPrimary
-            } as ChartDataset
+            } as ChartDataset<TimeSeriesChartVariant>
           ]
         }
 
-        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current })
+        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant })
 
         if (chartRef.current) {
           const chart = chartRef.current
@@ -179,17 +179,17 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           return
         }
 
-        const options: ChartOptions = {
+        const options: ChartOptions<TimeSeriesChartVariant> = {
           responsive: true,
           maintainAspectRatio: false,
           plugins: customPlugins,
           layout: {
-            padding: parseInt(theme?.spaceXxs)
+            padding: parseInt(theme?.spaceXxs as string)
           },
           scales
         }
 
-        let config: ChartJS['config'] = {
+        let config: ChartConfiguration<TimeSeriesChartVariant> = {
           type: variant,
           data: dataset,
           options,
@@ -197,12 +197,14 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         }
 
         if (chartConfigProps) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           config = chartConfigProps(config)
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config)
       },
-      [granularity, hasError, isFormatted, variant, zone, labelFormatter, theme, chartConfigProps]
+      [granularity, hasError, isFormatted, variant, zone, theme, card, labelFormatter, chartConfigProps]
     )
 
     const destroyChart = React.useCallback(() => {

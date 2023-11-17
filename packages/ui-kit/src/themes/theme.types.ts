@@ -1,35 +1,118 @@
-export type ThemeProps = {
-  baseTheme?: 'lightTheme' | 'darkTheme'
+import { CSSProperties } from 'react'
+import type { DefaultThemes } from '../components/ThemeProvider/ThemeProvider.types'
 
-  fontFamily?: string
-  fontSize?: string
-  fontWeight?: string
-  lineHeight?: string
+export type ThemeTokenProps = {
+  baseTheme?: DefaultThemes
 
-  tinyFontSize?: string
-  tinyFontWeight?: string
-  tinyLineHeight?: string
+  fontFamily?: CSSProperties['fontFamily']
+  fontSize?: CSSProperties['fontSize']
+  fontWeight?: CSSProperties['fontWeight']
+  lineHeight?: CSSProperties['lineHeight']
 
-  h1FontSize?: string
-  h1FontWeight?: string
-  h1LineHeight?: string
+  tinyFontFamily?: CSSProperties['fontFamily']
+  tinyFontSize?: CSSProperties['fontSize']
+  tinyFontWeight?: CSSProperties['fontWeight']
+  tinyLineHeight?: CSSProperties['lineHeight']
 
-  spaceXxs?: string
-  spaceXs?: string
+  smallFontFamily?: CSSProperties['fontFamily']
+  smallFontSize?: CSSProperties['fontSize']
+  smallFontWeight?: CSSProperties['fontWeight']
+  smallLineHeight?: CSSProperties['lineHeight']
 
-  componentHeight?: string
-  successPrimary?: string
-  successSecondary?: string
-  errorPrimary?: string
-  errorSecondary?: string
+  h1FontFamily?: CSSProperties['fontFamily']
+  h1FontSize?: CSSProperties['fontSize']
+  h1FontWeight?: CSSProperties['fontWeight']
+  h1LineHeight?: CSSProperties['lineHeight']
 
-  colorPrimary?: string
-  bgPrimary?: string
-  bgSecondary?: string
-  textPrimary?: string
-  textSecondary?: string
-  borderPrimary?: string
-  accent?: string
-  accentHover?: string
-  colorGradient?: string
+  spaceXxs?: CSSProperties['margin']
+  spaceXs?: CSSProperties['margin']
+  spaceSm?: CSSProperties['margin']
+  spaceMd?: CSSProperties['margin']
+  spaceLg?: CSSProperties['margin']
+  spaceXl?: CSSProperties['margin']
+  spaceXxl?: CSSProperties['margin']
+
+  borderRadiusSm?: CSSProperties['borderRadius']
+  shadowSm?: CSSProperties['boxShadow']
+
+  componentHeight?: CSSProperties['height']
+
+  successPrimary?: CSSProperties['color']
+  successSecondary?: CSSProperties['color']
+  errorPrimary?: CSSProperties['color']
+  errorSecondary?: CSSProperties['color']
+
+  colorPrimary?: CSSProperties['color']
+  colorSecondary?: CSSProperties['color']
+  bgPrimary?: CSSProperties['color']
+  bgSecondary?: CSSProperties['color']
+  textPrimary?: CSSProperties['color']
+  textSecondary?: CSSProperties['color']
+  borderPrimary?: CSSProperties['color']
+  accent?: CSSProperties['color']
+  accentHover?: CSSProperties['color']
+  colorGradient?: CSSProperties['color']
+}
+
+export type ThemeCSSTokenProps = {
+  '--propel-font-family'?: CSSProperties['fontFamily']
+  '--propel-font-size'?: CSSProperties['fontSize']
+  '--propel-font-weight'?: CSSProperties['fontWeight']
+  '--propel-line-height'?: CSSProperties['lineHeight']
+
+  '--propel-tiny-font-family'?: CSSProperties['fontFamily']
+  '--propel-tiny-font-size'?: CSSProperties['fontSize']
+  '--propel-tiny-font-weight'?: CSSProperties['fontWeight']
+  '--propel-tiny-line-height'?: CSSProperties['lineHeight']
+
+  '--propel-small-font-family'?: CSSProperties['fontFamily']
+  '--propel-small-font-size'?: CSSProperties['fontSize']
+  '--propel-small-font-weight'?: CSSProperties['fontWeight']
+  '--propel-small-line-height'?: CSSProperties['lineHeight']
+
+  '--propel-h1-font-family'?: CSSProperties['fontFamily']
+  '--propel-h1-font-size'?: CSSProperties['fontSize']
+  '--propel-h1-font-weight'?: CSSProperties['fontWeight']
+  '--propel-h1-line-height'?: CSSProperties['lineHeight']
+
+  '--propel-space-xxs'?: CSSProperties['margin']
+  '--propel-space-xs'?: CSSProperties['margin']
+  '--propel-space-sm'?: CSSProperties['margin']
+  '--propel-space-md'?: CSSProperties['margin']
+  '--propel-space-lg'?: CSSProperties['margin']
+  '--propel-space-xl'?: CSSProperties['margin']
+  '--propel-space-xxl'?: CSSProperties['margin']
+
+  '--propel-border-radius-sm'?: CSSProperties['borderRadius']
+  '--propel-shadow-sm'?: CSSProperties['boxShadow']
+
+  '--propel-component-height'?: CSSProperties['height']
+
+  '--propel-success-primary'?: CSSProperties['color']
+  '--propel-success-secondary'?: CSSProperties['color']
+  '--propel-error-primary'?: CSSProperties['color']
+  '--propel-error-secondary'?: CSSProperties['color']
+  '--propel-color-primary'?: CSSProperties['color']
+  '--propel-color-secondary'?: CSSProperties['color']
+  '--propel-bg-primary'?: CSSProperties['color']
+  '--propel-bg-secondary'?: CSSProperties['color']
+  '--propel-text-primary'?: CSSProperties['color']
+  '--propel-text-secondary'?: CSSProperties['color']
+  '--propel-border-primary'?: CSSProperties['color']
+  '--propel-accent'?: CSSProperties['color']
+  '--propel-accent-hover'?: CSSProperties['color']
+  '--propel-color-gradient'?: CSSProperties['color']
+}
+
+/**
+ * This type is used to extend the React.CSSProperties type with the CSS variables defined in the theme.
+ */
+export interface ThemeCSSProperties extends React.CSSProperties, ThemeCSSTokenProps {}
+
+export type ThemeComponentProps = {
+  /** Supports all standard CSS properties along with custom theme-based CSS variables */
+  style?: ThemeCSSProperties
+
+  /** Base theme to be used */
+  baseTheme?: DefaultThemes
 }

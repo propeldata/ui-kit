@@ -21,6 +21,7 @@ You can import the component in your React file and use it as shown in the follo
   of={CounterStories.SingleValueStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -32,6 +33,7 @@ access the style props:
   of={CounterStories.SingleValueCustomStyleStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -44,6 +46,7 @@ Here's an example of how you can wrap the Counter component inside a Card to giv
 <Canvas
   of={CounterStories.ValueInCardStory}
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -61,6 +64,12 @@ The following table describes the props available for the Counter component:
 See the documentation below for a complete reference to all of the props and classes available to the components
 mentioned here.
 
+- <LinkTo kind="API/ErrorFallbackProps" story="errorfallbackprops">
+    ErrorFallbackProps
+  </LinkTo>
+- <LinkTo kind="API/LoaderProps" story="loaderprops">
+    LoaderProps
+  </LinkTo>
 - <LinkTo kind="API/FilterInput" story="overview">
     FilterInput
   </LinkTo>

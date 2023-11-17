@@ -20,6 +20,7 @@ For example, to change the color of the bars in your time series chart, you can 
   of={TimeSeriesStories.CustomStyleStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -36,6 +37,7 @@ JavaScript code:
   of={TimeSeriesStories.ErrorStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />

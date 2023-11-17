@@ -22,6 +22,7 @@ You can import the component in your React file and use it as shown in the follo
   of={TimeSeriesStories.LineVariantStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -33,6 +34,7 @@ totally different time series chart now. Here's how you can access the style pro
   of={TimeSeriesStories.CustomChartStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -53,6 +55,12 @@ The following table describes the props available for the Time Series component:
 See the documentation below for a complete reference to all of the props and classes available to the components
 mentioned here.
 
+- <LinkTo kind="API/ErrorFallbackProps" story="errorfallbackprops">
+    ErrorFallbackProps
+  </LinkTo>
+- <LinkTo kind="API/LoaderProps" story="loaderprops">
+    LoaderProps
+  </LinkTo>
 - <LinkTo kind="API/FilterInput" story="overview">
     FilterInput
   </LinkTo>

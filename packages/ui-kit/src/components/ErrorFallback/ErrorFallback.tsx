@@ -1,7 +1,8 @@
 import classnames from 'classnames'
 import React from 'react'
 import { useCombinedRefsCallback } from '../../helpers'
-import { DefaultThemes, useTheme } from '../ThemeProvider'
+import { ThemeComponentProps } from '../../themes'
+import { useTheme } from '../ThemeProvider'
 import componentStyles from './ErrorFallback.module.scss'
 
 export const serverErrorMessage = {
@@ -9,8 +10,7 @@ export const serverErrorMessage = {
   body: 'Sorry we are not able to connect at this time due to a technical error.'
 }
 
-export interface ErrorFallbackProps extends React.ComponentPropsWithoutRef<'div'> {
-  baseTheme?: DefaultThemes
+export interface ErrorFallbackProps extends ThemeComponentProps, Omit<React.ComponentPropsWithoutRef<'div'>, 'style'> {
   error?: {
     title: string
     body: string

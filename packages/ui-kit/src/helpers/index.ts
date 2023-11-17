@@ -1,3 +1,4 @@
+export * from './camelCaseToKebabCase'
 export * from './chartUtils'
 export * from './customCanvasBackgroundColor'
 export * from './formatLabels'

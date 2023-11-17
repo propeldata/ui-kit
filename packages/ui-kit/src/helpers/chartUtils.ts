@@ -13,10 +13,10 @@ import {
   Tooltip
 } from 'chart.js'
 import React from 'react'
-import type { ThemeProps } from '../themes'
+import type { ThemeTokenProps } from '../themes'
 
 export type ChartJSDefaultStyleProps = {
-  theme: ThemeProps
+  theme: ThemeTokenProps
   globalChartConfigProps?: (chart: typeof Chart) => void
 }
 
@@ -50,6 +50,20 @@ export const initChartJs = () => {
   isChartJSRegistered = true
 }
 
+export const getPixelFontSizeAsNumber = (value: React.CSSProperties['fontSize']) => {
+  const element = document.createElement('div')
+  element.style.fontSize = `${value}`
+  element.style.position = 'absolute'
+  element.style.visibility = 'hidden'
+  element.textContent = 'M'
+
+  document.body.appendChild(element)
+  const computedFontSize = window.getComputedStyle(element).fontSize
+  document.body.removeChild(element)
+
+  return parseFloat(computedFontSize)
+}
+
 export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefaultStyleProps): typeof Chart => {
   if (!theme) {
     return
@@ -58,6 +72,8 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
   if (!isChartJSRegistered) {
     initChartJs()
   }
+
+  document.body.style.setProperty('--propel-bg-secondary', theme.bgSecondary)
 
   // Global
   Chart.defaults.color = theme.textSecondary
@@ -77,13 +93,12 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
   // Bar
   Chart.defaults.elements.bar.borderWidth = 0
   Chart.defaults.elements.bar.hoverBackgroundColor = theme.accentHover
-  // Chart.defaults.elements.bar.backgroundColor = theme.accent
 
   // Line
   Chart.defaults.elements.line.borderWidth = 3
 
   // Tooltip
-  Chart.defaults.plugins.tooltip.padding = parseInt(theme.spaceXs)
+  Chart.defaults.plugins.tooltip.padding = parseInt(theme.spaceXs as string)
   Chart.defaults.plugins.tooltip.backgroundColor = theme.bgPrimary
   Chart.defaults.plugins.tooltip.bodyColor = theme.textSecondary
   Chart.defaults.plugins.tooltip.titleColor = theme.textSecondary
@@ -98,9 +113,9 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
 
   Chart.defaults.plugins.tooltip.titleFont = {
     ...commonFontSettings,
-    size: parseInt(theme.fontSize) * parseFloat(theme.tinyFontSize),
+    size: getPixelFontSizeAsNumber(theme.tinyFontSize),
     weight: 'bold',
-    lineHeight: theme.tinyFontSize
+    lineHeight: theme.tinyLineHeight
   }
 
   if (globalChartConfigProps) {

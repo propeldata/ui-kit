@@ -1,16 +1,16 @@
-import { Chart as ChartJS } from 'chart.js'
+import { Chart as ChartJS, ChartConfiguration } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'
 import {
   customCanvasBackgroundColor,
   formatLabels,
+  getPixelFontSizeAsNumber,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
   useCombinedRefsCallback,
   useLeaderboardQuery,
   useSetupComponentDefaultChartStyles
 } from '../../helpers'
-import { ChartPlugins } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
@@ -40,6 +40,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       loaderProps,
       errorFallbackProps,
       style,
+      card = false,
       ...rest
     },
     forwardedRef
@@ -76,9 +77,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-        const customPlugins: ChartPlugins = {
+        const customPlugins = {
           customCanvasBackgroundColor: {
-            color: theme?.bgPrimary
+            color: card ? theme?.bgPrimary : 'transparent'
           }
         }
 
@@ -86,16 +87,24 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           const chart = chartRef.current
           chart.data.labels = labels
           chart.data.datasets[0].data = values
+          chart.data.datasets[0].backgroundColor = theme?.accent
           chart.options.plugins = {
             ...chart.options.plugins,
             ...customPlugins
           }
 
+          // @TODO: need improvement
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          chart.options.scales.x.border.color = theme?.colorSecondary
+          chart.options.scales.x.grid.color = theme?.colorSecondary
+          chart.options.scales.y.grid.color = theme?.colorSecondary
+
           chart.update()
           return
         }
 
-        let config: ChartJS['config'] = {
+        let config: ChartConfiguration<'bar'> = {
           type: 'bar',
           data: {
             labels: labels,
@@ -113,20 +122,42 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             responsive: true,
             maintainAspectRatio: false,
             layout: {
-              padding: parseInt(theme?.spaceXxs)
+              padding: parseInt(theme?.spaceXxs as string)
             },
             plugins: customPlugins,
             scales: {
               x: {
                 display: true,
                 grid: {
-                  drawOnChartArea: false
+                  drawOnChartArea: false,
+                  color: theme.colorSecondary
+                },
+                border: {
+                  color: theme.colorSecondary
+                },
+                ticks: {
+                  font: {
+                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                  }
                 },
                 beginAtZero: true
               },
               y: {
                 display: true,
-                grid: { drawOnChartArea: true }
+                grid: {
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  color: theme.colorSecondary
+                },
+                border: {
+                  display: false
+                },
+                ticks: {
+                  padding: 17,
+                  font: {
+                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                  }
+                }
               }
             }
           },
@@ -140,7 +171,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, labelFormatter, theme, chartConfigProps]
+      [variant, theme, card, labelFormatter, chartConfigProps]
     )
 
     const destroyChart = () => {
@@ -292,15 +323,12 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     return (
       <div
         ref={setRef}
-        className={classnames(
-          componentStyles.rootLeaderboard,
-          tableProps?.stickyHeader && componentStyles.stickyHeader
-        )}
+        className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
         {...rest}
       >
         <table cellSpacing={0}>
-          <thead>
+          <thead className={tableProps?.stickyHeader && componentStyles.stickyHeader}>
             <tr>
               {headersWithoutValue?.map((header, index) => (
                 <th key={`${header}-${index}`}>{header}</th>

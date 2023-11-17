@@ -36,6 +36,7 @@
     "postcss": "^8.4.31",
     "postcss-loader": "^7.3.3",
     "prop-types": "^15.8.1",
+    "raw-loader": "^4.0.2",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",
     "storybook": "^7.4.0",

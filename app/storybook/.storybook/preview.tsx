@@ -3,28 +3,13 @@ import type { Preview } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
 import { ThemeProvider } from '../../../packages/ui-kit/src/components/ThemeProvider'
-import themes from '../../../packages/ui-kit/src/themes/themes.module.scss'
 import axiosInstance from '../src/axios'
 import { getStringAttributes, prettier } from '../src/utils'
 import './global.css'
 
 const withThemeProvider = (Story, context) => (
   <>
-    <ThemeProvider
-      baseTheme={context.globals.theme}
-      // theme={themes.customTheme}
-      // theme={{
-      //   textSecondary: '#0000ff'
-      // }}
-      // @TODO: remove before PR review
-      // globalChartConfigProps={(Chart) => {
-      //   Chart.defaults.plugins.tooltip.backgroundColor = '#ff0000'
-      //   Chart.defaults.onClick = () => {
-      //     console.log('Global onClick handler')
-      //   }
-      //   return Chart
-      // }}
-    >
+    <ThemeProvider baseTheme={context.globals.theme}>
       <Story />
     </ThemeProvider>
   </>

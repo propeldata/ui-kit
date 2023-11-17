@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryContext, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
@@ -9,6 +9,8 @@ import {
   useStorybookAccessToken
 } from '../../helpers'
 import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
+import './Leaderboard.stories.css'
+import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
 
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
@@ -26,7 +28,6 @@ export default meta
 type Story = StoryObj<typeof LeaderboardComponent>
 
 const barHeaders = ['DATA_SOURCE_TYPE', 'value']
-
 const barRows = [
   ['Http', '7498734'],
   ['Snowflake', '6988344'],
@@ -35,7 +36,6 @@ const barRows = [
 ]
 
 const tableHeaders = ['Book title', 'Total sold']
-
 const tableRows = [
   ["John's way or Highway", '12863002'],
   ['How to Speak Native Animal', '7865371'],
@@ -63,21 +63,18 @@ const Leaderboard = (args: Story['args']) => {
   }
 
   return (
-    <>
-      <LeaderboardSource
-        ref={ref}
-        {...{
-          ...args,
-          query: args?.query
-            ? {
-                ...args?.query,
-                accessToken
-              }
-            : undefined
-        }}
-      />
-      {/* <button onClick={() => console.log(ref.current)}>Log ref</button> */}
-    </>
+    <LeaderboardSource
+      ref={ref}
+      {...{
+        ...args,
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
+      }}
+    />
   )
 }
 
@@ -101,10 +98,7 @@ export const SingleDimensionStory: Story = {
   name: 'Single dimension',
   args: {
     query: connectedParams,
-    style: {
-      '--propel-text-primary': '#ff0000',
-      '--propel-text-secondary': '#ff0000'
-    }
+    card: true
   },
   render: (args) => <Leaderboard {...args} />
 }
@@ -114,6 +108,7 @@ export const SingleDimensionTableVariantStory: Story = {
   args: {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
+    card: true,
     query: connectedParams
   },
   render: (args) => <Leaderboard {...args} />
@@ -124,8 +119,10 @@ export const SingleDimensionTableVariantWithValueBarStory: Story = {
   args: {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
+    card: true,
     query: connectedParams,
     tableProps: {
+      stickyHeader: true,
       hasValueBar: true,
       localize: true
     }
@@ -137,7 +134,8 @@ export const StaticStory: Story = {
   name: 'Static',
   args: {
     headers: barHeaders,
-    rows: barRows
+    rows: barRows,
+    card: true
   },
   render: (args) => <Leaderboard {...args} />
 }
@@ -145,57 +143,35 @@ export const StaticStory: Story = {
 export const CustomStyleStory: Story = {
   name: 'Custom styles',
   tags: ['pattern'],
-  parameters: { imports: 'Leaderboard' },
+  parameters: {
+    imports: 'Leaderboard',
+    rawCss: `
+      // Leaderboard.css
+
+      ${rawLeaderboardCss}
+    `,
+    codeTemplate: (body: string, context: StoryContext): string => `
+      // Leaderboard.tsx
+      
+      import { ${context?.parameters?.imports ?? ''} } from '@propeldata/ui-kit'
+      import './Leaderboard.css'
+
+      function ${context?.parameters?.componentName ?? `${context.title.split('/').pop()}Component`}() {
+        return (
+            ${context?.parameters?.transformBody ? context?.parameters?.transformBody(body) : body}
+        )
+      }
+    `
+  },
   args: {
     variant: 'table',
     headers: tableHeaders,
     rows: tableRows,
-    chartConfigProps: (config) => ({
-      ...config,
-      options: {
-        ...config.options,
-        onClick: () => {
-          console.log('Hey Line')
-        }
-      }
-    })
-    // styles: {
-    //   font: {
-    //     size: '14px'
-    //   },
-    //   table: {
-    //     stickyHeader: true,
-    //     height: '200px',
-    //     hasValueBar: true,
-    //     backgroundColor: '#191414',
-    //     header: {
-    //       align: 'center',
-    //       backgroundColor: '#282828',
-    //       font: {
-    //         color: '#1DB954',
-    //         weight: 'bold',
-    //         size: '18px'
-    //       }
-    //     },
-    //     valueBar: {
-    //       color: '#1DB954',
-    //       backgroundColor: '#545454'
-    //     },
-    //     valueColumn: {
-    //       align: 'center',
-    //       backgroundColor: '#191414',
-    //       font: {
-    //         color: '#1DB954'
-    //       }
-    //     },
-    //     columns: {
-    //       align: 'center',
-    //       font: {
-    //         color: '#1DB954'
-    //       }
-    //     }
-    //   }
-    // }
+    className: 'custom-leaderboard',
+    tableProps: {
+      hasValueBar: true,
+      stickyHeader: true
+    }
   },
   render: (args) => <Leaderboard {...args} />
 }

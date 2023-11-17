@@ -30,6 +30,7 @@ Here is an example using our <LinkTo kind="Components/Counter" story="overview">
   of={CounterStories.SingleValueStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -46,6 +47,7 @@ code:
   of={TimeSeriesStories.StaticStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />

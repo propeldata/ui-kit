@@ -1,4 +1,4 @@
-import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import { Canvas, ArgTypes, Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../../src/utils'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
@@ -22,6 +22,7 @@ You can import the component in your React file and use it as shown in the follo
   of={LeaderboardStories.SingleDimensionStory}
   sourceState="shown"
   source={{
+    language: 'tsx',
     transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
   }}
 />
@@ -33,7 +34,11 @@ totally different leaderboard chart now. Here's how you can access the style pro
   of={LeaderboardStories.CustomStyleStory}
   sourceState="shown"
   source={{
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+    language: 'tsx',
+    transform: (code, context) =>
+      `${prettier(context.parameters.rawCss, { parser: 'css' })}\n${prettier(
+        context.parameters.codeTemplate(code, context)
+      )}`
   }}
 />
 
@@ -53,6 +58,12 @@ The following table describes the props available for the Leaderboard component:
 See the documentation below for a complete reference to all of the props and classes available to the components
 mentioned here.
 
+- <LinkTo kind="API/ErrorFallbackProps" story="errorfallbackprops">
+    ErrorFallbackProps
+  </LinkTo>
+- <LinkTo kind="API/LoaderProps" story="loaderprops">
+    LoaderProps
+  </LinkTo>
 - <LinkTo kind="API/FilterInput" story="overview">
     FilterInput
   </LinkTo>

@@ -3,8 +3,6 @@
 .rootLeaderboard {
   @extend .typographyTiny;
   overflow: auto;
-  height: var(--propel-component-height);
-  background-color: var(--propel-bg-primary);
   padding: 0;
 
   canvas {
@@ -19,16 +17,13 @@
     th,
     td {
       text-align: left;
-      color: var(--propel-text-primary);
-      padding: 15px 8px;
+      padding: var(--propel-space-sm) var(--propel-space-sm) var(--propel-space-sm) 0;
+      @extend .typographySmall;
     }
 
     td {
-      color: var(--propel-text-primary);
-      background: linear-gradient(to right, var(--propel-border-primary) 15%, var(--propel-bg-primary) 0%);
-      background-position: top;
-      background-size: 6px 1px;
-      background-repeat: repeat-x;
+      @extend .typographySmall;
+      border-bottom: 1px solid var(--propel-color-secondary);
 
       &.valueBarCell {
         width: 20%;
@@ -38,7 +33,7 @@
 
     th {
       font-weight: 600;
-      color: var(--propel-text-primary);
+      color: var(--propel-text-secondary);
     }
 
     th.valueHeader,
@@ -48,12 +43,23 @@
       text-align: right;
     }
 
-    &.stickyHeader {
-      th {
-        position: sticky;
-        top: 0;
-        z-index: 9999;
+    tr {
+      &:last-of-type {
+        td {
+          border-bottom: none;
+        }
       }
+    }
+  }
+}
+
+.stickyHeader {
+  tr {
+    th {
+      background-color: var(--propel-bg-primary);
+      position: sticky;
+      top: 0;
+      z-index: 9999;
     }
   }
 }

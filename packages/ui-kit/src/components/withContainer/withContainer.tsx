@@ -1,5 +1,6 @@
 import React from 'react'
 import { QueryClient, QueryClientProvider } from '../../helpers'
+import { Card } from '../Card'
 import { ErrorBoundary } from '../ErrorBoundary'
 
 const queryClient = new QueryClient()
@@ -15,7 +16,13 @@ export const withContainer = <P extends object, C extends object>(
     return (
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary fallback={<ErrorFallback {...errorFallbackProps} />}>
-          <WrappedComponent ref={ref} {...componentProps} />
+          {componentProps?.card ? (
+            <Card>
+              <WrappedComponent ref={ref} {...componentProps} />
+            </Card>
+          ) : (
+            <WrappedComponent ref={ref} {...componentProps} />
+          )}
         </ErrorBoundary>
       </QueryClientProvider>
     )
