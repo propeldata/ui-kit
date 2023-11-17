@@ -4875,7 +4875,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash.uniq", "npm:4.5.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash.uniq%2F-%2Flodash.uniq-4.5.0.tgz"],\
             ["resolve-from", "npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fresolve-from%2F-%2Fresolve-from-5.0.0.tgz"],\
             ["ts-node", "virtual:690574d5b93e52b15c3e99b16fc7a04185ffee5709272015a9df39046b3810fcf3d487cbc87529dc0e58086b1df8f969ca4bf25f1555017969464a2201671049#npm:10.9.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.1.tgz"],\
-            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=5da071"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19291,7 +19291,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["js-yaml", "npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjs-yaml%2F-%2Fjs-yaml-4.1.0.tgz"],\
             ["parse-json", "npm:5.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fparse-json%2F-%2Fparse-json-5.2.0.tgz"],\
             ["path-type", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fpath-type%2F-%2Fpath-type-4.0.0.tgz"],\
-            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=5da071"]\
           ],\
           "packagePeers": [\
             "@types/typescript",\
@@ -19318,7 +19318,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/typescript", null],\
             ["cosmiconfig", "virtual:690574d5b93e52b15c3e99b16fc7a04185ffee5709272015a9df39046b3810fcf3d487cbc87529dc0e58086b1df8f969ca4bf25f1555017969464a2201671049#npm:8.3.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcosmiconfig%2F-%2Fcosmiconfig-8.3.6.tgz"],\
             ["ts-node", "virtual:690574d5b93e52b15c3e99b16fc7a04185ffee5709272015a9df39046b3810fcf3d487cbc87529dc0e58086b1df8f969ca4bf25f1555017969464a2201671049#npm:10.9.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.1.tgz"],\
-            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=5da071"]\
           ],\
           "packagePeers": [\
             "@types/cosmiconfig",\
@@ -35297,7 +35297,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["create-require", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcreate-require%2F-%2Fcreate-require-1.1.1.tgz"],\
             ["diff", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdiff%2F-%2Fdiff-4.0.2.tgz"],\
             ["make-error", "npm:1.3.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmake-error%2F-%2Fmake-error-1.3.6.tgz"],\
-            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
+            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=5da071"],\
             ["v8-compile-cache-lib", "npm:3.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fv8-compile-cache-lib%2F-%2Fv8-compile-cache-lib-3.0.1.tgz"],\
             ["yn", "npm:3.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fyn%2F-%2Fyn-3.1.1.tgz"]\
           ],\
@@ -35714,10 +35714,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=f3b441", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-4d95301be3-0f4da2f15e.zip/node_modules/typescript/",\
+        ["patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=5da071", {\
+          "packageLocation": "./.yarn/cache/typescript-patch-af3b2ab245-07106822b4.zip/node_modules/typescript/",\
           "packageDependencies": [\
-            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
+            ["typescript", "patch:typescript@npm%3A5.2.2%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-5.2.2.tgz#~builtin<compat/typescript>::version=5.2.2&hash=5da071"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -46290,6 +46290,7 @@ function reportRequiredFilesToWatchMode(files) {
 }
 
 function applyPatch(pnpapi, opts) {
+  const defaultCache = {};
   let enableNativeHooks = true;
   process.versions.pnp = String(pnpapi.VERSIONS.std);
   const moduleExports = require$$0__default.default;
@@ -46309,13 +46310,62 @@ function applyPatch(pnpapi, opts) {
   }
   const originalModuleLoad = require$$0.Module._load;
   require$$0.Module._load = function(request, parent, isMain) {
-    if (request === `pnpapi`) {
-      const parentApiPath = opts.manager.getApiPathFromParent(parent);
-      if (parentApiPath) {
-        return opts.manager.getApiEntry(parentApiPath, true).instance;
+    if (!enableNativeHooks)
+      return originalModuleLoad.call(require$$0.Module, request, parent, isMain);
+    if (isBuiltinModule(request)) {
+      try {
+        enableNativeHooks = false;
+        return originalModuleLoad.call(require$$0.Module, request, parent, isMain);
+      } finally {
+        enableNativeHooks = true;
       }
     }
-    return originalModuleLoad.call(require$$0.Module, request, parent, isMain);
+    const parentApiPath = opts.manager.getApiPathFromParent(parent);
+    const parentApi = parentApiPath !== null ? opts.manager.getApiEntry(parentApiPath, true).instance : null;
+    if (parentApi === null)
+      return originalModuleLoad(request, parent, isMain);
+    if (request === `pnpapi`)
+      return parentApi;
+    const modulePath = require$$0.Module._resolveFilename(request, parent, isMain);
+    const isOwnedByRuntime = parentApi !== null ? parentApi.findPackageLocator(modulePath) !== null : false;
+    const moduleApiPath = isOwnedByRuntime ? parentApiPath : opts.manager.findApiPathFor(npath.dirname(modulePath));
+    const entry = moduleApiPath !== null ? opts.manager.getApiEntry(moduleApiPath) : { instance: null, cache: defaultCache };
+    const cacheEntry = entry.cache[modulePath];
+    if (cacheEntry) {
+      if (cacheEntry.loaded === false && cacheEntry.isLoading !== true) {
+        try {
+          cacheEntry.isLoading = true;
+          if (isMain) {
+            process.mainModule = cacheEntry;
+            cacheEntry.id = `.`;
+          }
+          cacheEntry.load(modulePath);
+        } finally {
+          cacheEntry.isLoading = false;
+        }
+      }
+      return cacheEntry.exports;
+    }
+    const module = new require$$0.Module(modulePath, parent != null ? parent : void 0);
+    module.pnpApiPath = moduleApiPath;
+    reportRequiredFilesToWatchMode([modulePath]);
+    entry.cache[modulePath] = module;
+    if (isMain) {
+      process.mainModule = module;
+      module.id = `.`;
+    }
+    let hasThrown = true;
+    try {
+      module.isLoading = true;
+      module.load(modulePath);
+      hasThrown = false;
+    } finally {
+      module.isLoading = false;
+      if (hasThrown) {
+        delete require$$0.Module._cache[modulePath];
+      }
+    }
+    return module.exports;
   };
   function getIssuerSpecsFromPaths(paths) {
     return paths.map((path) => ({
@@ -46383,7 +46433,7 @@ function applyPatch(pnpapi, opts) {
       const parentDirectory = (parent == null ? void 0 : parent.filename) != null ? npath.dirname(parent.filename) : null;
       const absoluteRequest = npath.isAbsolute(request) ? request : parentDirectory !== null ? npath.resolve(parentDirectory, request) : null;
       if (absoluteRequest !== null) {
-        const apiPath = parent && parentDirectory === npath.dirname(absoluteRequest) ? opts.manager.getApiPathFromParent(parent) : opts.manager.findApiPathFor(absoluteRequest);
+        const apiPath = parentDirectory === npath.dirname(absoluteRequest) && (parent == null ? void 0 : parent.pnpApiPath) ? parent.pnpApiPath : opts.manager.findApiPathFor(absoluteRequest);
         if (apiPath !== null) {
           issuerSpecs.unshift({
             apiPath,
@@ -48104,6 +48154,7 @@ function makeManager(pnpapi, opts) {
   const initialApiStats = opts.fakeFs.statSync(npath.toPortablePath(initialApiPath));
   const apiMetadata = /* @__PURE__ */ new Map([
     [initialApiPath, {
+      cache: require$$0.Module._cache,
       instance: pnpapi,
       stats: initialApiStats,
       lastRefreshCheck: Date.now()
@@ -48135,6 +48186,7 @@ function makeManager(pnpapi, opts) {
       }
     } else {
       apiMetadata.set(pnpApiPath, apiEntry = {
+        cache: {},
         instance: loadApiInstance(pnpApiPath),
         stats: opts.fakeFs.statSync(pnpApiPath),
         lastRefreshCheck: Date.now()
@@ -48204,16 +48256,19 @@ ${controlSegment}
     } while (curr !== PortablePath.root);
     return addToCacheAndReturn(start, curr, null);
   }
-  const moduleToApiPathCache = /* @__PURE__ */ new WeakMap();
   function getApiPathFromParent(parent) {
     if (parent == null)
       return initialApiPath;
-    let apiPath = moduleToApiPathCache.get(parent);
-    if (typeof apiPath !== `undefined`)
-      return apiPath;
-    apiPath = parent.filename ? findApiPathFor(parent.filename) : null;
-    moduleToApiPathCache.set(parent, apiPath);
-    return apiPath;
+    if (typeof parent.pnpApiPath === `undefined`) {
+      if (parent.filename !== null) {
+        return parent.pnpApiPath = findApiPathFor(parent.filename);
+      } else {
+        return initialApiPath;
+      }
+    }
+    if (parent.pnpApiPath !== null)
+      return parent.pnpApiPath;
+    return null;
   }
   return {
     getApiPathFromParent,
