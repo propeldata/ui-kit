@@ -1,18 +1,20 @@
 import React, { createContext } from 'react'
 
-import { LogLevels } from './Log.types'
+import { LogLevel } from './Log.types'
 
 export type LogContextProps = {
-  logLevel?: LogLevels
+  logLevel: LogLevel
 }
 
-export const LogContext = createContext<LogContextProps | undefined>(LogLevels.Error)
+export const LogContext = createContext({ logLevel: LogLevel.Error })
 
 export type LogProviderProps = {
   children?: React.ReactNode
-  logLevel?: LogLevels
+
+  /** The log level to use (defaults to "error"). */
+  logLevel?: LogLevel
 }
 
-export const LogProvider = ({ children, logLevel = LogLevels.Error }: LogProviderProps) => (
-  <LogContext.Provider value={logLevel}>{children}</LogContext.Provider>
+export const LogProvider = ({ children, logLevel = LogLevel.Error }: LogProviderProps) => (
+  <LogContext.Provider value={{ logLevel }}>{children}</LogContext.Provider>
 )

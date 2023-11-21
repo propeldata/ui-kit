@@ -2,14 +2,14 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { Dom } from '../../testing'
 
-import { LogLevels } from './Log.types'
+import { LogLevel } from './Log.types'
 import { LogProvider } from './LogProvider'
 import { useLog } from './useLog'
 
 const ChildComponent: React.FC<unknown> = () => {
-  const { log, logLevel } = useLog()
+  const log = useLog()
 
-  const level = logLevel?.toUpperCase()
+  const level = log.level.toUpperCase()
 
   log.error(`This is a ERROR message with the log level set to ${level}`)
   log.warn(`This is a WARN message with the log level set to ${level}`)
@@ -18,10 +18,23 @@ const ChildComponent: React.FC<unknown> = () => {
 
   return (
     <div>
-      <p>{log.error.name === 'error' && `This is a ERROR message with the log level set to ${level}`}</p>
-      <p>{log.warn.name === 'warn' && `This is a WARN message with the log level set to ${level}`}</p>
-      <p>{log.info.name === 'info' && `This is a INFO message with the log level set to ${level}`}</p>
-      <p>{log.debug.name === 'debug' && `This is a DEBUG message with the log level set to ${level}`}</p>
+      <p>{log.level === LogLevel.Off && `The log level is ${level}. There is no log to show on console.`}</p>
+      <p>
+        {(log.level === LogLevel.Debug ||
+          log.level === LogLevel.Info ||
+          log.level === LogLevel.Warn ||
+          log.level === LogLevel.Error) &&
+          `This is a ERROR message with the log level set to ${level}`}
+      </p>
+      <p>
+        {(log.level === LogLevel.Debug || log.level === LogLevel.Info || log.level === LogLevel.Warn) &&
+          `This is a WARN message with the log level set to ${level}`}
+      </p>
+      <p>
+        {(log.level === LogLevel.Debug || log.level === LogLevel.Info) &&
+          `This is a INFO message with the log level set to ${level}`}
+      </p>
+      <p>{log.level === LogLevel.Debug && `This is a DEBUG message with the log level set to ${level}`}</p>
     </div>
   )
 }
@@ -48,7 +61,7 @@ describe('Logger', () => {
 
   it('should render the component with ERROR level log message LogProvider without LogLevel prop', async () => {
     dom = render(
-      <LogProvider logLevel={LogLevels.Error}>
+      <LogProvider logLevel={LogLevel.Error}>
         <ChildComponent />
       </LogProvider>
     )
@@ -57,7 +70,7 @@ describe('Logger', () => {
 
   it('should render the component with WARN level log message with LogLevel WARN prop', async () => {
     dom = render(
-      <LogProvider logLevel={LogLevels.Warn}>
+      <LogProvider logLevel={LogLevel.Warn}>
         <ChildComponent />
       </LogProvider>
     )
@@ -66,7 +79,7 @@ describe('Logger', () => {
 
   it('should render the component with INFO level log message with LogLevel INFO prop', async () => {
     dom = render(
-      <LogProvider logLevel={LogLevels.Info}>
+      <LogProvider logLevel={LogLevel.Info}>
         <ChildComponent />
       </LogProvider>
     )
@@ -79,7 +92,7 @@ describe('Logger', () => {
 
   it('should render the component with INFO level log message with LogLevel INFO prop', async () => {
     dom = render(
-      <LogProvider logLevel={LogLevels.Debug}>
+      <LogProvider logLevel={LogLevel.Debug}>
         <ChildComponent />
       </LogProvider>
     )
@@ -91,36 +104,16 @@ describe('Logger', () => {
     await dom.findByText('This is a DEBUG message with the log level set to DEBUG')
   })
 
-  it('should render the component with no log if the env set to "prodcution" and PRODUCTION_LOG_LEVEL set to "off"', async () => {
-    process.env = {
-      NODE_ENV: 'production',
-      PRODUCTION_LOG_LEVEL: 'off'
-    }
-
+  it('should render the component with no console message when the log level set to OFF', async () => {
     dom = render(
-      <LogProvider logLevel={LogLevels.Error}>
+      <LogProvider logLevel={LogLevel.Off}>
         <ChildComponent />
       </LogProvider>
     )
 
+    await dom.findByText('The log level is OFF. There is no log to show on console.')
+
+    // This checks if the log level is set to Off, there is no console message
     expect(dom.queryByText('This is a ERROR message with the log level set to ERROR')).not.toBeInTheDocument()
-  })
-
-  it('should render the component with WARN log if the env set to "prodcution" and PRODUCTION_LOG_LEVEL set to "warn" and LogLevel prop set to "info"', async () => {
-    process.env = {
-      NODE_ENV: 'production',
-      PRODUCTION_LOG_LEVEL: 'warn'
-    }
-
-    dom = render(
-      <LogProvider logLevel={LogLevels.Info}>
-        <ChildComponent />
-      </LogProvider>
-    )
-
-    await dom.findByText('This is a ERROR message with the log level set to WARN')
-    await dom.findByText('This is a WARN message with the log level set to WARN')
-
-    expect(dom.queryByText('This is a ERROR message with the log level set to INFO')).not.toBeInTheDocument()
   })
 })

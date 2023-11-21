@@ -2,28 +2,38 @@ import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { storybookCodeTemplate } from '../../helpers'
-import { LogProvider } from './LogProvider'
+import { LogProvider, LogProviderProps } from './LogProvider'
 import { useLog } from './useLog'
-import { LogLevels } from './Log.types'
+import { LogLevel } from './Log.types'
 
 const ChildComponent: React.FC<unknown> = () => {
-  const { log, logLevel } = useLog()
+  const log = useLog()
 
-  const level = logLevel?.toUpperCase()
+  const level = log.level.toUpperCase()
 
-  log.error(`This is a ERROR message with the log level set to ${level}`)
-  log.warn(`This is a WARN message with the log level set to ${level}`)
-  log.info(`This is a INFO message with the log level set to ${level}`)
-  log.debug(`This is a DEBUG message with the log level set to ${level}`)
+  log.error(`This is an error-level message with the log level set to ${level}.`)
+  log.warn(`This is a warn-level message with the log level set to ${level}.`)
+  log.info(`This is an info-level message with the log level set to ${level}.`)
+  log.debug(`This is a debug-level message with the log level set to ${level}.`)
 
   return (
     <div>
-      <p>{log.error.name === 'error' && `This is a ERROR message with the log level set to ${level}`}</p>
-      <p>{log.warn.name === 'warn' && `This is a WARN message with the log level set to ${level}`}</p>
-      <p>{log.info.name === 'info' && `This is a INFO message with the log level set to ${level}`}</p>
-      <p>{log.debug.name === 'debug' && `This is a DEBUG message with the log level set to ${level}`}</p>
+      <p>{log.level === LogLevel.Off && `The log level is ${level}. There is no log to show on console.`}</p>
+      <p>
+        {[LogLevel.Error, LogLevel.Warn, LogLevel.Info, LogLevel.Debug].includes(log.level) &&
+          `This is an error-level message with the log level set to ${level}.`}
+      </p>
+      <p>
+        {[LogLevel.Warn, LogLevel.Info, LogLevel.Debug].includes(log.level) &&
+          `This is a wanr-level message with the log level set to ${level}.`}
+      </p>
+      <p>
+        {[LogLevel.Info, LogLevel.Debug].includes(log.level) &&
+          `This is an info-level message with the log level set to ${level}.`}
+      </p>
+      <p>{log.level === LogLevel.Debug && `This is a debug-level message with the log level set to ${level}.`}</p>
       <mark>
-        <small>Check the console for logs</small>
+        <small>Check the console for logs.</small>
       </mark>
     </div>
   )
@@ -42,33 +52,56 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const LogLevelError: Story = {
+export const LogLevelOff: Story = {
+  args: {
+    logLevel: LogLevel.Off
+  },
   render: (args) => (
-    <LogProvider logLevel={LogLevels.Error}>
+    <LogProvider {...args}>
+      <ChildComponent />
+    </LogProvider>
+  )
+}
+
+export const LogLevelError: Story = {
+  args: {
+    logLevel: LogLevel.Error
+  },
+  render: (args) => (
+    <LogProvider {...args}>
       <ChildComponent />
     </LogProvider>
   )
 }
 
 export const LogLevelWarn: Story = {
+  args: {
+    logLevel: LogLevel.Warn
+  },
   render: (args) => (
-    <LogProvider logLevel={LogLevels.Warn}>
+    <LogProvider {...args}>
       <ChildComponent />
     </LogProvider>
   )
 }
 
 export const LogLevelInfo: Story = {
+  args: {
+    logLevel: LogLevel.Info
+  },
   render: (args) => (
-    <LogProvider logLevel={LogLevels.Info}>
+    <LogProvider {...args}>
       <ChildComponent />
     </LogProvider>
   )
 }
 
 export const LogLevelDebug: Story = {
+  args: {
+    logLevel: LogLevel.Debug
+  },
   render: (args) => (
-    <LogProvider logLevel={LogLevels.Debug}>
+    <LogProvider {...args}>
       <ChildComponent />
     </LogProvider>
   )
