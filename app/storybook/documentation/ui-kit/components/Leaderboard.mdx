@@ -3,6 +3,8 @@ import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../../src/utils'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
 import * as LeaderboardQueryPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
+import * as LeaderboardTablePropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardTableProps.stories'
+import * as LeaderboardChartPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardChartProps.stories'
 
 <Meta title="Components/Leaderboard" of={LeaderboardStories} />
 
@@ -19,7 +21,7 @@ automatically based on
 You can import the component in your React file and use it as shown in the following example:
 
 <Canvas
-  of={LeaderboardStories.SingleDimensionStory}
+  of={LeaderboardStories.SingleDimensionBarStory}
   sourceState="shown"
   source={{
     language: 'tsx',
@@ -49,11 +51,19 @@ to you! You can adjust these and other style properties to create a unique look 
 
 The following table describes the props available for the Leaderboard component:
 
-<ArgTypes of={LeaderboardStories.SingleDimensionStory} sort="alpha" />
+<ArgTypes of={LeaderboardStories.SingleDimensionBarStory} sort="alpha" />
 
 ### `LeaderboardQueryProps`
 
 <ArgTypes of={LeaderboardQueryPropsStories.Primary} sort="alpha" />
+
+### `LeaderboardTableProps`
+
+<ArgTypes of={LeaderboardTablePropsStories.Primary} sort="alpha" />
+
+### `LeaderboardChartProps`
+
+<ArgTypes of={LeaderboardChartPropsStories.Primary} sort="alpha" />
 
 See the documentation below for a complete reference to all of the props and classes available to the components
 mentioned here.

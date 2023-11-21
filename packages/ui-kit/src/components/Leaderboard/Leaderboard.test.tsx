@@ -69,7 +69,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = mockData.rows.map((row) => row[0])
+    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
@@ -102,7 +102,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = mockData.rows.map((row) => row[0])
+    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
@@ -153,7 +153,7 @@ describe('Leaderboard', () => {
       <Leaderboard
         headers={mockData.headers}
         rows={mockData.rows}
-        labelFormatter={(labels) => labels.map((label) => label.replace('-', '.'))}
+        labelFormatter={(labels) => labels.map((label) => label[0].replace('-', '.'))}
       />
     )
 
@@ -161,9 +161,9 @@ describe('Leaderboard', () => {
     const chartInstance = Chart.getChart(chartElement)
 
     const chartLabels = chartInstance?.data.labels
-    const resultingLabels = mockData.rows.map((row) => row[0])
+    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
 
-    expect(chartLabels).toEqual(resultingLabels.map((label) => label.replace('-', '.')))
+    expect(chartLabels).toEqual(resultingLabels.map((label) => label[0].replace('-', '.')))
   })
 
   it('should work for strings', async () => {

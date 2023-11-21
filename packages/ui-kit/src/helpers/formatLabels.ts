@@ -1,9 +1,11 @@
+type Labels = string[] | string[][]
+
 export interface FormatLabelsOptions {
-  labels?: string[]
-  formatter?: (labels: string[]) => string[]
+  labels?: Labels
+  formatter?: (labels: Labels) => Labels
 }
 
-export function formatLabels(options: FormatLabelsOptions): string[] | undefined {
+export function formatLabels(options: FormatLabelsOptions): Labels | undefined {
   const { labels, formatter } = options
 
   if (formatter && typeof formatter !== 'function') {

@@ -3,6 +3,7 @@ import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../../src/utils'
 import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 import * as TimeSeriesQueryPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
+import * as TimeSeriesChartPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesChartProps.stories'
 
 <Meta title="Components/TimeSeries" of={TimeSeriesStories} />
 
@@ -19,7 +20,7 @@ automatically based on
 You can import the component in your React file and use it as shown in the following example:
 
 <Canvas
-  of={TimeSeriesStories.LineVariantStory}
+  of={TimeSeriesStories.LineStory}
   sourceState="shown"
   source={{
     language: 'tsx',
@@ -46,11 +47,15 @@ you! You can adjust these and other style properties to create a unique look for
 
 The following table describes the props available for the Time Series component:
 
-<ArgTypes of={TimeSeriesStories.LineVariantStory} sort="alpha" style={{ color: 'initial' }} />
+<ArgTypes of={TimeSeriesStories.LineStory} sort="alpha" style={{ color: 'initial' }} />
 
 ### `TimeSeriesQueryProps`
 
 <ArgTypes of={TimeSeriesQueryPropsStories} sort="alpha" />
+
+### `TimeSeriesChartProps`
+
+<ArgTypes of={TimeSeriesChartPropsStories} sort="alpha" />
 
 See the documentation below for a complete reference to all of the props and classes available to the components
 mentioned here.

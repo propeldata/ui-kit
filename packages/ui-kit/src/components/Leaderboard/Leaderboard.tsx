@@ -1,4 +1,4 @@
-import { Chart as ChartJS, ChartConfiguration } from 'chart.js'
+import { Chart as ChartJS, ChartConfiguration, Plugin, ChartDataset, BarElement } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'
 import {
@@ -33,7 +33,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       className,
       chartConfigProps,
       loading: isLoadingStatic = false,
-      tableProps,
+      tableProps = {},
+      chartProps = {},
       baseTheme = 'lightTheme',
       labelFormatter,
       timeZone,
@@ -73,14 +74,70 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           return
         }
 
-        const labels = formatLabels({ labels: data.rows?.map((row) => row[0]), formatter: labelFormatter }) || []
+        const { labelPosition = 'axis', showBarValues = false } = chartProps
+
+        const labels =
+          formatLabels({ labels: data.rows?.map((row) => row.slice(0, row.length - 1)), formatter: labelFormatter }) ||
+          []
+
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
+
+        const customChartLabelsPlugin: Plugin<'bar'> = {
+          id: 'customChartLabelsPlugin',
+          afterDatasetDraw: (chart, args) => {
+            const {
+              ctx,
+              data,
+              chartArea: { left },
+              scales: { y }
+            } = chart
+
+            ctx.save()
+            ctx.textAlign = 'left'
+            ctx.textBaseline = 'middle'
+            ctx.font = `${theme.tinyFontWeight} ${theme.tinyFontSize} ${theme.tinyFontFamily}`
+            // @TODO: discuss with design team
+            ctx.fillStyle = '#ffffff'
+
+            const datasetIndex = args.index
+            const datasetMeta = chart.getDatasetMeta(datasetIndex)
+            const dataset = data.datasets[datasetIndex] as ChartDataset<'bar', number[]>
+
+            if (showBarValues) {
+              dataset.data.forEach((value, index) => {
+                const barElement = datasetMeta.data[index] as BarElement
+
+                ctx.fillText(
+                  value.toString(),
+                  barElement.x - ctx.measureText(value.toString()).width - 8,
+                  barElement.y + 0.5
+                )
+              })
+            }
+
+            if (labelPosition === 'top') {
+              ctx.fillStyle = theme?.textSecondary
+            }
+
+            if (['inside', 'top'].includes(labelPosition)) {
+              data.labels.forEach((label: string[], index) => {
+                const barElement = datasetMeta.data[index] as BarElement
+                const { height } = barElement.getProps(['height'])
+                const xPos = left + (labelPosition === 'inside' ? 8 : 0)
+                const yPos = y.getPixelForValue(index) - (labelPosition === 'inside' ? -1 : height + 4)
+
+                ctx.fillText(label.join(', '), xPos, yPos)
+              })
+            }
+          }
+        }
 
         const customPlugins = {
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
-          }
+          },
+          customChartLabelsPlugin
         }
 
         if (chartRef.current) {
@@ -112,7 +169,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
               {
                 data: values,
                 backgroundColor: theme?.accent,
-                barThickness: 17,
+                barThickness: labelPosition === 'top' ? 8 : 17,
+                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
                 borderWidth: 0
               }
             ]
@@ -122,7 +180,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             responsive: true,
             maintainAspectRatio: false,
             layout: {
-              padding: parseInt(theme?.spaceXxs as string)
+              padding: 4
             },
             plugins: customPlugins,
             scales: {
@@ -143,7 +201,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 beginAtZero: true
               },
               y: {
-                display: true,
+                display: labelPosition === 'axis',
                 grid: {
                   drawOnChartArea: true,
                   drawTicks: false,
@@ -161,7 +219,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
               }
             }
           },
-          plugins: [customCanvasBackgroundColor]
+          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
         }
 
         if (chartConfigProps) {
@@ -171,7 +229,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, labelFormatter, chartConfigProps]
+      [variant, theme, card, chartProps, labelFormatter, chartConfigProps]
     )
 
     const destroyChart = () => {
@@ -320,6 +378,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       rows: tableRows
     })
 
+    const {
+      stickyHeader = false,
+      hasValueBar = false,
+      localize = false,
+      prefixValue,
+      sufixValue,
+      stickyValues = false
+    } = tableProps
+
     return (
       <div
         ref={setRef}
@@ -327,14 +394,19 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         style={{ ...style, ...loadingStyles }}
         {...rest}
       >
-        <table cellSpacing={0}>
-          <thead className={tableProps?.stickyHeader && componentStyles.stickyHeader}>
+        <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>
+          <thead className={classnames(stickyHeader && componentStyles.stickyHeader)}>
             <tr>
               {headersWithoutValue?.map((header, index) => (
                 <th key={`${header}-${index}`}>{header}</th>
               ))}
-              <th className={componentStyles.valueHeader}>{valueHeader}</th>
-              {tableProps?.hasValueBar && <th />}
+              <th
+                data-role="table-value"
+                className={classnames(componentStyles.valueHeader, hasValueBar && componentStyles.valueWithValueBar)}
+              >
+                {valueHeader}
+              </th>
+              {hasValueBar && <th data-role="table-value-bar" />}
             </tr>
           </thead>
           <tbody>
@@ -346,16 +418,19 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                     {cell}
                   </td>
                 ))}
-                <td className={componentStyles.valueCell}>
+                <td
+                  data-role="table-value"
+                  className={classnames(componentStyles.valueCell, hasValueBar && componentStyles.valueWithValueBar)}
+                >
                   {getValueWithPrefixAndSufix({
-                    localize: tableProps?.localize,
-                    prefix: tableProps?.prefixValue,
-                    sufix: tableProps?.sufixValue,
+                    localize: localize,
+                    prefix: prefixValue,
+                    sufix: sufixValue,
                     value: valuesByRow?.[rowIndex] ?? undefined
                   })}
                 </td>
-                {tableProps?.hasValueBar && (
-                  <td className={componentStyles.valueBarCell}>
+                {hasValueBar && (
+                  <td data-role="table-value-bar">
                     <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} />
                   </td>
                 )}

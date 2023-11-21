@@ -56,6 +56,9 @@ export type LeaderboardTableProps = {
   /** Whether the table header should remain fixed while scrolling */
   stickyHeader?: boolean
 
+  /** Stick the values column on the right side of the table */
+  stickyValues?: boolean
+
   /** Whether the table should have a value bar */
   hasValueBar?: boolean
 
@@ -67,6 +70,14 @@ export type LeaderboardTableProps = {
 
   /** Symbol to be shown after the value text */
   sufixValue?: string
+}
+
+export type LeaderboardChartProps = {
+  /** Whether the chart should show a value inside the bar */
+  showBarValues?: boolean
+
+  /** Sets the position of the labels */
+  labelPosition?: 'axis' | 'inside' | 'top'
 }
 
 export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps {
@@ -90,6 +101,9 @@ export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps
 
   /** Optional props that are used to configure the table component. */
   tableProps?: LeaderboardTableProps
+
+  /** Optional props that are used to configure the chart component. */
+  chartProps?: LeaderboardChartProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
   labelFormatter?: (labels: string[]) => string[]

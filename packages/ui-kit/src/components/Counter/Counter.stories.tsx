@@ -9,6 +9,13 @@ const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
   component: CounterComponent,
   tags: ['tag'],
+  argTypes: {
+    baseTheme: {
+      table: {
+        disable: true
+      }
+    }
+  },
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Counter, RelativeTimeRange',

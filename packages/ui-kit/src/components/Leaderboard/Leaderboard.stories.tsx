@@ -15,6 +15,13 @@ import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
   component: LeaderboardComponent,
+  argTypes: {
+    baseTheme: {
+      table: {
+        disable: true
+      }
+    }
+  },
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Leaderboard, RelativeTimeRange',
@@ -94,8 +101,23 @@ const connectedParams = {
   sort: Sort.Asc
 }
 
-export const SingleDimensionStory: Story = {
-  name: 'Single dimension',
+const connectedParamsMultiDimensional = {
+  ...connectedParams,
+  dimensions: [
+    {
+      columnName: process.env.STORYBOOK_DIMENSION_1 as string
+    },
+    {
+      columnName: process.env.STORYBOOK_DIMENSION_2 as string
+    },
+    {
+      columnName: process.env.STORYBOOK_DIMENSION_3 as string
+    }
+  ]
+}
+
+export const SingleDimensionBarStory: Story = {
+  name: 'Single dimension Bar',
   args: {
     query: connectedParams,
     card: true
@@ -103,8 +125,20 @@ export const SingleDimensionStory: Story = {
   render: (args) => <Leaderboard {...args} />
 }
 
-export const SingleDimensionTableVariantStory: Story = {
-  name: 'Single dimension table variant',
+export const SingleDimensionBarWithValuesStory: Story = {
+  name: 'Single dimension Bar with values',
+  args: {
+    query: connectedParams,
+    card: true,
+    chartProps: {
+      showBarValues: true
+    }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const SingleDimensionTableStory: Story = {
+  name: 'Single dimension Table',
   args: {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
@@ -114,17 +148,104 @@ export const SingleDimensionTableVariantStory: Story = {
   render: (args) => <Leaderboard {...args} />
 }
 
-export const SingleDimensionTableVariantWithValueBarStory: Story = {
-  name: 'Single dimension table variant with value bar',
+export const SingleDimensionTableWithValueBarStory: Story = {
+  name: 'Single dimension Table with Value Bar',
   args: {
     variant: 'table',
     headers: [process.env.STORYBOOK_DIMENSION_1 as string, 'Value'],
     card: true,
     query: connectedParams,
     tableProps: {
-      stickyHeader: true,
-      hasValueBar: true,
-      localize: true
+      hasValueBar: true
+    }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionTableStory: Story = {
+  name: 'Multi dimension Table',
+  args: {
+    variant: 'table',
+    query: connectedParamsMultiDimensional,
+    card: true
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionTableWithValueBarStory: Story = {
+  name: 'Multi dimension Table with Value Bar',
+  args: {
+    variant: 'table',
+    query: connectedParamsMultiDimensional,
+    card: true,
+    tableProps: {
+      hasValueBar: true
+    }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionTableWithStickyValuesStory: Story = {
+  name: 'Multi dimension Table with sticky values',
+  args: {
+    variant: 'table',
+    style: {
+      width: '250px'
+    },
+    query: connectedParamsMultiDimensional,
+    card: true,
+    tableProps: {
+      stickyValues: true
+    }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionTableWithStickyValuesAndValueBarStory: Story = {
+  name: 'Multi dimension Table with sticky values and Value Bar',
+  args: {
+    variant: 'table',
+    style: {
+      width: '350px'
+    },
+    query: connectedParamsMultiDimensional,
+    card: true,
+    tableProps: {
+      stickyValues: true,
+      hasValueBar: true
+    }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionBarStory: Story = {
+  name: 'Multi dimension Bar',
+  args: {
+    query: connectedParamsMultiDimensional,
+    card: true
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionBarInsideStory: Story = {
+  name: 'Multi dimension Bar with labels inside bars',
+  args: {
+    query: connectedParamsMultiDimensional,
+    card: true,
+    chartProps: {
+      labelPosition: 'inside'
+    }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const MultiDimensionBarTopStory: Story = {
+  name: 'Multi dimension Bar with labels on top of the bars',
+  args: {
+    query: connectedParamsMultiDimensional,
+    card: true,
+    chartProps: {
+      labelPosition: 'top'
     }
   },
   render: (args) => <Leaderboard {...args} />

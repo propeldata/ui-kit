@@ -52,6 +52,14 @@ export type TimeSeriesQueryProps = {
   propelApiUrl?: string
 }
 
+export interface TimeSeriesChartProps {
+  /** When true, shows grid lines */
+  grid?: boolean
+
+  /** When true, fills the area under the line */
+  fillArea?: boolean
+}
+
 export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentProps {
   /** If passed along with `values` the component will ignore the built-in GraphQL operations */
   labels?: TimeSeriesData['labels']
@@ -73,6 +81,9 @@ export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentPr
 
   /** TimeSeries query props */
   query?: TimeSeriesQueryProps
+
+  /** Optional props that are used to configure the chart component. */
+  chartProps?: TimeSeriesChartProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
   labelFormatter?: (labels: string[]) => string[]

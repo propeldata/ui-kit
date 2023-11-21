@@ -36,6 +36,7 @@ const themeTokens: (keyof ThemeTokenProps)[] = [
   'spaceXxl',
 
   // Borders
+  'borderRadiusXs',
   'borderRadiusSm',
 
   // Shadows

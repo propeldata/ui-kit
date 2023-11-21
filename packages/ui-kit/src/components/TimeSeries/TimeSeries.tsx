@@ -1,4 +1,4 @@
-import { Chart as ChartJS, ChartDataset, ChartOptions, ChartConfiguration } from 'chart.js'
+import { Chart as ChartJS, ChartDataset, ChartOptions, ChartConfiguration, Color, LineController } from 'chart.js'
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import classnames from 'classnames'
 import React from 'react'
@@ -9,7 +9,8 @@ import {
   PROPEL_GRAPHQL_API_ENDPOINT,
   useSetupComponentDefaultChartStyles,
   useTimeSeriesQuery,
-  useCombinedRefsCallback
+  useCombinedRefsCallback,
+  convertHexToRGBA
 } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
@@ -20,6 +21,29 @@ import type { TimeSeriesData, TimeSeriesProps, TimeSeriesChartVariant } from './
 import { getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
+
+// Add shadow to the line chart
+class CustomLineController extends LineController {
+  draw(): void {
+    const ctx = (this.chart as ChartJS).ctx
+    ctx.save()
+
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)'
+    ctx.shadowBlur = 10
+    ctx.shadowOffsetX = 2
+    ctx.shadowOffsetY = 6
+
+    super.draw()
+    ctx.restore()
+  }
+}
+
+CustomLineController.id = 'shadowLine'
+CustomLineController.defaults = {
+  ...LineController.defaults
+}
+
+ChartJS.register(CustomLineController)
 
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
 
@@ -42,6 +66,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       loaderProps,
       errorFallbackProps,
       card = false,
+      chartProps = {},
       ...rest
     },
     forwardedRef
@@ -131,8 +156,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           return
         }
 
+        const { grid = false, fillArea = false } = chartProps
+
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) || []
         const values = data.values || []
+
         const plugins = [customCanvasBackgroundColor]
 
         const customPlugins = {
@@ -146,22 +174,35 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
+        let backgroundColor: Color | CanvasGradient = theme?.accent
+
+        const fill = fillArea && variant === 'line'
+        if (fill) {
+          const ctx = canvasRef.current.getContext('2d')
+          backgroundColor = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight)
+          // @TODO: need to refactor this logic due to the possible different types of the color value, e.g. hex, rgb, rgba, etc.
+          backgroundColor.addColorStop(0, convertHexToRGBA(theme?.accentHover, 0.35))
+          backgroundColor.addColorStop(1, convertHexToRGBA(theme?.accentHover, 0.05))
+        }
+
         const dataset = {
           labels,
           datasets: [
             {
               data: values,
-              backgroundColor: theme?.accent,
+              backgroundColor: backgroundColor,
               borderColor: theme?.accent,
               pointBackgroundColor: theme?.accentHover,
               pointHoverBackgroundColor: theme?.accentHover,
               pointHoverBorderWidth: 2,
-              pointHoverBorderColor: theme?.bgPrimary
+              pointHoverBorderColor: theme?.bgPrimary,
+              fill
             } as ChartDataset<TimeSeriesChartVariant>
           ]
         }
 
-        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant })
+        // @TODO: need to refactor this logic
+        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid })
 
         if (chartRef.current) {
           const chart = chartRef.current
@@ -190,7 +231,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         }
 
         let config: ChartConfiguration<TimeSeriesChartVariant> = {
-          type: variant,
+          // @TODO: require to refactor
+          type: variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar',
           data: dataset,
           options,
           plugins
@@ -204,7 +246,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         chartRef.current = new ChartJS(canvasRef.current, config)
       },
-      [granularity, hasError, isFormatted, variant, zone, theme, card, labelFormatter, chartConfigProps]
+      [granularity, hasError, isFormatted, variant, zone, theme, card, chartProps, labelFormatter, chartConfigProps]
     )
 
     const destroyChart = React.useCallback(() => {

@@ -13,6 +13,19 @@ import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSerie
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
   component: TimeSeriesComponent,
+  argTypes: {
+    baseTheme: {
+      table: {
+        disable: true
+      }
+    },
+    // @TODO: fix it
+    variant: {
+      table: {
+        disable: true
+      }
+    }
+  },
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'TimeSeries, RelativeTimeRange, TimeSeriesGranularity',
@@ -86,24 +99,47 @@ const TimeSeries = (args: Story['args']) => {
   )
 }
 
-export const LineVariantStory: Story = {
-  name: 'Line variant',
+export const LineStory: Story = {
+  name: 'Line',
+  args: {
+    variant: 'line',
+    query: connectedParams,
+    card: true
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const LineAreaStory: Story = {
+  name: 'Line Area',
   args: {
     variant: 'line',
     query: connectedParams,
     card: true,
-    chartConfigProps: (config) => {
-      return config
+    chartProps: {
+      fillArea: true
     }
   },
   render: (args) => <TimeSeries {...args} />
 }
 
-export const BarVariantStory: Story = {
-  name: 'Bar variant',
+export const BarStory: Story = {
+  name: 'Bar',
   args: {
     variant: 'bar',
     card: true,
+    query: connectedParams
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const BarGridStory: Story = {
+  name: 'Grid',
+  args: {
+    variant: 'bar',
+    card: true,
+    chartProps: {
+      grid: true
+    },
     query: connectedParams
   },
   render: (args) => <TimeSeries {...args} />

@@ -158,9 +158,10 @@ interface GetScalesOptions {
   zone: string
   chart?: Chart
   variant: TimeSeriesChartVariant
+  grid?: boolean
 }
 
-export function getScales({ granularity, isFormatted, zone, chart, variant }: GetScalesOptions) {
+export function getScales({ granularity, isFormatted, zone, chart, variant, grid }: GetScalesOptions) {
   const scales = chart?.options?.scales
   const scale = scales?.y?.type ?? 'linear'
   const beginAtZero = (scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>)?.y?.beginAtZero ?? false
@@ -170,7 +171,7 @@ export function getScales({ granularity, isFormatted, zone, chart, variant }: Ge
     x: {
       display: scales?.x?.display ?? true,
       grid: {
-        drawOnChartArea: false,
+        drawOnChartArea: grid,
         drawTicks: variant === 'line'
       },
       ticks: {

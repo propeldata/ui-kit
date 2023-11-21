@@ -32,6 +32,7 @@ export type ThemeTokenProps = {
   spaceXl?: CSSProperties['margin']
   spaceXxl?: CSSProperties['margin']
 
+  borderRadiusXs?: CSSProperties['borderRadius']
   borderRadiusSm?: CSSProperties['borderRadius']
   shadowSm?: CSSProperties['boxShadow']
 
@@ -83,7 +84,9 @@ export type ThemeCSSTokenProps = {
   '--propel-space-xl'?: CSSProperties['margin']
   '--propel-space-xxl'?: CSSProperties['margin']
 
+  '--propel-border-radius-xs'?: CSSProperties['borderRadius']
   '--propel-border-radius-sm'?: CSSProperties['borderRadius']
+
   '--propel-shadow-sm'?: CSSProperties['boxShadow']
 
   '--propel-component-height'?: CSSProperties['height']
