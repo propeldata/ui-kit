@@ -2,7 +2,7 @@ import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { storybookCodeTemplate } from '../../helpers'
-import { LogProvider, LogProviderProps } from './LogProvider'
+import { LogProvider } from './LogProvider'
 import { useLog } from './useLog'
 import { LogLevel } from './Log.types'
 
@@ -44,7 +44,7 @@ const meta: Meta<typeof ChildComponent> = {
   tags: ['pattern'],
   component: ChildComponent,
   parameters: {
-    imports: 'LogProvider, LogLevels, useLog',
+    imports: 'LogProvider, LogLevel, useLog',
     codeTemplate: storybookCodeTemplate
   }
 } satisfies Meta<typeof ChildComponent>
