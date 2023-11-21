@@ -1,0 +1,25 @@
+import { Canvas, ArgTypes, Meta, Story, Source, Description, Primary, Controls, Stories } from '@storybook/blocks'
+import { prettier } from '../../../src/utils'
+import * as LogStories from '../../../../../packages/ui-kit/src/components/Logger/Logger.stories'
+
+<Meta title="PROVIDER/Log" />
+
+# Log Provider
+
+You can provide your own messages by using the LogProvider setting different type of log level such as "error", "warn", "info" or "debug". 
+You can also disable all kind of logs by setting log level as "off". 
+This will enable you to provide more accurate feedback to users in case of technical errors, warnings, info or other issues.
+
+For example, when you set up log level as "error" to display a error message when the Counter component's chart data cannot be loaded, you can use the following
+JavaScript code:
+
+<Canvas
+  of={LogStories.LogLevelError}
+  sourceState="shown"
+  source={{
+    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
+  }}
+/>
+
+<Controls of={LogStories.LogLevelError} />
+

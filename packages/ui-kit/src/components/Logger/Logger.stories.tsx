@@ -25,7 +25,7 @@ const ChildComponent: React.FC<unknown> = () => {
       </p>
       <p>
         {[LogLevel.Warn, LogLevel.Info, LogLevel.Debug].includes(log.level) &&
-          `This is a wanr-level message with the log level set to ${level}.`}
+          `This is a warn-level message with the log level set to ${level}.`}
       </p>
       <p>
         {[LogLevel.Info, LogLevel.Debug].includes(log.level) &&
@@ -41,72 +41,33 @@ const ChildComponent: React.FC<unknown> = () => {
 
 const meta: Meta<typeof ChildComponent> = {
   title: 'PROVIDERS/Logger',
+  tags: ['pattern'],
   component: ChildComponent,
   parameters: {
     imports: 'LogProvider, LogLevels, useLog',
     codeTemplate: storybookCodeTemplate
   }
-}
+} satisfies Meta<typeof ChildComponent>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const LogLevelOff: Story = {
-  args: {
-    logLevel: LogLevel.Off
-  },
-  render: (args) => (
-    <LogProvider {...args}>
-      <ChildComponent />
-    </LogProvider>
-  )
-}
-
 export const LogLevelError: Story = {
   args: {
     logLevel: LogLevel.Error
   },
-  render: (args) => (
-    <LogProvider {...args}>
-      <ChildComponent />
-    </LogProvider>
-  )
-}
-
-export const LogLevelWarn: Story = {
-  args: {
-    logLevel: LogLevel.Warn
+  argTypes: {
+    logLevel: {
+      options: [LogLevel.Off, LogLevel.Error, LogLevel.Warn, LogLevel.Info, LogLevel.Debug],
+      description: 'The log level is to set which logs will be visible.',
+      default: 'error',
+      control: { type: 'select' }
+    }
   },
   render: (args) => (
     <LogProvider {...args}>
       <ChildComponent />
     </LogProvider>
   )
-}
-
-export const LogLevelInfo: Story = {
-  args: {
-    logLevel: LogLevel.Info
-  },
-  render: (args) => (
-    <LogProvider {...args}>
-      <ChildComponent />
-    </LogProvider>
-  )
-}
-
-export const LogLevelDebug: Story = {
-  args: {
-    logLevel: LogLevel.Debug
-  },
-  render: (args) => (
-    <LogProvider {...args}>
-      <ChildComponent />
-    </LogProvider>
-  )
-}
-
-export const WithoutLogProvider: Story = {
-  render: (args) => <ChildComponent />
 }

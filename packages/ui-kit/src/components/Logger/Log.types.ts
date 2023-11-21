@@ -6,7 +6,8 @@ export enum LogLevel {
   Debug = 'debug'
 }
 
-export interface LogConfig {
+export interface Log {
+  /** The currently configured log level. */
   level: LogLevel
 
   /** Log at error-level, if enabled. */
