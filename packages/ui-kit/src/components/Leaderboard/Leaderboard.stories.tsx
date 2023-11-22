@@ -163,7 +163,7 @@ export const SingleDimensionTableWithValueBarStory: Story = {
 }
 
 export const MultiDimensionTableStory: Story = {
-  name: 'Multi dimension Table',
+  name: 'Multidimensional Table',
   args: {
     variant: 'table',
     query: connectedParamsMultiDimensional,
@@ -173,7 +173,7 @@ export const MultiDimensionTableStory: Story = {
 }
 
 export const MultiDimensionTableWithValueBarStory: Story = {
-  name: 'Multi dimension Table with Value Bar',
+  name: 'Multidimensional Table with Value Bar',
   args: {
     variant: 'table',
     query: connectedParamsMultiDimensional,
@@ -186,7 +186,7 @@ export const MultiDimensionTableWithValueBarStory: Story = {
 }
 
 export const MultiDimensionTableWithStickyValuesStory: Story = {
-  name: 'Multi dimension Table with sticky values',
+  name: 'Multidimensional Table with sticky values',
   args: {
     variant: 'table',
     style: {
@@ -202,7 +202,7 @@ export const MultiDimensionTableWithStickyValuesStory: Story = {
 }
 
 export const MultiDimensionTableWithStickyValuesAndValueBarStory: Story = {
-  name: 'Multi dimension Table with sticky values and Value Bar',
+  name: 'Multidimensional Table with sticky values and Value Bar',
   args: {
     variant: 'table',
     style: {
@@ -219,7 +219,7 @@ export const MultiDimensionTableWithStickyValuesAndValueBarStory: Story = {
 }
 
 export const MultiDimensionBarStory: Story = {
-  name: 'Multi dimension Bar',
+  name: 'Multidimensional Bar',
   args: {
     query: connectedParamsMultiDimensional,
     card: true
@@ -228,7 +228,7 @@ export const MultiDimensionBarStory: Story = {
 }
 
 export const MultiDimensionBarInsideStory: Story = {
-  name: 'Multi dimension Bar with labels inside bars',
+  name: 'Multidimensional Bar with labels inside bars',
   args: {
     query: connectedParamsMultiDimensional,
     card: true,
@@ -240,7 +240,7 @@ export const MultiDimensionBarInsideStory: Story = {
 }
 
 export const MultiDimensionBarTopStory: Story = {
-  name: 'Multi dimension Bar with labels on top of the bars',
+  name: 'Multidimensional Bar with labels on top of the bars',
   args: {
     query: connectedParamsMultiDimensional,
     card: true,

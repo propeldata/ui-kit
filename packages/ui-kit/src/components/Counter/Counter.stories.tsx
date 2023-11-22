@@ -66,7 +66,11 @@ const Counter = (args: Story['args']) => {
 export const SingleValueStory: Story = {
   name: 'Single value',
   args: {
-    ...connectedParams
+    ...connectedParams,
+    style: {
+      width: 'fit-content'
+    },
+    card: true
   },
   render: (args) => <Counter {...args} />
 }
@@ -75,7 +79,11 @@ export const ValueInCardStory: Story = {
   name: 'Value in card',
   tags: ['pattern'],
   args: {
-    ...connectedParams
+    ...connectedParams,
+    style: {
+      width: 'fit-content'
+    },
+    card: true
   },
   render: (args) => (
     <div className="card-container">
@@ -92,7 +100,11 @@ export const StaticStory: Story = {
   args: {
     prefixValue: '$',
     value: '49291',
-    localize: true
+    localize: true,
+    card: true,
+    style: {
+      width: 'fit-content'
+    }
   },
   render: (args) => <Counter {...args} />
 }
@@ -102,7 +114,9 @@ export const SingleValueCustomStyleStory: Story = {
   tags: ['pattern'],
   args: {
     ...connectedParams,
+    card: true,
     style: {
+      width: 'fit-content',
       fontSize: '2rem',
       fontStyle: 'italic',
       fontFamily: 'Arial',

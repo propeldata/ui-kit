@@ -1,4 +1,5 @@
 import type { FilterInput, TimeRangeInput } from '../../helpers'
+import type { DataComponentProps } from '../shared.types'
 import type { ThemeComponentProps } from '../../themes'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { LoaderProps } from '../Loader'
@@ -26,7 +27,10 @@ export type CounterQueryProps = {
   propelApiUrl?: string
 }
 
-export interface CounterProps extends ThemeComponentProps, Omit<React.ComponentProps<'span'>, 'style'> {
+export interface CounterProps
+  extends ThemeComponentProps,
+    Omit<React.ComponentProps<'span'>, 'style'>,
+    DataComponentProps {
   /** If passed, the component will ignore the built-in GraphQL operations */
   value?: string
 

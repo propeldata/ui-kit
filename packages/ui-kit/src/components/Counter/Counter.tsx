@@ -23,6 +23,8 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       loaderProps,
       errorFallbackProps,
       timeZone,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      card,
       ...rest
     },
     forwardedRef
