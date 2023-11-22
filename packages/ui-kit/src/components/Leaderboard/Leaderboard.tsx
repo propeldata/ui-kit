@@ -5,10 +5,12 @@ import {
   customCanvasBackgroundColor,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useLeaderboardQuery,
-  formatLabels
+  formatLabels,
+  LeaderboardQuery
 } from '../../helpers'
+import { useLeaderboardQuery } from '../../helpers/graphql/hooks'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
+import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
@@ -46,8 +48,12 @@ export const LeaderboardComponent = ({
 }: LeaderboardProps) => {
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken()
+
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
+
+  const accessToken = query?.accessToken ?? accessTokenFromProvider
 
   /**
    * The html node where the chart will render
@@ -154,13 +160,13 @@ export const LeaderboardComponent = ({
     isInitialLoading: isLoadingQuery,
     error: hasError,
     data: fetchedData
-  } = useLeaderboardQuery(
+  } = useLeaderboardQuery<LeaderboardQuery, Error>(
     {
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${query?.accessToken}`
+          authorization: `Bearer ${accessToken}`
         }
       }
     },
@@ -183,9 +189,13 @@ export const LeaderboardComponent = ({
     {
       refetchInterval: query?.refetchInterval,
       retry: query?.retry,
-      enabled: !isStatic
+      enabled: !isStatic && accessToken != null
     }
   )
+
+  const isAccessTokenError = !isStatic && (hasError?.message?.includes('AuthenticationError') || accessToken == null)
+
+  const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
   const loadingStyles = {
     opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
@@ -209,7 +219,7 @@ export const LeaderboardComponent = ({
 
       if (
         !isStatic &&
-        (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
+        ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
       ) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
@@ -229,7 +239,7 @@ export const LeaderboardComponent = ({
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, headers, rows, query, isLoadingStatic, variant])
+  }, [isStatic, headers, rows, query, isLoadingStatic, variant, accessTokenFromProvider, isLoadingAccessToken])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -261,14 +271,20 @@ export const LeaderboardComponent = ({
     }
   }, [variant])
 
-  if (hasError || propsMismatch) {
+  React.useEffect(() => {
+    if (isAccessTokenError) {
+      onExpiredToken()
+    }
+  }, [isAccessTokenError, onExpiredToken])
+
+  if ((hasError || propsMismatch) && !isRetryingAccessToken) {
     destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken)) || isRetryingAccessToken) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }

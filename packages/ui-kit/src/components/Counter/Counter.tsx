@@ -1,8 +1,10 @@
 import { css } from '@emotion/css'
 import React from 'react'
-import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
+import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT } from '../../helpers'
+import { useCounterQuery } from '../../helpers/graphql/hooks'
 import type { ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
+import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
@@ -21,6 +23,8 @@ export const CounterComponent = (props: CounterProps) => {
     ...rest
   } = props
 
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken()
+
   /**
    * If the user passes `value` attribute, it
    * should behave as a static component without any GraphQL operation performed
@@ -31,17 +35,19 @@ export const CounterComponent = (props: CounterProps) => {
 
   const counterRef = React.useRef<HTMLSpanElement>(null)
 
+  const accessToken = query?.accessToken ?? accessTokenFromProvider
+
   const {
     isInitialLoading: isLoadingQuery,
     error,
     data: fetchedValue
-  } = useCounterQuery(
+  } = useCounterQuery<CounterQuery, Error>(
     {
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${query?.accessToken}`
+          authorization: `Bearer ${accessToken}`
         }
       }
     },
@@ -61,9 +67,13 @@ export const CounterComponent = (props: CounterProps) => {
     {
       refetchInterval: query?.refetchInterval,
       retry: query?.retry,
-      enabled: !isStatic
+      enabled: !isStatic && accessToken != null
     }
   )
+
+  const isAccessTokenError = !isStatic && (error?.message?.includes('AuthenticationError') || accessToken == null)
+
+  const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
   const value = isStatic ? staticValue : fetchedValue?.counter?.value
 
@@ -75,7 +85,7 @@ export const CounterComponent = (props: CounterProps) => {
         return
       }
 
-      if (!isStatic && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
+      if (!isStatic && ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) || !query?.metric || !query?.timeRange)) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
@@ -89,13 +99,20 @@ export const CounterComponent = (props: CounterProps) => {
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, value, query, isLoadingStatic])
+  }, [isStatic, value, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
 
-  if (error || propsMismatch) {
+  React.useEffect(() => {
+    if (isAccessTokenError) {
+      onExpiredToken()
+    }
+  }, [isAccessTokenError, onExpiredToken])
+
+  if ((error || propsMismatch) && !isRetryingAccessToken) {
     return <ErrorFallback error={null} styles={styles} />
   }
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !counterRef.current) {
+
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken)) || isRetryingAccessToken) && !counterRef.current) {
     return <Loader styles={styles}>000</Loader>
   }
 

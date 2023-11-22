@@ -18,9 +18,10 @@ import {
   customCanvasBackgroundColor,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useTimeSeriesQuery,
-  formatLabels
+  formatLabels,
+  TimeSeriesQuery
 } from '../../helpers'
+import { useTimeSeriesQuery } from '../../helpers/graphql/hooks'
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'
@@ -35,6 +36,7 @@ import {
   updateChartStyles,
   useSetupDefaultStyles
 } from './utils'
+import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 
 /**
  * It registers only the modules that will be used
@@ -73,6 +75,8 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
   timeZone,
   ...rest
 }) => {
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken()
+
   const isLoadingStatic = loading
 
   React.useEffect(() => {
@@ -89,6 +93,8 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
   const idRef = React.useRef(idCounter++)
   const id = `time-series-${idRef.current}`
+
+  const accessToken = query?.accessToken ?? accessTokenFromProvider
 
   /**
    * The html node where the chart will render
@@ -112,13 +118,13 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     isInitialLoading: isLoadingQuery,
     error: hasError,
     data: serverData
-  } = useTimeSeriesQuery(
+  } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
     {
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${query?.accessToken}`
+          authorization: `Bearer ${accessToken}`
         }
       }
     },
@@ -133,15 +139,19 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
           stop: query?.timeRange?.stop ?? null
         },
         granularity,
-        filters: query?.filters
-      }
+        filters: query?.filters,
+      },
     },
     {
       refetchInterval: query?.refetchInterval,
       retry: query?.retry,
-      enabled: !isStatic
+      enabled: !isStatic && accessToken != null
     }
   )
+
+  const isAccessTokenError = !isStatic && (hasError?.message?.includes('AuthenticationError') || accessToken == null)
+
+  const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
@@ -237,7 +247,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
         return
       }
 
-      if (!isStatic && (!query.accessToken || !query.metric || !query.timeRange)) {
+      if (!isStatic && ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) || !query?.metric || !query?.timeRange)) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
@@ -251,7 +261,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, labels, values, query, isLoadingStatic])
+  }, [isStatic, labels, values, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -274,14 +284,20 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     }
   }, [])
 
-  if (hasError || propsMismatch) {
+  React.useEffect(() => {
+    if (isAccessTokenError) {
+      onExpiredToken()
+    }
+  }, [isAccessTokenError, onExpiredToken])
+
+  if ((hasError || propsMismatch) && !isRetryingAccessToken) {
     destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !canvasRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken)) || isRetryingAccessToken) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }
