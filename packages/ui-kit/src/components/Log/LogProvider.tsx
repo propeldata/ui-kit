@@ -6,7 +6,7 @@ export type LogContextProps = {
   logLevel: LogLevel
 }
 
-const DEFAULT_LOG_LEVEL = LogLevel.Error
+export const DEFAULT_LOG_LEVEL = LogLevel.Error
 
 export const LogContext = createContext<LogContextProps>({ logLevel: DEFAULT_LOG_LEVEL })
 

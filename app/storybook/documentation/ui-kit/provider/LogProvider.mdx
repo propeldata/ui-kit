@@ -1,19 +1,40 @@
 import { Canvas, ArgTypes, Meta, Story, Source, Description, Primary, Controls, Stories } from '@storybook/blocks'
 import { prettier } from '../../../src/utils'
-import * as LogStories from '../../../../../packages/ui-kit/src/components/Logger/Logger.stories'
+import * as LogStories from '../../../../../packages/ui-kit/src/components/Log/Log.stories'
 
-<Meta title="PROVIDER/Log" />
+<Meta title="PROVIDERS/LogProvider" /> 
 
-# Log Provider
+# LogProvider
 
-By using the Log Provider, you can provide your own messages. 
-You can enable different level of logs by setting the log level type such as "error", "warn", "info" or "debug". 
-You can also disable all logs by setting log level as "off". 
+The Propel UI Kit logs all errors to the browser's console by default. You can configure this behavior using the LogProvider component. For example, if your app contains a Counter component like this:  
 
-Log Provider will enable you to provide more accurate feedback to users in case of technical errors, warnings, info or other issues.
+```ts  
+import { Counter } from "[@propeldata/ui-kit";](https://github.com/propeldata/ui-kit";)  
 
-For example, when you set up log level as "error" to display an error log in the TimeSeries component such as "chart data cannot be loaded", you can use the following
-JavaScript code:
+function App() {  
+  return (  
+    <Counter />  
+  );  
+}  
+```  
+
+you can nest it in a LogProvider component to change the log level to "warn":  
+
+```ts  
+import { Counter, LogLevel, LogProvider } from "[@propeldata/ui-kit";](https://github.com/propeldata/ui-kit";)  
+
+function App() {  
+  return (  
+    <LogProvider logLevel={LogLevel.Warn}>  
+      <Counter />  
+    </LogProvider>  
+  );  
+}  
+```  
+
+You can set the log level to "error", "warn", "info" or "debug". Additionally, you can disable all logs by setting log level to "off" (for example, in your production build).  
+
+Finally, we recommend configuring at most one LogProvider per app.  
 
 <Canvas
   of={LogStories.LogLevelError}
