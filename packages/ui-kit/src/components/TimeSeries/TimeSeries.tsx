@@ -67,7 +67,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       errorFallbackProps,
       card = false,
       chartProps = {},
-      ...rest
+      ...other
     },
     forwardedRef
   ) => {
@@ -322,7 +322,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     }
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest}>
+      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...other}>
         <canvas
           id={id}
           ref={canvasRef}

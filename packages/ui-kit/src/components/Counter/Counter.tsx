@@ -102,7 +102,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     }, [isStatic, value, query, isLoadingStatic])
 
     if (error || propsMismatch) {
-      return <ErrorFallback error={null} {...errorFallbackProps} />
+      return <ErrorFallback error={null} style={{ height: 'auto' }} {...errorFallbackProps} />
     }
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !innerRef.current) {

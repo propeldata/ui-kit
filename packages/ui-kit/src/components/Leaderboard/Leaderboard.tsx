@@ -42,7 +42,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       errorFallbackProps,
       style,
       card = false,
-      ...rest
+      ...other
     },
     forwardedRef
   ) => {
@@ -364,7 +364,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     if (variant === 'bar') {
       return (
-        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...rest}>
+        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...other}>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
       )
@@ -392,7 +392,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         ref={setRef}
         className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
-        {...rest}
+        {...other}
       >
         <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>
           <thead className={classnames(stickyHeader && componentStyles.stickyHeader)}>

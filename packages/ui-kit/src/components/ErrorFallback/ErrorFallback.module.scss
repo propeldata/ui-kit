@@ -8,9 +8,11 @@
   justify-content: center;
   @extend .typographyRegular;
 
-  &.container {
+  .container {
     max-width: 263px;
     text-align: center;
-    text-align: -webkit-center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
