@@ -8,6 +8,7 @@ export async function fetchStorybookAccessToken(axiosInstance) {
     return console.error('STORYBOOK_TOKEN_URL is not defined')
   }
   await axiosInstance.get(TOKEN_URL_VALUE).then((res) => {
-    return res.data.access_token
+    console.log(res)
+    return res
   })
 }
