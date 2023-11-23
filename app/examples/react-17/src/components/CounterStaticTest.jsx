@@ -26,24 +26,20 @@ export function CounterStaticTest() {
   }
 
   return (
-    <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
+    <div className="m-6">
       <h2 className="text-2xl">Counter Static</h2>
-      <div className="h-60 flex justify-center items-center">
-        <Counter value={data?.value} loading={isLoading} styles={{ font: { size: '3rem', color: fontColor } }} />
+      <div className="my-5">
+        <Counter card value={data?.value} loading={isLoading} styles={{ font: { size: '3rem', color: fontColor } }} />
       </div>
       <div className="flex items-center gap-2 mt-1">
         <button
-          className="border-2 bg-white p-1 h-9"
+          className="border-2 p-1 h-9"
           onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}
         >
           Switch mock data
         </button>
-        <input
-          className="border-2 bg-white p-1 h-9"
-          type="color"
-          onChange={(event) => setFontColor(event.target.value)}
-        />
-        <button className="border-2 bg-white p-1 h-9" onClick={handleReFetchMock}>
+        <input className="border-2 p-1 h-9" type="color" onChange={(event) => setFontColor(event.target.value)} />
+        <button className="border-2 p-1 h-9" onClick={handleReFetchMock}>
           Refetch Mock
         </button>
       </div>

@@ -1,6 +1,5 @@
 import React from 'react'
-import { AccessTokenProvider } from '@propeldata/ui-kit'
-
+import { ThemeProvider } from '@propeldata/ui-kit'
 import {
   TimeSeriesStaticTest,
   TimeSeriesConnectedTest,
@@ -24,20 +23,26 @@ async function fetchToken() {
 }
 
 export default function App() {
+  const [theme, setTheme] = React.useState('lightTheme')
   return (
-    <main>
-      <h1 className="m-3 text-3xl">React 18 Testing App</h1>
-      <hr />
-      <div className="grid grid-cols-2 gap-2">
-        <AccessTokenProvider fetchToken={fetchToken}>
+    <ThemeProvider baseTheme={theme}>
+      <main style={{ color: 'var(--propel-text-secondary)' }}>
+        <h1 className="px-6 py-3 text-3xl">
+          React 18 Testing App
+          <button className="m-3" onClick={() => setTheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')}>
+            {theme === 'lightTheme' ? '🌚' : '🌞'}
+          </button>
+        </h1>
+        <hr />
+        <div className="grid grid-cols-2 gap-2">
           <TimeSeriesStaticTest />
           <TimeSeriesConnectedTest />
           <LeaderboardStaticTest />
           <LeaderboardConnectedTest />
           <CounterStaticTest />
           <CounterConnectedTest />
-        </AccessTokenProvider>
-      </div>
-    </main>
+        </div>
+      </main>
+    </ThemeProvider>
   )
 }

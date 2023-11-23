@@ -12,10 +12,11 @@ export function CounterConnectedTest() {
   }
 
   return (
-    <div className="p-4 border-2 bg-neutral-100 border-slate-600 rounded m-3">
+    <div className="m-6">
       <h2 className="text-2xl">Counter Connected</h2>
-      <div className="h-60 flex justify-center items-center">
+      <div className="my-5">
         <Counter
+          card
           query={{
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             timeRange: {
