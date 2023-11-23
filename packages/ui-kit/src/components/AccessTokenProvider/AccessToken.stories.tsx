@@ -19,7 +19,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-async function fetchToken() {
+async function fetchAccessToken() {
   const accessToken = await fetchStorybookAccessToken(axiosInstance)
 
   return accessToken ?? ''
@@ -27,7 +27,7 @@ async function fetchToken() {
 
 export const AccessTokenProviderStory: Story = {
   args: {
-    fetchToken
+    fetchToken: fetchAccessToken
   },
   argTypes: {
     fetchToken: {
@@ -45,6 +45,13 @@ export const AccessTokenProviderStory: Story = {
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render: (_) => {
+
+    async function fetchToken() {
+      const accessToken = await fetchAccessToken()
+
+      return accessToken
+    }
+
     return (
       <AccessTokenProvider fetchToken={fetchToken}>
         <TimeSeries query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
