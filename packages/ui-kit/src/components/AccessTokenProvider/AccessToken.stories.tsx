@@ -22,7 +22,6 @@ type Story = StoryObj<typeof meta>
 async function fetchToken() {
   const accessToken = await fetchStorybookAccessToken(axiosInstance)
 
-  console.log(accessToken)
   return accessToken ?? ''
 }
 
