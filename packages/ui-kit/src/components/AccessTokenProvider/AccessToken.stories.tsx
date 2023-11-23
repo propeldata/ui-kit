@@ -46,7 +46,7 @@ export const AccessTokenProviderStory: Story = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render: (_) => {
 
-    async function fetchToken() {
+    const fetchToken = async () => {
       const accessToken = await fetchAccessToken()
 
       return accessToken
