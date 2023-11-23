@@ -19,9 +19,9 @@ import {
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
   formatLabels,
+  useTimeSeriesQuery,
   TimeSeriesQuery
 } from '../../helpers'
-import { useTimeSeriesQuery } from '../../helpers/graphql/hooks'
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaultStyles } from '../../themes'
 import { ErrorFallback } from '../ErrorFallback'

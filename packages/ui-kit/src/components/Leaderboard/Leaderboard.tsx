@@ -6,9 +6,9 @@ import {
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
   formatLabels,
+  useLeaderboardQuery,
   LeaderboardQuery
 } from '../../helpers'
-import { useLeaderboardQuery } from '../../helpers/graphql/hooks'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'

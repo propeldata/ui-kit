@@ -1,7 +1,6 @@
 import { css } from '@emotion/css'
 import React from 'react'
-import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT } from '../../helpers'
-import { useCounterQuery } from '../../helpers/graphql/hooks'
+import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import type { ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'

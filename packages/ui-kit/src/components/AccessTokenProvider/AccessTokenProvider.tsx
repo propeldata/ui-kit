@@ -1,4 +1,5 @@
 import React, { createContext, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react'
+import { useLog } from '../Log'
 
 interface AccessTokenContextValue {
   accessToken?: string
@@ -12,7 +13,6 @@ const ACCESS_TOKEN_MAX_RETRIES = 3
 
 export const AccessTokenContext = createContext<AccessTokenContextValue | undefined>({})
 
-// export type AccessTokenProviderProps = Omit<AccessTokenContextValue, 'fetchedToken'> & PropsWithChildren
 export interface AccessTokenProviderProps extends PropsWithChildren {
   /**
   * Function that the provider will use to fetch the access token.
@@ -36,6 +36,8 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
   const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
   const [failedRetry, setFailedRetry] = useState(false)
 
+  const log = useLog()
+
   const shouldFetchToken = accessTokenFromProps == null
 
   const interval = useRef<NodeJS.Timeout>()
@@ -43,11 +45,13 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
   const fetch = useCallback(async () => {
     try {
       const token = await fetchToken()
+      log.debug('Access token fetched successfully')
+
       setFetchedToken(token)
 
       return token
     } catch (error) {
-      // TODO: Handle error with logger
+      log.error('Failed to fetch access token', error)
     } finally {
       setIsLoading(false)
     }
@@ -57,7 +61,7 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
 
   useEffect(() => {
     if (shouldFetchToken) {
-      // TODO: debug log fetch access token
+      log.debug('Fetching access token')
 
       interval.current != null && clearInterval(interval.current)
 
@@ -65,13 +69,17 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
 
       interval.current = setInterval(fetch, ACCESS_TOKEN_REFRESH_INTERVAL)
     }
-  }, [fetch, fetchedToken, shouldFetchToken])
+  // This useEffect cannot be tiggered by `log` because it is a function
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetch, shouldFetchToken])
 
   const onExpiredToken = useCallback(async () => {
     if (onAccessTokenExpired) {
       onAccessTokenExpired()
       return
     }
+
+    log.debug('Re-fetching access token')
 
     let retryCount = 0
 
@@ -80,11 +88,13 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
       if (receivedToken != null) {
         return
       }
+      log.warn('Failed to re-fetch access token, retrying...')
       retryCount++
     }
 
     setFailedRetry(true)
-    // TODO: Handle maximum retries with logger
+
+    log.error('Maximum access token retries reached')
 
   // This useCallback cannot be tiggered by `onAccessTokenExpired` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
