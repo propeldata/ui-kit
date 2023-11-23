@@ -47,8 +47,8 @@ export const AccessTokenProviderStory: Story = {
   render: (_) => {
     return (
       <AccessTokenProvider fetchToken={fetchToken}>
-        <TimeSeries query={{ metric: 'queryCount', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
-        <Counter query={{ metric: 'queryCount', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
+        <TimeSeries query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
+        <Counter query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
       </AccessTokenProvider>
     )
   }
