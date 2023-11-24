@@ -193,7 +193,7 @@ export const LeaderboardComponent = ({
     }
   )
 
-  const isAccessTokenError = hasError?.message?.includes('AuthenticationError') || (accessToken == null && !isLoadingAccessToken)
+  const isAccessTokenError = hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken)
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
@@ -273,7 +273,7 @@ export const LeaderboardComponent = ({
 
   React.useEffect(() => {
     if (isAccessTokenError) {
-      onExpiredToken()
+      onExpiredToken?.()
     }
   }, [isAccessTokenError, onExpiredToken])
 

@@ -70,7 +70,7 @@ export const CounterComponent = (props: CounterProps) => {
     }
   )
 
-  const isAccessTokenError = error?.message?.includes('AuthenticationError') || (accessToken == null && !isLoadingAccessToken)
+  const isAccessTokenError = error?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken)
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
@@ -102,7 +102,7 @@ export const CounterComponent = (props: CounterProps) => {
 
   React.useEffect(() => {
     if (isAccessTokenError) {
-      onExpiredToken()
+      onExpiredToken?.()
     }
   }, [isAccessTokenError, onExpiredToken])
 
