@@ -70,7 +70,7 @@ export const CounterComponent = (props: CounterProps) => {
     }
   )
 
-  const isAccessTokenError = !isStatic && (error?.message?.includes('AuthenticationError') || accessToken == null)
+  const isAccessTokenError = error?.message?.includes('AuthenticationError') || (accessToken == null && !isLoadingAccessToken)
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 

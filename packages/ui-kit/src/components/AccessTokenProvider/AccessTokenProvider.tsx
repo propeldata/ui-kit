@@ -44,7 +44,7 @@ export interface AccessTokenProviderProps extends PropsWithChildren {
 export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
   const { children, accessToken: accessTokenFromProps, fetchToken, onAccessTokenExpired } = props
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(accessTokenFromProps == null)
   const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
   const [failedRetry, setFailedRetry] = useState(false)
 
@@ -79,13 +79,26 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
 
       fetchedToken == null && fetch()
 
-      interval.current = setInterval(fetch, ACCESS_TOKEN_REFRESH_INTERVAL)
+      interval.current = setInterval(() => {
+        log.debug('Re-fetching access token after interval')
+        fetch()
+      }, ACCESS_TOKEN_REFRESH_INTERVAL)
     }
   // This useEffect cannot be tiggered by `log` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetch, shouldFetchToken])
 
+  const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
+
   const onExpiredToken = useCallback(async () => {
+    if (!expiredTokenThrottleTimeout.current) {
+      expiredTokenThrottleTimeout.current = setTimeout(() => {
+        expiredTokenThrottleTimeout.current = undefined
+      }, 1000)
+    } else {
+      return
+    }
+
     if (onAccessTokenExpired) {
       onAccessTokenExpired()
       return

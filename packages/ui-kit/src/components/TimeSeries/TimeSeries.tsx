@@ -149,7 +149,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     }
   )
 
-  const isAccessTokenError = !isStatic && (hasError?.message?.includes('AuthenticationError') || accessToken == null)
+  const isAccessTokenError = hasError?.message?.includes('AuthenticationError') || (accessToken == null && !isLoadingAccessToken)
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 

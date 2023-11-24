@@ -193,7 +193,7 @@ export const LeaderboardComponent = ({
     }
   )
 
-  const isAccessTokenError = !isStatic && (hasError?.message?.includes('AuthenticationError') || accessToken == null)
+  const isAccessTokenError = hasError?.message?.includes('AuthenticationError') || (accessToken == null && !isLoadingAccessToken)
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
