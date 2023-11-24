@@ -1,10 +1,22 @@
 import React, { createContext, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react'
 import { useLog } from '../Log'
 
-interface AccessTokenContextValue {
+export interface AccessTokenContextValue {
+  /**
+   * The returned accessToken wheter from the props or from the fetchToken function
+   */
   accessToken?: string
+  /**
+   * If true, the access token is being fetched
+   */
   isLoading?: boolean
+  /**
+   * Function that will be called when the access token expires.
+   */
   onExpiredToken?: () => void
+  /**
+   * If true, the access token failed to be fetched after the maximum retries
+   */
   failedRetry?: boolean
 }
 
