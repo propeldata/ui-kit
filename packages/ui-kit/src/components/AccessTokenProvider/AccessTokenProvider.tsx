@@ -8,7 +8,7 @@ interface AccessTokenContextValue {
   failedRetry?: boolean
 }
 
-const ACCESS_TOKEN_REFRESH_INTERVAL = 3600000
+const ACCESS_TOKEN_REFRESH_INTERVAL = 3300000 // 55 minutes
 const ACCESS_TOKEN_MAX_RETRIES = 3
 
 export const AccessTokenContext = createContext<AccessTokenContextValue | undefined>({})
