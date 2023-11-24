@@ -159,7 +159,7 @@ describe('AccessTokenProvider', () => {
 
     expect(fetchToken).toHaveBeenCalledTimes(1)
 
-    jest.runOnlyPendingTimers()
+    jest.runOnlyPendingTimers() // Jest will finish the interval timer
 
     expect(fetchToken).toHaveBeenCalledTimes(2)
   })
