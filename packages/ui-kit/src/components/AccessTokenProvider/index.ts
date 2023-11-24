@@ -1,1 +1,1 @@
-export { AccessTokenContext, AccessTokenProviderProps } from './AccessTokenProvider'
+export { AccessTokenProvider, AccessTokenProviderProps } from './AccessTokenProvider'
