@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 
 import { Log, LogLevel } from './Log.types'
 import { LogContext } from './LogProvider'
@@ -12,30 +12,32 @@ export const useLog = (): Log => {
 
   // Build the log methods with only supported console methods based on the log level.
   // Supported log methods are: "error | warn | info | debug"
-  const error = function (...args: any[]) {
+  const error = useCallback(function (...args: unknown[]) {
     if (level === LogLevel.Error || level === LogLevel.Warn || level === LogLevel.Info || level === LogLevel.Debug) {
       return console.error(...args)
     }
-  }
+  }, [level])
 
-  const warn = function (...args: any[]) {
+  const warn = useCallback(function (...args: unknown[]) {
     if (level === LogLevel.Warn || level === LogLevel.Info || level === LogLevel.Debug) {
       return console.warn(...args)
     }
-  }
+  }, [level])
 
-  const info = function (...args: any[]) {
+  const info = useCallback(function (...args: unknown[]) {
     if (level === LogLevel.Info || level === LogLevel.Debug) {
       return console.info(...args)
     }
-  }
+  }, [level])
 
-  const debug = function (...args: any[]) {
+  const debug = useCallback(function (...args: unknown[]) {
     if (level === LogLevel.Debug) {
       return console.debug(...args)
     }
-  }
+  }, [level])
+
+  const log = useMemo(() => ({ error, warn, info, debug, level }), [error, warn, info, debug, level])
 
   // Export the log and logLevel
-  return { error, warn, info, debug, level }
+  return log
 }

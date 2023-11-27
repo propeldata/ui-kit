@@ -62,7 +62,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
     }
   // This useCallback cannot be tiggered by `fetchToken` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [log])
 
   useEffect(() => {
     if (accessTokenFromProps == null) {
@@ -85,9 +85,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
         clearInterval(interval.current)
       }
     }
-  // This useEffect cannot be tiggered by `log` because it is a function
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetch, accessTokenFromProps])
+  }, [fetch, accessTokenFromProps, log])
 
   const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
 
@@ -116,10 +114,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
     setFailedRetry(true)
 
     log.error('Maximum access token retries reached')
-
-  // This useCallback cannot be tiggered by `log` because it is a function
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetch])
+  }, [fetch, log])
 
   const accessToken = accessTokenFromProps ?? fetchedToken
 
