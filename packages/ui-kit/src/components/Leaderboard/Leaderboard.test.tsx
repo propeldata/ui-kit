@@ -28,6 +28,14 @@ const handlers = [
       )
     }
 
+    if (metricName === 'string-value') {
+      return res(
+        ctx.data({
+          leaderboard: { ...mockData, rows: mockData.rows.map((row) => [...row, 'My string value']) }
+        })
+      )
+    }
+
     return res(
       ctx.data({
         leaderboard: mockData
@@ -148,5 +156,32 @@ describe('Leaderboard', () => {
     const resultingLabels = mockData.rows.map((row) => row[0])
 
     expect(chartLabels).toEqual(resultingLabels.map((label) => label.replace('-', '.')))
+  })
+
+  it('should work for strings', async () => {
+    dom = render(
+      <Leaderboard
+        query={{
+          accessToken: 'test-token',
+          metric: 'string-value',
+          dimensions: [
+            {
+              columnName: 'test-column'
+            }
+          ],
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          },
+          retry: false
+        }}
+        variant="table"
+      />
+    )
+
+    const values = await dom.findAllByText('My string value')
+
+    expect(values).toHaveLength(3)
   })
 })
