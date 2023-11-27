@@ -25,7 +25,7 @@ const ACCESS_TOKEN_MAX_RETRIES = 3
 
 export const AccessTokenContext = createContext<AccessTokenContextValue | undefined>({})
 
-export interface AccessTokenProviderProps extends PropsWithChildren {
+export interface AccessTokenProviderProps {
   /**
   * Function that the provider will use to fetch the access token.
   * @returns {Promise<string>} A promise that resolves to the access token
@@ -35,6 +35,7 @@ export interface AccessTokenProviderProps extends PropsWithChildren {
   * If passed, the provider will ignore the `fetchToken` function and pass this access token to all the children components.
   */
   accessToken?: string
+  children?: React.ReactNode
 }
 
 export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ children, accessToken: accessTokenFromProps, fetchToken }) => {
