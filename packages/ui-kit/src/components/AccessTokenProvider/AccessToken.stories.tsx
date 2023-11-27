@@ -37,10 +37,6 @@ export const AccessTokenProviderStory: Story = {
     accessToken: {
       description: 'The access token that will be served to the components.',
       control: { type: 'text' }
-    },
-    onAccessTokenExpired: {
-      description: 'The function that will be called when the access token expires.',
-      control: { type: 'function' }
     }
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

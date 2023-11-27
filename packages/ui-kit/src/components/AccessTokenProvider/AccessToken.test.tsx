@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react"
+import { render } from "@testing-library/react"
 import React from "react"
 import { CounterQuery, LeaderboardQuery, RelativeTimeRange, TimeSeriesGranularity, TimeSeriesQuery } from "../../helpers"
 
@@ -127,20 +127,6 @@ describe('AccessTokenProvider', () => {
     await dom.findAllByText('Sorry we are not able to connect at this time due to a technical error.')
 
     expect(fetchToken).toHaveBeenCalledTimes(4) // 1 initial fetch + 3 retries
-  })
-
-  it('should call the onAccessTokenExpired callback when the accessToken expires', async () => {
-    const onAccessTokenExpired = jest.fn()
-
-    const accessToken = 'expired-token'
-
-    dom = render(
-      <DashboardComponent accessToken={accessToken} onAccessTokenExpired={onAccessTokenExpired} />
-    )
-
-    await waitFor(() => {
-      expect(onAccessTokenExpired).toHaveBeenCalled()
-    })
   })
 
   it('should refetch accessToken after interval', async () => {

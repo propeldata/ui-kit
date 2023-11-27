@@ -35,14 +35,10 @@ export interface AccessTokenProviderProps extends PropsWithChildren {
   * If passed, the provider will ignore the `fetchToken` function and pass this access token to all the children components.
   */
   accessToken?: string
-  /**
-  * Function that will be called when the access token expires.
-  */
-  onAccessTokenExpired?: () => void
 }
 
 export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
-  const { children, accessToken: accessTokenFromProps, fetchToken, onAccessTokenExpired } = props
+  const { children, accessToken: accessTokenFromProps, fetchToken } = props
 
   const [isLoading, setIsLoading] = useState(accessTokenFromProps == null)
   const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
@@ -103,11 +99,6 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
       return
     }
 
-    if (onAccessTokenExpired) {
-      onAccessTokenExpired()
-      return
-    }
-
     log.debug('Re-fetching access token')
 
     let retryCount = 0
@@ -125,7 +116,7 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
 
     log.error('Maximum access token retries reached')
 
-  // This useCallback cannot be tiggered by `onAccessTokenExpired` because it is a function
+  // This useCallback cannot be tiggered by `log` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetch])
 
