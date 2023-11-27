@@ -1,3 +1,5 @@
+import { getIsNonNumeric } from "../../helpers"
+
 interface getValueOptions {
   value: string | null
   localize?: boolean
@@ -6,13 +8,14 @@ interface getValueOptions {
 const getValue = (options: getValueOptions) => {
   const { value, localize } = options
 
-  if (isNaN(Number(value))) return value
+  if (value === null) {
+    return '-'
+  }
+
+  if (getIsNonNumeric(value)) return value
 
   if (value !== null && Number.isInteger(parseFloat(value))) {
     return localize ? parseInt(value).toLocaleString() : parseInt(value)
-  }
-  if (value === null) {
-    return '-'
   }
 
   return localize

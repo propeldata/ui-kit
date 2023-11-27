@@ -36,6 +36,14 @@ const handlers = [
       )
     }
 
+    if (metricName === 'boolean-value') {
+      return res(
+        ctx.data({
+          leaderboard: { ...mockData, rows: mockData.rows.map((row) => [...row, true]) }
+        })
+      )
+    }
+
     return res(
       ctx.data({
         leaderboard: mockData
@@ -181,6 +189,33 @@ describe('Leaderboard', () => {
     )
 
     const values = await dom.findAllByText('My string value')
+
+    expect(values).toHaveLength(3)
+  })
+
+  it('should work for booleans', async () => {
+    dom = render(
+      <Leaderboard
+        query={{
+          accessToken: 'test-token',
+          metric: 'boolean-value',
+          dimensions: [
+            {
+              columnName: 'test-column'
+            }
+          ],
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          },
+          retry: false
+        }}
+        variant="table"
+      />
+    )
+
+    const values = await dom.findAllByText("true")
 
     expect(values).toHaveLength(3)
   })

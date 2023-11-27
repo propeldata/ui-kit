@@ -1,5 +1,6 @@
 import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
 import React from 'react'
+import { getIsNonNumeric } from '../../helpers'
 import { defaultStyles, ChartStyles, ChartPlugins } from '../../themes'
 
 interface GetTableSettingsOptions {
@@ -18,14 +19,12 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const valuesByRow = rows?.map((row) => (row[row.length - 1] === null ? null : row[row.length - 1]))
 
-  const numberValuesByRow = valuesByRow.map((value) => (value === null ? null : Number(value)))
-  const maxValue = numberValuesByRow?.every((value) => value !== null && !isNaN(value))
-    ? Math.max(...(numberValuesByRow || []).map((value) => value ?? -Infinity))
-    : null
+  const isValidValueBar = valuesByRow.every((value) => !getIsNonNumeric(value))
+
+  const numberValuesByRow = isValidValueBar ? valuesByRow.map((value) => (value === null ? null : Number(value))) : null
+  const maxValue = isValidValueBar ? Math.max(...(numberValuesByRow || []).map((value) => value ?? -Infinity)) : null
 
   const isOrdered = styles?.table?.isOrdered || defaultStyles.table.isOrdered
-
-  const isValidValueBar = numberValuesByRow.every((value) => !isNaN(value))
 
   const hasValueBar = (styles?.table?.hasValueBar || defaultStyles.table.hasValueBar) && isValidValueBar
 
@@ -53,7 +52,7 @@ interface getValueOptions {
 const getValue = (options: getValueOptions) => {
   const { value, localize } = options
 
-  if (isNaN(Number(value))) return value
+  if (getIsNonNumeric(value)) return value
 
   const numberValue = Number(value)
 
