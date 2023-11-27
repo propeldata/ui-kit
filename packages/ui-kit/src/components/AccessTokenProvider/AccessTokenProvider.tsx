@@ -75,9 +75,13 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
     if (shouldFetchToken) {
       log.debug('Fetching access token')
 
-      interval.current != null && clearInterval(interval.current)
+      if (interval.current != null) {
+        clearInterval(interval.current)
+      }
 
-      fetchedToken == null && fetch()
+      if (fetchedToken == null) {
+        fetch()
+      }
 
       interval.current = setInterval(() => {
         log.debug('Re-fetching access token after interval')
