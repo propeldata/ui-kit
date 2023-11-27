@@ -6,6 +6,8 @@ interface getValueOptions {
 const getValue = (options: getValueOptions) => {
   const { value, localize } = options
 
+  if (isNaN(Number(value))) return value
+
   if (value !== null && Number.isInteger(parseFloat(value))) {
     return localize ? parseInt(value).toLocaleString() : parseInt(value)
   }
