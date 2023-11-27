@@ -95,7 +95,7 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
   const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
 
   const onExpiredToken = useCallback(async () => {
-    if (!expiredTokenThrottleTimeout.current) {
+    if (expiredTokenThrottleTimeout.current == null) {
       expiredTokenThrottleTimeout.current = setTimeout(() => {
         expiredTokenThrottleTimeout.current = undefined
       }, 1000)
