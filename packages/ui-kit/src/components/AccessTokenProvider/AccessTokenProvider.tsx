@@ -46,8 +46,6 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
 
   const log = useLog()
 
-  const shouldFetchToken = accessTokenFromProps == null
-
   const interval = useRef<NodeJS.Timeout>()
 
   const fetch = useCallback(async () => {
@@ -68,7 +66,7 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
   }, [])
 
   useEffect(() => {
-    if (shouldFetchToken) {
+    if (accessTokenFromProps == null) {
       log.debug('Fetching access token')
 
       if (interval.current != null) {
@@ -86,7 +84,7 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
     }
   // This useEffect cannot be tiggered by `log` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetch, shouldFetchToken])
+  }, [fetch, accessTokenFromProps])
 
   const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
 
