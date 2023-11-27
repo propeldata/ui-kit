@@ -48,7 +48,9 @@ export const LeaderboardComponent = ({
 }: LeaderboardProps) => {
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken()
+  const [isAccessTokenError, setIsAccessTokenError] = React.useState(false)
+
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken({ isAccessTokenError })
 
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
@@ -193,7 +195,9 @@ export const LeaderboardComponent = ({
     }
   )
 
-  const isAccessTokenError = hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken)
+  React.useEffect(() => {
+    setIsAccessTokenError(hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken))
+  }, [accessToken, hasError?.message, isLoadingAccessToken, isStatic])
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 

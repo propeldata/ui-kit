@@ -75,7 +75,9 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
   timeZone,
   ...rest
 }) => {
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken()
+  const [isAccessTokenError, setIsAccessTokenError] = React.useState(false)
+
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, failedRetry } = useAccessToken({ isAccessTokenError })
 
   const isLoadingStatic = loading
 
@@ -149,7 +151,9 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     }
   )
 
-  const isAccessTokenError = hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken)
+  React.useEffect(() => {
+    setIsAccessTokenError(hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken))
+  }, [accessToken, hasError?.message, isLoadingAccessToken, isStatic])
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
@@ -283,12 +287,6 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
       destroyChart()
     }
   }, [])
-
-  React.useEffect(() => {
-    if (isAccessTokenError) {
-      onExpiredToken?.()
-    }
-  }, [isAccessTokenError, onExpiredToken])
 
   if ((hasError || propsMismatch) && !isRetryingAccessToken) {
     destroyChart()

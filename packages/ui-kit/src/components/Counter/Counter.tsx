@@ -21,8 +21,9 @@ export const CounterComponent = (props: CounterProps) => {
     localize,
     ...rest
   } = props
+  const [isAccessTokenError, setIsAccessTokenError] = React.useState(false)
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken()
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken({ isAccessTokenError })
 
   /**
    * If the user passes `value` attribute, it
@@ -70,7 +71,9 @@ export const CounterComponent = (props: CounterProps) => {
     }
   )
 
-  const isAccessTokenError = error?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken)
+  React.useEffect(() => {
+    setIsAccessTokenError(error?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken))
+  }, [accessToken, error?.message, isLoadingAccessToken, isStatic])
 
   const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
