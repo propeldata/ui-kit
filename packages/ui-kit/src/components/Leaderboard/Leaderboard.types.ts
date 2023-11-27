@@ -16,7 +16,7 @@ export type LeaderboardData = {
 
 export type LeaderboardQueryProps = {
   /**
-   * Access token used for the query, while you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead
+   * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
    * @example
    * ```jsx
    * <AccessTokenProvider fetchToken={fetchToken}>
