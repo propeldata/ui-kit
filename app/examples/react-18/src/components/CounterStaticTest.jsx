@@ -8,7 +8,7 @@ const mockData1 = {
 }
 
 const mockData2 = {
-  value: true
+  value: '1214256124'
 }
 
 export function CounterStaticTest() {
