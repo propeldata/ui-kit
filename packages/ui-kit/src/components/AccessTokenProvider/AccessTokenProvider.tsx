@@ -69,18 +69,22 @@ export const AccessTokenProvider = (props: AccessTokenProviderProps) => {
     if (accessTokenFromProps == null) {
       log.debug('Fetching access token')
 
-      if (interval.current != null) {
-        clearInterval(interval.current)
-      }
-
-      if (fetchedToken == null) {
-        fetch()
-      }
+      fetch()
 
       interval.current = setInterval(() => {
         log.debug('Re-fetching access token after interval')
         fetch()
       }, ACCESS_TOKEN_REFRESH_INTERVAL)
+    } else {
+      log.debug('Access token provided by props')
+      setFetchedToken(null)
+      clearInterval(interval.current)
+    }
+
+    return () => {
+      if (interval.current != null) {
+        clearInterval(interval.current)
+      }
     }
   // This useEffect cannot be tiggered by `log` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
