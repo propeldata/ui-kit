@@ -37,7 +37,7 @@ export interface AccessTokenProviderProps extends PropsWithChildren {
   accessToken?: string
 }
 
-export const AccessTokenProvider = ({ children, accessToken: accessTokenFromProps, fetchToken }: AccessTokenProviderProps) => {
+export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ children, accessToken: accessTokenFromProps, fetchToken }) => {
   const [isLoading, setIsLoading] = useState(accessTokenFromProps == null)
   const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
   const [failedRetry, setFailedRetry] = useState(false)
