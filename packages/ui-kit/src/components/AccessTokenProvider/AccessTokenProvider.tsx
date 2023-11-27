@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react'
+import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
 import { useLog } from '../Log'
 
 export interface AccessTokenContextValue {
