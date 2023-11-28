@@ -27,9 +27,11 @@ import { ChartPlugins, ChartStyles, defaultAriaLabel, defaultChartHeight, defaul
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
+import { useLog } from '../Log'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import {
   getDefaultGranularity,
+  getNumericValues,
   getScales,
   tooltipTitleCallback,
   updateChartConfig,
@@ -116,6 +118,8 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
   useSetupDefaultStyles(styles)
 
+  const log = useLog()
+
   const {
     isInitialLoading: isLoadingQuery,
     error: hasError,
@@ -162,8 +166,8 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
       if (!canvasRef.current || !data?.labels || !data.values || hasError || (variant !== 'bar' && variant !== 'line'))
         return
 
-      const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) || []
-      const values = data.values || []
+      const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
+      const values = getNumericValues(data.values ?? [], log)
 
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
@@ -227,7 +231,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
       canvasRef.current.style.borderRadius = styles?.canvas?.borderRadius || defaultStyles.canvas.borderRadius
     },
-    [granularity, hasError, isFormatted, styles, variant, zone, labelFormatter]
+    [hasError, variant, labelFormatter, log, styles, granularity, isFormatted, zone]
   )
 
   const destroyChart = () => {
@@ -276,7 +280,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
   React.useEffect(() => {
     if (serverData && !isStatic) {
       const labels = serverData.timeSeries.labels ?? []
-      const values = (serverData.timeSeries.values ?? []).map((value) => (value == null ? null : Number(value)))
+      const values = serverData.timeSeries.values ?? []
 
       renderChart({ labels, values })
     }

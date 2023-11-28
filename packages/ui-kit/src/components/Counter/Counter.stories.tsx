@@ -177,3 +177,11 @@ export const SingleValueCustomStyleStory: Story = {
   },
   render: (args) => <Counter {...args} />
 }
+
+export const StringValueStory: Story = {
+  name: 'String value',
+  args: {
+    value: 'My string'
+  },
+  render: (args) => <Counter {...args} />
+}

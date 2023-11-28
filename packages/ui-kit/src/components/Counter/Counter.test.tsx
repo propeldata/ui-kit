@@ -31,6 +31,26 @@ const handlers = [
       )
     }
 
+    if (metricName === 'string-value') {
+      return res(
+        ctx.data({
+          counter: {
+            value: 'My string value'
+          }
+        })
+      )
+    }
+
+    if (metricName === 'boolean-value') {
+      return res(
+        ctx.data({
+          counter: {
+            value: true
+          }
+        })
+      )
+    }
+
     return res(
       ctx.data({
         counter: mockData
@@ -102,5 +122,35 @@ describe('Counter', () => {
     dom = render(<Counter />)
 
     await dom.findByRole('img')
+  })
+
+  it('Should work for strings', async () => {
+    dom = render(
+      <Counter
+        query={{
+          metric: 'string-value',
+          accessToken: 'test-token',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
+          retry: false
+        }}
+      />
+    )
+
+    await dom.findByText('My string value')
+  })
+
+  it('Should work for booleans', async () => {
+    dom = render(
+      <Counter
+        query={{
+          metric: 'boolean-value',
+          accessToken: 'test-token',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
+          retry: false
+        }}
+      />
+    )
+
+    await dom.findByText("true")
   })
 })

@@ -1,6 +1,7 @@
 import { TimeSeriesGranularity } from '../../testing'
+import { Log, LogLevel } from '../Log'
 
-import { getLabelsBasedGranularity, tooltipTitleCallback } from './utils'
+import { getLabelsBasedGranularity, getNumericValues, tooltipTitleCallback } from './utils'
 
 describe('TimeSeries/utils', () => {
   describe('getLabelsBasedGranularity', () => {
@@ -169,6 +170,25 @@ describe('TimeSeries/utils', () => {
       const result = tooltipTitleCallback([{ label: 'Aug 1, 2023, 12:00:00 AM' }], TimeSeriesGranularity.Month)
 
       expect(result).toBe('August, 2023')
+    })
+  })
+
+  describe('getNumericValues', () => {
+    it('should filter out non-numeric data and log a warning', () => {
+      const log: Log = {
+        warn: jest.fn(),
+        debug: jest.fn(),
+        error: jest.fn(),
+        info: jest.fn(),
+        level: LogLevel.Debug
+      }
+
+      const values = ['1', '2', 'string', '4', '5']
+
+      const result = getNumericValues(values, log)
+
+      expect(result).toEqual([1, 2, null, 4, 5])
+      expect(log.warn).toHaveBeenCalledWith('TimeSeries contains non-numeric values; these values will be set to null')
     })
   })
 })

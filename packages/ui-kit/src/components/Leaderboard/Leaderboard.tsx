@@ -317,7 +317,7 @@ export const LeaderboardComponent = ({
   const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
   const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
 
-  const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } =
+  const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow, numberValuesByRow } =
     getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
 
   return (
@@ -353,7 +353,7 @@ export const LeaderboardComponent = ({
               </td>
               {hasValueBar && (
                 <td className={ComponentStyles.valueBarCellStyles(styles)}>
-                  <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
+                  <ValueBar value={numberValuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} styles={styles} />
                 </td>
               )}
             </tr>

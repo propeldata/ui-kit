@@ -1,5 +1,6 @@
 import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
 import React from 'react'
+import { getDisplayValue } from '../../helpers'
 import { defaultStyles, ChartStyles, ChartPlugins } from '../../themes'
 
 interface GetTableSettingsOptions {
@@ -16,21 +17,23 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const rowsWithoutValue = rows?.map((row) => row.slice(0, row.length - 1))
 
-  const valuesByRow = rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1])))
-  const maxValue = valuesByRow?.some((value) => value !== null)
-    ? Math.max(...(valuesByRow || []).map((value) => value ?? -Infinity))
-    : null
+  const valuesByRow = rows?.map((row) => (row[row.length - 1] === null ? null : row[row.length - 1]))
+
+  const isValidValueBar = valuesByRow.every((value) => !isNaN(parseFloat(value)))
+
+  const numberValuesByRow = isValidValueBar ? valuesByRow.map((value) => (value === null ? null : Number(value))) : null
+  const maxValue = isValidValueBar ? Math.max(...(numberValuesByRow || []).map((value) => value ?? -Infinity)) : null
 
   const isOrdered = styles?.table?.isOrdered || defaultStyles.table.isOrdered
 
-  const hasValueBar = styles?.table?.hasValueBar || defaultStyles.table.hasValueBar
+  const hasValueBar = (styles?.table?.hasValueBar || defaultStyles.table.hasValueBar) && isValidValueBar
 
-  return { headersWithoutValue, valueHeader, valuesByRow, rowsWithoutValue, maxValue, isOrdered, hasValueBar }
+  return { headersWithoutValue, valueHeader, valuesByRow, rowsWithoutValue, maxValue, isOrdered, hasValueBar, isValidValueBar, numberValuesByRow }
 }
 
 export const getValueWithPrefixAndSufix = (params: {
   prefix?: string
-  value?: number | null
+  value?: string | null
   sufix?: string
   localize?: boolean
 }) => {
@@ -38,24 +41,7 @@ export const getValueWithPrefixAndSufix = (params: {
 
   if (value == null) return
 
-  return (prefix ? prefix + ' ' : '') + getValue({ value, localize }) + (sufix ? ' ' + sufix : '')
-}
-
-interface getValueOptions {
-  value: number
-  localize?: boolean
-}
-
-const getValue = (options: getValueOptions) => {
-  const { value, localize } = options
-
-  const isInteger = Number.isInteger(value)
-
-  if (isInteger) {
-    return localize ? value.toLocaleString() : value
-  }
-
-  return localize ? value.toFixed(2).toLocaleString() : value.toFixed(2)
+  return (prefix ? prefix + ' ' : '') + getDisplayValue({ value, localize }) + (sufix ? ' ' + sufix : '')
 }
 
 export function useSetupDefaultStyles(styles?: ChartStyles) {

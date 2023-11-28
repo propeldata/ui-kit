@@ -44,6 +44,16 @@ const tableRows = [
   ['The Lean Product Book', '1']
 ]
 
+const tableStringHeaders = ['Book title', 'value']
+
+const tableStringRows = [
+  ["John's way or Highway", 'John Doe'],
+  ['How to Speak Native Animal', 'John Doe'],
+  ['Cell Lost in a Sea of Desert', 'John Doe'],
+  ['Flying nowhere special', 'John Doe'],
+  ['The Lean Product Book', 'John Doe']
+]
+
 const Leaderboard = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
 
@@ -172,6 +182,16 @@ export const CustomStyleStory: Story = {
         }
       }
     }
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const StringValuesStory: Story = {
+  name: 'String values',
+  args: {
+    variant: 'table',
+    headers: tableStringHeaders,
+    rows: tableStringRows
   },
   render: (args) => <Leaderboard {...args} />
 }
