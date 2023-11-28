@@ -52,6 +52,16 @@ export const initChartJs = () => {
   isChartJSRegistered = true
 }
 
+/**
+ * Retrieves the computed pixel font size as a number from a CSS font-size value.
+ * This function dynamically creates an element, applies the provided font size,
+ * attaches it to the DOM to calculate the computed style, and then removes it.
+ * It is useful for converting relative font sizes (e.g., 'rem', 'em') to their
+ * pixel equivalent for calculations that require a numeric value.
+ *
+ * @param {React.CSSProperties['fontSize']} value - The font size in CSS units to be converted.
+ * @returns {number} The computed font size in pixels as a numeric value.
+ */
 export const getPixelFontSizeAsNumber = (value: React.CSSProperties['fontSize']) => {
   const element = document.createElement('div')
   element.style.fontSize = `${value}`
@@ -66,6 +76,15 @@ export const getPixelFontSizeAsNumber = (value: React.CSSProperties['fontSize'])
   return parseFloat(computedFontSize)
 }
 
+/**
+ * Converts a HEX color code to an RGBA color code.
+ * The function accepts both short (3-digit) and full (6-digit) HEX codes.
+ * It also handles the conversion of opacity from a scale of 0 to 1 or 0 to 100 to an RGBA opacity value.
+ *
+ * @param {string} hexCode - The HEX color code to be converted.
+ * @param {number} opacity - The opacity value on a scale from 0 to 1 (default is 1). Values from 0 to 100 are also accepted for backward compatibility.
+ * @returns {string} The resulting RGBA color code as a string.
+ */
 export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   let hex = hexCode.replace('#', '')
 
@@ -85,6 +104,14 @@ export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
   return `rgba(${r},${g},${b},${opacity})`
 }
 
+/**
+ * Applies a theme-based style configuration to Chart.js defaults and document properties.
+ * It also supports a callback for additional global Chart.js configuration.
+ * This function is intended to be called once to initialize or update the chart's styles globally.
+ *
+ * @param {ChartJSDefaultStyleProps} { theme, globalChartConfigProps } - An object containing the theme properties and an optional callback for additional global configuration.
+ * @returns {typeof Chart | undefined} The Chart object if the theme is provided, otherwise undefined.
+ */
 export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefaultStyleProps): typeof Chart => {
   if (!theme) {
     return
@@ -139,6 +166,7 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
     lineHeight: theme.tinyLineHeight
   }
 
+  // Pass the Chart object to the callback for additional global configuration.
   if (globalChartConfigProps) {
     globalChartConfigProps(Chart)
   }
@@ -146,6 +174,14 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
   return Chart
 }
 
+/**
+ * A React hook that initializes default styles for Chart.js components based on the given theme.
+ * It calls `setupChartStyles` to apply the theme to Chart.js defaults and sets up any global chart configurations.
+ * The hook should be used in a component that renders charts to ensure the styles are applied when the component mounts.
+ * The effect will re-run if the `theme` or `globalChartConfigProps` change.
+ *
+ * @param {ChartJSDefaultStyleProps} { theme, globalChartConfigProps } - An object containing the theme properties and an optional callback for additional global configuration.
+ */
 export function useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps }: ChartJSDefaultStyleProps) {
   React.useEffect(() => {
     if (theme) {

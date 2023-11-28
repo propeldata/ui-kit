@@ -6,7 +6,6 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.module.js",
   "scripts": {
-    "build-old": "rm -rf dist && yarn graphql:build && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
     "build": "rm -rf dist && yarn graphql:build && rollup -c",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",

@@ -281,6 +281,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       transition: 'opacity 0.2s ease-in-out'
     }
 
+    // @TODO: we should abstract this logic to a hook
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !headers && !rows) {

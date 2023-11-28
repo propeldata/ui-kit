@@ -77,6 +77,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
 
     const value = isStatic ? staticValue : fetchedValue?.counter?.value
 
+    // @TODO: we should abstract this logic to a hook
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !value) {

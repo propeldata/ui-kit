@@ -2,6 +2,15 @@
 
 import { useEffect, useRef, Ref } from 'react'
 
+/**
+ * Custom React hook that combines multiple refs into a single ref object.
+ * This is particularly useful when you need to pass a ref to a component that already uses an internal ref.
+ * The hook creates a new ref object (`targetRef`) and updates all provided refs (`refs`) to point to `targetRef.current`.
+ * It handles both function refs and object refs.
+ *
+ * @param {...(Ref<T> | null)[]} refs - An array of refs to be combined.
+ * @returns {RefObject<T>} A React ref object that is synchronized with the provided refs.
+ */
 export const useCombinedRefs = <T>(...refs: (Ref<T> | null)[]) => {
   const targetRef = useRef<T>(null)
 

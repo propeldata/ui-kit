@@ -258,6 +258,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       chartRef.current = null
     }, [chartRef])
 
+    // @TODO: we should abstract this logic to a hook
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !labels && !values) {

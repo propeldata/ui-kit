@@ -1,3 +1,13 @@
+/**
+ * Transforms an object of arguments into a string of JSX attributes.
+ * - Boolean arguments are converted to a simple attribute if true, or omitted if false.
+ * - Function arguments are converted to a string and cleansed of specific module import prefixes.
+ * - Other arguments are JSON-stringified, and objects or arrays are wrapped with braces.
+ *
+ * @param {object} args - The arguments object to be transformed into a string of attributes.
+ * @returns {string} A string of space-separated attributes for use in JSX.
+ */
+
 export const getStringAttributes = (args: any) =>
   args
     ? Object.keys(args)
