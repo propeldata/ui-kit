@@ -9,7 +9,7 @@ export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linea
 export type TimeSeriesChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
-  values?: Array<number | null>
+  values?: Array<number | string | null>
   labels?: string[]
 }
 

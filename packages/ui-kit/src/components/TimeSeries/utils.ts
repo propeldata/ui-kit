@@ -13,10 +13,11 @@ import {
 import { DateTime } from 'luxon'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import React from 'react'
-import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { getDisplayValue, Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import type { ChartPlugins, ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
 import type { ChartScales, TimeSeriesChartVariant } from './TimeSeries.types'
+import { Log } from '../Log'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -372,4 +373,27 @@ export function tooltipTitleCallback(context: { label: string }[], granularity: 
       [TimeSeriesGranularity.Year]: DateTime.fromJSDate(date).toFormat('yyyy')
     }[granularity] ?? title
   )
+}
+
+interface GetNumericDataOptions {
+  labels: string[]
+  values: Array<string | number>
+  log: Log
+}
+
+export function getNumericData({ labels, values, log }: GetNumericDataOptions) {
+  const newLabels = [...labels]
+  const newValues = values.map((value: string | number, index: number) => {
+    if (typeof value === 'number') return value
+
+    const displayValue = getDisplayValue({ value })
+
+    if (typeof displayValue !== 'number') {
+      log.warn('TimeSeries used with non-numeric value. Value will be filtered out:', displayValue)
+      newLabels.splice(index, 1)
+      return null
+    }
+  }).filter((value) => value !== null)
+
+  return { labels: newLabels, values: newValues }
 }
