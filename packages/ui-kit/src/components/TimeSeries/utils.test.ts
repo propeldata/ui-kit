@@ -190,7 +190,7 @@ describe('TimeSeries/utils', () => {
 
       expect(result.labels).toEqual(['1', '2', '3', '4'])
       expect(result.values).toEqual([1, 2, 3, 4])
-      expect(log.warn).toHaveBeenCalledWith('TimeSeries used with non-numeric value. Value will be filtered out: ', 'string')
+      expect(log.warn).toHaveBeenCalledWith('TimeSeries used with non-numeric value. Value will be filtered out:', 'string')
     })
   })
 })

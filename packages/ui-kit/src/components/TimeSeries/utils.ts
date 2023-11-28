@@ -393,6 +393,8 @@ export function getNumericData({ labels, values, log }: GetNumericDataOptions) {
       newLabels.splice(index, 1)
       return null
     }
+
+    return displayValue
   }).filter((value) => value !== null)
 
   return { labels: newLabels, values: newValues }
