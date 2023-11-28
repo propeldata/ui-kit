@@ -375,16 +375,9 @@ export function tooltipTitleCallback(context: { label: string }[], granularity: 
   )
 }
 
-interface GetNumericDataOptions {
-  labels: string[]
-  values: Array<string | number>
-  log: Log
-}
-
-export function getNumericData({ labels, values, log }: GetNumericDataOptions) {
+export function getNumericValues(values: Array<string | number>, log: Log) {
   let nonNumericValueFound = false
 
-  const newLabels = [...labels]
   const newValues = values.map((value: string | number) => {
     if (typeof value === 'number') return value
 
@@ -402,5 +395,5 @@ export function getNumericData({ labels, values, log }: GetNumericDataOptions) {
     log.warn('TimeSeries contains non-numeric values; these values will be set to null')
   }
 
-  return { labels: newLabels, values: newValues }
+  return newValues
 }

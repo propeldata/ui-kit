@@ -1,7 +1,7 @@
 import { TimeSeriesGranularity } from '../../testing'
 import { Log, LogLevel } from '../Log'
 
-import { getLabelsBasedGranularity, getNumericData, tooltipTitleCallback } from './utils'
+import { getLabelsBasedGranularity, getNumericValues, tooltipTitleCallback } from './utils'
 
 describe('TimeSeries/utils', () => {
   describe('getLabelsBasedGranularity', () => {
@@ -173,7 +173,7 @@ describe('TimeSeries/utils', () => {
     })
   })
 
-  describe('getNumericData', () => {
+  describe('getNumericValues', () => {
     it('should filter out non-numeric data and log a warning', () => {
       const log: Log = {
         warn: jest.fn(),
@@ -183,13 +183,11 @@ describe('TimeSeries/utils', () => {
         level: LogLevel.Debug
       }
 
-      const labels = ['1', '2', '3', '4', '5']
       const values = ['1', '2', 'string', '4', '5']
 
-      const result = getNumericData({labels, values, log})
+      const result = getNumericValues(values, log)
 
-      expect(result.labels).toEqual(['1', '2', '3', '4', '5'])
-      expect(result.values).toEqual([1, 2, null, 4, 5])
+      expect(result).toEqual([1, 2, null, 4, 5])
       expect(log.warn).toHaveBeenCalledWith('TimeSeries contains non-numeric values; these values will be set to null')
     })
   })

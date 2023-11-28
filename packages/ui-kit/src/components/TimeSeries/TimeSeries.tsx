@@ -30,7 +30,7 @@ import { useLog } from '../Log'
 import type { TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import {
   getDefaultGranularity,
-  getNumericData,
+  getNumericValues,
   getScales,
   tooltipTitleCallback,
   updateChartConfig,
@@ -152,11 +152,8 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
       if (!canvasRef.current || !data?.labels || !data.values || hasError || (variant !== 'bar' && variant !== 'line'))
         return
 
-    const { labels, values } = getNumericData({
-      labels: formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? [],
-      values: data.values ?? [],
-      log
-    })
+      const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
+      const values = getNumericValues(data.values ?? [], log)
 
       const backgroundColor = styles?.[variant]?.backgroundColor || defaultStyles[variant].backgroundColor
       const borderColor = styles?.[variant]?.borderColor || defaultStyles[variant].borderColor
