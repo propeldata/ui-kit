@@ -135,7 +135,7 @@ export type ChartTableProps = {
   stickyHeader?: boolean
   /** Whether the table shows number order */
   isOrdered?: boolean
-  /** Whether the table shows a value bar, will not show the value bar if values are not numbers */
+  /** Whether the table shows a value bar. It will not show the value bar if the values are non-numeric. */
   hasValueBar?: boolean
   /** The background color of the table */
   backgroundColor?: string
