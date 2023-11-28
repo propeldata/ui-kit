@@ -1,6 +1,6 @@
 import { Chart, ChartTypeRegistry, Scriptable, ScriptableTooltipContext, TextAlign } from 'chart.js'
 import React from 'react'
-import { getIsNonNumeric } from '../../helpers'
+import { getDisplayValue } from '../../helpers'
 import { defaultStyles, ChartStyles, ChartPlugins } from '../../themes'
 
 interface GetTableSettingsOptions {
@@ -19,7 +19,7 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const valuesByRow = rows?.map((row) => (row[row.length - 1] === null ? null : row[row.length - 1]))
 
-  const isValidValueBar = valuesByRow.every((value) => !getIsNonNumeric(value))
+  const isValidValueBar = valuesByRow.every((value) => !isNaN(parseFloat(value)))
 
   const numberValuesByRow = isValidValueBar ? valuesByRow.map((value) => (value === null ? null : Number(value))) : null
   const maxValue = isValidValueBar ? Math.max(...(numberValuesByRow || []).map((value) => value ?? -Infinity)) : null
@@ -41,28 +41,7 @@ export const getValueWithPrefixAndSufix = (params: {
 
   if (value == null) return
 
-  return (prefix ? prefix + ' ' : '') + getValue({ value, localize }) + (sufix ? ' ' + sufix : '')
-}
-
-interface getValueOptions {
-  value: string
-  localize?: boolean
-}
-
-const getValue = (options: getValueOptions) => {
-  const { value, localize } = options
-
-  if (getIsNonNumeric(value)) return value
-
-  const numberValue = Number(value)
-
-  const isInteger = Number.isInteger(numberValue)
-
-  if (isInteger) {
-    return localize ? value.toLocaleString() : numberValue
-  }
-
-  return localize ? numberValue.toFixed(2).toLocaleString() : numberValue.toFixed(2)
+  return (prefix ? prefix + ' ' : '') + getDisplayValue({ value, localize }) + (sufix ? ' ' + sufix : '')
 }
 
 export function useSetupDefaultStyles(styles?: ChartStyles) {
