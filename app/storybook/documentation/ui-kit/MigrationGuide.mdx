@@ -1,10 +1,34 @@
-import { Canvas, Meta, Story, Source } from '@storybook/blocks'
+import { Meta, Source } from '@storybook/blocks'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 
 <Meta title="Getting started/Migration guide" />
 
 # Migration guide
 
-## 1. Update your dependencies
+## Migration to UI-kit ver 0.4.0
+
+This version has some breaking changes. Please follow the steps below to migrate your code.
+
+### `labelFormatter` prop is deprecated
+
+The `labelFormatter` prop has been deprecated in favor of `chartConfigProps`, which exposes access to the full Chart.js
+API.
+
+<SourceCode of={TimeSeriesStories.ChartFormatYLabelsStory} shown />
+
+### `styles` prop is deprecated
+
+The `styles` prop has been also deprecated. Instead, use `chartConfigProps` to style charts and `className` or `styles`
+to style the component itself.
+
+<SourceCode of={TimeSeriesStories.CustomStyleStory} shown />
+
+## Migration from "@propeldata/react"-prefixed to `@propeldata/ui-kit`
+
+For versions prior to September 18, 2023
+
+### 1. Update your dependencies
 
 Remove any existing "**@propeldata/react**"-prefixed dependencies (for example, **@propeldata/react-counter**,
 **@propeldata/react-leaderboard**, and **@propeldata/react-time-series**). Then, add a new dependency on
@@ -32,7 +56,7 @@ Remove any existing "**@propeldata/react**"-prefixed dependencies (for example, 
   `}
 />
 
-## 2. Update your imports
+### 2. Update your imports
 
 Wherever you previously imported from **@propeldata/react-counter**, **@propeldata/react-leaderboard**, or
 **@propeldata/react-time-series**, you can now import from **@propeldata/ui-kit**. Note that Styles has been renamed to

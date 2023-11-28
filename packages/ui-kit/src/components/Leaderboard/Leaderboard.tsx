@@ -52,7 +52,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
     const globalChartConfigProps = useGlobalChartConfigProps()
-    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps: globalChartConfigProps })
+    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps })
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`

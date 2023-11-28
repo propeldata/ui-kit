@@ -1,8 +1,10 @@
-import { Canvas, Meta, Story, Source } from '@storybook/blocks'
+import { Canvas, Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import { prettier } from '../../src/utils'
 import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 
-<Meta title="Getting started/Customization" />
+<Meta title="Customization/Components" />
 
 # Customization
 
@@ -11,10 +13,13 @@ are some of the customization options available to you:
 
 ## Styles
 
-You can apply your own custom styles to each component using the Styles interface. This interface includes a wide range
-of properties to customize your charts, such as font, canvas, tooltip, bar, line, and point.
+You can apply your own custom styles to each component using the `style` and `className` properties in the standard way.
+It is possible to customize the chart even further
+by&#160;<LinkTo kind="Customization/Chart Configuration" story="overview">using the Chart.js API directly</LinkTo>.
 
-For example, to change the color of the bars in your time series chart, you can use the following JavaScript code:
+For example, to change the color of the bars in your time series chart, you can use the following code:
+
+<SourceCode of={TimeSeriesStories.CustomStyleStory} shown />
 
 <Canvas
   of={TimeSeriesStories.CustomStyleStory}

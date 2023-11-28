@@ -43,6 +43,7 @@ const connectedParams = {
 
 const Counter = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
+  const ref = React.useRef(null)
 
   if (!accessToken && args?.query) {
     return null
@@ -51,7 +52,15 @@ const Counter = (args: Story['args']) => {
   return (
     <CounterSource
       {...{
+        ref,
         ...args,
+        // @TODO: Improve this
+        onClick: args?.onClick
+          ? () => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              args.onClick ? args.onClick(ref?.current as any) : undefined
+            }
+          : undefined,
         query: args?.query
           ? {
               ...args?.query,
@@ -82,8 +91,7 @@ export const ValueInCardStory: Story = {
     ...connectedParams,
     style: {
       width: 'fit-content'
-    },
-    card: true
+    }
   },
   render: (args) => (
     <div className="card-container">
@@ -126,10 +134,39 @@ export const SingleValueCustomStyleStory: Story = {
   render: (args) => <Counter {...args} />
 }
 
-export const StringValueStory: Story = {
-  name: 'String value',
+export const SingleValueRefStory: Story = {
+  name: 'Single value with ref',
+  tags: ['pattern'],
   args: {
-    value: 'My string'
+    value: '49291',
+    localize: true,
+    card: true,
+    onClick: (ref) => {
+      console.log('ref', ref)
+    }
+  },
+  parameters: {
+    // @TODO: Improve this
+    codeTemplate: () => `
+      import React from 'react'
+      import { Counter } from '@propeldata/ui-kit'
+
+      function App() {
+        const ref = React.useRef(null)
+
+        return (
+          <Counter
+            ref={ref}
+            value="49291"
+            localize
+            card
+            onClick={() => {
+              console.log('ref', ref?.current)
+            }}
+          />
+        )
+      }
+    `
   },
   render: (args) => <Counter {...args} />
 }

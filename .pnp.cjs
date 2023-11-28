@@ -62,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@propeldata/release", "virtual:d26b180e5d69ca09b533751978022df86de1630ecb6edca9d1da9d4b28017a3de218cb8c682b6714a530709b2458183d18028f332e114e155880662c3c19fa9b#workspace:packages/core/release"],\
             ["@types/css-modules", "npm:1.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fcss-modules%2F-%2Fcss-modules-1.0.5.tgz"],\
             ["@types/eslint", "npm:7.29.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Feslint%2F-%2Feslint-7.29.0.tgz"],\
+            ["@types/node", "npm:20.10.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.10.0.tgz"],\
             ["@types/react", "npm:18.2.38::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.38.tgz"],\
             ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
             ["@typescript-eslint/eslint-plugin", "virtual:d26b180e5d69ca09b533751978022df86de1630ecb6edca9d1da9d4b28017a3de218cb8c682b6714a530709b2458183d18028f332e114e155880662c3c19fa9b#npm:5.62.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40typescript-eslint%2Feslint-plugin%2F-%2Feslint-plugin-5.62.0.tgz"],\
@@ -8548,6 +8549,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@propeldata/release", "virtual:d26b180e5d69ca09b533751978022df86de1630ecb6edca9d1da9d4b28017a3de218cb8c682b6714a530709b2458183d18028f332e114e155880662c3c19fa9b#workspace:packages/core/release"],\
             ["@types/css-modules", "npm:1.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fcss-modules%2F-%2Fcss-modules-1.0.5.tgz"],\
             ["@types/eslint", "npm:7.29.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Feslint%2F-%2Feslint-7.29.0.tgz"],\
+            ["@types/node", "npm:20.10.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.10.0.tgz"],\
             ["@types/react", "npm:18.2.38::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.38.tgz"],\
             ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
             ["@typescript-eslint/eslint-plugin", "virtual:d26b180e5d69ca09b533751978022df86de1630ecb6edca9d1da9d4b28017a3de218cb8c682b6714a530709b2458183d18028f332e114e155880662c3c19fa9b#npm:5.62.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40typescript-eslint%2Feslint-plugin%2F-%2Feslint-plugin-5.62.0.tgz"],\
@@ -14641,6 +14643,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-18.18.12-4425ca58e9-59bb2e94b0.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:18.18.12::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-18.18.12.tgz"],\
+            ["undici-types", "npm:5.26.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:20.10.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.10.0.tgz", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-20.10.0-2f734c8b2c-face395140.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:20.10.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.10.0.tgz"],\
             ["undici-types", "npm:5.26.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz"]\
           ],\
           "linkType": "HARD"\

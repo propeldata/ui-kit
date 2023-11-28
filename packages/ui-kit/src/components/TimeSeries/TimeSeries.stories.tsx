@@ -127,7 +127,13 @@ export const BarStory: Story = {
   args: {
     variant: 'bar',
     card: true,
-    query: connectedParams
+    query: {
+      ...connectedParams,
+      timeRange: {
+        ...connectedParams.timeRange,
+        n: 90
+      }
+    }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -140,7 +146,13 @@ export const BarGridStory: Story = {
     chartProps: {
       grid: true
     },
-    query: connectedParams
+    query: {
+      ...connectedParams,
+      timeRange: {
+        ...connectedParams.timeRange,
+        n: 90
+      }
+    }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -203,6 +215,12 @@ export const CustomStyleStory: Story = {
   args: {
     variant: 'bar',
     query: connectedParams,
+    // Style the component
+    style: {
+      border: '1px solid #532AB4',
+      borderRadius: '4px'
+    },
+    // Style the chart
     chartConfigProps: (config) => {
       config.data.datasets[0] = {
         ...config.data.datasets[0],
@@ -210,6 +228,52 @@ export const CustomStyleStory: Story = {
       }
       return config
     }
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ChartOnClickStory: Story = {
+  name: 'Chart onClick event',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        onClick: (event, elements) => {
+          console.log('chartOnClickStory', event, elements)
+        }
+      }
+    })
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ChartFormatYLabelsStory: Story = {
+  name: 'Chart format yAxis labels',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        scales: {
+          ...config.options?.scales,
+          y: {
+            ...config.options?.scales?.y,
+            ticks: {
+              ...config.options?.scales?.y?.ticks,
+              // Format the yAxis labels as currency
+              callback: (dataLabel) => `$${dataLabel.toLocaleString()}`
+            }
+          }
+        }
+      }
+    })
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -230,9 +294,11 @@ export const ErrorStory: Story = {
   tags: ['pattern'],
   parameters: { imports: 'TimeSeries' },
   args: {
-    error: {
-      title: 'Unable to connect',
-      body: 'Sorry we are not able to connect at this time due to a technical error.'
+    errorFallbackProps: {
+      error: {
+        title: 'Unable to connect',
+        body: 'Sorry we are not able to connect at this time due to a technical error.'
+      }
     }
   },
   render: (args) => <TimeSeries {...args} />

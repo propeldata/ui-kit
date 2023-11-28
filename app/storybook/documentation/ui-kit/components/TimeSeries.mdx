@@ -1,6 +1,6 @@
-import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import { ArgTypes, Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
-import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
 import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 import * as TimeSeriesQueryPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
 import * as TimeSeriesChartPropsStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesChartProps.stories'
@@ -19,26 +19,12 @@ automatically based on
 
 You can import the component in your React file and use it as shown in the following example:
 
-<Canvas
-  of={TimeSeriesStories.LineStory}
-  sourceState="shown"
-  source={{
-    language: 'tsx',
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
-/>
+<SourceCode of={TimeSeriesStories.LineStory} shown />
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
 totally different time series chart now. Here's how you can access the style props:
 
-<Canvas
-  of={TimeSeriesStories.CustomChartStory}
-  sourceState="shown"
-  source={{
-    language: 'tsx',
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
-/>
+<SourceCode of={TimeSeriesStories.CustomChartStory} shown />
 
 In this example, we built a minimalistic chart where you could use on small viewports or in a mobile design maybe. Up to
 you! You can adjust these and other style properties to create a unique look for your time series chart.

@@ -25,6 +25,7 @@
     "@propeldata/release": "workspace:^",
     "@types/css-modules": "^1.0.2",
     "@types/eslint": "^7.28.0",
+    "@types/node": "^20.10.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.43.0",

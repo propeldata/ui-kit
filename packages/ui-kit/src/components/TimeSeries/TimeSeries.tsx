@@ -77,7 +77,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     const globalChartConfigProps = useGlobalChartConfigProps()
     const isLoadingStatic = loading
-    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps: globalChartConfigProps })
+    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps })
 
     React.useEffect(() => {
       chartJsAdapterLuxon

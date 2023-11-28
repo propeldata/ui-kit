@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as ThemeProviderStories from '../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
+import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
+
+<Meta title="Customization/Chart configuration" />
+
+# Chart Configuration
+
+We built the UI Kit on top of all the power and efficiency of Chart.js.
+
+## Global Chart.js configuration
+
+You can extend or override global Chart.js settings by providing a `globalChartConfigProps` function to the
+`ThemeProvider` component. This function accepts the [config object](https://www.chartjs.org/docs/latest/configuration/)
+from Chart.js as an argument and should return the modified config object with your configurations applied.
+
+Note that the settings will be applied globally to Chart.js throughout the app, affecting all chart instances, not only
+those within the `ThemeProvider`.
+
+<SourceCode of={ThemeProviderStories.ThemeProviderChartConfigStory} hideStory shown />
+
+## Chart configuration
+
+You can customize the chart settings at the component level by utilizing the `chartConfigProps` prop. This prop accepts
+a function that receives the chart's current configuration object specific to a chart type. Within this function, you
+can modify and return the configuration object to tailor the chart's appearance and behavior to your needs. The changes
+made through `chartConfigProps` will only affect the particular instance of the chart.
+
+<SourceCode of={TimeSeriesStories.ChartOnClickStory} shown />

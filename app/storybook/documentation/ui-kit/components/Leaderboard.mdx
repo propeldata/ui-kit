@@ -1,6 +1,7 @@
-import { Canvas, ArgTypes, Meta } from '@storybook/blocks'
+import { ArgTypes, Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
 import * as LeaderboardQueryPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
 import * as LeaderboardTablePropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardTableProps.stories'
@@ -20,28 +21,19 @@ automatically based on
 
 You can import the component in your React file and use it as shown in the following example:
 
-<Canvas
-  of={LeaderboardStories.SingleDimensionBarStory}
-  sourceState="shown"
-  source={{
-    language: 'tsx',
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
-/>
+<SourceCode of={LeaderboardStories.SingleDimensionBarStory} shown />
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
 totally different leaderboard chart now. Here's how you can access the style props:
 
-<Canvas
+<SourceCode
   of={LeaderboardStories.CustomStyleStory}
-  sourceState="shown"
-  source={{
-    language: 'tsx',
-    transform: (code, context) =>
-      `${prettier(context.parameters.rawCss, { parser: 'css' })}\n${prettier(
-        context.parameters.codeTemplate(code, context)
-      )}`
-  }}
+  transform={(code, context) =>
+    `${prettier(context.parameters.rawCss, { parser: 'css' })}\n${prettier(
+      context.parameters.codeTemplate(code, context)
+    )}`
+  }
+  shown
 />
 
 In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe. Up

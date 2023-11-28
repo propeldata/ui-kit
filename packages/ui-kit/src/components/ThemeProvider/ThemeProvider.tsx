@@ -13,12 +13,12 @@ export const useTheme = ({ componentContainer, baseTheme = 'lightTheme' }: UseTh
   const context = useContext(ThemeContext)
 
   React.useEffect(() => {
-    if (!theme) {
+    if (!theme || context) {
       return
     }
 
     setupChartStyles({ theme })
-  }, [theme])
+  }, [theme, context])
 
   React.useEffect(() => {
     if (!componentContainer) {
@@ -85,7 +85,7 @@ export const ThemeProvider = ({
       return
     }
 
-    setupChartStyles({ theme, globalChartConfigProps: globalChartConfigProps })
+    setupChartStyles({ theme, globalChartConfigProps })
   }, [theme, globalChartConfigProps])
 
   return (

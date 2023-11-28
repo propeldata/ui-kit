@@ -4,53 +4,33 @@ import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
 import { ThemeProvider } from '../../../packages/ui-kit/src/components/ThemeProvider'
 import axiosInstance from '../src/axios'
-import { getStringAttributes, prettier } from '../src/utils'
+import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
 
-const withThemeProvider = (Story, context) => (
-  <>
-    <ThemeProvider baseTheme={context.globals.theme}>
-      <Story />
-    </ThemeProvider>
-  </>
-)
+const withThemeProvider = (Story, context) => {
+  if (context.parameters.skipThemeProvider) {
+    return <Story />
+  }
+
+  return (
+    <>
+      <ThemeProvider baseTheme={context.globals.theme}>
+        <Story />
+      </ThemeProvider>
+    </>
+  )
+}
 
 const withSource = (StoryFn, context) => {
   const [showSource, setShowSource] = React.useState(false)
-
-  let source
-  try {
-    const docSource = context.parameters.docs.source.originalSource
-
-    // Parse render from the source string
-    const lines = docSource.split('\n')
-    const renderStr = 'render: args =>'
-    const renderStartIndex = lines.findIndex((line) => line.indexOf(renderStr) > -1)
-    const renderEndIndex = lines.findIndex(
-      (line, index) =>
-        index > renderStartIndex && (line === '}' || (line.substr(0, 2) === '  ' && line.charAt(2) !== ' '))
-    )
-
-    let render = lines
-      .splice(renderStartIndex, renderEndIndex - renderStartIndex)
-      .join('\n')
-      .replace(renderStr, '')
-      .replace('{...args}', getStringAttributes(context.args))
-      // Trim the leading and trailing commas
-      .replace(/,\s*$/, '')
-      .trim('')
-
-    source = prettier(context.parameters.codeTemplate(render, context))
-  } catch (e) {
-    console.warn(e)
-  }
+  const source = parseStorySourceCode({ context, formatted: true })
 
   return (
     <div style={{ padding: 20 }}>
       <StoryFn />
-      {context.viewMode === 'story' && source && !showSource && (
-        <a className="showCodeLink" onClick={() => setShowSource(true)}>
-          Show code
+      {context.viewMode === 'story' && source && (
+        <a className="showCodeLink" onClick={() => setShowSource(!showSource)}>
+          {showSource ? 'Hide' : 'Show'} code
         </a>
       )}
       {context.viewMode === 'story' && source && showSource && (
@@ -66,7 +46,9 @@ const preview: Preview = {
       storySort: {
         order: [
           'Getting started',
-          ['Overview', 'Installation', 'Usage', 'Customization', 'Migration guide'],
+          ['Overview', 'Installation', 'Usage', 'FAQ', 'Migration guide'],
+          'Customization',
+          ['Theming', 'Components'],
           'Components',
           ['Counter', 'TimeSeries', 'Leaderboard'],
           'React'
