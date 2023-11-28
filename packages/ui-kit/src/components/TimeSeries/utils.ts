@@ -382,20 +382,25 @@ interface GetNumericDataOptions {
 }
 
 export function getNumericData({ labels, values, log }: GetNumericDataOptions) {
+  let nonNumericValueFound = false
+
   const newLabels = [...labels]
-  const newValues = values.map((value: string | number, index: number) => {
+  const newValues = values.map((value: string | number) => {
     if (typeof value === 'number') return value
 
     const displayValue = getDisplayValue({ value })
 
     if (typeof displayValue !== 'number') {
-      log.warn('TimeSeries used with non-numeric value. Value will be filtered out:', displayValue)
-      newLabels.splice(index, 1)
+      nonNumericValueFound = true
       return null
     }
 
     return displayValue
-  }).filter((value) => value !== null)
+  })
+
+  if (nonNumericValueFound) {
+    log.warn('TimeSeries contains non-numeric values; these values will be set to null')
+  }
 
   return { labels: newLabels, values: newValues }
 }

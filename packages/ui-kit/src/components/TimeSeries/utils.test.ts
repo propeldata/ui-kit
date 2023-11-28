@@ -183,14 +183,14 @@ describe('TimeSeries/utils', () => {
         level: LogLevel.Debug
       }
 
-      const labels = ['1', '2', 'filtered-out', '3', '4']
-      const values = [1, 2, 'string', 3, 4]
+      const labels = ['1', '2', '3', '4', '5']
+      const values = ['1', '2', 'string', '4', '5']
 
       const result = getNumericData({labels, values, log})
 
-      expect(result.labels).toEqual(['1', '2', '3', '4'])
-      expect(result.values).toEqual([1, 2, 3, 4])
-      expect(log.warn).toHaveBeenCalledWith('TimeSeries used with non-numeric value. Value will be filtered out:', 'string')
+      expect(result.labels).toEqual(['1', '2', '3', '4', '5'])
+      expect(result.values).toEqual([1, 2, null, 4, 5])
+      expect(log.warn).toHaveBeenCalledWith('TimeSeries contains non-numeric values; these values will be set to null')
     })
   })
 })
