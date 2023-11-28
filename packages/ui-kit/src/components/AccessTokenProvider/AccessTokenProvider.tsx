@@ -38,8 +38,8 @@ export interface AccessTokenProviderProps {
   children?: React.ReactNode
 }
 
-export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ children, accessToken: accessTokenFromProps, fetchToken }) => {
-  const [isLoading, setIsLoading] = useState(accessTokenFromProps == null)
+export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ children, accessToken, fetchToken }) => {
+  const [isLoading, setIsLoading] = useState(accessToken == null)
   const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
   const [failedRetry, setFailedRetry] = useState(false)
 
@@ -65,7 +65,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
   }, [log])
 
   useEffect(() => {
-    if (accessTokenFromProps == null) {
+    if (accessToken == null) {
       log.debug('Fetching access token')
 
       fetch()
@@ -85,7 +85,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
         clearInterval(interval.current)
       }
     }
-  }, [fetch, accessTokenFromProps, log])
+  }, [fetch, accessToken, log])
 
   const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
 
@@ -116,7 +116,5 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
     log.error('Maximum access token retries reached')
   }, [fetch, log])
 
-  const accessToken = accessTokenFromProps ?? fetchedToken
-
-  return <AccessTokenContext.Provider value={{ accessToken, isLoading, onExpiredToken, failedRetry }}>{children}</AccessTokenContext.Provider>
+  return <AccessTokenContext.Provider value={{ accessToken: accessToken ?? fetchedToken, isLoading, onExpiredToken, failedRetry }}>{children}</AccessTokenContext.Provider>
 }
