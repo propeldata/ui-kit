@@ -1,7 +1,6 @@
-import { getDisplayValue } from "./getDisplayValue"
+import { getDisplayValue } from './getDisplayValue'
 
 describe('getDisplayValue', () => {
-
   beforeAll(() => {
     jest.spyOn(Number.prototype, 'toLocaleString').mockImplementation(() => 'localized')
   })

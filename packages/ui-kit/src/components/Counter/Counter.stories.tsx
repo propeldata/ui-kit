@@ -104,7 +104,7 @@ export const ValueInCardStory: Story = {
 }
 
 export const StaticStory: Story = {
-  name: 'Static',
+  name: 'Static numeric value',
   args: {
     prefixValue: '$',
     value: '49291',
@@ -113,6 +113,14 @@ export const StaticStory: Story = {
     style: {
       width: 'fit-content'
     }
+  },
+  render: (args) => <Counter {...args} />
+}
+
+export const StringValueStory: Story = {
+  name: 'Static string value',
+  args: {
+    value: 'My string'
   },
   render: (args) => <Counter {...args} />
 }

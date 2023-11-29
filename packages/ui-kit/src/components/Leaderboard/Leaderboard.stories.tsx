@@ -52,7 +52,6 @@ const tableRows = [
 ]
 
 const tableStringHeaders = ['Book title', 'value']
-
 const tableStringRows = [
   ["John's way or Highway", 'John Doe'],
   ['How to Speak Native Animal', 'John Doe'],
@@ -252,10 +251,21 @@ export const MultiDimensionBarTopStory: Story = {
 }
 
 export const StaticStory: Story = {
-  name: 'Static',
+  name: 'Static Bar with numeric values',
   args: {
     headers: barHeaders,
     rows: barRows,
+    card: true
+  },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const StringValuesStory: Story = {
+  name: 'Static Table with string values',
+  args: {
+    variant: 'table',
+    headers: tableStringHeaders,
+    rows: tableStringRows,
     card: true
   },
   render: (args) => <Leaderboard {...args} />
@@ -293,16 +303,6 @@ export const CustomStyleStory: Story = {
       hasValueBar: true,
       stickyHeader: true
     }
-  },
-  render: (args) => <Leaderboard {...args} />
-}
-
-export const StringValuesStory: Story = {
-  name: 'String values',
-  args: {
-    variant: 'table',
-    headers: tableStringHeaders,
-    rows: tableStringRows
   },
   render: (args) => <Leaderboard {...args} />
 }

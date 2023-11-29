@@ -59,7 +59,7 @@ export type LeaderboardTableProps = {
   /** Stick the values column on the right side of the table */
   stickyValues?: boolean
 
-  /** Whether the table should have a value bar */
+  /** Whether the table shows a value bar. It will not show the value bar if the values are non-numeric. */
   hasValueBar?: boolean
 
   /** When true, formats value to locale string */

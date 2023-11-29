@@ -16,9 +16,10 @@ import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
+import { useLog } from '../Log'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesData, TimeSeriesProps, TimeSeriesChartVariant } from './TimeSeries.types'
-import { getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
+import { getNumericValues, getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
 
@@ -74,6 +75,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const theme = useTheme({ componentContainer, baseTheme })
+    const log = useLog()
 
     const globalChartConfigProps = useGlobalChartConfigProps()
     const isLoadingStatic = loading
@@ -158,8 +160,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const { grid = false, fillArea = false } = chartProps
 
-        const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) || []
-        const values = data.values || []
+        const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
+        const values = getNumericValues(data.values ?? [], log)
 
         const plugins = [customCanvasBackgroundColor]
 
@@ -246,7 +248,19 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         chartRef.current = new ChartJS(canvasRef.current, config)
       },
-      [granularity, hasError, isFormatted, variant, zone, theme, card, chartProps, labelFormatter, chartConfigProps]
+      [
+        granularity,
+        hasError,
+        isFormatted,
+        variant,
+        zone,
+        theme,
+        card,
+        chartProps,
+        log,
+        labelFormatter,
+        chartConfigProps
+      ]
     )
 
     const destroyChart = React.useCallback(() => {

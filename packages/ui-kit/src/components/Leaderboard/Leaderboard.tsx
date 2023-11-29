@@ -374,7 +374,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
     const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
 
-    const { headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow } = getTableSettings({
+    const {
+      headersWithoutValue,
+      isOrdered,
+      maxValue,
+      rowsWithoutValue,
+      valueHeader,
+      valuesByRow,
+      numberValuesByRow,
+      isValidValueBar
+    } = getTableSettings({
       headers: tableHeaders,
       rows: tableRows
     })
@@ -387,6 +396,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       sufixValue,
       stickyValues = false
     } = tableProps
+
+    const isValueBar = isValidValueBar && hasValueBar
 
     return (
       <div
@@ -403,11 +414,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
               ))}
               <th
                 data-role="table-value"
-                className={classnames(componentStyles.valueHeader, hasValueBar && componentStyles.valueWithValueBar)}
+                className={classnames(componentStyles.valueHeader, isValueBar && componentStyles.valueWithValueBar)}
               >
                 {valueHeader}
               </th>
-              {hasValueBar && <th data-role="table-value-bar" />}
+              {isValueBar && <th data-role="table-value-bar" />}
             </tr>
           </thead>
           <tbody>
@@ -421,7 +432,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 ))}
                 <td
                   data-role="table-value"
-                  className={classnames(componentStyles.valueCell, hasValueBar && componentStyles.valueWithValueBar)}
+                  className={classnames(componentStyles.valueCell, isValueBar && componentStyles.valueWithValueBar)}
                 >
                   {getValueWithPrefixAndSufix({
                     localize: localize,
@@ -430,9 +441,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                     value: valuesByRow?.[rowIndex] ?? undefined
                   })}
                 </td>
-                {hasValueBar && (
+                {isValueBar && (
                   <td data-role="table-value-bar">
-                    <ValueBar value={valuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} />
+                    <ValueBar value={numberValuesByRow?.[rowIndex] ?? 0} maxValue={maxValue ?? 0} />
                   </td>
                 )}
               </tr>

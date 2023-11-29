@@ -1,7 +1,8 @@
 import { Chart, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
-import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { getDisplayValue, Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { Log } from '../Log'
 import { TimeSeriesChartVariant } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {

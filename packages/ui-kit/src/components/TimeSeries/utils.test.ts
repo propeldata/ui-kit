@@ -1,5 +1,6 @@
 import { TimeSeriesGranularity } from '../../testing'
-import { Log, LogLevel } from '../Log'
+import { LogLevel } from '../Log/Log.types'
+import { Log } from '../Log'
 
 import { getLabelsBasedGranularity, getNumericValues, tooltipTitleCallback } from './utils'
 

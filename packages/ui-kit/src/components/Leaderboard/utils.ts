@@ -1,3 +1,5 @@
+import { getDisplayValue } from '../../helpers'
+
 interface GetTableSettingsOptions {
   headers?: string[]
   rows?: Array<Array<string | null>>
@@ -20,7 +22,16 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const isOrdered = false
 
-  return { headersWithoutValue, valueHeader, valuesByRow, rowsWithoutValue, maxValue, isOrdered }
+  return {
+    headersWithoutValue,
+    valueHeader,
+    valuesByRow,
+    rowsWithoutValue,
+    maxValue,
+    isOrdered,
+    numberValuesByRow,
+    isValidValueBar
+  }
 }
 
 export const getValueWithPrefixAndSufix = (params: {

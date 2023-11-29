@@ -215,7 +215,7 @@ describe('Leaderboard', () => {
       />
     )
 
-    const values = await dom.findAllByText("true")
+    const values = await dom.findAllByText('true')
 
     expect(values).toHaveLength(3)
   })
