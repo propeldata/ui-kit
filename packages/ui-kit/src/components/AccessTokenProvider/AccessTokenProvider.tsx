@@ -54,38 +54,15 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
 
       setFetchedToken(token)
 
+      setIsLoading(false)
+
       return token
     } catch (error) {
       log.error('Failed to fetch access token', error)
-    } finally {
-      setIsLoading(false)
     }
   // This useCallback cannot be tiggered by `fetchToken` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [log])
-
-  useEffect(() => {
-    if (accessToken == null) {
-      log.debug('Fetching access token')
-
-      fetch()
-
-      interval.current = setInterval(() => {
-        log.debug('Re-fetching access token after interval')
-        fetch()
-      }, ACCESS_TOKEN_REFRESH_INTERVAL)
-    } else {
-      log.debug('Access token provided by props')
-      setFetchedToken(null)
-      clearInterval(interval.current)
-    }
-
-    return () => {
-      if (interval.current != null) {
-        clearInterval(interval.current)
-      }
-    }
-  }, [fetch, accessToken, log])
 
   const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
 
@@ -101,20 +78,64 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
     log.debug('Re-fetching access token')
 
     let retryCount = 0
+    let receivedToken: string
 
-    while (retryCount < ACCESS_TOKEN_MAX_RETRIES) {
-      const receivedToken = await fetch()
+    while(retryCount < ACCESS_TOKEN_MAX_RETRIES) {
+      receivedToken = await fetch()
+
       if (receivedToken != null) {
+        setIsLoading(false)
         return
       }
+
       log.warn('Failed to re-fetch access token, retrying...')
       retryCount++
     }
 
+    setIsLoading(false)
     setFailedRetry(true)
-
     log.error('Maximum access token retries reached')
+
+    const interval = setInterval(async () => {
+      receivedToken = await fetch()
+      if (receivedToken != null) {
+        clearInterval(interval)
+      }
+
+      log.warn('Failed to re-fetch access token, retrying...')
+    }, 2500)
   }, [fetch, log])
+
+  useEffect(() => {
+    async function init() {
+      if (accessToken == null) {
+        log.debug('Fetching access token')
+
+        const accessToken = await fetch()
+
+        if (accessToken == null) {
+          onExpiredToken()
+        }
+
+        interval.current = setInterval(async () => {
+          log.debug('Re-fetching access token after interval')
+          await fetch()
+        }, ACCESS_TOKEN_REFRESH_INTERVAL)
+      } else {
+        log.debug('Access token provided by props')
+        setFetchedToken(null)
+        clearInterval(interval.current)
+      }
+    }
+
+    init()
+
+    return () => {
+      if (interval.current != null) {
+        clearInterval(interval.current)
+      }
+    }
+  }, [fetch, accessToken, log, onExpiredToken])
 
   return <AccessTokenContext.Provider value={{ accessToken: accessToken ?? fetchedToken, isLoading, onExpiredToken, failedRetry }}>{children}</AccessTokenContext.Provider>
 }
