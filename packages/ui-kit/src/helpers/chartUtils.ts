@@ -67,7 +67,7 @@ export const getPixelFontSizeAsNumber = (value: React.CSSProperties['fontSize'])
   element.style.fontSize = `${value}`
   element.style.position = 'absolute'
   element.style.visibility = 'hidden'
-  element.textContent = 'M'
+  element.textContent = 'M' // arbitrary choice of "M"
 
   document.body.appendChild(element)
   const computedFontSize = window.getComputedStyle(element).fontSize
