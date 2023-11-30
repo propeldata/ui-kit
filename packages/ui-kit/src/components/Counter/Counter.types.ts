@@ -52,7 +52,7 @@ export interface CounterProps
   /** When true, shows a skeleton loader */
   loading?: boolean
 
-  /** Optional porps that are used to configure the Loader component. */
+  /** Optional props that are used to configure the Loader component. */
   loaderProps?: LoaderProps
 
   /** Optional porps that are used to configure the ErrorFallback component. */
