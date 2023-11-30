@@ -55,6 +55,6 @@ export interface CounterProps
   /** Optional props that are used to configure the Loader component. */
   loaderProps?: LoaderProps
 
-  /** Optional porps that are used to configure the ErrorFallback component. */
+  /** Optional props that are used to configure the ErrorFallback component. */
   errorFallbackProps?: ErrorFallbackProps
 }
