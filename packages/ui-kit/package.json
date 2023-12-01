@@ -6,7 +6,8 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.module.js",
   "scripts": {
-    "build": "rm -rf dist && yarn graphql:build && rollup -c",
+    "typecheck": "tsc --noEmit",
+    "build": "rm -rf dist && yarn typecheck && yarn graphql:build && rollup -c",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "yarn graphql:gen && jest",
@@ -51,6 +52,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/testing-library__jest-dom": "^5.14.7",
+    "axios": "^1.6.2",
     "classnames": "^2.3.2",
     "graphql": "^16.6.0",
     "jest": "^27.5.1",

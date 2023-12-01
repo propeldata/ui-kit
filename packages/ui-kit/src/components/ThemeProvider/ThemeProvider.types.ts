@@ -29,7 +29,7 @@ export interface ThemeProviderProps extends Pick<ThemeContextProps, 'globalChart
    * 1. As a CSS class name.
    * 2. As a JavaScript object, which should follow the structure of `ThemeTokenProps`. This approach is ideal for detailed, in-line customizations and can be particularly useful when integrating design tokens from CSS-in-JS libraries, such as Material UI.
    *
-   * The use of this prop is optional. In its absence, UI-kit components will default to a standard pre-set theme.
+   * The use of this prop is optional. In its absence, UI Kit components will default to a standard pre-set theme.
    */
   theme?: string | ThemeTokenProps
 }
@@ -38,5 +38,5 @@ export type ThemeStateProps = ThemeTokenProps | undefined
 
 export interface UseThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
   /** The component root element to which the theme will be applied. */
-  componentContainer?: HTMLElement
+  componentContainer?: HTMLElement | null
 }

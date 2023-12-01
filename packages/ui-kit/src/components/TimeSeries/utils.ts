@@ -27,13 +27,13 @@ export function getDefaultGranularity(options: GetDefaultGranularityOptions): Ti
   const relative = options.timeRange?.relative
   const labels = options.labels
 
-  if (!relative && !labels) {
+  if (!(relative && labels)) {
     // TODO(mroberts): In a future release, we should calculate this for absolute ranges, too.
     //   Actually, all of this logic should move to the backend.
     return TimeSeriesGranularity.Day
   }
 
-  if (!relative) {
+  if (!relative && labels) {
     return getLabelsBasedGranularity(labels)
   }
 
@@ -107,7 +107,7 @@ export function convertToTimestamp(value: string) {
 }
 
 export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranularity {
-  const granularityByDistanceDictionary = {
+  const granularityByDistanceDictionary: { [key: string]: TimeSeriesGranularity } = {
     '86400000': TimeSeriesGranularity.Day,
     '900000': TimeSeriesGranularity.FifteenMinutes,
     '300000': TimeSeriesGranularity.FiveMinutes,
@@ -157,7 +157,7 @@ interface GetScalesOptions {
   granularity: TimeSeriesGranularity | null
   isFormatted: boolean
   zone: string
-  chart?: Chart
+  chart?: Chart | null
   variant: TimeSeriesChartVariant
   grid?: boolean
 }
@@ -245,20 +245,23 @@ export function tooltipTitleCallback(context: { label: string }[], granularity: 
   const title = context[0].label
   const date = new Date(title)
 
-  return (
-    {
-      [TimeSeriesGranularity.Day]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
-      [TimeSeriesGranularity.Week]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
-      [TimeSeriesGranularity.Month]: DateTime.fromJSDate(date).toFormat('LLLL, yyyy'),
-      [TimeSeriesGranularity.Year]: DateTime.fromJSDate(date).toFormat('yyyy')
-    }[granularity] ?? title
-  )
+  switch (granularity) {
+    case TimeSeriesGranularity.Day:
+    case TimeSeriesGranularity.Week:
+      return DateTime.fromJSDate(date).toFormat('LLL d, yyyy')
+    case TimeSeriesGranularity.Month:
+      return DateTime.fromJSDate(date).toFormat('LLLL, yyyy')
+    case TimeSeriesGranularity.Year:
+      return DateTime.fromJSDate(date).toFormat('yyyy')
+    default:
+      return title
+  }
 }
 
-export function getNumericValues(values: Array<string | number>, log: Log) {
+export function getNumericValues(values: Array<string | number | null>, log: Log) {
   let nonNumericValueFound = false
 
-  const newValues = values.map((value: string | number) => {
+  const newValues = values.map((value: string | number | null) => {
     if (typeof value === 'number') return value
 
     const displayValue = getDisplayValue({ value })

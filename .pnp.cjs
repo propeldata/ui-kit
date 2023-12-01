@@ -8381,6 +8381,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.39::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.39.tgz"],\
             ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
+            ["axios", "npm:1.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.6.2.tgz"],\
             ["chart.js", "npm:4.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.4.0.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["classnames", "npm:2.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclassnames%2F-%2Fclassnames-2.3.2.tgz"],\
@@ -8437,6 +8438,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.39::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.39.tgz"],\
             ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
+            ["axios", "npm:1.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.6.2.tgz"],\
             ["chart.js", "npm:4.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.4.0.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["classnames", "npm:2.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclassnames%2F-%2Fclassnames-2.3.2.tgz"],\
@@ -8493,6 +8495,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.39::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.39.tgz"],\
             ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
+            ["axios", "npm:1.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.6.2.tgz"],\
             ["chart.js", "npm:4.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.4.0.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["classnames", "npm:2.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclassnames%2F-%2Fclassnames-2.3.2.tgz"],\
@@ -8548,6 +8551,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.39::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.39.tgz"],\
             ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
+            ["axios", "npm:1.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.6.2.tgz"],\
             ["chart.js", "npm:4.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchart.js%2F-%2Fchart.js-4.4.0.tgz"],\
             ["chartjs-adapter-luxon", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchartjs-adapter-luxon%2F-%2Fchartjs-adapter-luxon-1.2.1.tgz"],\
             ["classnames", "npm:2.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclassnames%2F-%2Fclassnames-2.3.2.tgz"],\
@@ -17481,7 +17485,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/axios-npm-0.21.4-dcb9dd742c-44245f24ac.zip/node_modules/axios/",\
           "packageDependencies": [\
             ["axios", "npm:0.21.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-0.21.4.tgz"],\
-            ["follow-redirects", "virtual:a7cedeb72d43af7f22becee741fba76c9cbb3b4ca4e7703ca0950ee05a3f435a74c70afe4b2c1c84718049f0cec3f1cd8b62c97a175debb8d0481068a4977ed9#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"]\
+            ["follow-redirects", "virtual:484f01900eb2f5e4e636282193873e26b78b55b184734de086bd4895b59e96696c5f9168f1504bed1f82cc89a5e540a6adda5638d44fca5bc031d0dd17fa0f68#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -17489,7 +17493,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/axios-npm-1.6.2-484f01900e-4a7429e2b7.zip/node_modules/axios/",\
           "packageDependencies": [\
             ["axios", "npm:1.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.6.2.tgz"],\
-            ["follow-redirects", "virtual:a7cedeb72d43af7f22becee741fba76c9cbb3b4ca4e7703ca0950ee05a3f435a74c70afe4b2c1c84718049f0cec3f1cd8b62c97a175debb8d0481068a4977ed9#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"],\
+            ["follow-redirects", "virtual:484f01900eb2f5e4e636282193873e26b78b55b184734de086bd4895b59e96696c5f9168f1504bed1f82cc89a5e540a6adda5638d44fca5bc031d0dd17fa0f68#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"],\
             ["form-data", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fform-data%2F-%2Fform-data-4.0.0.tgz"],\
             ["proxy-from-env", "npm:1.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fproxy-from-env%2F-%2Fproxy-from-env-1.1.0.tgz"]\
           ],\
@@ -22847,10 +22851,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:a7cedeb72d43af7f22becee741fba76c9cbb3b4ca4e7703ca0950ee05a3f435a74c70afe4b2c1c84718049f0cec3f1cd8b62c97a175debb8d0481068a4977ed9#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-18e5c51dcc/0/cache/follow-redirects-npm-1.15.3-2c88f42894-584da22ec5.zip/node_modules/follow-redirects/",\
+        ["virtual:484f01900eb2f5e4e636282193873e26b78b55b184734de086bd4895b59e96696c5f9168f1504bed1f82cc89a5e540a6adda5638d44fca5bc031d0dd17fa0f68#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-6622da4ba9/0/cache/follow-redirects-npm-1.15.3-2c88f42894-584da22ec5.zip/node_modules/follow-redirects/",\
           "packageDependencies": [\
-            ["follow-redirects", "virtual:a7cedeb72d43af7f22becee741fba76c9cbb3b4ca4e7703ca0950ee05a3f435a74c70afe4b2c1c84718049f0cec3f1cd8b62c97a175debb8d0481068a4977ed9#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"],\
+            ["follow-redirects", "virtual:484f01900eb2f5e4e636282193873e26b78b55b184734de086bd4895b59e96696c5f9168f1504bed1f82cc89a5e540a6adda5638d44fca5bc031d0dd17fa0f68#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"],\
             ["@types/debug", null],\
             ["debug", null]\
           ],\
@@ -24049,7 +24053,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["http-proxy", "npm:1.18.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fhttp-proxy%2F-%2Fhttp-proxy-1.18.1.tgz"],\
             ["eventemitter3", "npm:4.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Feventemitter3%2F-%2Feventemitter3-4.0.7.tgz"],\
-            ["follow-redirects", "virtual:a7cedeb72d43af7f22becee741fba76c9cbb3b4ca4e7703ca0950ee05a3f435a74c70afe4b2c1c84718049f0cec3f1cd8b62c97a175debb8d0481068a4977ed9#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"],\
+            ["follow-redirects", "virtual:484f01900eb2f5e4e636282193873e26b78b55b184734de086bd4895b59e96696c5f9168f1504bed1f82cc89a5e540a6adda5638d44fca5bc031d0dd17fa0f68#npm:1.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffollow-redirects%2F-%2Ffollow-redirects-1.15.3.tgz"],\
             ["requires-port", "npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frequires-port%2F-%2Frequires-port-1.0.0.tgz"]\
           ],\
           "linkType": "HARD"\

@@ -18,7 +18,7 @@ as the default.
 ## ThemeProvider
 
 To customize the theme, it's necessary to employ the `ThemeProvider` component, which injects a theme into your
-application. This step, however, is not mandatory as UI-kit components are pre-equipped with a default theme.
+application. This step, however, is not mandatory as UI Kit components are pre-equipped with a default theme.
 
 The `ThemeProvider` utilizes React's [context mechanism](https://react.dev/learn/passing-data-deeply-with-context) to
 propagate the theme to the components. Therefore, ensure that `ThemeProvider` is positioned as a parent to the
@@ -27,7 +27,7 @@ the&#160;<LinkTo kind="API/ThemeProvider" story="overview">API section</LinkTo>.
 
 ## Theme configuration
 
-Adjusting the theme configuration variables is the most effective approach to customize the UI-kit according to your
+Adjusting the theme configuration variables is the most effective approach to customize the UI Kit according to your
 unique needs.
 
 ### Tokens
@@ -40,16 +40,16 @@ in the <LinkTo kind="API/ThemeTokenProps" story="overview">API section</LinkTo>.
 
 ### Default values
 
-The content in `themes.module.scss` serves as the foundational entry point for theming within the UI-kit.
+The content in `themes.module.scss` serves as the foundational entry point for theming within the UI Kit.
 
 <Source language="css" format="dedent" dark code={rawThemesScss} />
 
-The `lightTheme.scss` file sets up the **light theme** for the UI-kit, defining a series of CSS custom properties
+The `lightTheme.scss` file sets up the **light theme** for the UI Kit, defining a series of CSS custom properties
 specific to this theme.
 
 <Source language="css" format="dedent" dark code={rawLightThemeScss} />
 
-The `darkTheme.scss` file sets up the **dark theme** for the UI-kit, defining a series of CSS custom properties specific
+The `darkTheme.scss` file sets up the **dark theme** for the UI Kit, defining a series of CSS custom properties specific
 to this theme.
 
 <Source language="css" format="dedent" dark code={rawDarkThemeScss} />

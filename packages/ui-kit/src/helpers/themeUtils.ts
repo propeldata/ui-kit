@@ -22,7 +22,8 @@ export const parseComputedStyle = (themeContainer: HTMLElement) => {
   themeDict.forEach((item) => {
     const cssVarValue = computedStyle.getPropertyValue(item.cssVarName)
     if (cssVarValue) {
-      theme[item.name as string] = cssVarValue
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(theme as any)[item.name as string] = cssVarValue
     }
   })
   return theme
@@ -51,7 +52,8 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
  */
 export const setContainerStyle = (themeContainer: HTMLElement, theme: ThemeTokenProps) => {
   themeDict.forEach((item) => {
-    const themePropValue = theme[item.name as string]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const themePropValue = (theme as any)[item.name as string]
     if (themePropValue) {
       themeContainer.style.setProperty(item.cssVarName, themePropValue)
     }

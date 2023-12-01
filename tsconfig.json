@@ -5,6 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "module": "esnext",
+    "strict": true,
     "lib": ["dom", "es2015"],
     "esModuleInterop": true,
     "moduleResolution": "node",

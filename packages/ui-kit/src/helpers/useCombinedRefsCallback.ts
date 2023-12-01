@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, Ref, MutableRefObject } from 'react'
 import { useCombinedRefs } from './useCombinedRefs'
 
 /**
@@ -8,21 +8,45 @@ import { useCombinedRefs } from './useCombinedRefs'
  * The `setRef` callback is used to update both the `componentContainer` state and the `combinedRef`.
  * This hook is useful for components that need to expose their DOM node to parent components while maintaining an internal ref.
  *
- * @param {object} { forwardedRef, innerRef } - An object containing the refs to be combined.
- * @returns {object} An object containing `componentContainer`, `combinedRef`, and `setRef`.
+ * @param {Ref<HTMLElement>} forwardedRef - The forwarded ref.
+ * @param {Ref<HTMLElement>} innerRef - The internal ref.
+ * @returns An object containing `componentContainer`, `combinedRef`, and `setRef`.
  */
-export const useCombinedRefsCallback = ({ forwardedRef, innerRef }) => {
+export const useCombinedRefsCallback = ({
+  forwardedRef,
+  innerRef
+}: {
+  forwardedRef: Ref<HTMLElement>
+  innerRef: Ref<HTMLElement>
+}): {
+  componentContainer: HTMLElement | null
+  combinedRef: MutableRefObject<HTMLElement | null>
+  setRef: (node: HTMLElement | null) => void
+} => {
   const combinedRef = useCombinedRefs(forwardedRef, innerRef)
   const [componentContainer, setComponentContainer] = useState<HTMLElement | null>(null)
 
   const setRef = useCallback(
-    (node) => {
+    (node: HTMLElement | null) => {
       if (node !== null) {
         setComponentContainer(node)
-        combinedRef.current = node
+
+        // Update forwardedRef
+        if (typeof forwardedRef === 'function') {
+          forwardedRef(node)
+        } else if (forwardedRef && 'current' in forwardedRef) {
+          ;(forwardedRef as MutableRefObject<HTMLElement | null>).current = node
+        }
+
+        // Update innerRef
+        if (typeof innerRef === 'function') {
+          innerRef(node)
+        } else if (innerRef && 'current' in innerRef) {
+          ;(innerRef as MutableRefObject<HTMLElement | null>).current = node
+        }
       }
     },
-    [combinedRef]
+    [forwardedRef, innerRef]
   )
 
   return { componentContainer, combinedRef, setRef }

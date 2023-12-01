@@ -4080,6 +4080,7 @@ __metadata:
     "@types/react": latest
     "@types/react-dom": latest
     "@types/testing-library__jest-dom": ^5.14.7
+    axios: ^1.6.2
     chart.js: ^4.1.2
     chartjs-adapter-luxon: 1.2.1
     classnames: ^2.3.2
@@ -8902,7 +8903,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.5.0":
+"axios@npm:^1.5.0, axios@npm:^1.6.2":
   version: 1.6.2
   resolution: "axios@npm:1.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Faxios%2F-%2Faxios-1.6.2.tgz"
   dependencies:

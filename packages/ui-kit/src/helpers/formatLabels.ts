@@ -1,4 +1,4 @@
-type Labels = string[] | string[][]
+export type Labels = string[] | string[][]
 
 export interface FormatLabelsOptions {
   labels?: Labels

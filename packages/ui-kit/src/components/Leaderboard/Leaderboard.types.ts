@@ -1,5 +1,5 @@
 import type { ChartConfiguration } from 'chart.js'
-import { DimensionInput, FilterInput, Sort, TimeRangeInput } from '../../helpers'
+import { DimensionInput, FilterInput, Labels, Sort, TimeRangeInput } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps } from '../shared.types'
 
@@ -106,7 +106,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps
   chartProps?: LeaderboardChartProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
-  labelFormatter?: (labels: string[]) => string[]
+  labelFormatter?: (labels: Labels) => Labels
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'bar'>) => typeof config

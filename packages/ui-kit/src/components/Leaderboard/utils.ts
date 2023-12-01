@@ -15,9 +15,11 @@ export function getTableSettings(options: GetTableSettingsOptions) {
 
   const valuesByRow = rows?.map((row) => (row[row.length - 1] === null ? null : row[row.length - 1]))
 
-  const isValidValueBar = valuesByRow.every((value) => !isNaN(parseFloat(value)))
+  const isValidValueBar = valuesByRow?.every((value) => !isNaN(parseFloat(value ?? '')))
 
-  const numberValuesByRow = isValidValueBar ? valuesByRow.map((value) => (value === null ? null : Number(value))) : null
+  const numberValuesByRow = isValidValueBar
+    ? valuesByRow?.map((value) => (value === null ? null : Number(value)))
+    : null
   const maxValue = isValidValueBar ? Math.max(...(numberValuesByRow || []).map((value) => value ?? -Infinity)) : null
 
   const isOrdered = false

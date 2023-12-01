@@ -6,6 +6,7 @@ import {
   formatLabels,
   getPixelFontSizeAsNumber,
   getTimeZone,
+  Labels,
   PROPEL_GRAPHQL_API_ENDPOINT,
   useCombinedRefsCallback,
   useLeaderboardQuery,
@@ -77,8 +78,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const { labelPosition = 'axis', showBarValues = false } = chartProps
 
         const labels =
-          formatLabels({ labels: data.rows?.map((row) => row.slice(0, row.length - 1)), formatter: labelFormatter }) ||
-          []
+          formatLabels({
+            labels: data.rows?.map((row) => row.slice(0, row.length - 1)) as Labels,
+            formatter: labelFormatter
+          }) || []
 
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
@@ -117,11 +120,12 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             }
 
             if (labelPosition === 'top') {
-              ctx.fillStyle = theme?.textSecondary
+              ctx.fillStyle = theme?.textSecondary ?? ''
             }
 
             if (['inside', 'top'].includes(labelPosition)) {
-              data.labels.forEach((label: string[], index) => {
+              const labels = data.labels as string[][]
+              labels?.forEach((label, index) => {
                 const barElement = datasetMeta.data[index] as BarElement
                 const { height } = barElement.getProps(['height'])
                 const xPos = left + (labelPosition === 'inside' ? 8 : 0)
@@ -154,7 +158,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           chart.options.scales.x.border.color = theme?.colorSecondary
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           chart.options.scales.x.grid.color = theme?.colorSecondary
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           chart.options.scales.y.grid.color = theme?.colorSecondary
 
           chart.update()
@@ -259,7 +267,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           filters: query?.filters,
           sort: query?.sort,
           rowLimit: query?.rowLimit ?? 100,
-          dimensions: query?.dimensions,
+          dimensions: query?.dimensions ?? [],
           timeZone: timeZone ?? getTimeZone(),
           timeRange: {
             relative: query?.timeRange?.relative ?? null,
@@ -328,7 +336,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     }, [isStatic, isLoadingStatic, variant, headers, rows, renderChart])
 
     React.useEffect(() => {
-      if (fetchedData && !isStatic) {
+      if (fetchedData?.leaderboard && !isStatic) {
         renderChart(fetchedData.leaderboard)
       }
     }, [fetchedData, variant, isStatic, renderChart])
@@ -371,8 +379,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       )
     }
 
-    const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
-    const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
+    const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard?.headers
+    const tableRows = isStatic ? rows : fetchedData?.leaderboard?.rows
 
     const {
       headersWithoutValue,

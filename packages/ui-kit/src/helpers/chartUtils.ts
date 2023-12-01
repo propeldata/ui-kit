@@ -17,7 +17,7 @@ import React from 'react'
 import type { ThemeTokenProps } from '../themes'
 
 export type ChartJSDefaultStyleProps = {
-  theme: ThemeTokenProps
+  theme?: ThemeTokenProps
   globalChartConfigProps?: (chart: typeof Chart) => void
 }
 
@@ -85,7 +85,11 @@ export const getPixelFontSizeAsNumber = (value: React.CSSProperties['fontSize'])
  * @param {number} opacity - The opacity value on a scale from 0 to 1 (default is 1). Values from 0 to 100 are also accepted for backward compatibility.
  * @returns {string} The resulting RGBA color code as a string.
  */
-export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
+export const convertHexToRGBA = (hexCode?: string, opacity = 1) => {
+  if (!hexCode) {
+    throw new Error('A HEX color code is required.')
+  }
+
   let hex = hexCode.replace('#', '')
 
   if (hex.length === 3) {
@@ -112,7 +116,10 @@ export const convertHexToRGBA = (hexCode: string, opacity = 1) => {
  * @param {ChartJSDefaultStyleProps} { theme, globalChartConfigProps } - An object containing the theme properties and an optional callback for additional global configuration.
  * @returns {typeof Chart | undefined} The Chart object if the theme is provided, otherwise undefined.
  */
-export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefaultStyleProps): typeof Chart => {
+export const setupChartStyles = ({
+  theme,
+  globalChartConfigProps
+}: ChartJSDefaultStyleProps): typeof Chart | undefined => {
   if (!theme) {
     return
   }
@@ -121,12 +128,12 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
     initChartJs()
   }
 
-  document.body.style.setProperty('--propel-bg-secondary', theme.bgSecondary)
+  document.body.style.setProperty('--propel-bg-secondary', theme.bgSecondary ?? null)
 
   // Global
-  Chart.defaults.color = theme.textSecondary
-  Chart.defaults.backgroundColor = theme.accent
-  Chart.defaults.borderColor = theme.borderPrimary
+  Chart.defaults.color = theme.textSecondary ?? ''
+  Chart.defaults.backgroundColor = theme.accent ?? ''
+  Chart.defaults.borderColor = theme.borderPrimary ?? ''
 
   // Point
   Chart.defaults.elements.point.pointStyle = 'circle'
@@ -134,23 +141,23 @@ export const setupChartStyles = ({ theme, globalChartConfigProps }: ChartJSDefau
   Chart.defaults.elements.point.radius = 0
   Chart.defaults.elements.point.borderWidth = 2
   Chart.defaults.elements.point.hoverRadius = 6
-  Chart.defaults.elements.point.hoverBorderColor = theme.bgPrimary
-  Chart.defaults.elements.point.backgroundColor = theme.accentHover
-  Chart.defaults.elements.point.hoverBackgroundColor = theme.accentHover
+  Chart.defaults.elements.point.hoverBorderColor = theme.bgPrimary ?? ''
+  Chart.defaults.elements.point.backgroundColor = theme.accentHover ?? ''
+  Chart.defaults.elements.point.hoverBackgroundColor = theme.accentHover ?? ''
 
   // Bar
   Chart.defaults.elements.bar.borderWidth = 0
-  Chart.defaults.elements.bar.hoverBackgroundColor = theme.accentHover
+  Chart.defaults.elements.bar.hoverBackgroundColor = theme.accentHover ?? ''
 
   // Line
   Chart.defaults.elements.line.borderWidth = 3
 
   // Tooltip
   Chart.defaults.plugins.tooltip.padding = parseInt(theme.spaceXs as string)
-  Chart.defaults.plugins.tooltip.backgroundColor = theme.bgPrimary
-  Chart.defaults.plugins.tooltip.bodyColor = theme.textSecondary
-  Chart.defaults.plugins.tooltip.titleColor = theme.textSecondary
-  Chart.defaults.plugins.tooltip.borderColor = theme.borderPrimary
+  Chart.defaults.plugins.tooltip.backgroundColor = theme.bgPrimary ?? ''
+  Chart.defaults.plugins.tooltip.bodyColor = theme.textSecondary ?? ''
+  Chart.defaults.plugins.tooltip.titleColor = theme.textSecondary ?? ''
+  Chart.defaults.plugins.tooltip.borderColor = theme.borderPrimary ?? ''
   Chart.defaults.plugins.tooltip.borderWidth = 1
   Chart.defaults.plugins.tooltip.cornerRadius = 4
 

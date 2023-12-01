@@ -1,6 +1,6 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { FilterInput, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { FilterInput, Labels, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps } from '../shared.types'
 
@@ -86,7 +86,7 @@ export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentPr
   chartProps?: TimeSeriesChartProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
-  labelFormatter?: (labels: string[]) => string[]
+  labelFormatter?: (labels: Labels) => Labels
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {

@@ -43,7 +43,7 @@ export const useTheme = ({ componentContainer, baseTheme = 'lightTheme' }: UseTh
   return theme
 }
 
-export const useGlobalChartConfigProps = (): ((chart: typeof Chart) => typeof Chart) => {
+export const useGlobalChartConfigProps = (): ((chart: typeof Chart) => typeof Chart) | undefined => {
   const context = useContext(ThemeContext)
 
   if (!context) {

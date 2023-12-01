@@ -1,9 +1,10 @@
 import React from 'react'
+import type { AxiosInstance } from 'axios'
 
 const ACCESS_TOKEN_VALUE = process.env.STORYBOOK_PROPEL_ACCESS_TOKEN
-const TOKEN_URL_VALUE = process.env.STORYBOOK_TOKEN_URL
+const TOKEN_URL_VALUE = process.env.STORYBOOK_TOKEN_URL ?? ''
 
-export const useStorybookAccessToken = (axiosInstance) => {
+export const useStorybookAccessToken = (axiosInstance: AxiosInstance) => {
   const [accessToken, setAccessToken] = React.useState<string | undefined>(ACCESS_TOKEN_VALUE)
 
   React.useEffect(() => {

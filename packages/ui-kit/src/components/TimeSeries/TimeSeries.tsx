@@ -1,25 +1,27 @@
-import { Chart as ChartJS, ChartDataset, ChartOptions, ChartConfiguration, Color, LineController } from 'chart.js'
+import { Chart as ChartJS, ChartConfiguration, ChartDataset, ChartOptions, Color, LineController } from 'chart.js'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import classnames from 'classnames'
 import React from 'react'
 import {
+  convertHexToRGBA,
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useSetupComponentDefaultChartStyles,
-  useTimeSeriesQuery,
   useCombinedRefsCallback,
-  convertHexToRGBA
+  useSetupComponentDefaultChartStyles,
+  useTimeSeriesQuery
 } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
+import { useLog } from '../Log'
 import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
-import { useLog } from '../Log'
 import componentStyles from './TimeSeries.module.scss'
-import type { TimeSeriesData, TimeSeriesProps, TimeSeriesChartVariant } from './TimeSeries.types'
-import { getNumericValues, getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
+import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
+import { getDefaultGranularity, getNumericValues, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
 
@@ -161,7 +163,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const { grid = false, fillArea = false } = chartProps
 
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
-        const values = getNumericValues(data.values ?? [], log)
+        const values = getNumericValues(data.values, log)
 
         const plugins = [customCanvasBackgroundColor]
 
@@ -176,15 +178,17 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        let backgroundColor: Color | CanvasGradient = theme?.accent
+        let backgroundColor: Color | CanvasGradient = theme?.accent ?? ''
 
         const fill = fillArea && variant === 'line'
         if (fill) {
           const ctx = canvasRef.current.getContext('2d')
-          backgroundColor = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight)
-          // @TODO: need to refactor this logic due to the possible different types of the color value, e.g. hex, rgb, rgba, etc.
-          backgroundColor.addColorStop(0, convertHexToRGBA(theme?.accentHover, 0.35))
-          backgroundColor.addColorStop(1, convertHexToRGBA(theme?.accentHover, 0.05))
+          if (ctx) {
+            backgroundColor = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight)
+            // @TODO: need to refactor this logic due to the possible different types of the color value, e.g. hex, rgb, rgba, etc.
+            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.accentHover, 0.35))
+            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.accentHover, 0.05))
+          }
         }
 
         const dataset = {
@@ -311,8 +315,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     React.useEffect(() => {
       if (serverData && !isStatic) {
-        const labels = serverData.timeSeries.labels ?? []
-        const values = (serverData.timeSeries.values ?? []).map((value) => (value == null ? null : Number(value)))
+        const labels = serverData.timeSeries?.labels ?? []
+        const values = (serverData.timeSeries?.values ?? []).map((value) => (value == null ? null : Number(value)))
 
         renderChart({ labels, values })
       }
@@ -356,4 +360,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
 TimeSeriesComponent.displayName = 'TimeSeriesComponent'
 
+// @TODO: fix this complex type
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const TimeSeries = withContainer(TimeSeriesComponent, ErrorFallback) as typeof TimeSeriesComponent
