@@ -30,12 +30,8 @@ export function CounterConnectedTest() {
         />
       </div>
       <div className="flex items-center gap-2 mt-1">
-        <input
-          className="border-2 bg-white p-1 h-9"
-          type="color"
-          onChange={(event) => setFontColor(event.target.value)}
-        />
-        <button className="border-2 bg-white p-1 h-9" onClick={handleSwitchRefetchInterval}>
+        <input className="border-2 p-1 h-9" type="color" onChange={(event) => setFontColor(event.target.value)} />
+        <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
           Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
         </button>
       </div>

@@ -33,17 +33,13 @@ export function CounterStaticTest() {
       </div>
       <div className="flex items-center gap-2 mt-1">
         <button
-          className="border-2 bg-white p-1 h-9"
+          className="border-2 p-1 h-9"
           onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}
         >
           Switch mock data
         </button>
-        <input
-          className="border-2 bg-white p-1 h-9"
-          type="color"
-          onChange={(event) => setFontColor(event.target.value)}
-        />
-        <button className="border-2 bg-white p-1 h-9" onClick={handleReFetchMock}>
+        <input className="border-2 p-1 h-9" type="color" onChange={(event) => setFontColor(event.target.value)} />
+        <button className="border-2 p-1 h-9" onClick={handleReFetchMock}>
           Refetch Mock
         </button>
       </div>
