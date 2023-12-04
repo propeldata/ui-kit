@@ -1,23 +1,26 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
+import { sleep } from '../../helpers'
 import { useLog } from '../Log'
 
 export interface AccessTokenContextValue {
   /**
-   * The returned accessToken wheter from the props or from the fetchToken function
+   * The current access token, if any.
+   *
+   * If the AccessTokenProvider was instantiated without a token, or the fetch token function has not completed, this property will be undefined.
+   *
+   * Otherwise, when re-fetching an access token, this property will remain equal to the previous access token, until the fetch token function completes again.
    */
   accessToken?: string
   /**
-   * If true, the access token is being fetched
+   * If true, the AccessTokenProvider is fetching an access token.
+   *
+   * The AccessTokenProvider could be fetching an initial access token, or it could be re-fetching the access token.
    */
   isLoading?: boolean
-  /**
-   * Function that will be called when the access token expires.
+    /**
+   * If present, the AccessTokenProvider encountered an error fetching the access token. This will be set to `undefined` as soon as fetching the access token succeeds.
    */
-  onExpiredToken?: () => void
-  /**
-   * If true, the access token failed to be fetched after the maximum retries
-   */
-  failedRetry?: boolean
+  error?: Error
 }
 
 const ACCESS_TOKEN_REFRESH_INTERVAL = 3300000 // 55 minutes
@@ -41,81 +44,50 @@ export interface AccessTokenProviderProps {
 export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ children, accessToken, fetchToken }) => {
   const [isLoading, setIsLoading] = useState(accessToken == null)
   const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
-  const [failedRetry, setFailedRetry] = useState(false)
+  const [error, setError] = useState<Error | undefined>(undefined)
 
   const log = useLog()
 
   const interval = useRef<NodeJS.Timeout>()
+  const mounted = useRef(true)
 
   const fetch = useCallback(async () => {
-    try {
-      const token = await fetchToken()
-      log.debug('Access token fetched successfully')
+    let retries = 0
 
-      setFetchedToken(token)
+    while (mounted.current) {
+      try {
+        const token = await fetchToken()
+        log.debug('Access token fetched successfully')
 
-      setIsLoading(false)
+        setError(undefined)
+        setIsLoading(false)
+        setFetchedToken(token)
 
-      return token
-    } catch (error) {
-      log.error('Failed to fetch access token', error)
+        break
+      } catch (error) {
+        log.error('Failed to fetch access token', error)
+
+        if (retries === ACCESS_TOKEN_MAX_RETRIES) {
+          setIsLoading(false)
+          setError(new Error('Failed to fetch access token: ' + error.message))
+        }
+
+        retries++
+
+        await sleep(1000)
+      }
     }
   // This useCallback cannot be tiggered by `fetchToken` because it is a function
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [log])
-
-  const expiredTokenThrottleTimeout = useRef<NodeJS.Timeout>()
-
-  const onExpiredToken = useCallback(async () => {
-    if (expiredTokenThrottleTimeout.current == null) {
-      expiredTokenThrottleTimeout.current = setTimeout(() => {
-        expiredTokenThrottleTimeout.current = undefined
-      }, 1000)
-    } else {
-      return
-    }
-
-    log.debug('Re-fetching access token')
-
-    let retryCount = 0
-    let receivedToken: string
-
-    while(retryCount < ACCESS_TOKEN_MAX_RETRIES) {
-      receivedToken = await fetch()
-
-      if (receivedToken != null) {
-        setIsLoading(false)
-        return
-      }
-
-      log.warn('Failed to re-fetch access token, retrying...')
-      retryCount++
-    }
-
-    setIsLoading(false)
-    setFailedRetry(true)
-    log.error('Maximum access token retries reached')
-
-    const interval = setInterval(async () => {
-      receivedToken = await fetch()
-      if (receivedToken != null) {
-        clearInterval(interval)
-      }
-
-      log.warn('Failed to re-fetch access token, retrying...')
-    }, 2500)
-  }, [fetch, log])
 
   useEffect(() => {
     async function init() {
       if (accessToken == null) {
         log.debug('Fetching access token')
 
-        const accessToken = await fetch()
-
-        if (accessToken == null) {
-          onExpiredToken()
-        }
+        setIsLoading(true)
+        await fetch()
 
         interval.current = setInterval(async () => {
           log.debug('Re-fetching access token after interval')
@@ -135,7 +107,14 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
         clearInterval(interval.current)
       }
     }
-  }, [fetch, accessToken, log, onExpiredToken])
+  }, [fetch, accessToken, log])
 
-  return <AccessTokenContext.Provider value={{ accessToken: accessToken ?? fetchedToken, isLoading, onExpiredToken, failedRetry }}>{children}</AccessTokenContext.Provider>
+  useEffect(() => {
+    mounted.current = true
+    return () => {
+      mounted.current = false
+    }
+  }, [])
+
+  return <AccessTokenContext.Provider value={{ accessToken: accessToken ?? fetchedToken, isLoading, error }}>{children}</AccessTokenContext.Provider>
 }

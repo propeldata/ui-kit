@@ -48,9 +48,7 @@ export const LeaderboardComponent = ({
 }: LeaderboardProps) => {
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
-  const [isAccessTokenError, setIsAccessTokenError] = React.useState(false)
-
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken({ isAccessTokenError })
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
 
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
@@ -195,12 +193,6 @@ export const LeaderboardComponent = ({
     }
   )
 
-  React.useEffect(() => {
-    setIsAccessTokenError(hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken))
-  }, [accessToken, hasError?.message, isLoadingAccessToken, isStatic])
-
-  const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
-
   const loadingStyles = {
     opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
     transition: 'opacity 0.2s ease-in-out'
@@ -275,20 +267,14 @@ export const LeaderboardComponent = ({
     }
   }, [variant])
 
-  React.useEffect(() => {
-    if (isAccessTokenError) {
-      onExpiredToken?.()
-    }
-  }, [isAccessTokenError, onExpiredToken])
-
-  if ((hasError || propsMismatch) && !isRetryingAccessToken) {
+  if ((hasError || propsMismatch)) {
     destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken)) || isRetryingAccessToken) && isNoContainerRef) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }

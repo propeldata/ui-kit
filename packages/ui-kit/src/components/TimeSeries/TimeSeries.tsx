@@ -77,9 +77,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
   timeZone,
   ...rest
 }) => {
-  const [isAccessTokenError, setIsAccessTokenError] = React.useState(false)
-
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, failedRetry } = useAccessToken({ isAccessTokenError })
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
 
   const isLoadingStatic = loading
 
@@ -154,12 +152,6 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
       enabled: !isStatic && accessToken != null
     }
   )
-
-  React.useEffect(() => {
-    setIsAccessTokenError(hasError?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken))
-  }, [accessToken, hasError?.message, isLoadingAccessToken, isStatic])
-
-  const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
@@ -292,14 +284,14 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     }
   }, [])
 
-  if ((hasError || propsMismatch) && !isRetryingAccessToken) {
+  if ((hasError || propsMismatch)) {
     destroyChart()
     return <ErrorFallback error={error} styles={styles} />
   }
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken)) || isRetryingAccessToken) && !canvasRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }

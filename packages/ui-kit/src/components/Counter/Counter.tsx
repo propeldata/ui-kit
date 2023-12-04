@@ -21,9 +21,8 @@ export const CounterComponent = (props: CounterProps) => {
     localize,
     ...rest
   } = props
-  const [isAccessTokenError, setIsAccessTokenError] = React.useState(false)
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken, onExpiredToken, failedRetry } = useAccessToken({ isAccessTokenError })
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
 
   /**
    * If the user passes `value` attribute, it
@@ -71,12 +70,6 @@ export const CounterComponent = (props: CounterProps) => {
     }
   )
 
-  React.useEffect(() => {
-    setIsAccessTokenError(error?.message?.includes('AuthenticationError') || (!isStatic && accessToken == null && !isLoadingAccessToken))
-  }, [accessToken, error?.message, isLoadingAccessToken, isStatic])
-
-  const isRetryingAccessToken = (!isStatic && isAccessTokenError && !failedRetry)
-
   const value = isStatic ? staticValue : fetchedValue?.counter?.value
 
   React.useEffect(() => {
@@ -103,18 +96,12 @@ export const CounterComponent = (props: CounterProps) => {
     }
   }, [isStatic, value, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
 
-  React.useEffect(() => {
-    if (isAccessTokenError) {
-      onExpiredToken?.()
-    }
-  }, [isAccessTokenError, onExpiredToken])
-
-  if ((error || propsMismatch) && !isRetryingAccessToken) {
+  if ((error || propsMismatch)) {
     return <ErrorFallback error={null} styles={styles} />
   }
 
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken)) || isRetryingAccessToken) && !counterRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && !counterRef.current) {
     return <Loader styles={styles}>000</Loader>
   }
 
