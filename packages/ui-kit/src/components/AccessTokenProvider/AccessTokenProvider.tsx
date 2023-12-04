@@ -86,7 +86,6 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
       if (accessToken == null) {
         log.debug('Fetching access token')
 
-        setIsLoading(true)
         await fetch()
 
         interval.current = setInterval(async () => {
