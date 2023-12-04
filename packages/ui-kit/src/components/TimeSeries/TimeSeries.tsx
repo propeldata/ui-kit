@@ -308,6 +308,10 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     }, [isStatic, labels, values, query, isLoadingStatic])
 
     React.useEffect(() => {
+      destroyChart()
+    }, [destroyChart, variant])
+
+    React.useEffect(() => {
       if (isStatic) {
         renderChart({ labels, values })
       }

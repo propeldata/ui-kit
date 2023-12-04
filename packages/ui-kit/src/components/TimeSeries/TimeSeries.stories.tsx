@@ -18,12 +18,6 @@ const meta: Meta<typeof TimeSeriesComponent> = {
       table: {
         disable: true
       }
-    },
-    // @TODO: fix it
-    variant: {
-      table: {
-        disable: true
-      }
     }
   },
   parameters: {

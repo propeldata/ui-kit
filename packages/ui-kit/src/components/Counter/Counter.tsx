@@ -77,7 +77,6 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
 
     const value = isStatic ? staticValue : fetchedValue?.counter?.value
 
-    // @TODO: we should abstract this logic to a hook
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !value) {
@@ -103,7 +102,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     }, [isStatic, value, query, isLoadingStatic])
 
     if (error || propsMismatch) {
-      return <ErrorFallback error={null} style={{ height: 'auto' }} {...errorFallbackProps} />
+      return <ErrorFallback error={null} {...errorFallbackProps} />
     }
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !innerRef.current) {

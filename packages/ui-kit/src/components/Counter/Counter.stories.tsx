@@ -120,7 +120,8 @@ export const StaticStory: Story = {
 export const StringValueStory: Story = {
   name: 'Static string value',
   args: {
-    value: 'My string'
+    card: true,
+    value: 'A string value'
   },
   render: (args) => <Counter {...args} />
 }

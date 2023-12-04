@@ -1,6 +1,6 @@
-import type { ThemeTokenProps } from '../themes/theme.types'
-import { themeTokens } from '../themes/themeTokens'
-import { camelCaseToKebabCase } from './camelCaseToKebabCase'
+import type { ThemeTokenProps } from '../../themes/theme.types'
+import { themeTokens } from '../../themes/themeTokens'
+import { camelCaseToKebabCase } from '../camelCaseToKebabCase'
 
 const themeDict = themeTokens.map((themeToken) => ({
   name: themeToken,
@@ -22,8 +22,7 @@ export const parseComputedStyle = (themeContainer: HTMLElement) => {
   themeDict.forEach((item) => {
     const cssVarValue = computedStyle.getPropertyValue(item.cssVarName)
     if (cssVarValue) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(theme as any)[item.name as string] = cssVarValue
+      Object.assign(theme, { [item.name]: cssVarValue })
     }
   })
   return theme
@@ -52,8 +51,7 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
  */
 export const setContainerStyle = (themeContainer: HTMLElement, theme: ThemeTokenProps) => {
   themeDict.forEach((item) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const themePropValue = (theme as any)[item.name as string]
+    const themePropValue = theme[item.name]?.toString()
     if (themePropValue) {
       themeContainer.style.setProperty(item.cssVarName, themePropValue)
     }

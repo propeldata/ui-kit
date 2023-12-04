@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { useEffect, useRef, Ref } from 'react'
+import { useEffect, useRef, Ref, MutableRefObject } from 'react'
 
 /**
  * Custom React hook that combines multiple refs into a single ref object.
@@ -22,10 +22,10 @@ export const useCombinedRefs = <T>(...refs: (Ref<T> | null)[]) => {
 
       if (typeof ref === 'function') {
         ref(targetRef.current)
-      } else {
-        // @ts-ignore
-        // eslint-disable-next-line no-param-reassign
-        ref.current = targetRef.current
+      } else if ('current' in ref) {
+        // Type assertion to treat ref as MutableRefObject
+        const mutableRef = ref as MutableRefObject<T | null>
+        mutableRef.current = targetRef.current
       }
     })
   }, [refs])

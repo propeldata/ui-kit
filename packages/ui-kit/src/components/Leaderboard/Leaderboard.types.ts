@@ -102,7 +102,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps
   /** Optional props that are used to configure the table component. */
   tableProps?: LeaderboardTableProps
 
-  /** Optional props that are used to configure the chart component. */
+  /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
   chartProps?: LeaderboardChartProps
 
   /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */

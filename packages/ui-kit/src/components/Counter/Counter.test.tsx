@@ -151,6 +151,6 @@ describe('Counter', () => {
       />
     )
 
-    await dom.findByText("true")
+    await dom.findByText('true')
   })
 })

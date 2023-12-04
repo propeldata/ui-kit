@@ -1,4 +1,4 @@
-const DEFAULT_TIME_ZONE = 'UTC'
+export const DEFAULT_TIME_ZONE = 'UTC'
 
 /**
  * Get the local time zone, falling back to "UTC" if unavailable.
