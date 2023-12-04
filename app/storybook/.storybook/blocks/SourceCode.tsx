@@ -57,7 +57,7 @@ export type SourceCodeProps = {
  * A custom block to parse and show the source code of a story.
  */
 
-export const SourceCode = ({ of, transform, shown = false, hideStory = false }) => {
+export const SourceCode = ({ of, transform, shown = false, hideStory = false }: SourceCodeProps) => {
   const resolvedOf = useOf(of || 'story', ['story', 'meta'])
   const [showSource, setShowSource] = React.useState(shown)
 
@@ -65,7 +65,7 @@ export const SourceCode = ({ of, transform, shown = false, hideStory = false }) 
     case 'story': {
       const context = resolvedOf.story
       const source = transform
-        ? transform(parseStorySourceCode({ context }), context)
+        ? transform(parseStorySourceCode({ context }) ?? '', context)
         : parseStorySourceCode({ context, formatted: true })
 
       return (

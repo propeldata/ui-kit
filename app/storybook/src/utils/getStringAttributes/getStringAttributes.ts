@@ -8,7 +8,7 @@
  * @returns {string} A string of space-separated attributes for use in JSX.
  */
 
-export const getStringAttributes = (args: any) =>
+export const getStringAttributes = (args: Record<string, unknown>): string =>
   args
     ? Object.keys(args)
         .reduce((acc, item) => {
@@ -24,6 +24,10 @@ export const getStringAttributes = (args: any) =>
             return (
               acc + `${item}={${String(args[item]).replaceAll('_deps_exports__WEBPACK_IMPORTED_MODULE_7__.', '')}} `
             )
+          }
+
+          if (typeof args[item] === 'number') {
+            return acc + `${item}="${args[item]}" `
           }
 
           const val = JSON.stringify(args[item])

@@ -1,5 +1,5 @@
 import { Source } from '@storybook/blocks'
-import type { Preview } from '@storybook/react'
+import type { Preview, StoryContext } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
 import { ThemeProvider } from '../../../packages/ui-kit/src/components/ThemeProvider'
@@ -7,21 +7,19 @@ import axiosInstance from '../src/axios'
 import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
 
-const withThemeProvider = (Story, context) => {
+const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   if (context.parameters.skipThemeProvider) {
     return <Story />
   }
 
   return (
-    <>
-      <ThemeProvider baseTheme={context.globals.theme}>
-        <Story />
-      </ThemeProvider>
-    </>
+    <ThemeProvider baseTheme={context.globals.theme}>
+      <Story />
+    </ThemeProvider>
   )
 }
 
-const withSource = (StoryFn, context) => {
+const withSource = (StoryFn: React.FC, context: StoryContext) => {
   const [showSource, setShowSource] = React.useState(false)
   const source = parseStorySourceCode({ context, formatted: true })
 
