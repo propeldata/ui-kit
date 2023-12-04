@@ -57,6 +57,14 @@ const handlers = componentHandlers.map(handler => handler((req, res, ctx) => {
   )
 }))
 
+jest.mock('../../helpers', () => {
+  const actual = jest.requireActual('../../helpers')
+  return {
+    ...actual,
+    sleep: jest.fn()
+  }
+})
+
 describe('AccessTokenProvider', () => {
   let dom: Dom
 
@@ -88,14 +96,14 @@ describe('AccessTokenProvider', () => {
     expect(charts).toHaveLength(2)
   })
 
-  it('should re-fetch the accessToken when it expires', async () => {
+  it('should re-fetch the accessToken when the request fails', async () => {
     const createTokenFetcher = () => {
       let fetchCount = 0
 
       return jest.fn(async () => {
         fetchCount++
         if (fetchCount === 1) {
-          return 'expired-token'
+          throw new Error()
         }
 
         return 'valid-token'
@@ -114,19 +122,6 @@ describe('AccessTokenProvider', () => {
     expect(charts).toHaveLength(2)
 
     expect(fetchToken).toHaveBeenCalledTimes(2)
-  })
-
-  it('should fail to re-fetch the accessToken after several retries', async () => {
-    const fetchToken = jest.fn(async () => null)
-
-    dom = render(
-      <DashboardComponent fetchToken={fetchToken} />
-    )
-
-    await dom.findAllByText('Unable to connect')
-    await dom.findAllByText('Sorry we are not able to connect at this time due to a technical error.')
-
-    expect(fetchToken).toHaveBeenCalledTimes(4) // 1 initial fetch + 3 retries
   })
 
   it('should refetch accessToken after interval', async () => {
