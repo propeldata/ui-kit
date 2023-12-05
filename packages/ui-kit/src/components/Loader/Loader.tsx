@@ -10,7 +10,7 @@ export interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ children, className, isText, baseTheme, ...other }, forwardedRef) => {
+  ({ children, className, isText, baseTheme, ...rest }, forwardedRef) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     useTheme({ componentContainer, baseTheme })
@@ -21,7 +21,7 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
         className={classnames(componentStyles.rootLoader, className)}
         role="alert"
         aria-live="polite"
-        {...other}
+        {...rest}
       >
         <p hidden>Loading...</p>
         <div

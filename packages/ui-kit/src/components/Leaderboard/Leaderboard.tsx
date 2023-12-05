@@ -6,7 +6,7 @@ import {
   formatLabels,
   getPixelFontSizeAsNumber,
   getTimeZone,
-  Labels,
+  LeaderboardLabels,
   PROPEL_GRAPHQL_API_ENDPOINT,
   useCombinedRefsCallback,
   useLeaderboardQuery,
@@ -43,7 +43,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       errorFallbackProps,
       style,
       card = false,
-      ...other
+      ...rest
     },
     forwardedRef
   ) => {
@@ -79,15 +79,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const labels =
           formatLabels({
-            labels: data.rows?.map((row) => row.slice(0, row.length - 1)) as Labels,
+            labels: data.rows?.map((row) => row.slice(0, row.length - 1)) as LeaderboardLabels,
             formatter: labelFormatter
           }) || []
 
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-        const customChartLabelsPlugin: Plugin<'bar'> = {
-          id: 'customChartLabelsPlugin',
+        const customLeaderboardChartLabelsPlugin: Plugin<'bar'> = {
+          id: 'customLeaderboardChartLabelsPlugin',
           afterDatasetDraw: (chart, args) => {
             const {
               ctx,
@@ -100,7 +100,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             ctx.textAlign = 'left'
             ctx.textBaseline = 'middle'
             ctx.font = `${theme.tinyFontWeight} ${theme.tinyFontSize} ${theme.tinyFontFamily}`
-            // @TODO: discuss with design team
             ctx.fillStyle = '#ffffff'
 
             const datasetIndex = args.index
@@ -141,7 +140,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
           },
-          customChartLabelsPlugin
+          customLeaderboardChartLabelsPlugin
         }
 
         if (chartRef.current) {
@@ -227,7 +226,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
               }
             }
           },
-          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
+          plugins: [customCanvasBackgroundColor, customLeaderboardChartLabelsPlugin]
         }
 
         if (chartConfigProps) {
@@ -373,7 +372,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     if (variant === 'bar') {
       return (
-        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...other}>
+        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...rest}>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
       )
@@ -412,7 +411,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         ref={setRef}
         className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
-        {...other}
+        {...rest}
       >
         <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>
           <thead className={classnames(stickyHeader && componentStyles.stickyHeader)}>

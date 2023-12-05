@@ -57,8 +57,7 @@ const Counter = (args: Story['args']) => {
         // @TODO: Improve this
         onClick: args?.onClick
           ? () => {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              args.onClick ? args.onClick(ref?.current as any) : undefined
+              ref?.current && args.onClick?.(ref.current)
             }
           : undefined,
         query: args?.query
@@ -77,7 +76,8 @@ export const SingleValueStory: Story = {
   args: {
     ...connectedParams,
     style: {
-      width: 'fit-content'
+      width: 'fit-content',
+      '--propel-accent': 'red'
     },
     card: true
   },
@@ -132,6 +132,11 @@ export const SingleValueCustomStyleStory: Story = {
   args: {
     ...connectedParams,
     card: true,
+    loaderProps: {
+      style: {
+        fontSize: '2rem'
+      }
+    },
     style: {
       width: 'fit-content',
       fontSize: '2rem',

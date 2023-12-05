@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { Chart } from 'chart.js'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
@@ -183,8 +184,11 @@ export const CustomChartStory: Story = {
       // Style the canvas
       const backgroundColorPlugin = {
         id: 'backgroundColorPlugin',
-        beforeDraw: (chart) => {
+        beforeDraw: (chart: Chart) => {
           const ctx = chart.canvas.getContext('2d')
+          if (!ctx) {
+            return
+          }
           ctx.save()
           ctx.fillStyle = 'lightblue'
           ctx.fillRect(0, 0, chart.width, chart.height)
@@ -245,8 +249,26 @@ export const ChartOnClickStory: Story = {
   render: (args) => <TimeSeries {...args} />
 }
 
-export const ChartFormatYLabelsStory: Story = {
-  name: 'Chart format yAxis labels',
+export const ChartLabelFormatStory: Story = {
+  name: 'Chart format xAxis via labelFormat prop',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    labelFormatter: (labels) =>
+      labels.map((label) =>
+        new Date(label).toLocaleDateString('en', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })
+      )
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ChartFormatXLabelsStory: Story = {
+  name: 'Chart format xAxis labels',
   tags: ['pattern'],
   args: {
     variant: 'bar',
@@ -257,12 +279,17 @@ export const ChartFormatYLabelsStory: Story = {
         ...config.options,
         scales: {
           ...config.options?.scales,
-          y: {
-            ...config.options?.scales?.y,
+          x: {
+            ...config.options?.scales?.x,
             ticks: {
-              ...config.options?.scales?.y?.ticks,
+              ...config.options?.scales?.x?.ticks,
               // Format the yAxis labels as currency
-              callback: (dataLabel) => `$${dataLabel.toLocaleString()}`
+              callback: (label) =>
+                new Date(label).toLocaleDateString('en', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })
             }
           }
         }

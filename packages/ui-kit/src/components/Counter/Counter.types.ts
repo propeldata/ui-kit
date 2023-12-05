@@ -1,8 +1,6 @@
 import type { FilterInput, TimeRangeInput } from '../../helpers'
 import type { DataComponentProps } from '../shared.types'
 import type { ThemeComponentProps } from '../../themes'
-import type { ErrorFallbackProps } from '../ErrorFallback'
-import type { LoaderProps } from '../Loader'
 
 export type CounterQueryProps = {
   /** Time range that the chart will respond to. Will be ignored when value is passed */
@@ -51,10 +49,4 @@ export interface CounterProps
 
   /** When true, shows a skeleton loader */
   loading?: boolean
-
-  /** Optional props that are used to configure the Loader component. */
-  loaderProps?: LoaderProps
-
-  /** Optional props that are used to configure the ErrorFallback component. */
-  errorFallbackProps?: ErrorFallbackProps
 }

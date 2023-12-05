@@ -15,12 +15,57 @@ This version has some breaking changes. Please follow the steps below to migrate
 The `labelFormatter` prop has been deprecated in favor of `chartConfigProps`, which exposes access to the full Chart.js
 API.
 
-<SourceCode of={TimeSeriesStories.ChartFormatYLabelsStory} shown />
+#### Before (using `labelFormatter` prop)
 
-### `styles` prop is deprecated
+<SourceCode of={TimeSeriesStories.ChartLabelFormatStory} shown />
 
-The `styles` prop has been also deprecated. Instead, use `chartConfigProps` to style charts and `className` or `styles`
-to style the component itself.
+#### After (using `chartConfigProps` prop)
+
+<SourceCode of={TimeSeriesStories.ChartFormatXLabelsStory} shown />
+
+### `styles` prop is removed (breaking change)
+
+The `styles` prop has been removed from UI Kit API. Instead, use `chartConfigProps` to style charts and `className` or
+`style` to style the component itself.
+
+#### Before (using `styles` prop)
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import {
+      TimeSeries,
+      RelativeTimeRange,
+      TimeSeriesGranularity,
+    } from "@propeldata/ui-kit";
+
+    function TimeSeriesComponent() {
+      return (
+        <TimeSeries
+          query={{
+            accessToken: "<PROPEL_ACCESS_TOKEN>",
+            granularity: TimeSeriesGranularity.Week,
+            metric: "Revenue",
+            timeRange: {
+              n: 30,
+              relative: RelativeTimeRange.LastNDays,
+            },
+          }}
+          styles={{
+            bar: {
+              backgroundColor: "#532AB4",
+            },
+          }}
+          variant="bar"
+        />
+      );
+    }
+
+`} />
+
+#### After (using `chartConfigProps` and `style` props)
 
 <SourceCode of={TimeSeriesStories.CustomStyleStory} shown />
 

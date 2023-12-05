@@ -153,7 +153,7 @@ describe('Leaderboard', () => {
       <Leaderboard
         headers={mockData.headers}
         rows={mockData.rows}
-        labelFormatter={(labels) => labels.map((label) => label[0].replace('-', '.'))}
+        labelFormatter={(labels) => labels.map((label) => label.map((l) => l.toUpperCase()))}
       />
     )
 
@@ -163,7 +163,7 @@ describe('Leaderboard', () => {
     const chartLabels = chartInstance?.data.labels
     const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
 
-    expect(chartLabels).toEqual(resultingLabels.map((label) => label[0].replace('-', '.')))
+    expect(chartLabels).toEqual(resultingLabels.map((label) => label.map((l) => l.toUpperCase())))
   })
 
   it('should work for strings', async () => {

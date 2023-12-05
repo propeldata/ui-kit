@@ -1,3 +1,21 @@
+/**
+ * Theme Utilities for ThemeProvider
+ *
+ * These functions are integral to the ThemeProvider's functionality in managing and applying styles within a React application.
+ *
+ * - parseComputedStyle(themeContainer: HTMLElement): This utility is used within the ThemeProvider to dynamically read
+ *   the current theme-related styles from a specified HTML element. It extracts CSS variable values corresponding
+ *   to theme tokens, facilitating the adaptation of component styles based on the current theme.
+ *
+ * - clearContainerStyle(themeContainer: HTMLElement): This function is essential for resetting an HTML element's styles
+ *   to their default state. Within the ThemeProvider, it's used to clear any previously set theme-specific styles,
+ *   ensuring a clean slate before applying a new theme or reverting to default styles.
+ *
+ * - setContainerStyle(themeContainer: HTMLElement, theme: ThemeTokenProps): This method applies a specified theme to an
+ *   HTML element by setting the appropriate CSS variables. It's a crucial part of the ThemeProvider's mechanism for
+ *   dynamically applying theme properties, ensuring that components reflect the chosen theme consistently.
+ */
+
 import type { ThemeTokenProps } from '../../themes/theme.types'
 import { themeTokens } from '../../themes/themeTokens'
 import { camelCaseToKebabCase } from '../camelCaseToKebabCase'

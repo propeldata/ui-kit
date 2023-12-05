@@ -1,4 +1,4 @@
-import { useState, useCallback, Ref, MutableRefObject } from 'react'
+import { useState, useCallback, RefCallback, MutableRefObject, ForwardedRef } from 'react'
 import { useCombinedRefs } from '../useCombinedRefs'
 
 /**
@@ -8,25 +8,25 @@ import { useCombinedRefs } from '../useCombinedRefs'
  * The `setRef` callback is used to update both the `componentContainer` state and the `combinedRef`.
  * This hook is useful for components that need to expose their DOM node to parent components while maintaining an internal ref.
  *
- * @param {Ref<HTMLElement>} forwardedRef - The forwarded ref.
- * @param {Ref<HTMLElement>} innerRef - The internal ref.
+ * @param {Ref<T>} forwardedRef - The forwarded ref.
+ * @param {Ref<T>} innerRef - The internal ref.
  * @returns An object containing `componentContainer`, `combinedRef`, and `setRef`.
  */
-export const useCombinedRefsCallback = ({
+export const useCombinedRefsCallback = <T>({
   forwardedRef,
   innerRef
 }: {
-  forwardedRef: Ref<HTMLElement>
-  innerRef: Ref<HTMLElement>
+  forwardedRef: ForwardedRef<T>
+  innerRef: MutableRefObject<T> | RefCallback<T>
 }) => {
   const combinedRef = useCombinedRefs(forwardedRef, innerRef)
-  const [componentContainer, setComponentContainer] = useState<HTMLElement | null>(null)
+  const [componentContainer, setComponentContainer] = useState<T | null>(null)
 
   const setRef = useCallback(
-    (node: HTMLElement | null) => {
+    (node: T | null) => {
       if (node !== null) {
         setComponentContainer(node)
-        ;(combinedRef as MutableRefObject<HTMLElement | null>).current = node
+        ;(combinedRef as MutableRefObject<T | null>).current = node
       }
     },
     [combinedRef]

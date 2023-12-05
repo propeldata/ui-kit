@@ -106,7 +106,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     }
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !innerRef.current) {
-      return <Loader {...loaderProps} isText />
+      return <Loader className={componentStyles.loader} {...loaderProps} isText />
     }
 
     return (

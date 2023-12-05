@@ -27,13 +27,13 @@ const Icon = ({ color }: { color?: string }) => (
 )
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
-  ({ error = serverErrorMessage, className, baseTheme, ...other }, forwardedRef) => {
+  ({ error = serverErrorMessage, className, baseTheme, ...rest }, forwardedRef) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     useTheme({ componentContainer, baseTheme })
 
     return (
-      <div ref={setRef} className={componentStyles.rootErrorFallback} {...other}>
+      <div ref={setRef} className={componentStyles.rootErrorFallback} {...rest}>
         <div className={classnames(componentStyles.container, className)}>
           <Icon />
           {error && (

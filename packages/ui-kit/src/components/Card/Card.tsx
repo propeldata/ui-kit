@@ -9,13 +9,13 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, className, baseTheme, ...other }, forwardedRef) => {
+  ({ children, className, baseTheme, ...rest }, forwardedRef) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     useTheme({ componentContainer, baseTheme })
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootCard, className)} {...other}>
+      <div ref={setRef} className={classnames(componentStyles.rootCard, className)} {...rest}>
         {children}
       </div>
     )

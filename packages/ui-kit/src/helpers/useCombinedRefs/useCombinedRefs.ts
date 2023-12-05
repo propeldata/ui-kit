@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
-import { useEffect, useRef, Ref, MutableRefObject } from 'react'
+import { useEffect, useRef, RefCallback, RefObject, MutableRefObject } from 'react'
 
 /**
  * Custom React hook that combines multiple refs into a single ref object.
@@ -11,7 +9,7 @@ import { useEffect, useRef, Ref, MutableRefObject } from 'react'
  * @param {...(Ref<T> | null)[]} refs - An array of refs to be combined.
  * @returns {RefObject<T>} A React ref object that is synchronized with the provided refs.
  */
-export const useCombinedRefs = <T>(...refs: (Ref<T> | null)[]) => {
+export const useCombinedRefs = <T>(...refs: (MutableRefObject<T | null> | RefCallback<T> | null)[]): RefObject<T> => {
   const targetRef = useRef<T>(null)
 
   useEffect(() => {

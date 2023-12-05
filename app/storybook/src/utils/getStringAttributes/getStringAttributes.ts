@@ -21,6 +21,7 @@ export const getStringAttributes = (args: Record<string, unknown>): string =>
           }
 
           if (typeof args[item] === 'function') {
+            // Removes the module-specific prefix '_deps_exports__WEBPACK_IMPORTED_MODULE_7__.' added by Storybook's Webpack from function references.
             return (
               acc + `${item}={${String(args[item]).replaceAll('_deps_exports__WEBPACK_IMPORTED_MODULE_7__.', '')}} `
             )

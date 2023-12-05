@@ -61,37 +61,36 @@ export const SourceCode = ({ of, transform, shown = false, hideStory = false }: 
   const resolvedOf = useOf(of || 'story', ['story', 'meta'])
   const [showSource, setShowSource] = React.useState(shown)
 
-  switch (resolvedOf.type) {
-    case 'story': {
-      const context = resolvedOf.story
-      const source = transform
-        ? transform(parseStorySourceCode({ context }) ?? '', context)
-        : parseStorySourceCode({ context, formatted: true })
+  if (resolvedOf.type === 'story') {
+    const context = resolvedOf.story
+    const source = transform
+      ? transform(parseStorySourceCode({ context }) ?? '', context)
+      : parseStorySourceCode({ context, formatted: true })
 
-      return (
-        <div className="propelSourceCodeBlock">
-          {!hideStory && (
-            <div
-              style={{
-                padding: 20,
-                border: '1px solid hsla(203, 50%, 30%, 0.15)',
-                borderRadius: 4,
-                boxShadow: 'rgba(0, 0, 0, 0.10) 0 1px 3px 0'
-              }}
-            >
-              <Story of={context.moduleExport} />
-            </div>
-          )}
+    return (
+      <div className="propelSourceCodeBlock">
+        {!hideStory && (
+          <div
+            style={{
+              padding: 20,
+              border: '1px solid hsla(203, 50%, 30%, 0.15)',
+              borderRadius: 4,
+              boxShadow: 'rgba(0, 0, 0, 0.10) 0 1px 3px 0'
+            }}
+          >
+            <Story of={context.moduleExport} />
+          </div>
+        )}
 
-          {!hideStory && source && (
-            <a className="showCodeLink" onClick={() => setShowSource(!showSource)}>
-              {showSource ? 'Hide' : 'Show'} code
-            </a>
-          )}
-          {source && showSource && <Source dark format="dedent" language="tsx" code={source} />}
-        </div>
-      )
-    }
+        {!hideStory && source && (
+          <a className="showCodeLink" onClick={() => setShowSource(!showSource)}>
+            {showSource ? 'Hide' : 'Show'} code
+          </a>
+        )}
+        {source && showSource && <Source dark format="dedent" language="tsx" code={source} />}
+      </div>
+    )
   }
+
   return null
 }
