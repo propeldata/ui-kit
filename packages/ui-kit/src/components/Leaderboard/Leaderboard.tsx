@@ -5,10 +5,12 @@ import {
   customCanvasBackgroundColor,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
+  formatLabels,
   useLeaderboardQuery,
-  formatLabels
+  LeaderboardQuery
 } from '../../helpers'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
+import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
@@ -46,8 +48,12 @@ export const LeaderboardComponent = ({
 }: LeaderboardProps) => {
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
+  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
+
+  const accessToken = query?.accessToken ?? accessTokenFromProvider
 
   /**
    * The html node where the chart will render
@@ -154,13 +160,13 @@ export const LeaderboardComponent = ({
     isInitialLoading: isLoadingQuery,
     error: hasError,
     data: fetchedData
-  } = useLeaderboardQuery(
+  } = useLeaderboardQuery<LeaderboardQuery, Error>(
     {
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${query?.accessToken}`
+          authorization: `Bearer ${accessToken}`
         }
       }
     },
@@ -183,7 +189,7 @@ export const LeaderboardComponent = ({
     {
       refetchInterval: query?.refetchInterval,
       retry: query?.retry,
-      enabled: !isStatic
+      enabled: !isStatic && accessToken != null
     }
   )
 
@@ -209,7 +215,11 @@ export const LeaderboardComponent = ({
 
       if (
         !isStatic &&
-        (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
+        ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
+          !query.metric ||
+          !query.timeRange ||
+          !query.dimensions ||
+          !query.rowLimit)
       ) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
@@ -229,7 +239,7 @@ export const LeaderboardComponent = ({
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, headers, rows, query, isLoadingStatic, variant])
+  }, [isStatic, headers, rows, query, isLoadingStatic, variant, accessTokenFromProvider, isLoadingAccessToken])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -268,7 +278,7 @@ export const LeaderboardComponent = ({
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }
@@ -297,8 +307,16 @@ export const LeaderboardComponent = ({
   const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard.headers
   const tableRows = isStatic ? rows : fetchedData?.leaderboard.rows
 
-  const { hasValueBar, headersWithoutValue, isOrdered, maxValue, rowsWithoutValue, valueHeader, valuesByRow, numberValuesByRow } =
-    getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
+  const {
+    hasValueBar,
+    headersWithoutValue,
+    isOrdered,
+    maxValue,
+    rowsWithoutValue,
+    valueHeader,
+    valuesByRow,
+    numberValuesByRow
+  } = getTableSettings({ headers: tableHeaders, rows: tableRows, styles })
 
   return (
     <div ref={tableRef} className={ComponentStyles.getContainerStyles(styles)} style={loadingStyles}>

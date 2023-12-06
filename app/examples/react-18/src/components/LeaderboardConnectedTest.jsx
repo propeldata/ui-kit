@@ -1,13 +1,8 @@
 import React from 'react'
 import { Leaderboard, RelativeTimeRange } from '@propeldata/ui-kit'
 
-const {
-  REACT_APP_PROPEL_ACCESS_TOKEN,
-  REACT_APP_METRIC_UNIQUE_NAME_1,
-  REACT_APP_DIMENSION_1,
-  REACT_APP_DIMENSION_2,
-  REACT_APP_DIMENSION_3
-} = process.env
+const { REACT_APP_METRIC_UNIQUE_NAME_1, REACT_APP_DIMENSION_1, REACT_APP_DIMENSION_2, REACT_APP_DIMENSION_3 } =
+  process.env
 
 export function LeaderboardConnectedTest() {
   const [barsColor, setBarsColor] = React.useState('#ccc')
@@ -24,7 +19,6 @@ export function LeaderboardConnectedTest() {
       <h2 className="text-2xl">Leaderboard Connected</h2>
       <Leaderboard
         query={{
-          accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
           dimensions: [
             {
               columnName: REACT_APP_DIMENSION_1
