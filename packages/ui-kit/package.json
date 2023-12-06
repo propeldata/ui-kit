@@ -9,7 +9,7 @@
     "build": "rm -rf dist && yarn graphql:build && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
-    "test": "jest",
+    "test": "yarn graphql:gen && jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
   },
   "publishConfig": {
