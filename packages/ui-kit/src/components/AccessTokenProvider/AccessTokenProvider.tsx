@@ -8,7 +8,7 @@ export interface AccessTokenContextValue {
    *
    * If the AccessTokenProvider was instantiated without a token, or the fetch token function has not completed, this property will be undefined.
    *
-   * Otherwise, when re-fetching an access token, this property will remain equal to the previous access token, until the fetch token function completes again.
+   * Otherwise, when re-fetching an access token, this property will remain equal to the previous access token until the fetch token function completes again.
    */
   accessToken?: string
   /**
