@@ -25,6 +25,7 @@ export interface AccessTokenContextValue {
 
 const ACCESS_TOKEN_REFRESH_INTERVAL = 3300000 // 55 minutes
 const ACCESS_TOKEN_MAX_RETRIES = 3
+const ACCESS_TOKEN_RETRY_INTERVAL = 1000
 
 export const AccessTokenContext = createContext<AccessTokenContextValue | undefined>({})
 
@@ -57,6 +58,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
     while (mounted.current) {
       try {
         const token = await fetchToken()
+        if (!mounted.current) break
         log.debug('Access token fetched successfully')
 
         setError(undefined)
@@ -65,7 +67,8 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
 
         break
       } catch (error) {
-        log.error('Failed to fetch access token', error)
+        if (!mounted.current) break
+        log.warn('Failed to fetch access token', error)
 
         if (retries === ACCESS_TOKEN_MAX_RETRIES) {
           setIsLoading(false)
@@ -74,7 +77,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps>  = ({ child
 
         retries++
 
-        await sleep(1000)
+        await sleep(ACCESS_TOKEN_RETRY_INTERVAL)
       }
     }
   // This useCallback cannot be tiggered by `fetchToken` because it is a function
