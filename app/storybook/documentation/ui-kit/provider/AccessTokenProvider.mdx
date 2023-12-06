@@ -61,10 +61,7 @@ If you'd prefer to handle fetching on your own, you can pass the `accessToken` p
 
 ```jsx
 function App() {
-
-  const handleTokenExpiration = () => {
-    // refetch token
-  }
+  const [accessToken, setAccessToken] = useState(null)
 
   return (
     <AccessTokenProvider 
