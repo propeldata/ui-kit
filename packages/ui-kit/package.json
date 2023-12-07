@@ -1,6 +1,6 @@
 {
   "name": "@propeldata/ui-kit",
-  "version": "0.3.0-rc.4",
+  "version": "0.3.0-rc.3",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
@@ -9,7 +9,7 @@
     "build": "rm -rf dist && yarn graphql:build && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
-    "test": "jest",
+    "test": "yarn graphql:gen && jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
   },
   "publishConfig": {
@@ -35,7 +35,7 @@
     "@graphql-codegen/typescript": "^4.0.1",
     "@graphql-codegen/typescript-msw": "^1.1.6",
     "@graphql-codegen/typescript-operations": "^4.0.1",
-    "@graphql-codegen/typescript-react-query": "^4.1.0",
+    "@graphql-codegen/typescript-react-query": "^6.0.0",
     "@juggle/resize-observer": "^3.4.0",
     "@storybook/blocks": "^7.2.1",
     "@storybook/react": "^7.2.0",

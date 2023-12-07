@@ -14,7 +14,17 @@ export type TimeSeriesData = {
 }
 
 export type TimeSeriesQueryProps = {
-  /** This should eventually be replaced to customer's app credentials */
+  /**
+   * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
+   * @example
+   * ```jsx
+   * <AccessTokenProvider fetchToken={fetchToken}>
+   *   <Counter />
+   *   <TimeSeries />
+   *   <Leaderboard />
+   * </AccessTokenProvider>
+   * ```
+   * */
   accessToken?: string
 
   /** Metric unique name */

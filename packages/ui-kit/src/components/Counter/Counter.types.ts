@@ -4,7 +4,17 @@ import type { ChartStyles } from '../../themes'
 export type CounterQueryProps = {
   /** Time range that the chart will respond to. Will be ignored when value is passed */
   timeRange?: TimeRangeInput
-  /** This should eventually be replaced to customer's app credentials. Will be ignored when value is passed */
+  /**
+   * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
+   * @example
+   * ```jsx
+   * <AccessTokenProvider fetchToken={fetchToken}>
+   *   <Counter />
+   *   <TimeSeries />
+   *   <Leaderboard />
+   * </AccessTokenProvider>
+   * ```
+   * */
   accessToken?: string
   /** Metric unique name will be ignored when value is passed */
   metric?: string
