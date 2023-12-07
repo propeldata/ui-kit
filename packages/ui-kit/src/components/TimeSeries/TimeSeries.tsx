@@ -10,14 +10,13 @@ import {
   formatLabels,
   getTimeZone,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useCombinedRefsCallback,
-  useSetupComponentDefaultChartStyles,
+  useForwardedRefCallback,
   useTimeSeriesQuery
 } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useLog } from '../Log'
-import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
+import { useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
@@ -49,7 +48,6 @@ CustomLineController.defaults = {
 ChartJS.register(CustomLineController)
 
 // @TODO: refactor due to query and styles causing a re-render even if they are the same
-
 export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesProps>(
   (
     {
@@ -74,14 +72,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     },
     forwardedRef
   ) => {
-    const innerRef = React.useRef<HTMLDivElement>(null)
-    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const theme = useTheme({ componentContainer, baseTheme })
+    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
+    const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
+    const { theme, chartConfig } = useTheme<typeof type>({ componentContainer, baseTheme })
     const log = useLog()
-
-    const globalChartConfigProps = useGlobalChartConfigProps()
     const isLoadingStatic = loading
-    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps })
 
     React.useEffect(() => {
       chartJsAdapterLuxon
@@ -214,12 +209,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           const chart = chartRef.current
           chart.data.labels = labels
           chart.options.scales = {
-            ...scales,
-            ...chart.options.scales
+            ...chart.options.scales,
+            ...scales
           }
           chart.options.plugins = {
-            ...customPlugins,
-            ...chart.options.plugins
+            ...chart.options.plugins,
+            ...customPlugins
           }
 
           const dataset = chart.data.datasets[0]
@@ -240,14 +235,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         }
 
         let config: ChartConfiguration<TimeSeriesChartVariant> = {
-          // @TODO: require to refactor
-          type: variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar',
+          ...chartConfig,
+          type,
           data: dataset,
           options,
           plugins
         }
 
         if (chartConfigProps) {
+          // @TODO: fix this complex type
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           config = chartConfigProps(config)
@@ -266,7 +262,9 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         chartProps,
         log,
         labelFormatter,
-        chartConfigProps
+        chartConfigProps,
+        type,
+        chartConfig
       ]
     )
 

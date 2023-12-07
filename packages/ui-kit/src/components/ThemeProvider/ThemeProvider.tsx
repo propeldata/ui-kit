@@ -1,23 +1,89 @@
-import { Chart } from 'chart.js'
+import { ChartConfiguration, ChartOptions } from 'chart.js'
 import classnames from 'classnames'
 import React, { createContext, useContext, useState } from 'react'
-import { setupChartStyles } from '../../helpers'
+import { getPixelFontSizeAsNumber, initChartJs } from '../../helpers'
 import { clearContainerStyle, parseComputedStyle, setContainerStyle } from '../../helpers/themeUtils'
 import themes from '../../themes/themes.module.scss'
-import type { ThemeContextProps, ThemeProviderProps, ThemeStateProps, UseThemeProps } from './ThemeProvider.types'
+import type {
+  ChartVariant,
+  ThemeContextProps,
+  ThemeProviderProps,
+  ThemeStateProps,
+  UseThemeProps
+} from './ThemeProvider.types'
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
 
-export const useTheme = ({ componentContainer, baseTheme = 'lightTheme' }: UseThemeProps): ThemeStateProps => {
+export const useTheme = <T extends ChartVariant>({
+  componentContainer,
+  baseTheme = 'lightTheme'
+}: UseThemeProps): { theme: ThemeStateProps; chartConfig?: ChartConfiguration<T> } => {
   const [theme, setTheme] = useState<ThemeStateProps>()
+  const [chartConfig, setChartConfig] = useState<ChartConfiguration<T>>()
   const context = useContext(ThemeContext)
 
   React.useEffect(() => {
-    if (!theme || context) {
+    if (!theme) {
       return
     }
 
-    setupChartStyles({ theme })
+    let config: Partial<ChartConfiguration<T>> = {
+      type: undefined
+    }
+
+    config.options = {
+      color: theme.textSecondary ?? '',
+      backgroundColor: theme.accent ?? '',
+      borderColor: theme.borderPrimary ?? '',
+      elements: {
+        point: {
+          pointStyle: 'circle',
+          hitRadius: 6,
+          radius: 0,
+          borderWidth: 2,
+          hoverRadius: 6,
+          hoverBorderColor: theme.bgPrimary ?? '',
+          backgroundColor: theme.accentHover ?? '',
+          hoverBackgroundColor: theme.accentHover ?? ''
+        },
+        bar: {
+          borderWidth: 0,
+          hoverBackgroundColor: theme.accentHover ?? ''
+        },
+        line: {
+          borderWidth: 3
+        }
+      },
+      plugins: {
+        tooltip: {
+          padding: parseInt(theme.spaceXs as string),
+          backgroundColor: theme.bgPrimary ?? '',
+          bodyColor: theme.textSecondary ?? '',
+          titleColor: theme.textSecondary ?? '',
+          borderColor: theme.borderPrimary ?? '',
+          borderWidth: 1,
+          cornerRadius: 4,
+          titleFont: {
+            size: getPixelFontSizeAsNumber(theme.tinyFontSize),
+            weight: 'bold',
+            lineHeight: theme.tinyLineHeight,
+            family: theme.fontFamily
+          }
+        }
+      }
+    } as ChartOptions<T>
+
+    if (context) {
+      if (context.globalChartConfigProps) {
+        // @TODO: fix any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        config = context.globalChartConfigProps(config as any) as ChartConfiguration<T>
+      }
+    }
+
+    initChartJs()
+
+    setChartConfig(config as ChartConfiguration<T>)
   }, [theme, context])
 
   React.useEffect(() => {
@@ -40,17 +106,7 @@ export const useTheme = ({ componentContainer, baseTheme = 'lightTheme' }: UseTh
     setTheme(parseComputedStyle(componentContainer))
   }, [context, componentContainer, baseTheme])
 
-  return theme
-}
-
-export const useGlobalChartConfigProps = (): ((chart: typeof Chart) => typeof Chart) | undefined => {
-  const context = useContext(ThemeContext)
-
-  if (!context) {
-    return undefined
-  }
-
-  return context.globalChartConfigProps
+  return { theme, chartConfig }
 }
 
 export const ThemeProvider = ({
@@ -80,16 +136,12 @@ export const ThemeProvider = ({
     setTheme(combinedWithBaseProps)
   }, [ref, themeProp, baseTheme])
 
-  React.useEffect(() => {
-    if (!theme) {
-      return
-    }
-
-    setupChartStyles({ theme, globalChartConfigProps })
-  }, [theme, globalChartConfigProps])
-
   return (
-    <div ref={ref} className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}>
+    <div
+      ref={ref}
+      className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}
+      data-testid="theme-provider"
+    >
       <ThemeContext.Provider value={{ theme, globalChartConfigProps }}>{children}</ThemeContext.Provider>
     </div>
   )

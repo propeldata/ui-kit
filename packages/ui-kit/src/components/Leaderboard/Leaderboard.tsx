@@ -1,4 +1,4 @@
-import { Chart as ChartJS, ChartConfiguration, Plugin, ChartDataset, BarElement } from 'chart.js'
+import { BarElement, Chart as ChartJS, ChartConfiguration, ChartDataset, Plugin } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'
 import {
@@ -9,12 +9,12 @@ import {
   LeaderboardLabels,
   PROPEL_GRAPHQL_API_ENDPOINT,
   useCombinedRefsCallback,
-  useLeaderboardQuery,
-  useSetupComponentDefaultChartStyles
+  // useForwardedRefCallback,
+  useLeaderboardQuery
 } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import { useGlobalChartConfigProps, useTheme } from '../ThemeProvider'
+import { useTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
@@ -49,11 +49,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const theme = useTheme({ componentContainer, baseTheme })
-
+    // const { componentContainer, ref, setRef } = useForwardedRefCallback(forwardedRef)
+    const { theme, chartConfig } = useTheme<'bar'>({ componentContainer, baseTheme })
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-    const globalChartConfigProps = useGlobalChartConfigProps()
-    useSetupComponentDefaultChartStyles({ theme, globalChartConfigProps })
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -71,7 +69,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     const renderChart = React.useCallback(
       (data?: LeaderboardData) => {
-        if (!canvasRef.current || !data || variant === 'table' || !theme) {
+        if (!canvasRef.current || !data || variant === 'table' || !theme || !chartConfig) {
           return
         }
 
@@ -169,6 +167,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         }
 
         let config: ChartConfiguration<'bar'> = {
+          ...chartConfig,
           type: 'bar',
           data: {
             labels: labels,
@@ -183,13 +182,17 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             ]
           },
           options: {
+            ...chartConfig.options,
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
             layout: {
               padding: 4
             },
-            plugins: customPlugins,
+            plugins: {
+              ...chartConfig.options?.plugins,
+              ...customPlugins
+            },
             scales: {
               x: {
                 display: true,
@@ -236,7 +239,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, labelFormatter, chartConfigProps]
+      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter]
     )
 
     const destroyChart = () => {
@@ -363,7 +366,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       return <ErrorFallback {...errorFallbackProps} error={error} />
     }
 
+    // const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !ref.current)
     const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
+    // const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || variant === 'table'
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
       destroyChart()

@@ -1,4 +1,4 @@
-import { Chart } from 'chart.js'
+import type { ChartConfiguration } from 'chart.js'
 import React from 'react'
 import type { ThemeTokenProps } from '../../themes/theme.types'
 
@@ -6,10 +6,10 @@ export type ThemeContextProps = {
   theme?: ThemeTokenProps
 
   /**
-   * Configuration function for global `Chart.js` settings.
+   * Configuration function for default `Chart.js` settings.
    * It allows defining or overriding chart configurations globally.
    */
-  globalChartConfigProps?: (chart: typeof Chart) => typeof Chart
+  globalChartConfigProps?: (config: ChartConfiguration<ChartVariant>) => ChartConfiguration<ChartVariant>
 }
 
 export type DefaultThemes = 'lightTheme' | 'darkTheme'
@@ -35,6 +35,8 @@ export interface ThemeProviderProps extends Pick<ThemeContextProps, 'globalChart
 }
 
 export type ThemeStateProps = ThemeTokenProps | undefined
+
+export type ChartVariant = 'bar' | 'line'
 
 export interface UseThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
   /** The component root element to which the theme will be applied. */

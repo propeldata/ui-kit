@@ -1,4 +1,4 @@
-import type { Meta, StoryObj, StoryContext } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { storybookCodeTemplate } from '../../helpers'
 import { ThemeProvider } from './ThemeProvider'
@@ -82,11 +82,20 @@ export const ThemeProviderChartConfigStory: Story = {
   name: 'ThemeProvider customize chart config',
   tags: ['pattern'],
   args: {
-    globalChartConfigProps: (Chart) => {
-      Chart.defaults.plugins.tooltip.borderColor = '#532ab4'
-      Chart.defaults.plugins.tooltip.borderWidth = 3
-
-      return Chart
+    globalChartConfigProps: (chartConfig) => {
+      chartConfig.options = {
+        ...chartConfig.options,
+        plugins: {
+          ...chartConfig.options?.plugins,
+          tooltip: {
+            ...chartConfig.options?.plugins?.tooltip,
+            backgroundColor: '#532ab4',
+            titleColor: '#ffffff',
+            borderWidth: 3
+          }
+        }
+      }
+      return chartConfig
     }
   },
   parameters: {

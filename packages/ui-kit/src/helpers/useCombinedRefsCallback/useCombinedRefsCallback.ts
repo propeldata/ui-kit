@@ -10,7 +10,7 @@ import { useCombinedRefs } from '../useCombinedRefs'
  *
  * @param {Ref<T>} forwardedRef - The forwarded ref.
  * @param {Ref<T>} innerRef - The internal ref.
- * @returns An object containing `componentContainer`, `combinedRef`, and `setRef`.
+ * @returns An object containing `componentContainer`, `combinedRef`, `ref`, and `setRef`.
  */
 export const useCombinedRefsCallback = <T>({
   forwardedRef,
@@ -32,5 +32,5 @@ export const useCombinedRefsCallback = <T>({
     [combinedRef]
   )
 
-  return { componentContainer, combinedRef, setRef }
+  return { componentContainer, combinedRef, setRef, ref: combinedRef }
 }

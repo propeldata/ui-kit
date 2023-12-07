@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useCombinedRefsCallback } from '../../helpers'
+import { useForwardedRefCallback } from '../../helpers'
 import { DefaultThemes, useTheme } from '../ThemeProvider'
 import componentStyles from './Card.module.scss'
 
@@ -10,8 +10,7 @@ export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ children, className, baseTheme, ...rest }, forwardedRef) => {
-    const innerRef = React.useRef<HTMLDivElement>(null)
-    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     useTheme({ componentContainer, baseTheme })
 
     return (

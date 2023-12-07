@@ -1,6 +1,6 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { FilterInput, TimeSeriesLabels, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
+import { FilterInput, TimeRangeInput, TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps } from '../shared.types'
 

@@ -11,14 +11,12 @@ We built the UI Kit on top of all the power and efficiency of Chart.js.
 
 ## Global Chart.js configuration
 
-You can extend or override global Chart.js settings by providing a `globalChartConfigProps` function to the
-`ThemeProvider` component. This function accepts the [config object](https://www.chartjs.org/docs/latest/configuration/)
-from Chart.js as an argument and should return the modified config object with your configurations applied.
+You can extend or override default Chart.js settings of all chart components by providing a `globalChartConfigProps`
+function to the `ThemeProvider` component. This function accepts the
+[config object](https://www.chartjs.org/docs/latest/configuration/) from Chart.js as an argument and should return the
+modified config object with your configurations applied.
 
-Note that the settings will be applied globally to Chart.js throughout the app, affecting all chart instances, not only
-those within the `ThemeProvider`.
-
-<SourceCode of={ThemeProviderStories.ThemeProviderChartConfigStory} hideStory shown />
+<SourceCode of={ThemeProviderStories.ThemeProviderChartConfigStory} shown />
 
 ## Chart configuration
 

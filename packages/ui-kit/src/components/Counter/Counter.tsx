@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
-import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCombinedRefsCallback, useCounterQuery } from '../../helpers'
+import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery, useForwardedRefCallback } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useTheme } from '../ThemeProvider'
@@ -29,8 +29,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     },
     forwardedRef
   ) => {
-    const innerRef = React.useRef<HTMLSpanElement>(null)
-    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const { componentContainer, setRef, ref } = useForwardedRefCallback(forwardedRef)
     useTheme({ componentContainer, baseTheme })
 
     /**
@@ -105,7 +104,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       return <ErrorFallback error={null} {...errorFallbackProps} />
     }
 
-    if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !innerRef.current) {
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !ref?.current) {
       return <Loader className={componentStyles.loader} {...loaderProps} isText />
     }
 

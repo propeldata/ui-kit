@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useCombinedRefsCallback } from '../../helpers'
+import { useForwardedRefCallback } from '../../helpers'
 import { ThemeComponentProps } from '../../themes'
 import { useTheme } from '../ThemeProvider'
 import componentStyles from './ErrorFallback.module.scss'
@@ -28,8 +28,7 @@ const Icon = ({ color }: { color?: string }) => (
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
   ({ error = serverErrorMessage, className, baseTheme, ...rest }, forwardedRef) => {
-    const innerRef = React.useRef<HTMLDivElement>(null)
-    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     useTheme({ componentContainer, baseTheme })
 
     return (
