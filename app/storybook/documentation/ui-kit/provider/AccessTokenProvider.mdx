@@ -57,6 +57,31 @@ function App() {
 }
 ```
 
+Preferably the `fetchToken` function lives outside of the component scope, in case you need to create it within the component scope please wrap it in a `useCallback` to prevent unnecessary re-renders:
+
+```jsx
+import React, { useCallback } from 'react'
+
+import { Counter, TimeSeries, Leaderboard, AccessTokenProvider } from "@propeldata/ui-kit"  
+
+function App() {
+
+  const fetchToken = useCallback(() => {
+    // fetching logic
+
+    return accessToken
+  }, [deps])
+
+  return (
+    <AccessTokenProvider fetchToken={fetchToken}>
+      <Counter />
+      <TimeSeries />
+      <Leaderboard />
+    </AccessTokenProvider>
+  );  
+}
+```
+
 If you'd prefer to handle fetching on your own, you can pass the `accessToken` prop to the `AccessTokenProvider`. The provided access token will be served to all of its child components:
 
 ```jsx

@@ -80,9 +80,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({ childr
         await sleep(ACCESS_TOKEN_RETRY_INTERVAL)
       }
     }
-    // This useCallback cannot be tiggered by `fetchToken` because it is a function
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [log])
+  }, [log, fetchToken])
 
   useEffect(() => {
     async function init() {
