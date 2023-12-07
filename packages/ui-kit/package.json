@@ -7,7 +7,7 @@
   "module": "dist/esm/index.module.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "rm -rf dist && yarn typecheck && yarn graphql:build && rollup -c",
+    "build": "rm -rf dist && yarn graphql:build && yarn typecheck && rollup -c",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "yarn graphql:build && jest",
