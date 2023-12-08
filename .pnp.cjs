@@ -5996,6 +5996,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
+        ["virtual:009c775aa1e983172414e562d03ccbce90b5322a54e5df94edf4561ef12075bdc4f0a5db857d1cb73bd362c63bf52304c6f90c6321fe1f9ac4242f914563dc67#npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-3.1.2.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@graphql-codegen-plugin-helpers-virtual-70523b1213/0/cache/@graphql-codegen-plugin-helpers-npm-3.1.2-d595ac7e0d-4d0c615738.zip/node_modules/@graphql-codegen/plugin-helpers/",\
+          "packageDependencies": [\
+            ["@graphql-codegen/plugin-helpers", "virtual:009c775aa1e983172414e562d03ccbce90b5322a54e5df94edf4561ef12075bdc4f0a5db857d1cb73bd362c63bf52304c6f90c6321fe1f9ac4242f914563dc67#npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-3.1.2.tgz"],\
+            ["@graphql-tools/utils", "virtual:507baaac73fc4c6501b010dbfa5c657863724fbe23ed494b48175e51b9fda50e18da902f5fa093dcd4ca0fcacdd6488ac2327277604840baba10a0bba03c33f1#npm:9.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-9.2.1.tgz"],\
+            ["@types/graphql", null],\
+            ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
+            ["common-tags", "npm:1.8.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcommon-tags%2F-%2Fcommon-tags-1.8.2.tgz"],\
+            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
+            ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
+            ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
+            ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/graphql",\
+            "graphql"\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["virtual:0b685817c62bc9fd32c55fd382515921dab53b4174b6bd765a30babf96f2875e213ec947755c0b89269c5840d6f869a7953dcc6dc5f5853ecf92c7acfe348ac6#npm:5.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-5.0.1.tgz", {\
           "packageLocation": "./.yarn/__virtual__/@graphql-codegen-plugin-helpers-virtual-1356ba9ee2/0/cache/@graphql-codegen-plugin-helpers-npm-5.0.1-47be60c94f-97faa8f87f.zip/node_modules/@graphql-codegen/plugin-helpers/",\
           "packageDependencies": [\
@@ -6027,25 +6046,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
             ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
             ["tslib", "npm:2.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.5.3.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@types/graphql",\
-            "graphql"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:4d924428a0329f865b43c072107c5556964af4bdd43fb7cca9564adbc0ec4db4bc2f76834e77219d78b96cc1e7d1269e1030e570d4d659f5df4487b5e3316844#npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-3.1.2.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@graphql-codegen-plugin-helpers-virtual-3f54aa48f4/0/cache/@graphql-codegen-plugin-helpers-npm-3.1.2-d595ac7e0d-4d0c615738.zip/node_modules/@graphql-codegen/plugin-helpers/",\
-          "packageDependencies": [\
-            ["@graphql-codegen/plugin-helpers", "virtual:4d924428a0329f865b43c072107c5556964af4bdd43fb7cca9564adbc0ec4db4bc2f76834e77219d78b96cc1e7d1269e1030e570d4d659f5df4487b5e3316844#npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-3.1.2.tgz"],\
-            ["@graphql-tools/utils", "virtual:507baaac73fc4c6501b010dbfa5c657863724fbe23ed494b48175e51b9fda50e18da902f5fa093dcd4ca0fcacdd6488ac2327277604840baba10a0bba03c33f1#npm:9.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-tools%2Futils%2F-%2Futils-9.2.1.tgz"],\
-            ["@types/graphql", null],\
-            ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
-            ["common-tags", "npm:1.8.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcommon-tags%2F-%2Fcommon-tags-1.8.2.tgz"],\
-            ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
-            ["import-from", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fimport-from%2F-%2Fimport-from-4.0.0.tgz"],\
-            ["lodash", "npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flodash%2F-%2Flodash-4.17.21.tgz"],\
-            ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -6180,24 +6180,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@graphql-codegen/typescript-react-query", [\
-        ["npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz", {\
-          "packageLocation": "./.yarn/cache/@graphql-codegen-typescript-react-query-npm-4.1.0-335991d9ba-af6caf1be0.zip/node_modules/@graphql-codegen/typescript-react-query/",\
+        ["npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz", {\
+          "packageLocation": "./.yarn/cache/@graphql-codegen-typescript-react-query-npm-6.0.0-3a0188761c-0e52fec4b9.zip/node_modules/@graphql-codegen/typescript-react-query/",\
           "packageDependencies": [\
-            ["@graphql-codegen/typescript-react-query", "npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"]\
+            ["@graphql-codegen/typescript-react-query", "npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@graphql-codegen-typescript-react-query-virtual-4d924428a0/0/cache/@graphql-codegen-typescript-react-query-npm-4.1.0-335991d9ba-af6caf1be0.zip/node_modules/@graphql-codegen/typescript-react-query/",\
+        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@graphql-codegen-typescript-react-query-virtual-009c775aa1/0/cache/@graphql-codegen-typescript-react-query-npm-6.0.0-3a0188761c-0e52fec4b9.zip/node_modules/@graphql-codegen/typescript-react-query/",\
           "packageDependencies": [\
-            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"],\
-            ["@graphql-codegen/plugin-helpers", "virtual:4d924428a0329f865b43c072107c5556964af4bdd43fb7cca9564adbc0ec4db4bc2f76834e77219d78b96cc1e7d1269e1030e570d4d659f5df4487b5e3316844#npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-3.1.2.tgz"],\
+            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
+            ["@graphql-codegen/plugin-helpers", "virtual:009c775aa1e983172414e562d03ccbce90b5322a54e5df94edf4561ef12075bdc4f0a5db857d1cb73bd362c63bf52304c6f90c6321fe1f9ac4242f914563dc67#npm:3.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fplugin-helpers%2F-%2Fplugin-helpers-3.1.2.tgz"],\
             ["@graphql-codegen/visitor-plugin-common", "virtual:b07c423299c2eaa82564abffe2e675426d815f6138698aacdf3fe765abf4335e155b5a221102a2c09c38fd7af433d5e864d58f380f119a3f23898a945ec6915c#npm:2.13.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fvisitor-plugin-common%2F-%2Fvisitor-plugin-common-2.13.1.tgz"],\
             ["@types/graphql", null],\
             ["auto-bind", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fauto-bind%2F-%2Fauto-bind-4.0.0.tgz"],\
             ["change-case-all", "npm:1.0.15::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchange-case-all%2F-%2Fchange-case-all-1.0.15.tgz"],\
             ["graphql", "npm:16.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fgraphql%2F-%2Fgraphql-16.8.1.tgz"],\
-            ["tslib", "npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.4.1.tgz"]\
+            ["tslib", "npm:2.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.2.tgz"]\
           ],\
           "packagePeers": [\
             "@types/graphql",\
@@ -8544,7 +8544,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript%2F-%2Ftypescript-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"],\
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
-            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"],\
+            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -8601,7 +8601,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript%2F-%2Ftypescript-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"],\
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
-            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"],\
+            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -8658,7 +8658,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript%2F-%2Ftypescript-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"],\
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
-            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"],\
+            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -8715,7 +8715,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript%2F-%2Ftypescript-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-msw%2F-%2Ftypescript-msw-1.1.6.tgz"],\
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
-            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"],\
+            ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\

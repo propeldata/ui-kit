@@ -1,6 +1,13 @@
 import classnames from 'classnames'
 import React from 'react'
-import { getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery, useForwardedRefCallback } from '../../helpers'
+import {
+  CounterQuery,
+  getTimeZone,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  useCombinedRefsCallback,
+  useCounterQuery
+} from '../../helpers'
+import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useTheme } from '../ThemeProvider'
@@ -29,7 +36,10 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     },
     forwardedRef
   ) => {
-    const { componentContainer, setRef, ref } = useForwardedRefCallback(forwardedRef)
+    const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+    const accessToken = query?.accessToken ?? accessTokenFromProvider
+    const innerRef = React.useRef<HTMLSpanElement>(null)
+    const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
     useTheme({ componentContainer, baseTheme })
 
     /**
@@ -44,13 +54,13 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       isInitialLoading: isLoadingQuery,
       error,
       data: fetchedValue
-    } = useCounterQuery(
+    } = useCounterQuery<CounterQuery, Error>(
       {
         endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
         fetchParams: {
           headers: {
             'content-type': 'application/graphql-response+json',
-            authorization: `Bearer ${query?.accessToken}`
+            authorization: `Bearer ${accessToken}`
           }
         }
       },
@@ -70,7 +80,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       {
         refetchInterval: query?.refetchInterval,
         retry: query?.retry,
-        enabled: !isStatic
+        enabled: !isStatic && accessToken != null
       }
     )
 
@@ -84,7 +94,12 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
           return
         }
 
-        if (!isStatic && (!query?.accessToken || !query?.metric || !query?.timeRange)) {
+        if (
+          !isStatic &&
+          ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
+            !query?.metric ||
+            !query?.timeRange)
+        ) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
           // ) we will set logs as a feature later
@@ -98,13 +113,13 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, value, query, isLoadingStatic])
+    }, [isStatic, value, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
 
     if (error || propsMismatch) {
       return <ErrorFallback error={null} {...errorFallbackProps} />
     }
 
-    if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !ref?.current) {
+    if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && !ref.current) {
       return <Loader className={componentStyles.loader} {...loaderProps} isText />
     }
 

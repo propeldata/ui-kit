@@ -7,11 +7,12 @@ import {
   getPixelFontSizeAsNumber,
   getTimeZone,
   LeaderboardLabels,
+  LeaderboardQuery,
   PROPEL_GRAPHQL_API_ENDPOINT,
   useCombinedRefsCallback,
-  // useForwardedRefCallback,
   useLeaderboardQuery
 } from '../../helpers'
+import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useTheme } from '../ThemeProvider'
@@ -49,9 +50,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    // const { componentContainer, ref, setRef } = useForwardedRefCallback(forwardedRef)
     const { theme, chartConfig } = useTheme<'bar'>({ componentContainer, baseTheme })
+    const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
     const [propsMismatch, setPropsMismatch] = React.useState(false)
+
+    const accessToken = query?.accessToken ?? accessTokenFromProvider
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -253,13 +256,13 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       isInitialLoading: isLoadingQuery,
       error: hasError,
       data: fetchedData
-    } = useLeaderboardQuery(
+    } = useLeaderboardQuery<LeaderboardQuery, Error>(
       {
         endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
         fetchParams: {
           headers: {
             'content-type': 'application/graphql-response+json',
-            authorization: `Bearer ${query?.accessToken}`
+            authorization: `Bearer ${accessToken}`
           }
         }
       },
@@ -282,7 +285,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       {
         refetchInterval: query?.refetchInterval,
         retry: query?.retry,
-        enabled: !isStatic
+        enabled: !isStatic && accessToken != null
       }
     )
 
@@ -309,7 +312,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         if (
           !isStatic &&
-          (!query.accessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
+          ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
+            !query.metric ||
+            !query.timeRange ||
+            !query.dimensions ||
+            !query.rowLimit)
         ) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
@@ -329,7 +336,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, headers, rows, query, isLoadingStatic, variant])
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant, accessTokenFromProvider, isLoadingAccessToken])
 
     React.useEffect(() => {
       if (isStatic) {
@@ -370,7 +377,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
     // const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || variant === 'table'
 
-    if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
+    if (
+      ((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) &&
+      isNoContainerRef
+    ) {
       destroyChart()
       return <Loader {...loaderProps} />
     }

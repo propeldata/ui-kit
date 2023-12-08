@@ -1,7 +1,7 @@
 import React from 'react'
 import { RelativeTimeRange, TimeSeries, TimeSeriesGranularity } from '@propeldata/ui-kit'
 
-const { REACT_APP_PROPEL_ACCESS_TOKEN, REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
+const { REACT_APP_METRIC_UNIQUE_NAME_1 } = process.env
 
 export function TimeSeriesConnectedTest() {
   const [barsColor, setBarsColor] = React.useState('#ccc')
@@ -20,7 +20,6 @@ export function TimeSeriesConnectedTest() {
         <TimeSeries
           card
           query={{
-            accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             timeRange: {
               relative: RelativeTimeRange.LastNDays,

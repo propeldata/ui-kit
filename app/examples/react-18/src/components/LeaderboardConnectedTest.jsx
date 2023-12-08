@@ -21,7 +21,6 @@ export function LeaderboardConnectedTest() {
         <Leaderboard
           card
           query={{
-            accessToken: REACT_APP_PROPEL_ACCESS_TOKEN,
             dimensions: [
               {
                 columnName: REACT_APP_DIMENSION_1

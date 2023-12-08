@@ -2571,18 +2571,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-react-query@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@graphql-codegen/typescript-react-query@npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-4.1.0.tgz"
+"@graphql-codegen/typescript-react-query@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@graphql-codegen/typescript-react-query@npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"
   dependencies:
     "@graphql-codegen/plugin-helpers": ^3.0.0
     "@graphql-codegen/visitor-plugin-common": 2.13.1
     auto-bind: ~4.0.0
     change-case-all: 1.0.15
-    tslib: ~2.4.0
+    tslib: ~2.6.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: af6caf1be072f4918121b1c68c988ef193f145f65aa19333da8a3e02e29e825c75100a7e93f0dcd0cc69f3acab68a051cd1f0b5f4d11fa05704ae54b0b8f0c6f
+  checksum: 0e52fec4b90b47d29867955f7a9205cc0b4625d5729d2a01ddcf11e4ef21a7c64c66eb1a814e59670512a68f7c382549454ab05ce8fdb6967eccae6b4734eade
   languageName: node
   linkType: hard
 
@@ -4236,7 +4236,7 @@ __metadata:
     "@graphql-codegen/typescript": ^4.0.1
     "@graphql-codegen/typescript-msw": ^1.1.6
     "@graphql-codegen/typescript-operations": ^4.0.1
-    "@graphql-codegen/typescript-react-query": ^4.1.0
+    "@graphql-codegen/typescript-react-query": ^6.0.0
     "@juggle/resize-observer": ^3.4.0
     "@rollup/plugin-commonjs": ^25.0.7
     "@rollup/plugin-node-resolve": ^15.2.3
@@ -23692,7 +23692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.1, tslib@npm:^2.6.2":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.1, tslib@npm:^2.6.2, tslib@npm:~2.6.0":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ftslib%2F-%2Ftslib-2.6.2.tgz"
   checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad

@@ -1,7 +1,6 @@
-import { Canvas, Meta } from '@storybook/blocks'
+import { Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
-import { prettier } from '../../src/utils'
 import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
 
 <Meta title="Customization/Components" />
@@ -21,15 +20,6 @@ For example, to change the color of the bars in your time series chart, you can 
 
 <SourceCode of={TimeSeriesStories.CustomStyleStory} shown />
 
-<Canvas
-  of={TimeSeriesStories.CustomStyleStory}
-  sourceState="shown"
-  source={{
-    language: 'tsx',
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
-/>
-
 ## Errors
 
 You can also provide your own custom error messages by using the error prop. This will enable you to provide more
@@ -38,14 +28,7 @@ accurate feedback to your users in case of technical errors or other issues.
 For example, to display a custom error message when the chart data cannot be loaded, you can use the following
 JavaScript code:
 
-<Canvas
-  of={TimeSeriesStories.ErrorStory}
-  sourceState="shown"
-  source={{
-    language: 'tsx',
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
-/>
+<SourceCode of={TimeSeriesStories.ErrorStory} shown />
 
 By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that
 fit seamlessly into your front-end applications.
