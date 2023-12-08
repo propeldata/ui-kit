@@ -1,0 +1,23 @@
+import { Canvas, ArgTypes, Meta, Story, Source, Description, Primary, Controls, Stories } from '@storybook/blocks'
+
+<Meta title="HOOKS/Query Hooks" /> 
+
+# Query Hooks
+
+Propel’s UI Kit library provides the following React components: Counter, TimeSeries, and Leaderboard. To query the GraphQL API, we have developed 
+Query Hooks including "useCounter".
+
+
+## useCounter
+
+```ts  
+import { useCounter } from "@propeldata/ui-kit"  
+import fractionUnicode from 'fraction-unicode'
+
+export default function Fraction(props) {
+  const numerator = useCounter({ query, timeZone})
+  const denominator = useCounter({ query, timeZone})
+
+  return (<p>{fractionUnicode(numerator.value, denominator.value)}</p>)
+}
+```  

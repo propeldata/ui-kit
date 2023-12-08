@@ -1,19 +1,19 @@
 import { css } from '@emotion/css'
 import React from 'react'
-import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import type { ChartStyles } from '../../themes'
 import { defaultStyles } from '../../themes'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
+import { useCounter } from '../../hooks'
 
 export const CounterComponent = (props: CounterProps) => {
   const {
     value: staticValue,
     query,
+    timeZone,
     prefixValue,
     sufixValue,
     styles,
@@ -22,7 +22,7 @@ export const CounterComponent = (props: CounterProps) => {
     ...rest
   } = props
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+  const { value: counterQueryValue, isLoadingQuery, error } = useCounter({ query, timeZone })
 
   /**
    * If the user passes `value` attribute, it
@@ -34,43 +34,7 @@ export const CounterComponent = (props: CounterProps) => {
 
   const counterRef = React.useRef<HTMLSpanElement>(null)
 
-  const accessToken = query?.accessToken ?? accessTokenFromProvider
-
-  const {
-    isInitialLoading: isLoadingQuery,
-    error,
-    data: fetchedValue
-  } = useCounterQuery<CounterQuery, Error>(
-    {
-      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
-      fetchParams: {
-        headers: {
-          'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${accessToken}`
-        }
-      }
-    },
-    {
-      counterInput: {
-        metricName: query?.metric,
-        timeZone: props.timeZone ?? getTimeZone(),
-        timeRange: {
-          relative: query?.timeRange?.relative ?? null,
-          n: query?.timeRange?.n ?? null,
-          start: query?.timeRange?.start ?? null,
-          stop: query?.timeRange?.stop ?? null
-        },
-        filters: query?.filters ?? []
-      }
-    },
-    {
-      refetchInterval: query?.refetchInterval,
-      retry: query?.retry,
-      enabled: !isStatic && accessToken != null
-    }
-  )
-
-  const value = isStatic ? staticValue : fetchedValue?.counter?.value
+  const value = isStatic ? staticValue : counterQueryValue
 
   React.useEffect(() => {
     function handlePropsMismatch() {
@@ -80,12 +44,7 @@ export const CounterComponent = (props: CounterProps) => {
         return
       }
 
-      if (
-        !isStatic &&
-        ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
-          !query?.metric ||
-          !query?.timeRange)
-      ) {
+      if (!isStatic && value == null && (!query?.metric || !query?.timeRange)) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
@@ -99,16 +58,13 @@ export const CounterComponent = (props: CounterProps) => {
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, value, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
+  }, [isStatic, value, query, isLoadingStatic])
 
   if (error || propsMismatch) {
     return <ErrorFallback error={null} styles={styles} />
   }
 
-  if (
-    ((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) &&
-    !counterRef.current
-  ) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !counterRef.current) {
     return <Loader styles={styles}>000</Loader>
   }
 
