@@ -5,11 +5,14 @@ body {
   padding: 0;
 
   height: 100vh;
-
-  background-color: var(--propel-bg-secondary);
 }
 
 .border-2 {
   border-color: var(--propel-border-primary);
   background-color: transparent;
+}
+
+main {
+  min-width: 100vw;
+  min-height: 100vh;
 }

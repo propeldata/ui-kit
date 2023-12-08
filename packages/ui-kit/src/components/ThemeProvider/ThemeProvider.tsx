@@ -112,7 +112,7 @@ export const useTheme = <T extends ChartVariant>({
 export const ThemeProvider = ({
   children,
   baseTheme = 'lightTheme',
-  theme: themeProp = themes.lightTheme,
+  theme: themeProp,
   globalChartConfigProps
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()

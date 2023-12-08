@@ -27,7 +27,7 @@ export default function App() {
   return (
     <AccessTokenProvider fetchToken={fetchToken}>
       <ThemeProvider baseTheme={theme}>
-        <main style={{ color: 'var(--propel-text-secondary)' }}>
+        <main style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-bg-secondary)' }}>
           <h1 className="px-6 py-3 text-3xl">
             React 18 Testing App
             <button className="m-3" onClick={() => setTheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')}>
