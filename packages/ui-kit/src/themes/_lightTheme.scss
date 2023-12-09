@@ -1,6 +1,10 @@
 /** lightTheme.scss */
 
+@use './common';
+
 .lightTheme {
+  @extend .commonTokens;
+
   --propel-color-primary: #2e90fa;
   --propel-color-secondary: #cdd5df;
   --propel-bg-primary: #ffffff;

@@ -1,6 +1,10 @@
 /** darkTheme.scss */
 
+@use './common';
+
 .darkTheme {
+  @extend .commonTokens;
+
   --propel-color-primary: #2e90fa;
   --propel-color-secondary: rgba(46, 144, 250, 0.35);
   --propel-bg-primary: #202939;
