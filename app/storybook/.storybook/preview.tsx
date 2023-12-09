@@ -2,10 +2,18 @@ import { Source } from '@storybook/blocks'
 import type { Preview, StoryContext } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
-import { ThemeProvider } from '../../../packages/ui-kit/src/components/ThemeProvider'
+import { ThemeProvider, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
 import axiosInstance from '../src/axios'
 import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
+
+const GlobalStyles = () => {
+  const theme = useTheme()
+  if (document && theme) {
+    document.body.style.setProperty('--bg-color', theme.bgSecondary as string)
+  }
+  return null
+}
 
 const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   if (context.parameters.skipThemeProvider) {
@@ -14,6 +22,7 @@ const withThemeProvider = (Story: React.FC, context: StoryContext) => {
 
   return (
     <ThemeProvider baseTheme={context.globals.theme}>
+      <GlobalStyles />
       <Story />
     </ThemeProvider>
   )

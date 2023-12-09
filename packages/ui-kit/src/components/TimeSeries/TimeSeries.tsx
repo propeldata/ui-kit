@@ -18,7 +18,7 @@ import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useLog } from '../Log'
-import { useTheme } from '../ThemeProvider'
+import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
@@ -76,7 +76,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
-    const { theme, chartConfig } = useTheme<typeof type>({ componentContainer, baseTheme })
+    const { theme, chartConfig } = useSetupTheme<typeof type>({ componentContainer, baseTheme })
     const log = useLog()
     const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
     const accessToken = query?.accessToken ?? accessTokenFromProvider
@@ -207,7 +207,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         }
 
         // @TODO: need to refactor this logic
-        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid })
+        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid, theme })
 
         if (chartRef.current) {
           const chart = chartRef.current

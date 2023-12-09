@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { ThemeProvider, useTheme } from './ThemeProvider' // Adjust the import path as needed
+import { ThemeProvider, useSetupTheme } from './ThemeProvider' // Adjust the import path as needed
 import type { ThemeTokenProps } from '../../themes/theme.types' // Adjust the import path as needed
 
 const theme: ThemeTokenProps = {
@@ -35,9 +35,9 @@ describe('ThemeProvider', () => {
   })
 })
 
-describe('useTheme', () => {
+describe('useSetupTheme', () => {
   const TestComponent = ({ container }: { container?: HTMLElement }) => {
-    const { theme, chartConfig } = useTheme({ componentContainer: container })
+    const { theme, chartConfig } = useSetupTheme({ componentContainer: container })
     return (
       <div>
         Theme: {JSON.stringify(theme || 'No theme')}, ChartConfig: {JSON.stringify(chartConfig || 'No chartConfig')}

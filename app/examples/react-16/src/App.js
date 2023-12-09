@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccessTokenProvider, ThemeProvider } from '@propeldata/ui-kit'
+import { AccessTokenProvider, ThemeProvider, useTheme } from '@propeldata/ui-kit'
 
 import {
   TimeSeriesStaticTest,
@@ -23,12 +23,21 @@ async function fetchToken() {
   return access_token
 }
 
+const GlobalStyles = () => {
+  const theme = useTheme()
+  if (document && theme) {
+    document.body.style.setProperty('--bg-color', theme.bgSecondary)
+  }
+  return null
+}
+
 export default function App() {
   const [theme, setTheme] = React.useState('lightTheme')
   return (
     <AccessTokenProvider fetchToken={fetchToken}>
       <ThemeProvider baseTheme={theme}>
-        <main style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-bg-secondary)' }}>
+        <GlobalStyles />
+        <main style={{ color: 'var(--propel-text-secondary)' }}>
           <h1 className="px-6 py-3 text-3xl">
             React 16.8 Testing App
             <button className="m-3" onClick={() => setTheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')}>

@@ -3,6 +3,7 @@ import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
 import { getDisplayValue, Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
 import { Log } from '../Log'
+import { ThemeStateProps } from '../ThemeProvider'
 import { TimeSeriesChartVariant } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
@@ -160,9 +161,10 @@ interface GetScalesOptions {
   chart?: Chart | null
   variant: TimeSeriesChartVariant
   grid?: boolean
+  theme?: ThemeStateProps
 }
 
-export function getScales({ granularity, isFormatted, zone, chart, variant, grid }: GetScalesOptions) {
+export function getScales({ granularity, isFormatted, zone, chart, variant, grid, theme }: GetScalesOptions) {
   const scales = chart?.options?.scales
   const scale = scales?.y?.type ?? 'linear'
   const beginAtZero = (scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>)?.y?.beginAtZero ?? false
@@ -183,6 +185,7 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
     y: {
       display: scales?.y?.display ?? true,
       grid: {
+        color: theme?.colorSecondary,
         drawOnChartArea: true
       },
       ticks: {

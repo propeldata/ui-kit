@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: var(--propel-bg-secondary);
+  background-color: var(--bg-color);
 }
 
 a p {

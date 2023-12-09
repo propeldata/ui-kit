@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import React from 'react'
 import { useForwardedRefCallback } from '../../helpers'
 import { ThemeComponentProps } from '../../themes'
-import { useTheme } from '../ThemeProvider'
+import { useSetupTheme } from '../ThemeProvider'
 import componentStyles from './ErrorFallback.module.scss'
 
 export const serverErrorMessage = {
@@ -29,7 +29,7 @@ const Icon = ({ color }: { color?: string }) => (
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
   ({ error = serverErrorMessage, className, baseTheme, ...rest }, forwardedRef) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    useTheme({ componentContainer, baseTheme })
+    useSetupTheme({ componentContainer, baseTheme })
 
     return (
       <div ref={setRef} className={componentStyles.rootErrorFallback} {...rest}>

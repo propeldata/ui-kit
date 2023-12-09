@@ -9,15 +9,27 @@ import type {
   ThemeContextProps,
   ThemeProviderProps,
   ThemeStateProps,
-  UseThemeProps
+  UseSetupThemeProps
 } from './ThemeProvider.types'
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
 
-export const useTheme = <T extends ChartVariant>({
+/** A hook that returns the theme. */
+export const useTheme = (): ThemeStateProps | undefined => {
+  const context = useContext(ThemeContext)
+
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider')
+  }
+
+  return context.theme
+}
+
+/** A hook that sets up the theme. */
+export const useSetupTheme = <T extends ChartVariant>({
   componentContainer,
   baseTheme = 'lightTheme'
-}: UseThemeProps): { theme: ThemeStateProps; chartConfig?: ChartConfiguration<T> } => {
+}: UseSetupThemeProps): { theme: ThemeStateProps; chartConfig?: ChartConfiguration<T> } => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const [chartConfig, setChartConfig] = useState<ChartConfiguration<T>>()
   const context = useContext(ThemeContext)

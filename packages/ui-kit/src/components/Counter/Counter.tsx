@@ -10,7 +10,7 @@ import {
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import { useTheme } from '../ThemeProvider'
+import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Counter.module.scss'
 import type { CounterProps } from './Counter.types'
@@ -40,7 +40,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     const accessToken = query?.accessToken ?? accessTokenFromProvider
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
-    useTheme({ componentContainer, baseTheme })
+    useSetupTheme({ componentContainer, baseTheme })
 
     /**
      * If the user passes `value` attribute, it

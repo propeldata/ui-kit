@@ -38,7 +38,7 @@ export type ThemeStateProps = ThemeTokenProps | undefined
 
 export type ChartVariant = 'bar' | 'line'
 
-export interface UseThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
+export interface UseSetupThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
   /** The component root element to which the theme will be applied. */
   componentContainer?: HTMLElement | null
 }

@@ -15,7 +15,7 @@ import {
 import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import { useTheme } from '../ThemeProvider'
+import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
@@ -50,7 +50,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const { theme, chartConfig } = useTheme<'bar'>({ componentContainer, baseTheme })
+    const { theme, chartConfig } = useSetupTheme<'bar'>({ componentContainer, baseTheme })
     const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 

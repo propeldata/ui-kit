@@ -221,19 +221,7 @@ export const MultiDimensionBarStory: Story = {
   name: 'Multidimensional Bar',
   args: {
     query: connectedParamsMultiDimensional,
-    card: true,
-    labelFormatter: (labels) => {
-      console.log(labels)
-      return labels.map((label) => label.map((l) => l.toUpperCase()))
-      // labels.map((label) =>
-      //   new Date(label).toLocaleDateString('en', {
-      //     year: 'numeric',
-      //     month: 'short',
-      //     day: 'numeric'
-      //   })
-      // )
-      // return labels
-    }
+    card: true
   },
   render: (args) => <Leaderboard {...args} />
 }
