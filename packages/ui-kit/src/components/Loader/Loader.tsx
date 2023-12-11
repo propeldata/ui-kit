@@ -25,6 +25,7 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
         <p hidden>Loading...</p>
         <div
           data-role="loader-animation"
+          data-testid="loader-animation"
           className={classnames(componentStyles.loaderAnimation, isText && componentStyles.emptyText)}
         >
           {children}

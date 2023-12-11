@@ -33,7 +33,7 @@ export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps
 
     return (
       <div ref={setRef} className={componentStyles.rootErrorFallback} {...rest}>
-        <div className={classnames(componentStyles.container, className)}>
+        <div className={classnames(componentStyles.container, className)} data-testid="error-fallback-container">
           <Icon />
           {error && (
             <>

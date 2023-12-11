@@ -14,7 +14,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     useSetupTheme({ componentContainer, baseTheme })
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootCard, className)} {...rest}>
+      <div ref={setRef} className={classnames(componentStyles.rootCard, className)} data-testid="card" {...rest}>
         {children}
       </div>
     )
