@@ -1,12 +1,11 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { ThemeProvider, useSetupTheme } from './ThemeProvider' // Adjust the import path as needed
-import type { ThemeTokenProps } from '../../themes/theme.types' // Adjust the import path as needed
+import { ThemeProvider, useSetupTheme } from './ThemeProvider'
+import type { ThemeTokenProps } from '../../themes/theme.types'
 
 const theme: ThemeTokenProps = {
   colorPrimary: 'red',
   colorSecondary: 'blue'
-  // ... other necessary theme properties
 }
 
 describe('ThemeProvider', () => {

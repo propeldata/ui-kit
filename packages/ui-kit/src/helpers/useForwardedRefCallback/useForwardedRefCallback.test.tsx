@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { useForwardedRefCallback } from './useForwardedRefCallback' // Adjust the import path as needed
+import { useForwardedRefCallback } from './useForwardedRefCallback'
 
 describe('useForwardedRefCallback', () => {
   it('updates the forwarded ref with the DOM node', () => {
