@@ -22,7 +22,7 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
         aria-live="polite"
         {...rest}
       >
-        <p hidden>Loading...</p>
+        <p hidden>Loading&hellip;</p>
         <div
           data-role="loader-animation"
           data-testid="loader-animation"

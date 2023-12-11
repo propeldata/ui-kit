@@ -2,7 +2,6 @@ import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, FilterInput, LeaderboardLabels, Sort, TimeRangeInput } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps } from '../shared.types'
-// import { ChartCongfigProps } from '../ThemeProvider'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 

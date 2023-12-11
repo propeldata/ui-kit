@@ -21,6 +21,6 @@ describe('Loader', () => {
     const { container } = render(<Loader isText />)
     const loaderAnimation = container.querySelector('p')
 
-    expect(loaderAnimation?.textContent).toBe('Loading...')
+    expect(loaderAnimation?.textContent).toBe('Loading…')
   })
 })

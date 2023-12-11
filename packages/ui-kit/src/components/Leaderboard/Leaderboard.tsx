@@ -373,9 +373,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       return <ErrorFallback {...errorFallbackProps} error={error} />
     }
 
-    // const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !ref.current)
     const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
-    // const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || variant === 'table'
 
     if (
       ((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) &&

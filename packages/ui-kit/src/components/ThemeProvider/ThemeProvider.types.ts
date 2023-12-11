@@ -6,8 +6,11 @@ export type ThemeContextProps = {
   theme?: ThemeTokenProps
 
   /**
-   * Configuration function for default `Chart.js` settings.
-   * It allows defining or overriding chart configurations globally.
+   * Allows global customization of Chart.js settings for all chart components.
+   * The function provided to `ThemeProvider` takes a Chart.js config object
+   * (https://www.chartjs.org/docs/latest/configuration/) and returns it with
+   * applied customizations, ensuring consistent chart behavior and styling
+   * throughout your application.
    */
   globalChartConfigProps?: (config: ChartConfiguration<ChartVariant>) => ChartConfiguration<ChartVariant>
 }
