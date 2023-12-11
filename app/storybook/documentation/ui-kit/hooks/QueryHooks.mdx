@@ -21,3 +21,41 @@ export default function Fraction(props) {
   return (<p>{fractionUnicode(numerator.value, denominator.value)}</p>)
 }
 ```  
+
+## useTimeSeries
+
+```ts  
+import { useTimeSeries } from "@propeldata/ui-kit"  
+import { renderChart } from './chart'
+
+export default function TimeSeriesChart(props) {
+  const {data} = useTimeSeries({ query, timeZone})
+
+    React.useEffect(() => {
+    if (data) {
+      const labels = data.timeSeries.labels ?? []
+      const values = data.timeSeries.values ?? []
+
+      renderChart({ labels, values })
+    }
+  }, [data, renderChart])
+
+  return (<canvas id={id} ref={chartRef} />)
+}
+```  
+
+## useLeaderboard
+
+```ts  
+import { useLeaderboard } from "@propeldata/ui-kit"  
+import { Table } from './table'
+
+export default function Fraction(props) {
+  const { data } = useLeaderboard({ query, timeZone})
+
+  const headers = data?.leaderboard.headers
+  const rows = data?.leaderboard.rows
+
+  return (<Table header={headers} rows={rows} />)
+}
+```  

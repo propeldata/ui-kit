@@ -1,16 +1,9 @@
 import { css } from '@emotion/css'
 import { BarController, BarElement, CategoryScale, Chart as ChartJS, Colors, LinearScale, Tooltip } from 'chart.js'
 import React from 'react'
-import {
-  customCanvasBackgroundColor,
-  getTimeZone,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  formatLabels,
-  useLeaderboardQuery,
-  LeaderboardQuery
-} from '../../helpers'
+import { customCanvasBackgroundColor, formatLabels } from '../../helpers'
 import { ChartPlugins, defaultChartHeight, defaultStyles } from '../../themes'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
+
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
@@ -24,6 +17,7 @@ import {
   useSetupDefaultStyles
 } from './utils'
 import { ValueBar } from './ValueBar'
+import { useLeaderboard } from '../../hooks'
 
 /**
  * It registers only the modules that will be used
@@ -48,12 +42,8 @@ export const LeaderboardComponent = ({
 }: LeaderboardProps) => {
   const [propsMismatch, setPropsMismatch] = React.useState(false)
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
-
   const idRef = React.useRef(idCounter++)
   const id = `leaderboard-${idRef.current}`
-
-  const accessToken = query?.accessToken ?? accessTokenFromProvider
 
   /**
    * The html node where the chart will render
@@ -156,42 +146,7 @@ export const LeaderboardComponent = ({
     }
   }
 
-  const {
-    isInitialLoading: isLoadingQuery,
-    error: hasError,
-    data: fetchedData
-  } = useLeaderboardQuery<LeaderboardQuery, Error>(
-    {
-      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
-      fetchParams: {
-        headers: {
-          'content-type': 'application/graphql-response+json',
-          authorization: `Bearer ${accessToken}`
-        }
-      }
-    },
-    {
-      leaderboardInput: {
-        metricName: query?.metric,
-        filters: query?.filters,
-        sort: query?.sort,
-        rowLimit: query?.rowLimit ?? 100,
-        dimensions: query?.dimensions,
-        timeZone: timeZone ?? getTimeZone(),
-        timeRange: {
-          relative: query?.timeRange?.relative ?? null,
-          n: query?.timeRange?.n ?? null,
-          start: query?.timeRange?.start ?? null,
-          stop: query?.timeRange?.stop ?? null
-        }
-      }
-    },
-    {
-      refetchInterval: query?.refetchInterval,
-      retry: query?.retry,
-      enabled: !isStatic && accessToken != null
-    }
-  )
+  const { data: fetchedData, isLoadingQuery, error: hasError, hasNotAccessToken } = useLeaderboard({ query, timeZone })
 
   const loadingStyles = {
     opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
@@ -215,11 +170,7 @@ export const LeaderboardComponent = ({
 
       if (
         !isStatic &&
-        ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
-          !query.metric ||
-          !query.timeRange ||
-          !query.dimensions ||
-          !query.rowLimit)
+        (hasNotAccessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
       ) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
@@ -239,7 +190,7 @@ export const LeaderboardComponent = ({
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, headers, rows, query, isLoadingStatic, variant, accessTokenFromProvider, isLoadingAccessToken])
+  }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasNotAccessToken])
 
   React.useEffect(() => {
     if (isStatic) {
@@ -278,7 +229,7 @@ export const LeaderboardComponent = ({
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && isNoContainerRef) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }

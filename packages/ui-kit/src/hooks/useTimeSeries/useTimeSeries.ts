@@ -1,12 +1,12 @@
-import { CounterQueryProps, useAccessToken, useLog } from '../../components'
-import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
+import { TimeSeriesQueryProps, useAccessToken, useLog } from '../../components'
+import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery } from '../../helpers'
 
-interface useCounterProps {
-  query?: CounterQueryProps
+interface useTimeSeriesProps {
+  query?: TimeSeriesQueryProps
   timeZone?: string
 }
 
-export const useCounter = (props?: useCounterProps) => {
+export const useTimeSeries = (props?: useTimeSeriesProps) => {
   const { query, timeZone } = props
 
   const log = useLog()
@@ -19,7 +19,7 @@ export const useCounter = (props?: useCounterProps) => {
     log.error('No access token provided.')
   }
 
-  const { data, error, isInitialLoading } = useCounterQuery<CounterQuery, Error>(
+  const { data, error, isInitialLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
     {
       endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -30,16 +30,17 @@ export const useCounter = (props?: useCounterProps) => {
       }
     },
     {
-      counterInput: {
+      timeSeriesInput: {
         metricName: query?.metric,
-        timeZone: timeZone ?? getTimeZone(),
+        timeZone,
         timeRange: {
           relative: query?.timeRange?.relative ?? null,
           n: query?.timeRange?.n ?? null,
           start: query?.timeRange?.start ?? null,
           stop: query?.timeRange?.stop ?? null
         },
-        filters: query?.filters ?? []
+        granularity: query?.granularity,
+        filters: query?.filters
       }
     },
     {
