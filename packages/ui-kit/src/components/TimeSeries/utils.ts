@@ -250,6 +250,7 @@ export function tooltipTitleCallback(context: { label: string }[], granularity: 
 
   switch (granularity) {
     case TimeSeriesGranularity.Day:
+      return DateTime.fromJSDate(date).toFormat('LLL d, yyyy')
     case TimeSeriesGranularity.Week:
       return DateTime.fromJSDate(date).toFormat('LLL d, yyyy')
     case TimeSeriesGranularity.Month:
