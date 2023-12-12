@@ -26,6 +26,8 @@ export type CounterQueryProps = {
   retry?: boolean
   /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
   propelApiUrl?: string
+  /** Indicates specific time zone region */
+  timeZone?: string
 }
 
 export interface CounterProps extends React.ComponentProps<'span'> {

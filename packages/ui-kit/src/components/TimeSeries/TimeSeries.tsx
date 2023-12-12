@@ -109,10 +109,10 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
   const {
     data: serverData,
-    isLoadingQuery,
+    isLoading,
     error: hasError,
     hasNotAccessToken
-  } = useTimeSeries({ query: { ...query, granularity }, timeZone: zone })
+  } = useTimeSeries({ ...query, granularity, timeZone: zone })
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
@@ -252,7 +252,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
   // @TODO: encapsulate this logic in a shared hook/component
   // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !canvasRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !canvasRef.current) {
     destroyChart()
     return <Loader styles={styles} />
   }
@@ -267,7 +267,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
         role={role || 'img'}
         aria-label={ariaLabel || defaultAriaLabel}
         style={{
-          opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
+          opacity: isLoading || isLoadingStatic ? '0.3' : '1',
           transition: 'opacity 0.2s ease-in-out'
         }}
         {...rest}

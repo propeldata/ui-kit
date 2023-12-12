@@ -146,10 +146,10 @@ export const LeaderboardComponent = ({
     }
   }
 
-  const { data: fetchedData, isLoadingQuery, error: hasError, hasNotAccessToken } = useLeaderboard({ query, timeZone })
+  const { data: fetchedData, isLoading, error: hasError, hasNotAccessToken } = useLeaderboard({ ...query, timeZone })
 
   const loadingStyles = {
-    opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
+    opacity: isLoading || isLoadingStatic ? '0.3' : '1',
     transition: 'opacity 0.2s ease-in-out'
   }
 
@@ -229,7 +229,7 @@ export const LeaderboardComponent = ({
 
   const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !tableRef.current)
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && isNoContainerRef) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
     destroyChart()
     return <Loader styles={styles} />
   }

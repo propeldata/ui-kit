@@ -1,27 +1,32 @@
 import { CounterQueryProps, useAccessToken, useLog } from '../../components'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
 
-interface useCounterProps {
-  query?: CounterQueryProps
-  timeZone?: string
-}
-
-export const useCounter = (props?: useCounterProps) => {
-  const { query, timeZone } = props
+export const useCounter = (props?: CounterQueryProps): UseQueryProps<CounterQuery> => {
+  const {
+    accessToken: accessTokenFromProp,
+    propelApiUrl,
+    metric,
+    timeRange,
+    filters,
+    refetchInterval,
+    retry,
+    timeZone
+  } = props
 
   const log = useLog()
 
   const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
 
-  const accessToken = query?.accessToken ?? accessTokenFromProvider
+  const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  if (query && !accessToken) {
+  if (!accessToken) {
     log.error('No access token provided.')
   }
 
   const { data, error, isInitialLoading } = useCounterQuery<CounterQuery, Error>(
     {
-      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
+      endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/graphql-response+json',
@@ -31,27 +36,27 @@ export const useCounter = (props?: useCounterProps) => {
     },
     {
       counterInput: {
-        metricName: query?.metric,
+        metricName: metric,
         timeZone: timeZone ?? getTimeZone(),
         timeRange: {
-          relative: query?.timeRange?.relative ?? null,
-          n: query?.timeRange?.n ?? null,
-          start: query?.timeRange?.start ?? null,
-          stop: query?.timeRange?.stop ?? null
+          relative: timeRange?.relative ?? null,
+          n: timeRange?.n ?? null,
+          start: timeRange?.start ?? null,
+          stop: timeRange?.stop ?? null
         },
-        filters: query?.filters ?? []
+        filters: filters ?? []
       }
     },
     {
-      refetchInterval: query?.refetchInterval,
-      retry: query?.retry,
-      enabled: query && accessToken != null
+      refetchInterval: refetchInterval,
+      retry: retry,
+      enabled: accessToken != null
     }
   )
 
   return {
     data,
-    isLoadingQuery: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: isInitialLoading ?? isLoadingAccessToken,
     error,
     hasNotAccessToken: !accessToken
   }

@@ -22,7 +22,7 @@ export const CounterComponent = (props: CounterProps) => {
     ...rest
   } = props
 
-  const { data, isLoadingQuery, error, hasNotAccessToken } = useCounter({ query, timeZone })
+  const { data, isLoading, error, hasNotAccessToken } = useCounter({ ...query, timeZone })
 
   /**
    * If the user passes `value` attribute, it
@@ -64,7 +64,7 @@ export const CounterComponent = (props: CounterProps) => {
     return <ErrorFallback error={null} styles={styles} />
   }
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoadingQuery)) && !counterRef.current) {
+  if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !counterRef.current) {
     return <Loader styles={styles}>000</Loader>
   }
 
@@ -72,7 +72,7 @@ export const CounterComponent = (props: CounterProps) => {
     <span
       ref={counterRef}
       style={{
-        opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
+        opacity: isLoading || isLoadingStatic ? '0.3' : '1',
         transition: 'opacity 0.2s ease-in-out'
       }}
       {...rest}

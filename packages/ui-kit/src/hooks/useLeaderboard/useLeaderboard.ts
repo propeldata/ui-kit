@@ -1,26 +1,35 @@
 import { LeaderboardQueryProps, useAccessToken, useLog } from '../../components'
 import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
 
-interface useLeaderboardProps {
-  query?: LeaderboardQueryProps
-  timeZone?: string
-}
-export const useLeaderboard = (props?: useLeaderboardProps) => {
-  const { query, timeZone } = props
+export const useLeaderboard = (props?: LeaderboardQueryProps): UseQueryProps<LeaderboardQuery> => {
+  const {
+    accessToken: accessTokenFromProp,
+    propelApiUrl,
+    metric,
+    sort,
+    rowLimit,
+    dimensions,
+    timeRange,
+    filters,
+    refetchInterval,
+    retry,
+    timeZone
+  } = props
 
   const log = useLog()
 
   const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
 
-  const accessToken = query?.accessToken ?? accessTokenFromProvider
+  const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  if (query && !accessToken) {
+  if (!accessToken) {
     log.error('No access token provided.')
   }
 
   const { data, error, isInitialLoading } = useLeaderboardQuery<LeaderboardQuery, Error>(
     {
-      endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
+      endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
         headers: {
           'content-type': 'application/graphql-response+json',
@@ -30,30 +39,30 @@ export const useLeaderboard = (props?: useLeaderboardProps) => {
     },
     {
       leaderboardInput: {
-        metricName: query?.metric,
-        filters: query?.filters,
-        sort: query?.sort,
-        rowLimit: query?.rowLimit ?? 100,
-        dimensions: query?.dimensions,
+        metricName: metric,
+        filters: filters,
+        sort: sort,
+        rowLimit: rowLimit ?? 100,
+        dimensions: dimensions,
         timeZone: timeZone ?? getTimeZone(),
         timeRange: {
-          relative: query?.timeRange?.relative ?? null,
-          n: query?.timeRange?.n ?? null,
-          start: query?.timeRange?.start ?? null,
-          stop: query?.timeRange?.stop ?? null
+          relative: timeRange?.relative ?? null,
+          n: timeRange?.n ?? null,
+          start: timeRange?.start ?? null,
+          stop: timeRange?.stop ?? null
         }
       }
     },
     {
-      refetchInterval: query?.refetchInterval,
-      retry: query?.retry,
-      enabled: query && accessToken != null
+      refetchInterval: refetchInterval,
+      retry: retry,
+      enabled: accessToken != null
     }
   )
 
   return {
     data,
-    isLoadingQuery: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: isInitialLoading ?? isLoadingAccessToken,
     error,
     hasNotAccessToken: !accessToken
   }
