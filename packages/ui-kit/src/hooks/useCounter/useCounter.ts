@@ -16,12 +16,16 @@ export const useCounter = (props?: CounterQueryProps): UseQueryProps<CounterQuer
 
   const log = useLog()
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+  const {
+    accessToken: accessTokenFromProvider,
+    isLoading: isLoadingAccessToken,
+    error: accessTokenError
+  } = useAccessToken()
 
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  if (!accessToken) {
-    log.error('No access token provided.')
+  if (!accessToken && metric) {
+    log.error(accessTokenError ?? 'No access token provided.')
   }
 
   const { data, error, isInitialLoading } = useCounterQuery<CounterQuery, Error>(
@@ -57,7 +61,6 @@ export const useCounter = (props?: CounterQueryProps): UseQueryProps<CounterQuer
   return {
     data,
     isLoading: isInitialLoading ?? isLoadingAccessToken,
-    error,
-    hasNotAccessToken: !accessToken
+    error: accessTokenError ?? error
   }
 }

@@ -8,17 +8,18 @@
  */
 export interface UseQueryProps<T> {
   /** Query type */
-  data: T | undefined
+  data?: T
+
   /**
    * Indicates if the query is loading
    * Sets to true when the query is fetching data for the first time and when the access token is loading
    */
-  isLoading: boolean
-  /** Error returned by the query */
-  error: Error | undefined
+  isLoading?: boolean
+
   /**
-   * Indicates if the access token is not provided
-   * Sets to true when the access token is not provided by query or provider
+   * Throws error
+   * @name AccessTokenError When accessToken is not provided
+   * @name Error When the query fails
    */
-  hasNotAccessToken: boolean
+  error?: Error
 }

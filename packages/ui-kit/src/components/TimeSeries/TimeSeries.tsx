@@ -107,12 +107,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
 
   const log = useLog()
 
-  const {
-    data: serverData,
-    isLoading,
-    error: hasError,
-    hasNotAccessToken
-  } = useTimeSeries({ ...query, granularity, timeZone: zone })
+  const { data: serverData, isLoading, error: hasError } = useTimeSeries({ ...query, granularity, timeZone: zone })
 
   const renderChart = React.useCallback(
     (data?: TimeSeriesData) => {
@@ -208,7 +203,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
         return
       }
 
-      if (!isStatic && (hasNotAccessToken || !query?.metric || !query?.timeRange)) {
+      if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
@@ -222,7 +217,7 @@ export const TimeSeriesComponent: React.FC<TimeSeriesProps> = ({
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, labels, values, query, isLoadingStatic, hasNotAccessToken])
+  }, [isStatic, labels, values, query, isLoadingStatic, hasError?.name])
 
   React.useEffect(() => {
     if (isStatic) {

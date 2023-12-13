@@ -146,7 +146,7 @@ export const LeaderboardComponent = ({
     }
   }
 
-  const { data: fetchedData, isLoading, error: hasError, hasNotAccessToken } = useLeaderboard({ ...query, timeZone })
+  const { data: fetchedData, isLoading, error: hasError } = useLeaderboard({ ...query, timeZone })
 
   const loadingStyles = {
     opacity: isLoading || isLoadingStatic ? '0.3' : '1',
@@ -170,7 +170,11 @@ export const LeaderboardComponent = ({
 
       if (
         !isStatic &&
-        (hasNotAccessToken || !query.metric || !query.timeRange || !query.dimensions || !query.rowLimit)
+        (hasError?.name === 'AccessTokenError' ||
+          !query.metric ||
+          !query.timeRange ||
+          !query.dimensions ||
+          !query.rowLimit)
       ) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
@@ -190,7 +194,7 @@ export const LeaderboardComponent = ({
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasNotAccessToken])
+  }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name])
 
   React.useEffect(() => {
     if (isStatic) {

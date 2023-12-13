@@ -17,12 +17,16 @@ export const useTimeSeries = (props?: TimeSeriesQueryProps): UseQueryProps<TimeS
 
   const log = useLog()
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+  const {
+    accessToken: accessTokenFromProvider,
+    isLoading: isLoadingAccessToken,
+    error: accessTokenError
+  } = useAccessToken()
 
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  if (!accessToken) {
-    log.error('No access token provided.')
+  if (!accessToken && metric) {
+    log.error(accessTokenError ?? 'No access token provided.')
   }
 
   const { data, error, isInitialLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
@@ -59,7 +63,6 @@ export const useTimeSeries = (props?: TimeSeriesQueryProps): UseQueryProps<TimeS
   return {
     data,
     isLoading: isInitialLoading ?? isLoadingAccessToken,
-    error,
-    hasNotAccessToken: !accessToken
+    error: accessTokenError ?? error
   }
 }

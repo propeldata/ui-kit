@@ -19,12 +19,16 @@ export const useLeaderboard = (props?: LeaderboardQueryProps): UseQueryProps<Lea
 
   const log = useLog()
 
-  const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
+  const {
+    accessToken: accessTokenFromProvider,
+    isLoading: isLoadingAccessToken,
+    error: accessTokenError
+  } = useAccessToken()
 
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  if (!accessToken) {
-    log.error('No access token provided.')
+  if (!accessToken && metric) {
+    log.error(accessTokenError ?? 'No access token provided.')
   }
 
   const { data, error, isInitialLoading } = useLeaderboardQuery<LeaderboardQuery, Error>(
@@ -63,7 +67,6 @@ export const useLeaderboard = (props?: LeaderboardQueryProps): UseQueryProps<Lea
   return {
     data,
     isLoading: isInitialLoading ?? isLoadingAccessToken,
-    error,
-    hasNotAccessToken: !accessToken
+    error: accessTokenError ?? error
   }
 }

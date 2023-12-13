@@ -22,7 +22,7 @@ export const CounterComponent = (props: CounterProps) => {
     ...rest
   } = props
 
-  const { data, isLoading, error, hasNotAccessToken } = useCounter({ ...query, timeZone })
+  const { data, isLoading, error } = useCounter({ ...query, timeZone })
 
   /**
    * If the user passes `value` attribute, it
@@ -44,7 +44,7 @@ export const CounterComponent = (props: CounterProps) => {
         return
       }
 
-      if (!isStatic && hasNotAccessToken && (!query?.metric || !query?.timeRange)) {
+      if (!isStatic && error?.name === 'AccessTokenError' && (!query?.metric || !query?.timeRange)) {
         // console.error(
         //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
         // ) we will set logs as a feature later
@@ -58,7 +58,7 @@ export const CounterComponent = (props: CounterProps) => {
     if (!isLoadingStatic) {
       handlePropsMismatch()
     }
-  }, [isStatic, value, query, isLoadingStatic, hasNotAccessToken])
+  }, [isStatic, value, query, isLoadingStatic, error?.name])
 
   if (error || propsMismatch) {
     return <ErrorFallback error={null} styles={styles} />
