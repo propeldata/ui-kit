@@ -15,9 +15,35 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-themes'),
     getAbsolutePath('@storybook/addon-interactions'),
-    getAbsolutePath('@storybook/addon-a11y')
+    getAbsolutePath('@storybook/addon-a11y'),
+    {
+      name: getAbsolutePath('@storybook/addon-styling-webpack'),
+      options: {
+        rules: [
+          {
+            test: /\.(sa|sc|c)ss$/,
+            sideEffects: true,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {
+                  importLoaders: 1
+                }
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  implementation: require.resolve('postcss')
+                }
+              },
+              { loader: 'sass-loader' }
+            ]
+          }
+        ]
+      }
+    }
   ],
   framework: {
     name: getAbsolutePath('@storybook/react-webpack5'),
@@ -38,8 +64,13 @@ const config: StorybookConfig = {
       loader: require.resolve('babel-loader'),
       exclude: /node_modules/,
       options: {
-        presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
+        presets: ['@babel/preset-react', '@babel/preset-typescript']
       }
+    })
+
+    config.module?.rules?.push({
+      test: /\.raw\.css$/,
+      use: ['raw-loader']
     })
 
     if (config.resolve) {

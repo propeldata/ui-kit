@@ -1,9 +1,16 @@
+import classnames from 'classnames'
 import React from 'react'
-import { css } from '@emotion/css'
-import { defaultChartHeight, serverErrorMessage, ChartStyles } from '../../themes'
+import { useForwardedRefCallback } from '../../helpers'
+import { ThemeComponentProps } from '../../themes'
+import { useSetupTheme } from '../ThemeProvider'
+import componentStyles from './ErrorFallback.module.scss'
 
-export interface ErrorFallbackProps {
-  styles?: ChartStyles
+export const serverErrorMessage = {
+  title: 'Unable to connect',
+  body: 'Sorry we are not able to connect at this time due to a technical error.'
+}
+
+export interface ErrorFallbackProps extends ThemeComponentProps, Omit<React.ComponentPropsWithoutRef<'div'>, 'style'> {
   error?: {
     title: string
     body: string
@@ -19,48 +26,29 @@ const Icon = ({ color }: { color?: string }) => (
   </svg>
 )
 
-export function ErrorFallback(props: ErrorFallbackProps) {
-  const { error = serverErrorMessage, styles } = props
+export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
+  ({ error = serverErrorMessage, className, baseTheme, ...rest }, forwardedRef) => {
+    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
+    useSetupTheme({ componentContainer, baseTheme })
 
-  const width = styles?.canvas?.width
-  const defaultHeight = error ? defaultChartHeight : 'auto'
-  const height = styles?.canvas?.height || defaultHeight
-
-  return (
-    <div
-      className={css`
-        width: ${width ? width + 'px' : '100%'};
-        height: ${height}px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      `}
-    >
-      <div
-        className={css`
-          max-width: 263px;
-          text-align: center;
-          text-align: -webkit-center;
-        `}
-      >
-        <Icon color={styles?.font?.color} />
-        {error && (
-          <>
-            <p
-              className={css`
-                font-weight: 500;
-              `}
-              role="alert"
-              aria-live="assertive"
-            >
-              {error.title}
-            </p>
-            <p role="alert" aria-live="assertive">
-              {error.body}
-            </p>
-          </>
-        )}
+    return (
+      <div ref={setRef} className={componentStyles.rootErrorFallback} {...rest}>
+        <div className={classnames(componentStyles.container, className)} data-testid="error-fallback-container">
+          <Icon />
+          {error && (
+            <>
+              <p role="alert" aria-live="assertive">
+                {error.title}
+              </p>
+              <p role="alert" aria-live="assertive">
+                {error.body}
+              </p>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
+
+ErrorFallback.displayName = 'ErrorFallback'

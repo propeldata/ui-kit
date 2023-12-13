@@ -1,6 +1,6 @@
-import { css } from '@emotion/css'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
+import './Counter.stories.css'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { quotedStringRegex, RelativeTimeRange, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { Counter as CounterSource, CounterComponent } from './Counter'
@@ -9,6 +9,13 @@ const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
   component: CounterComponent,
   tags: ['tag'],
+  argTypes: {
+    baseTheme: {
+      table: {
+        disable: true
+      }
+    }
+  },
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Counter, RelativeTimeRange',
@@ -36,6 +43,7 @@ const connectedParams = {
 
 const Counter = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
+  const ref = React.useRef(null)
 
   if (!accessToken && args?.query) {
     return null
@@ -44,7 +52,14 @@ const Counter = (args: Story['args']) => {
   return (
     <CounterSource
       {...{
+        ref,
         ...args,
+        // @TODO: Improve this
+        onClick: args?.onClick
+          ? () => {
+              ref?.current && args.onClick?.(ref.current)
+            }
+          : undefined,
         query: args?.query
           ? {
               ...args?.query,
@@ -56,107 +71,57 @@ const Counter = (args: Story['args']) => {
   )
 }
 
-const styles = {
-  container: css`
-    font-family: Inter;
-    display: inline-flex;
-    min-width: 300;
-  `,
-  card: css`
-    flex: 1 auto;
-    box-sizing: border-box;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    padding: 20px;
-    background-color: var(--color-background);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-  `,
-  cardTitle: css`
-    margin: 0;
-    font-weight: 500;
-    color: #2e90fa;
-  `,
-  cardComparisonTitle: css`
-    margin: 0;
-    font-weight: 500;
-    color: #7d89b0;
-  `,
-  cardComparisonValues: css`
-    display: flex;
-    align-items: flex-end;
-    color: #7d89b0;
-  `,
-  cardComparisonFrom: css`
-    margin: 0 0 4px 1ch;
-  `
-}
-
 export const SingleValueStory: Story = {
   name: 'Single value',
-  args: connectedParams,
+  args: {
+    ...connectedParams,
+    style: {
+      width: 'fit-content',
+      '--propel-accent': 'red'
+    },
+    card: true
+  },
   render: (args) => <Counter {...args} />
 }
 
 export const ValueInCardStory: Story = {
   name: 'Value in card',
+  tags: ['pattern'],
   args: {
     ...connectedParams,
     style: {
-      fontSize: '40px',
-      fontWeight: 600
+      width: 'fit-content'
     }
   },
   render: (args) => (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <span className={styles.cardTitle}>Revenue</span>
+    <div className="card-container">
+      <div className="card">
+        <span className="card-label">Revenue</span>
         <Counter {...args} />
       </div>
     </div>
   )
 }
 
-export const ValueInCardWithComparisonStory: Story = {
-  name: 'Value in card with comparison',
-  args: {
-    ...connectedParams,
-    style: {
-      fontSize: '32px',
-      fontWeight: 600
-    }
-  },
-  render: (args) => (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <span className={styles.cardComparisonTitle}>Revenue</span>
-        <div className={styles.cardComparisonValues}>
-          <Counter {...args} />
-          <div className={styles.cardComparisonFrom}>
-            <span>from </span>
-            <Counter
-              prefixValue="$"
-              value="16856"
-              localize
-              style={{
-                color: '#7d89b0'
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export const StaticStory: Story = {
-  name: 'Static',
+  name: 'Static numeric value',
   args: {
     prefixValue: '$',
     value: '49291',
-    localize: true
+    localize: true,
+    card: true,
+    style: {
+      width: 'fit-content'
+    }
+  },
+  render: (args) => <Counter {...args} />
+}
+
+export const StringValueStory: Story = {
+  name: 'Static string value',
+  args: {
+    card: true,
+    value: 'A string value'
   },
   render: (args) => <Counter {...args} />
 }
@@ -166,22 +131,56 @@ export const SingleValueCustomStyleStory: Story = {
   tags: ['pattern'],
   args: {
     ...connectedParams,
-    styles: {
-      font: {
-        size: '2rem',
-        style: 'italic',
-        family: 'Arial',
-        weight: 'bold'
+    card: true,
+    loaderProps: {
+      style: {
+        fontSize: '2rem'
       }
+    },
+    style: {
+      width: 'fit-content',
+      fontSize: '2rem',
+      fontStyle: 'italic',
+      fontFamily: 'Arial',
+      fontWeight: 'bold'
     }
   },
   render: (args) => <Counter {...args} />
 }
 
-export const StringValueStory: Story = {
-  name: 'String value',
+export const SingleValueRefStory: Story = {
+  name: 'Single value with ref',
+  tags: ['pattern'],
   args: {
-    value: 'My string'
+    value: '49291',
+    localize: true,
+    card: true,
+    onClick: (ref) => {
+      console.log('ref', ref)
+    }
+  },
+  parameters: {
+    // @TODO: Improve this
+    codeTemplate: () => `
+      import React from 'react'
+      import { Counter } from '@propeldata/ui-kit'
+
+      function App() {
+        const ref = React.useRef(null)
+
+        return (
+          <Counter
+            ref={ref}
+            value="49291"
+            localize
+            card
+            onClick={() => {
+              console.log('ref', ref?.current)
+            }}
+          />
+        )
+      }
+    `
   },
   render: (args) => <Counter {...args} />
 }

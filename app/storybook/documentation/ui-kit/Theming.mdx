@@ -1,0 +1,84 @@
+import { Meta, Source } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../src/utils'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as ThemeProviderStories from '../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
+import rawThemesScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/themes.module.scss'
+import rawCommonScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_common.scss'
+import rawLightThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_lightTheme.scss'
+import rawDarkThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_darkTheme.scss'
+
+<Meta title="Customization/Theming" />
+
+# Theming
+
+The theme of a UI determines essential visual elements, including the colors of components, the depth of shadows, and
+the overall light or dark appearance of the interface. We provide both light and dark themes, with the light theme set
+as the default.
+
+## ThemeProvider
+
+To customize the theme, it's necessary to employ the `ThemeProvider` component, which injects a theme into your
+application. This step, however, is not mandatory as UI Kit components are pre-equipped with a default theme.
+
+The `ThemeProvider` utilizes React's [context mechanism](https://react.dev/learn/passing-data-deeply-with-context) to
+propagate the theme to the components. Therefore, ensure that `ThemeProvider` is positioned as a parent to the
+components you wish to customize. Further details are available in
+the&#160;<LinkTo kind="API/ThemeProvider" story="overview">API section</LinkTo>.
+
+## Theme configuration
+
+Adjusting the theme configuration variables is the most effective approach to customize the UI Kit according to your
+unique needs.
+
+### Tokens
+
+Each token in the theme object is represented as both a
+[CSS Custom Property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and a corresponding
+JavaScript property, e.g. `--propel-font-family` and `fontFamily`. The CSS Custom Properties are prefixed with
+`--propel-` which helps to prevent any potential naming collisions with other stylesheets. Further details are available
+in the <LinkTo kind="API/ThemeTokenProps" story="overview">API section</LinkTo>.
+
+### Default values
+
+The content in `themes.module.scss` serves as the foundational entry point for theming within the UI Kit.
+
+<Source language="css" format="dedent" dark code={rawThemesScss} />
+
+The `common.scss` file contains the **common** theme configuration, defining a series of CSS custom properties that are
+shared by both the light and dark themes.
+
+<Source language="css" format="dedent" dark code={rawCommonScss} />
+
+The `lightTheme.scss` file sets up the **light theme** for the UI Kit, defining a series of CSS custom properties
+specific to this theme.
+
+<Source language="css" format="dedent" dark code={rawLightThemeScss} />
+
+The `darkTheme.scss` file sets up the **dark theme** for the UI Kit, defining a series of CSS custom properties specific
+to this theme.
+
+<Source language="css" format="dedent" dark code={rawDarkThemeScss} />
+
+### Customizing the Theme
+
+The `ThemeProvider` component allows theme customization through its `theme` prop.
+
+#### Customization via CSS Class:
+
+<SourceCode
+  of={ThemeProviderStories.ThemeProviderCustomizeViaCssClassNameStory}
+  transform={(code, context) =>
+    `${prettier(context.parameters.rawCss, { parser: 'css' })}\n${prettier(
+      context.parameters.codeTemplate(code, context)
+    )}`
+  }
+  shown
+/>
+
+#### Customization via JavaScript properties:
+
+<SourceCode of={ThemeProviderStories.ThemeProviderCustomizeViaJSPropsStory} shown />
+
+This method enables the seamless integration of design tokens from a CSS-in-JS library, like
+[Material UI](https://mui.com/material-ui/customization/theming/).

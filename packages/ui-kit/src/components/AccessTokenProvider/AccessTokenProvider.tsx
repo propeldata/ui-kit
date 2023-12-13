@@ -10,7 +10,7 @@ export interface AccessTokenContextValue {
    *
    * Otherwise, when re-fetching an access token, this property will remain equal to the previous access token until the fetch token function completes again.
    */
-  accessToken?: string
+  accessToken?: string | null
   /**
    * If true, the AccessTokenProvider is fetching an access token.
    *
@@ -27,7 +27,7 @@ const ACCESS_TOKEN_REFRESH_INTERVAL = 3300000 // 55 minutes
 const ACCESS_TOKEN_MAX_RETRIES = 3
 const ACCESS_TOKEN_RETRY_INTERVAL = 1000
 
-export const AccessTokenContext = createContext<AccessTokenContextValue | undefined>({})
+export const AccessTokenContext = createContext<AccessTokenContextValue>({})
 
 export interface AccessTokenProviderProps {
   /**
@@ -44,7 +44,7 @@ export interface AccessTokenProviderProps {
 
 export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({ children, accessToken, fetchToken }) => {
   const [isLoading, setIsLoading] = useState(accessToken == null)
-  const [fetchedToken, setFetchedToken] = useState<string | undefined>(undefined)
+  const [fetchedToken, setFetchedToken] = useState<string | undefined | null>(undefined)
   const [error, setError] = useState<Error | undefined>(undefined)
 
   const log = useLog()
@@ -54,6 +54,10 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({ childr
 
   const fetch = useCallback(async () => {
     let retries = 0
+
+    if (!fetchToken) {
+      throw new Error('You must pass either `fetchToken` or `accessToken` props')
+    }
 
     while (mounted.current) {
       try {
@@ -66,7 +70,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({ childr
         setFetchedToken(token)
 
         break
-      } catch (error) {
+      } catch (error: any) {
         if (!mounted.current) break
         log.warn('Failed to fetch access token', error)
 

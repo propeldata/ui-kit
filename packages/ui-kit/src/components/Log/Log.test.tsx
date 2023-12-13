@@ -121,6 +121,6 @@ describe('Logger', () => {
     await dom.findByText('The log level is off. There is no log to show on console.')
 
     // If the log level is set to Off, there is no console message
-    expect(dom.queryByText(LogLevel.Error, LogLevel.Error)).not.toBeInTheDocument()
+    expect(dom.queryByText(getLog(LogLevel.Error, LogLevel.Error.toString()))).not.toBeInTheDocument()
   })
 })

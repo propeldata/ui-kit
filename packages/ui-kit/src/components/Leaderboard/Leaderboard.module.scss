@@ -1,0 +1,101 @@
+@use '../../themes/typography';
+
+.rootLeaderboard {
+  @extend .typographyTiny;
+  overflow: auto;
+  padding: 0;
+
+  canvas {
+    height: var(--propel-component-height);
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    --value-bar-min-width: 100px;
+    --value-bar-padding-right: 6px;
+
+    .stickyColumn {
+      position: sticky;
+      background-color: var(--propel-bg-primary);
+      right: 0;
+    }
+
+    [data-role='table-value'] {
+      right: 0;
+      text-align: right;
+      padding-left: var(--propel-space-sm);
+      white-space: nowrap;
+      width: 1%;
+    }
+
+    [data-role='table-value-bar'] {
+      width: 20%;
+      min-width: var(--value-bar-min-width);
+      padding-right: var(--value-bar-padding-right);
+    }
+
+    &.stickyValues {
+      [data-role='table-value'] {
+        @extend .stickyColumn;
+
+        &.valueWithValueBar {
+          right: calc(var(--value-bar-min-width) + var(--value-bar-padding-right));
+        }
+
+        &::after {
+          content: '';
+          left: 0;
+          top: 0;
+          background-color: var(--propel-border-primary);
+          box-shadow: var(--propel-shadow-sm);
+          width: 1px;
+          height: 100%;
+          z-index: 9999;
+          position: absolute;
+        }
+      }
+
+      [data-role='table-value-bar'] {
+        @extend .stickyColumn;
+      }
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: var(--propel-space-sm) var(--propel-space-sm) var(--propel-space-sm) 0;
+      @extend .typographySmall;
+    }
+
+    td {
+      @extend .typographySmall;
+      border-bottom: 1px solid var(--propel-color-secondary);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--propel-text-secondary);
+    }
+
+    tr {
+      &:last-of-type {
+        td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
+.stickyHeader {
+  tr {
+    th {
+      background-color: var(--propel-bg-primary);
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+  }
+}

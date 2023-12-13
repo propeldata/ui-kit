@@ -7,6 +7,9 @@
 const config = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   modulePathIgnorePatterns: ['dist'],
+  moduleNameMapper: {
+    '^.+\\.(css|less|scss)$': '<rootDir>/src/testing/mockStyles.ts'
+  },
   rootDir: '.',
   roots: ['<rootDir>'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js', 'jest-canvas-mock'],

@@ -1,76 +1,49 @@
-import { css, Global, ThemeProvider } from '@emotion/react'
-import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 import { Source } from '@storybook/blocks'
-import type { Preview, ReactRenderer } from '@storybook/react'
+import type { Preview, StoryContext } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
+import { ThemeProvider, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
 import axiosInstance from '../src/axios'
-import { prettier, getStringAttributes } from '../src/utils'
+import { parseStorySourceCode } from './blocks/SourceCode'
+import './global.css'
 
-const GlobalStyles = () => (
-  <Global
-    styles={css`
-      body {
-        font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      }
-      a p {
-        display: inline;
-        /* @TODO: find a way to customize it without !important dominance */
-        color: #2e90fa !important;
-      }
-      a.showCodeLink {
-        display: block;
-        margin-top: 20px;
-        cursor: pointer;
-        font-size: 0.9em;
-        color: #2e90fa;
-      }
-    `}
-  />
-)
+const GlobalStyles = () => {
+  const theme = useTheme()
+  if (document && theme) {
+    document.body.style.setProperty('--bg-color', theme.bgSecondary as string)
+  }
+  return null
+}
 
-const withSource = (StoryFn, context) => {
-  const [showSource, setShowSource] = React.useState(false)
-
-  let source
-  try {
-    const docSource = context.parameters.docs.source.originalSource
-
-    // Parse render from the source string
-    const lines = docSource.split('\n')
-    const renderStr = 'render: args =>'
-    const renderStartIndex = lines.findIndex((line) => line.indexOf(renderStr) > -1)
-    const renderEndIndex = lines.findIndex(
-      (line, index) =>
-        index > renderStartIndex && (line === '}' || (line.substr(0, 2) === '  ' && line.charAt(2) !== ' '))
-    )
-    let render = lines
-      .splice(renderStartIndex, renderEndIndex - renderStartIndex)
-      .join('\n')
-      .replace(renderStr, '')
-      .replace('{...args}', getStringAttributes(context.args))
-      // Trim the leading and trailing commas
-      .replace(/,\s*$/, '')
-      .trim('')
-
-    // source = prettier(render)
-    source = prettier(context.parameters.codeTemplate(render, context))
-  } catch (e) {
-    console.warn(e)
+const withThemeProvider = (Story: React.FC, context: StoryContext) => {
+  if (context.parameters.skipThemeProvider) {
+    return <Story />
   }
 
   return (
-    <>
+    <ThemeProvider baseTheme={context.globals.theme}>
+      <GlobalStyles />
+      <Story />
+    </ThemeProvider>
+  )
+}
+
+const withSource = (StoryFn: React.FC, context: StoryContext) => {
+  const [showSource, setShowSource] = React.useState(false)
+  const source = parseStorySourceCode({ context, formatted: true })
+
+  return (
+    <div style={{ padding: 20 }}>
       <StoryFn />
-      {context.viewMode === 'story' && source && !showSource && (
-        <a className="showCodeLink" onClick={() => setShowSource(true)}>
-          Show code
+      {context.viewMode === 'story' && source && (
+        <a className="showCodeLink" onClick={() => setShowSource(!showSource)}>
+          {showSource ? 'Hide' : 'Show'} code
         </a>
       )}
       {context.viewMode === 'story' && source && showSource && (
         <Source dark format="dedent" language="tsx" code={source} />
       )}
-    </>
+    </div>
   )
 }
 
@@ -80,7 +53,9 @@ const preview: Preview = {
       storySort: {
         order: [
           'Getting started',
-          ['Overview', 'Installation', 'Usage', 'Customization', 'Migration guide'],
+          ['Overview', 'Installation', 'Authentication', 'Usage', 'FAQ', 'Migration guide'],
+          'Customization',
+          ['Theming', 'Components'],
           'Components',
           ['Counter', 'TimeSeries', 'Leaderboard'],
           'React'
@@ -97,24 +72,26 @@ const preview: Preview = {
       }
     }
   },
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      defaultValue: 'lightTheme',
+      toolbar: {
+        icon: 'circlehollow',
+        items: [
+          { value: 'lightTheme', icon: 'circlehollow', title: 'light' },
+          { value: 'darkTheme', icon: 'circle', title: 'dark' }
+        ],
+        showName: true
+      }
+    }
+  },
   decorators: [
     withSource,
     // @ts-ignore
     withAxiosDecorator(axiosInstance),
-    withThemeFromJSXProvider<ReactRenderer>({
-      themes: {
-        light: {
-          textColor: '#ff0000'
-        }
-        // @TODO: a full themes support will be added later
-        // dark: {
-        //   textColor: '#0000ff'
-        // }
-      },
-      defaultTheme: 'light',
-      Provider: ThemeProvider,
-      GlobalStyles: GlobalStyles
-    })
+    withThemeProvider
   ]
 }
 

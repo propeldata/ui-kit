@@ -1,0 +1,21 @@
+import { Meta, Source } from '@storybook/blocks'
+import { themeTokens } from '../../../../../packages/ui-kit/src/themes/themeTokens'
+import { camelCaseToKebabCase } from '../../../../../packages/ui-kit/src/helpers/camelCaseToKebabCase'
+
+<Meta title="API/ThemeTokenProps" />
+
+# `ThemeTokenProps`
+
+Each token in the theme object is represented as both a
+[CSS Custom Property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and a corresponding
+JavaScript property, e.g. `--propel-font-family` and `fontFamily`. The CSS Custom Properties are prefixed with
+`--propel-` which helps to prevent any potential naming collisions with other stylesheets.
+
+<Source
+  language="css"
+  format="dedent"
+  dark
+  code={`${themeTokens
+    .map((themeToken) => `--propel-${camelCaseToKebabCase(themeToken)}: /* ${themeToken} */`)
+    .join('\n')}`}
+/>

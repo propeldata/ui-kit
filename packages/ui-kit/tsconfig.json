@@ -1,9 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
+    "baseUrl": ".",
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["src/**/*.stories.*"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/testing/mockStyles.ts"],
+  "exclude": ["src/**/*.stories.*", "dist", "api"]
 }

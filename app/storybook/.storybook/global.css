@@ -1,5 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
-:root {
-  --pui-time-series-background-color: red;
+body {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+}
+
+a p {
+  display: inline;
+  /* @TODO: find a way to customize it without !important dominance */
+  color: #2e90fa !important;
+}
+
+.propelSourceCodeBlock {
+  padding: 20px 0px;
+}
+
+.propelSourceCodeBlock .docblock-source {
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+a.showCodeLink {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  color: #2e90fa;
 }
