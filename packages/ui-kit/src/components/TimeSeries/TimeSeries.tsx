@@ -196,6 +196,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
             {
               data: values,
               backgroundColor: backgroundColor,
+              hoverBackgroundColor: theme?.accentHover,
               borderColor: theme?.accent,
               pointBackgroundColor: theme?.accentHover,
               pointHoverBackgroundColor: theme?.accentHover,

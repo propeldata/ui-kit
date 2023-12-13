@@ -4,6 +4,7 @@ import { prettier } from '../../src/utils'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as ThemeProviderStories from '../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
 import rawThemesScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/themes.module.scss'
+import rawCommonScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_common.scss'
 import rawLightThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_lightTheme.scss'
 import rawDarkThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_darkTheme.scss'
 
@@ -43,6 +44,11 @@ in the <LinkTo kind="API/ThemeTokenProps" story="overview">API section</LinkTo>.
 The content in `themes.module.scss` serves as the foundational entry point for theming within the UI Kit.
 
 <Source language="css" format="dedent" dark code={rawThemesScss} />
+
+The `common.scss` file contains the **common** theme configuration, defining a series of CSS custom properties that are
+shared by both the light and dark themes.
+
+<Source language="css" format="dedent" dark code={rawCommonScss} />
 
 The `lightTheme.scss` file sets up the **light theme** for the UI Kit, defining a series of CSS custom properties
 specific to this theme.
