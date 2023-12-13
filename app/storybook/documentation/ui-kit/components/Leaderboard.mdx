@@ -1,8 +1,11 @@
-import { Canvas, ArgTypes, Meta, Story, Source } from '@storybook/blocks'
+import { ArgTypes, Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
 import * as LeaderboardStories from '../../../../../packages/ui-kit/src/components/Leaderboard/Leaderboard.stories'
 import * as LeaderboardQueryPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
+import * as LeaderboardTablePropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardTableProps.stories'
+import * as LeaderboardChartPropsStories from '../../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardChartProps.stories'
 
 <Meta title="Components/Leaderboard" of={LeaderboardStories} />
 
@@ -18,46 +21,50 @@ automatically based on
 
 You can import the component in your React file and use it as shown in the following example:
 
-<Canvas
-  of={LeaderboardStories.SingleDimensionStory}
-  sourceState="shown"
-  source={{
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
-/>
+<SourceCode of={LeaderboardStories.SingleDimensionBarStory} shown />
 
 As you can see, the chart comes with a set of basic styles. However, you can customize it to your liking. Let's build a
 totally different leaderboard chart now. Here's how you can access the style props:
 
-<Canvas
+<SourceCode
   of={LeaderboardStories.CustomStyleStory}
-  sourceState="shown"
-  source={{
-    transform: (code, context) => prettier(context.parameters.codeTemplate(code, context))
-  }}
+  transform={(code, context) =>
+    `${prettier(context.parameters.rawCss, { parser: 'css' })}\n${prettier(
+      context.parameters.codeTemplate(code, context)
+    )}`
+  }
+  shown
 />
 
 In this example, we built a detailed table chart where you could use on small viewports or in a mobile design maybe. Up
 to you! You can adjust these and other style properties to create a unique look for your leaderboard chart.
 
-Now let's look at what all you can do with the component. The next 2 topics will cover all the props and styles you can
-configure to have a nice chart experience
-
 ## Props API
 
 The following table describes the props available for the Leaderboard component:
 
-<ArgTypes of={LeaderboardStories.SingleDimensionStory} sort="alpha" />
+<ArgTypes of={LeaderboardStories.SingleDimensionBarStory} sort="alpha" />
 
 ### `LeaderboardQueryProps`
 
 <ArgTypes of={LeaderboardQueryPropsStories.Primary} sort="alpha" />
 
+### `LeaderboardTableProps`
+
+<ArgTypes of={LeaderboardTablePropsStories.Primary} sort="alpha" />
+
+### `LeaderboardChartProps`
+
+<ArgTypes of={LeaderboardChartPropsStories.Primary} sort="alpha" />
+
 See the documentation below for a complete reference to all of the props and classes available to the components
 mentioned here.
 
-- <LinkTo kind="API/ChartStyles" story="overview">
-    ChartStyles
+- <LinkTo kind="API/ErrorFallbackProps" story="errorfallbackprops">
+    ErrorFallbackProps
+  </LinkTo>
+- <LinkTo kind="API/LoaderProps" story="loaderprops">
+    LoaderProps
   </LinkTo>
 - <LinkTo kind="API/FilterInput" story="overview">
     FilterInput

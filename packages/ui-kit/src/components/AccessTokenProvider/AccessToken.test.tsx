@@ -79,7 +79,7 @@ describe('AccessTokenProvider', () => {
   it('should provide the static accessToken to the child components', async () => {
     dom = render(<DashboardComponent accessToken="valid-token" />)
 
-    await dom.findByText(counterResponse.counter.value)
+    await dom.findByText(counterResponse?.counter?.value as string)
     const charts = await dom.findAllByRole('img')
 
     expect(charts).toHaveLength(2)
@@ -90,7 +90,7 @@ describe('AccessTokenProvider', () => {
 
     dom = render(<DashboardComponent fetchToken={fetchToken} />)
 
-    await dom.findByText(counterResponse.counter.value)
+    await dom.findByText(counterResponse?.counter?.value as string)
     const charts = await dom.findAllByRole('img')
 
     expect(charts).toHaveLength(2)
@@ -114,7 +114,7 @@ describe('AccessTokenProvider', () => {
 
     dom = render(<DashboardComponent fetchToken={fetchToken} />)
 
-    await dom.findByText(counterResponse.counter.value)
+    await dom.findByText(counterResponse?.counter?.value as string)
     const charts = await dom.findAllByRole('img')
 
     expect(charts).toHaveLength(2)
@@ -129,7 +129,7 @@ describe('AccessTokenProvider', () => {
 
     dom = render(<DashboardComponent fetchToken={fetchToken} />)
 
-    await dom.findByText(counterResponse.counter.value)
+    await dom.findByText(counterResponse?.counter?.value as string)
     const charts = await dom.findAllByRole('img')
 
     expect(charts).toHaveLength(2)

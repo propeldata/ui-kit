@@ -1,10 +1,11 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { storybookCodeTemplate } from '../../helpers'
+import { quotedStringRegex, storybookCodeTemplate } from '../../helpers'
 import { DEFAULT_LOG_LEVEL, LogProvider } from './LogProvider'
 import { useLog } from './useLog'
 import { LogLevel } from './Log.types'
+
+const options = [LogLevel.Off, LogLevel.Error, LogLevel.Warn, LogLevel.Info, LogLevel.Debug]
 
 const getLog = (type: string, level: string) =>
   `This is ${
@@ -39,12 +40,23 @@ const Counter: React.FC<unknown> = () => {
 }
 
 const meta: Meta<typeof Counter> = {
-  title: 'PROVIDERS/Logger',
+  title: 'Getting started/Logger',
   tags: ['pattern'],
   component: Counter,
   parameters: {
-    imports: 'Counter, LogProvider',
-    codeTemplate: storybookCodeTemplate
+    imports: 'Counter, LogProvider, LogLevel',
+    codeTemplate: storybookCodeTemplate,
+    transformBody: (body: string) => {
+      let transformedBody = body
+      options.forEach((option) => {
+        const index = Object.keys(LogLevel).findIndex((key) => LogLevel[key] === option)
+        transformedBody = transformedBody.replace(
+          quotedStringRegex(option),
+          `{LogLevel.${Object.keys(LogLevel)[index]}}`
+        )
+      })
+      return transformedBody
+    }
   }
 } satisfies Meta<typeof Counter>
 
@@ -58,7 +70,7 @@ export const LogLevelError: Story = {
   },
   argTypes: {
     logLevel: {
-      options: [LogLevel.Off, LogLevel.Error, LogLevel.Warn, LogLevel.Info, LogLevel.Debug],
+      options,
       description: 'The log level to set (defaults to "error").',
       default: DEFAULT_LOG_LEVEL,
       control: { type: 'select' }

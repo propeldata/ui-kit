@@ -1,104 +1,104 @@
-import { css } from '@emotion/css'
+import classnames from 'classnames'
 import React from 'react'
-import type { ChartStyles } from '../../themes'
-import { defaultStyles } from '../../themes'
+import { useCombinedRefsCallback } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
+import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
+import componentStyles from './Counter.module.scss'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
 import { useCounter } from '../../hooks'
 
-export const CounterComponent = (props: CounterProps) => {
-  const {
-    value: staticValue,
-    query,
-    timeZone,
-    prefixValue,
-    sufixValue,
-    styles,
-    loading: isLoadingStatic = false,
-    localize,
-    ...rest
-  } = props
+export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
+  (
+    {
+      value: staticValue,
+      query,
+      prefixValue,
+      sufixValue,
+      loading: isLoadingStatic = false,
+      localize,
+      className,
+      baseTheme,
+      loaderProps,
+      errorFallbackProps,
+      timeZone,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      card,
+      ...rest
+    },
+    forwardedRef
+  ) => {
+    const innerRef = React.useRef<HTMLSpanElement>(null)
+    const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
+    useSetupTheme({ componentContainer, baseTheme })
 
-  const { data, isLoading, error } = useCounter({ ...query, timeZone })
+    /**
+     * If the user passes `value` attribute, it
+     * should behave as a static component without any GraphQL operation performed
+     */
+    const isStatic = !query
 
-  /**
-   * If the user passes `value` attribute, it
-   * should behave as a static component without any GraphQL operation performed
-   */
-  const isStatic = !query
+    const [propsMismatch, setPropsMismatch] = React.useState(false)
 
-  const [propsMismatch, setPropsMismatch] = React.useState(false)
+    const { data, isLoading, error } = useCounter({ ...query, timeZone })
 
-  const counterRef = React.useRef<HTMLSpanElement>(null)
+    const value = isStatic ? staticValue : data?.counter?.value
 
-  const value = isStatic ? staticValue : data?.counter.value
+    React.useEffect(() => {
+      function handlePropsMismatch() {
+        if (isStatic && !value) {
+          // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
+          setPropsMismatch(true)
+          return
+        }
 
-  React.useEffect(() => {
-    function handlePropsMismatch() {
-      if (isStatic && !value) {
-        // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
-        setPropsMismatch(true)
-        return
+        if (!isStatic && (error?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
+          // console.error(
+          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
+          // ) we will set logs as a feature later
+          setPropsMismatch(true)
+          return
+        }
+
+        setPropsMismatch(false)
       }
 
-      if (!isStatic && error?.name === 'AccessTokenError' && (!query?.metric || !query?.timeRange)) {
-        // console.error(
-        //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-        // ) we will set logs as a feature later
-        setPropsMismatch(true)
-        return
+      if (!isLoadingStatic) {
+        handlePropsMismatch()
       }
+    }, [isStatic, value, query, isLoadingStatic, error?.name])
 
-      setPropsMismatch(false)
+    if (error || propsMismatch) {
+      return <ErrorFallback error={null} {...errorFallbackProps} />
     }
 
-    if (!isLoadingStatic) {
-      handlePropsMismatch()
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref.current) {
+      return <Loader className={componentStyles.loader} {...loaderProps} isText />
     }
-  }, [isStatic, value, query, isLoadingStatic, error?.name])
 
-  if (error || propsMismatch) {
-    return <ErrorFallback error={null} styles={styles} />
+    return (
+      <span
+        ref={setRef}
+        className={classnames(
+          componentStyles.rootCounter,
+          (isLoading || isLoadingStatic) && componentStyles.loading,
+          className
+        )}
+        {...rest}
+      >
+        {getValueWithPrefixAndSufix({
+          prefix: prefixValue,
+          value,
+          sufix: sufixValue,
+          localize
+        })}
+      </span>
+    )
   }
+)
 
-  if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !counterRef.current) {
-    return <Loader styles={styles}>000</Loader>
-  }
-
-  return (
-    <span
-      ref={counterRef}
-      style={{
-        opacity: isLoading || isLoadingStatic ? '0.3' : '1',
-        transition: 'opacity 0.2s ease-in-out'
-      }}
-      {...rest}
-      className={getFontStyles(styles)}
-    >
-      {getValueWithPrefixAndSufix({
-        prefix: prefixValue,
-        value,
-        sufix: sufixValue,
-        localize
-      })}
-    </span>
-  )
-}
+CounterComponent.displayName = 'CounterComponent'
 
 export const Counter = withContainer(CounterComponent, ErrorFallback) as typeof CounterComponent
-
-const getFontStyles = (styles?: ChartStyles) => css`
-  color: ${styles?.font?.color || defaultStyles.font.color};
-  font-size: ${styles?.font?.size || defaultStyles.font.size};
-  font-family: ${styles?.font?.family || defaultStyles.font.family};
-  font-weight: ${styles?.font?.weight || defaultStyles.font.weight};
-  font-stretch: ${styles?.font?.stretch || defaultStyles.font.stretch};
-  font-variant: ${styles?.font?.variant || defaultStyles.font.variant};
-  font-style: ${styles?.font?.style || defaultStyles.font.style};
-  line-height: ${styles?.font?.lineHeight || defaultStyles.font.lineHeight};
-
-  white-space: nowrap;
-`

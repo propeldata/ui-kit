@@ -39,13 +39,10 @@ export const AccessTokenProviderStory: Story = {
       control: { type: 'text' }
     }
   },
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  render: (_) => {
-    return (
-      <AccessTokenProvider fetchToken={fetchToken}>
-        <TimeSeries query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
-        <Counter query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
-      </AccessTokenProvider>
-    )
-  }
+  render: () => (
+    <AccessTokenProvider fetchToken={fetchToken}>
+      <TimeSeries query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
+      <Counter query={{ metric: 'Revenue', timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 } }} />
+    </AccessTokenProvider>
+  )
 }

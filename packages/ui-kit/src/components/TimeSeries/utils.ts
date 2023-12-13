@@ -1,23 +1,10 @@
-import {
-  Chart,
-  ChartTypeRegistry,
-  PointStyle,
-  ScaleOptionsByType,
-  Scriptable,
-  ScriptableAndArray,
-  ScriptableContext,
-  ScriptableTooltipContext,
-  TextAlign,
-  TimeUnit
-} from 'chart.js'
-import { DateTime } from 'luxon'
+import { Chart, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
-import React from 'react'
+import { DateTime } from 'luxon'
 import { getDisplayValue, Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../helpers'
-import type { ChartPlugins, ChartStyles } from '../../themes'
-import { defaultStyles } from '../../themes'
-import type { ChartScales, TimeSeriesChartVariant } from './TimeSeries.types'
 import { Log } from '../Log'
+import { ThemeStateProps } from '../ThemeProvider'
+import { TimeSeriesChartVariant } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -41,13 +28,13 @@ export function getDefaultGranularity(options: GetDefaultGranularityOptions): Ti
   const relative = options.timeRange?.relative
   const labels = options.labels
 
-  if (!relative && !labels) {
+  if (!(relative && labels)) {
     // TODO(mroberts): In a future release, we should calculate this for absolute ranges, too.
     //   Actually, all of this logic should move to the backend.
     return TimeSeriesGranularity.Day
   }
 
-  if (!relative) {
+  if (!relative && labels) {
     return getLabelsBasedGranularity(labels)
   }
 
@@ -121,7 +108,7 @@ export function convertToTimestamp(value: string) {
 }
 
 export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranularity {
-  const granularityByDistanceDictionary = {
+  const granularityByDistanceDictionary: { [key: string]: TimeSeriesGranularity } = {
     '86400000': TimeSeriesGranularity.Day,
     '900000': TimeSeriesGranularity.FifteenMinutes,
     '300000': TimeSeriesGranularity.FiveMinutes,
@@ -167,151 +154,47 @@ export function getGranularityByDistance(timestamps: string[]): TimeSeriesGranul
   return granularityInDictionary
 }
 
-export function useSetupDefaultStyles(styles?: ChartStyles) {
-  React.useEffect(() => {
-    async function setupDefaultStyles() {
-      const pointStyle = styles?.point?.style as ScriptableAndArray<
-        PointStyle,
-        ScriptableContext<keyof ChartTypeRegistry>
-      >
-
-      const font = {
-        family: styles?.font?.family,
-        size: styles?.font?.size as Scriptable<number | undefined, ScriptableTooltipContext<keyof ChartTypeRegistry>>,
-        style: styles?.font?.style,
-        lineHeight: styles?.font?.lineHeight,
-        color: styles?.font?.color || defaultStyles.font.color
-      }
-
-      Chart.defaults.color = styles?.font?.color || defaultStyles.font.color
-
-      Chart.defaults.elements.point.pointStyle = pointStyle === undefined ? 'circle' : pointStyle
-      Chart.defaults.elements.point.radius = styles?.point?.radius || defaultStyles.point.radius
-      Chart.defaults.elements.point.backgroundColor =
-        styles?.point?.backgroundColor || defaultStyles.point.backgroundColor
-      Chart.defaults.elements.point.borderColor = styles?.point?.borderColor || defaultStyles.point.borderColor
-      Chart.defaults.elements.point.borderWidth = styles?.point?.borderWidth || defaultStyles.point.borderWidth
-      Chart.defaults.elements.point.hoverBorderColor =
-        styles?.point?.hoverBorderColor || defaultStyles.point.hoverBorderColor
-      Chart.defaults.elements.point.hoverBackgroundColor =
-        styles?.point?.hoverBackgroundColor || defaultStyles.point.hoverBackgroundColor
-
-      Chart.defaults.elements.bar.backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
-      Chart.defaults.elements.bar.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
-      Chart.defaults.elements.bar.borderRadius = styles?.bar?.borderRadius || defaultStyles.bar.borderRadius
-      Chart.defaults.elements.bar.borderColor = styles?.bar?.borderColor || defaultStyles.bar.borderColor
-      Chart.defaults.elements.bar.hoverBackgroundColor =
-        styles?.bar?.hoverBackgroundColor || defaultStyles.bar.hoverBackgroundColor
-      Chart.defaults.elements.bar.hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
-
-      Chart.defaults.elements.line.tension = styles?.line?.tension || defaultStyles.line.tension
-      Chart.defaults.elements.line.borderWidth = styles?.line?.borderWidth || defaultStyles.line.borderWidth
-      Chart.defaults.elements.line.stepped = styles?.line?.stepped || defaultStyles.line.stepped
-      Chart.defaults.elements.line.borderColor = styles?.line?.borderColor || defaultStyles.line.borderColor
-
-      Chart.defaults.plugins.tooltip.enabled =
-        styles?.tooltip?.display !== undefined ? styles?.tooltip?.display : defaultStyles.tooltip.display
-      Chart.defaults.plugins.tooltip.padding = styles?.tooltip?.padding || defaultStyles.tooltip.padding
-      Chart.defaults.plugins.tooltip.backgroundColor =
-        styles?.tooltip?.backgroundColor || defaultStyles.tooltip.backgroundColor
-      Chart.defaults.plugins.tooltip.bodyColor = styles?.tooltip?.color || defaultStyles.tooltip.color
-      Chart.defaults.plugins.tooltip.titleColor = styles?.tooltip?.color || defaultStyles.tooltip.color
-      Chart.defaults.plugins.tooltip.borderColor = styles?.tooltip?.borderColor || defaultStyles.tooltip.borderColor
-      Chart.defaults.plugins.tooltip.borderWidth = styles?.tooltip?.borderWidth || defaultStyles.tooltip.borderWidth
-      Chart.defaults.plugins.tooltip.caretSize = styles?.tooltip?.caretSize || defaultStyles.tooltip.caretSize
-      Chart.defaults.plugins.tooltip.cornerRadius = styles?.tooltip?.borderRadius || defaultStyles.tooltip.borderRadius
-      Chart.defaults.plugins.tooltip.titleFont = font
-      Chart.defaults.plugins.tooltip.titleAlign = styles?.tooltip?.alignContent as Scriptable<
-        TextAlign,
-        ScriptableTooltipContext<keyof ChartTypeRegistry>
-      >
-      Chart.defaults.plugins.tooltip.bodyAlign = styles?.tooltip?.alignContent as Scriptable<
-        TextAlign,
-        ScriptableTooltipContext<keyof ChartTypeRegistry>
-      >
-    }
-
-    setupDefaultStyles()
-  }, [styles])
-}
-
-interface UpdateChartStylesOptions {
-  chart: Chart
-  styles?: ChartStyles
-  variant: TimeSeriesChartVariant
-}
-
-export function updateChartStyles(options: UpdateChartStylesOptions) {
-  const { chart, styles, variant } = options
-
-  const dataset = chart.data.datasets[0]
-
-  if (variant === 'bar') {
-    dataset.backgroundColor = styles?.bar?.backgroundColor || defaultStyles.bar.backgroundColor
-    dataset.borderColor = styles?.bar?.borderColor || defaultStyles.bar.borderColor
-    dataset.borderWidth = styles?.bar?.borderWidth || defaultStyles.bar.borderWidth
-    dataset.hoverBackgroundColor = styles?.bar?.hoverBackgroundColor || defaultStyles.bar.hoverBackgroundColor
-    dataset.hoverBorderColor = styles?.bar?.hoverBorderColor || defaultStyles.bar.hoverBorderColor
-  } else {
-    dataset.backgroundColor = styles?.line?.backgroundColor || defaultStyles.line.backgroundColor
-    dataset.borderColor = styles?.line?.borderColor || defaultStyles.line.borderColor
-    dataset.borderWidth = styles?.line?.borderWidth || defaultStyles.line.borderWidth
-    dataset.hoverBackgroundColor = styles?.line?.hoverBackgroundColor || defaultStyles.line.hoverBackgroundColor
-    dataset.hoverBorderColor = styles?.line?.hoverBorderColor || defaultStyles.line.hoverBorderColor
-  }
-
-  if (chart.options.layout) {
-    chart.options.layout.padding = styles?.canvas?.padding || defaultStyles.canvas.padding
-  }
-}
-
-interface UpdateChartConfig {
-  chart: Chart
-  values: Array<number | null>
-  labels: string[]
-  scales: ChartScales
-  variant: TimeSeriesChartVariant
-  customPlugins: ChartPlugins
-}
-
-export function updateChartConfig(options: UpdateChartConfig) {
-  const { chart, labels, values, scales, variant, customPlugins } = options
-
-  const dataset = chart.data.datasets[0]
-
-  chart.data.labels = labels
-  dataset.data = values
-  chart.options.scales = scales
-  dataset.type = variant
-
-  chart.options.plugins = customPlugins
-}
-
 interface GetScalesOptions {
-  styles?: ChartStyles
   granularity: TimeSeriesGranularity | null
   isFormatted: boolean
   zone: string
+  chart?: Chart | null
+  variant: TimeSeriesChartVariant
+  grid?: boolean
+  theme?: ThemeStateProps
 }
 
-export function getScales(options: GetScalesOptions) {
-  const { styles, granularity, isFormatted, zone } = options
-  const scale = styles?.yAxis?.scale || defaultStyles.yAxis.scale
-
-  const hideGridLines = styles?.canvas?.hideGridLines || defaultStyles.canvas.hideGridLines
+export function getScales({ granularity, isFormatted, zone, chart, variant, grid, theme }: GetScalesOptions) {
+  const scales = chart?.options?.scales
+  const scale = scales?.y?.type ?? 'linear'
+  const beginAtZero = (scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>)?.y?.beginAtZero ?? false
+  const padding = variant === 'line' ? 5 : 9
 
   const scalesBase = {
     x: {
-      display: !hideGridLines,
+      display: scales?.x?.display ?? true,
       grid: {
-        drawOnChartArea: false
+        drawOnChartArea: grid,
+        drawTicks: variant === 'line'
       },
-      beginAtZero: true
+      ticks: {
+        padding
+      },
+      beginAtZero
     },
     y: {
-      display: !hideGridLines,
-      beginAtZero: styles?.yAxis?.beginAtZero || defaultStyles.yAxis.beginAtZero,
-      grid: { drawOnChartArea: true }
+      display: scales?.y?.display ?? true,
+      grid: {
+        color: theme?.colorSecondary,
+        drawOnChartArea: true
+      },
+      ticks: {
+        padding
+      },
+      border: {
+        display: false
+      },
+      beginAtZero
     }
   }
 
@@ -365,20 +248,24 @@ export function tooltipTitleCallback(context: { label: string }[], granularity: 
   const title = context[0].label
   const date = new Date(title)
 
-  return (
-    {
-      [TimeSeriesGranularity.Day]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
-      [TimeSeriesGranularity.Week]: DateTime.fromJSDate(date).toFormat('LLL d, yyyy'),
-      [TimeSeriesGranularity.Month]: DateTime.fromJSDate(date).toFormat('LLLL, yyyy'),
-      [TimeSeriesGranularity.Year]: DateTime.fromJSDate(date).toFormat('yyyy')
-    }[granularity] ?? title
-  )
+  switch (granularity) {
+    case TimeSeriesGranularity.Day:
+      return DateTime.fromJSDate(date).toFormat('LLL d, yyyy')
+    case TimeSeriesGranularity.Week:
+      return DateTime.fromJSDate(date).toFormat('LLL d, yyyy')
+    case TimeSeriesGranularity.Month:
+      return DateTime.fromJSDate(date).toFormat('LLLL, yyyy')
+    case TimeSeriesGranularity.Year:
+      return DateTime.fromJSDate(date).toFormat('yyyy')
+    default:
+      return title
+  }
 }
 
-export function getNumericValues(values: Array<string | number>, log: Log) {
+export function getNumericValues(values: Array<string | number | null>, log: Log) {
   let nonNumericValueFound = false
 
-  const newValues = values.map((value: string | number) => {
+  const newValues = values.map((value: string | number | null) => {
     if (typeof value === 'number') return value
 
     const displayValue = getDisplayValue({ value })

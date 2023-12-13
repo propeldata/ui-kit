@@ -120,7 +120,7 @@ describe('TimeSeries', () => {
       <TimeSeries
         labels={mockStaticData.labels}
         values={mockStaticData.values}
-        labelFormatter={(labels) => labels.map((label) => label.replace('-', '.'))}
+        labelFormatter={(labels) => labels.map((label) => (label as string).replace('-', '.'))}
       />
     )
 

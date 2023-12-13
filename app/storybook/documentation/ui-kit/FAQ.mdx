@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/blocks'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as CounterStories from '../../../../packages/ui-kit/src/components/Counter/Counter.stories'
+
+<Meta title="Getting started/FAQ" />
+
+# Frequently Asked Questions
+
+This section provides concise answers to common questions about our UI Kit library. Covering topics from setup to
+advanced customization, it's designed to assist you in making the most of our UI Kit. For queries not addressed here,
+our support team is always ready to help.
+
+## How can I access the DOM element?
+
+All UI Kit components rendering DOM elements forward their ref to the underlying DOM component. This allows for the
+retrieval of DOM elements by accessing the ref attached to these UI Kit components.
+
+<SourceCode of={CounterStories.SingleValueRefStory} shown />
+
+## Do I have to use a CSS-in-JS library (like Emotion) or preprocessor (like SASS) to style my components?
+
+No, you can use any styling solution you prefer. UI Kit works even with plain CSS.
+
+## When should I use inline-style vs. CSS?
+
+As a general guideline, reserve inline styles primarily for dynamic style properties. Using CSS offers several benefits,
+including:
+
+- Automatic prefixing
+- Enhanced debugging capabilities
+- Support for media queries
+- Use of keyframes

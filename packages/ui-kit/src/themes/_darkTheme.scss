@@ -1,0 +1,18 @@
+/** darkTheme.scss */
+
+@use './common';
+
+.darkTheme {
+  @extend .commonTokens;
+
+  --propel-color-primary: #2e90fa;
+  --propel-color-secondary: rgba(46, 144, 250, 0.35);
+  --propel-bg-primary: #202939;
+  --propel-bg-secondary: #0d121c;
+  --propel-text-primary: #f8fafc;
+  --propel-text-secondary: #9aa4b2;
+  --propel-border-primary: #364152;
+  --propel-accent: rgba(46, 144, 250, 0.6);
+  --propel-accent-hover: #2e90fa;
+  --propel-color-gradient: linear-gradient(180deg, rgba(46, 144, 250, 0.35) -11.58%, rgba(46, 144, 250, 0.05) 100%);
+}

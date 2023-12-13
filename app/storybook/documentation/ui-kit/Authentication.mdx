@@ -1,0 +1,123 @@
+import { Source, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as AccessTokenProviderStories from '../../../../packages/ui-kit/src/components/AccessTokenProvider/AccessToken.stories'
+
+<Meta title="Getting started/Authentication" />
+
+# Authentication
+
+The `AccessTokenProvider` allows you to provide a function that fetches an access token from your backend. By using this
+function, the provider will serve the fetched access token to all of its child components and will automatically refresh
+the token when it expires.
+
+This way, instead of manually providing the access token to each component like this:
+
+<Source
+  language="jsx"
+  format="dedent"
+  dark
+  code={`
+    import React, { useState, useEffect } from 'react'
+    import { Counter, TimeSeries, Leaderboard } from "@propeldata/ui-kit"
+    import { fetchToken } from './utils'
+
+    function App() {
+      const [accessToken, setAccessToken] = useState(null)
+
+      useEffect(() => {
+        async function fetchAccessToken() {
+          const accessToken = await fetchToken()
+          setAccessToken(accessToken)
+        }
+
+        fetchAccessToken()
+      }, [fetchToken, setAccessToken])
+
+      return (
+        <Counter query={{ accessToken }} />
+        <TimeSeries query={{ accessToken }} />
+        <Leaderboard query={{ accessToken }} />
+      );
+    }
+
+`} />
+
+You can just wrap your app with the `AccessTokenProvider`, pass it the `fetchToken` function, and it will automatically
+provide the access token to all of its child components:
+
+<Source
+  language="jsx"
+  format="dedent"
+  dark
+  code={`
+    import React from 'react'
+    import { Counter, TimeSeries, Leaderboard, AccessTokenProvider } from '@propeldata/ui-kit'
+    import { fetchToken } from './utils'
+
+    function App() {
+      return (
+        <AccessTokenProvider fetchToken={fetchToken}>
+          <Counter />
+          <TimeSeries />
+          <Leaderboard />
+        </AccessTokenProvider>
+      )
+    }
+
+`} />
+
+Preferably the `fetchToken` function lives outside of the component scope, in case you need to create it within the
+component scope please wrap it in a `useCallback` to prevent unnecessary re-renders:
+
+<Source
+  language="jsx"
+  format="dedent"
+  dark
+  code={`
+    import React, { useCallback } from 'react'
+    import { Counter, TimeSeries, Leaderboard, AccessTokenProvider } from '@propeldata/ui-kit'
+
+    function App() {
+      const fetchToken = useCallback(() => {
+        // fetching logic
+
+        return accessToken
+      }, [deps])
+
+      return (
+        <AccessTokenProvider fetchToken={fetchToken}>
+          <Counter />
+          <TimeSeries />
+          <Leaderboard />
+        </AccessTokenProvider>
+      )
+    }
+
+`} />
+
+If you'd prefer to handle fetching on your own, you can pass the `accessToken` prop to the `AccessTokenProvider`. The
+provided access token will be served to all of its child components:
+
+<Source
+  language="jsx"
+  format="dedent"
+  dark
+  code={`
+    function App() {
+      const [accessToken, setAccessToken] = useState(null)
+
+      return (
+        <AccessTokenProvider accessToken={accessToken}>
+          <Counter />
+          <TimeSeries />
+          <Leaderboard />
+        </AccessTokenProvider>
+      )
+    }
+
+`} />
+
+You can use several `AccessTokenProvider` components in your app, each with its own `fetchToken` function or
+`accessToken` prop. But we recommend not to nest them, as it may cause unexpected behavior.
+
+<SourceCode of={AccessTokenProviderStories.AccessTokenProviderStory} shown />

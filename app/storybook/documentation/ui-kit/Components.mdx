@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
+
+<Meta title="Customization/Components" />
+
+# Components
+
+We designed the Propel UI Kit to be highly customizable and easy to incorporate into your front-end applications. Here
+are some of the customization options available to you:
+
+## Styles
+
+You can apply your own custom styles to each component using the `style` and `className` properties in the standard way.
+It is possible to customize the chart even further
+by&#160;<LinkTo kind="Customization/Chart Configuration" story="overview">using the Chart.js API directly</LinkTo>.
+
+For example, to change the color of the bars in your time series chart, you can use the following code:
+
+<SourceCode of={TimeSeriesStories.CustomStyleStory} shown />
+
+## Errors
+
+You can also provide your own custom error messages by using the error prop. This will enable you to provide more
+accurate feedback to your users in case of technical errors or other issues.
+
+For example, to display a custom error message when the chart data cannot be loaded, you can use the following
+JavaScript code:
+
+<SourceCode of={TimeSeriesStories.ErrorStory} shown />
+
+By customizing your Propel UI Kit components in this way, you can create unique, user-friendly data visualizations that
+fit seamlessly into your front-end applications.

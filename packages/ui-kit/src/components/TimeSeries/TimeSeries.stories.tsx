@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { Chart } from 'chart.js'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
@@ -13,6 +14,13 @@ import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSerie
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
   component: TimeSeriesComponent,
+  argTypes: {
+    baseTheme: {
+      table: {
+        disable: true
+      }
+    }
+  },
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'TimeSeries, RelativeTimeRange, TimeSeriesGranularity',
@@ -86,20 +94,60 @@ const TimeSeries = (args: Story['args']) => {
   )
 }
 
-export const LineVariantStory: Story = {
-  name: 'Line variant',
+export const LineStory: Story = {
+  name: 'Line',
   args: {
     variant: 'line',
-    query: connectedParams
+    query: connectedParams,
+    card: true
   },
   render: (args) => <TimeSeries {...args} />
 }
 
-export const BarVariantStory: Story = {
-  name: 'Bar variant',
+export const LineAreaStory: Story = {
+  name: 'Line Area',
+  args: {
+    variant: 'line',
+    query: connectedParams,
+    card: true,
+    chartProps: {
+      fillArea: true
+    }
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const BarStory: Story = {
+  name: 'Bar',
   args: {
     variant: 'bar',
-    query: connectedParams
+    card: true,
+    query: {
+      ...connectedParams,
+      timeRange: {
+        ...connectedParams.timeRange,
+        n: 90
+      }
+    }
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const BarGridStory: Story = {
+  name: 'Grid',
+  args: {
+    variant: 'bar',
+    card: true,
+    chartProps: {
+      grid: true
+    },
+    query: {
+      ...connectedParams,
+      timeRange: {
+        ...connectedParams.timeRange,
+        n: 90
+      }
+    }
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -110,21 +158,50 @@ export const CustomChartStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams,
-    styles: {
-      line: {
+    chartConfigProps: (config) => {
+      // Change the line style
+      config.data.datasets[0] = {
+        ...config.data.datasets[0],
         tension: 0.1,
         borderColor: '#17B897',
-        borderWidth: 3
-      },
-      point: {
-        style: false
-      },
-      canvas: {
-        width: 100,
-        height: 45,
-        backgroundColor: 'transparent',
-        hideGridLines: true
+        borderWidth: 3,
+        pointStyle: false
       }
+
+      // Hide the axes
+      config.options = {
+        ...config.options,
+        scales: {
+          x: {
+            display: false
+          },
+          y: {
+            display: false
+          }
+        }
+      }
+
+      // Style the canvas
+      const backgroundColorPlugin = {
+        id: 'backgroundColorPlugin',
+        beforeDraw: (chart: Chart) => {
+          const ctx = chart.canvas.getContext('2d')
+          if (!ctx) {
+            return
+          }
+          ctx.save()
+          ctx.fillStyle = 'lightblue'
+          ctx.fillRect(0, 0, chart.width, chart.height)
+          ctx.restore()
+        }
+      }
+      config.plugins = [...(config.plugins || []), backgroundColorPlugin]
+
+      return config
+    },
+    style: {
+      width: '100px',
+      height: '45px'
     }
   },
   render: (args) => <TimeSeries {...args} />
@@ -136,11 +213,88 @@ export const CustomStyleStory: Story = {
   args: {
     variant: 'bar',
     query: connectedParams,
-    styles: {
-      bar: {
+    // Style the component
+    style: {
+      border: '1px solid #532AB4',
+      borderRadius: '4px'
+    },
+    // Style the chart
+    chartConfigProps: (config) => {
+      config.data.datasets[0] = {
+        ...config.data.datasets[0],
         backgroundColor: '#532AB4'
       }
+      return config
     }
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ChartOnClickStory: Story = {
+  name: 'Chart onClick event',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        onClick: (event, elements) => {
+          console.log('chartOnClickStory', event, elements)
+        }
+      }
+    })
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ChartLabelFormatStory: Story = {
+  name: 'Chart format xAxis via labelFormat prop',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    labelFormatter: (labels) =>
+      labels.map((label) =>
+        new Date(label).toLocaleDateString('en', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })
+      )
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ChartFormatXLabelsStory: Story = {
+  name: 'Chart format xAxis labels',
+  tags: ['pattern'],
+  args: {
+    variant: 'bar',
+    query: connectedParams,
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        scales: {
+          ...config.options?.scales,
+          x: {
+            ...config.options?.scales?.x,
+            ticks: {
+              ...config.options?.scales?.x?.ticks,
+              // Format the yAxis labels as currency
+              callback: (label) =>
+                new Date(label).toLocaleDateString('en', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })
+            }
+          }
+        }
+      }
+    })
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -150,6 +304,7 @@ export const StaticStory: Story = {
   parameters: { imports: 'TimeSeries' },
   args: {
     variant: 'line',
+    card: true,
     ...dataset
   },
   render: (args) => <TimeSeries {...args} />
@@ -160,9 +315,11 @@ export const ErrorStory: Story = {
   tags: ['pattern'],
   parameters: { imports: 'TimeSeries' },
   args: {
-    error: {
-      title: 'Unable to connect',
-      body: 'Sorry we are not able to connect at this time due to a technical error.'
+    errorFallbackProps: {
+      error: {
+        title: 'Unable to connect',
+        body: 'Sorry we are not able to connect at this time due to a technical error.'
+      }
     }
   },
   render: (args) => <TimeSeries {...args} />

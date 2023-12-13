@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <img src="public/assets/propel-logo.svg"/><br /><br />
-  <h1>UI-Kit Storybook</h1>
+  <h1>UI Kit Storybook</h1>
 </div>
 <br />
 

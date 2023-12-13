@@ -1,11 +1,7 @@
-import { DimensionInput, FilterInput, Sort, TimeRangeInput } from '../../helpers'
-import { ChartStyles } from '../../themes'
+import type { ChartConfiguration } from 'chart.js'
+import { DimensionInput, FilterInput, LeaderboardLabels, Sort, TimeRangeInput } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
-
-/**
- * @deprecated the type is deprecated, use LeaderboardChartVariant or TimeSeriesChartVariant instead
- */
-export type ChartVariant = 'bar' | 'line'
+import type { DataComponentProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 
@@ -51,6 +47,7 @@ export type LeaderboardQueryProps = {
 
   /** Whether to retry on errors. */
   retry?: boolean
+
   /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
   propelApiUrl?: string
 
@@ -58,12 +55,37 @@ export type LeaderboardQueryProps = {
   timeZone?: string
 }
 
-export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentProps<'canvas'> {
+export type LeaderboardTableProps = {
+  /** Whether the table header should remain fixed while scrolling */
+  stickyHeader?: boolean
+
+  /** Stick the values column on the right side of the table */
+  stickyValues?: boolean
+
+  /** Whether the table shows a value bar. It will not show the value bar if the values are non-numeric. */
+  hasValueBar?: boolean
+
+  /** When true, formats value to locale string */
+  localize?: boolean
+
+  /** Symbol to be shown before the value text */
+  prefixValue?: string
+
+  /** Symbol to be shown after the value text */
+  sufixValue?: string
+}
+
+export type LeaderboardChartProps = {
+  /** Whether the chart should show a value inside the bar */
+  showBarValues?: boolean
+
+  /** Sets the position of the labels */
+  labelPosition?: 'axis' | 'inside' | 'top'
+}
+
+export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps {
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
-
-  /** Basic styles initial state */
-  styles?: ChartStyles
 
   /** If passed along with `rows` the component will ignore the built-in GraphQL operations */
   headers?: string[]
@@ -80,6 +102,15 @@ export interface LeaderboardProps extends ErrorFallbackProps, React.ComponentPro
   /** Leaderboard query props */
   query?: LeaderboardQueryProps
 
-  /** Format function for labels, must return an array with the new labels */
-  labelFormatter?: (labels: string[]) => string[]
+  /** Optional props that are used to configure the table component. */
+  tableProps?: LeaderboardTableProps
+
+  /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
+  chartProps?: LeaderboardChartProps
+
+  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  labelFormatter?: (labels: LeaderboardLabels) => LeaderboardLabels
+
+  /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
+  chartConfigProps?: (config: ChartConfiguration<'bar'>) => ChartConfiguration<'bar'>
 }

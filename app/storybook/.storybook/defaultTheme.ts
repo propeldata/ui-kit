@@ -3,7 +3,7 @@ import packageInfo from '../../../packages/ui-kit/package.json'
 
 export const defaultTheme = create({
   base: 'light',
-  brandTitle: `UI-kit v.${packageInfo.version}`,
+  brandTitle: `UI Kit v.${packageInfo.version}`,
   brandImage: '/propel-logo.svg'
   //   fontBase: '"Inter", sans-serif'
 })
