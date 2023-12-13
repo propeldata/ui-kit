@@ -2,7 +2,7 @@ import { CounterQueryProps, useAccessToken, useLog } from '../../components'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
-export const useCounter = (props?: CounterQueryProps): UseQueryProps<CounterQuery> => {
+export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery> => {
   const {
     accessToken: accessTokenFromProp,
     propelApiUrl,

@@ -1,8 +1,8 @@
 import { TimeSeriesQueryProps, useAccessToken, useLog } from '../../components'
-import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery } from '../../helpers'
+import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
-export const useTimeSeries = (props?: TimeSeriesQueryProps): UseQueryProps<TimeSeriesQuery> => {
+export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSeriesQuery> => {
   const {
     accessToken: accessTokenFromProp,
     propelApiUrl,
@@ -49,7 +49,7 @@ export const useTimeSeries = (props?: TimeSeriesQueryProps): UseQueryProps<TimeS
           start: timeRange?.start ?? null,
           stop: timeRange?.stop ?? null
         },
-        granularity: granularity,
+        granularity: granularity as TimeSeriesGranularity,
         filters: filters
       }
     },

@@ -2,7 +2,7 @@ import { LeaderboardQueryProps, useAccessToken, useLog } from '../../components'
 import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
-export const useLeaderboard = (props?: LeaderboardQueryProps): UseQueryProps<LeaderboardQuery> => {
+export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<LeaderboardQuery> => {
   const {
     accessToken: accessTokenFromProp,
     propelApiUrl,
@@ -47,7 +47,7 @@ export const useLeaderboard = (props?: LeaderboardQueryProps): UseQueryProps<Lea
         filters: filters,
         sort: sort,
         rowLimit: rowLimit ?? 100,
-        dimensions: dimensions,
+        dimensions: dimensions ?? [],
         timeZone: timeZone ?? getTimeZone(),
         timeRange: {
           relative: timeRange?.relative ?? null,

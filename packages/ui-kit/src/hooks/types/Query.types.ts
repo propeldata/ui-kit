@@ -21,5 +21,5 @@ export interface UseQueryProps<T> {
    * @name AccessTokenError When accessToken is not provided
    * @name Error When the query fails
    */
-  error?: Error
+  error?: Error | null
 }
