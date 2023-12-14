@@ -4,6 +4,11 @@ import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as useCounterQueryStories from '../../../../packages/ui-kit/src/hooks/useCounter/useCounter.stories'
 import * as CounterQueryPropsStories from '../../../../packages/ui-kit/src/components/Counter/CounterQueryProps.stories'
 
+import * as useLeaderboardStories from '../../../../packages/ui-kit/src/hooks/useLeaderboard/useLeaderboard.stories'
+import * as LeaderboardQueryPropsStories from '../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
+
+import * as TimeSeriesQueryPropsStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
+
 <Meta title="Customization/Query Hooks" />
 
 # Query Hooks
@@ -15,9 +20,24 @@ Query Hooks including "useCounter", "useLeaderboard" and "useTimeSeries.
 
 <SourceCode of={useCounterQueryStories.FractionUnicode} shown />
 
-### `useCounter Query Hook Props`
+### `CounterQueryProps`
 
 <ArgTypes of={CounterQueryPropsStories.Primary} sort="alpha" />
+
+## useTimeSeries
+
+
+### `TimeSeriesQueryProps`
+
+<ArgTypes of={TimeSeriesQueryPropsStories} sort="alpha" />
+
+## useLeaderboard
+
+<SourceCode of={useLeaderboardStories.LeaderboardTable} shown />
+
+### `LeaderboardQueryProps`
+
+<ArgTypes of={LeaderboardQueryPropsStories.Primary} sort="alpha" />
 
 See the documentation below for a complete reference to all of the props for FilterInput and TimeRangeInput, which are mentioned here.
 
@@ -27,42 +47,3 @@ See the documentation below for a complete reference to all of the props for Fil
 - <LinkTo kind="API/TimeRangeInput" story="overview">
     TimeRangeInput
   </LinkTo>
-
-
-## useTimeSeries
-
-```ts  
-import { useTimeSeries } from "@propeldata/ui-kit"  
-import { renderChart } from './chart'
-
-export default function TimeSeriesChart(props) {
-  const {data} = useTimeSeries({ query, timeZone})
-
-    React.useEffect(() => {
-    if (data) {
-      const labels = data.timeSeries.labels ?? []
-      const values = data.timeSeries.values ?? []
-
-      renderChart({ labels, values })
-    }
-  }, [data, renderChart])
-
-  return (<canvas id={id} ref={chartRef} />)
-}
-```  
-
-## useLeaderboard
-
-```ts  
-import { useLeaderboard } from "@propeldata/ui-kit"  
-import { Table } from './table'
-
-export default function Fraction(props) {
-  const { data } = useLeaderboard({ query, timeZone})
-
-  const headers = data?.leaderboard.headers
-  const rows = data?.leaderboard.rows
-
-  return (<Table header={headers} rows={rows} />)
-}
-```  

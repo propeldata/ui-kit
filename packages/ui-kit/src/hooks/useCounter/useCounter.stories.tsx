@@ -5,6 +5,23 @@ import axiosInstance from '../../../../../app/storybook/src/axios'
 import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
 import { useCounter } from './useCounter'
 
+const args = {
+  numerator: {
+    metric: 'Revenue',
+    timeRange: {
+      relative: RelativeTimeRange.LastNDays,
+      n: 30
+    }
+  },
+  denominator: {
+    metric: 'Revenue',
+    timeRange: {
+      relative: RelativeTimeRange.LastNDays,
+      n: 90
+    }
+  }
+}
+
 const fractionUnicode = (numerator: string, denominator: string) => (
   <>
     <sup>{numerator}</sup> / <sub>{denominator}</sub>
@@ -21,7 +38,24 @@ const meta: Meta<typeof Fraction> = {
     imports: ['useCounter', 'useAccessToken'],
     isFunction: true,
     codeTemplate: storybookCodeTemplate,
-    transformBody: (body: string) => `${body.replace(`useStorybookAccessToken(axiosInstance)`, 'useAccessToken()')} }`
+    transformBody: (body: string) =>
+      body
+        .replace(`useStorybookAccessToken(axiosInstance)`, 'useAccessToken()')
+        .replace(
+          `{
+      ...args.numerator,
+      accessToken
+    }`,
+          `${JSON.stringify(args.numerator)}`
+        )
+        .replace(
+          `{
+      ...args.denominator,
+      accessToken
+    }`,
+          `${JSON.stringify(args.numerator)}`
+        )
+        .concat(' }')
   }
 } satisfies Meta<typeof Fraction>
 
@@ -30,30 +64,14 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const FractionUnicode: Story = {
-  args: {
-    numerator: {
-      metric: 'Revenue',
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 30
-      }
-    },
-    denominator: {
-      metric: 'Revenue',
-      timeRange: {
-        relative: RelativeTimeRange.LastNDays,
-        n: 90
-      }
-    }
-  },
-  argTypes: {},
+  args,
   render: (args) =>
-    (function Fraction(numerator, denominator) {
+    (function Fraction() {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
       // useCounter hoooks with query params timeRange set to last 30 days
-      const { data: numeratorData } = useCounter({ ...numerator, accessToken })
+      const { data: numerator } = useCounter({ ...args.numerator, accessToken })
       // useCounter hoooks with query params timeRange set to last 90 days
-      const { data: denominatorData } = useCounter({ ...denominator, accessToken })
-      return <p>{fractionUnicode(numeratorData?.counter?.value ?? '', denominatorData?.counter?.value ?? '')}</p>
-    })(args.numerator, args.denominator)
+      const { data: denominator } = useCounter({ ...args.denominator, accessToken })
+      return <p>{fractionUnicode(numerator?.counter?.value ?? '', denominator?.counter?.value ?? '')}</p>
+    })()
 }
