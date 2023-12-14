@@ -18,11 +18,10 @@ const meta: Meta<typeof Fraction> = {
   tags: ['pattern'],
   component: Fraction,
   parameters: {
-    imports: 'useCounter',
+    imports: ['useCounter', 'useAccessToken'],
+    isFunction: true,
     codeTemplate: storybookCodeTemplate,
-    transformBody: (body: string) => {
-      return body
-    }
+    transformBody: (body: string) => `${body.replace(`useStorybookAccessToken(axiosInstance)`, 'useAccessToken()')} }`
   }
 } satisfies Meta<typeof Fraction>
 
@@ -48,15 +47,13 @@ export const FractionUnicode: Story = {
     }
   },
   argTypes: {},
-  render: (args) => {
-    function Fraction() {
+  render: (args) =>
+    (function Fraction(numerator, denominator) {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
       // useCounter hoooks with query params timeRange set to last 30 days
-      const numerator = useCounter({ ...args.numerator, accessToken })
+      const { data: numeratorData } = useCounter({ ...numerator, accessToken })
       // useCounter hoooks with query params timeRange set to last 90 days
-      const denominator = useCounter({ ...args.denominator, accessToken })
-      return <p>{fractionUnicode(numerator?.data?.counter?.value ?? '', denominator?.data?.counter?.value ?? '')}</p>
-    }
-    return Fraction()
-  }
+      const { data: denominatorData } = useCounter({ ...denominator, accessToken })
+      return <p>{fractionUnicode(numeratorData?.counter?.value ?? '', denominatorData?.counter?.value ?? '')}</p>
+    })(args.numerator, args.denominator)
 }
