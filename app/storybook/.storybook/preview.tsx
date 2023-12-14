@@ -3,6 +3,7 @@ import type { Preview, StoryContext } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
 import { ThemeProvider, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
+import { QueryClient, QueryClientProvider } from '../../../packages/ui-kit/src/helpers'
 import axiosInstance from '../src/axios'
 import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
@@ -25,6 +26,20 @@ const withThemeProvider = (Story: React.FC, context: StoryContext) => {
       <GlobalStyles />
       <Story />
     </ThemeProvider>
+  )
+}
+
+const withQueryClientProvider = (Story: React.FC, context: StoryContext) => {
+  const queryClient = new QueryClient()
+
+  if (context.parameters.skipQueryClientProvider) {
+    return <Story />
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Story />
+    </QueryClientProvider>
   )
 }
 
@@ -91,7 +106,8 @@ const preview: Preview = {
     withSource,
     // @ts-ignore
     withAxiosDecorator(axiosInstance),
-    withThemeProvider
+    withThemeProvider,
+    withQueryClientProvider
   ]
 }
 

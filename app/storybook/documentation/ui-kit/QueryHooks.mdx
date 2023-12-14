@@ -1,26 +1,33 @@
-import { Canvas, ArgTypes, Meta, Story, Source, Description, Primary, Controls, Stories } from '@storybook/blocks'
+import { ArgTypes, Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as useCounterQueryStories from '../../../../packages/ui-kit/src/hooks/useCounter/useCounter.stories'
+import * as CounterQueryPropsStories from '../../../../packages/ui-kit/src/components/Counter/CounterQueryProps.stories'
 
-<Meta title="Customization/Query Hooks" /> 
+<Meta title="Customization/Query Hooks" />
 
 # Query Hooks
 
 Propel’s UI Kit library provides the following React components: Counter, TimeSeries, and Leaderboard. To query the GraphQL API, we have developed 
 Query Hooks including "useCounter", "useLeaderboard" and "useTimeSeries.
 
-
 ## useCounter
 
-```ts  
-import { useCounter } from "@propeldata/ui-kit"  
-import fractionUnicode from 'fraction-unicode'
+<SourceCode of={useCounterQueryStories.FractionUnicode} shown />
 
-export default function Fraction(props) {
-  const numerator = useCounter({ query, timeZone})
-  const denominator = useCounter({ query, timeZone})
+### `useCounter Query Hook Props`
 
-  return (<p>{fractionUnicode(numerator.value, denominator.value)}</p>)
-}
-```  
+<ArgTypes of={CounterQueryPropsStories.Primary} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props for FilterInput and TimeRangeInput, which are mentioned here.
+
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>
+
 
 ## useTimeSeries
 
