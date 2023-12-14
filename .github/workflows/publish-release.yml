@@ -46,8 +46,10 @@ jobs:
           cache_fresh_start: 'true'
 
       # Release
-      - run: |
-          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
-          git config --global user.email "engineering@propeldata.com"
-          git config --global user.name "Propel Data Cloud, Inc." 
-          COMMIT_MESSAGE=release yarn release
+      - name: Publish new version
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: 'chore: release package(s)'
+          title: 'chore: release package(s)'
+          publish: yarn release

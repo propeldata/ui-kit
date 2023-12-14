@@ -13,7 +13,7 @@
     "prepare": "yarn build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "release": "propel-release",
+    "release": "yarn changeset version && yarn changeset publish",
     "test": "turbo run test",
     "postinstall": "husky install",
     "commit": "cz",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@changesets/cli": "^2.27.1",
     "@propeldata/release": "workspace:^",
     "@types/css-modules": "^1.0.2",
     "@types/eslint": "^7.28.0",
