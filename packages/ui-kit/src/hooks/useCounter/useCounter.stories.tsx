@@ -7,14 +7,14 @@ import { useCounter } from './useCounter'
 
 const args = {
   numerator: {
-    metric: 'Revenue',
+    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 30
     }
   },
   denominator: {
-    metric: 'Revenue',
+    metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 90
