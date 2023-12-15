@@ -22,6 +22,7 @@ const args = {
   }
 }
 
+// This is a function that returns a React component
 const fractionUnicode = (numerator: string, denominator: string) => (
   <>
     <sup>{numerator}</sup> / <sub>{denominator}</sub>
@@ -53,7 +54,7 @@ const meta: Meta<typeof Fraction> = {
       ...args.denominator,
       accessToken
     }`,
-          `${JSON.stringify(args.numerator)}`
+          `${JSON.stringify(args.denominator)}`
         )
         .concat(' }')
   }

@@ -34,6 +34,7 @@ describe('useLeaderboard', () => {
 
   const queryClient = new QueryClient()
 
+  // CustomComponent is a component that uses useCounter hook
   const CustomComponent = (props: LeaderboardQueryProps) => {
     const { data } = useLeaderboard(props)
     return (
@@ -58,6 +59,7 @@ describe('useLeaderboard', () => {
     )
   }
 
+  // Setup QueryClientProvider for react-query
   const QuerClientProviderComponent = (props: LeaderboardQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />

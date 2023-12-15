@@ -33,11 +33,13 @@ describe('useCounter', () => {
 
   const queryClient = new QueryClient()
 
+  // CustomComponent is a component that uses useCounter hook
   const CustomComponent = (props: CounterQueryProps) => {
     const { data } = useCounter(props)
-    return data?.counter?.value
+    return <div>{data?.counter?.value}</div>
   }
 
+  // Setup QueryClientProvider for react-query
   const QuerClientProviderComponent = (props: CounterQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />

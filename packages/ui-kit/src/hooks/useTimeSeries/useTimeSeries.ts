@@ -2,6 +2,11 @@ import { TimeSeriesQueryProps, useAccessToken, useLog } from '../../components'
 import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
+/**
+ * @hook useTimeSeries
+ * @param props
+ * @returns {data: TimeSeriesQuery | undefined, isLoading: boolean, error: Error | undefined}
+ */
 export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSeriesQuery> => {
   const {
     accessToken: accessTokenFromProp,
@@ -17,18 +22,26 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
 
   const log = useLog()
 
+  // Get access token using useAccessToken hook
   const {
     accessToken: accessTokenFromProvider,
     isLoading: isLoadingAccessToken,
     error: accessTokenError
   } = useAccessToken()
 
+  // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
+  // Log error if no access token provided and metric is provided
   if (!accessToken && metric) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
+  /**
+   * @hook react-query wrapper
+   * @param {TimeSeriesQuery} data
+   * @returns {data: TimeSeriesQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
+   */
   const { data, error, isInitialLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,

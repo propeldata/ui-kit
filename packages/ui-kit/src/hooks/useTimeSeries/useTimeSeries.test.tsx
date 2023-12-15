@@ -34,6 +34,7 @@ describe('useTimeSeries', () => {
 
   const queryClient = new QueryClient()
 
+  // CustomComponent is a component that uses useCounter hook
   const CustomComponent = (props: TimeSeriesQueryProps) => {
     const { data } = useTimeSeries(props)
     const { labels, values } = data?.timeSeries ?? {}
@@ -49,6 +50,7 @@ describe('useTimeSeries', () => {
     )
   }
 
+  // Setup QueryClientProvider for react-query
   const QuerClientProviderComponent = (props: TimeSeriesQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
