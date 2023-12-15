@@ -50,6 +50,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          version: yarn changeset version
           commit: 'chore: release package(s)'
           title: 'chore: release package(s)'
           publish: yarn release
