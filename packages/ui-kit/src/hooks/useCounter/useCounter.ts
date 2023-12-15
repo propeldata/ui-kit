@@ -52,8 +52,8 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
       }
     },
     {
-      refetchInterval: refetchInterval,
-      retry: retry,
+      refetchInterval,
+      retry,
       enabled: accessToken != null
     }
   )

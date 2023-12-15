@@ -58,8 +58,8 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
       }
     },
     {
-      refetchInterval: refetchInterval,
-      retry: retry,
+      refetchInterval,
+      retry,
       enabled: accessToken != null
     }
   )

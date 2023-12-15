@@ -54,8 +54,8 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
       }
     },
     {
-      refetchInterval: refetchInterval,
-      retry: retry,
+      refetchInterval,
+      retry,
       enabled: accessToken != null
     }
   )
