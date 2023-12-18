@@ -7,6 +7,7 @@ import { useCounter } from './useCounter'
 
 const args = {
   numerator: {
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
@@ -14,6 +15,7 @@ const args = {
     }
   },
   denominator: {
+    accessToken: '<PROPEL_ACCESS_TOKEN>',
     metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
     timeRange: {
       relative: RelativeTimeRange.LastNDays,

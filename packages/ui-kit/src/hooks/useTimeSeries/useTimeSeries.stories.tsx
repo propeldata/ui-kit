@@ -9,6 +9,7 @@ import { useTimeSeries } from './useTimeSeries'
 Chart.register(...registerables)
 
 const args = {
+  accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
     relative: RelativeTimeRange.LastNDays,

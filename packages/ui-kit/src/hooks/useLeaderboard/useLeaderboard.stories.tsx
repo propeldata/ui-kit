@@ -7,6 +7,7 @@ import { useLeaderboard } from './useLeaderboard'
 import './useLeaderboard.stories.css'
 
 const args = {
+  accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   rowLimit: 5,
   dimensions: [
