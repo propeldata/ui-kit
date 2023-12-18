@@ -1,0 +1,39 @@
+name: RFC description: Propose substantial changes to the UI Kit title: '[RFC] ' labels: ['RFC'] body:
+
+- type: textarea attributes: label: Summary description: Brief explanation of the feature.
+
+- type: textarea attributes: label: What's the problem? description: | Write a short paragraph or bulleted list to
+  briefly explain what you're trying to do, what outcomes you're aiming for, and any other relevant details to help
+  communicate the motivation behind this RFC.
+
+      Please focus on explaining the motivation so that if this RFC is not accepted, the motivation could be used to develop alternative solutions. In other words, enumerate the constraints you are trying to solve without coupling them too closely to the solution you have in mind.
+
+- type: textarea attributes: label: What are the requirements? description: Provide a list of requirements that should
+  be met by the accepted proposal.
+
+- type: textarea attributes: label: Detailed design description: | This is the bulk of the RFC. Explain the design in
+  enough detail for somebody familiar with the UI Kit to understand, and for somebody familiar with the implementation
+  to implement. This should get into specifics and corner-cases, and include examples of how the feature is used.
+
+      Consider:
+      - using diagrams to help illustrate your ideas
+      - including code examples if you're proposing API changes
+
+- type: textarea attributes: label: Drawbacks description: | Why should we _not_ do this? Please consider:
+
+      - implementation cost, both in term of code size and complexity
+      - whether the proposed feature can be better implemented in users' applications
+      - the impact on teaching people the UI Kit
+      - integration of this feature with other existing and planned features
+      - cost of migrating existing users' applications (is it a breaking change?)
+
+      There are tradeoffs to choosing any path. Attempt to identify them here.
+
+- type: textarea attributes: label: Alternatives description: | Have you considered alternative options for achieving
+  the desired outcome? It's not necessary to go into too much detail here, but it can help strengthen the main proposal.
+
+- type: textarea attributes: label: Adoption strategy description: | If we implement this proposal, how will existing UI
+  Kit users adopt it? Is this a breaking change?
+
+- type: textarea attributes: label: Unresolved questions description: Optional, but suggested for first drafts. What
+  parts of the design are still TBD?
