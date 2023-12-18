@@ -61,6 +61,6 @@ body:
 
   - type: textarea
     attributes:
-    label: Unresolved questions
-    description: |
-      Optional, but suggested for first drafts. What parts of the design are still TBD?
+      label: Unresolved questions
+      description: |
+        Optional, but suggested for first drafts. What parts of the design are still TBD?
