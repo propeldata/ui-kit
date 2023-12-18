@@ -2,13 +2,10 @@ import { ArgTypes, Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as useCounterQueryStories from '../../../../packages/ui-kit/src/hooks/useCounter/useCounter.stories'
-import * as CounterQueryPropsStories from '../../../../packages/ui-kit/src/components/Counter/CounterQueryProps.stories'
 
 import * as useLeaderboardStories from '../../../../packages/ui-kit/src/hooks/useLeaderboard/useLeaderboard.stories'
-import * as LeaderboardQueryPropsStories from '../../../../packages/ui-kit/src/components/Leaderboard/LeaderboardQueryProps.stories'
 
 import * as useTimeSeriesStories from '../../../../packages/ui-kit/src/hooks/useTimeSeries/useTimeSeries.stories'
-import * as TimeSeriesQueryPropsStories from '../../../../packages/ui-kit/src/components/TimeSeries/TimeSeriesQueryProps.stories'
 
 <Meta title="Customization/Query Hooks" />
 
@@ -23,7 +20,11 @@ Query Hooks including "useCounter", "useLeaderboard" and "useTimeSeries.
 
 ### `CounterQueryProps`
 
-<ArgTypes of={CounterQueryPropsStories.Primary} sort="alpha" />
+See the documentation below for a complete reference for CounterQueryProps
+
+- <LinkTo kind="API/CounterQueryProps" story="overview">
+    CounterQueryProps
+  </LinkTo>
 
 ## useTimeSeries
 
@@ -31,7 +32,11 @@ Query Hooks including "useCounter", "useLeaderboard" and "useTimeSeries.
 
 ### `TimeSeriesQueryProps`
 
-<ArgTypes of={TimeSeriesQueryPropsStories} sort="alpha" />
+See the documentation below for a complete reference for TimeSeriesQueryProps
+
+- <LinkTo kind="API/TimeSeriesQueryProps" story="overview">
+    TimeSeriesQueryProps
+  </LinkTo>
 
 ## useLeaderboard
 
@@ -39,7 +44,11 @@ Query Hooks including "useCounter", "useLeaderboard" and "useTimeSeries.
 
 ### `LeaderboardQueryProps`
 
-<ArgTypes of={LeaderboardQueryPropsStories.Primary} sort="alpha" />
+See the documentation below for a complete reference for LeaderboardQueryProps
+
+- <LinkTo kind="API/LeaderboardQueryProps" story="overview">
+    LeaderboardQueryProps
+  </LinkTo>
 
 See the documentation below for a complete reference to all of the props for FilterInput and TimeRangeInput, which are mentioned here.
 

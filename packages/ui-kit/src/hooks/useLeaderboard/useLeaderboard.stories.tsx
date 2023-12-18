@@ -22,12 +22,9 @@ const args = {
   sort: Sort.Asc
 }
 
-const Leaderboard: React.FC<unknown> = () => {}
-
-const meta: Meta<typeof Leaderboard> = {
+const meta: Meta = {
   title: 'Components/LeaderboardTable',
   tags: ['pattern'],
-  component: Leaderboard,
   parameters: {
     imports: ['useLeaderboard', 'useAccessToken'],
     isFunction: true,
@@ -44,7 +41,7 @@ const meta: Meta<typeof Leaderboard> = {
         )
         .concat(' }')
   }
-} satisfies Meta<typeof Leaderboard>
+} satisfies Meta
 
 export default meta
 

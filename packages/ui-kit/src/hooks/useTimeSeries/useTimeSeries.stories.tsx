@@ -18,12 +18,9 @@ const args = {
   granularity: TimeSeriesGranularity.Week
 }
 
-const TimeSeries: React.FC<unknown> = () => {}
-
-const meta: Meta<typeof TimeSeries> = {
+const meta: Meta = {
   title: 'Components/TimeSeriesChart',
   tags: ['pattern'],
-  component: TimeSeries,
   parameters: {
     imports: ['useTimeSeries', 'useAccessToken'],
     isFunction: true,
@@ -40,7 +37,7 @@ const meta: Meta<typeof TimeSeries> = {
         )
         .concat(' }')
   }
-} satisfies Meta<typeof TimeSeries>
+} satisfies Meta
 
 export default meta
 

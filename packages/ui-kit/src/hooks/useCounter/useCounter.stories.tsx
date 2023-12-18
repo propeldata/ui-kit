@@ -31,18 +31,21 @@ const fractionUnicode = (numerator: string, denominator: string) => (
   </>
 )
 
-const Fraction: React.FC<unknown> = () => {}
-
-const meta: Meta<typeof Fraction> = {
+const meta: Meta = {
   title: 'Components/Fraction',
   tags: ['pattern'],
-  component: Fraction,
   parameters: {
     imports: ['useCounter', 'useAccessToken'],
     isFunction: true,
     codeTemplate: storybookCodeTemplate,
     transformBody: (body: string) =>
       body
+        .replace(
+          'function',
+          `import {fractionUnicode} from "./fractionUnicode" 
+      
+      function`
+        )
         .replace(`useStorybookAccessToken(axiosInstance)`, 'useAccessToken()')
         .replace(
           `{
@@ -60,7 +63,7 @@ const meta: Meta<typeof Fraction> = {
         )
         .concat(' }')
   }
-} satisfies Meta<typeof Fraction>
+} satisfies Meta
 
 export default meta
 
@@ -75,6 +78,10 @@ export const FractionUnicode: Story = {
       const { data: numerator } = useCounter({ ...args.numerator, accessToken })
       // useCounter hoooks with query params timeRange set to last 90 days
       const { data: denominator } = useCounter({ ...args.denominator, accessToken })
-      return <p>{fractionUnicode(numerator?.counter?.value ?? '', denominator?.counter?.value ?? '')}</p>
+      return (
+        <p style={{ display: 'flex' }}>
+          {fractionUnicode(numerator?.counter?.value ?? '', denominator?.counter?.value ?? '')}
+        </p>
+      )
     })()
 }
