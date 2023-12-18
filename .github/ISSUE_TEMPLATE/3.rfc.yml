@@ -1,8 +1,8 @@
 name: RFC
-about: Propose substantial changes to the UI Kit
-title: '[RFC] '
-labels: 'RFC'
-assignees: ''
+description: Propose substantial changes to the UI Kit
+title: "[RFC] "
+labels: [RFC]
+assignees: []
 body:
   - type: textarea
     attributes:
@@ -11,7 +11,7 @@ body:
 
   - type: textarea
     attributes:
-      label: What's the problem?
+      label: "What's the problem?"
       description: |
         Write a short paragraph or bulleted list to briefly explain what you're trying to do, what outcomes you're aiming for, and any other relevant details to help communicate the motivation behind this RFC.
 
