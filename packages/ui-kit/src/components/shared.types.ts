@@ -19,7 +19,7 @@ export interface QueryProps {
   /** Indicates specific time zone region */
   timeZone?: string
 
-  /** Time range that the chart will respond to. Will be ignored when value is passed */
+  /** Specify the time range for a time series, counter, or leaderboard Metric query */
   timeRange?: TimeRangeInput
 
   /**
@@ -35,7 +35,7 @@ export interface QueryProps {
    * */
   accessToken?: string
 
-  /** Metric unique name will be ignored when value is passed */
+  /** The name of the Metric to query */
   metric?: string
 
   /** Filters that the chart will respond to */

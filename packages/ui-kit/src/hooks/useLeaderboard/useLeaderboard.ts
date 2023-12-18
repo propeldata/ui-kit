@@ -3,6 +3,8 @@ import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderbo
 import { UseQueryProps } from '../types/Query.types'
 
 /**
+ * This hook allows you to query a Leaderboard using Propel's GraphQL API.
+ * Use it to build custom components that require Leaderboard data.
  * @hook useLeaderboard
  * @param props
  * @returns {data: LeaderboardQuery | undefined, isLoading: boolean, error: Error | undefined}
@@ -34,8 +36,10 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
+  const enabled = accessToken != null
+
   // Log error if no access token provided and metric is provided
-  if (!accessToken && metric) {
+  if (!enabled && metric) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
@@ -73,13 +77,13 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     {
       refetchInterval,
       retry,
-      enabled: accessToken != null
+      enabled
     }
   )
 
   return {
     data,
     isLoading: isInitialLoading ?? isLoadingAccessToken,
-    error: accessTokenError ?? error
+    error: enabled ? error : accessTokenError
   }
 }

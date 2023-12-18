@@ -12,7 +12,7 @@ export interface UseQueryProps<T> {
 
   /**
    * Indicates if the query is loading
-   * Sets to true when the query is fetching data for the first time and when the access token is loading
+   * Equal to true when the query is fetching data.
    */
   isLoading?: boolean
 

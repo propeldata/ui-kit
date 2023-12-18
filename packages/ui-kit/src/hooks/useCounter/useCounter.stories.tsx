@@ -74,9 +74,9 @@ export const FractionUnicode: Story = {
   render: (args) =>
     (function Fraction() {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
-      // useCounter hoooks with query params timeRange set to last 30 days
+      // useCounter hooks with query params timeRange set to last 30 days
       const { data: numerator } = useCounter({ ...args.numerator, accessToken })
-      // useCounter hoooks with query params timeRange set to last 90 days
+      // useCounter hooks with query params timeRange set to last 90 days
       const { data: denominator } = useCounter({ ...args.denominator, accessToken })
       return (
         <p style={{ display: 'flex' }}>

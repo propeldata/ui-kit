@@ -3,6 +3,8 @@ import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeS
 import { UseQueryProps } from '../types/Query.types'
 
 /**
+ * This hook allows you to query a Time Series using Propel's GraphQL API.
+ * Use it to build custom components that require Time Series data.
  * @hook useTimeSeries
  * @param props
  * @returns {data: TimeSeriesQuery | undefined, isLoading: boolean, error: Error | undefined}
@@ -32,8 +34,10 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
+  const enabled = accessToken != null
+
   // Log error if no access token provided and metric is provided
-  if (!accessToken && metric) {
+  if (!enabled && metric) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
@@ -69,13 +73,13 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     {
       refetchInterval,
       retry,
-      enabled: accessToken != null
+      enabled
     }
   )
 
   return {
     data,
     isLoading: isInitialLoading ?? isLoadingAccessToken,
-    error: accessTokenError ?? error
+    error: enabled ? error : accessTokenError
   }
 }

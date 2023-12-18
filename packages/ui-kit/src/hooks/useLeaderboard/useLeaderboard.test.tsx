@@ -34,7 +34,7 @@ describe('useLeaderboard', () => {
 
   const queryClient = new QueryClient()
 
-  // CustomComponent is a component that uses useCounter hook
+  // CustomComponent is a component that uses useLeaderboard hook
   const CustomComponent = (props: LeaderboardQueryProps) => {
     const { data } = useLeaderboard(props)
     return (
@@ -70,7 +70,7 @@ describe('useLeaderboard', () => {
     setupTestHandlers(handlers)
   })
 
-  it('should useCounter return value', async () => {
+  it('should useLeaderboard return value', async () => {
     dom = render(<QuerClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.headers[0])

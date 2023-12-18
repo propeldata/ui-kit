@@ -2,25 +2,31 @@ import { ArgTypes, Meta } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as useCounterQueryStories from '../../../../packages/ui-kit/src/hooks/useCounter/useCounter.stories'
-
 import * as useLeaderboardStories from '../../../../packages/ui-kit/src/hooks/useLeaderboard/useLeaderboard.stories'
-
 import * as useTimeSeriesStories from '../../../../packages/ui-kit/src/hooks/useTimeSeries/useTimeSeries.stories'
 
 <Meta title="Customization/Query Hooks" />
 
 # Query Hooks
 
-Propel’s UI Kit library provides the following React components: Counter, TimeSeries, and Leaderboard. To query the GraphQL API, we have developed 
-Query Hooks including "useCounter", "useLeaderboard" and "useTimeSeries.
+Propel's UI Kit provides prebuilt React components that are responsible for querying data from Propel's GraphQL API and visualizing that data. 
+These prebuilt components integrate with the UI Kit's <LinkTo kind="Customization/Theming" story="overview">ThemeProvider</LinkTo>, allowing you to customize each 
+component's appearance. However, sometimes you need more control than what CSS and the `ThemeProvider` can offer. Additionally, you may want to combine data 
+from multiple sources within a single component.  
+
+This is where Query Hooks come in. Query Hooks are custom [React Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) that allow you to query data 
+from Propel's GraphQL API. With Query Hooks, you can build custom components that query multiple data sources and visualize them exactly the way you want to. 
+For example, if there is a specific charting library you want to use, you can integrate with it using Query Hooks.  
+
+Additionally, Query Hooks integrate with the UI Kit's <LinkTo kind="Getting started/Authentication" story="overview">AccessTokenProvider</LinkTo>. This means you don't have to 
+take care of access token management when using Query Hooks. You can continue to configure your access token in one place, 
+and the Query Hooks will automatically re-fetch data when the access token changes. 
 
 ## useCounter
 
 <SourceCode of={useCounterQueryStories.FractionUnicode} shown />
 
-### `CounterQueryProps`
-
-See the documentation below for a complete reference for CounterQueryProps
+See the documentation below for a complete reference for `CounterQueryProps` :
 
 - <LinkTo kind="API/CounterQueryProps" story="overview">
     CounterQueryProps
@@ -30,9 +36,7 @@ See the documentation below for a complete reference for CounterQueryProps
 
 <SourceCode of={useTimeSeriesStories.TimeSeriesChart} shown />
 
-### `TimeSeriesQueryProps`
-
-See the documentation below for a complete reference for TimeSeriesQueryProps
+See the documentation below for a complete reference for `TimeSeriesQueryProps`:
 
 - <LinkTo kind="API/TimeSeriesQueryProps" story="overview">
     TimeSeriesQueryProps
@@ -42,9 +46,7 @@ See the documentation below for a complete reference for TimeSeriesQueryProps
 
 <SourceCode of={useLeaderboardStories.LeaderboardTable} shown />
 
-### `LeaderboardQueryProps`
-
-See the documentation below for a complete reference for LeaderboardQueryProps
+See the documentation below for a complete reference for `LeaderboardQueryProps`:
 
 - <LinkTo kind="API/LeaderboardQueryProps" story="overview">
     LeaderboardQueryProps
