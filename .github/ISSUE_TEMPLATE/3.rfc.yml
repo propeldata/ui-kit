@@ -1,4 +1,3 @@
----
 name: RFC
 about: Propose substantial changes to the UI Kit
 title: '[RFC] '
@@ -65,4 +64,3 @@ body:
     label: Unresolved questions
     description: |
       Optional, but suggested for first drafts. What parts of the design are still TBD?
----
