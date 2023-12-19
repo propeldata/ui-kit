@@ -1,13 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
-import {
-  CounterQuery,
-  getTimeZone,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  useCombinedRefsCallback,
-  useCounterQuery
-} from '../../helpers'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
+import { useCombinedRefsCallback } from '../../helpers'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
@@ -15,6 +8,7 @@ import { withContainer } from '../withContainer'
 import componentStyles from './Counter.module.scss'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
+import { useCounter } from '../../hooks'
 
 export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
   (
@@ -36,8 +30,6 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     },
     forwardedRef
   ) => {
-    const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
-    const accessToken = query?.accessToken ?? accessTokenFromProvider
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
     useSetupTheme({ componentContainer, baseTheme })
@@ -50,41 +42,9 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
-    const {
-      isInitialLoading: isLoadingQuery,
-      error,
-      data: fetchedValue
-    } = useCounterQuery<CounterQuery, Error>(
-      {
-        endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
-        fetchParams: {
-          headers: {
-            'content-type': 'application/graphql-response+json',
-            authorization: `Bearer ${accessToken}`
-          }
-        }
-      },
-      {
-        counterInput: {
-          metricName: query?.metric,
-          timeZone: timeZone ?? getTimeZone(),
-          timeRange: {
-            relative: query?.timeRange?.relative ?? null,
-            n: query?.timeRange?.n ?? null,
-            start: query?.timeRange?.start ?? null,
-            stop: query?.timeRange?.stop ?? null
-          },
-          filters: query?.filters ?? []
-        }
-      },
-      {
-        refetchInterval: query?.refetchInterval,
-        retry: query?.retry,
-        enabled: !isStatic && accessToken != null
-      }
-    )
+    const { data, isLoading, error } = useCounter({ ...query, timeZone })
 
-    const value = isStatic ? staticValue : fetchedValue?.counter?.value
+    const value = isStatic ? staticValue : data?.counter?.value
 
     React.useEffect(() => {
       function handlePropsMismatch() {
@@ -94,12 +54,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
           return
         }
 
-        if (
-          !isStatic &&
-          ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
-            !query?.metric ||
-            !query?.timeRange)
-        ) {
+        if (!isStatic && (error?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
           // ) we will set logs as a feature later
@@ -113,13 +68,13 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, value, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
+    }, [isStatic, value, query, isLoadingStatic, error?.name])
 
     if (error || propsMismatch) {
       return <ErrorFallback error={null} {...errorFallbackProps} />
     }
 
-    if (((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) && !ref.current) {
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref.current) {
       return <Loader className={componentStyles.loader} {...loaderProps} isText />
     }
 
@@ -128,7 +83,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
         ref={setRef}
         className={classnames(
           componentStyles.rootCounter,
-          (isLoadingQuery || isLoadingStatic) && componentStyles.loading,
+          (isLoading || isLoadingStatic) && componentStyles.loading,
           className
         )}
         {...rest}

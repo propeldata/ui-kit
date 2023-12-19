@@ -14,8 +14,11 @@ export const storybookCodeTemplate = (body: string, context: StoryContext): stri
   const imports = context?.parameters?.imports ?? ''
   const componentName = context?.parameters?.componentName ?? `${context.title.split('/').pop()}Component`
   const transformedBody = context?.parameters?.transformBody ? context?.parameters?.transformBody(body) : body
+  const isFunction = context?.parameters?.isFunction ?? false
 
-  let template = `
+  let template = isFunction
+    ? transformedBody
+    : `
     function ${componentName}() {
       return (
         ${transformedBody}

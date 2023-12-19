@@ -1,7 +1,7 @@
 import type { ChartConfiguration } from 'chart.js'
-import { DimensionInput, FilterInput, LeaderboardLabels, Sort, TimeRangeInput } from '../../helpers'
+import { DimensionInput, LeaderboardLabels, Sort } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
-import type { DataComponentProps } from '../shared.types'
+import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 
@@ -10,29 +10,7 @@ export type LeaderboardData = {
   rows?: Array<Array<string | null>>
 }
 
-export type LeaderboardQueryProps = {
-  /**
-   * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
-   * @example
-   * ```jsx
-   * <AccessTokenProvider fetchToken={fetchToken}>
-   *   <Counter />
-   *   <TimeSeries />
-   *   <Leaderboard />
-   * </AccessTokenProvider>
-   * ```
-   * */
-  accessToken?: string
-
-  /** Metric unique name */
-  metric?: string
-
-  /** Time range that the chart will respond to */
-  timeRange?: TimeRangeInput
-
-  /** Filters that the chart will respond to */
-  filters?: FilterInput[]
-
+export interface LeaderboardQueryProps extends QueryProps {
   /** The number of rows to be returned. It can be a number between 1 and 1,000 */
   rowLimit?: number
 
@@ -41,15 +19,6 @@ export type LeaderboardQueryProps = {
 
   /** One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank. */
   dimensions?: DimensionInput[]
-
-  /** Interval in milliseconds for refetching the data */
-  refetchInterval?: number
-
-  /** Whether to retry on errors. */
-  retry?: boolean
-
-  /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
-  propelApiUrl?: string
 }
 
 export type LeaderboardTableProps = {

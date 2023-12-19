@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
+import { AccessTokenError } from './utils'
 import { sleep } from '../../helpers'
 import { useLog } from '../Log'
 
@@ -76,7 +77,7 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({ childr
 
         if (retries === ACCESS_TOKEN_MAX_RETRIES) {
           setIsLoading(false)
-          setError(new Error('Failed to fetch access token: ' + error.message))
+          setError(new AccessTokenError('Failed to fetch access token: ' + error.message))
         }
 
         retries++

@@ -1,8 +1,8 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { FilterInput, TimeRangeInput, TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
+import { TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
 import type { ErrorFallbackProps } from '../ErrorFallback'
-import type { DataComponentProps } from '../shared.types'
+import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
@@ -13,43 +13,12 @@ export type TimeSeriesData = {
   labels?: string[]
 }
 
-export type TimeSeriesQueryProps = {
-  /**
-   * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
-   * @example
-   * ```jsx
-   * <AccessTokenProvider fetchToken={fetchToken}>
-   *   <Counter />
-   *   <TimeSeries />
-   *   <Leaderboard />
-   * </AccessTokenProvider>
-   * ```
-   * */
-  accessToken?: string
-
-  /** Metric unique name */
-  metric?: string
-
-  /** Time range that the chart will respond to */
-  timeRange?: TimeRangeInput
-
+export interface TimeSeriesQueryProps extends QueryProps {
   /** Granularity that the chart will respond to */
   granularity?: TimeSeriesGranularity
 
-  /** Filters that the chart will respond to */
-  filters?: FilterInput[]
-
   /** Timestamp format that the chart will respond to */
   timestampFormat?: string
-
-  /** Interval in milliseconds for refetching the data */
-  refetchInterval?: number
-
-  /** Whether to retry on errors. */
-  retry?: boolean
-
-  /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
-  propelApiUrl?: string
 }
 
 export interface TimeSeriesChartProps {

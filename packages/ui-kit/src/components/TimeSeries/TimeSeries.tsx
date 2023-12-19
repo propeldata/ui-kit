@@ -9,12 +9,8 @@ import {
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  TimeSeriesQuery,
-  useForwardedRefCallback,
-  useTimeSeriesQuery
+  useForwardedRefCallback
 } from '../../helpers'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useLog } from '../Log'
@@ -23,6 +19,7 @@ import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import { getDefaultGranularity, getNumericValues, getScales, tooltipTitleCallback } from './utils'
+import { useTimeSeries } from '../../hooks'
 
 let idCounter = 0
 
@@ -78,8 +75,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
     const { theme, chartConfig } = useSetupTheme<typeof type>({ componentContainer, baseTheme })
     const log = useLog()
-    const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
-    const accessToken = query?.accessToken ?? accessTokenFromProvider
     const isLoadingStatic = loading
 
     React.useEffect(() => {
@@ -111,40 +106,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const isFormatted = !!labelFormatter
     const zone = timeZone ?? getTimeZone()
 
-    const {
-      isInitialLoading: isLoadingQuery,
-      error: hasError,
-      data: serverData
-    } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
-      {
-        endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
-        fetchParams: {
-          headers: {
-            'content-type': 'application/graphql-response+json',
-            authorization: `Bearer ${accessToken}`
-          }
-        }
-      },
-      {
-        timeSeriesInput: {
-          metricName: query?.metric,
-          timeZone: zone,
-          timeRange: {
-            relative: query?.timeRange?.relative ?? null,
-            n: query?.timeRange?.n ?? null,
-            start: query?.timeRange?.start ?? null,
-            stop: query?.timeRange?.stop ?? null
-          },
-          granularity,
-          filters: query?.filters
-        }
-      },
-      {
-        refetchInterval: query?.refetchInterval,
-        retry: query?.retry,
-        enabled: !isStatic && accessToken != null
-      }
-    )
+    const { data: serverData, isLoading, error: hasError } = useTimeSeries({ ...query, granularity, timeZone: zone })
 
     const renderChart = React.useCallback(
       (data?: TimeSeriesData) => {
@@ -297,12 +259,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           return
         }
 
-        if (
-          !isStatic &&
-          ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
-            !query?.metric ||
-            !query?.timeRange)
-        ) {
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
           // ) we will set logs as a feature later
@@ -316,7 +273,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, labels, values, query, isLoadingStatic, accessTokenFromProvider, isLoadingAccessToken])
+    }, [isStatic, labels, values, query, isLoadingStatic, hasError?.name])
 
     React.useEffect(() => {
       destroyChart()
@@ -350,10 +307,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     // @TODO: encapsulate this logic in a shared hook/component
     // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
-    if (
-      ((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) &&
-      !canvasRef.current
-    ) {
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !canvasRef.current) {
       destroyChart()
       return <Loader {...loaderProps} />
     }
@@ -367,7 +321,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           role={role || 'img'}
           aria-label={ariaLabel || ''}
           style={{
-            opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
+            opacity: isLoading || isLoadingStatic ? '0.3' : '1',
             transition: 'opacity 0.2s ease-in-out'
           }}
         />

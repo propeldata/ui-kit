@@ -36,7 +36,7 @@ export const parseStorySourceCode = ({ context, formatted = false }: ParseStoryS
       .replace(/,\s*$/, '')
       .trim('')
 
-    if (formatted) {
+    if (formatted && context.parameters.codeTemplate) {
       source = prettier(context.parameters.codeTemplate(source, context))
     }
   } catch (e) {

@@ -5,14 +5,9 @@ import {
   customCanvasBackgroundColor,
   formatLabels,
   getPixelFontSizeAsNumber,
-  getTimeZone,
   LeaderboardLabels,
-  LeaderboardQuery,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  useCombinedRefsCallback,
-  useLeaderboardQuery
+  useCombinedRefsCallback
 } from '../../helpers'
-import { useAccessToken } from '../AccessTokenProvider/useAccessToken'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
@@ -21,6 +16,7 @@ import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
+import { useLeaderboard } from '../../hooks'
 
 let idCounter = 0
 
@@ -51,10 +47,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const { theme, chartConfig } = useSetupTheme<'bar'>({ componentContainer, baseTheme })
-    const { accessToken: accessTokenFromProvider, isLoading: isLoadingAccessToken } = useAccessToken()
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-
-    const accessToken = query?.accessToken ?? accessTokenFromProvider
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -252,45 +245,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }
 
-    const {
-      isInitialLoading: isLoadingQuery,
-      error: hasError,
-      data: fetchedData
-    } = useLeaderboardQuery<LeaderboardQuery, Error>(
-      {
-        endpoint: query?.propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
-        fetchParams: {
-          headers: {
-            'content-type': 'application/graphql-response+json',
-            authorization: `Bearer ${accessToken}`
-          }
-        }
-      },
-      {
-        leaderboardInput: {
-          metricName: query?.metric,
-          filters: query?.filters,
-          sort: query?.sort,
-          rowLimit: query?.rowLimit ?? 100,
-          dimensions: query?.dimensions ?? [],
-          timeZone: timeZone ?? getTimeZone(),
-          timeRange: {
-            relative: query?.timeRange?.relative ?? null,
-            n: query?.timeRange?.n ?? null,
-            start: query?.timeRange?.start ?? null,
-            stop: query?.timeRange?.stop ?? null
-          }
-        }
-      },
-      {
-        refetchInterval: query?.refetchInterval,
-        retry: query?.retry,
-        enabled: !isStatic && accessToken != null
-      }
-    )
+    const { data: fetchedData, isLoading, error: hasError } = useLeaderboard({ ...query, timeZone })
 
     const loadingStyles = {
-      opacity: isLoadingQuery || isLoadingStatic ? '0.3' : '1',
+      opacity: isLoading || isLoadingStatic ? '0.3' : '1',
       transition: 'opacity 0.2s ease-in-out'
     }
 
@@ -312,7 +270,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         if (
           !isStatic &&
-          ((!query?.accessToken && !accessTokenFromProvider && !isLoadingAccessToken) ||
+          (hasError?.name === 'AccessTokenError' ||
             !query.metric ||
             !query.timeRange ||
             !query.dimensions ||
@@ -336,7 +294,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, headers, rows, query, isLoadingStatic, variant, accessTokenFromProvider, isLoadingAccessToken])
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name])
 
     React.useEffect(() => {
       if (isStatic) {
@@ -375,10 +333,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
 
-    if (
-      ((isStatic && isLoadingStatic) || (!isStatic && (isLoadingQuery || isLoadingAccessToken))) &&
-      isNoContainerRef
-    ) {
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
       destroyChart()
       return <Loader {...loaderProps} />
     }
