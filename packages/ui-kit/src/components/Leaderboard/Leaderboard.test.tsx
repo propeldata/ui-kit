@@ -57,6 +57,13 @@ describe('Leaderboard', () => {
 
   beforeEach(() => {
     setupTestHandlers(handlers)
+    jest.useFakeTimers()
+  })
+
+  // Running all pending timers and switching to real timers using Jest
+  afterEach(() => {
+    jest.runOnlyPendingTimers()
+    jest.useRealTimers()
   })
 
   it('should render the leaderboard with static data', () => {
