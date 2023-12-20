@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useLeaderboardStories from '../../../../../packages/ui-kit/src/hooks/useLeaderboard/useLeaderboard.stories'
+
+<Meta title="Hooks/useLeaderboard" />
+
+# `useLeaderboard`
+
+The `useLeaderboard` is a proposed Query Hook in the Propel’s UI Kit library. This Hook abstracts the code for querying the GraphQL API, allowing customers 
+to implement their own components using the Hook. The `useLeaderboard` hook would return the result of a query, which could then be used in a 
+component for displaying data. This makes it easier for customers to implement their own components while leveraging the query logic provided by Propel.
+This implementation allows for the customer to use it in their own components, such as a Table component that displays list of data. 
+
+<SourceCode of={useLeaderboardStories.LeaderboardTable} shown />
+
+See the documentation below for a complete reference for `LeaderboardQueryProps`:
+
+- <LinkTo kind="API/LeaderboardQueryProps" story="overview">
+    LeaderboardQueryProps
+  </LinkTo>
+
+See the documentation below for a complete reference to all of the props for FilterInput and TimeRangeInput, which are mentioned here.
+
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>
