@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+
+<Meta title="Hooks/Query Hooks" />
+
+# Query Hooks
+
+Propel's UI Kit provides prebuilt React components that are responsible for querying data from Propel's GraphQL API and visualizing that data. 
+These prebuilt components integrate with the UI Kit's <LinkTo kind="Customization/Theming" story="overview">ThemeProvider</LinkTo>, allowing you to customize each 
+component's appearance. However, sometimes you need more control than what CSS and the `ThemeProvider` can offer. Additionally, you may want to combine data 
+from multiple sources within a single component.  
+
+This is where Query Hooks come in. Query Hooks are custom [React Hooks](https://react.dev/learn/reusing-logic-with-custom-hooks) that allow you to query data 
+from Propel's GraphQL API. With Query Hooks, you can build custom components that query multiple data sources and visualize them exactly the way you want to. 
+For example, if there is a specific charting library you want to use, you can integrate with it using Query Hooks.  
+
+Additionally, Query Hooks integrate with the UI Kit's <LinkTo kind="Getting started/Authentication" story="overview">AccessTokenProvider</LinkTo>. This means you don't have to 
+take care of access token management when using Query Hooks. You can continue to configure your access token in one place, 
+and the Query Hooks will automatically re-fetch data when the access token changes. 
+
+#### List of query hooks
+
+- <LinkTo kind="Hooks/useCounter" story="overview">useCounter</LinkTo>
+- <LinkTo kind="Hooks/useLeaderboard" story="overview">useLeaderboard</LinkTo>
+- <LinkTo kind="Hooks/useTimeSeries" story="overview">useTimeSeries</LinkTo>
+
+
