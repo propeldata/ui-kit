@@ -61,8 +61,8 @@ package publishing, streamlining the process for consistency and reliability. He
 
 1. Include a changeset file with each pull request by running `npx changeset` or `yarn changeset`. This file describes
    the changes and suggests the appropriate version bump.
-1. After merging a pull request, the github-actions will automatically create a release candidate PR with name "Version
-   Packages".
+1. After merging a pull request, the `publish-release` GitHub Action will automatically create a release candidate PR
+   with the name "Version Packages".
 1. Review the changes in the "Version Packages" Pull Request, which includes the updated package versions and
    changelogs. Once you're satisfied, merge this pull request into the main branch.
 1. After merging into the main branch, the `publish-release` GitHub Action will automatically run, triggering
