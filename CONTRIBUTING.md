@@ -81,5 +81,5 @@ NPM under a unique pre-release tag.
 4. Select the branch of the `publish-canary` action. If you didn't change this action in your branch select the main
    branch.
 5. In the "Branch to create a snapshot from" text field enter the name of your branch.
-6. Click the green `Run workflow` button
+6. Click the green `Run workflow` button.
 7. Wait for the workflow to complete and check the output for the NPM package name and version.
