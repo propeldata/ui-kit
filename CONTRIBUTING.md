@@ -61,11 +61,11 @@ package publishing, streamlining the process for consistency and reliability. He
 
 1. Include a changeset file with each pull request by running `npx changeset` or `yarn changeset`. This file describes
    the changes and suggests the appropriate version bump.
-1. After merging a pull request, the `publish-release` GitHub Action will automatically create a release candidate PR
-   with the name "Version Packages".
-1. Review the changes in the "Version Packages" Pull Request, which includes the updated package versions and
+2. After merging a pull request, the `publish-release` GitHub Action will automatically create a new PR "Version
+   Packages" with the versioning changes.
+3. Review the changes in the "Version Packages" Pull Request, which includes the updated package versions and
    changelogs. Once you're satisfied, merge this pull request into the main branch.
-1. After merging into the main branch, the `publish-release` GitHub Action will automatically run, triggering
+4. After merging into the main branch, the `publish-release` GitHub Action will automatically run, triggering
    `npx changeset publish` which publishes the updated packages to NPM, and creates a git tag for the release, which
    will be used to create a GitHub Release.
 
@@ -76,10 +76,10 @@ publish a pre-release version, also known as a "canary". This will create a snap
 NPM under a unique pre-release tag.
 
 1. Go to the Actions tab in GitHub
-1. Click on the `publish-canary` workflow
-1. Ckick the `Run workflow` button
-1. Select the branch of the `publish-canary` action. If you didn't change this action in your branch select the main
+2. Click on the `publish-canary` workflow
+3. Ckick the `Run workflow` button
+4. Select the branch of the `publish-canary` action. If you didn't change this action in your branch select the main
    branch.
-1. In the "Branch to create a snapshot from" text field enter the name of your branch.
-1. Click the green `Run workflow` button
-1. Wait for the workflow to complete and check the output for the NPM package name and version.
+5. In the "Branch to create a snapshot from" text field enter the name of your branch.
+6. Click the green `Run workflow` button
+7. Wait for the workflow to complete and check the output for the NPM package name and version.
