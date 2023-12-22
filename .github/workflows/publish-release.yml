@@ -55,6 +55,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          commit: 'ci: Version Packages'
           version: yarn changeset version
           publish: yarn release
         env:
