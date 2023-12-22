@@ -1,6 +1,11 @@
 name: publish-release
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 env:
   PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
@@ -45,12 +50,13 @@ jobs:
         with:
           cache_fresh_start: 'true'
 
-      # Release
-      - name: Publish new version
+      # Publish
+      - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
           version: yarn changeset version
-          commit: 'chore: release package(s)'
-          title: 'chore: release package(s)'
           publish: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

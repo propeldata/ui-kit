@@ -32,7 +32,6 @@
     "@typescript-eslint/parser": "^5.43.0",
     "babel-loader": "^8.3.0",
     "commitizen": "^4.2.5",
-    "conventional-changelog-angular": "^6.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
@@ -51,7 +50,7 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@3.6.0",
+  "packageManager": "yarn@4.0.2",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

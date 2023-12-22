@@ -1,9 +1,11 @@
-name: publish-pre-release
+name: publish-canary
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to create a snapshot from'
+        required: true
 
 env:
   PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
@@ -49,15 +51,11 @@ jobs:
         with:
           cache_fresh_start: 'true'
 
-      - name: Setup Git User
-        run: |
-          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
-          git config --global user.email "engineering@propeldata.com"
-          git config --global user.name "Propel Data Cloud, Inc."
-          COMMIT_MESSAGE=release PRE_RELEASE=true yarn release
-
       # Release
       - name: Prerelease Version and Publish
         run: |
+          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+          git config --global user.email "engineering@propeldata.com"
+          git config --global user.name "Propel Data Cloud, Inc." 
           yarn changeset version --snapshot
           yarn release --pre

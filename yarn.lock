@@ -4301,7 +4301,6 @@ __metadata:
     "@typescript-eslint/parser": ^5.43.0
     babel-loader: ^8.3.0
     commitizen: ^4.2.5
-    conventional-changelog-angular: ^6.0.0
     cz-conventional-changelog: ^3.3.0
     eslint: ^8.28.0
     eslint-config-prettier: ^8.5.0
@@ -8433,13 +8432,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"array-ify@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "array-ify@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Farray-ify%2F-%2Farray-ify-1.0.0.tgz"
-  checksum: c0502015b319c93dd4484f18036bcc4b654eb76a4aa1f04afbcef11ac918859bb1f5d71ba1f0f1141770db9eef1a4f40f1761753650873068010bbf7bcdae4a4
-  languageName: node
-  linkType: hard
-
 "array-includes@npm:^3.1.6, array-includes@npm:^3.1.7":
   version: 3.1.7
   resolution: "array-includes@npm:3.1.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Farray-includes%2F-%2Farray-includes-3.1.7.tgz"
@@ -9976,16 +9968,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compare-func@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "compare-func@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcompare-func%2F-%2Fcompare-func-2.0.0.tgz"
-  dependencies:
-    array-ify: ^1.0.0
-    dot-prop: ^5.1.0
-  checksum: fb71d70632baa1e93283cf9d80f30ac97f003aabee026e0b4426c9716678079ef5fea7519b84d012cbed938c476493866a38a79760564a9e21ae9433e40e6f0d
-  languageName: node
-  linkType: hard
-
 "compressible@npm:~2.0.16":
   version: 2.0.18
   resolution: "compressible@npm:2.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcompressible%2F-%2Fcompressible-2.0.18.tgz"
@@ -10097,15 +10079,6 @@ __metadata:
   version: 1.0.5
   resolution: "content-type@npm:1.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcontent-type%2F-%2Fcontent-type-1.0.5.tgz"
   checksum: 566271e0a251642254cde0f845f9dd4f9856e52d988f4eb0d0dcffbb7a1f8ec98de7a5215fc628f3bce30fe2fb6fd2bc064b562d721658c59b544e2d34ea2766
-  languageName: node
-  linkType: hard
-
-"conventional-changelog-angular@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "conventional-changelog-angular@npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fconventional-changelog-angular%2F-%2Fconventional-changelog-angular-6.0.0.tgz"
-  dependencies:
-    compare-func: ^2.0.0
-  checksum: ddc59ead53a45b817d83208200967f5340866782b8362d5e2e34105fdfa3d3a31585ebbdec7750bdb9de53da869f847e8ca96634a9801f51e27ecf4e7ffe2bad
   languageName: node
   linkType: hard
 
@@ -11232,15 +11205,6 @@ __metadata:
     no-case: ^3.0.4
     tslib: ^2.0.3
   checksum: a65e3519414856df0228b9f645332f974f2bf5433370f544a681122eab59e66038fc3349b4be1cdc47152779dac71a5864f1ccda2f745e767c46e9c6543b1169
-  languageName: node
-  linkType: hard
-
-"dot-prop@npm:^5.1.0":
-  version: 5.3.0
-  resolution: "dot-prop@npm:5.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdot-prop%2F-%2Fdot-prop-5.3.0.tgz"
-  dependencies:
-    is-obj: ^2.0.0
-  checksum: d5775790093c234ef4bfd5fbe40884ff7e6c87573e5339432870616331189f7f5d86575c5b5af2dcf0f61172990f4f734d07844b1f23482fff09e3c4bead05ea
   languageName: node
   linkType: hard
 
@@ -14661,13 +14625,6 @@ __metadata:
   version: 1.0.1
   resolution: "is-obj@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-obj%2F-%2Fis-obj-1.0.1.tgz"
   checksum: 3ccf0efdea12951e0b9c784e2b00e77e87b2f8bd30b42a498548a8afcc11b3287342a2030c308e473e93a7a19c9ea7854c99a8832a476591c727df2a9c79796c
-  languageName: node
-  linkType: hard
-
-"is-obj@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "is-obj@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-obj%2F-%2Fis-obj-2.0.0.tgz"
-  checksum: c9916ac8f4621962a42f5e80e7ffdb1d79a3fab7456ceaeea394cd9e0858d04f985a9ace45be44433bf605673c8be8810540fe4cc7f4266fc7526ced95af5a08
   languageName: node
   linkType: hard
 
