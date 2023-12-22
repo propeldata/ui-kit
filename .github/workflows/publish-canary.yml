@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to create a snapshot from'
+        description: 'Branch to create a canary from'
         required: true
 
 env:
