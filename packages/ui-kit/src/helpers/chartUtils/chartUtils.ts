@@ -69,12 +69,12 @@ export type CustomChartLabelsPluginProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export const getCustomChartLabelsPlugin: Plugin<ChartVariant> = ({
+export const getCustomChartLabelsPlugin = ({
   theme,
   showBarValues = false,
   labelPosition = 'axis',
   showTotalValue
-}: CustomChartLabelsPluginProps) => {
+}: CustomChartLabelsPluginProps): Plugin<ChartVariant> => {
   return {
     id: 'customChartLabelsPlugin',
     afterDatasetDraw: (chart, args) => {
@@ -120,7 +120,7 @@ export const getCustomChartLabelsPlugin: Plugin<ChartVariant> = ({
       }
 
       if (datasetMeta.type === 'doughnut' && showTotalValue) {
-        const totalValue = datasetMeta.total.toLocaleString()
+        const totalValue = dataset.data?.reduce((a: number, c: number) => a + c, 0).toLocaleString()
 
         ctx.fillStyle = '#667085'
         ctx.fillText('Total', chart.width / 2 - ctx.measureText('Total').width / 2, chart.height / 2 - 5)
@@ -133,11 +133,11 @@ export const getCustomChartLabelsPlugin: Plugin<ChartVariant> = ({
   }
 }
 
-export type chartConfigProps<T> = {
+export type chartConfigProps<T extends ChartVariant> = {
   /** Sets the chart configuration*/
   chartConfig: ChartConfiguration<T>
   /** Sets the chart type */
-  variant: ChartVariant
+  variant?: ChartVariant
   /** Labels of the chart */
   labels: PieChartLabels | LeaderboardLabels
   /** Values of the chart */
@@ -146,14 +146,14 @@ export type chartConfigProps<T> = {
    * string for bar and line charts
    * string[] for pie and doughnut charts
    */
-  backgroundColor: string | string[] | null
+  backgroundColor?: string | string[] | null
   /** Sets the custom plugin*/
   customPlugins?: object
   /** Sets the custom chart labels plugin*/
   customChartLabelsPlugin: Plugin<ChartVariant>
 } & Pick<CustomChartLabelsPluginProps, 'theme' | 'labelPosition'>
 
-export const getChartConfig: ChartConfiguration<ChartVariant> = ({
+export const getChartConfig = ({
   chartConfig,
   variant = 'bar',
   labels,
@@ -167,7 +167,24 @@ export const getChartConfig: ChartConfiguration<ChartVariant> = ({
   const isPie = variant === 'pie'
   const isDoughnut = variant === 'doughnut'
   const isPieOrDoughnut = isPie || isDoughnut
-  const offset = isPieOrDoughnut ? 4 : undefined
+
+  const datasets = {
+    ['doughnut']: {
+      cutout: isDoughnut ? '75%' : 0,
+      hoverOffset: 20,
+      offset: 4
+    },
+    ['pie']: {
+      hoverOffset: 20,
+      offset: 4
+    },
+    ['bar']: {
+      barThickness: labelPosition === 'top' ? 8 : 17
+    },
+    ['line']: {
+      barThickness: labelPosition === 'top' ? 8 : 17
+    }
+  }[variant]
 
   return {
     ...chartConfig,
@@ -178,12 +195,9 @@ export const getChartConfig: ChartConfiguration<ChartVariant> = ({
         {
           data: values,
           backgroundColor: backgroundColor,
-          barThickness: labelPosition === 'top' ? 8 : 17,
           borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
           borderWidth: 0,
-          cutout: isDoughnut ? '75%' : 0,
-          offset,
-          hoverOffset: isPieOrDoughnut ? 20 : 0
+          ...datasets
         }
       ]
     },

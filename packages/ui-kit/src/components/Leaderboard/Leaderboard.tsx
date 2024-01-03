@@ -123,10 +123,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           values,
           labelPosition,
           theme,
-          chartProps,
           customPlugins,
           customChartLabelsPlugin,
-          backgroundColor: theme?.accent
+          backgroundColor: theme?.accent ?? null
         })
 
         if (chartConfigProps) {

@@ -133,7 +133,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           values,
           labelPosition,
           theme,
-          chartProps,
           customPlugins,
           customChartLabelsPlugin,
           backgroundColor: chartColorPlatte
