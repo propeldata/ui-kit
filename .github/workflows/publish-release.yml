@@ -1,6 +1,11 @@
 name: publish-release
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 env:
   PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
@@ -45,9 +50,14 @@ jobs:
         with:
           cache_fresh_start: 'true'
 
-      # Release
-      - run: |
-          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
-          git config --global user.email "engineering@propeldata.com"
-          git config --global user.name "Propel Data Cloud, Inc." 
-          COMMIT_MESSAGE=release yarn release
+      # Publish
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          commit: 'ci: Version Packages'
+          version: yarn changeset version
+          publish: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

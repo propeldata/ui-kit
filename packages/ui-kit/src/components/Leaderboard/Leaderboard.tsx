@@ -97,7 +97,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           const chart = chartRef.current
           chart.data.labels = labels
           chart.data.datasets[0].data = values
-          chart.data.datasets[0].backgroundColor = theme?.accent
           chart.options.plugins = {
             ...chart.options.plugins,
             ...customPlugins
