@@ -64,6 +64,12 @@ export const useSetupTheme = <T extends ChartVariant>({
         },
         line: {
           borderWidth: 3
+        },
+        pie: {
+          borderWidth: 0
+        },
+        doughnut: {
+          borderWidth: 0
         }
       },
       plugins: {

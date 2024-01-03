@@ -1,10 +1,10 @@
-import { BarElement, Chart as ChartJS, ChartConfiguration, ChartDataset, Plugin } from 'chart.js'
+import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'
 import {
-  customCanvasBackgroundColor,
   formatLabels,
-  getPixelFontSizeAsNumber,
+  getChartConfig,
+  getCustomChartLabelsPlugin,
   LeaderboardLabels,
   useCombinedRefsCallback
 } from '../../helpers'
@@ -80,61 +80,17 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-        const customLeaderboardChartLabelsPlugin: Plugin<'bar'> = {
-          id: 'customLeaderboardChartLabelsPlugin',
-          afterDatasetDraw: (chart, args) => {
-            const {
-              ctx,
-              data,
-              chartArea: { left },
-              scales: { y }
-            } = chart
-
-            ctx.save()
-            ctx.textAlign = 'left'
-            ctx.textBaseline = 'middle'
-            ctx.font = `${theme.tinyFontWeight} ${theme.tinyFontSize} ${theme.tinyFontFamily}`
-            ctx.fillStyle = '#ffffff'
-
-            const datasetIndex = args.index
-            const datasetMeta = chart.getDatasetMeta(datasetIndex)
-            const dataset = data.datasets[datasetIndex] as ChartDataset<'bar', number[]>
-
-            if (showBarValues) {
-              dataset.data.forEach((value, index) => {
-                const barElement = datasetMeta.data[index] as BarElement
-
-                ctx.fillText(
-                  value.toString(),
-                  barElement.x - ctx.measureText(value.toString()).width - 8,
-                  barElement.y + 0.5
-                )
-              })
-            }
-
-            if (labelPosition === 'top') {
-              ctx.fillStyle = theme?.textSecondary ?? ''
-            }
-
-            if (['inside', 'top'].includes(labelPosition)) {
-              const labels = data.labels as string[][]
-              labels?.forEach((label, index) => {
-                const barElement = datasetMeta.data[index] as BarElement
-                const { height } = barElement.getProps(['height'])
-                const xPos = left + (labelPosition === 'inside' ? 8 : 0)
-                const yPos = y.getPixelForValue(index) - (labelPosition === 'inside' ? -1 : height + 4)
-
-                ctx.fillText(label.join(', '), xPos, yPos)
-              })
-            }
-          }
-        }
+        const customChartLabelsPlugin: Plugin<'bar'> = getCustomChartLabelsPlugin({
+          theme,
+          labelPosition,
+          showBarValues
+        })
 
         const customPlugins = {
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
           },
-          customLeaderboardChartLabelsPlugin
+          customChartLabelsPlugin
         }
 
         if (chartRef.current) {
@@ -162,71 +118,17 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           return
         }
 
-        let config: ChartConfiguration<'bar'> = {
-          ...chartConfig,
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                data: values,
-                backgroundColor: theme?.accent,
-                barThickness: labelPosition === 'top' ? 8 : 17,
-                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
-                borderWidth: 0
-              }
-            ]
-          },
-          options: {
-            ...chartConfig.options,
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: {
-              padding: 4
-            },
-            plugins: {
-              ...chartConfig.options?.plugins,
-              ...customPlugins
-            },
-            scales: {
-              x: {
-                display: true,
-                grid: {
-                  drawOnChartArea: false,
-                  color: theme.colorSecondary
-                },
-                border: {
-                  color: theme.colorSecondary
-                },
-                ticks: {
-                  font: {
-                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
-                  }
-                },
-                beginAtZero: true
-              },
-              y: {
-                display: labelPosition === 'axis',
-                grid: {
-                  drawOnChartArea: true,
-                  drawTicks: false,
-                  color: theme.colorSecondary
-                },
-                border: {
-                  display: false
-                },
-                ticks: {
-                  padding: 17,
-                  font: {
-                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
-                  }
-                }
-              }
-            }
-          },
-          plugins: [customCanvasBackgroundColor, customLeaderboardChartLabelsPlugin]
-        }
+        let config: ChartConfiguration<'bar'> = getChartConfig({
+          chartConfig,
+          labels,
+          values,
+          labelPosition,
+          theme,
+          chartProps,
+          customPlugins,
+          customChartLabelsPlugin,
+          backgroundColor: theme?.accent
+        })
 
         if (chartConfigProps) {
           config = chartConfigProps(config)
