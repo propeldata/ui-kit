@@ -2,9 +2,10 @@ import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'
 import {
+  customCanvasBackgroundColor,
   formatLabels,
-  getChartConfig,
   getCustomChartLabelsPlugin,
+  getPixelFontSizeAsNumber,
   LeaderboardLabels,
   useCombinedRefsCallback
 } from '../../helpers'
@@ -117,16 +118,71 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           return
         }
 
-        let config: ChartConfiguration<'bar'> = getChartConfig({
-          chartConfig,
-          labels,
-          values,
-          labelPosition,
-          theme,
-          customPlugins,
-          customChartLabelsPlugin,
-          backgroundColor: theme?.accent ?? null
-        })
+        let config: ChartConfiguration<'bar'> = {
+          ...chartConfig,
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                data: values,
+                backgroundColor: theme?.accent,
+                barThickness: labelPosition === 'top' ? 8 : 17,
+                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
+                borderWidth: 0
+              }
+            ]
+          },
+          options: {
+            ...chartConfig.options,
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: 4
+            },
+            plugins: {
+              ...chartConfig.options?.plugins,
+              ...customPlugins
+            },
+            scales: {
+              x: {
+                display: true,
+                grid: {
+                  drawOnChartArea: false,
+                  color: theme.colorSecondary
+                },
+                border: {
+                  color: theme.colorSecondary
+                },
+                ticks: {
+                  font: {
+                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                  }
+                },
+                beginAtZero: true
+              },
+              y: {
+                display: labelPosition === 'axis',
+                grid: {
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  color: theme.colorSecondary
+                },
+                border: {
+                  display: false
+                },
+                ticks: {
+                  padding: 17,
+                  font: {
+                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                  }
+                }
+              }
+            }
+          },
+          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
+        }
 
         if (chartConfigProps) {
           config = chartConfigProps(config)

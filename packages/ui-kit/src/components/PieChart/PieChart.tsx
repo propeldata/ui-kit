@@ -5,8 +5,8 @@ import componentStyles from './PieChart.module.scss'
 
 import {
   PieChartLabels,
+  customCanvasBackgroundColor,
   formatLabels,
-  getChartConfig,
   getCustomChartLabelsPlugin,
   useCombinedRefsCallback
 } from '../../helpers'
@@ -78,7 +78,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           return
         }
 
-        const { labelPosition = 'axis', chartColorPlatte = defaultChartColorPlatte } = chartProps
+        const { chartColorPlatte = defaultChartColorPlatte } = chartProps
 
         const labels =
           formatLabels({
@@ -126,23 +126,54 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           return
         }
 
-        let config: ChartConfiguration<'pie' | 'doughnut'> = getChartConfig({
-          chartConfig,
-          variant,
-          labels,
-          values,
-          labelPosition,
-          theme,
-          customPlugins,
-          customChartLabelsPlugin,
-          backgroundColor: chartColorPlatte
-        })
+        const datasets = variant === 'doughnut' ? { cutout: '75%' } : {}
+
+        let config: ChartConfiguration<'pie' | 'doughnut'> = {
+          ...chartConfig,
+          type: variant,
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                data: values as number[],
+                backgroundColor: chartColorPlatte,
+                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
+                borderWidth: 0,
+                offset: 4,
+                hoverOffset: 20,
+                ...datasets
+              }
+            ]
+          },
+          options: {
+            ...chartConfig.options,
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: 4
+            },
+            plugins: {
+              ...chartConfig.options?.plugins,
+              ...customPlugins
+            },
+            scales: {
+              x: {
+                display: false
+              },
+              y: {
+                display: false
+              }
+            }
+          },
+          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
+        }
 
         if (chartConfigProps) {
           config = chartConfigProps(config)
         }
 
-        chartRef.current = new ChartJS(canvasRef.current, config)
+        chartRef.current = new ChartJS(canvasRef.current, config) as ChartJS
         canvasRef.current.style.borderRadius = '0px'
       },
       [variant, theme, card, chartProps, chartConfig, chartConfigProps]
