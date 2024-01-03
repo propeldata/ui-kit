@@ -86,7 +86,7 @@ export const getCustomChartLabelsPlugin = ({
       ctx.textAlign = 'left'
       ctx.textBaseline = 'middle'
       ctx.font = `${theme?.tinyFontWeight} ${theme?.tinyFontSize} ${theme?.tinyFontFamily}`
-      ctx.fillStyle = '#ffffff'
+      ctx.fillStyle = theme?.textPrimary ?? '#ffffff'
 
       const datasetIndex = args.index
       const datasetMeta = chart.getDatasetMeta(datasetIndex)
@@ -117,13 +117,13 @@ export const getCustomChartLabelsPlugin = ({
       }
 
       if (datasetMeta.type === 'doughnut' && showTotalValue) {
-        const totalValue = dataset.data?.reduce((a: number, c: number) => a + c, 0).toLocaleString()
+        const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
 
-        ctx.fillStyle = '#667085'
+        ctx.fillStyle = theme?.textSecondary ?? '#667085'
         ctx.fillText('Total', chart.width / 2 - ctx.measureText('Total').width / 2, chart.height / 2 - 5)
 
         ctx.font = `${theme?.fontSize} ${theme?.tinyFontFamily}`
-        ctx.fillStyle = '#0C111D'
+        ctx.fillStyle = theme?.textPrimary ?? '#0C111D'
         ctx.fillText(totalValue, chart.width / 2 - ctx.measureText(totalValue).width / 2, chart.height / 2 + 20)
       }
     }

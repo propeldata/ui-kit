@@ -137,7 +137,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               {
                 data: values as number[],
                 backgroundColor: chartColorPlatte,
-                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
                 borderWidth: 0,
                 offset: 4,
                 hoverOffset: 20,
