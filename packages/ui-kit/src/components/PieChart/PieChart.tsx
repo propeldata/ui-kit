@@ -6,7 +6,6 @@ import componentStyles from './PieChart.module.scss'
 import {
   PieChartLabels,
   customCanvasBackgroundColor,
-  formatLabels,
   getCustomChartLabelsPlugin,
   useCombinedRefsCallback
 } from '../../helpers'
@@ -80,11 +79,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const { chartColorPlatte = defaultChartColorPlatte } = chartProps
 
-        const labels =
-          formatLabels({
-            labels: data.rows?.map((row) => row.slice(0, row.length - 1)) as PieChartLabels,
-            formatter: (labels) => labels
-          }) || []
+        const labels = (data.rows?.map((row) => row.slice(0, row.length - 1)) as PieChartLabels) ?? []
 
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
