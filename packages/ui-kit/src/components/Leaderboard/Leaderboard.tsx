@@ -94,7 +94,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           legend: {
             display: false
           },
-          customLeaderboardChartLabelsPlugin
+          customChartLabelsPlugin
         }
 
         if (chartRef.current) {
