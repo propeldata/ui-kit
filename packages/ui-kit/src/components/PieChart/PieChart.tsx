@@ -96,32 +96,29 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           customChartLabelsPlugin
         }
 
+        const datasets = variant == 'doughnut' ? { cutout: '75%' } : { cutout: '0' }
+
         if (chartRef.current) {
           const chart = chartRef.current
+
           chart.data.labels = labels
+
+          chart.data.datasets[0] = {
+            ...chart.data.datasets[0],
+            ...datasets
+          }
+          chart.data.datasets[0].type = variant
           chart.data.datasets[0].data = values
           chart.data.datasets[0].backgroundColor = chartColorPlatte
+
           chart.options.plugins = {
             ...chart.options.plugins,
             ...customPlugins
           }
 
-          // @TODO: need improvement
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          chart.options.scales.x.border.color = theme?.colorSecondary
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          chart.options.scales.x.grid.color = theme?.colorSecondary
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          chart.options.scales.y.grid.color = theme?.colorSecondary
-
           chart.update()
           return
         }
-
-        const datasets = variant === 'doughnut' ? { cutout: '75%' } : {}
 
         let config: ChartConfiguration<'pie' | 'doughnut'> = {
           ...chartConfig,

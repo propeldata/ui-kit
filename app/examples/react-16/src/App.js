@@ -7,7 +7,9 @@ import {
   LeaderboardStaticTest,
   LeaderboardConnectedTest,
   CounterStaticTest,
-  CounterConnectedTest
+  CounterConnectedTest,
+  PieChartStaticTest,
+  PieChartConnectedTest
 } from 'components'
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
@@ -53,6 +55,8 @@ export default function App() {
             <LeaderboardConnectedTest />
             <CounterStaticTest />
             <CounterConnectedTest />
+            <PieChartStaticTest />
+            <PieChartConnectedTest />
           </div>
         </main>
       </ThemeProvider>
