@@ -12,7 +12,10 @@ import {
   TimeSeriesScale,
   Tooltip,
   Filler,
-  ChartConfiguration
+  ChartConfiguration,
+  Title,
+  SubTitle,
+  Legend
 } from 'chart.js'
 import type { ThemeTokenProps } from '../../themes'
 
@@ -38,6 +41,9 @@ export const initChartJs = () => {
     LogarithmicScale,
     Tooltip,
     Colors,
+    Title,
+    SubTitle,
+    Legend,
     PointElement,
     BarElement,
     LineElement,
