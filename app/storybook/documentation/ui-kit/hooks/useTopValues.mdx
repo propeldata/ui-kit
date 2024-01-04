@@ -1,0 +1,28 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useTopValuesStories from '../../../../../packages/ui-kit/src/hooks/useTopValues/useTopValues.stories'
+
+<Meta title="Hooks/useTopValues" />{' '}
+
+# `useTopValues`
+
+The `useTopValues` is a proposed Query Hook in the Propel’s UI Kit library. This Hook abstracts the code for querying
+the GraphQL API, allowing customers to implement their own components using the Hook. The `useTopValues` hook would return an
+array of the most frequent values in a given column. The resulting array is sorted in descending order of approximate
+frequency of values.
+
+<SourceCode of={useTopValuesStories.TopValuesChart} shown />
+
+See the documentation below for a complete reference for `TopValuesQueryProps`:
+
+- <LinkTo kind="API/TopValuesQueryProps" story="overview">
+    TopValuesQueryProps
+  </LinkTo>
+
+See the documentation below for a complete reference to all of the props for TimeRangeInput, which is
+mentioned here.
+
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>
