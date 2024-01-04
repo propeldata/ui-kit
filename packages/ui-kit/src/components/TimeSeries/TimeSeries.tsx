@@ -132,6 +132,9 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
           },
+          legend: {
+            display: false
+          },
           tooltip: {
             callbacks: {
               title: (context: { label: string }[]) => tooltipTitleCallback(context, granularity)

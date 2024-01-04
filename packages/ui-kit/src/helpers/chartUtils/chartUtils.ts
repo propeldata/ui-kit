@@ -17,7 +17,10 @@ import {
   Filler,
   ChartDataset,
   Plugin,
-  ChartConfiguration
+  ChartConfiguration,
+  Title,
+  SubTitle,
+  Legend
 } from 'chart.js'
 import type { ThemeTokenProps } from '../../themes'
 import { ChartVariant } from '../../components'
@@ -44,6 +47,9 @@ export const initChartJs = () => {
     LogarithmicScale,
     Tooltip,
     Colors,
+    Title,
+    SubTitle,
+    Legend,
     PointElement,
     BarElement,
     LineElement,

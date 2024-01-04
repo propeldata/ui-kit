@@ -91,7 +91,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
           },
-          customChartLabelsPlugin
+          legend: {
+            display: false
+          },
+          customLeaderboardChartLabelsPlugin
         }
 
         if (chartRef.current) {
