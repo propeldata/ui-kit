@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Chart, registerables } from 'chart.js'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken, TimeSeriesGranularity } from '../../helpers'
+import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
 
 import { useTopValues } from './useTopValues'
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
@@ -19,8 +19,7 @@ const args: TopValuesQueryProps = {
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
     n: 30
-  },
-  granularity: TimeSeriesGranularity.Week
+  }
 }
 
 const meta: Meta = {

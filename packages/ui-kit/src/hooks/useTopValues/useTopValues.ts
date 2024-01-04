@@ -48,7 +48,7 @@ export const useTopValues = (props: TopValuesQueryProps): UseQueryProps<TopValue
   /**
    * @hook react-query wrapper
    * @param {TopValuesQuery} data
-   * @returns {data: TimeSeriesQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
+   * @returns {data: TopValuesQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
   const { data, error, isInitialLoading } = useTopValuesQuery<TopValuesQuery, Error>(
     {
