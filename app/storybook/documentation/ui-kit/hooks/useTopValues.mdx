@@ -7,10 +7,9 @@ import * as useTopValuesStories from '../../../../../packages/ui-kit/src/hooks/u
 
 # `useTopValues`
 
-The `useTopValues` is a proposed Query Hook in the Propel’s UI Kit library. This Hook abstracts the code for querying
-the GraphQL API, allowing customers to implement their own components using the Hook. The `useTopValues` hook would return an
-array of the most frequent values in a given column. The resulting array is sorted in descending order of approximate
-frequency of values.
+The `useTopValues` Query Hook allows querying [Propel's `topValues` API](https://www.propeldata.com/docs/api/query/queries#topValues).
+This simplifies creating custom components that need to display the most frequent values in a given column. You can use
+this hook to create a component for displaying top values, while reusing the Propel UI Kit's query logic and access token management.
 
 <SourceCode of={useTopValuesStories.TopValuesChart} shown />
 
