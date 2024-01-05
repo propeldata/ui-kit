@@ -80,7 +80,7 @@ const connectedParams = {
 }
 
 export const SingleDimensionPieStory: Story = {
-  name: 'Single dimension Pie',
+  name: 'Pie',
   args: {
     query: connectedParams,
     card: true
@@ -89,10 +89,35 @@ export const SingleDimensionPieStory: Story = {
 }
 
 export const SingleDimensionDoughnutStory: Story = {
-  name: 'Single dimension Doughnut',
+  name: 'Doughnut',
   args: {
     variant: 'doughnut',
     query: connectedParams,
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const PieLegendBottomStory: Story = {
+  name: 'Pie legend on bottom',
+  args: {
+    query: connectedParams,
+    chartProps: {
+      legendPosition: 'bottom'
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const DoughnutLegendBottomStory: Story = {
+  name: 'Doughnut legend on bottom',
+  args: {
+    variant: 'doughnut',
+    query: connectedParams,
+    chartProps: {
+      legendPosition: 'bottom'
+    },
     card: true
   },
   render: (args) => <PieChart {...args} />
@@ -114,6 +139,18 @@ export const StaticDoughnutStory: Story = {
     variant: 'doughnut',
     headers: pieHeaders,
     rows: pieRows,
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const PieIsLegendHiddenStory: Story = {
+  name: 'Legend is hidden',
+  args: {
+    query: connectedParams,
+    chartProps: {
+      isLegendHidden: true
+    },
     card: true
   },
   render: (args) => <PieChart {...args} />

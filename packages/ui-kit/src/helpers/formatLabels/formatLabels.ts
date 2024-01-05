@@ -1,6 +1,5 @@
 export type TimeSeriesLabels = string[]
 export type LeaderboardLabels = string[][]
-export type PieChartLabels = string[][]
 
 export interface FormatLabelsOptions<T extends TimeSeriesLabels | LeaderboardLabels> {
   labels?: T

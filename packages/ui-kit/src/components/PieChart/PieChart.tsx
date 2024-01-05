@@ -3,18 +3,13 @@ import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js/auto'
 import classnames from 'classnames'
 import componentStyles from './PieChart.module.scss'
 
-import {
-  PieChartLabels,
-  customCanvasBackgroundColor,
-  getCustomChartLabelsPlugin,
-  useCombinedRefsCallback
-} from '../../helpers'
+import { customCanvasBackgroundColor, getCustomChartLabelsPlugin, useCombinedRefsCallback } from '../../helpers'
 import { useSetupTheme } from '../ThemeProvider'
 import { useCounter, useLeaderboard } from '../../hooks'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
-import { PieChartProps, PieChartdData } from './PieChart.types'
+import { PieChartProps, PieChartData } from './PieChart.types'
 
 const defaultChartColorPlatte: string[] = [
   componentStyles.color_blue_800,
@@ -50,7 +45,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       chartConfigProps,
       ...rest
     }: PieChartProps,
-    forwardedRef: any
+    forwardedRef: React.ForwardedRef<HTMLDivElement>
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
@@ -93,17 +88,20 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const isDoughnut = variant === 'doughnut'
 
     const renderChart = React.useCallback(
-      (data?: PieChartdData) => {
+      (data?: PieChartData) => {
         if (!canvasRef.current || !data || !theme || !chartConfig) {
           return
         }
 
-        const { chartColorPlatte = defaultChartColorPlatte } = chartProps
+        const {
+          chartColorPlatte = defaultChartColorPlatte,
+          legendPosition = 'top',
+          isLegendHidden = false
+        } = chartProps
 
-        const labels = (data.rows?.map((row) => row.slice(0, row.length - 1)) as PieChartLabels) ?? []
+        const labels = data.rows?.map((row) => row[0]) ?? []
 
-        const values =
-          data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
+        const values = data.rows?.map((row) => Number(row[1])) ?? []
 
         const customChartLabelsPlugin: Plugin<'pie' | 'doughnut'> = getCustomChartLabelsPlugin({
           theme
@@ -114,7 +112,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             color: card ? theme?.bgPrimary : 'transparent'
           },
           legend: {
-            display: true,
+            display: !isLegendHidden,
+            position: legendPosition,
             labels: {
               usePointStyle: true,
               pointStyle: '*',
@@ -154,7 +153,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             labels: labels,
             datasets: [
               {
-                data: values as number[],
+                data: values,
                 backgroundColor: chartColorPlatte,
                 borderWidth: 0,
                 offset: 4,
@@ -210,14 +209,12 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         return
       }
 
-      let leaderboardSum = 0
+      const leaderboardTotalValue = leaderboardData?.leaderboard?.rows.reduce((a, b) => a + Number(b[1]), 0) ?? 0
+      const counterValue = Number(counterData?.counter?.value ?? '0')
 
-      for (const row of leaderboardData?.leaderboard?.rows ?? []) {
-        leaderboardSum += parseFloat(row[1] as string)
+      if (counterValue > leaderboardTotalValue) {
+        leaderboardData?.leaderboard?.rows.push(['Other', (counterValue - leaderboardTotalValue).toString()])
       }
-
-      const otherValue = parseFloat(counterData?.counter?.value ?? '0') - leaderboardSum
-      leaderboardData?.leaderboard?.rows.push(['Other', otherValue.toString()])
 
       return leaderboardData
     }, [leaderboardData, counterData])
@@ -301,9 +298,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       return <Loader {...loaderProps} />
     }
 
-    const isTotal = isStatic
-      ? (rows?.map((e) => Number(e[1])) ?? []).reduce((a: number, b: number) => a + b, 0) ?? '0'
-      : Number(counterData?.counter?.value)
+    const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
 
     return (
       <>
@@ -313,7 +308,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         {isPie && (
           <div className={classnames(componentStyles.pieChartTotalValue, className)}>
             <span>Total :</span>
-            <span>{isTotal.toLocaleString()}</span>
+            <span>{totalValue.toLocaleString()}</span>
           </div>
         )}
       </>

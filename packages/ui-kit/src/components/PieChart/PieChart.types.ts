@@ -9,11 +9,21 @@ export type ChartProps = {
   /** Sets the position of the labels */
   labelPosition?: 'axis' | 'inside' | 'top'
 
+  /** Hides the legend on chart If it is set the true
+   * @default false
+   */
+  isLegendHidden?: boolean
+
+  /** Sets the position of the legend
+   * @default 'top'
+   */
+  legendPosition?: 'top' | 'bottom'
+
   /** Sets the chart color platte */
   chartColorPlatte?: string[]
 }
 
-export type PieChartdData = {
+export type PieChartData = {
   headers?: string[]
   rows?: Array<Array<string | null>>
 }
