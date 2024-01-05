@@ -9,9 +9,9 @@ import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 
 const args: TopValuesQueryProps = {
   dataPool: {
-    name: 'TacoSoft Demo Data'
+    name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
   },
-  columnName: 'restaurant_name',
+  columnName: process.env.STORYBOOK_COLUMN_NAME_1,
   maxValues: 5,
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
