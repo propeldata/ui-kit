@@ -72,8 +72,6 @@ export type CustomChartLabelsPluginProps = {
   theme?: ThemeTokenProps
   /** Whether the chart should show a value inside the bar */
   showBarValues?: boolean
-  /** Whether the chart should show the total value inside the doughnut */
-  showTotalValue?: boolean
   /** Sets the position of the labels */
   labelPosition?: 'axis' | 'inside' | 'top'
 }
@@ -81,8 +79,7 @@ export type CustomChartLabelsPluginProps = {
 export const getCustomChartLabelsPlugin = ({
   theme,
   showBarValues = false,
-  labelPosition = 'axis',
-  showTotalValue
+  labelPosition = 'axis'
 }: CustomChartLabelsPluginProps): Plugin<ChartVariant> => {
   return {
     id: 'customChartLabelsPlugin',
@@ -128,13 +125,12 @@ export const getCustomChartLabelsPlugin = ({
         })
       }
 
-      if (datasetMeta.type === 'doughnut' && showTotalValue) {
+      if (datasetMeta.type === 'doughnut') {
         const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
-
         ctx.fillStyle = theme?.textSecondary ?? '#667085'
         ctx.fillText('Total', chart.width / 2 - ctx.measureText('Total').width / 2, chart.height / 2 - 5)
 
-        ctx.font = `${theme?.fontSize} ${theme?.tinyFontFamily}`
+        ctx.font = `24px ${theme?.tinyFontFamily}`
         ctx.fillStyle = theme?.textPrimary ?? '#0C111D'
         ctx.fillText(totalValue, chart.width / 2 - ctx.measureText(totalValue).width / 2, chart.height / 2 + 20)
       }

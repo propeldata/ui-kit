@@ -10,6 +10,15 @@
     }
 }
 
+.pieChartTotalValue{
+    text-align: center;
+    margin-top: 10px;
+
+    span{ margin: 0; line-height: 22px; color:var(--propel-text-secondary)}
+    span:first-child{ font-size: 12px; padding-right: 5px; }
+    span:last-child{ font-size: 14px; color: var(--propel-text-primary)}
+}
+
 :export{
     /* Color Blue (Brand)*/
     color_blue_950: #102A56;

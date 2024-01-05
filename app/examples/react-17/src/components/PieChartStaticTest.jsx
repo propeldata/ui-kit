@@ -9,7 +9,7 @@ const mockData1 = {
     ['Likes', '9'],
     ['Follow', '1'],
     ['Test', '4'],
-    ['Another', '7']
+    ['Other', '7']
   ]
 }
 
@@ -19,7 +19,7 @@ const mockData2 = {
     ['Likes', '43'],
     ['Follow', '21'],
     ['Test', '125'],
-    ['Another', '68']
+    ['Other', '68']
   ]
 }
 

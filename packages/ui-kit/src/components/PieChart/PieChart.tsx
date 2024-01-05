@@ -71,6 +71,27 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
      */
     const isStatic = !query
 
+    /**
+     * Fetches the leaderboard data from the API
+     */
+    const {
+      data: leaderboardData,
+      isLoading: leaderboardIsLoading,
+      error: leaderboardHasError
+    } = useLeaderboard({ ...query })
+
+    /**
+     * Fetches the counter data from the API
+     */
+    const { data: counterData, isLoading: counterIsLoading, error: counterHasError } = useCounter({ ...query })
+
+    const isLoading = leaderboardIsLoading || counterIsLoading
+
+    const hasError = leaderboardHasError || counterHasError
+
+    const isPie = variant === 'pie'
+    const isDoughnut = variant === 'doughnut'
+
     const renderChart = React.useCallback(
       (data?: PieChartdData) => {
         if (!canvasRef.current || !data || !theme || !chartConfig) {
@@ -85,18 +106,26 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
         const customChartLabelsPlugin: Plugin<'pie' | 'doughnut'> = getCustomChartLabelsPlugin({
-          theme,
-          showTotalValue: true
+          theme
         })
 
         const customPlugins = {
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
           },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: true,
+              pointStyle: '*',
+              pointStyleWidth: 8,
+              boxHeight: 6
+            }
+          },
           customChartLabelsPlugin
         }
 
-        const datasets = variant == 'doughnut' ? { cutout: '75%' } : { cutout: '0' }
+        const datasets = isDoughnut ? { cutout: '75%' } : { cutout: '0' }
 
         if (chartRef.current) {
           const chart = chartRef.current
@@ -165,7 +194,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         chartRef.current = new ChartJS(canvasRef.current, config) as ChartJS
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps]
+      [variant, theme, card, chartProps, chartConfig, isDoughnut, chartConfigProps]
     )
 
     const destroyChart = () => {
@@ -174,18 +203,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         chartRef.current = null
       }
     }
-
-    const {
-      data: leaderboardData,
-      isLoading: leaderboardIsLoading,
-      error: leaderboardHasError
-    } = useLeaderboard({ ...query })
-
-    const { data: counterData, isLoading: counterIsLoading, error: counterHasError } = useCounter({ ...query })
-
-    const isLoading = leaderboardIsLoading || counterIsLoading
-
-    const hasError = leaderboardHasError || counterHasError
 
     // Calculate the other value and add it to the leaderboardData
     const fetchedData = React.useMemo(() => {
@@ -284,10 +301,22 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       return <Loader {...loaderProps} />
     }
 
+    const isTotal = isStatic
+      ? (rows?.map((e) => Number(e[1])) ?? []).reduce((a: number, b: number) => a + b, 0) ?? '0'
+      : Number(counterData?.counter?.value)
+
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
-        <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
-      </div>
+      <>
+        <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
+          <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
+        </div>
+        {isPie && (
+          <div className={classnames(componentStyles.pieChartTotalValue, className)}>
+            <span>Total :</span>
+            <span>{isTotal.toLocaleString()}</span>
+          </div>
+        )}
+      </>
     )
   }
 )
