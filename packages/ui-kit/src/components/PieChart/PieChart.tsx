@@ -102,14 +102,12 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           const chart = chartRef.current
 
           chart.data.labels = labels
-
-          chart.data.datasets[0] = {
-            ...chart.data.datasets[0],
+          Object.assign(chart.data.datasets[0], {
+            type: variant,
+            data: values,
+            backgroundColor: chartColorPlatte,
             ...datasets
-          }
-          chart.data.datasets[0].type = variant
-          chart.data.datasets[0].data = values
-          chart.data.datasets[0].backgroundColor = chartColorPlatte
+          })
 
           chart.options.plugins = {
             ...chart.options.plugins,
