@@ -7,10 +7,9 @@ import * as useCounterQueryStories from '../../../../../packages/ui-kit/src/hook
 
 # `useCounter`
 
-The `useCounter` is a proposed Query Hook in the Propel’s UI Kit library. This Hook abstracts the code for querying the GraphQL API, allowing customers 
-to implement their own components using the Hook. The `useCounter` hook would return the result of a query, which could then be used in a 
-component for displaying data. This makes it easier for customers to implement their own components while leveraging the query logic provided by Propel.
-This implementation allows for the customer to use it in their own components, such as a Fraction component that displays two Counters as a fraction. 
+The `useCounter` Query Hook allows querying [Propel's `counter` API](https://www.propeldata.com/docs/api/query/queries#counter).
+This simplifies creating custom components that need to display counter data. For example, you can use this hook to create a
+component for displaying two counter values as a fraction, while reusing the Propel UI Kit's query logic and access token management.
 
 <SourceCode of={useCounterQueryStories.FractionUnicode} shown />
 
