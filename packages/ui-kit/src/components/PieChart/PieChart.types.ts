@@ -24,6 +24,11 @@ export type ChartProps = {
    */
   legendPosition?: 'top' | 'bottom'
 
+  /** Shows the values on chart if it is set the true
+   * @default false
+   */
+  showValues?: boolean
+
   /** Sets the chart color platte */
   chartColorPlatte?: string[]
 }

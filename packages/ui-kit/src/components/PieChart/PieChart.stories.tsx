@@ -171,3 +171,30 @@ export const ChangeOtherLabelStory: Story = {
   },
   render: (args) => <PieChart {...args} />
 }
+
+export const ShowValuesPieChartStory: Story = {
+  name: 'Show values for Pie',
+  args: {
+    headers: pieHeaders,
+    rows: pieRows,
+    chartProps: {
+      showValues: true
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const ShowValuesDoughnutStory: Story = {
+  name: 'Show values for Dounghnut',
+  args: {
+    variant: 'doughnut',
+    headers: pieHeaders,
+    rows: pieRows,
+    chartProps: {
+      showValues: true
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}

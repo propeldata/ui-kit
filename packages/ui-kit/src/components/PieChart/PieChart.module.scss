@@ -19,3 +19,69 @@
     span:first-child{ font-size: 12px; padding-right: 5px; }
     span:last-child{ font-size: 14px; color: var(--propel-text-primary)}
 }
+
+.pieChartList{
+    @extend .typographySmall;
+    margin-top: 20px;
+
+    ul{
+        max-width: 260px;
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+    
+        li{                        
+            display: flex;
+            padding: 5px 0;
+            justify-content: space-between;
+            
+            &>span{            
+                display: flex;
+                align-items: center;
+            }
+
+            &>span:first-child{
+                &:before {
+                        content: '';
+                        display: inline-block;
+                        width: 12px;
+                        height: 12px;
+                        margin-right: 5px;
+                        border-radius: 50%;
+                        background-color: var(--color-blue-800);
+                    }
+            }
+
+            &>span:last-child{
+                align-items: right;
+                font-weight: bold;
+            }            
+        }
+
+        @for $i from 8 through 1 {
+            li:nth-child(#{9 - $i}){
+                &>span:first-child{
+                    &:before {
+                        background-color: var(--color-blue-#{$i}00);
+                    }
+                }
+            }
+        }
+
+        li:nth-child(9){
+            &>span:first-child {
+                    &:before {
+                        background-color: var(--color-blue-50);
+                }
+            }
+        }
+
+        li:nth-child(10) {
+            &>span:first-child {
+                &:before {
+                    background-color: var(--color-blue-25);
+                }
+            }
+        }
+    }
+}

@@ -87,6 +87,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const isPie = variant === 'pie'
     const isDoughnut = variant === 'doughnut'
 
+    const showValues = chartProps?.showValues ?? false
+
     const renderChart = React.useCallback(
       (data?: PieChartData) => {
         if (!canvasRef.current || !data || !theme || !chartConfig) {
@@ -108,7 +110,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             color: card ? theme?.bgPrimary : 'transparent'
           },
           legend: {
-            display: !hideLegend,
+            display: showValues ? false : !hideLegend,
             position: legendPosition,
             labels: {
               usePointStyle: true,
@@ -189,7 +191,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         chartRef.current = new ChartJS(canvasRef.current, config) as ChartJS
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, isDoughnut, chartConfigProps]
+      [variant, theme, card, chartProps, chartConfig, isDoughnut, showValues, chartConfigProps]
     )
 
     const destroyChart = () => {
@@ -298,6 +300,25 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
 
+    const getListItem = () => {
+      if (showValues) {
+        const _rows = isStatic ? rows : fetchedData?.leaderboard?.rows
+
+        return (
+          <div className={classnames(componentStyles.pieChartList, className)}>
+            <ul>
+              {_rows?.map((row, index) => (
+                <li key={`label-${index}`}>
+                  <span>{row[0]}</span>
+                  <span>{parseFloat(row[1] ?? '0').toLocaleString()}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    }
+
     return (
       <>
         <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
@@ -309,6 +330,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             <span>{totalValue.toLocaleString()}</span>
           </div>
         )}
+        {getListItem()}
       </>
     )
   }
