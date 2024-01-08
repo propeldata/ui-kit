@@ -9,10 +9,15 @@ export type ChartProps = {
   /** Sets the position of the labels */
   labelPosition?: 'axis' | 'inside' | 'top'
 
-  /** Hides the legend on chart If it is set the true
+  /** Sets the other label text
+   * @default 'Other'
+   */
+  otherLabel?: string
+
+  /** Hides the legend on chart if it is set the true
    * @default false
    */
-  isLegendHidden?: boolean
+  hideLegend?: boolean
 
   /** Sets the position of the legend
    * @default 'top'
@@ -35,7 +40,7 @@ export interface PieChartQueryProps extends QueryProps {
   /** The sort order of the rows. It can be ascending (ASC) or descending (DESC) order. Defaults to descending (DESC) order when not provided. */
   sort?: Sort
 
-  /** One Dimension to group the Metric values by. Typically, Dimensions in a pie chart are what you want to compare and rank. */
+  /** The variant the chart will display, can be either "pie" or "doughnut" */
   dimensions?: DimensionInput[]
 }
 

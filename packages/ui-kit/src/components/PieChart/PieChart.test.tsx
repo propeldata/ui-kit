@@ -6,16 +6,18 @@ import { Dom, mockLeaderboardQuery, mockCounterQuery, setupTestHandlers } from '
 import { PieChart } from './PieChart'
 
 const mockCounterData = {
-  value: '2375'
+  value: '87560'
 }
 
 const mockData = {
-  headers: ['DATA_SOURCE_TYPE', 'value'],
+  headers: ['Taco name', 'value'],
   rows: [
-    ['Http', '250'],
-    ['Snowflake', '385'],
-    ['S3', '445'],
-    ['Redshift', '560']
+    ['Carnitas', '21250'],
+    ['Al Pastor', '14385'],
+    ['Carne Asada', '8445'],
+    ['Pollo', '15600'],
+    ['Barbacoa', '5560'],
+    ['Veggie', '11320']
   ]
 }
 
@@ -84,7 +86,7 @@ describe('PieChart', () => {
     const chartLabels = chartInstance?.data.labels
 
     const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
+    const resultingLabels = mockData.rows.map((row) => row[0])
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)
@@ -117,15 +119,15 @@ describe('PieChart', () => {
     const chartLabels = chartInstance?.data.labels
 
     // extend mock data with other value
-    // Total value = 2375
-    // existing mock data total= 1640
-    // other value = 735
-    const extedndedMockData = {
+    // Total value = 87560
+    // existing mock data total= 76560
+    // other value = 11000
+    const extendedMockData = {
       headers: [...mockData.headers],
-      rows: [...mockData.rows, ['Other', '735']]
+      rows: [...mockData.rows, ['Other', '11000']]
     }
-    const resultingRows = extedndedMockData.rows.map((row) => parseInt(row[row.length - 1]))
-    const resultingLabels = extedndedMockData.rows.map((row) => row.slice(0, row.length - 1))
+    const resultingRows = extendedMockData.rows.map((row) => parseInt(row[row.length - 1]))
+    const resultingLabels = extendedMockData.rows.map((row) => row[0])
 
     expect(chartData).toEqual(resultingRows)
     expect(chartLabels).toEqual(resultingLabels)

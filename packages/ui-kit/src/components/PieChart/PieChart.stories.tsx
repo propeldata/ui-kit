@@ -32,12 +32,15 @@ export default meta
 
 type Story = StoryObj<typeof PieChartComponent>
 
-const pieHeaders = ['DATA_SOURCE_TYPE', 'value']
+const pieHeaders = ['Taco name', 'value']
 const pieRows = [
-  ['Http', '7498'],
-  ['Snowflake', '1285'],
-  ['S3', '10345'],
-  ['Redshift', '15944']
+  ['Carnitas', '21250'],
+  ['Al Pastor', '14385'],
+  ['Carne Asada', '8445'],
+  ['Pollo', '15600'],
+  ['Barbacoa', '5560'],
+  ['Veggie', '11320'],
+  ['Other', '11000']
 ]
 const PieChart = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
@@ -149,7 +152,20 @@ export const PieIsLegendHiddenStory: Story = {
   args: {
     query: connectedParams,
     chartProps: {
-      isLegendHidden: true
+      hideLegend: true
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const ChangeOtherLabelStory: Story = {
+  name: 'Other label text',
+  args: {
+    variant: 'doughnut',
+    query: connectedParams,
+    chartProps: {
+      otherLabel: 'Rest'
     },
     card: true
   },

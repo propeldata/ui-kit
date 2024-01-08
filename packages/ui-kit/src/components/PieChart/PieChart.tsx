@@ -11,7 +11,7 @@ import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import { PieChartProps, PieChartData } from './PieChart.types'
 
-const defaultChartColorPlatte: string[] = [
+const defaultChartColorPalette: string[] = [
   componentStyles.color_blue_800,
   componentStyles.color_blue_700,
   componentStyles.color_blue_600,
@@ -93,11 +93,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           return
         }
 
-        const {
-          chartColorPlatte = defaultChartColorPlatte,
-          legendPosition = 'top',
-          isLegendHidden = false
-        } = chartProps
+        const { chartColorPlatte = defaultChartColorPalette, legendPosition = 'top', hideLegend = false } = chartProps
 
         const labels = data.rows?.map((row) => row[0]) ?? []
 
@@ -112,7 +108,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             color: card ? theme?.bgPrimary : 'transparent'
           },
           legend: {
-            display: !isLegendHidden,
+            display: !hideLegend,
             position: legendPosition,
             labels: {
               usePointStyle: true,
@@ -203,6 +199,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       }
     }
 
+    const otherLabel = chartProps?.otherLabel ?? 'Other'
+
     // Calculate the other value and add it to the leaderboardData
     const fetchedData = React.useMemo(() => {
       if (!leaderboardData || !counterData) {
@@ -213,11 +211,11 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       const counterValue = Number(counterData?.counter?.value ?? '0')
 
       if (counterValue > leaderboardTotalValue) {
-        leaderboardData?.leaderboard?.rows.push(['Other', (counterValue - leaderboardTotalValue).toString()])
+        leaderboardData?.leaderboard?.rows.push([otherLabel, (counterValue - leaderboardTotalValue).toString()])
       }
 
       return leaderboardData
-    }, [leaderboardData, counterData])
+    }, [leaderboardData, counterData, otherLabel])
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',
@@ -307,7 +305,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         </div>
         {isPie && (
           <div className={classnames(componentStyles.pieChartTotalValue, className)}>
-            <span>Total :</span>
+            <span>Total: </span>
             <span>{totalValue.toLocaleString()}</span>
           </div>
         )}
