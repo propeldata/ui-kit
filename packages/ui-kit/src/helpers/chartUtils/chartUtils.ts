@@ -128,15 +128,13 @@ export const getCustomChartLabelsPlugin = ({
       if (datasetMeta.type === 'doughnut') {
         const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
         ctx.font = `12px ${theme?.tinyFontFamily}`
-        ctx.fillStyle = theme?.textSecondary ?? '#667085'
         ctx.fillText(
           'Total',
           chart.width / 2 - ctx.measureText('Total').width / 2,
           chart.chartArea.height / 2 + chart.chartArea.top - 20
         )
 
-        ctx.font = `24px ${theme?.tinyFontFamily}`
-        ctx.fillStyle = theme?.textPrimary ?? '#0C111D'
+        ctx.font = `700 24px ${theme?.tinyFontFamily}`
         ctx.fillText(
           totalValue,
           chart.width / 2 - ctx.measureText(totalValue).width / 2,
