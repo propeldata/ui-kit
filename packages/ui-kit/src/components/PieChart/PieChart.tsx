@@ -305,7 +305,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         const _rows = isStatic ? rows : fetchedData?.leaderboard?.rows
 
         return (
-          <div className={classnames(componentStyles.pieChartList, className)}>
+          <div className={componentStyles.pieChartList}>
             <ul>
               {_rows?.map((row, index) => (
                 <li key={`label-${index}`}>
@@ -320,18 +320,18 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     }
 
     return (
-      <>
-        <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
+      <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
+        <div>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
         {isPie && (
-          <div className={classnames(componentStyles.pieChartTotalValue, className)}>
+          <div className={componentStyles.pieChartTotalValue}>
             <span>Total: </span>
             <span>{totalValue.toLocaleString()}</span>
           </div>
         )}
         {getListItem()}
-      </>
+      </div>
     )
   }
 )

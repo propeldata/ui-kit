@@ -127,6 +127,7 @@ export const getCustomChartLabelsPlugin = ({
 
       if (datasetMeta.type === 'doughnut') {
         const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
+        ctx.font = `12px ${theme?.tinyFontFamily}`
         ctx.fillStyle = theme?.textSecondary ?? '#667085'
         ctx.fillText(
           'Total',

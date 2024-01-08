@@ -1,5 +1,5 @@
-@use '../../themes/typography';
-@use '../../themes/common';
+@use "../../themes/typography";
+@use "../../themes/common";
 
 .rootPieChart {
     @extend .typographyTiny;
@@ -11,56 +11,68 @@
     }
 }
 
-.pieChartTotalValue{
-    text-align: center;
-    margin-top: 10px;
+.pieChartTotalValue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--propel-space-sm);
 
-    span{ margin: 0; line-height: 22px; color:var(--propel-text-secondary)}
-    span:first-child{ font-size: 12px; padding-right: 5px; }
-    span:last-child{ font-size: 14px; color: var(--propel-text-primary)}
+    span {
+        margin: 0;
+        line-height: var(--propel-tiny-line-height);
+        color: var(--propel-text-secondary);
+    }
+    span:first-child {
+        font-size: var(--propel-small-font-size);
+        padding-right: var(--propel-space-xxs);
+    }
+    span:last-child {
+        font-size: var(--propel-small-font-size);
+        font-weight: 700;
+    }
 }
 
-.pieChartList{
+.pieChartList {
     @extend .typographySmall;
-    margin-top: 20px;
+    margin-top: var(--propel-space-md);
 
-    ul{
-        max-width: 260px;
+    ul {
+        max-width: 18rem;
         list-style: none;
         padding: 0;
         margin: 0 auto;
-    
-        li{                        
+
+        li {
             display: flex;
-            padding: 5px 0;
+            padding: var(--propel-space-xxs) 0;
             justify-content: space-between;
-            
-            &>span{            
+
+            & > span {
                 display: flex;
                 align-items: center;
             }
 
-            &>span:first-child{
+            & > span:first-child {
                 &:before {
-                        content: '';
-                        display: inline-block;
-                        width: 12px;
-                        height: 12px;
-                        margin-right: 5px;
-                        border-radius: 50%;
-                        background-color: var(--color-blue-800);
-                    }
+                    content: "";
+                    display: inline-block;
+                    width: 0.75rem;
+                    height: 0.75rem;
+                    margin-right: var(--propel-space-xs);
+                    border-radius: 50%;
+                    background-color: var(--color-blue-800);
+                }
             }
 
-            &>span:last-child{
+            & > span:last-child {
                 align-items: right;
                 font-weight: bold;
-            }            
+            }
         }
 
         @for $i from 8 through 1 {
-            li:nth-child(#{9 - $i}){
-                &>span:first-child{
+            li:nth-child(#{9 - $i}) {
+                & > span:first-child {
                     &:before {
                         background-color: var(--color-blue-#{$i}00);
                     }
@@ -68,16 +80,16 @@
             }
         }
 
-        li:nth-child(9){
-            &>span:first-child {
-                    &:before {
-                        background-color: var(--color-blue-50);
+        li:nth-child(9) {
+            & > span:first-child {
+                &:before {
+                    background-color: var(--color-blue-50);
                 }
             }
         }
 
         li:nth-child(10) {
-            &>span:first-child {
+            & > span:first-child {
                 &:before {
                     background-color: var(--color-blue-25);
                 }
