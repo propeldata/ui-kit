@@ -11,19 +11,6 @@ import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import { PieChartProps, PieChartData } from './PieChart.types'
 
-const defaultChartColorPalette: string[] = [
-  componentStyles.color_blue_800,
-  componentStyles.color_blue_700,
-  componentStyles.color_blue_600,
-  componentStyles.color_blue_500,
-  componentStyles.color_blue_400,
-  componentStyles.color_blue_300,
-  componentStyles.color_blue_200,
-  componentStyles.color_blue_100,
-  componentStyles.color_blue_50,
-  componentStyles.color_blue_25
-]
-
 let idCounter = 0
 
 export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>(
@@ -88,6 +75,22 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const isDoughnut = variant === 'doughnut'
 
     const showValues = chartProps?.showValues ?? false
+
+    const defaultChartColorPalette = React.useMemo(
+      () => [
+        theme?.colorBlue800,
+        theme?.colorBlue700,
+        theme?.colorBlue600,
+        theme?.colorBlue500,
+        theme?.colorBlue400,
+        theme?.colorBlue300,
+        theme?.colorBlue200,
+        theme?.colorBlue100,
+        theme?.colorBlue50,
+        theme?.colorBlue25
+      ],
+      [theme]
+    )
 
     const renderChart = React.useCallback(
       (data?: PieChartData) => {
@@ -191,7 +194,17 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         chartRef.current = new ChartJS(canvasRef.current, config) as ChartJS
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, isDoughnut, showValues, chartConfigProps]
+      [
+        variant,
+        theme,
+        card,
+        chartProps,
+        chartConfig,
+        isDoughnut,
+        showValues,
+        defaultChartColorPalette,
+        chartConfigProps
+      ]
     )
 
     const destroyChart = () => {
