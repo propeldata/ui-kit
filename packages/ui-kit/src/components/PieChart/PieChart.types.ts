@@ -10,7 +10,7 @@ export type ChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 
   /** Sets the other label text
-   * @default 'Other'
+   * @default Other
    */
   otherLabel?: string
 
@@ -20,7 +20,7 @@ export type ChartProps = {
   hideLegend?: boolean
 
   /** Sets the position of the legend
-   * @default 'top'
+   * @default top
    */
   legendPosition?: 'top' | 'bottom'
 
