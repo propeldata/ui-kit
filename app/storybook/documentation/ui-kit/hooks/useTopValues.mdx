@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useTopValuesStories from '../../../../../packages/ui-kit/src/hooks/useTopValues/useTopValues.stories'
+
+<Meta title="Hooks/useTopValues" />{' '}
+
+# `useTopValues`
+
+The `useTopValues` Query Hook allows querying [Propel's `topValues` API](https://www.propeldata.com/docs/api/query/queries#topValues).
+This simplifies creating custom components that need to display the most frequent values in a given column. You can use
+this hook to create a component for displaying top values, while reusing the Propel UI Kit's query logic and access token management.
+
+<SourceCode of={useTopValuesStories.TopValuesChart} shown />
+
+See the documentation below for a complete reference for `TopValuesQueryProps`:
+
+- <LinkTo kind="API/TopValuesQueryProps" story="overview">
+    TopValuesQueryProps
+  </LinkTo>
+
+See the documentation below for a complete reference to all of the props for TimeRangeInput, which is
+mentioned here.
+
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>

@@ -7,9 +7,9 @@ import * as useTimeSeriesStories from '../../../../../packages/ui-kit/src/hooks/
 
 # `useTimeSeries`
 
-The `useTimeSeries` is a proposed Query Hook in the Propel’s UI Kit library. It is designed to abstract the code for querying 
-the GraphQL API, specifically for data over a period of time. This makes it easier for customers to implement their own time series components 
-while leveraging the query logic provided by Propel. 
+The `useTimeSeries` Query Hook allows querying [Propel's `timeSeries` API](https://www.propeldata.com/docs/api/query/queries#timeSeries).
+This simplifies creating custom components that need to display time series data. For example, you can use this Query Hook to create
+your own time series component, while reusing the Propel UI Kit's query logic and access token management.
 
 <SourceCode of={useTimeSeriesStories.TimeSeriesChart} shown />
 
