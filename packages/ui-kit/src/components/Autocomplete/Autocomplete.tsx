@@ -1,11 +1,11 @@
 import { Button } from '@mui/base/Button'
 import { Popper } from '@mui/base/Popper'
 import { useAutocomplete, UseAutocompleteProps } from '@mui/base/useAutocomplete'
-import { unstable_useForkRef as useForkRef } from '@mui/utils'
 import * as React from 'react'
 import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
 import { AutocompleteOption } from './Autocomplete.types'
+import { useCombinedRefs } from '../../helpers'
 
 const ChevronUpIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +55,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     componentName: 'BaseAutocompleteIntroduction'
   })
 
-  const rootRef = useForkRef(ref, setAnchorEl)
+  const rootRef = useCombinedRefs(ref, setAnchorEl)
 
   return (
     <React.Fragment>
@@ -68,6 +68,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           id={id}
           disabled={disabled}
           readOnly={readOnly}
+          placeholder="Select or type"
           {...getInputProps()}
           className={componentStyles.autocompleteInput}
         />
