@@ -36,7 +36,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   props: UseAutocompleteProps<any[number], false, false, false>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { disableClearable = false, disabled = false, readOnly = false, ...other } = props
+  const { disabled = false, readOnly = false, ...other } = props
 
   const {
     getRootProps,
@@ -44,7 +44,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     getPopupIndicatorProps,
     getListboxProps,
     getOptionProps,
-    dirty,
     id,
     popupOpen,
     focused,
@@ -55,8 +54,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     ...props,
     componentName: 'BaseAutocompleteIntroduction'
   })
-
-  const hasClearIcon = !disableClearable && !disabled && dirty && !readOnly
 
   const rootRef = useForkRef(ref, setAnchorEl)
 
