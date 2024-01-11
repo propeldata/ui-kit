@@ -149,7 +149,8 @@ const top100Films = [
 export const BasicStory: Story = {
   name: 'Basic',
   args: {
-    options: top100Films
+    options: top100Films,
+    placeholder: 'Search or type'
   },
   render: (args) => <Autocomplete {...args} />
 }

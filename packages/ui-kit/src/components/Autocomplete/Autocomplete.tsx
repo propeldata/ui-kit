@@ -1,11 +1,13 @@
 import { Button } from '@mui/base/Button'
 import { Popper } from '@mui/base/Popper'
-import { useAutocomplete, UseAutocompleteProps } from '@mui/base/useAutocomplete'
+import { Input } from '@mui/base/Input'
+import { useAutocomplete } from '@mui/base/useAutocomplete'
 import * as React from 'react'
 import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
-import { AutocompleteOption } from './Autocomplete.types'
 import { useCombinedRefs } from '../../helpers'
+import { AutocompleteProps } from './Autocomplete.types'
+import './Autocomplete.css'
 
 const ChevronUpIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,10 +35,10 @@ const ChevronDownIcon = () => (
 
 // See full Autocomplete example here: https://mui.com/base-ui/react-autocomplete/#introduction
 export const Autocomplete = React.forwardRef(function Autocomplete(
-  props: UseAutocompleteProps<AutocompleteOption, false, false, false>,
+  props: AutocompleteProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { disabled = false, readOnly = false, ...other } = props
+  const { disabled = false, readOnly = false, placeholder = '', ...other } = props
 
   const {
     getRootProps,
@@ -62,15 +64,20 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
       <div
         {...getRootProps(other)}
         ref={rootRef}
-        className={classnames(componentStyles.rootAutocomplete, focused && 'focused')}
+        className={classnames(componentStyles.rootAutocomplete, focused && componentStyles.rootAutocomplete__focused)}
       >
-        <input
+        <Input
           id={id}
           disabled={disabled}
           readOnly={readOnly}
-          placeholder="Select or type"
+          placeholder={placeholder}
           {...getInputProps()}
-          className={componentStyles.autocompleteInput}
+          slotProps={{
+            input: {
+              className: componentStyles.autocompleteInput
+            }
+          }}
+          style={{ width: '100%' }}
         />
         <Button {...getPopupIndicatorProps()} className={componentStyles.autocompleteIndicator}>
           {popupOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}

@@ -105,6 +105,8 @@ export type ThemeCSSTokenProps = {
   '--propel-accent'?: CSSProperties['color']
   '--propel-accent-hover'?: CSSProperties['color']
   '--propel-color-gradient'?: CSSProperties['color']
+
+  '--propel-colors-blue-25'?: CSSProperties['color']
 }
 
 /**
