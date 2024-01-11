@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as CounterMetricQueryStories from '../../../../packages/ui-kit/src/hooks/useCounter/CounterMetric.stories'
+
+<Meta title="Getting started/Metric" /> 
+
+# `Metric`
+
+The metric query is used to query a `Metric` in counter, time series, or leaderboard format.
+
+The application scope shoul be authorized to do with the given API including `METRIC_QUERY`, `METRIC_READ` and `DATA_POOL_QUERY`.
+
+### Counter metric query by `id`
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryById} shown />
+
+### Counter metric query by `name`
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryByName} shown />
+
+### Counter metric query by `sum`
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryBySum} shown />
+
+### Counter metric query by `custom`
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryByCustom} shown />
+
+See the documentation below for a complete reference for `MetricInput` :
+
+- <LinkTo kind="API/MetricInput" story="overview">
+    MetricInput
+  </LinkTo>

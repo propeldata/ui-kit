@@ -259,6 +259,10 @@ input CounterInput {
   """
   metricName: String
   """
+  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
+  """
+  metric: MetricInput
+  """
   The time range for calculating the counter.
   """
   timeRange: TimeRangeInput!
@@ -296,6 +300,10 @@ input TimeSeriesInput {
   Required if `metricId` is not specified.
   """
   metricName: String
+  """
+  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
+  """
+  metric: MetricInput
   """
   The time range for calculating the time series.
   """
@@ -338,6 +346,10 @@ input LeaderboardInput {
   Required if `metricId` is not specified.
   """
   metricName: String
+  """
+  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
+  """
+  metric: MetricInput
   """
   The time range for calculating the leaderboard.
   """
@@ -887,4 +899,150 @@ type Query {
 
 type Mutation {
   noop: ID!
+}
+
+"""
+The fields for querying a Data Pool.
+"""
+input DataPoolInput @oneOf {
+  """
+  The ID of the Data Pool.
+  """
+  id: ID
+  """
+  The name of the Data Pool.
+  """
+  name: String
+}
+
+"""
+The fields for querying a Custom Metric.
+"""
+input CustomMetricQueryInput {
+  """
+  The Data Pool to which this Metric belongs.
+  """
+  dataPool: DataPoolInput!
+  """
+  Custom expression for defining the Metric.
+  """
+  expression: String!
+}
+
+input CountMetricQueryInput {
+  "The Data Pool to which this Metric belongs."
+  dataPool: DataPoolInput!
+}
+
+"""
+The fields for querying a Sum Metric.
+"""
+input SumMetricQueryInput {
+  """
+  The Data Pool to which this Metric belongs.
+  """
+  dataPool: DataPoolInput!
+  """
+  The column to be summed.
+  """
+  measure: DimensionInput!
+}
+
+"""
+The fields for querying an Average Metric.
+"""
+input AverageMetricQueryInput {
+  """
+  The Data Pool to which this Metric belongs.
+  """
+  dataPool: DataPoolInput!
+  """
+  The column to be averaged.
+  """
+  measure: DimensionInput!
+}
+
+"""
+The fields for querying a Min Metric.
+"""
+input MinMetricQueryInput {
+  """
+  The Data Pool to which this Metric belongs.
+  """
+  dataPool: DataPoolInput!
+  """
+  The column to calculate the minimum from.
+  """
+  measure: DimensionInput!
+}
+
+"""
+The fields for querying a Max Metric.
+"""
+input MaxMetricQueryInput {
+  """
+  The Data Pool to which this Metric belongs.
+  """
+  dataPool: DataPoolInput!
+  """
+  The column to calculate the maximum from.
+  """
+  measure: DimensionInput!
+}
+
+"""
+The fields for querying a Count Distinct Metric.
+"""
+input CountDistinctMetricQueryInput {
+  """
+  The Data Pool to which this Metric belongs.
+  """
+  dataPool: DataPoolInput!
+  """
+  The column to count distinct values from.
+  """
+  dimension: DimensionInput!
+}
+
+"""
+The fields for querying a Metric.
+The metric query is used to query a Metric in counter, time series, or leaderboard format.
+"""
+input MetricInput @oneOf {
+  """
+  The ID of a pre-configured Metric.
+  """
+  id: ID
+  """
+  The name of a pre-configured Metric.
+  """
+  name: String
+  """
+  An ad hoc Custom Metric.
+  """
+  custom: CustomMetricQueryInput
+  """
+  An ad hoc Count Metric.
+  """
+  count: CountMetricQueryInput
+  """
+  An ad hoc Sum Metric.
+  """
+  sum: SumMetricQueryInput
+  """
+  An ad hoc Average Metric.
+  """
+  average: AverageMetricQueryInput
+  """
+  An ad hoc Min Metric.
+  """
+  min: MinMetricQueryInput
+  """
+  An ad hoc Max Metric.
+  """
+  max: MaxMetricQueryInput
+  """
+  An ad hoc Count Distinct Metric.
+  """
+  countDistinct: CountDistinctMetricQueryInput
 }

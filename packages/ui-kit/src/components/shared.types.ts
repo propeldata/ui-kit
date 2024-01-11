@@ -1,4 +1,4 @@
-import { FilterInput, TimeRangeInput } from 'src/helpers'
+import { FilterInput, MetricInput, TimeRangeInput } from 'src/helpers'
 import type { ErrorFallbackProps } from './ErrorFallback'
 import type { LoaderProps } from './Loader'
 
@@ -35,8 +35,13 @@ export interface QueryProps {
    * */
   accessToken?: string
 
-  /** The name of the Metric to query */
-  metric?: string
+  /**
+   * The metric query is used to query a Metric in counter, time series, or leaderboard format.
+   * If it is passed a `string`, it will be used as the metric name.
+   * If it is passed a `MetricInput`, it will be used as the metric query.
+   * @type string | MetricInput
+   * */
+  metric?: string | MetricInput
 
   /** Filters that the chart will respond to */
   filters?: FilterInput[]
