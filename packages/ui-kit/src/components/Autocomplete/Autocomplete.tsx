@@ -5,6 +5,7 @@ import { unstable_useForkRef as useForkRef } from '@mui/utils'
 import * as React from 'react'
 import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
+import { AutocompleteOption } from './Autocomplete.types'
 
 const ChevronUpIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,8 +33,7 @@ const ChevronDownIcon = () => (
 
 // See full Autocomplete example here: https://mui.com/base-ui/react-autocomplete/#introduction
 export const Autocomplete = React.forwardRef(function Autocomplete(
-  //   props: UseAutocompleteProps<(typeof top100Films)[number], false, false, false>,
-  props: UseAutocompleteProps<any[number], false, false, false>,
+  props: UseAutocompleteProps<AutocompleteOption, false, false, false>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   const { disabled = false, readOnly = false, ...other } = props
@@ -90,16 +90,17 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           disablePortal
         >
           <ul {...getListboxProps()} className={componentStyles.autocompleteList}>
-            {(groupedOptions as any).map((option: any, index: any) => {
-              const optionProps = getOptionProps({ option, index })
+            {groupedOptions.map((option, index) => {
+              if ('label' in option) {
+                const optionProps = getOptionProps({ option, index })
 
-              return (
-                <li key={index} {...optionProps}>
-                  {option.label}
-                </li>
-              )
+                return (
+                  <li key={index} {...optionProps}>
+                    {option.label}
+                  </li>
+                )
+              }
             })}
-
             {groupedOptions.length === 0 && <li>No results</li>}
           </ul>
         </Popper>
