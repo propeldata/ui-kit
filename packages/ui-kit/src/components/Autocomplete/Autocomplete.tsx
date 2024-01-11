@@ -6,9 +6,29 @@ import * as React from 'react'
 import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
 
-// There is an issue with MUI icons: https://stackoverflow.com/a/71806305/311327
-// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-// import ClearIcon from '@mui/icons-material/Clear'
+const ChevronUpIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M5 12.5L10 7.5L15 12.5"
+      stroke="#667085"
+      strokeWidth="1.66667"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
+
+const ChevronDownIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M5 7.5L10 12.5L15 7.5"
+      stroke="#667085"
+      strokeWidth="1.66667"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
 
 // See full Autocomplete example here: https://mui.com/base-ui/react-autocomplete/#introduction
 export const Autocomplete = React.forwardRef(function Autocomplete(
@@ -22,7 +42,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     getRootProps,
     getInputProps,
     getPopupIndicatorProps,
-    getClearProps,
     getListboxProps,
     getOptionProps,
     dirty,
@@ -55,10 +74,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           {...getInputProps()}
           className={componentStyles.autocompleteInput}
         />
-        {hasClearIcon && <Button {...getClearProps()}>{/* <ClearIcon /> */}x</Button>}
-        <Button {...getPopupIndicatorProps()} className={popupOpen ? 'popupOpen' : undefined}>
-          \/
-          {/* <ArrowDropDownIcon /> */}
+        <Button {...getPopupIndicatorProps()} className={componentStyles.autocompleteIndicator}>
+          {popupOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </Button>
       </div>
       {anchorEl ? (

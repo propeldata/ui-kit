@@ -8,7 +8,9 @@
   gap: var(--propel-space-xxs);
   padding: var(--propel-space-xxs);
   overflow: hidden;
-  max-width: 320px;
+  max-width: 620px;
+
+  box-sizing: border-box;
 
   &.focused {
     border-color: var(--propel-color-secondary);
@@ -33,11 +35,30 @@
   flex: 1 0 auto;
 }
 
+.autocompleteIndicator {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+  border-radius: 4px;
+  background-color: transparent;
+  align-self: center;
+  padding: 0 2px;
+  margin-right: 4px;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--propel-bg-secondary);
+    cursor: pointer;
+  }
+}
+
 .autocompleteList {
   box-sizing: border-box;
   padding: var(--propel-space-xxs);
   margin: var(--propel-space-xxs) 0;
-  min-width: 320px;
+  width: 620px;
   border-radius: var(--propel-border-radius-sm);
   overflow: auto;
   outline: 0px;
