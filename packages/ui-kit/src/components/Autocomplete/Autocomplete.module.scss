@@ -1,0 +1,86 @@
+.rootAutocomplete {
+  box-shadow: var(--propel-shadow-sm);
+  border-radius: var(--propel-border-radius-sm);
+  color: var(--propel-text-primary);
+  background-color: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  display: flex;
+  gap: var(--propel-space-xxs);
+  padding: var(--propel-space-xxs);
+  overflow: hidden;
+  max-width: 320px;
+
+  &.focused {
+    border-color: var(--propel-color-secondary);
+  }
+
+  &:hover {
+    background: var(--propel-bg-secondary);
+  }
+
+  &:focus-visible {
+    outline: 0;
+  }
+}
+
+.autocompleteInput {
+  color: var(--propel-text-primary);
+  background: inherit;
+  border: none;
+  border-radius: inherit;
+  padding: var(--propel-space-xxs);
+  outline: 0;
+  flex: 1 0 auto;
+}
+
+.autocompleteList {
+  box-sizing: border-box;
+  padding: var(--propel-space-xxs);
+  margin: var(--propel-space-xxs) 0;
+  min-width: 320px;
+  border-radius: var(--propel-border-radius-sm);
+  overflow: auto;
+  outline: 0px;
+  max-height: 300px;
+  z-index: 1;
+  background-color: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  color: var(--propel-text-primary);
+  box-shadow: var(--propel-shadow-sm);
+
+  li {
+    list-style: none;
+    padding: var(--propel-space-sm);
+    border-radius: var(--propel-border-radius-sm);
+    cursor: default;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: var(--propel-accent-hover);
+      cursor: pointer;
+    }
+
+    &[aria-selected='true'] {
+      background-color: var(--propel-accent);
+      color: var(--propel-text-primary);
+    }
+
+    &.Mui-focused,
+    &.Mui-focusVisible {
+      // color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+    }
+
+    &.Mui-focusVisible {
+      // box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[500] : blue[200]};
+    }
+
+    &[aria-selected='true'].Mui-focused,
+    &[aria-selected='true'].Mui-focusVisible {
+      // background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
+      // color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
+    }
+  }
+}

@@ -4776,6 +4776,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["regenerator-runtime", "npm:0.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fregenerator-runtime%2F-%2Fregenerator-runtime-0.14.0.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.23.8-97b3f844a2-0bd5543c26.zip/node_modules/@babel/runtime/",\
+          "packageDependencies": [\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["regenerator-runtime", "npm:0.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fregenerator-runtime%2F-%2Fregenerator-runtime-0.14.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@babel/template", [\
@@ -5964,6 +5972,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@floating-ui/utils", "npm:0.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.1.6.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:1.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fcore%2F-%2Fcore-1.5.3.tgz", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-core-npm-1.5.3-e6c5ac3201-72af8563e1.zip/node_modules/@floating-ui/core/",\
+          "packageDependencies": [\
+            ["@floating-ui/core", "npm:1.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fcore%2F-%2Fcore-1.5.3.tgz"],\
+            ["@floating-ui/utils", "npm:0.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.2.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@floating-ui/dom", [\
@@ -5975,6 +5991,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@floating-ui/utils", "npm:0.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.1.6.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:1.5.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.4.tgz", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-dom-npm-1.5.4-cd0d59aef1-5e6f05532f.zip/node_modules/@floating-ui/dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/dom", "npm:1.5.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.4.tgz"],\
+            ["@floating-ui/core", "npm:1.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fcore%2F-%2Fcore-1.5.3.tgz"],\
+            ["@floating-ui/utils", "npm:0.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.2.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@floating-ui/react-dom", [\
@@ -5982,6 +6007,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@floating-ui-react-dom-npm-2.0.4-00e515ee36-91b2369e25.zip/node_modules/@floating-ui/react-dom/",\
           "packageDependencies": [\
             ["@floating-ui/react-dom", "npm:2.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.4.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-react-dom-npm-2.0.5-4817f0db33-24cadf4626.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"]\
           ],\
           "linkType": "SOFT"\
         }],\
@@ -6057,6 +6089,78 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["virtual:6cb779f90900aa1b5722ae3cd5f1f2e6330f9b9c9d14768d05afca691140d0cd35834ae49292131d6b49912fc973b09e1094003e6d965e393323f1e3ef67bbe9#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-virtual-ca0f350928/0/cache/@floating-ui-react-dom-npm-2.0.5-4817f0db33-24cadf4626.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "virtual:6cb779f90900aa1b5722ae3cd5f1f2e6330f9b9c9d14768d05afca691140d0cd35834ae49292131d6b49912fc973b09e1094003e6d965e393323f1e3ef67bbe9#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@floating-ui/dom", "npm:1.5.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.4.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
+            ["react-dom", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-virtual-94069d00a3/0/cache/@floating-ui-react-dom-npm-2.0.5-4817f0db33-24cadf4626.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@floating-ui/dom", "npm:1.5.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.4.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
+            ["react-dom", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-16.14.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:a21f1566a0a48d6cf94dd558f495ee030eb805f64a2a8825cb46da63c16d1a84185dc3ac6316aa3409ec7a8e3b3fab0b718f3650e08c12245c9e52ec41874f34#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-virtual-5d27acce42/0/cache/@floating-ui-react-dom-npm-2.0.5-4817f0db33-24cadf4626.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "virtual:a21f1566a0a48d6cf94dd558f495ee030eb805f64a2a8825cb46da63c16d1a84185dc3ac6316aa3409ec7a8e3b3fab0b718f3650e08c12245c9e52ec41874f34#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@floating-ui/dom", "npm:1.5.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.4.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
+            ["react-dom", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-17.0.2.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:e309867792ec4250431a7f24185ba3fa5af8d167b5a67886e1b4c644dc8e6a9863d7485e64338afdc6be13893ae8f09d2dcd41423d48eb6587317782cd25df5f#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-virtual-ccb82ae8f6/0/cache/@floating-ui-react-dom-npm-2.0.5-4817f0db33-24cadf4626.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "virtual:e309867792ec4250431a7f24185ba3fa5af8d167b5a67886e1b4c644dc8e6a9863d7485e64338afdc6be13893ae8f09d2dcd41423d48eb6587317782cd25df5f#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@floating-ui/dom", "npm:1.5.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.4.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
+            ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["virtual:f9025e4688199d383c8a45de1bb8cc63ff76d060b7f566e693a4a43802772304a332b2854d2af31e375061004a8ebc56ca7bcf87a5541f0f7dcd1b29b5746c0e#npm:2.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.4.tgz", {\
           "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-virtual-b1382f15ca/0/cache/@floating-ui-react-dom-npm-2.0.4-00e515ee36-91b2369e25.zip/node_modules/@floating-ui/react-dom/",\
           "packageDependencies": [\
@@ -6081,6 +6185,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@floating-ui-utils-npm-0.1.6-a277e7318d-b34d4b5470.zip/node_modules/@floating-ui/utils/",\
           "packageDependencies": [\
             ["@floating-ui/utils", "npm:0.1.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.1.6.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.2.1.tgz", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-utils-npm-0.2.1-a00411729b-9ed4380653.zip/node_modules/@floating-ui/utils/",\
+          "packageDependencies": [\
+            ["@floating-ui/utils", "npm:0.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Futils%2F-%2Futils-0.2.1.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8037,6 +8148,191 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@mui/base", [\
+        ["npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz", {\
+          "packageLocation": "./.yarn/cache/@mui-base-npm-5.0.0-beta.31-ac9dfcb2ff-c1b9c4bfab.zip/node_modules/@mui/base/",\
+          "packageDependencies": [\
+            ["@mui/base", "npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-base-virtual-a21f1566a0/0/cache/@mui-base-npm-5.0.0-beta.31-ac9dfcb2ff-c1b9c4bfab.zip/node_modules/@mui/base/",\
+          "packageDependencies": [\
+            ["@mui/base", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@floating-ui/react-dom", "virtual:a21f1566a0a48d6cf94dd558f495ee030eb805f64a2a8825cb46da63c16d1a84185dc3ac6316aa3409ec7a8e3b3fab0b718f3650e08c12245c9e52ec41874f34#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
+            ["@mui/utils", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@popperjs/core", "npm:2.11.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
+            ["react-dom", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-17.0.2.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:1fa1568ab9d83a1f6b4c51482b7c47c9d744c6c6fc43ad711f8e9b5206f0e06e206a7bc0ede48193a25db0b961c4b498ca33c19f23da80fdf67305272d2338ed#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-base-virtual-6cb779f909/0/cache/@mui-base-npm-5.0.0-beta.31-ac9dfcb2ff-c1b9c4bfab.zip/node_modules/@mui/base/",\
+          "packageDependencies": [\
+            ["@mui/base", "virtual:1fa1568ab9d83a1f6b4c51482b7c47c9d744c6c6fc43ad711f8e9b5206f0e06e206a7bc0ede48193a25db0b961c4b498ca33c19f23da80fdf67305272d2338ed#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@floating-ui/react-dom", "virtual:6cb779f90900aa1b5722ae3cd5f1f2e6330f9b9c9d14768d05afca691140d0cd35834ae49292131d6b49912fc973b09e1094003e6d965e393323f1e3ef67bbe9#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
+            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@popperjs/core", "npm:2.11.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
+            ["react-dom", "virtual:4e943709711c7f1808d16b6e7402826f520934863f82f7eafe744d9fd7069a89c68dec5dc0c69b3849cdbb88a3aca62802ed72bb2f50d28e5d89a57532ec36c3#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-base-virtual-e309867792/0/cache/@mui-base-npm-5.0.0-beta.31-ac9dfcb2ff-c1b9c4bfab.zip/node_modules/@mui/base/",\
+          "packageDependencies": [\
+            ["@mui/base", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@floating-ui/react-dom", "virtual:e309867792ec4250431a7f24185ba3fa5af8d167b5a67886e1b4c644dc8e6a9863d7485e64338afdc6be13893ae8f09d2dcd41423d48eb6587317782cd25df5f#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
+            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@popperjs/core", "npm:2.11.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
+            ["react-dom", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-base-virtual-75891b9359/0/cache/@mui-base-npm-5.0.0-beta.31-ac9dfcb2ff-c1b9c4bfab.zip/node_modules/@mui/base/",\
+          "packageDependencies": [\
+            ["@mui/base", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@floating-ui/react-dom", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40floating-ui%2Freact-dom%2F-%2Freact-dom-2.0.5.tgz"],\
+            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
+            ["@mui/utils", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@popperjs/core", "npm:2.11.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["@types/react-dom", "npm:18.2.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.17.tgz"],\
+            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
+            ["react-dom", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-16.14.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@mui/types", [\
+        ["npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz", {\
+          "packageLocation": "./.yarn/cache/@mui-types-npm-7.2.13-e9da52ddf3-58dfc96f96.zip/node_modules/@mui/types/",\
+          "packageDependencies": [\
+            ["@mui/types", "npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-types-virtual-da68b6e8e5/0/cache/@mui-types-npm-7.2.13-e9da52ddf3-58dfc96f96.zip/node_modules/@mui/types/",\
+          "packageDependencies": [\
+            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@mui/utils", [\
+        ["npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz", {\
+          "packageLocation": "./.yarn/cache/@mui-utils-npm-5.15.4-ca00385fb4-b23f57a08c.zip/node_modules/@mui/utils/",\
+          "packageDependencies": [\
+            ["@mui/utils", "npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-utils-virtual-d52f3b79d3/0/cache/@mui-utils-npm-5.15.4-ca00385fb4-b23f57a08c.zip/node_modules/@mui/utils/",\
+          "packageDependencies": [\
+            ["@mui/utils", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@types/prop-types", "npm:15.7.11::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fprop-types%2F-%2Fprop-types-15.7.11.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
+            ["react-is", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-is%2F-%2Freact-is-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-utils-virtual-1e61b39cc3/0/cache/@mui-utils-npm-5.15.4-ca00385fb4-b23f57a08c.zip/node_modules/@mui/utils/",\
+          "packageDependencies": [\
+            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@types/prop-types", "npm:15.7.11::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fprop-types%2F-%2Fprop-types-15.7.11.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
+            ["react-is", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-is%2F-%2Freact-is-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/@mui-utils-virtual-b4a609621e/0/cache/@mui-utils-npm-5.15.4-ca00385fb4-b23f57a08c.zip/node_modules/@mui/utils/",\
+          "packageDependencies": [\
+            ["@mui/utils", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
+            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
+            ["@types/prop-types", "npm:15.7.11::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fprop-types%2F-%2Fprop-types-15.7.11.tgz"],\
+            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
+            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
+            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
+            ["react-is", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-is%2F-%2Freact-is-18.2.0.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@ndelangen/get-tarball", [\
         ["npm:3.0.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ndelangen%2Fget-tarball%2F-%2Fget-tarball-3.0.9.tgz", {\
           "packageLocation": "./.yarn/cache/@ndelangen-get-tarball-npm-3.0.9-9f4bd9ca73-7fa8ac40b4.zip/node_modules/@ndelangen/get-tarball/",\
@@ -8403,6 +8699,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@popperjs/core", [\
+        ["npm:2.11.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz", {\
+          "packageLocation": "./.yarn/cache/@popperjs-core-npm-2.11.8-630d561c96-e5c69fdebf.zip/node_modules/@popperjs/core/",\
+          "packageDependencies": [\
+            ["@popperjs/core", "npm:2.11.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40popperjs%2Fcore%2F-%2Fcore-2.11.8.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@propeldata/ui-kit", [\
         ["virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#workspace:packages/ui-kit", {\
           "packageLocation": "./.yarn/__virtual__/@propeldata-ui-kit-virtual-018ca4966b/1/packages/ui-kit/",\
@@ -8415,6 +8720,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
+            ["@mui/base", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@mui/utils", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -8472,6 +8779,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
+            ["@mui/base", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@mui/utils", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -8529,6 +8838,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
+            ["@mui/base", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -8586,6 +8897,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-operations", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-operations%2F-%2Ftypescript-operations-4.0.1.tgz"],\
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
+            ["@mui/base", "virtual:1fa1568ab9d83a1f6b4c51482b7c47c9d744c6c6fc43ad711f8e9b5206f0e06e206a7bc0ede48193a25db0b961c4b498ca33c19f23da80fdf67305272d2338ed#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -18234,6 +18547,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-plain-object", "npm:2.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-plain-object%2F-%2Fis-plain-object-2.0.4.tgz"],\
             ["kind-of", "npm:6.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fkind-of%2F-%2Fkind-of-6.0.3.tgz"],\
             ["shallow-clone", "npm:3.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fshallow-clone%2F-%2Fshallow-clone-3.0.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["clsx", [\
+        ["npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz", {\
+          "packageLocation": "./.yarn/cache/clsx-npm-2.1.0-b6cdd0d65c-43fefc29b6.zip/node_modules/clsx/",\
+          "packageDependencies": [\
+            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
