@@ -5614,38 +5614,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@emotion/cache", [\
-        ["npm:11.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fcache%2F-%2Fcache-11.11.0.tgz", {\
-          "packageLocation": "./.yarn/cache/@emotion-cache-npm-11.11.0-e31cd86fc8-8eb1dc22be.zip/node_modules/@emotion/cache/",\
-          "packageDependencies": [\
-            ["@emotion/cache", "npm:11.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fcache%2F-%2Fcache-11.11.0.tgz"],\
-            ["@emotion/memoize", "npm:0.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fmemoize%2F-%2Fmemoize-0.8.1.tgz"],\
-            ["@emotion/sheet", "npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fsheet%2F-%2Fsheet-1.2.2.tgz"],\
-            ["@emotion/utils", "npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Futils%2F-%2Futils-1.2.1.tgz"],\
-            ["@emotion/weak-memoize", "npm:0.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fweak-memoize%2F-%2Fweak-memoize-0.3.1.tgz"],\
-            ["stylis", "npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstylis%2F-%2Fstylis-4.2.0.tgz"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@emotion/memoize", [\
-        ["npm:0.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fmemoize%2F-%2Fmemoize-0.8.1.tgz", {\
-          "packageLocation": "./.yarn/cache/@emotion-memoize-npm-0.8.1-eef3f95cfb-a19cc01a29.zip/node_modules/@emotion/memoize/",\
-          "packageDependencies": [\
-            ["@emotion/memoize", "npm:0.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fmemoize%2F-%2Fmemoize-0.8.1.tgz"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@emotion/sheet", [\
-        ["npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fsheet%2F-%2Fsheet-1.2.2.tgz", {\
-          "packageLocation": "./.yarn/cache/@emotion-sheet-npm-1.2.2-84d2621fe3-d973273c9c.zip/node_modules/@emotion/sheet/",\
-          "packageDependencies": [\
-            ["@emotion/sheet", "npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fsheet%2F-%2Fsheet-1.2.2.tgz"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@emotion/use-insertion-effect-with-fallbacks", [\
         ["npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fuse-insertion-effect-with-fallbacks%2F-%2Fuse-insertion-effect-with-fallbacks-1.0.1.tgz", {\
           "packageLocation": "./.yarn/cache/@emotion-use-insertion-effect-with-fallbacks-npm-1.0.1-e62ecab1a6-700b6e5bbb.zip/node_modules/@emotion/use-insertion-effect-with-fallbacks/",\
@@ -5703,24 +5671,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/react",\
             "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@emotion/utils", [\
-        ["npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Futils%2F-%2Futils-1.2.1.tgz", {\
-          "packageLocation": "./.yarn/cache/@emotion-utils-npm-1.2.1-45e16146c3-e0b44be070.zip/node_modules/@emotion/utils/",\
-          "packageDependencies": [\
-            ["@emotion/utils", "npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Futils%2F-%2Futils-1.2.1.tgz"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@emotion/weak-memoize", [\
-        ["npm:0.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fweak-memoize%2F-%2Fweak-memoize-0.3.1.tgz", {\
-          "packageLocation": "./.yarn/cache/@emotion-weak-memoize-npm-0.3.1-2ce8127ae9-b2be47caa2.zip/node_modules/@emotion/weak-memoize/",\
-          "packageDependencies": [\
-            ["@emotion/weak-memoize", "npm:0.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fweak-memoize%2F-%2Fweak-memoize-0.3.1.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8303,306 +8253,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@mui/icons-material", [\
-        ["npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/cache/@mui-icons-material-npm-5.15.4-4cc76257ea-b83be07386.zip/node_modules/@mui/icons-material/",\
-          "packageDependencies": [\
-            ["@mui/icons-material", "npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-icons-material-virtual-e89cc58331/0/cache/@mui-icons-material-npm-5.15.4-4cc76257ea-b83be07386.zip/node_modules/@mui/icons-material/",\
-          "packageDependencies": [\
-            ["@mui/icons-material", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@mui/material", null],\
-            ["@types/mui__material", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@mui/material",\
-            "@types/mui__material",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-icons-material-virtual-b39084e003/0/cache/@mui-icons-material-npm-5.15.4-4cc76257ea-b83be07386.zip/node_modules/@mui/icons-material/",\
-          "packageDependencies": [\
-            ["@mui/icons-material", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@mui/material", null],\
-            ["@types/mui__material", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@mui/material",\
-            "@types/mui__material",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-icons-material-virtual-646232c2c4/0/cache/@mui-icons-material-npm-5.15.4-4cc76257ea-b83be07386.zip/node_modules/@mui/icons-material/",\
-          "packageDependencies": [\
-            ["@mui/icons-material", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@mui/material", null],\
-            ["@types/mui__material", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@mui/material",\
-            "@types/mui__material",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@mui/private-theming", [\
-        ["npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/cache/@mui-private-theming-npm-5.15.4-b2df12e75c-aacbaaf304.zip/node_modules/@mui/private-theming/",\
-          "packageDependencies": [\
-            ["@mui/private-theming", "npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:0ff432ad18cac8ab7e6a1635322929d0785525b468ad30400b51db93c5757837308160fbef0ecfce93a95dd46a20f3972ec382b1d4aba3ff0122844835619144#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-private-theming-virtual-7e1e72d014/0/cache/@mui-private-theming-npm-5.15.4-b2df12e75c-aacbaaf304.zip/node_modules/@mui/private-theming/",\
-          "packageDependencies": [\
-            ["@mui/private-theming", "virtual:0ff432ad18cac8ab7e6a1635322929d0785525b468ad30400b51db93c5757837308160fbef0ecfce93a95dd46a20f3972ec382b1d4aba3ff0122844835619144#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:28fb523b9db7ad71a835b9f81480e3817ea6eb5cc6c2bc18368b7bfbdd25781c24cb40ad8021b8c7a666fa346f753856b259024321b1a566ae43d60f037eddcf#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-private-theming-virtual-44a432608a/0/cache/@mui-private-theming-npm-5.15.4-b2df12e75c-aacbaaf304.zip/node_modules/@mui/private-theming/",\
-          "packageDependencies": [\
-            ["@mui/private-theming", "virtual:28fb523b9db7ad71a835b9f81480e3817ea6eb5cc6c2bc18368b7bfbdd25781c24cb40ad8021b8c7a666fa346f753856b259024321b1a566ae43d60f037eddcf#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@mui/utils", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:9aafd079c632d674af3c555cb3ba176bfc769b3f61a1d5c90b53e3d04710e3723b4e3caf01df1f3469c49445e12cccb19502255fa10c887b9a3e8ef201997c78#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-private-theming-virtual-6b0f50bd4b/0/cache/@mui-private-theming-npm-5.15.4-b2df12e75c-aacbaaf304.zip/node_modules/@mui/private-theming/",\
-          "packageDependencies": [\
-            ["@mui/private-theming", "virtual:9aafd079c632d674af3c555cb3ba176bfc769b3f61a1d5c90b53e3d04710e3723b4e3caf01df1f3469c49445e12cccb19502255fa10c887b9a3e8ef201997c78#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@mui/utils", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@mui/styled-engine", [\
-        ["npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/cache/@mui-styled-engine-npm-5.15.4-b422fc1a18-316e59ab2d.zip/node_modules/@mui/styled-engine/",\
-          "packageDependencies": [\
-            ["@mui/styled-engine", "npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:0ff432ad18cac8ab7e6a1635322929d0785525b468ad30400b51db93c5757837308160fbef0ecfce93a95dd46a20f3972ec382b1d4aba3ff0122844835619144#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-styled-engine-virtual-7fcff22e4c/0/cache/@mui-styled-engine-npm-5.15.4-b422fc1a18-316e59ab2d.zip/node_modules/@mui/styled-engine/",\
-          "packageDependencies": [\
-            ["@mui/styled-engine", "virtual:0ff432ad18cac8ab7e6a1635322929d0785525b468ad30400b51db93c5757837308160fbef0ecfce93a95dd46a20f3972ec382b1d4aba3ff0122844835619144#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@emotion/cache", "npm:11.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fcache%2F-%2Fcache-11.11.0.tgz"],\
-            ["@emotion/react", null],\
-            ["@emotion/styled", null],\
-            ["@types/emotion__react", null],\
-            ["@types/emotion__styled", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["csstype", "npm:3.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@emotion/react",\
-            "@emotion/styled",\
-            "@types/emotion__react",\
-            "@types/emotion__styled",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:28fb523b9db7ad71a835b9f81480e3817ea6eb5cc6c2bc18368b7bfbdd25781c24cb40ad8021b8c7a666fa346f753856b259024321b1a566ae43d60f037eddcf#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-styled-engine-virtual-cc971e3586/0/cache/@mui-styled-engine-npm-5.15.4-b422fc1a18-316e59ab2d.zip/node_modules/@mui/styled-engine/",\
-          "packageDependencies": [\
-            ["@mui/styled-engine", "virtual:28fb523b9db7ad71a835b9f81480e3817ea6eb5cc6c2bc18368b7bfbdd25781c24cb40ad8021b8c7a666fa346f753856b259024321b1a566ae43d60f037eddcf#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@emotion/cache", "npm:11.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fcache%2F-%2Fcache-11.11.0.tgz"],\
-            ["@emotion/react", null],\
-            ["@emotion/styled", null],\
-            ["@types/emotion__react", null],\
-            ["@types/emotion__styled", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["csstype", "npm:3.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@emotion/react",\
-            "@emotion/styled",\
-            "@types/emotion__react",\
-            "@types/emotion__styled",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:9aafd079c632d674af3c555cb3ba176bfc769b3f61a1d5c90b53e3d04710e3723b4e3caf01df1f3469c49445e12cccb19502255fa10c887b9a3e8ef201997c78#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-styled-engine-virtual-5c72b40704/0/cache/@mui-styled-engine-npm-5.15.4-b422fc1a18-316e59ab2d.zip/node_modules/@mui/styled-engine/",\
-          "packageDependencies": [\
-            ["@mui/styled-engine", "virtual:9aafd079c632d674af3c555cb3ba176bfc769b3f61a1d5c90b53e3d04710e3723b4e3caf01df1f3469c49445e12cccb19502255fa10c887b9a3e8ef201997c78#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@emotion/cache", "npm:11.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40emotion%2Fcache%2F-%2Fcache-11.11.0.tgz"],\
-            ["@emotion/react", null],\
-            ["@emotion/styled", null],\
-            ["@types/emotion__react", null],\
-            ["@types/emotion__styled", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["csstype", "npm:3.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@emotion/react",\
-            "@emotion/styled",\
-            "@types/emotion__react",\
-            "@types/emotion__styled",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@mui/system", [\
-        ["npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/cache/@mui-system-npm-5.15.4-deb07f08f1-99e546d113.zip/node_modules/@mui/system/",\
-          "packageDependencies": [\
-            ["@mui/system", "npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-system-virtual-28fb523b9d/0/cache/@mui-system-npm-5.15.4-deb07f08f1-99e546d113.zip/node_modules/@mui/system/",\
-          "packageDependencies": [\
-            ["@mui/system", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@emotion/react", null],\
-            ["@emotion/styled", null],\
-            ["@mui/private-theming", "virtual:28fb523b9db7ad71a835b9f81480e3817ea6eb5cc6c2bc18368b7bfbdd25781c24cb40ad8021b8c7a666fa346f753856b259024321b1a566ae43d60f037eddcf#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"],\
-            ["@mui/styled-engine", "virtual:28fb523b9db7ad71a835b9f81480e3817ea6eb5cc6c2bc18368b7bfbdd25781c24cb40ad8021b8c7a666fa346f753856b259024321b1a566ae43d60f037eddcf#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"],\
-            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
-            ["@mui/utils", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
-            ["@types/emotion__react", null],\
-            ["@types/emotion__styled", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
-            ["csstype", "npm:3.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@emotion/react",\
-            "@emotion/styled",\
-            "@types/emotion__react",\
-            "@types/emotion__styled",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-system-virtual-0ff432ad18/0/cache/@mui-system-npm-5.15.4-deb07f08f1-99e546d113.zip/node_modules/@mui/system/",\
-          "packageDependencies": [\
-            ["@mui/system", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@emotion/react", null],\
-            ["@emotion/styled", null],\
-            ["@mui/private-theming", "virtual:0ff432ad18cac8ab7e6a1635322929d0785525b468ad30400b51db93c5757837308160fbef0ecfce93a95dd46a20f3972ec382b1d4aba3ff0122844835619144#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"],\
-            ["@mui/styled-engine", "virtual:0ff432ad18cac8ab7e6a1635322929d0785525b468ad30400b51db93c5757837308160fbef0ecfce93a95dd46a20f3972ec382b1d4aba3ff0122844835619144#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"],\
-            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
-            ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
-            ["@types/emotion__react", null],\
-            ["@types/emotion__styled", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
-            ["csstype", "npm:3.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@emotion/react",\
-            "@emotion/styled",\
-            "@types/emotion__react",\
-            "@types/emotion__styled",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz", {\
-          "packageLocation": "./.yarn/__virtual__/@mui-system-virtual-9aafd079c6/0/cache/@mui-system-npm-5.15.4-deb07f08f1-99e546d113.zip/node_modules/@mui/system/",\
-          "packageDependencies": [\
-            ["@mui/system", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
-            ["@babel/runtime", "npm:7.23.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.23.8.tgz"],\
-            ["@emotion/react", null],\
-            ["@emotion/styled", null],\
-            ["@mui/private-theming", "virtual:9aafd079c632d674af3c555cb3ba176bfc769b3f61a1d5c90b53e3d04710e3723b4e3caf01df1f3469c49445e12cccb19502255fa10c887b9a3e8ef201997c78#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fprivate-theming%2F-%2Fprivate-theming-5.15.4.tgz"],\
-            ["@mui/styled-engine", "virtual:9aafd079c632d674af3c555cb3ba176bfc769b3f61a1d5c90b53e3d04710e3723b4e3caf01df1f3469c49445e12cccb19502255fa10c887b9a3e8ef201997c78#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fstyled-engine%2F-%2Fstyled-engine-5.15.4.tgz"],\
-            ["@mui/types", "virtual:75891b93594c8ef43671920469c588f8092d14f507045d504186f4cfd28cf14b1f68a04096e3e96c79e94802271b0df18b6f620950ab6bfd63a005e2ece61225#npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz"],\
-            ["@mui/utils", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
-            ["@types/emotion__react", null],\
-            ["@types/emotion__styled", null],\
-            ["@types/react", "npm:18.2.43::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.43.tgz"],\
-            ["clsx", "npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fclsx%2F-%2Fclsx-2.1.0.tgz"],\
-            ["csstype", "npm:3.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcsstype%2F-%2Fcsstype-3.1.3.tgz"],\
-            ["prop-types", "npm:15.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fprop-types%2F-%2Fprop-types-15.8.1.tgz"],\
-            ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"]\
-          ],\
-          "packagePeers": [\
-            "@emotion/react",\
-            "@emotion/styled",\
-            "@types/emotion__react",\
-            "@types/emotion__styled",\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@mui/types", [\
         ["npm:7.2.13::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ftypes%2F-%2Ftypes-7.2.13.tgz", {\
           "packageLocation": "./.yarn/cache/@mui-types-npm-7.2.13-e9da52ddf3-58dfc96f96.zip/node_modules/@mui/types/",\
@@ -9071,8 +8721,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
-            ["@mui/icons-material", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@mui/system", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
             ["@mui/utils", "virtual:018ca4966b99eaaa50b165bc42f5ffa3e2d6ad0858b0d7f9d950b92d10b0334418c2784609faa367441f95612308a58daf40217391a3ca95da2c3f6787b9de3c#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -9132,8 +8780,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
-            ["@mui/icons-material", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@mui/system", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
             ["@mui/utils", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -9193,8 +8839,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
-            ["@mui/icons-material", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@mui/system", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
             ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -9254,8 +8898,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:1fa1568ab9d83a1f6b4c51482b7c47c9d744c6c6fc43ad711f8e9b5206f0e06e206a7bc0ede48193a25db0b961c4b498ca33c19f23da80fdf67305272d2338ed#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
-            ["@mui/icons-material", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Ficons-material%2F-%2Ficons-material-5.15.4.tgz"],\
-            ["@mui/system", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fsystem%2F-%2Fsystem-5.15.4.tgz"],\
             ["@mui/utils", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Futils%2F-%2Futils-5.15.4.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
@@ -36047,15 +35689,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/postcss",\
             "postcss"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["stylis", [\
-        ["npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstylis%2F-%2Fstylis-4.2.0.tgz", {\
-          "packageLocation": "./.yarn/cache/stylis-npm-4.2.0-07f013e40c-0eb6cc1b86.zip/node_modules/stylis/",\
-          "packageDependencies": [\
-            ["stylis", "npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstylis%2F-%2Fstylis-4.2.0.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
