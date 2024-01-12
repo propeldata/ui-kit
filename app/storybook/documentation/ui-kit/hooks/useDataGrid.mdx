@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useDataGridStories from '../../../../../packages/ui-kit/src/hooks/useDataGrid/useDataGrid.stories'
+
+<Meta title="Hooks/useDataGrid" /> 
+
+# `useDataGrid`
+
+The `useDataGrid` is a proposed Query Hook in the Propel’s UI Kit library. This Hook abstracts the code for querying the GraphQL API, 
+allowing customers to implement their own components using the Hook. The `useDataGrid` hook would return the result of a query, 
+which could then be used in a component for displaying data. This makes it easier for customers to implement their own components 
+while leveraging the query logic provided by Propel. This implementation allows for the customer to use it in their own components, 
+such as a Table component that displays list of data.
+
+<SourceCode of={useDataGridStories.DataGridStory} shown />
+
+See the documentation below for a complete reference for `DataGridQueryProps`:
+
+- <LinkTo kind="API/DataGridQueryProps" story="overview">
+    DataGridQueryProps
+  </LinkTo>
+
+See the documentation below for a complete reference to all of the props for FilterInput and TimeRangeInput, which are mentioned here.
+
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>
