@@ -53,10 +53,12 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     groupedOptions
   } = useAutocomplete({
     ...props,
-    componentName: 'BaseAutocompleteIntroduction'
+    componentName: 'Autocomplete'
   })
 
   const rootRef = useCombinedRefs(ref, setAnchorEl)
+
+  console.log(groupedOptions)
 
   return (
     <React.Fragment>
@@ -67,18 +69,24 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
       >
         <Input
           id={id}
+          ref={setAnchorEl}
           disabled={disabled}
           readOnly={readOnly}
           placeholder={placeholder}
-          {...getInputProps()}
           slotProps={{
             input: {
-              className: componentStyles.autocompleteInput
+              className: componentStyles.autocompleteInput,
+              ...getInputProps()
             }
           }}
           style={{ width: '100%' }}
         />
-        <Button {...getPopupIndicatorProps()} className={componentStyles.autocompleteIndicator}>
+        <Button
+          {...getPopupIndicatorProps()}
+          name="autocomplete-button"
+          aria-label="dropdown-button"
+          className={componentStyles.autocompleteIndicator}
+        >
           {popupOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </Button>
       </div>

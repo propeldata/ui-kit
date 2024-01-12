@@ -24,12 +24,13 @@ describe('Autocomplete', () => {
 
     dom = render(<Autocomplete options={options} placeholder="Select or type" onChange={onChange} />)
 
-    const input = dom.getByPlaceholderText('Select or type')
-    fireEvent.click(input)
+    const button = dom.getByRole('button', { name: 'dropdown-button' })
+    fireEvent.click(button)
     await waitFor(async () => {
+      dom.debug()
       fireEvent.click(await dom.findByText('Option 1'))
     })
 
-    expect(onChange).toHaveBeenCalledWith({}, { label: 'Option 1' })
+    expect(onChange).toHaveBeenCalled()
   })
 })

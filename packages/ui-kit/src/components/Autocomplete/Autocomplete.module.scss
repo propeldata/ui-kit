@@ -90,7 +90,7 @@
       color: var(--propel-text-primary);
     }
 
-    &[class^='Mui-focusVisible'] {
+    &[class^='Mui-focused'] {
       background-color: var(--propel-colors-blue-25);
     }
   }
