@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 
 import { Dom } from 'src/testing'
 import { Autocomplete } from './Autocomplete'
+import { AutocompleteOption } from './Autocomplete.types'
 
 const options = [
   {
@@ -20,7 +21,11 @@ describe('Autocomplete', () => {
   let dom: Dom
 
   it('should enable selecting an option', async () => {
-    const onChange = jest.fn()
+    const onChangeValue = jest.fn()
+
+    const onChange = (_: SyntheticEvent, value: AutocompleteOption | null) => {
+      onChangeValue(value)
+    }
 
     dom = render(<Autocomplete options={options} placeholder="Select or type" onChange={onChange} />)
 
@@ -31,6 +36,6 @@ describe('Autocomplete', () => {
       fireEvent.click(await dom.findByText('Option 1'))
     })
 
-    expect(onChange).toHaveBeenCalled()
+    expect(onChangeValue).toHaveBeenCalledWith({ label: 'Option 1' })
   })
 })

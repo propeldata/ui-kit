@@ -58,8 +58,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
 
   const rootRef = useCombinedRefs(ref, setAnchorEl)
 
-  console.log(groupedOptions)
-
   return (
     <React.Fragment>
       <div
