@@ -83,7 +83,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
         />
         <Button
           {...getPopupIndicatorProps()}
-          name="autocomplete-button"
           aria-label="dropdown-button"
           className={componentStyles.autocompleteIndicator}
         >
