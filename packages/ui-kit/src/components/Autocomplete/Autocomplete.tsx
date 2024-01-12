@@ -7,7 +7,6 @@ import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
 import { useCombinedRefs } from '../../helpers'
 import { AutocompleteProps } from './Autocomplete.types'
-import './Autocomplete.css'
 
 const ChevronUpIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -89,5 +89,9 @@
       background-color: var(--propel-accent);
       color: var(--propel-text-primary);
     }
+
+    &[class^='Mui-focusVisible'] {
+      background-color: var(--propel-colors-blue-25);
+    }
   }
 }
