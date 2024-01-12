@@ -11,7 +11,7 @@ const meta = {
 
 PieChartPropsComponent.defaultProps = {
   labelPosition: 'axis',
-  chartColorPlatte: [
+  chartColorPalette: [
     '#1849A9',
     '#175CD3',
     '#1570EF',

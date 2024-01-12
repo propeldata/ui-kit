@@ -98,7 +98,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           return
         }
 
-        const { chartColorPlatte = defaultChartColorPalette, legendPosition = 'top', hideLegend = false } = chartProps
+        const { chartColorPalette = defaultChartColorPalette, legendPosition = 'top', hideLegend = false } = chartProps
 
         const labels = data.rows?.map((row) => row[0]) ?? []
 
@@ -134,7 +134,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           Object.assign(chart.data.datasets[0], {
             type: variant,
             data: values,
-            backgroundColor: chartColorPlatte,
+            backgroundColor: chartColorPalette,
             ...datasets
           })
 
@@ -155,7 +155,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             datasets: [
               {
                 data: values,
-                backgroundColor: chartColorPlatte,
+                backgroundColor: chartColorPalette,
                 borderWidth: 0,
                 offset: 4,
                 hoverOffset: 20,

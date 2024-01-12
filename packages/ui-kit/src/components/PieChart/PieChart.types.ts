@@ -29,8 +29,8 @@ export type ChartProps = {
    */
   showValues?: boolean
 
-  /** Sets the chart color platte */
-  chartColorPlatte?: string[]
+  /** Sets the chart color palette */
+  chartColorPalette?: string[]
 }
 
 export type PieChartData = {
