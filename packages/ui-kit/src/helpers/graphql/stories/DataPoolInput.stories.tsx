@@ -9,11 +9,9 @@ const meta = {
   component: DataPoolInputComponent,
   argTypes: {
     id: {
-      control: 'text',
       description: 'The id of the data pool to use for the metric. Required if `name` is not provided.'
     },
     name: {
-      control: 'text',
       description: 'The name of the data pool to use for the metric. Required if `id` is not provided.'
     }
   }

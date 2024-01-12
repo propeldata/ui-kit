@@ -6,10 +6,10 @@ import * as CounterMetricQueryStories from '../../../../packages/ui-kit/src/hook
 <Meta title="Getting started/Metric" /> 
 
 # `Metric`
+The metric query is used to query a `Metric` or a `Data Pool`'s data in counter, time series, or leaderboard format. When querying a `Data Pool` 
+you can configure it to work as one of the [metric types](https://www.propeldata.com/docs/metrics#type). 
 
-The metric query is used to query a `Metric` in counter, time series, or leaderboard format.
-
-The application scope shoul be authorized to do with the given API including `METRIC_QUERY`, `METRIC_READ` and `DATA_POOL_QUERY`.
+The application scopes for `Metric` queries should include `METRIC_QUERY` and `METRIC_READ`, for `Data Pool` queries the `DATA_POOL_QUERY` scope should also be included.  
 
 ### Counter metric query by `id`
 

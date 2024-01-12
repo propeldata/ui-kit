@@ -8,7 +8,7 @@ import { useCounter } from './useCounter'
 const args = {
   id: {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
-    metric: { id: process.env.STORYBOOK_METRIC_ID },
+    metric: { id: process.env.STORYBOOK_METRIC_ID ?? '' },
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 30
@@ -16,7 +16,7 @@ const args = {
   },
   name: {
     accessToken: '<PROPEL_ACCESS_TOKEN>',
-    metric: { name: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1 },
+    metric: { name: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1 ?? '' },
     timeRange: {
       relative: RelativeTimeRange.LastNDays,
       n: 90
@@ -27,7 +27,7 @@ const args = {
     metric: {
       custom: {
         dataPool: {
-          id: process.env.STORYBOOK_DATAPOOL_ID
+          id: process.env.STORYBOOK_DATAPOOL_ID ?? ''
         },
         expression: 'COUNT_DISTINCT(taco_total_price)'
       }
@@ -42,7 +42,7 @@ const args = {
     metric: {
       sum: {
         dataPool: {
-          id: process.env.STORYBOOK_DATAPOOL_ID
+          id: process.env.STORYBOOK_DATAPOOL_ID ?? ''
         },
         measure: {
           columnName: 'quantity'
@@ -99,8 +99,8 @@ const meta: Meta = {
     }`,
           `${JSON.stringify(args.sum)}`
         )
-        .replace(process.env.STORYBOOK_METRIC_ID, '<PROPELL_METRIC_ID>')
-        .replace(process.env.STORYBOOK_DATAPOOL_ID, '<PROPELL_DATAPOOL_ID>')
+        .replace(process.env.STORYBOOK_METRIC_ID ?? '', '<PROPELL_METRIC_ID>')
+        .replace(process.env.STORYBOOK_DATAPOOL_ID ?? '', '<PROPELL_DATAPOOL_ID>')
         .replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays')
         .concat(' }')
   }
