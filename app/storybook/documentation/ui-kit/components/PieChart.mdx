@@ -1,0 +1,52 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as PieChartStories from '../../../../../packages/ui-kit/src/components/PieChart/PieChart.stories'
+import * as PieChartQueryPropsStories from '../../../../../packages/ui-kit/src/components/PieChart/PieChartQueryProps.stories'
+import * as PieChartPropsStories from '../../../../../packages/ui-kit/src/components/PieChart/PieChartProps.stories'
+
+<Meta title="Components/PieChart" of={PieChartStories} />
+
+# PieChart overview
+
+The PieChart component is designed to create pie chart (AKA doughnut chart) visualizations for your front-end applications. 
+With two props in Static mode, `headers` and `rows`, the PieChart component provides a simple way to display your data. 
+If you opt for the Connected mode, the component will accept the `query` prop, which loads the data automatically using Propel's GraphQL API. 
+The PieChart component supports only one dimension.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={PieChartStories.SingleDimensionPieStory} shown />
+
+## Props API
+
+The following table describes the props available for the PieChart component:
+
+<ArgTypes of={PieChartStories.SingleDimensionPieStory} sort="alpha" />
+
+### `PieChartQueryProps`
+
+<ArgTypes of={PieChartQueryPropsStories.Primary} sort="alpha" />
+
+### `PieChartProps`
+
+<ArgTypes of={PieChartPropsStories.Primary} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props and classes available to the components
+mentioned here.
+
+- <LinkTo kind="API/ErrorFallbackProps" story="errorfallbackprops">
+    ErrorFallbackProps
+  </LinkTo>
+- <LinkTo kind="API/LoaderProps" story="loaderprops">
+    LoaderProps
+  </LinkTo>
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>

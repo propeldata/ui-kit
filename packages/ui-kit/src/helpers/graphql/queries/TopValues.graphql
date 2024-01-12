@@ -1,0 +1,5 @@
+query TopValues($topValuesInput: TopValuesInput!) {
+  topValues(input: $topValuesInput) {
+    values
+  }
+}

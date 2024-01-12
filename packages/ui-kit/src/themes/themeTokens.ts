@@ -59,5 +59,19 @@ export const themeTokens: (keyof ThemeTokenProps)[] = [
   'borderPrimary',
   'accent',
   'accentHover',
-  'colorGradient'
+  'colorGradient',
+
+  // Colors Blue
+  'colorBlue950',
+  'colorBlue900',
+  'colorBlue800',
+  'colorBlue700',
+  'colorBlue600',
+  'colorBlue500',
+  'colorBlue400',
+  'colorBlue300',
+  'colorBlue200',
+  'colorBlue100',
+  'colorBlue50',
+  'colorBlue25'
 ]
