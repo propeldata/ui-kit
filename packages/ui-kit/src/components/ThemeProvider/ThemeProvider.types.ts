@@ -39,7 +39,7 @@ export interface ThemeProviderProps extends Pick<ThemeContextProps, 'globalChart
 
 export type ThemeStateProps = ThemeTokenProps | undefined
 
-export type ChartVariant = 'bar' | 'line'
+export type ChartVariant = 'bar' | 'line' | 'pie' | 'doughnut'
 
 export interface UseSetupThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
   /** The component root element to which the theme will be applied. */

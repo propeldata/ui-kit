@@ -53,6 +53,22 @@ export type ThemeTokenProps = {
   accent?: CSSProperties['color']
   accentHover?: CSSProperties['color']
   colorGradient?: CSSProperties['color']
+
+  /**
+   * Color Blue
+   */
+  colorBlue950?: CSSProperties['color']
+  colorBlue900?: CSSProperties['color']
+  colorBlue800?: CSSProperties['color']
+  colorBlue700?: CSSProperties['color']
+  colorBlue600?: CSSProperties['color']
+  colorBlue500?: CSSProperties['color']
+  colorBlue400?: CSSProperties['color']
+  colorBlue300?: CSSProperties['color']
+  colorBlue200?: CSSProperties['color']
+  colorBlue100?: CSSProperties['color']
+  colorBlue50?: CSSProperties['color']
+  colorBlue25?: CSSProperties['color']
 }
 
 export type ThemeCSSTokenProps = {
@@ -106,7 +122,18 @@ export type ThemeCSSTokenProps = {
   '--propel-accent-hover'?: CSSProperties['color']
   '--propel-color-gradient'?: CSSProperties['color']
 
-  '--propel-colors-blue-25'?: CSSProperties['color']
+  '--propel-color-blue950'?: CSSProperties['color']
+  '--propel-color-blue900'?: CSSProperties['color']
+  '--propel-color-blue800'?: CSSProperties['color']
+  '--propel-color-blue700'?: CSSProperties['color']
+  '--propel-color-blue600'?: CSSProperties['color']
+  '--propel-color-blue500'?: CSSProperties['color']
+  '--propel-color-blue400'?: CSSProperties['color']
+  '--propel-color-blue300'?: CSSProperties['color']
+  '--propel-color-blue200'?: CSSProperties['color']
+  '--propel-color-blue100'?: CSSProperties['color']
+  '--propel-color-blue50'?: CSSProperties['color']
+  '--propel-color-blue25'?: CSSProperties['color']
 }
 
 /**
