@@ -103,7 +103,7 @@ export const getCustomChartLabelsPlugin = ({
 
       if (showBarValues) {
         dataset.data.forEach((value, index) => {
-          const barElement = datasetMeta.data[index] as BarElement
+          const barElement = datasetMeta.data[index]
 
           ctx.fillText(value.toString(), barElement.x - ctx.measureText(value.toString()).width - 8, barElement.y + 0.5)
         })
@@ -116,7 +116,7 @@ export const getCustomChartLabelsPlugin = ({
       if (['inside', 'top'].includes(labelPosition)) {
         const labels = data.labels as string[][]
         labels?.forEach((label, index) => {
-          const barElement = datasetMeta.data[index] as BarElement
+          const barElement = datasetMeta.data[index]
           const { height } = barElement.getProps(['height'])
           const xPos = left + (labelPosition === 'inside' ? 8 : 0)
           const yPos = y.getPixelForValue(index) - (labelPosition === 'inside' ? -1 : height + 4)
