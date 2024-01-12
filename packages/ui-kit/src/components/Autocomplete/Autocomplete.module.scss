@@ -81,7 +81,7 @@
     }
 
     &:hover {
-      background-color: var(--propel-colors-blue-25);
+      background-color: var(--propel-colors-blue25);
       cursor: pointer;
     }
 
@@ -91,7 +91,7 @@
     }
 
     &[class^='Mui-focused'] {
-      background-color: var(--propel-colors-blue-25);
+      background-color: var(--propel-colors-blue25);
     }
   }
 }
