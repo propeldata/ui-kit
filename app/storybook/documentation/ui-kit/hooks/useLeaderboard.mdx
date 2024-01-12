@@ -7,10 +7,9 @@ import * as useLeaderboardStories from '../../../../../packages/ui-kit/src/hooks
 
 # `useLeaderboard`
 
-The `useLeaderboard` is a proposed Query Hook in the Propel’s UI Kit library. This Hook abstracts the code for querying the GraphQL API, allowing customers 
-to implement their own components using the Hook. The `useLeaderboard` hook would return the result of a query, which could then be used in a 
-component for displaying data. This makes it easier for customers to implement their own components while leveraging the query logic provided by Propel.
-This implementation allows for the customer to use it in their own components, such as a Table component that displays list of data. 
+The `useLeaderboard` Query Hook allows querying [Propel's `leaderboard` API](https://www.propeldata.com/docs/api/query/queries#leaderboard).
+This simplifies creating custom components that need to display leaderboard data. For example, you can use this hook to create a table
+component that displays leaderboard data, while reusing the Propel UI Kit's query logic and access token management.
 
 <SourceCode of={useLeaderboardStories.LeaderboardTable} shown />
 

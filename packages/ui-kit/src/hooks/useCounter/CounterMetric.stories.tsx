@@ -27,7 +27,7 @@ const args = {
     metric: {
       custom: {
         dataPool: {
-          id: process.env.STORYBOOK_METRICLESS_DATAPOOL_ID
+          id: process.env.STORYBOOK_DATAPOOL_ID
         },
         expression: 'COUNT_DISTINCT(taco_total_price)'
       }
@@ -42,7 +42,7 @@ const args = {
     metric: {
       sum: {
         dataPool: {
-          id: process.env.STORYBOOK_METRICLESS_DATAPOOL_ID
+          id: process.env.STORYBOOK_DATAPOOL_ID
         },
         measure: {
           columnName: 'quantity'
@@ -100,7 +100,7 @@ const meta: Meta = {
           `${JSON.stringify(args.sum)}`
         )
         .replace(process.env.STORYBOOK_METRIC_ID, '<PROPELL_METRIC_ID>')
-        .replace(process.env.STORYBOOK_METRICLESS_DATAPOOL_ID, '<PROPELL_DATAPOOL_ID>')
+        .replace(process.env.STORYBOOK_DATAPOOL_ID, '<PROPELL_DATAPOOL_ID>')
         .replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays')
         .concat(' }')
   }
