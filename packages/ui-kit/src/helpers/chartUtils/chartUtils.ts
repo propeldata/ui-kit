@@ -7,17 +7,23 @@ import {
   LinearScale,
   LineController,
   LineElement,
+  PieController,
+  ArcElement,
+  DoughnutController,
   LogarithmicScale,
   PointElement,
   TimeSeriesScale,
   Tooltip,
   Filler,
+  ChartDataset,
+  Plugin,
   ChartConfiguration,
   Title,
   SubTitle,
   Legend
 } from 'chart.js'
 import type { ThemeTokenProps } from '../../themes'
+import { ChartVariant } from '../../components'
 
 export type ChartJSDefaultStyleProps = {
   theme?: ThemeTokenProps
@@ -49,6 +55,9 @@ export const initChartJs = () => {
     LineElement,
     BarController,
     LineController,
+    PieController,
+    ArcElement,
+    DoughnutController,
     TimeSeriesScale,
     CategoryScale,
     LinearScale,
@@ -56,4 +65,82 @@ export const initChartJs = () => {
   )
 
   isChartJSRegistered = true
+}
+
+export type CustomChartLabelsPluginProps = {
+  /** Sets the theme state*/
+  theme?: ThemeTokenProps
+  /** Whether the chart should show a value inside the bar */
+  showBarValues?: boolean
+  /** Sets the position of the labels */
+  labelPosition?: 'axis' | 'inside' | 'top'
+}
+
+export const getCustomChartLabelsPlugin = ({
+  theme,
+  showBarValues = false,
+  labelPosition = 'axis'
+}: CustomChartLabelsPluginProps): Plugin<ChartVariant> => {
+  return {
+    id: 'customChartLabelsPlugin',
+    afterDatasetDraw: (chart, args) => {
+      const {
+        ctx,
+        data,
+        chartArea: { left },
+        scales: { y }
+      } = chart
+
+      ctx.save()
+      ctx.textAlign = 'left'
+      ctx.textBaseline = 'middle'
+      ctx.font = `${theme?.tinyFontWeight} ${theme?.tinyFontSize} ${theme?.tinyFontFamily}`
+      ctx.fillStyle = theme?.textPrimary ?? '#ffffff'
+
+      const datasetIndex = args.index
+      const datasetMeta = chart.getDatasetMeta(datasetIndex)
+      const dataset = data.datasets[datasetIndex] as ChartDataset<ChartVariant, number[]>
+
+      if (showBarValues) {
+        dataset.data.forEach((value, index) => {
+          const barElement = datasetMeta.data[index]
+
+          ctx.fillText(value.toString(), barElement.x - ctx.measureText(value.toString()).width - 8, barElement.y + 0.5)
+        })
+      }
+
+      if (labelPosition === 'top') {
+        ctx.fillStyle = theme?.textSecondary ?? ''
+      }
+
+      if (['inside', 'top'].includes(labelPosition)) {
+        const labels = data.labels as string[][]
+        labels?.forEach((label, index) => {
+          const barElement = datasetMeta.data[index]
+          const { height } = barElement.getProps(['height'])
+          const xPos = left + (labelPosition === 'inside' ? 8 : 0)
+          const yPos = y.getPixelForValue(index) - (labelPosition === 'inside' ? -1 : height + 4)
+
+          ctx.fillText(label.join(', '), xPos, yPos)
+        })
+      }
+
+      if (datasetMeta.type === 'doughnut') {
+        const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
+        ctx.font = `12px ${theme?.tinyFontFamily}`
+        ctx.fillText(
+          'Total',
+          chart.width / 2 - ctx.measureText('Total').width / 2,
+          chart.chartArea.height / 2 + chart.chartArea.top - 20
+        )
+
+        ctx.font = `700 24px ${theme?.tinyFontFamily}`
+        ctx.fillText(
+          totalValue,
+          chart.width / 2 - ctx.measureText(totalValue).width / 2,
+          chart.chartArea.height / 2 + chart.chartArea.top + 5
+        )
+      }
+    }
+  }
 }
