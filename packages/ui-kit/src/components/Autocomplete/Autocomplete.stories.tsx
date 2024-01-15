@@ -6,7 +6,7 @@ import { Autocomplete } from './Autocomplete'
 const meta: Meta<typeof Autocomplete> = {
   title: 'Components/Autocomplete',
   component: Autocomplete,
-  tags: ['tag'],
+  tags: ['tag', 'pattern'],
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Autocomplete, RelativeTimeRange',
