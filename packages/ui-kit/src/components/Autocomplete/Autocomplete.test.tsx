@@ -32,7 +32,6 @@ describe('Autocomplete', () => {
     const button = dom.getByRole('button', { name: 'dropdown-button' })
     fireEvent.click(button)
     await waitFor(async () => {
-      dom.debug()
       fireEvent.click(await dom.findByText('Option 1'))
     })
 
