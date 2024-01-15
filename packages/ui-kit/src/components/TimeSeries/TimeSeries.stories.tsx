@@ -67,9 +67,9 @@ const connectedParams = {
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
-    n: 30
+    n: 90
   },
-  granularity: TimeSeriesGranularity.Week
+  granularity: TimeSeriesGranularity.Day
 }
 
 const TimeSeries = (args: Story['args']) => {
