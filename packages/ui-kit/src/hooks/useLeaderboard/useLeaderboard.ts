@@ -1,4 +1,4 @@
-import { LeaderboardQueryProps, useAccessToken, useLog } from '../../components'
+import { LeaderboardQueryProps, useAccessToken, useFilter, useLog } from '../../components'
 import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -18,7 +18,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     rowLimit,
     dimensions,
     timeRange,
-    filters,
+    filters: filtersFromProp,
     refetchInterval,
     retry,
     timeZone
@@ -35,6 +35,10 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
+
+  const { filters: filtersFromProvider } = useFilter()
+
+  const filters = filtersFromProp ?? filtersFromProvider
 
   const enabled = accessToken != null
 
@@ -61,7 +65,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     {
       leaderboardInput: {
         metricName: metric,
-        filters: filters,
+        filters,
         sort: sort,
         rowLimit: rowLimit ?? 100,
         dimensions: dimensions ?? [],

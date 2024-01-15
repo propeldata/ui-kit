@@ -1,4 +1,4 @@
-import { TimeSeriesQueryProps, useAccessToken, useLog } from '../../components'
+import { TimeSeriesQueryProps, useAccessToken, useLog, useFilter } from '../../components'
 import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -16,7 +16,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     metric,
     timeRange,
     granularity,
-    filters,
+    filters: filtersFromProp,
     refetchInterval,
     retry,
     timeZone
@@ -33,6 +33,10 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
+
+  const { filters: filtersFromProvider } = useFilter()
+
+  const filters = filtersFromProp ?? filtersFromProvider
 
   const enabled = accessToken != null
 
@@ -67,7 +71,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
           stop: timeRange?.stop ?? null
         },
         granularity: granularity as TimeSeriesGranularity,
-        filters: filters
+        filters
       }
     },
     {

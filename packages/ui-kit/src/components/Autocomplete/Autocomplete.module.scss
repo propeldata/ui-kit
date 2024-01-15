@@ -8,7 +8,6 @@
   gap: var(--propel-space-xxs);
   padding: var(--propel-space-xxs);
   overflow: hidden;
-  max-width: 620px;
 
   transition: all 100ms;
 
@@ -59,7 +58,7 @@
   box-sizing: border-box;
   padding: var(--propel-space-xxs);
   margin: var(--propel-space-xxs) 0;
-  width: 620px;
+  width: 100%;
   border-radius: var(--propel-border-radius-sm);
   overflow: auto;
   outline: 0px;

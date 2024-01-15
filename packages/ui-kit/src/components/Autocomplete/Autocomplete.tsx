@@ -77,6 +77,9 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
             { name: 'flip', enabled: false },
             { name: 'preventOverflow', enabled: false }
           ]}
+          style={{
+            width: anchorEl.clientWidth
+          }}
           disablePortal
         >
           <ul {...getListboxProps()} className={componentStyles.autocompleteList}>

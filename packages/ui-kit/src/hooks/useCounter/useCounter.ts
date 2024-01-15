@@ -1,4 +1,4 @@
-import { CounterQueryProps, useAccessToken, useLog } from '../../components'
+import { CounterQueryProps, useAccessToken, useFilter, useLog } from '../../components'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -15,7 +15,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     propelApiUrl,
     metric,
     timeRange,
-    filters,
+    filters: filtersFromProp,
     refetchInterval,
     retry,
     timeZone
@@ -32,6 +32,10 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
+
+  const { filters: filtersFromProvider } = useFilter()
+
+  const filters = filtersFromProp ?? filtersFromProvider
 
   const enabled = accessToken != null
 
@@ -65,7 +69,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
           start: timeRange?.start ?? null,
           stop: timeRange?.stop ?? null
         },
-        filters: filters ?? []
+        filters
       }
     },
     {

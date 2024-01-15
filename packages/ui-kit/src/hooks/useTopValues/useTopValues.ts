@@ -10,7 +10,8 @@ import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
  * @param props
  * @returns {data: TopValuesQuery | undefined, isLoading: boolean, error: Error | undefined}
  */
-export const useTopValues = ({
+export const useTopValues = (props: TopValuesQueryProps): UseQueryProps<TopValuesQuery> => {
+  const {
     accessToken: accessTokenFromProp,
     propelApiUrl,
     metric,
@@ -21,7 +22,7 @@ export const useTopValues = ({
     refetchInterval,
     retry,
     timeZone
-  }: TopValuesQueryProps): UseQueryProps<TopValuesQuery> => {
+  } = props
 
   const log = useLog()
 
