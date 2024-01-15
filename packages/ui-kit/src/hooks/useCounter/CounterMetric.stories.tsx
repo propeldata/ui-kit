@@ -29,7 +29,7 @@ const args = {
         dataPool: {
           id: process.env.STORYBOOK_DATAPOOL_ID ?? ''
         },
-        expression: 'COUNT_DISTINCT(taco_total_price)'
+        expression: 'SUM(taco_total_price) / SUM(quantity)'
       }
     },
     timeRange: {

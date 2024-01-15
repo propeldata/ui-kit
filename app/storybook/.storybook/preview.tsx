@@ -68,7 +68,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Getting started',
-          ['Overview', 'Installation', 'Authentication', 'Usage', 'Metric', 'FAQ', 'Migration guide'],
+          ['Overview', 'Installation', 'Authentication', 'Usage', 'Querying Metrics', 'FAQ', 'Migration guide'],
           'Customization',
           ['Theming', 'Components'],
           'Components',

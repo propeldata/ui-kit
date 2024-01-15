@@ -2685,10 +2685,6 @@ input CounterInput {
   """
   metric: MetricInput
   """
-  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
-  """
-  metric: MetricInput
-  """
   The time range for calculating the counter.
   """
   timeRange: TimeRangeInput!
@@ -2726,10 +2722,6 @@ input TimeSeriesInput {
   Required if `metricId` is not specified.
   """
   metricName: String @deprecated(reason: "Use `metric`")
-  """
-  The Metric to Query. It can be a pre-created one or it can be inlined here.
-  """
-  metric: MetricInput
   """
   The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
@@ -2776,10 +2768,6 @@ input LeaderboardInput {
   Required if `metricId` is not specified.
   """
   metricName: String @deprecated(reason: "Use `metric`")
-  """
-  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
-  """
-  metric: MetricInput
   """
   The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """

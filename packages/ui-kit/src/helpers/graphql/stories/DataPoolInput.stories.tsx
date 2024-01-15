@@ -9,10 +9,10 @@ const meta = {
   component: DataPoolInputComponent,
   argTypes: {
     id: {
-      description: 'The id of the data pool to use for the metric. Required if `name` is not provided.'
+      description: 'The ID of the Data Pool to query. Required if `name` is not provided.'
     },
     name: {
-      description: 'The name of the data pool to use for the metric. Required if `id` is not provided.'
+      description: 'The name of the Data Pool to query. Required if `id` is not provided.'
     }
   }
 } satisfies Meta<typeof DataPoolInputComponent>

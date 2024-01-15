@@ -36,9 +36,9 @@ export interface QueryProps {
   accessToken?: string
 
   /**
-   * The metric query is used to query a Metric in counter, time series, or leaderboard format.
-   * If it is passed a `string`, it will be used as the metric name.
-   * If it is passed a `MetricInput`, it will be used as the metric query.
+   * The `metric` prop allows you to specify which metric to query.
+   * You can query predefined metrics by passing their name or ID as a string, or
+   * you can query metrics on-the-fly by passing an inline metric definition to the prop.
    * @type string | MetricInput
    * */
   metric?: string | MetricInput
