@@ -1,0 +1,97 @@
+.rootAutocomplete {
+  box-shadow: var(--propel-shadow-sm);
+  border-radius: var(--propel-border-radius-sm);
+  color: var(--propel-text-primary);
+  background-color: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  display: flex;
+  gap: var(--propel-space-xxs);
+  padding: var(--propel-space-xxs);
+  overflow: hidden;
+  max-width: 620px;
+
+  transition: all 100ms;
+
+  box-sizing: border-box;
+
+  &:hover {
+    border: 1px solid var(--propel-accent);
+  }
+}
+
+.rootAutocomplete__focused {
+  border: 1px solid var(--propel-accent);
+  box-shadow: 0 0 0 3px #c7def7;
+}
+
+.autocompleteInput {
+  color: var(--propel-text-primary);
+  background: inherit;
+  border: none;
+  border-radius: inherit;
+  padding: var(--propel-space-xxs);
+  outline: 0;
+  flex: 1 0 auto;
+
+  width: 100%;
+}
+
+.autocompleteIndicator {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+  border-radius: 4px;
+  background-color: transparent;
+  align-self: center;
+  padding: 0 2px;
+  margin-right: 4px;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--propel-bg-secondary);
+    cursor: pointer;
+  }
+}
+
+.autocompleteList {
+  box-sizing: border-box;
+  padding: var(--propel-space-xxs);
+  margin: var(--propel-space-xxs) 0;
+  width: 620px;
+  border-radius: var(--propel-border-radius-sm);
+  overflow: auto;
+  outline: 0px;
+  max-height: 300px;
+  z-index: 1;
+  background-color: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  color: var(--propel-text-primary);
+  box-shadow: var(--propel-shadow-sm);
+
+  li {
+    list-style: none;
+    padding: var(--propel-space-sm);
+    border-radius: var(--propel-border-radius-sm);
+    cursor: default;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: var(--propel-colors-blue25);
+      cursor: pointer;
+    }
+
+    &[aria-selected='true'] {
+      background-color: var(--propel-accent);
+      color: var(--propel-text-primary);
+    }
+
+    &[class^='Mui-focused'] {
+      background-color: var(--propel-colors-blue25);
+    }
+  }
+}
