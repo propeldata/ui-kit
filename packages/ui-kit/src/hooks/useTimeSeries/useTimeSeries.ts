@@ -1,4 +1,4 @@
-import { TimeSeriesQueryProps, useAccessToken, useLog, useFilter } from '../../components'
+import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
 import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -34,7 +34,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilter()
+  const { filters: filtersFromProvider } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
 

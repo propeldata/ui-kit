@@ -1,4 +1,4 @@
-import { LeaderboardQueryProps, useAccessToken, useFilter, useLog } from '../../components'
+import { LeaderboardQueryProps, useAccessToken, useFilters, useLog } from '../../components'
 import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -36,7 +36,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilter()
+  const { filters: filtersFromProvider } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
 

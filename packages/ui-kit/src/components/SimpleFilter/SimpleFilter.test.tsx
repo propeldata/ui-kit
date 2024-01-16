@@ -8,8 +8,8 @@ import { SimpleFilter } from './SimpleFilter'
 
 const setFilterMock = jest.fn()
 
-jest.mock('../FilterProvider/useFilter', () => ({
-  useFilter: () => ({
+jest.mock('../FilterProvider/useFilters', () => ({
+  useFilters: () => ({
     filters: [],
     setFilters: setFilterMock
   })

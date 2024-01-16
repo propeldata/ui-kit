@@ -4,7 +4,7 @@ import { FilterInput, FilterOperator, getTimeZone } from '../../helpers'
 
 import { Autocomplete } from '../Autocomplete'
 import { AutocompleteOption } from '../Autocomplete/Autocomplete.types'
-import { useFilter } from '../FilterProvider/useFilter'
+import { useFilters } from '../FilterProvider/useFilters'
 
 import { SimpleFilterProps } from './SimpleFilter.types'
 import { withContainer } from '../withContainer'
@@ -26,7 +26,7 @@ const SimpleFilterComponent = ({
 
   const isStatic = !query
 
-  const { filters, setFilters } = useFilter()
+  const { filters, setFilters } = useFilters()
 
   const columnName = query?.columnName ?? columnNameProp
   const zone = query?.timeZone ?? getTimeZone()

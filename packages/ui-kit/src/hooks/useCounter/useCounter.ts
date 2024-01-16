@@ -1,4 +1,4 @@
-import { CounterQueryProps, useAccessToken, useFilter, useLog } from '../../components'
+import { CounterQueryProps, useAccessToken, useFilters, useLog } from '../../components'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, useCounterQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -33,7 +33,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilter()
+  const { filters: filtersFromProvider } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
 

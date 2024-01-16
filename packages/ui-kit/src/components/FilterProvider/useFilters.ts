@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { FilterContext } from './FilterProvider'
 
-export const useFilter = () => {
+export const useFilters = () => {
   return useContext(FilterContext)
 }

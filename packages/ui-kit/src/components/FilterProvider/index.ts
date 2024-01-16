@@ -1,2 +1,2 @@
 export * from './FilterProvider'
-export * from './useFilter'
+export * from './useFilters'
