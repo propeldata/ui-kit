@@ -7,11 +7,14 @@
   "module": "dist/esm/index.module.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "rm -rf dist && yarn graphql:build && yarn typecheck && rollup -c",
+    "build": "rm -rf dist && yarn graphql:build && yarn parse-design-tokens && yarn validate-design-tokens && yarn typecheck && rollup -c",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "yarn graphql:build && jest",
-    "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json"
+    "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json",
+    "parse-design-tokens": "node ./scripts/parse-design-tokens.js",
+    "validate-design-tokens": "yarn build-css && node ./scripts/validate-design-tokens.js",
+    "build-css": "sass src:src/generated"
   },
   "publishConfig": {
     "access": "public",
