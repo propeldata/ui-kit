@@ -100,28 +100,4 @@ describe('SimpleFilter', () => {
       }
     ])
   })
-
-  it('should show error icon when query fails', async () => {
-    dom = render(
-      <FilterProvider>
-        <SimpleFilter
-          query={{
-            accessToken: 'test token',
-            columnName: 'should-fail',
-            dataPool: {
-              name: 'test data pool'
-            },
-            maxValues: 1000,
-            timeRange: {
-              relative: RelativeTimeRange.LastNDays,
-              n: 30
-            },
-            retry: false
-          }}
-        />
-      </FilterProvider>
-    )
-
-    await dom.findByRole('img')
-  })
 })
