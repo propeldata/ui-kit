@@ -15,7 +15,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   props: AutocompleteProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { disabled = false, readOnly = false, placeholder = '', containerStyle, ...other } = props
+  const { disabled = false, readOnly = false, placeholder = '', containerStyle, freeSolo = false, ...other } = props
 
   const {
     getRootProps,
@@ -31,7 +31,9 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     groupedOptions
   } = useAutocomplete({
     ...props,
-    componentName: 'Autocomplete'
+    componentName: 'Autocomplete',
+    freeSolo,
+    selectOnFocus: true
   })
 
   const rootRef = useCombinedRefs(ref, setAnchorEl)
@@ -58,15 +60,17 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           }}
           style={{ width: '100%' }}
         />
-        <Button
-          {...getPopupIndicatorProps()}
-          aria-label="dropdown-button"
-          className={componentStyles.autocompleteIndicator}
-        >
-          {popupOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-        </Button>
+        {props.options.length > 0 && (
+          <Button
+            {...getPopupIndicatorProps()}
+            aria-label="dropdown-button"
+            className={componentStyles.autocompleteIndicator}
+          >
+            {popupOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          </Button>
+        )}
       </div>
-      {anchorEl ? (
+      {anchorEl && props.options.length > 0 && !(groupedOptions.length === 0 && freeSolo) ? (
         <Popper
           open={popupOpen}
           anchorEl={anchorEl}
@@ -85,7 +89,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
         >
           <ul {...getListboxProps()} className={componentStyles.autocompleteList}>
             {groupedOptions.map((option, index) => {
-              if ('label' in option) {
+              if (typeof option !== 'string' && 'label' in option) {
                 const optionProps = getOptionProps({ option, index })
 
                 return (

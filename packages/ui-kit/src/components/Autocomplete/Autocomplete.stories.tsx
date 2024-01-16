@@ -154,3 +154,13 @@ export const BasicStory: Story = {
   },
   render: (args) => <Autocomplete {...args} />
 }
+
+export const FreeSoloStory: Story = {
+  name: 'FreeSolo',
+  args: {
+    options: top100Films,
+    placeholder: 'Search or type',
+    freeSolo: true
+  },
+  render: (args) => <Autocomplete {...args} />
+}

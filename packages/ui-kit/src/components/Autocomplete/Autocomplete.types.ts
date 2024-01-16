@@ -6,9 +6,12 @@ export interface AutocompleteOption {
   [x: string | number | symbol]: unknown
 }
 
-export interface AutocompleteProps extends UseAutocompleteProps<AutocompleteOption, false, false, false> {
+export interface AutocompleteProps extends UseAutocompleteProps<string | AutocompleteOption, false, false, boolean> {
   placeholder?: string
 
   /** Styles to be applied to the container element */
   containerStyle?: CSSProperties
+
+  /** If true, enables the user to type an arbitrary value */
+  freeSolo?: boolean
 }

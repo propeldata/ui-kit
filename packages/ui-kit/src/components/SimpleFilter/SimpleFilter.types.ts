@@ -1,6 +1,5 @@
 import { DataPoolInput } from '../../helpers'
 import { AutocompleteProps } from '../Autocomplete/Autocomplete.types'
-import { ErrorFallbackProps } from '../ErrorFallback'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
 export interface SimpleFilterQueryProps extends Omit<QueryProps, 'metric' | 'filters'> {
@@ -14,7 +13,7 @@ export interface SimpleFilterQueryProps extends Omit<QueryProps, 'metric' | 'fil
   maxValues?: number
 }
 
-export interface SimpleFilterProps extends ErrorFallbackProps, Omit<DataComponentProps, 'card'> {
+export interface SimpleFilterProps extends Omit<DataComponentProps, 'card'> {
   /** Props that the autocomplete input will receive */
   autocompleteProps?: Omit<AutocompleteProps, 'options'>
 
@@ -29,4 +28,7 @@ export interface SimpleFilterProps extends ErrorFallbackProps, Omit<DataComponen
 
   /** SimpleFilter query props */
   query?: SimpleFilterQueryProps
+
+  /** Whether there was an error or not, setting to `true` will enable freeSolo mode */
+  error?: boolean
 }

@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useRef } from 'react'
+import React, { SyntheticEvent, useEffect, useRef } from 'react'
 import { useTopValues } from '../../hooks'
 import { FilterInput, FilterOperator, getTimeZone } from '../../helpers'
 
@@ -11,12 +11,12 @@ import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import componentStyles from './SimpleFilter.module.scss'
+import { useLog } from '../Log'
 
 const SimpleFilterComponent = ({
   autocompleteProps,
   columnName: columnNameProp = '',
   query,
-  errorFallbackProps,
   error,
   loading,
   loaderProps,
@@ -31,15 +31,19 @@ const SimpleFilterComponent = ({
   const columnName = query?.columnName ?? columnNameProp
   const zone = query?.timeZone ?? getTimeZone()
 
-  const { data, error: hasError, isLoading } = useTopValues({ ...query, timeZone: zone })
+  const log = useLog()
 
-  const handleChange = (_: SyntheticEvent<Element, Event>, value: AutocompleteOption | null) => {
+  const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone: zone })
+
+  const isError = queryError != null || error != null
+
+  const handleChange = (_: SyntheticEvent<Element, Event>, value: AutocompleteOption | string | null) => {
     if (value == null) return
 
     const newFilter: FilterInput = {
       column: columnName,
       operator: FilterOperator.Equals,
-      value: value.label
+      value: typeof value === 'string' ? value : value.label
     }
 
     const newFilterList = filters.filter((filter) => filter.id !== id).concat({ ...newFilter, id })
@@ -51,9 +55,11 @@ const SimpleFilterComponent = ({
     ? options?.map((label) => ({ label })) ?? []
     : data?.topValues.values.map((label) => ({ label })) ?? []
 
-  if (error != null || hasError != null) {
-    return <ErrorFallback error={null} {...errorFallbackProps} style={{ height: '34.2px' }} />
-  }
+  useEffect(() => {
+    if (queryError != null) {
+      log.error('Error fetching Top Values for SimpleFilter:', queryError.message)
+    }
+  }, [log, queryError])
 
   if (loading || (!isStatic && isLoading)) {
     return (
@@ -61,7 +67,14 @@ const SimpleFilterComponent = ({
     )
   }
 
-  return <Autocomplete {...autocompleteProps} options={autocompleteOptions} onChange={handleChange} />
+  return (
+    <Autocomplete
+      {...autocompleteProps}
+      options={autocompleteOptions}
+      onChange={handleChange}
+      freeSolo={isError || autocompleteProps?.freeSolo}
+    />
+  )
 }
 
 export const SimpleFilter = withContainer(SimpleFilterComponent, ErrorFallback)

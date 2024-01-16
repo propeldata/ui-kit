@@ -170,3 +170,73 @@ export const MultipleStory: Story = {
     </FilterProvider>
   )
 }
+
+export const FreeSoloStory: Story = {
+  name: 'FreeSolo',
+  args: {
+    query: {
+      columnName: process.env.STORYBOOK_DIMENSION_1 ?? '',
+      dataPool: {
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1 ?? ''
+      },
+      maxValues: 3,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      }
+    },
+    autocompleteProps: {
+      placeholder: 'Search or type a sauce name',
+      freeSolo: true
+    }
+  },
+  render: (args) => (
+    <FilterProvider>
+      <SimpleFilter {...args} />
+      <TimeSeries
+        card
+        query={{
+          metric: 'Revenue',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
+          granularity: TimeSeriesGranularity.Day
+        }}
+        style={{ marginTop: '1rem' }}
+      />
+    </FilterProvider>
+  )
+}
+
+export const ErrorStory: Story = {
+  name: 'Error',
+  args: {
+    query: {
+      columnName: 'sauce_name',
+      dataPool: {
+        name: 'invalid_data_pool_name'
+      },
+      maxValues: 3,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      },
+      retry: false
+    },
+    autocompleteProps: {
+      placeholder: 'Search or type a sauce name'
+    }
+  },
+  render: (args) => (
+    <FilterProvider>
+      <SimpleFilter {...args} />
+      <TimeSeries
+        card
+        query={{
+          metric: 'Revenue',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
+          granularity: TimeSeriesGranularity.Day
+        }}
+        style={{ marginTop: '1rem' }}
+      />
+    </FilterProvider>
+  )
+}
