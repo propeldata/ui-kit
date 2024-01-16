@@ -46,7 +46,7 @@ let id = 0
 export const RecordsByIdStory: Story = {
   args,
   render: (args) =>
-    (function DataGrid() {
+    (function RecordsById() {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
       const { data } = useRecordsById({ ...args, accessToken })
       const { columns, values } = data?.recordsByUniqueId ?? {}
