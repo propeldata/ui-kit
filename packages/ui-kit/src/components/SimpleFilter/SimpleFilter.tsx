@@ -52,11 +52,13 @@ const SimpleFilterComponent = ({
     : data?.topValues.values.map((label) => ({ label })) ?? []
 
   if (error != null || hasError != null) {
-    return <ErrorFallback error={null} {...errorFallbackProps} />
+    return <ErrorFallback error={null} {...errorFallbackProps} style={{ height: '34.2px' }} />
   }
 
   if (loading || (!isStatic && isLoading)) {
-    return <Loader {...loaderProps} className={componentStyles.loader} />
+    return (
+      <Loader {...loaderProps} className={componentStyles.loader} style={{ ...autocompleteProps?.containerStyle }} />
+    )
   }
 
   return <Autocomplete {...autocompleteProps} options={autocompleteOptions} onChange={handleChange} />

@@ -15,7 +15,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   props: AutocompleteProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { disabled = false, readOnly = false, placeholder = '', ...other } = props
+  const { disabled = false, readOnly = false, placeholder = '', containerStyle, ...other } = props
 
   const {
     getRootProps,
@@ -42,6 +42,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
         {...getRootProps(other)}
         ref={rootRef}
         className={classnames(componentStyles.rootAutocomplete, focused && componentStyles.rootAutocomplete__focused)}
+        style={{ ...containerStyle }}
       >
         <Input
           id={id}

@@ -14,7 +14,7 @@ export interface SimpleFilterQueryProps extends Omit<QueryProps, 'metric' | 'fil
   maxValues?: number
 }
 
-export interface SimpleFilterProps extends ErrorFallbackProps, DataComponentProps {
+export interface SimpleFilterProps extends ErrorFallbackProps, Omit<DataComponentProps, 'card'> {
   /** Props that the autocomplete input will receive */
   autocompleteProps?: Omit<AutocompleteProps, 'options'>
 

@@ -99,17 +99,73 @@ export const ConnectedStory: Story = {
         relative: RelativeTimeRange.LastNDays,
         n: 30
       }
+    },
+    autocompleteProps: {
+      placeholder: 'Search or type a sauce name'
     }
   },
   render: (args) => (
     <FilterProvider>
       <SimpleFilter {...args} />
       <TimeSeries
+        card
         query={{
           metric: 'Revenue',
           timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
           granularity: TimeSeriesGranularity.Day
         }}
+        style={{ marginTop: '1rem' }}
+      />
+    </FilterProvider>
+  )
+}
+
+export const MultipleStory: Story = {
+  name: 'Multiple',
+  args: {
+    query: {
+      columnName: process.env.STORYBOOK_DIMENSION_1 ?? '',
+      dataPool: {
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1 ?? ''
+      },
+      maxValues: 1000,
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 30
+      }
+    },
+    autocompleteProps: {
+      placeholder: 'Search or type a sauce name'
+    }
+  },
+  render: (args) => (
+    <FilterProvider>
+      <SimpleFilter {...args} />
+      <SimpleFilter
+        query={{
+          columnName: 'taco_name',
+          dataPool: {
+            name: 'TacoSoft Demo Data'
+          },
+          maxValues: 1000,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+        autocompleteProps={{
+          placeholder: 'Search or type a taco name',
+          containerStyle: { marginTop: '12px' }
+        }}
+      />
+      <TimeSeries
+        card
+        query={{
+          metric: 'Revenue',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 },
+          granularity: TimeSeriesGranularity.Day
+        }}
+        style={{ marginTop: '12px' }}
       />
     </FilterProvider>
   )
