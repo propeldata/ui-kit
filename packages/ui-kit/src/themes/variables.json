@@ -1,0 +1,131 @@
+{
+  "version": "1.0.4",
+  "metadata": {},
+  "collections": [
+    {
+      "name": "Primitives",
+      "modes": [
+        {
+          "name": "Mode 1",
+          "variables": [
+            {
+              "name": "color/blue/25",
+              "type": "color",
+              "isAlias": false,
+              "value": "#F5FAFF"
+            },
+            {
+              "name": "color/blue/50",
+              "type": "color",
+              "isAlias": false,
+              "value": "#EFF8FF"
+            },
+            {
+              "name": "spacing/0",
+              "type": "number",
+              "isAlias": false,
+              "value": 0
+            },
+            {
+              "name": "spacing/0_5",
+              "type": "number",
+              "isAlias": false,
+              "value": 2
+            },
+            {
+              "name": "spacing/1",
+              "type": "number",
+              "isAlias": false,
+              "value": 4
+            },
+            {
+              "name": "color/warning/25",
+              "type": "color",
+              "isAlias": false,
+              "value": "#FFFBFA"
+            },
+            {
+              "name": "color/warning/50",
+              "type": "color",
+              "isAlias": false,
+              "value": "#FEF3F2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tokens",
+      "modes": [
+        {
+          "name": "Mode 1",
+          "variables": [
+            {
+              "name": "text/text-primary",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "color/blue/25"
+              }
+            },
+            {
+              "name": "border/border-primary",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "color/warning/25"
+              }
+            },
+            {
+              "name": "border/border-secondary",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "color/warning/50"
+              }
+            },
+            {
+              "name": "text/text-secondary",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "color/blue/50"
+              }
+            },
+            {
+              "name": "spacing-none",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "spacing/0"
+              }
+            },
+            {
+              "name": "spacing-xxs",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "spacing/0_5"
+              }
+            },
+            {
+              "name": "spacing-xs",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "Primitives",
+                "name": "spacing/1"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

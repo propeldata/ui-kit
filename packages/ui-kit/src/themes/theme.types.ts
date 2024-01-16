@@ -1,7 +1,8 @@
 import { CSSProperties } from 'react'
 import type { DefaultThemes } from '../components/ThemeProvider/ThemeProvider.types'
+import { ThemeTokenGeneratedProps, ThemeCSSTokenGeneratedProps } from './generated/theme.types'
 
-export type ThemeTokenProps = {
+export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
   baseTheme?: DefaultThemes
 
   fontFamily?: CSSProperties['fontFamily']
@@ -73,7 +74,7 @@ export type ThemeTokenProps = {
   colorBlue25?: CSSProperties['color']
 }
 
-export type ThemeCSSTokenProps = {
+export interface ThemeCSSTokenProps extends ThemeCSSTokenGeneratedProps {
   '--propel-font-family'?: CSSProperties['fontFamily']
   '--propel-font-size'?: CSSProperties['fontSize']
   '--propel-font-weight'?: CSSProperties['fontWeight']
