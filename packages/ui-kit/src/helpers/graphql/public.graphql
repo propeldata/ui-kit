@@ -4460,6 +4460,10 @@ type Query {
   """
   dataGrid(input: DataGridInput!): DataGridConnection!
   """
+  This query returns records by the given unique IDs.
+  """
+  recordsByUniqueId(input: RecordsByUniqueIdInput!): RecordsByUniqueIdResponse!
+  """
   This query returns an array of the most frequent values in a given column. The resulting array is sorted in descending order of approximate frequency of values.
   """
   topValues(input: TopValuesInput!): TopValuesResponse!
@@ -5350,4 +5354,45 @@ input WebhookConnectionSettingsInput {
   The unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
   """
   uniqueId: String
+}
+
+"""
+The fields for querying records by unique ID.
+"""
+input RecordsByUniqueIdInput {
+  """
+  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+  """
+  The Data Pool to be queried. If a Data Pool ID is provided it will take precedence over the Data Pool name.
+  """
+  dataPoolId: ID
+  """
+  The Data Pool to be queried. If a Data Pool ID is provided it will take precedence over the Data Pool name.
+  """
+  dataPoolName: String
+  """
+  The columns to retrieve.
+  """
+  columns: [String!]!
+  """
+  The unique IDs of the records to retrieve.
+  """
+  uniqueIds: [String!]!
+}
+
+type RecordsByUniqueIdResponse {
+  """
+  The Data Pool columns for the record.
+  """
+  columns: [String!]!
+  """
+  An array of values for the record.
+  """
+  values: [[String]!]!
+  """
+  The Query statistics and metadata.
+  """
+  query: QueryInfo!
 }

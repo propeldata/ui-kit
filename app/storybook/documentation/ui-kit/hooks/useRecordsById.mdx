@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useRecordsByIdStories from '../../../../../packages/ui-kit/src/hooks/useRecordsById/useRecordsById.stories'
+
+<Meta title="Hooks/useRecordsById" />
+
+# `useRecordsById`
+
+The `useRecordsById` Query Hook allows querying [Propel's `recordsByUniqueId` API](https://www.propeldata.com/docs/api/query/queries#recordsByUniqueId).
+This simplifies creating custom components that need to display the most frequent values in a given column. You can use
+this hook to create a component for displaying Records By Id, while reusing the Propel UI Kit's query logic and access token management.
+
+<SourceCode of={useRecordsByIdStories.RecordsByIdStory} shown />
+
+See the documentation below for a complete reference for `RecordsByIdQueryProps`:
+
+- <LinkTo kind="API/RecordsByIdQueryProps" story="overview">
+    RecordsByIdQueryProps
+  </LinkTo>
