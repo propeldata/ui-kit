@@ -22,7 +22,7 @@ export interface QueryProps {
   /**
    * Specify the time range for a time series, counter, or leaderboard Metric query
    * @type TimeRangeInput
-   * */
+   */
   timeRange?: TimeRangeInput
 
   /**
