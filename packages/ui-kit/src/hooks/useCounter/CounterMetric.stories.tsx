@@ -99,8 +99,8 @@ const meta: Meta = {
     }`,
           `${JSON.stringify(args.sum)}`
         )
-        .replace(process.env.STORYBOOK_METRIC_ID ?? '', '<PROPELL_METRIC_ID>')
-        .replace(process.env.STORYBOOK_DATAPOOL_ID ?? '', '<PROPELL_DATAPOOL_ID>')
+        .replace(process.env.STORYBOOK_METRIC_ID ?? '', '<PROPEL_METRIC_ID>')
+        .replace(process.env.STORYBOOK_DATAPOOL_ID ?? '', '<PROPEL_DATAPOOL_ID>')
         .replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays')
         .concat(' }')
   }
