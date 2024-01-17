@@ -8,7 +8,17 @@ const devOnly = [
   'Hooks/useDataGrid',
   'API/DataGridQueryProps',
   'API/PieChartQueryProps',
-  'API/TopValuesQueryProps'
+  'API/TopValuesQueryProps',
+  'Getting started/Query Metrics',
+  'API/AverageMetricQueryInput',
+  'API/CountDistinctMetricQueryInput',
+  'API/CounterQueryProps',
+  'API/CustomMetricQueryInput',
+  'API/DataPoolInput',
+  'API/MaxMetricQueryInput',
+  'API/MetricInput',
+  'API/MinMetricQueryInput',
+  'API/SumMetricQueryInput'
 ]
 
 addons.setConfig({
