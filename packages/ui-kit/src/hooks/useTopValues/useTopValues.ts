@@ -11,18 +11,18 @@ import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
  * @returns {data: TopValuesQuery | undefined, isLoading: boolean, error: Error | undefined}
  */
 export const useTopValues = ({
-    accessToken: accessTokenFromProp,
-    propelApiUrl,
-    metric,
-    timeRange,
-    columnName,
-    dataPool,
-    maxValues,
-    refetchInterval,
-    retry,
-    timeZone
-  }: TopValuesQueryProps): UseQueryProps<TopValuesQuery> => {
-
+  accessToken: accessTokenFromProp,
+  propelApiUrl,
+  metric,
+  timeRange,
+  columnName,
+  dataPool,
+  maxValues,
+  refetchInterval,
+  retry,
+  enabled: enabledProp = true,
+  timeZone
+}: TopValuesQueryProps): UseQueryProps<TopValuesQuery> => {
   const log = useLog()
 
   // Get access token using useAccessToken hook
@@ -35,10 +35,10 @@ export const useTopValues = ({
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const enabled = accessToken != null
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
-  if (!enabled && metric) {
+  if (accessToken == null && metric) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 

@@ -18,6 +18,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     granularity,
     filters,
     refetchInterval,
+    enabled: enabledProp = true,
     retry,
     timeZone
   } = props
@@ -34,7 +35,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const enabled = accessToken != null
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
   if (!enabled && metric) {

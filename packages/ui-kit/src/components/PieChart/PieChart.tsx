@@ -60,12 +60,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: leaderboardData,
       isLoading: leaderboardIsLoading,
       error: leaderboardHasError
-    } = useLeaderboard({ ...query })
+    } = useLeaderboard({ ...query, enabled: !isStatic })
 
     /**
      * Fetches the counter data from the API
      */
-    const { data: counterData, isLoading: counterIsLoading, error: counterHasError } = useCounter({ ...query })
+    const {
+      data: counterData,
+      isLoading: counterIsLoading,
+      error: counterHasError
+    } = useCounter({ ...query, enabled: !isStatic })
 
     const isLoading = leaderboardIsLoading || counterIsLoading
 

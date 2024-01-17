@@ -204,7 +204,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }
 
-    const { data: fetchedData, isLoading, error: hasError } = useLeaderboard({ ...query, timeZone })
+    const { data: fetchedData, isLoading, error: hasError } = useLeaderboard({ ...query, timeZone, enabled: !isStatic })
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',

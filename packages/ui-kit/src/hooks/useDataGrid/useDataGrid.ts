@@ -25,6 +25,7 @@ export const useDataGrid = ({
   after,
   before,
   refetchInterval,
+  enabled: enabledProp = true,
   retry
 }: DataGridQueryProps): UseQueryProps<DataGridQuery> => {
   const log = useLog()
@@ -39,10 +40,10 @@ export const useDataGrid = ({
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const enabled = accessToken != null
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and dataPool is provided
-  if (!enabled && dataPool != null) {
+  if (accessToken == null && dataPool != null) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 

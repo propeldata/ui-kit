@@ -1,7 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
+import { AccessTokenProvider } from '../AccessTokenProvider'
 import { Counter } from './Counter'
+import { mockServer } from '../../testing'
+import { sleep } from '../../helpers'
 
 const mockData = {
   value: '123'
@@ -10,6 +13,16 @@ const mockData = {
 const handlers = [
   mockCounterQuery((req, res, ctx) => {
     const { metricName } = req.variables.counterInput
+
+    if (metricName == null) {
+      return res(
+        ctx.errors([
+          {
+            message: 'no metric name provided'
+          }
+        ])
+      )
+    }
 
     if (metricName === 'lack-of-data') {
       return res(
@@ -152,5 +165,19 @@ describe('Counter', () => {
     )
 
     await dom.findByText('true')
+  })
+
+  it('Should NOT fetch data in static mode', async () => {
+    mockServer.events.on('request:start', async () => {
+      throw new Error('Should not fetch data in static mode')
+    })
+
+    dom = render(
+      <AccessTokenProvider accessToken="abc">
+        <Counter value="123" />
+      </AccessTokenProvider>
+    )
+
+    await sleep(100)
   })
 })

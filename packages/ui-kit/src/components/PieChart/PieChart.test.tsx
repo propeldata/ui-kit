@@ -1,8 +1,9 @@
 import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
-import { RelativeTimeRange } from '../../helpers'
-import { Dom, mockLeaderboardQuery, mockCounterQuery, setupTestHandlers } from '../../testing'
+import { RelativeTimeRange, sleep } from '../../helpers'
+import { Dom, mockLeaderboardQuery, mockCounterQuery, setupTestHandlers, mockServer } from '../../testing'
+import { AccessTokenProvider } from '../AccessTokenProvider'
 import { PieChart } from './PieChart'
 
 const mockCounterData = {
@@ -171,5 +172,21 @@ describe('PieChart', () => {
       // TODO: this message suggests that the error is due to a network issue when it's not, maybe we should think about changing the message depending on the error
       await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
     })
+  })
+
+  it('Should NOT fetch data in static mode', async () => {
+    jest.useRealTimers()
+
+    mockServer.events.on('request:start', async () => {
+      throw new Error('Should not fetch data in static mode')
+    })
+
+    dom = render(
+      <AccessTokenProvider accessToken="abc">
+        <PieChart {...mockData} />
+      </AccessTokenProvider>
+    )
+
+    await sleep(100)
   })
 })
