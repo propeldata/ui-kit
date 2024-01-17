@@ -19,7 +19,10 @@ export interface QueryProps {
   /** Indicates specific time zone region */
   timeZone?: string
 
-  /** Specify the time range for a time series, counter, or leaderboard Metric query */
+  /**
+   * Specify the time range for a time series, counter, or leaderboard Metric query
+   * @type TimeRangeInput
+   */
   timeRange?: TimeRangeInput
 
   /**
