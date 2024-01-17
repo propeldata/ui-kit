@@ -14,16 +14,6 @@ const handlers = [
   mockCounterQuery((req, res, ctx) => {
     const { metricName } = req.variables.counterInput
 
-    if (metricName == null) {
-      return res(
-        ctx.errors([
-          {
-            message: 'no metric name provided'
-          }
-        ])
-      )
-    }
-
     if (metricName === 'lack-of-data') {
       return res(
         ctx.data({
