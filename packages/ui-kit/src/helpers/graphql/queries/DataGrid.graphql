@@ -1,0 +1,12 @@
+query DataGrid($dataGridInput: DataGridInput!) {
+  dataGrid(input: $dataGridInput) {
+    headers
+    rows
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+      startCursor
+    }
+  }
+}
