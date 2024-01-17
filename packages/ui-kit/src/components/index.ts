@@ -1,6 +1,7 @@
 export * from './AccessTokenProvider'
 export * from './Card'
 export * from './Counter'
+export * from './DataGrid'
 export * from './ErrorBoundary'
 export * from './ErrorFallback'
 export * from './Leaderboard'

@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useDataGridStories from '../../../../../packages/ui-kit/src/hooks/useDataGrid/useDataGrid.stories'
+
+<Meta title="Hooks/useDataGrid" /> 
+
+# `useDataGrid`
+
+The `useDataGrid` Query Hook allows querying [Propel's `dataGrid` API](https://www.propeldata.com/docs/api/query/queries#dataGrid).
+This simplifies creating custom components that need to display data tables and grids. For example, you can use this hook to create a table
+component that displays tabular data, while reusing the Propel UI Kit's query logic and access token management.
+
+<SourceCode of={useDataGridStories.DataGridStory} shown />
+
+See the documentation below for a complete reference for `DataGridQueryProps`:
+
+- <LinkTo kind="API/DataGridQueryProps" story="overview">
+    DataGridQueryProps
+  </LinkTo>
+
+See the documentation below for a complete reference to all of the props for FilterInput and TimeRangeInput, which are mentioned here.
+
+- <LinkTo kind="API/FilterInput" story="overview">
+    FilterInput
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>
