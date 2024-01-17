@@ -8,7 +8,9 @@ const devOnly = [
   'Hooks/useDataGrid',
   'API/DataGridQueryProps',
   'API/PieChartQueryProps',
-  'API/TopValuesQueryProps'
+  'API/TopValuesQueryProps',
+  'API/RecordsByIdQueryProps',
+  'Hooks/useRecordsById'
 ]
 
 addons.setConfig({

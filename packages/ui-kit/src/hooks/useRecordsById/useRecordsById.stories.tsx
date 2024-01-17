@@ -32,7 +32,7 @@ const meta: Meta = {
     }`,
           `${JSON.stringify(args)}`
         )
-        .replace(process.env.STORYBOOK_WEBHOOK_DATAPOOL_ID ?? '', '<PROPELL_DATAPOOL_ID>')
+        .replace(process.env.STORYBOOK_WEBHOOK_DATAPOOL_ID ?? '', '<PROPEL_DATAPOOL_ID>')
         .concat(' }')
   }
 } satisfies Meta
