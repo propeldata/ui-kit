@@ -6,7 +6,7 @@ import * as React from 'react'
 import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
 import { useCombinedRefs } from '../../helpers'
-import { AutocompleteProps } from './Autocomplete.types'
+import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
 import { ChevronUpIcon } from '../Icons/ChevronUp'
 import { ChevronDownIcon } from '../Icons/ChevronDown'
 
@@ -47,7 +47,19 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     ...props,
     componentName: 'Autocomplete',
     freeSolo,
-    selectOnFocus: true
+    selectOnFocus: true,
+    getOptionLabel: (option) => {
+      if (typeof option === 'string') {
+        return option
+      }
+      if (option && option.label != null) {
+        return option.label
+      }
+      if (option && option.value != null) {
+        return option.value
+      }
+      return ''
+    }
   })
 
   const rootRef = useCombinedRefs(ref, setAnchorEl)
@@ -119,20 +131,22 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
             style={{ ...getListboxProps().style, ...listStyle }}
           >
             {groupedOptions.map((option, index) => {
-              if (typeof option !== 'string' && 'label' in option) {
-                const optionProps = getOptionProps({ option, index })
+              let optionLabel: AutocompleteOption
+              if (typeof option === 'string') optionLabel = { label: option }
+              else optionLabel = { ...option }
 
-                return (
-                  <li
-                    key={index}
-                    {...optionProps}
-                    className={classnames(optionProps.className, optionClassname)}
-                    style={{ ...optionProps.style, ...optionStyle }}
-                  >
-                    {option.label}
-                  </li>
-                )
-              }
+              const optionProps = getOptionProps({ option: optionLabel, index })
+
+              return (
+                <li
+                  key={index}
+                  {...optionProps}
+                  className={classnames(optionProps.className, optionClassname)}
+                  style={{ ...optionProps.style, ...optionStyle }}
+                >
+                  {optionLabel.label}
+                </li>
+              )
             })}
             {groupedOptions.length === 0 && <li>No results</li>}
           </ul>

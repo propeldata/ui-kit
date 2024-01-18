@@ -37,13 +37,13 @@ const SimpleFilterComponent = ({
 
   const isError = queryError != null || error != null
 
-  const handleChange = (_: SyntheticEvent<Element, Event>, value: AutocompleteOption | string | null) => {
-    if (value == null) return
+  const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
+    if (selectedOption == null) return
 
     const newFilter: FilterInput = {
       column: columnName,
       operator: FilterOperator.Equals,
-      value: typeof value === 'string' ? value : value.label
+      value: typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
     }
 
     const newFilterList = filters.filter((filter) => filter.id !== id).concat({ ...newFilter, id })
@@ -51,9 +51,7 @@ const SimpleFilterComponent = ({
     setFilters([...newFilterList])
   }
 
-  const autocompleteOptions = isStatic
-    ? options?.map((label) => ({ label })) ?? []
-    : data?.topValues.values.map((label) => ({ label })) ?? []
+  const autocompleteOptions = isStatic ? options ?? [] : data?.topValues.values ?? []
 
   useEffect(() => {
     if (queryError != null) {

@@ -100,4 +100,26 @@ describe('SimpleFilter', () => {
       }
     ])
   })
+
+  it('should build labeled filters correctly', async () => {
+    dom = render(
+      <FilterProvider>
+        <SimpleFilter columnName="test column" options={[{ label: 'Option 1', value: 'option_1' }]} />
+      </FilterProvider>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(dom.getByRole('button', { name: 'dropdown-button' }))
+      fireEvent.click(dom.getByText('Option 1'))
+    })
+
+    expect(setFilterMock).toHaveBeenCalledWith([
+      {
+        id: expect.any(Symbol),
+        column: 'test column',
+        operator: FilterOperator.Equals,
+        value: 'option_1'
+      }
+    ])
+  })
 })

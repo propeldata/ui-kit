@@ -86,6 +86,22 @@ export const StaticStory: Story = {
   )
 }
 
+export const StaticCustomLabelStory: Story = {
+  name: 'Static Custom Label',
+  args: {
+    columnName: 'Column Name',
+    options: [
+      { label: 'Option 1', value: 'option_1' },
+      { label: 'Option 2', value: 'option_2' }
+    ]
+  },
+  render: (args) => (
+    <FilterProvider>
+      <SimpleFilter {...args} />
+    </FilterProvider>
+  )
+}
+
 export const ConnectedStory: Story = {
   name: 'Connected',
   args: {

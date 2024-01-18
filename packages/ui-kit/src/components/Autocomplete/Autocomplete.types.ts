@@ -2,7 +2,10 @@ import { CSSProperties } from 'react'
 import { UseAutocompleteProps } from '@mui/base/useAutocomplete'
 
 export interface AutocompleteOption {
-  label: string
+  /** The display label */
+  label?: string
+  /** The value that will be used when the option is selected */
+  value?: string
   [x: string | number | symbol]: unknown
 }
 

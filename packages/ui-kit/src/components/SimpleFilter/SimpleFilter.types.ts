@@ -1,5 +1,5 @@
 import { DataPoolInput } from '../../helpers'
-import { AutocompleteProps } from '../Autocomplete/Autocomplete.types'
+import { AutocompleteOption, AutocompleteProps } from '../Autocomplete/Autocomplete.types'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
 export interface SimpleFilterQueryProps extends Omit<QueryProps, 'metric' | 'filters'> {
@@ -18,7 +18,7 @@ export interface SimpleFilterProps extends Omit<DataComponentProps, 'card'> {
   autocompleteProps?: Omit<AutocompleteProps, 'options'>
 
   /** The possible values for the selected column, will be ignored if `query` is passed */
-  options?: string[]
+  options?: AutocompleteOption[] | string[]
 
   /** When true, shows a skeleton loader */
   loading?: boolean
