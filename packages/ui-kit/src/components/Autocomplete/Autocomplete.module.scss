@@ -80,8 +80,12 @@
     }
 
     &:hover {
-      background-color: var(--propel-colors-blue25);
+      background-color: var(--propel-color-blue25);
       cursor: pointer;
+    }
+
+    &[class^='Mui-focused'] {
+      background-color: var(--propel-color-blue25);
     }
 
     &[aria-selected='true'] {
@@ -89,8 +93,9 @@
       color: var(--propel-text-primary);
     }
 
-    &[class^='Mui-focused'] {
-      background-color: var(--propel-colors-blue25);
+    &[aria-selected='true']:hover {
+      background-color: var(--propel-accent-hover);
+      color: var(--propel-text-primary);
     }
   }
 }

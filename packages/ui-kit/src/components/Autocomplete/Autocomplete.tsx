@@ -15,7 +15,21 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   props: AutocompleteProps,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { disabled = false, readOnly = false, placeholder = '', containerStyle, freeSolo = false, ...other } = props
+  const {
+    disabled = false,
+    readOnly = false,
+    placeholder = '',
+    containerStyle,
+    containerClassname,
+    inputStyle,
+    inputClassname,
+    freeSolo = false,
+    listStyle,
+    listClassname,
+    optionStyle,
+    optionClassname,
+    ...other
+  } = props
 
   const {
     getRootProps,
@@ -43,8 +57,12 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
       <div
         {...getRootProps(other)}
         ref={rootRef}
-        className={classnames(componentStyles.rootAutocomplete, focused && componentStyles.rootAutocomplete__focused)}
-        style={{ ...containerStyle }}
+        className={classnames(
+          componentStyles.rootAutocomplete,
+          focused && componentStyles.rootAutocomplete__focused,
+          containerClassname
+        )}
+        style={{ ...getRootProps(other).style, ...containerStyle }}
       >
         <Input
           id={id}
@@ -54,8 +72,16 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           placeholder={placeholder}
           slotProps={{
             input: {
-              className: componentStyles.autocompleteInput,
-              ...getInputProps()
+              ...getInputProps(),
+              className: classnames(
+                ...(getInputProps().className ?? ''),
+                componentStyles.autocompleteInput,
+                inputClassname
+              ),
+              style: {
+                ...getInputProps().style,
+                ...inputStyle
+              }
             }
           }}
           style={{ width: '100%' }}
@@ -87,13 +113,22 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           }}
           disablePortal
         >
-          <ul {...getListboxProps()} className={componentStyles.autocompleteList}>
+          <ul
+            {...getListboxProps()}
+            className={classnames(componentStyles.autocompleteList, listClassname)}
+            style={{ ...getListboxProps().style, ...listStyle }}
+          >
             {groupedOptions.map((option, index) => {
               if (typeof option !== 'string' && 'label' in option) {
                 const optionProps = getOptionProps({ option, index })
 
                 return (
-                  <li key={index} {...optionProps}>
+                  <li
+                    key={index}
+                    {...optionProps}
+                    className={classnames(optionProps.className, optionClassname)}
+                    style={{ ...optionProps.style, ...optionStyle }}
+                  >
                     {option.label}
                   </li>
                 )

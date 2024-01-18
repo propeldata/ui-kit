@@ -11,6 +11,7 @@ const devOnly = [
   'API/TopValuesQueryProps',
   'Components/SimpleFilter'
 ]
+const hidden = ['Components/Autocomplete']
 
 addons.setConfig({
   theme: defaultTheme,
@@ -21,7 +22,11 @@ addons.setConfig({
       },
       devOnly: (item) => {
         return (
-          env !== 'production' || !devOnly.map((element) => element.toLowerCase()).includes(item.title.toLowerCase())
+          env !== 'production' ||
+          !devOnly
+            .concat(hidden)
+            .map((element) => element.toLowerCase())
+            .includes(item.title.toLowerCase())
         )
       }
     }
