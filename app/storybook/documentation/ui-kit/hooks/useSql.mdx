@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as useSqlStories from '../../../../../packages/ui-kit/src/hooks/useSql/useSql.stories'
+
+<Meta title="Hooks/useSql" />
+
+# `useSql`
+
+The `useSql` Query Hook allows querying [Propel's `sql` API](https://www.propeldata.com/docs/api/query/queries#sqlV1).
+This simplifies creating custom components that need to display the sql query response. You can use this hook to create a custom component 
+for displaying sql query data, while reusing the Propel UI Kit's query logic and access token management.
+
+<SourceCode of={useSqlStories.SqlStory} shown />
+
+See the documentation below for a complete reference for `SqlQueryProps`:
+
+- <LinkTo kind="API/SqlQueryProps" story="overview">
+    SqlQueryProps
+  </LinkTo>

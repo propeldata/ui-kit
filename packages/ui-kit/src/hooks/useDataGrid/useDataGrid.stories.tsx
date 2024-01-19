@@ -6,7 +6,7 @@ import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken, Sort
 
 import { useDataGrid } from './useDataGrid'
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
-import './useDataGrid.stories.css'
+import '../css/stories.css'
 
 const args: DataGridQueryProps = {
   dataPool: {

@@ -2,4 +2,4 @@
 '@propeldata/ui-kit': minor
 ---
 
-Add Records By Id query hook
+Add SQL query hook

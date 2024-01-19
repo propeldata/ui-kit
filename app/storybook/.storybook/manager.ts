@@ -20,7 +20,9 @@ const devOnly = [
   'API/MaxMetricQueryInput',
   'API/MetricInput',
   'API/MinMetricQueryInput',
-  'API/SumMetricQueryInput'
+  'API/SumMetricQueryInput',
+  'Hooks/useSql',
+  'API/SqlQueryProps'
 ]
 
 addons.setConfig({

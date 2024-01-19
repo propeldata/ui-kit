@@ -4351,6 +4351,63 @@ type TopValuesResponse {
   values: [String!]!
 }
 
+"""
+Input to the SqlV1 api.
+"""
+input SqlV1Input {
+  """
+  The SQL query.
+  """
+  query: String!
+
+  """
+  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller @tag(name: "internal")
+
+  """
+  query timeout in milliseconds.
+  """
+  timeout: Int @tag(name: "internal")
+}
+
+type SqlColumnResponse {
+  """
+  The name of the returned column.
+  """
+  columnName: String!
+
+  """
+  The returned column's type.
+  """
+  type: ColumnType!
+
+  """
+  Whether the column is nullable, meaning whether it accepts a null value.
+  """
+  isNullable: Boolean!
+}
+
+"""
+Response from the SQL API.
+"""
+type SqlResponse {
+  """
+  The column names in the same order as present in the `data` field.
+  """
+  columns: [SqlColumnResponse!]!
+  """
+  The data gathered by the SQL query. The data is returned in an N x M matrix format, where the
+  first dimension are the rows retrieved, and the second dimension are the columns. Each cell
+  can be either a string or null, and the string can represent a number, text, date or boolean value.
+  """
+  rows: [[String]!]!
+  """
+  The Query statistics and metadata.
+  """
+  info: QueryInfo!
+}
+
 type Query {
   """
   This query returns the Application specified by the given ID.
@@ -4548,6 +4605,11 @@ type Query {
     last: Int
     before: String
   ): UpdateDataPoolRecordsJobConnection!
+
+  """
+  Query Data Pools using SQL.
+  """
+  sqlV1(input: SqlV1Input!): SqlResponse!
 }
 
 """
