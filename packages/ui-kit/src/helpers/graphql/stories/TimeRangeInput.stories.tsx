@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import type { TimeRangeInput } from './index'
+import type { TimeRangeInput } from '../index'
 
 export const TimeRangeInputComponent: React.FC<TimeRangeInput> = () => null
 

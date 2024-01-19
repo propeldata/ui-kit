@@ -9,7 +9,19 @@ const devOnly = [
   'API/DataGridQueryProps',
   'API/PieChartQueryProps',
   'API/TopValuesQueryProps',
-  'Components/SimpleFilter'
+  'Components/SimpleFilter',
+  'API/RecordsByIdQueryProps',
+  'Hooks/useRecordsById',
+  'Getting started/Query Metrics',
+  'API/AverageMetricQueryInput',
+  'API/CountDistinctMetricQueryInput',
+  'API/CounterQueryProps',
+  'API/CustomMetricQueryInput',
+  'API/DataPoolInput',
+  'API/MaxMetricQueryInput',
+  'API/MetricInput',
+  'API/MinMetricQueryInput',
+  'API/SumMetricQueryInput'
 ]
 const hidden = ['Components/Autocomplete']
 

@@ -10,20 +10,18 @@ import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
  * @param props
  * @returns {data: TopValuesQuery | undefined, isLoading: boolean, error: Error | undefined}
  */
-export const useTopValues = (props: TopValuesQueryProps): UseQueryProps<TopValuesQuery> => {
-  const {
-    accessToken: accessTokenFromProp,
-    propelApiUrl,
-    metric,
-    timeRange,
-    columnName,
-    dataPool,
-    maxValues,
-    refetchInterval,
-    retry,
-    timeZone
-  } = props
-
+export const useTopValues = ({
+  accessToken: accessTokenFromProp,
+  propelApiUrl,
+  metric,
+  timeRange,
+  columnName,
+  dataPool,
+  maxValues,
+  refetchInterval,
+  retry,
+  timeZone
+}: TopValuesQueryProps): UseQueryProps<TopValuesQuery> => {
   const log = useLog()
 
   // Get access token using useAccessToken hook

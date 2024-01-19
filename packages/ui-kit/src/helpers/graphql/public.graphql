@@ -2577,6 +2577,9 @@ input MigrateMetricInput {
   newDataPoolId: ID!
 }
 
+"""
+The fields for querying a Data Pool.
+"""
 input DataPoolInput @oneOf {
   "The ID of the Data Pool."
   id: ID
@@ -2584,6 +2587,9 @@ input DataPoolInput @oneOf {
   name: String
 }
 
+"""
+The fields for querying a Custom Metric.
+"""
 input CustomMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2591,11 +2597,17 @@ input CustomMetricQueryInput {
   expression: String!
 }
 
+"""
+The fields for querying a Count Metric.
+"""
 input CountMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
 }
 
+"""
+The fields for querying a Sum Metric.
+"""
 input SumMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2605,6 +2617,9 @@ input SumMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying an Average Metric.
+"""
 input AverageMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2614,6 +2629,9 @@ input AverageMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying a Min Metric.
+"""
 input MinMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2623,6 +2641,9 @@ input MinMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying a Max Metric.
+"""
 input MaxMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2632,6 +2653,9 @@ input MaxMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying a Count Distinct Metric.
+"""
 input CountDistinctMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2641,6 +2665,10 @@ input CountDistinctMetricQueryInput {
   dimension: DimensionInput!
 }
 
+"""
+The fields for querying a Metric.
+The metric query is used to query a Metric in counter, time series, or leaderboard format.
+"""
 input MetricInput @oneOf {
   "The ID of a pre-configured Metric."
   id: ID
@@ -2723,7 +2751,7 @@ input TimeSeriesInput {
   """
   metricName: String @deprecated(reason: "Use `metric`")
   """
-  The Metric to Query. It can be a pre-created one or it can be inlined here.
+  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
   metric: MetricInput
   """
@@ -4460,6 +4488,10 @@ type Query {
   """
   dataGrid(input: DataGridInput!): DataGridConnection!
   """
+  This query returns records by the given unique IDs.
+  """
+  recordsByUniqueId(input: RecordsByUniqueIdInput!): RecordsByUniqueIdResponse!
+  """
   This query returns an array of the most frequent values in a given column. The resulting array is sorted in descending order of approximate frequency of values.
   """
   topValues(input: TopValuesInput!): TopValuesResponse!
@@ -5350,4 +5382,41 @@ input WebhookConnectionSettingsInput {
   The unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
   """
   uniqueId: String
+}
+
+"""
+The fields for querying records by unique ID.
+"""
+input RecordsByUniqueIdInput {
+  """
+  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+  """
+  The Data Pool to be queried. A Data Pool ID or unique name can be provided.
+  """
+  dataPool: DataPoolInput!
+  """
+  The columns to retrieve.
+  """
+  columns: [String!]!
+  """
+  The unique IDs of the records to retrieve.
+  """
+  uniqueIds: [String!]!
+}
+
+type RecordsByUniqueIdResponse {
+  """
+  The Data Pool columns for the record.
+  """
+  columns: [String!]!
+  """
+  An array of values for the record.
+  """
+  values: [[String]!]!
+  """
+  The Query statistics and metadata.
+  """
+  query: QueryInfo!
 }

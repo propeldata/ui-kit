@@ -47,6 +47,9 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
+  // Define metric input
+  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
+
   /**
    * @hook react-query wrapper
    * @param {LeaderboardQuery} data
@@ -64,7 +67,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     },
     {
       leaderboardInput: {
-        metricName: metric,
+        ...metricInput,
         filters,
         sort: sort,
         rowLimit: rowLimit ?? 100,
