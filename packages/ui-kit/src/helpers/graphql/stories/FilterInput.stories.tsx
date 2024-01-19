@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import type { FilterInput } from './index'
+import type { FilterInput } from '../index'
 
 export const FilterInputComponent: React.FC<FilterInput> = () => null
 
