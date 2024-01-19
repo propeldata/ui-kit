@@ -2577,6 +2577,9 @@ input MigrateMetricInput {
   newDataPoolId: ID!
 }
 
+"""
+The fields for querying a Data Pool.
+"""
 input DataPoolInput @oneOf {
   "The ID of the Data Pool."
   id: ID
@@ -2584,6 +2587,9 @@ input DataPoolInput @oneOf {
   name: String
 }
 
+"""
+The fields for querying a Custom Metric.
+"""
 input CustomMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2591,11 +2597,17 @@ input CustomMetricQueryInput {
   expression: String!
 }
 
+"""
+The fields for querying a Count Metric.
+"""
 input CountMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
 }
 
+"""
+The fields for querying a Sum Metric.
+"""
 input SumMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2605,6 +2617,9 @@ input SumMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying an Average Metric.
+"""
 input AverageMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2614,6 +2629,9 @@ input AverageMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying a Min Metric.
+"""
 input MinMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2623,6 +2641,9 @@ input MinMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying a Max Metric.
+"""
 input MaxMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2632,6 +2653,9 @@ input MaxMetricQueryInput {
   measure: DimensionInput!
 }
 
+"""
+The fields for querying a Count Distinct Metric.
+"""
 input CountDistinctMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
@@ -2641,6 +2665,10 @@ input CountDistinctMetricQueryInput {
   dimension: DimensionInput!
 }
 
+"""
+The fields for querying a Metric.
+The metric query is used to query a Metric in counter, time series, or leaderboard format.
+"""
 input MetricInput @oneOf {
   "The ID of a pre-configured Metric."
   id: ID
@@ -2723,7 +2751,7 @@ input TimeSeriesInput {
   """
   metricName: String @deprecated(reason: "Use `metric`")
   """
-  The Metric to Query. It can be a pre-created one or it can be inlined here.
+  The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
   metric: MetricInput
   """

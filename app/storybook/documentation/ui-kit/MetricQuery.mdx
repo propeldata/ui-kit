@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as CounterMetricQueryStories from '../../../../packages/ui-kit/src/hooks/useCounter/CounterMetric.stories'
+
+<Meta title="Getting started/Query Metrics" /> 
+
+# Querying Metrics  
+
+Propel's UI Kit allows you to query data you've loaded into Propel as metrics by passing the `metric` prop to components and query hooks. 
+UI Kit then issues requests to Propel using your access token and the `metric` prop in order to query your data and visualize the results in the frontend.  
+
+There are two main ways to query metrics:  
+
+- **Query predefined metrics:** This approach allows you to define metrics in Propel's backend and to query them by name or ID in the frontend. 
+You provide the metric name or ID in the `metric` prop, and Propel queries it. This approach requires your Application's access token to have the `METRIC_QUERY` scope.  
+- **Query metrics on-the-fly.** This approach offers the most flexibility to the frontend. You provide an inline metric definition in the `metric` prop, 
+and Propel uses this to query your data, without you having to define metrics ahead of time. This approach requires your Application's access token to have 
+the `DATA_POOL_QUERY` scope.  
+
+You can also mix and match the two approaches. For example, you may want to display predefined metrics to your users, while also offering them the ability to 
+query metrics on-the-fly. Just ensure you setup the appropriate scopes for your Application and access policies for your data.  
+
+See below for examples of the different ways to query metrics. Each of the examples uses a Counter, but the approaches also work for other components 
+and query hooks. 
+
+### Query a predefined metric by `id`
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryById} shown />
+
+### Query a predefined metric by `name`
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryByName} shown />
+
+### Query a `sum` metric on-the-fly
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryBySum} shown />
+
+### Query a `custom` metric on-the-fly
+
+<SourceCode of={CounterMetricQueryStories.CounterMetricQueryByCustom} shown />
+
+See the documentation below for a complete reference for `MetricInput`:
+
+- <LinkTo kind="API/MetricInput" story="overview">
+    MetricInput
+  </LinkTo>

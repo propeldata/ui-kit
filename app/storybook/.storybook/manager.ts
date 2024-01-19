@@ -10,7 +10,17 @@ const devOnly = [
   'API/PieChartQueryProps',
   'API/TopValuesQueryProps',
   'API/RecordsByIdQueryProps',
-  'Hooks/useRecordsById'
+  'Hooks/useRecordsById',
+  'Getting started/Query Metrics',
+  'API/AverageMetricQueryInput',
+  'API/CountDistinctMetricQueryInput',
+  'API/CounterQueryProps',
+  'API/CustomMetricQueryInput',
+  'API/DataPoolInput',
+  'API/MaxMetricQueryInput',
+  'API/MetricInput',
+  'API/MinMetricQueryInput',
+  'API/SumMetricQueryInput'
 ]
 
 addons.setConfig({
