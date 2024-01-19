@@ -135,7 +135,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
               if (typeof option === 'string') optionLabel = { label: option }
               else optionLabel = { ...option }
 
-              const optionProps = getOptionProps({ option: optionLabel, index })
+              const optionProps = getOptionProps({ option: option as AutocompleteOption, index })
 
               return (
                 <li
