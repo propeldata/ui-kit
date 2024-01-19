@@ -9,6 +9,8 @@ const devOnly = [
   'API/DataGridQueryProps',
   'API/PieChartQueryProps',
   'API/TopValuesQueryProps',
+  'API/RecordsByIdQueryProps',
+  'Hooks/useRecordsById',
   'Getting started/Query Metrics',
   'API/AverageMetricQueryInput',
   'API/CountDistinctMetricQueryInput',
