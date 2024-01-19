@@ -10,7 +10,7 @@ import './useRecordsById.stories.css'
 
 const args: RecordsByIdQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
-  dataPoolId: process.env.STORYBOOK_WEBHOOK_DATAPOOL_ID ?? '',
+  dataPool: { id: process.env.STORYBOOK_WEBHOOK_DATAPOOL_ID ?? '' },
   columns: ['foo', 'bar', '_propel_received_at'],
   uniqueIds: ['1', '2', '3', '4', '5']
 }

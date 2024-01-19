@@ -25,7 +25,7 @@ const handlers = [
 
 const mockQuery = {
   accessToken: 'token',
-  dataPoolId: 'data-pool-id',
+  dataPool: { id: 'data-pool-id' },
   columns: ['column-1', 'column-2'],
   uniqueIds: ['unique-id-1', 'unique-id-2']
 }

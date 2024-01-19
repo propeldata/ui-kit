@@ -3,7 +3,7 @@ import { QueryProps } from '../shared.types'
 import type { RecordsByIdQueryProps } from './RecordsById.types'
 
 export const RecordsByIdQueryPropsComponent: React.FC<
-  RecordsByIdQueryProps & Partial<Pick<QueryProps, 'accessToken' | 'refetchInterval' | 'retry' | 'propelApiUrl'>>
+  RecordsByIdQueryProps & Omit<QueryProps, 'timeZone' | 'timeRange' | 'metric' | 'filters'>
 > = () => null
 
 const meta = {

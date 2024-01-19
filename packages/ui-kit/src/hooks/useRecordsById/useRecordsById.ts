@@ -11,8 +11,7 @@ import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.
  * @returns {data: RecordsByUniqueIdQuery | undefined, isLoading: boolean, error: Error | undefined}
  */
 export const useRecordsById = ({
-  dataPoolId,
-  dataPoolName,
+  dataPool,
   uniqueIds,
   columns,
   accessToken: accessTokenFromProp,
@@ -39,8 +38,6 @@ export const useRecordsById = ({
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
-  const dataPoolInput = dataPoolId != null ? { dataPoolId } : { dataPoolName: dataPoolName ?? '' }
-
   /**
    * @hook react-query wrapper
    * @param {RecordsByUniqueIdQuery} data
@@ -58,7 +55,7 @@ export const useRecordsById = ({
     },
     {
       recordsByUniqueIdInput: {
-        ...dataPoolInput,
+        dataPool,
         uniqueIds,
         columns
       }
