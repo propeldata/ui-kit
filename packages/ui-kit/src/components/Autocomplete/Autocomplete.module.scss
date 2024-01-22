@@ -8,10 +8,7 @@
   gap: var(--propel-space-xxs);
   padding: var(--propel-space-xxs);
   overflow: hidden;
-  max-width: 620px;
-
   transition: all 100ms;
-
   box-sizing: border-box;
 
   &:hover {
@@ -32,7 +29,6 @@
   padding: var(--propel-space-xxs);
   outline: 0;
   flex: 1 0 auto;
-
   width: 100%;
 }
 
@@ -45,7 +41,6 @@
   align-self: center;
   padding: 0 2px;
   margin-right: 4px;
-
   display: flex;
   align-items: center;
 
@@ -59,7 +54,7 @@
   box-sizing: border-box;
   padding: var(--propel-space-xxs);
   margin: var(--propel-space-xxs) 0;
-  width: 620px;
+  width: 100%;
   border-radius: var(--propel-border-radius-sm);
   overflow: auto;
   outline: 0px;
@@ -81,8 +76,12 @@
     }
 
     &:hover {
-      background-color: var(--propel-colors-blue25);
+      background-color: var(--propel-color-blue25);
       cursor: pointer;
+    }
+
+    &[class^='Mui-focused'] {
+      background-color: var(--propel-color-blue25);
     }
 
     &[aria-selected='true'] {
@@ -90,8 +89,9 @@
       color: var(--propel-text-primary);
     }
 
-    &[class^='Mui-focused'] {
-      background-color: var(--propel-colors-blue25);
+    &[aria-selected='true']:hover {
+      background-color: var(--propel-accent-hover);
+      color: var(--propel-text-primary);
     }
   }
 }
