@@ -1,0 +1,45 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as SimpleFilterStories from '../../../../../packages/ui-kit/src/components/SimpleFilter/SimpleFilter.stories'
+import * as AutocompleteStories from '../../../../../packages/ui-kit/src/components/Autocomplete/Autocomplete.stories'
+import * as SimpleFilterQueryPropsStories from '../../../../../packages/ui-kit/src/components/SimpleFilter/SimpleFilterQueryProps.stories'
+
+<Meta title="Components/SimpleFilter" of={SimpleFilterStories} />
+
+# SimpleFilter Overview
+
+The SimpleFilter component is a dropdown designed to build metric filters and supply them to the components in
+your dashboard. You can either use it in `static` mode by providing a set of `options` and a `columnName` that the
+component can use to build the filter, or use it in `connected` mode by providing a `query` object which uses
+[Propel's Top Values API](https://www.propeldata.com/docs/query-your-data/top-values) to populate the dropdown.
+
+## Basic usage
+
+This components require wrapping your app in a `FilterProvider` which will provide the built filter to the child
+components. All the components wrapped within the same `FilterProvider` will share the same filters.
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={SimpleFilterStories.ConnectedStory} shown />
+
+## Props API
+
+The following table describes the props available for the SimpleFilter component:
+
+<ArgTypes of={SimpleFilterStories.StaticStory} sort="alpha" />
+
+### `SimpleFilterQueryProps`
+
+<ArgTypes of={SimpleFilterQueryPropsStories.Primary} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props and classes available to the components
+mentioned here.
+
+- <LinkTo kind="API/LoaderProps" story="loaderprops">
+    LoaderProps
+  </LinkTo>
+- <LinkTo kind="API/TimeRangeInput" story="overview">
+    TimeRangeInput
+  </LinkTo>

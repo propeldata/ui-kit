@@ -9,6 +9,7 @@ const devOnly = [
   'API/DataGridQueryProps',
   'API/PieChartQueryProps',
   'API/TopValuesQueryProps',
+  'Components/SimpleFilter',
   'API/RecordsByIdQueryProps',
   'Hooks/useRecordsById',
   'Getting started/Query Metrics',
@@ -22,6 +23,7 @@ const devOnly = [
   'API/MinMetricQueryInput',
   'API/SumMetricQueryInput'
 ]
+const hidden = ['Components/Autocomplete']
 
 addons.setConfig({
   theme: defaultTheme,
@@ -32,7 +34,11 @@ addons.setConfig({
       },
       devOnly: (item) => {
         return (
-          env !== 'production' || !devOnly.map((element) => element.toLowerCase()).includes(item.title.toLowerCase())
+          env !== 'production' ||
+          !devOnly
+            .concat(hidden)
+            .map((element) => element.toLowerCase())
+            .includes(item.title.toLowerCase())
         )
       }
     }
