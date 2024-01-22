@@ -1,6 +1,4 @@
-"""
-The Propel GraphQL API schema
-"""
+"""The Propel GraphQL API schema"""
 schema {
   query: Query
   mutation: Mutation
@@ -26,47 +24,29 @@ The ID or unique name input.
 If both ID and unique name are provided, the ID will take precedence.
 """
 input idOrUniqueName {
-  """
-  The unique identifier of the object.
-  """
+  """The unique identifier of the object."""
   id: String
-  """
-  The unique name of the object.
-  """
+  """The unique name of the object."""
   uniqueName: String
 }
 
-"""
-The failure response object.
-"""
+"""The failure response object."""
 type FailureResponse {
-  """
-  The error that caused the failure.
-  """
+  """The error that caused the failure."""
   error: Error!
 }
 
-"""
-The error object.
-"""
+"""The error object."""
 type Error {
-  """
-  The error code.
-  """
+  """The error code."""
   code: Int
-  """
-  The error message.
-  """
+  """The error message."""
   message: String!
 }
 
-"""
-The Account object.
-"""
+"""The Account object."""
 type Account {
-  """
-  The Account's unique identifier.
-  """
+  """The Account's unique identifier."""
   id: ID!
 }
 
@@ -76,9 +56,7 @@ The Environments object.
 Environments are independent and isolated Propel workspaces for development, staging (testing), and production workloads. Environments are hosted in a specific region, initially in us-east-2 only.
 """
 type Environment {
-  """
-  The Environment's unique identifier.
-  """
+  """The Environment's unique identifier."""
   id: ID!
 }
 
@@ -88,43 +66,27 @@ All Propel resources, such as Applications and Metrics, have a set of common pro
 Environments are independent and isolated Propel workspaces for development, staging (testing), and production workloads.
 """
 interface Common {
-  """
-  The resource's unique name.
-  """
+  """ The resource's unique name. """
   uniqueName: String!
-  """
-  The resource's description.
-  """
+  """ The resource's description. """
   description: String!
-  """
-  The resource's Account.
-  """
+  """ The resource's Account. """
   account: Account!
-  """
-  The resource's Environment.
-  """
+  """ The resource's Environment. """
   environment: Environment!
-  """
-  The resource's creation date and time in UTC.
-  """
+  """ The resource's creation date and time in UTC. """
   createdAt: DateTime!
-  """
-  The resource's last modification date and time in UTC.
-  """
+  """ The resource's last modification date and time in UTC. """
   modifiedAt: DateTime!
-  """
-  The resource's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
+  """ The resource's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
   """
   createdBy: String!
-  """
-  The resource's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
+  """ The resource's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
 }
 
-"""
-The page info object used for pagination.
-"""
+"""The page info object used for pagination."""
 type PageInfo {
   """
   Points to the first item returned in the results. Used when paginating backward.
@@ -150,25 +112,15 @@ A Propeller determines your Application's query processing power. The larger the
 [Learn more about Data Sources](https://www.propeldata.com/docs/applications#propeller).
 """
 enum Propeller {
-  """
-  Max records per second: 5,000,000 records per second
-  """
+  """Max records per second: 5,000,000 records per second"""
   P1_X_SMALL
-  """
-  Max records per second: 25,000,000 records per second
-  """
+  """Max records per second: 25,000,000 records per second"""
   P1_SMALL
-  """
-  Max records per second: 100,000,000 records per second
-  """
+  """Max records per second: 100,000,000 records per second"""
   P1_MEDIUM
-  """
-  Max records per second: 250,000,000 records per second
-  """
+  """Max records per second: 250,000,000 records per second"""
   P1_LARGE
-  """
-  Max records per second: 500,000,000 records per second
-  """
+  """Max records per second: 500,000,000 records per second"""
   P1_X_LARGE
 }
 
@@ -180,33 +132,19 @@ Propel Applications represent the web or mobile app you are building. They provi
 [Learn more about Applications](https://www.propeldata.com/docs/applications).
 """
 type Application implements Node & Common {
-  """
-  The Application's unique identifier.
-  """
+  """The Application's unique identifier."""
   id: ID!
-  """
-  The Application's unique name.
-  """
+  """The Application's unique name."""
   uniqueName: String!
-  """
-  The Application's description.
-  """
+  """The Application's description."""
   description: String!
-  """
-  The Application's Account.
-  """
+  """The Application's Account."""
   account: Account!
-  """
-  The Application's Environment.
-  """
+  """The Application's Environment."""
   environment: Environment!
-  """
-  The Application's creation date and time in UTC.
-  """
+  """The Application's creation date and time in UTC."""
   createdAt: DateTime!
-  """
-  The Application's last modification date and time in UTC.
-  """
+  """The Application's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The Application's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
@@ -216,64 +154,39 @@ type Application implements Node & Common {
   The Application's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The Application's OAuth 2.0 client identifier.
-  """
+  """The Application's OAuth 2.0 client identifier."""
   clientId: String!
-  """
-  The Application's OAuth 2.0 client secret.
-  """
+  """The Application's OAuth 2.0 client secret."""
   secret: String
-  """
-  The Application's Propeller.
-  """
+  """The Application's Propeller."""
   propeller: Propeller!
-  """
-  The Application's OAuth 2.0 scopes.
-  """
+  """The Application's OAuth 2.0 scopes."""
   scopes: [ApplicationScope!]!
-  """
-  A paginated list of Policies associated with the Application.
-  """
-  policies(first: Int, after: String, last: Int, before: String): PolicyConnection!
-    @deprecated(reason: "Use Data Pool Access Policies instead")
+  """A paginated list of Policies associated with the Application."""
+  policies(first: Int, after: String, last: Int, before: String): PolicyConnection! @deprecated(reason: "Use Data Pool Access Policies instead")
   """
   A paginated list of Data Pool Access Policies associated with the Application.
   """
   dataPoolAccessPolicies(first: Int, after: String, last: Int, before: String): DataPoolAccessPolicyConnection!
 }
 
-"""
-The API operations an Application is authorized to perform.
-"""
+"""The API operations an Application is authorized to perform."""
 enum ApplicationScope {
   """
   Grant read/write access to Data Sources, Data Pools, Metrics and Policies.
   """
   ADMIN
-  """
-  Grant read/write access to Applications.
-  """
+  """Grant read/write access to Applications."""
   APPLICATION_ADMIN
-  """
-  Grant read access to query Data Pools.
-  """
+  """Grant read access to query Data Pools."""
   DATA_POOL_QUERY
-  """
-  Grant read access to read Data Pools.
-  """
+  """Grant read access to read Data Pools."""
   DATA_POOL_READ
-  """
-  Grant read access to fetch column statistics from Data Pools.
-  """
+  """Grant read access to fetch column statistics from Data Pools."""
   DATA_POOL_STATS
-  """
-  Grant read access to query Metrics.
-  """
+  """Grant read access to query Metrics."""
   METRIC_QUERY
-  """
-  Grant read access to fetch Dimension statistics from Metrics.
-  """
+  """Grant read access to fetch Dimension statistics from Metrics."""
   METRIC_STATS
   """
   Grant read access to Metrics.
@@ -283,17 +196,13 @@ enum ApplicationScope {
   METRIC_READ
 }
 
-"""
-The fields for creating an Application.
-"""
+"""The fields for creating an Application."""
 input createApplicationInput {
   """
   The Application's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Application's description.
-  """
+  """The Application's description."""
   description: String
   """
   The Application's Propeller. If no Propeller is provided, Propel will set the Propeller to `P1_X_SMALL`.
@@ -305,29 +214,17 @@ input createApplicationInput {
   scopes: [ApplicationScope!]
 }
 
-"""
-The fields for modifying an Application.
-"""
+"""The fields for modifying an Application."""
 input modifyApplicationInput {
-  """
-  The ID or unique name of the Application to modify.
-  """
+  """The ID or unique name of the Application to modify."""
   idOrUniqueName: idOrUniqueName!
-  """
-  The Application's new unique name.
-  """
+  """The Application's new unique name."""
   uniqueName: String
-  """
-  The Application's new description.
-  """
+  """The Application's new description. """
   description: String
-  """
-  The Application's new Propeller.
-  """
+  """The Application's new Propeller. """
   propeller: Propeller
-  """
-  The Application's new API authorization scopes.
-  """
+  """The Application's new API authorization scopes. """
   scopes: [ApplicationScope!]
 }
 
@@ -339,13 +236,9 @@ If successful, an `ApplicationResponse` will be returned; otherwise, a
 """
 union ApplicationOrFailureResponse = ApplicationResponse | FailureResponse
 
-"""
-The result of a mutation which creates or modifies an Application.
-"""
+"""The result of a mutation which creates or modifies an Application."""
 type ApplicationResponse {
-  """
-  The Application which was created or modified.
-  """
+  """ The Application which was created or modified. """
   application: Application
 }
 
@@ -357,33 +250,19 @@ A Data Source is a connection to your data warehouse. It has the necessary conne
 [Learn more about Data Sources](https://www.propeldata.com/docs/data-sources).
 """
 type DataSource implements Node & Common {
-  """
-  The Data Source's unique identifier.
-  """
+  """The Data Source's unique identifier."""
   id: ID!
-  """
-  The Data Source's unique name.
-  """
+  """The Data Source's unique name."""
   uniqueName: String!
-  """
-  The Data Source's description.
-  """
+  """The Data Source's description."""
   description: String!
-  """
-  The Data Source's Account.
-  """
+  """The Data Source's Account."""
   account: Account!
-  """
-  The Data Source's Environment.
-  """
+  """The Data Source's Environment."""
   environment: Environment!
-  """
-  The Data Source's creation date and time in UTC.
-  """
+  """The Data Source's creation date and time in UTC."""
   createdAt: DateTime!
-  """
-  The Data Source's last modification date and time in UTC.
-  """
+  """The Data Source's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The Data Source's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
@@ -393,18 +272,12 @@ type DataSource implements Node & Common {
   The Data Source's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The Data Source's type.
-  """
+  """The Data Source's type."""
   type: DataSourceType!
-  """
-  The Data Source's status.
-  """
+  """The Data Source's status."""
   status: DataSourceStatus!
   error: Error @deprecated(reason: "Refer to `checks` instead")
-  """
-  The Data Source's connection settings.
-  """
+  """The Data Source's connection settings."""
   connectionSettings: ConnectionSettings!
   """
   The tables contained within the Data Source, according to the most recent table introspection.
@@ -414,8 +287,7 @@ type DataSource implements Node & Common {
   A list of table introspections performed for the Data Source. You can see how tables and columns changed over time by paging through this list.
   """
   tableIntrospections(first: Int, after: String, last: Int, before: String): TableIntrospectionConnection
-  """
-  A list of checks performed on the Data Source during its most recent connection attempt.
+  """ A list of checks performed on the Data Source during its most recent connection attempt.
   """
   checks: [DataSourceCheck!]
   """
@@ -438,43 +310,27 @@ Data Source Checks are executed when setting up your Data Source. They check tha
 The exact Checks to perform vary by Data Source. For example, Snowflake-backed Data Sources will have their own specific Checks.
 """
 type DataSourceCheck {
-  """
-  The name of the Data Source Check to be performed.
-  """
+  """ The name of the Data Source Check to be performed. """
   name: String!
-  """
-  A description of the Data Source Check to be performed.
-  """
+  """ A description of the Data Source Check to be performed. """
   description: String
-  """
-  The status of the Data Source Check (all checks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED).
+  """ The status of the Data Source Check (all checks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED).
   """
   status: DataSourceCheckStatus!
-  """
-  If the Data Source Check failed, this field includes a descriptive error message.
+  """ If the Data Source Check failed, this field includes a descriptive error message.
   """
   error: Error
-  """
-  The time at which the Data Source Check was performed.
-  """
+  """ The time at which the Data Source Check was performed. """
   checkedAt: DateTime
 }
 
-"""
-The status of a Data Source Check.
-"""
+"""The status of a Data Source Check."""
 enum DataSourceCheckStatus {
-  """
-  The Check has not started.
-  """
+  """The Check has not started."""
   NOT_STARTED
-  """
-  The Check succeeded.
-  """
+  """The Check succeeded."""
   SUCCEEDED
-  """
-  The Check failed.
-  """
+  """The Check failed."""
   FAILED
 }
 
@@ -484,59 +340,37 @@ The table introspection object.
 When setting up a Data Source, Propel may need to introspect tables in order to determine what tables and columns are available to create Data Pools from. The table introspection represents the lifecycle of this operation (whether it's in-progress, succeeded, or failed) and the resulting tables and columns. These will be captured as table and column objects, respectively.
 """
 type TableIntrospection {
-  """
-  The Data Source the table introspection was performed for.
-  """
+  """The Data Source the table introspection was performed for."""
   dataSource: DataSource!
-  """
-  The status of the table introspection.
-  """
+  """The status of the table introspection."""
   status: TableIntrospectionStatus!
-  """
-  The table introspection's creation date and time in UTC.
-  """
+  """The table introspection's creation date and time in UTC."""
   createdAt: DateTime!
   """
   The table introspection's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
   """
   createdBy: String!
-  """
-  The table introspection's last modification date and time in UTC.
-  """
+  """The table introspection's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The table introspection's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The number of tables introspected.
-  """
+  """The number of tables introspected."""
   numTables: Int
-  """
-  The tables introspected.
-  """
+  """The tables introspected."""
   tables(first: Int, after: String, last: Int, before: String): TableConnection
 }
 
-"""
-The status of a table introspection.
-"""
+"""The status of a table introspection."""
 enum TableIntrospectionStatus {
-  """
-  The table introspection has not started.
-  """
+  """The table introspection has not started."""
   NOT_STARTED
-  """
-  The table introspection has started.
-  """
+  """The table introspection has started."""
   STARTED
-  """
-  The table introspection succeeded.
-  """
+  """The table introspection succeeded."""
   SUCCEEDED
-  """
-  The table introspection failed.
-  """
+  """The table introspection failed."""
   FAILED
 }
 
@@ -546,17 +380,11 @@ The table object.
 Once a table introspection succeeds, it creates a new table object for every table it introspected.
 """
 type Table {
-  """
-  The table's ID.
-  """
+  """The table's ID."""
   id: ID!
-  """
-  The table's name.
-  """
+  """The table's name."""
   name: String!
-  """
-  The Data Source to which the table belongs.
-  """
+  """The Data Source to which the table belongs."""
   dataSource: DataSource
   """
   The number of rows contained within the table at the time of introspection. Check the table's `cachedAt` time, since this info can become out of date.
@@ -566,41 +394,23 @@ type Table {
   The size of the table (in bytes) at the time of introspection. Check the table's `cachedAt` time, since this info can become out of date.
   """
   size: Int
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   kind: String! @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   comment: String! @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   clusterBy: String @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   owner: String! @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   timeTravelRetentionInDays: Int @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   isAutomaticClusteringEnabled: Boolean @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   isChangeTrackingEnabled: Boolean @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   isSearchOptimizationEnabled: Boolean @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the table obtained from Snowflake.
-  """
+  """Information about the table obtained from Snowflake."""
   isExternal: Boolean! @deprecated(reason: "This is Snowflake-specific, and will be removed")
   """
   The time at which the table was cached (i.e., the time at which it was introspected).
@@ -614,17 +424,11 @@ type Table {
   The table's creator. This corresponds to the initiator of the table Introspection. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
   """
   createdBy: String!
-  """
-  The table's columns.
-  """
+  """The table's columns."""
   columns(first: Int, after: String, last: Int, before: String): ColumnConnection
-  """
-  The table's columns which can be used as a timestamp for a Data Pool.
-  """
+  """The table's columns which can be used as a timestamp for a Data Pool."""
   availableTimestamps(first: Int, after: String, last: Int, before: String): ColumnConnection
-  """
-  The table's columns which can be used as a measure for a Metric.
-  """
+  """The table's columns which can be used as a measure for a Metric."""
   availableMeasures(first: Int, after: String, last: Int, before: String): ColumnConnection
 }
 
@@ -634,41 +438,25 @@ The column object.
 Once a table introspection succeeds, it creates a new table object for every table it introspected. Within each table object, it also creates a column object for every column it introspected.
 """
 type Column {
-  """
-  The column's name.
-  """
+  """The column's name."""
   name: String!
-  """
-  The column's type.
-  """
+  """The column's type."""
   type: String!
-  """
-  Information about the column obtained from Snowflake.
-  """
+  """Information about the column obtained from Snowflake."""
   kind: String! @deprecated(reason: "This is Snowflake-specific, and will be removed")
   """
   Whether the column is nullable, meaning whether it accepts a null value.
   """
   isNullable: Boolean
-  """
-  Information about the column obtained from Snowflake.
-  """
+  """Information about the column obtained from Snowflake."""
   defaultValue: String @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the column obtained from Snowflake.
-  """
+  """Information about the column obtained from Snowflake."""
   isPrimaryKey: Boolean @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the column obtained from Snowflake.
-  """
+  """Information about the column obtained from Snowflake."""
   isUniqueKey: Boolean @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the column obtained from Snowflake.
-  """
+  """Information about the column obtained from Snowflake."""
   comment: String @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  Information about the column obtained from Snowflake.
-  """
+  """Information about the column obtained from Snowflake."""
   policyName: String @deprecated(reason: "This is Snowflake-specific, and will be removed")
   """
   The time at which the column was cached (i.e., the time at which it was introspected).
@@ -700,87 +488,53 @@ type Column {
   supportedDataPoolColumnTypes: [ColumnType!]!
 }
 
-"""
-The types of Data Sources.
-"""
+"""The types of Data Sources."""
 enum DataSourceType {
-  """
-  Indicates a Webhook Data Source.
-  """
+  """Indicates a Webhook Data Source."""
   WEBHOOK
-  """
-  Indicates an S3 Data Source.
-  """
+  """Indicates an S3 Data Source."""
   S3
-  """
-  Indicates a Redshift Data Source.
-  """
+  """Indicates a Redshift Data Source."""
   Redshift
-  """
-  Indicates an Http Data Source.
-  """
+  """Indicates an Http Data Source."""
   Http
-  """
-  Indicates a BigQuery Data Source.
-  """
+  """Indicates a ClickHouse Data Source."""
+  CLICKHOUSE
+  """Indicates a BigQuery Data Source."""
   BIGQUERY
-  """
-  Indicates a Snowflake Data Source.
-  """
+  """Indicates a Snowflake Data Source."""
   Snowflake
 }
 
-"""
-The status of a Data Source.
-"""
+"""The status of a Data Source."""
 enum DataSourceStatus {
-  """
-  The Data Source has been created, but it is not connected yet.
-  """
+  """The Data Source has been created, but it is not connected yet."""
   CREATED
-  """
-  Propel is attempting to connect the Data Source.
-  """
+  """Propel is attempting to connect the Data Source."""
   CONNECTING
-  """
-  The Data Source is connected.
-  """
+  """The Data Source is connected."""
   CONNECTED
-  """
-  The Data Source failed to connect.
-  """
+  """The Data Source failed to connect."""
   BROKEN
-  """
-  Propel is deleting the Data Source.
-  """
+  """Propel is deleting the Data Source."""
   DELETING
 }
 
-union ConnectionSettings =
-    SnowflakeConnectionSettings
-  | HttpConnectionSettings
-  | S3ConnectionSettings
-  | WebhookConnectionSettings
+union ConnectionSettings = SnowflakeConnectionSettings | HttpConnectionSettings | S3ConnectionSettings | WebhookConnectionSettings
 
-"""
-The Snowflake Data Source connection settings.
-"""
+"""The Snowflake Data Source connection settings."""
 type SnowflakeConnectionSettings {
   """
   The Snowflake account. This is the part before the "snowflakecomputing.com" part of your Snowflake URL.
   """
   account: String!
-  """
-  The Snowflake database name.
-  """
+  """The Snowflake database name."""
   database: String!
   """
   The Snowflake warehouse name. It should be "PROPELLING" if you used the default name in the setup script.
   """
   warehouse: String!
-  """
-  The Snowflake schema.
-  """
+  """The Snowflake schema."""
   schema: String!
   """
   The Snowflake username. It should be "PROPEL" if you used the default name in the setup script.
@@ -792,9 +546,7 @@ type SnowflakeConnectionSettings {
   role: String!
 }
 
-"""
-The HTTP Basic authentication settings.
-"""
+"""The HTTP Basic authentication settings."""
 type HttpBasicAuthSettings {
   """
   Username for HTTP Basic authentication that must be included in the Authorization header when uploading new data.
@@ -806,73 +558,49 @@ type HttpBasicAuthSettings {
   password: String!
 }
 
-"""
-The fields for creating a Snowflake Data Source.
-"""
+"""The fields for creating a Snowflake Data Source."""
 input createSnowflakeDataSourceInput {
   """
   The Data Source's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Data Source's description.
-  """
+  """The Data Source's description."""
   description: String
-  """
-  The Data Source's connection settings.
-  """
+  """The Data Source's connection settings."""
   connectionSettings: SnowflakeConnectionSettingsInput!
 }
 
-"""
-The fields for modifying a Snowflake Data Source.
-"""
+"""The fields for modifying a Snowflake Data Source."""
 input modifySnowflakeDataSourceInput {
-  """
-  The ID or unique name of the Data Source to modify.
-  """
+  """The ID or unique name of the Data Source to modify."""
   idOrUniqueName: idOrUniqueName!
-  """
-  The Data Source's new unique name.
-  """
+  """The Data Source's new unique name. """
   uniqueName: String
-  """
-  The Data Source's new description.
-  """
+  """The Data Source's new description. """
   description: String
-  """
-  The Data Source's new connection settings.
-  """
+  """The Data Source's new connection settings. """
   connectionSettings: PartialSnowflakeConnectionSettingsInput
 }
 
-"""
-The fields for creating a Snowflake Data Source's connection settings.
-"""
+"""The fields for creating a Snowflake Data Source's connection settings."""
 input SnowflakeConnectionSettingsInput {
   """
   The Snowflake account. Only include the part before the "snowflakecomputing.com" part of your Snowflake URL (make sure you are in classic console, not Snowsight). For AWS-based accounts, this looks like "znXXXXX.us-east-2.aws". For Google Cloud-based accounts, this looks like "ffXXXXX.us-central1.gcp".
   """
   account: String!
-  """
-  The Snowflake database name.
-  """
+  """The Snowflake database name."""
   database: String!
   """
   The Snowflake warehouse name. It should be "PROPELLING" if you used the default name in the setup script.
   """
   warehouse: String!
-  """
-  The Snowflake schema.
-  """
+  """The Snowflake schema."""
   schema: String!
   """
   The Snowflake username. It should be "PROPEL" if you used the default name in the setup script.
   """
   username: String!
-  """
-  The Snowflake password.
-  """
+  """The Snowflake password."""
   password: String!
   """
   The Snowflake role. It should be "PROPELLER" if you used the default name in the setup script.
@@ -914,25 +642,15 @@ input PartialSnowflakeConnectionSettingsInput {
   role: String
 }
 
-"""
-The Propel data types.
-"""
+"""The Propel data types."""
 enum ColumnType {
-  """
-  True or false.
-  """
+  """True or false."""
   BOOLEAN
-  """
-  A variable-length string.
-  """
+  """A variable-length string."""
   STRING
-  """
-  A 32-bit signed double-precision floating point number.
-  """
+  """A 32-bit signed double-precision floating point number."""
   FLOAT
-  """
-  A 64-bit signed double-precision floating point number.
-  """
+  """A 64-bit signed double-precision floating point number."""
   DOUBLE
   """
   An 8-bit signed integer, with a minimum value of -2⁷ and a maximum value of 2⁷-1.
@@ -950,17 +668,11 @@ enum ColumnType {
   A 64-bit signed integer, with a minimum value of -2⁶³ and a maximum value of 2⁶³-1.
   """
   INT64
-  """
-  A date without a timestamp. For example, "YYYY-MM-DD".
-  """
+  """A date without a timestamp. For example, "YYYY-MM-DD"."""
   DATE
-  """
-  A date with a timestamp. For example, "yyy-MM-dd HH:mm:ss".
-  """
+  """A date with a timestamp. For example, "yyy-MM-dd HH:mm:ss"."""
   TIMESTAMP
-  """
-  A JavaScript Object Notation (JSON) document.
-  """
+  """A JavaScript Object Notation (JSON) document."""
   JSON
 }
 
@@ -978,153 +690,87 @@ input HttpBasicAuthInput {
   password: String!
 }
 
-"""
-An HTTP Data Source's table.
-"""
+"""An HTTP Data Source's table."""
 type HttpDataSourceTable {
-  """
-  The ID of the table
-  """
+  """The ID of the table"""
   id: ID!
-  """
-  The name of the table
-  """
+  """The name of the table"""
   name: String!
-  """
-  All the columns present in the table
-  """
+  """All the columns present in the table"""
   columns: [HttpDataSourceColumn!]!
 }
 
-"""
-The fields for specifying an HTTP Data Source's table.
-"""
+"""The fields for specifying an HTTP Data Source's table."""
 input HttpDataSourceTableInput {
-  """
-  The name of the table
-  """
+  """The name of the table"""
   name: String!
-  """
-  All the columns present in the table
-  """
+  """All the columns present in the table"""
   columns: [HttpDataSourceColumnInput!]!
 }
 
-"""
-A column in an HTTP Data Source's table.
-"""
+"""A column in an HTTP Data Source's table."""
 type HttpDataSourceColumn {
-  """
-  The column name. It has to be unique within a Table.
-  """
+  """The column name. It has to be unique within a Table."""
   name: String!
-  """
-  The column type.
-  """
+  """The column type."""
   type: ColumnType!
-  """
-  Whether the column's type is nullable or not.
-  """
+  """Whether the column's type is nullable or not."""
   nullable: Boolean!
 }
 
-"""
-The fields for specifying a column in an HTTP Data Source's table.
-"""
+"""The fields for specifying a column in an HTTP Data Source's table."""
 input HttpDataSourceColumnInput {
-  """
-  The column name. It has to be unique within a Table.
-  """
+  """The column name. It has to be unique within a Table."""
   name: String!
-  """
-  The column type.
-  """
+  """The column type."""
   type: ColumnType!
-  """
-  Whether the column's type is nullable or not.
-  """
+  """Whether the column's type is nullable or not."""
   nullable: Boolean!
 }
 
-"""
-An S3 Data Source's table.
-"""
+"""An S3 Data Source's table."""
 type S3DataSourceTable {
-  """
-  The ID of the table
-  """
+  """The ID of the table"""
   id: ID!
-  """
-  The name of the table
-  """
+  """The name of the table"""
   name: String!
-  """
-  The path to the table's files in S3.
-  """
+  """The path to the table's files in S3."""
   path: String
-  """
-  All the columns present in the table
-  """
+  """All the columns present in the table"""
   columns: [S3DataSourceColumn!]!
 }
 
-"""
-The fields for specifying an S3 Data Source's table.
-"""
+"""The fields for specifying an S3 Data Source's table."""
 input S3DataSourceTableInput {
-  """
-  The name of the table
-  """
+  """The name of the table"""
   name: String!
-  """
-  The path to the table's files in S3.
-  """
+  """The path to the table's files in S3."""
   path: String
-  """
-  All the columns present in the table
-  """
+  """All the columns present in the table"""
   columns: [S3DataSourceColumnInput!]!
 }
 
-"""
-A column in an S3 Data Source's table.
-"""
+"""A column in an S3 Data Source's table."""
 type S3DataSourceColumn {
-  """
-  The column name.
-  """
+  """The column name."""
   name: String!
-  """
-  The column type.
-  """
+  """The column type."""
   type: ColumnType!
-  """
-  Whether the column's type is nullable or not.
-  """
+  """Whether the column's type is nullable or not."""
   nullable: Boolean!
 }
 
-"""
-The fields for specifying a column in an S3 Data Source's table.
-"""
+"""The fields for specifying a column in an S3 Data Source's table."""
 input S3DataSourceColumnInput {
-  """
-  The column name. It has to be unique within a Table.
-  """
+  """The column name. It has to be unique within a Table."""
   name: String!
-  """
-  The column type.
-  """
+  """The column type."""
   type: ColumnType!
-  """
-  Whether the column's type is nullable or not.
-  """
+  """Whether the column's type is nullable or not."""
   nullable: Boolean!
 }
 
-"""
-A column in the Webhook Data Source's table.
-"""
+"""A column in the Webhook Data Source's table."""
 type WebhookDataSourceColumn {
   "The column name."
   name: String!
@@ -1142,9 +788,7 @@ type WebhookDataSourceColumn {
   nullable: Boolean!
 }
 
-"""
-The fields for specifying a column in an Webhook Data Source's table.
-"""
+"""The fields for specifying a column in an Webhook Data Source's table."""
 input WebhookDataSourceColumnInput {
   "The column name. It has to be unique within a Table."
   name: String!
@@ -1170,13 +814,9 @@ If successful, an `DataSourceResponse` will be returned; otherwise, a
 """
 union DataSourceOrFailureResponse = DataSourceResponse | FailureResponse
 
-"""
-The result of a mutation which creates or modifies a Data Source.
-"""
+"""The result of a mutation which creates or modifies a Data Source."""
 type DataSourceResponse {
-  """
-  The Data Source which was created or modified.
-  """
+  """ The Data Source which was created or modified. """
   dataSource: DataSource
 }
 
@@ -1266,95 +906,58 @@ Data Pool Setup Tasks are executed when setting up your Data Pool. They ensure P
 The exact Setup Tasks to perform vary by Data Source. For example, Data Pools pointing to a Snowflake-backed Data Sources will have their own specific Setup Tasks.
 """
 type DataPoolSetupTask {
-  """
-  The name of the Data Pool Setup Task to be performed.
-  """
+  """ The name of the Data Pool Setup Task to be performed. """
   name: String!
-  """
-  A description of the Data Pool Setup Task to be performed.
-  """
+  """ A description of the Data Pool Setup Task to be performed. """
   description: String
-  """
-  The status of the Data Pool Setup Task (all setup tasks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED).
+  """ The status of the Data Pool Setup Task (all setup tasks begin as NOT_STARTED before transitioning to SUCCEEDED or FAILED).
   """
   status: DataPoolSetupTaskStatus!
-  """
-  If the Data Pool Setup Task failed, this field includes a descriptive error message.
+  """ If the Data Pool Setup Task failed, this field includes a descriptive error message.
   """
   error: Error
-  """
-  The time at which the Data Pool Setup Task was completed.
-  """
+  """ The time at which the Data Pool Setup Task was completed. """
   completedAt: DateTime
 }
 
-"""
-The status of a Data Pool Setup Task.
-"""
+"""The status of a Data Pool Setup Task."""
 enum DataPoolSetupTaskStatus {
-  """
-  The Data Pool Setup Task has not been started yet.
-  """
+  """The Data Pool Setup Task has not been started yet."""
   NOT_STARTED
-  """
-  The Data Pool Setup Task has completed successfully.
-  """
+  """The Data Pool Setup Task has completed successfully. """
   SUCCEEDED
-  """
-  The Data Pool Setup Task has failed.
-  """
+  """The Data Pool Setup Task has failed. """
   FAILED
 }
 
-"""
-The Dimension object that represents a column in a table.
-"""
+"""The Dimension object that represents a column in a table."""
 type Dimension {
-  """
-  The column name it represents.
-  """
+  """ The column name it represents. """
   columnName: String!
-  """
-  The column data type.
-  """
+  """ The column data type. """
   type: String!
-  """
-  Whether the column is nullable.
-  """
+  """ Whether the column is nullable. """
   isNullable: Boolean
-  """
-  Whether the column is a unique key.
-  """
+  """ Whether the column is a unique key. """
   isUniqueKey: Boolean @deprecated(reason: "This is Snowflake-specific, and will be removed")
-  """
-  The statistics for the dimension values. Fetching statistics incurs query costs.
+  """ The statistics for the dimension values. Fetching statistics incurs query costs.
   """
   stats: DimensionStatistics
 }
 
-"""
-Statistics about a particular Dimension.
-"""
+"""Statistics about a particular Dimension."""
 type DimensionStatistics {
-  """
-  An array of unique values for the Dimension, up to 1,000. Empty if the Dimension contains more than 1,000 unique values. Fetching unique values incurs query costs.
+  """ An array of unique values for the Dimension, up to 1,000. Empty if the Dimension contains more than 1,000 unique values. Fetching unique values incurs query costs.
   """
   uniqueValues(limit: Int): [String!]
-  """
-  The minimum value of the Dimension.
-  """
+  """ The minimum value of the Dimension. """
   min: String
-  """
-  The maximum value of the Dimension.
-  """
+  """ The maximum value of the Dimension. """
   max: String
-  """
-  The average value of the Dimension. Empty for non-numeric Dimensions.
+  """ The average value of the Dimension. Empty for non-numeric Dimensions.
   """
   average: String
-  """
-  The Query statistics and metadata.
-  """
+  """The Query statistics and metadata."""
   query: QueryInfo!
 }
 
@@ -1390,24 +993,17 @@ you could write
 Note that `and` takes precedence over `or`.
 """
 type Filter {
-  """
-  The name of the column to filter on.
-  """
+  """ The name of the column to filter on. """
   column: String!
-  """
-  The operation to perform when comparing the column and filter values.
+  """ The operation to perform when comparing the column and filter values.
   """
   operator: FilterOperator!
-  """
-  The value to compare the column to.
-  """
+  """ The value to compare the column to. """
   value: String
-  """
-  Additional filters to AND with this one. AND takes precedence over OR.
+  """ Additional filters to AND with this one. AND takes precedence over OR.
   """
   and: [Filter!]
-  """
-  Additional filters to OR with this one. AND takes precedence over OR.
+  """ Additional filters to OR with this one. AND takes precedence over OR.
   """
   or: [Filter!]
 }
@@ -1433,44 +1029,29 @@ The fields for creating an Update Data Pool Records Job.
 ```
 """
 type UpdateDataPoolRecordsJobSetColumn {
-  """
-  The name of the column to update.
-  """
+  """ The name of the column to update. """
   column: String!
-  """
-  The value to which the column will be updated. Once evaluated, it should be of the same data type as the column.
+  """ The value to which the column will be updated. Once evaluated, it should be of the same data type as the column.
   """
   expression: String!
 }
 
-"""
-The fields for creating or modifying a Dimension.
-"""
+"""The fields for creating or modifying a Dimension."""
 input DimensionInput {
-  """
-  The name of the column to create the Dimension from.
-  """
+  """ The name of the column to create the Dimension from. """
   columnName: String!
 }
 
-"""
-The status of a Data Pool.
-"""
+"""The status of a Data Pool."""
 enum DataPoolStatus {
-  """
-  The Data Pool has been created and will be set up soon.
-  """
+  """ The Data Pool has been created and will be set up soon. """
   CREATED
-  """
-  Propel is attempting to set up the Data Pool.
-  """
+  """ Propel is attempting to set up the Data Pool. """
   PENDING
-  """
-  The Data Pool is set up and serving data. Check its Syncs to monitor data ingestion.
+  """ The Data Pool is set up and serving data. Check its Syncs to monitor data ingestion.
   """
   LIVE
-  """
-  The Data Pool setup failed. Check its Setup Tasks before re-attempting setup.
+  """ The Data Pool setup failed. Check its Setup Tasks before re-attempting setup.
   """
   SETUP_FAILED
   CONNECTING @deprecated(reason: "Start using `PENDING` instead")
@@ -1478,9 +1059,7 @@ enum DataPoolStatus {
   BROKEN @deprecated(reason: "Start using `SETUP_FAILED` instead")
   PAUSING @deprecated(reason: "The ability to pause will move to a new field")
   PAUSED @deprecated(reason: "The ability to pause will move to a new field")
-  """
-  Propel is deleting the Data Pool and all of its associated data.
-  """
+  """ Propel is deleting the Data Pool and all of its associated data. """
   DELETING
 }
 
@@ -1586,9 +1165,7 @@ input DataPoolColumnInput {
   isNullable: Boolean!
 }
 
-"""
-The fields for creating a Data Pool.
-"""
+"""The fields for creating a Data Pool."""
 input CreateDataPoolInputV2 {
   "The Data Source that will be used to create the Data Pool."
   dataSource: ID!
@@ -1608,9 +1185,7 @@ input CreateDataPoolInputV2 {
   The Data Pool's unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated within the Data Pool.
   """
   uniqueId: UniqueIdInput
-  """
-  The Data Pool's syncing settings.
-  """
+  """ The Data Pool's syncing settings. """
   syncing: DataPoolSyncingInput
   """
   Enables or disables access control for the Data Pool.
@@ -1621,29 +1196,17 @@ input CreateDataPoolInputV2 {
   accessControlEnabled: Boolean
 }
 
-"""
-The fields for modifying a Data Pool.
-"""
+"""The fields for modifying a Data Pool."""
 input modifyDataPoolInput {
-  """
-  The ID or unique name of the Data Pool to modify.
-  """
+  """The ID or unique name of the Data Pool to modify."""
   idOrUniqueName: idOrUniqueName!
-  """
-  The Data Pool's new unique name.
-  """
+  """The Data Pool's new unique name. """
   uniqueName: String
-  """
-  The Data Pool's new description.
-  """
+  """The Data Pool's new description. """
   description: String
-  """
-  The Data Pool's new data retention in days.
-  """
+  """The Data Pool's new data retention in days. """
   dataRetentionInDays: Int
-  """
-  The Data Pool's new syncing settings.
-  """
+  """ The Data Pool's new syncing settings. """
   syncing: DataPoolSyncingInput
   """
   Enables or disables access control for the Data Pool.
@@ -1662,13 +1225,9 @@ If successful, an `DataPoolResponse` will be returned; otherwise, a
 """
 union DataPoolOrFailureResponse = DataPoolResponse | FailureResponse
 
-"""
-The result of a mutation which creates or modifies a Data Pool.
-"""
+"""The result of a mutation which creates or modifies a Data Pool."""
 type DataPoolResponse {
-  """
-  The Data Pool which was created or modified.
-  """
+  """ The Data Pool which was created or modified. """
   dataPool: DataPool
 }
 
@@ -1676,27 +1235,17 @@ type DataPoolResponse {
 The Data Pool Sync Status. It indicates whether a Data Pool is syncing data or not.
 """
 enum DataPoolSyncStatus {
-  """
-  Syncing is enabled for the Data Pool.
-  """
+  """ Syncing is enabled for the Data Pool. """
   ENABLED
-  """
-  Propel is disabling syncing for the Data Pool.
-  """
+  """ Propel is disabling syncing for the Data Pool. """
   DISABLING
-  """
-  Syncing is disabled for the Data Pool.
-  """
+  """ Syncing is disabled for the Data Pool. """
   DISABLED
 }
 
-"""
-Settings related to Data Pool syncing.
-"""
+"""Settings related to Data Pool syncing."""
 type DataPoolSyncing {
-  """
-  Indicates whether syncing is enabled or disabled.
-  """
+  """ Indicates whether syncing is enabled or disabled. """
   status: DataPoolSyncStatus!
   """
   The syncing interval.
@@ -1707,15 +1256,11 @@ type DataPoolSyncing {
   if you pause or resume syncing, this too can shift the syncing interval around.
   """
   interval: DataPoolSyncInterval
-  """
-  The date and time of the most recent Sync in UTC.
-  """
+  """ The date and time of the most recent Sync in UTC. """
   lastSyncedAt: DateTime
 }
 
-"""
-The fields for modifying the Data Pool syncing.
-"""
+"""The fields for modifying the Data Pool syncing."""
 input DataPoolSyncingInput {
   interval: DataPoolSyncInterval!
 }
@@ -1726,25 +1271,15 @@ The Sync object.
 This represents the process of syncing data from your Data Source (for example, a Snowflake data warehouse) to your Data Pool.
 """
 type Sync implements Node {
-  """
-  The Sync's unique identifier.
-  """
+  """The Sync's unique identifier."""
   id: ID!
-  """
-  The Sync's Account.
-  """
+  """The Sync's Account."""
   account: Account
-  """
-  The Sync's Environment.
-  """
+  """The Sync's Environment."""
   environment: Environment
-  """
-  The Sync's creation date and time in UTC.
-  """
+  """The Sync's creation date and time in UTC."""
   createdAt: DateTime!
-  """
-  The Sync's last modification date and time in UTC.
-  """
+  """The Sync's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The Sync's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
@@ -1754,115 +1289,73 @@ type Sync implements Node {
   The Sync's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The Sync's Data Pool.
-  """
+  """The Sync's Data Pool."""
   dataPool: DataPool
-  """
-  The Sync's Data Pool's Data Source.
-  """
+  """The Sync's Data Pool's Data Source."""
   dataSource: DataSource
-  """
-  The number of new, updated, and deleted records contained within the Sync, if known. This excludes filtered records.
+  """ The number of new, updated, and deleted records contained within the Sync, if known. This excludes filtered records.
   """
   processedRecords: String
-  """
-  The number of new records contained within the Sync, if known. This excludes filtered records.
+  """ The number of new records contained within the Sync, if known. This excludes filtered records.
   """
   newRecords: String
-  """
-  The number of updated records contained within the Sync, if known. This excludes filtered records.
+  """ The number of updated records contained within the Sync, if known. This excludes filtered records.
   """
   updatedRecords: String
-  """
-  The number of deleted records contained within the Sync, if known. This excludes filtered records.
+  """ The number of deleted records contained within the Sync, if known. This excludes filtered records.
   """
   deletedRecords: String
-  """
-  The number of filtered records contained within the Sync, due to issues such as a missing timestamp Dimension, if any are known to be invalid.
+  """ The number of filtered records contained within the Sync, due to issues such as a missing timestamp Dimension, if any are known to be invalid.
   """
   invalidRecords: String
-  """
-  The (compressed) size of the Sync, in bytes, if known.
-  """
+  """ The (compressed) size of the Sync, in bytes, if known. """
   size: String
-  """
-  The status of the Sync (all Syncs begin as SYNCING before transitioning to SUCCEEDED or FAILED).
+  """ The status of the Sync (all Syncs begin as SYNCING before transitioning to SUCCEEDED or FAILED).
   """
   status: SyncStatus!
-  """
-  The time at which the Sync started.
-  """
+  """ The time at which the Sync started. """
   startedAt: DateTime
-  """
-  The time at which the Sync succeeded.
-  """
+  """ The time at which the Sync succeeded. """
   succeededAt: DateTime
-  """
-  The time at which the Sync failed.
-  """
+  """ The time at which the Sync failed. """
   failedAt: DateTime
-  """
-  If the Sync failed, this represents the reason the Sync failed.
-  """
+  """ If the Sync failed, this represents the reason the Sync failed. """
   error: Error
 }
 
-"""
-The status of a Sync.
-"""
+"""The status of a Sync."""
 enum SyncStatus {
-  """
-  Propel is actively syncing records contained within the Sync.
-  """
+  """ Propel is actively syncing records contained within the Sync. """
   SYNCING
-  """
-  The Sync succeeded. Propel successfully synced all records contained within the Sync.
+  """ The Sync succeeded. Propel successfully synced all records contained within the Sync.
   """
   SUCCEEDED
-  """
-  The Sync failed. Propel failed to sync some or all records contained within the Sync.
+  """ The Sync failed. Propel failed to sync some or all records contained within the Sync.
   """
   FAILED
-  """
-  Propel is deleting the Sync.
-  """
+  """ Propel is deleting the Sync. """
   DELETING @deprecated(reason: "No longer used")
 }
 
-"""
-The filter to apply when listing the Syncs for a Data Pool.
-"""
+"""The filter to apply when listing the Syncs for a Data Pool."""
 enum SyncsFilter {
-  """
-  Returns only Syncs with empty records.
-  """
+  """ Returns only Syncs with empty records. """
   EMPTY
-  """
-  Returns only Syncs that contain one or more records.
-  """
+  """ Returns only Syncs that contain one or more records. """
   NOT_EMPTY
-  """
-  Returns all Syncs, regardless of whether they contain records or not.
+  """ Returns all Syncs, regardless of whether they contain records or not.
   """
   ALL
 }
 
-"""
-The fields for querying Data Grid records.
-"""
+"""The fields for querying Data Grid records."""
 input DataGridInput {
-  """
-  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """ Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
   """
   propeller: Propeller
-  """
-  The ID of the Data Pool to be queried
-  """
+  """The ID of the Data Pool to be queried """
   dataPool: DataPoolInput
-  """
-  The time range for retrieving the records.
-  """
+  """ The time range for retrieving the records."""
   timeRange: TimeRangeInput!
   """
   The time zone to use. Dates and times are always returned in UTC, but setting the time zone influences relative time ranges and granularities.
@@ -1870,9 +1363,7 @@ input DataGridInput {
   You can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database). Defaults to "UTC".
   """
   timeZone: String
-  """
-  The columns to retrieve.
-  """
+  """The columns to retrieve."""
   columns: [String!]!
   """
   The index of the column to order the table by. The index is 1-based. If not provided, records will be ordered by their timestamp by default.
@@ -1886,21 +1377,15 @@ input DataGridInput {
   The filters to apply to the records. You may only filter on columns included in the `columns` array input.
   """
   filters: [FilterInput!]
-  """
-  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+  """ The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
   """
   first: Int
-  """
-  The cursor to use when paging forward.
-  """
+  """ The cursor to use when paging forward. """
   after: String
-  """
-  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+  """ The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
   """
   last: Int
-  """
-  The cursor to use when paging backward.
-  """
+  """ The cursor to use when paging backward. """
   before: String
 }
 
@@ -1910,13 +1395,10 @@ The fields for querying a Metric Report.
 A Metric Report is a table whose columns include dimensions and Metric values, calculated over a given time range.
 """
 input MetricReportInput {
-  """
-  Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """ Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
   """
   propeller: Propeller
-  """
-  The time range for calculating the Metric Report.
-  """
+  """ The time range for calculating the Metric Report."""
   timeRange: TimeRangeInput!
   """
   The time zone to use. Dates and times are always returned in UTC, but setting the time zone influences relative time ranges and granularities.
@@ -1924,84 +1406,61 @@ input MetricReportInput {
   You can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database). Defaults to "UTC".
   """
   timeZone: String
-  """
-  One or many dimensions to group the Metric values by. Typically, dimensions in a report are what you want to compare and rank.
+  """ One or many dimensions to group the Metric values by. Typically, dimensions in a report are what you want to compare and rank.
   """
   dimensions: [MetricReportDimensionInput!]!
-  """
-  One or more Metrics to include in the Metric Report. These will be broken down by `dimensions`.
+  """ One or more Metrics to include in the Metric Report. These will be broken down by `dimensions`.
   """
   metrics: [MetricReportMetricInput!]!
-  """
-  The Query Filters to apply when building the Metric Report. These can be used to filter out rows.
+  """ The Query Filters to apply when building the Metric Report. These can be used to filter out rows.
   """
   filters: [FilterInput!]
-  """
-  The index of the column to order the Metric Report by. The index is 1-based and defaults to the first Metric column. In other words, by default, reports are ordered by the first Metric; however, you can order by the second Metric, third Metric, etc., by overriding the `orderByColumn` input. You can also order by dimensions this way.
+  """ The index of the column to order the Metric Report by. The index is 1-based and defaults to the first Metric column. In other words, by default, reports are ordered by the first Metric; however, you can order by the second Metric, third Metric, etc., by overriding the `orderByColumn` input. You can also order by dimensions this way.
   """
   orderByColumn: Int
-  """
-  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+  """ The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
   """
   first: Int
-  """
-  The cursor to use when paging forward.
-  """
+  """ The cursor to use when paging forward. """
   after: String
-  """
-  The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+  """ The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
   """
   last: Int
-  """
-  The cursor to use when paging backward.
-  """
+  """ The cursor to use when paging backward. """
   before: String
 }
 
-"""
-The fields for specifying a dimension to include in a Metric Report.
-"""
+"""The fields for specifying a dimension to include in a Metric Report."""
 input MetricReportDimensionInput {
-  """
-  The column name of the dimension to include in a Metric Report. This must match the name of a Data Pool column.
+  """ The column name of the dimension to include in a Metric Report. This must match the name of a Data Pool column.
   """
   columnName: String!
-  """
-  The name to display in the `headers` array when displaying the report. This defaults to the column name if unspecified.
+  """ The name to display in the `headers` array when displaying the report. This defaults to the column name if unspecified.
   """
   displayName: String
-  """
-  The sort order for the dimension. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to ascending (`ASC`) order when not provided.
+  """ The sort order for the dimension. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to ascending (`ASC`) order when not provided.
   """
   sort: Sort
 }
 
-"""
-The fields for specifying a Metric to include in a Metric Report.
-"""
+"""The fields for specifying a Metric to include in a Metric Report."""
 input MetricReportMetricInput {
-  """
-  The Metric's unique name. If not specified, Propel will lookup the Metric by ID.
+  """ The Metric's unique name. If not specified, Propel will lookup the Metric by ID.
   """
   uniqueName: String @deprecated(reason: "Use `metric`")
-  """
-  The Metric's ID. If not specified, Propel will lookup the Metric by unique name.
+  """ The Metric's ID. If not specified, Propel will lookup the Metric by unique name.
   """
   id: ID @deprecated(reason: "Use `metric`")
   """
   The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
   metric: MetricInput
-  """
-  The name to display in the `headers` array when displaying the report. This defaults to the Metric's unique name if unspecified.
+  """ The name to display in the `headers` array when displaying the report. This defaults to the Metric's unique name if unspecified.
   """
   displayName: String
-  """
-  The Query Filters to apply when calculating the Metric.
-  """
+  """ The Query Filters to apply when calculating the Metric. """
   filters: [FilterInput!]
-  """
-  The sort order for the Metric. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
+  """ The sort order for the Metric. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
   """
   sort: Sort
 }
@@ -2015,17 +1474,11 @@ pages of the report.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type MetricReportConnection {
-  """
-  The report connection's page info.
-  """
+  """The report connection's page info."""
   pageInfo: PageInfo!
-  """
-  The report connection's edges.
-  """
+  """The report connection's edges."""
   edges: [MetricReportEdge!]!
-  """
-  The report connection's nodes.
-  """
+  """The report connection's nodes."""
   nodes: [MetricReportNode!]!
   """
   An ordered array of display names for your dimensions and Metrics, as defined in the report input. Use this to display your table's header.
@@ -2035,9 +1488,7 @@ type MetricReportConnection {
   An ordered array of rows. Each row contains dimension and Metric values, as defined in the report input. Use these to display the rows of your table.
   """
   rows: [[String]!]!
-  """
-  The Query statistics and metadata.
-  """
+  """The Query statistics and metadata."""
   query: QueryInfo!
 }
 
@@ -2047,13 +1498,9 @@ The Metric Report edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type MetricReportEdge {
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: MetricReportNode!
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
 }
 
@@ -2083,33 +1530,19 @@ A Metric is a business indicator measured over time.
 [Learn more about Metrics](/docs/key-concepts#metric).
 """
 type Metric implements Node & Common {
-  """
-  The Metric's unique identifier.
-  """
+  """The Metric's unique identifier."""
   id: ID!
-  """
-  The Metric's unique name.
-  """
+  """The Metric's unique name."""
   uniqueName: String!
-  """
-  The Metric's description.
-  """
+  """The Metric's description."""
   description: String!
-  """
-  The Metric's Account.
-  """
+  """The Metric's Account."""
   account: Account!
-  """
-  The Metric's Environment.
-  """
+  """The Metric's Environment."""
   environment: Environment!
-  """
-  The Metric's creation date and time in UTC.
-  """
+  """The Metric's creation date and time in UTC."""
   createdAt: DateTime!
-  """
-  The Metric's last modification date and time in UTC.
-  """
+  """The Metric's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The Metric's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
@@ -2119,25 +1552,19 @@ type Metric implements Node & Common {
   The Metric's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The Data Pool that powers this Metric.
-  """
+  """The Data Pool that powers this Metric."""
   dataPool: DataPool
   """
   The Metric's Dimensions. These Dimensions are available to Query Filters.
   """
   dimensions: [Dimension!]!
-  """
-  The Metric's timestamp. This is the same as its Data Pool's timestamp.
-  """
+  """The Metric's timestamp. This is the same as its Data Pool's timestamp."""
   timestamp: Dimension!
   """
   The Metric's measure. Access this from the Metric's `settings` object instead.
   """
   measure: Dimension @deprecated(reason: "Use the Metric `settings` object instead.")
-  """
-  List the Boosters associated to the Metric.
-  """
+  """List the Boosters associated to the Metric."""
   boosters(first: Int, after: String, last: Int, before: String): BoosterConnection!
   """
   The Metric's type. The different Metric types determine how the values are calculated.
@@ -2159,35 +1586,18 @@ type Metric implements Node & Common {
   The Metric data in leaderboard format. A table (array of rows) with the selected dimensions and corresponding Metric values for the given time range and filters.
   """
   leaderboard(input: LeaderboardInput!): LeaderboardResponse
-  """
-  List the Policies associated to the Metric.
-  """
-  policies(first: Int, after: String, last: Int, before: String): PolicyConnection!
-    @deprecated(reason: "Use Data Pool Access Policies instead")
-  """
-  Whether or not access control is enabled for the Metric.
-  """
+  """List the Policies associated to the Metric."""
+  policies(first: Int, after: String, last: Int, before: String): PolicyConnection! @deprecated(reason: "Use Data Pool Access Policies instead")
+  """Whether or not access control is enabled for the Metric."""
   accessControlEnabled: Boolean! @deprecated(reason: "Use Data Pool Access Policies instead")
 }
 
-"""
-A Metric's settings, depending on its type.
-"""
-union MetricSettings =
-    CountMetricSettings
-  | SumMetricSettings
-  | CountDistinctMetricSettings
-  | AverageMetricSettings
-  | MinMetricSettings
-  | MaxMetricSettings
-  | CustomMetricSettings
+"""A Metric's settings, depending on its type."""
+union MetricSettings = CountMetricSettings | SumMetricSettings | CountDistinctMetricSettings | AverageMetricSettings | MinMetricSettings | MaxMetricSettings | CustomMetricSettings
 
-"""
-The available Metric types.
-"""
+"""The available Metric types."""
 enum MetricType {
-  """
-  Counts the number of records that matches the Metric Filters. For time series, it will count the values for each time granularity.
+  """ Counts the number of records that matches the Metric Filters. For time series, it will count the values for each time granularity.
   """
   COUNT
   """
@@ -2214,9 +1624,7 @@ enum MetricType {
   CUSTOM
 }
 
-"""
-Settings for Count Metrics.
-"""
+"""Settings for Count Metrics."""
 type CountMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
@@ -2224,23 +1632,17 @@ type CountMetricSettings {
   filters: [Filter!]
 }
 
-"""
-Settings for Sum Metrics.
-"""
+"""Settings for Sum Metrics."""
 type SumMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
   filters: [Filter!]
-  """
-  The Dimension to be summed.
-  """
+  """The Dimension to be summed."""
   measure: Dimension!
 }
 
-"""
-Settings for Count Distinct Metrics.
-"""
+"""Settings for Count Distinct Metrics."""
 type CountDistinctMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
@@ -2252,271 +1654,179 @@ type CountDistinctMetricSettings {
   dimension: Dimension!
 }
 
-"""
-Settings for Average Metrics.
-"""
+"""Settings for Average Metrics."""
 type AverageMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
   filters: [Filter!]
-  """
-  The Dimension to be averaged.
-  """
+  """The Dimension to be averaged."""
   measure: Dimension!
 }
 
-"""
-Settings for Min Metrics.
-"""
+"""Settings for Min Metrics."""
 type MinMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
   filters: [Filter!]
-  """
-  The Dimension to select the minimum from.
-  """
+  """The Dimension to select the minimum from."""
   measure: Dimension!
 }
 
-"""
-Settings for Max Metrics.
-"""
+"""Settings for Max Metrics."""
 type MaxMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
   filters: [Filter!]
-  """
-  The Dimension to select the maximum from.
-  """
+  """The Dimension to select the maximum from."""
   measure: Dimension!
 }
 
-"""
-Settings for Custom Metrics.
-"""
+"""Settings for Custom Metrics."""
 type CustomMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
   filters: [Filter!]
-  """
-  The expression that defines the aggregation function for this Metric.
-  """
+  """The expression that defines the aggregation function for this Metric."""
   expression: String!
 }
 
-"""
-The result of a mutation which creates or modifies a Metric.
-"""
+"""The result of a mutation which creates or modifies a Metric."""
 type MetricResponse {
-  """
-  The Metric which was created or modified.
-  """
+  """ The Metric which was created or modified. """
   metric: Metric
 }
 
-"""
-The fields for creating a new Count Metric.
-"""
+"""The fields for creating a new Count Metric."""
 input CreateCountMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name. If not specified, Propel will set the ID as unique name.
+  """ The Metric's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
 }
 
-"""
-The fields for creating a new Sum Metric.
-"""
+"""The fields for creating a new Sum Metric."""
 input CreateSumMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name. If not specified, Propel will set the ID as unique name.
+  """ The Metric's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
-  """
-  The column to be summed.
-  """
+  """ The column to be summed. """
   measure: DimensionInput!
 }
 
-"""
-The fields for creating a new Average Metric.
-"""
+"""The fields for creating a new Average Metric."""
 input CreateAverageMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name.
-  """
+  """ The Metric's unique name. """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
-  """
-  The column to be averaged.
-  """
+  """ The column to be averaged. """
   measure: DimensionInput!
 }
 
-"""
-The fields for creating a new Minimum (Min) Metric.
-"""
+"""The fields for creating a new Minimum (Min) Metric."""
 input CreateMinMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name. If not specified, Propel will set the ID as unique name.
+  """ The Metric's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
   measure: DimensionInput!
 }
 
-"""
-The fields for creating a new Maximum (Max) Metric.
-"""
+"""The fields for creating a new Maximum (Max) Metric."""
 input CreateMaxMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name. If not specified, Propel will set the ID as unique name.
+  """ The Metric's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
-  """
-  The column to calculate the maximum from.
-  """
+  """ The column to calculate the maximum from. """
   measure: DimensionInput!
 }
 
-"""
-The fields for creating a new Count Distinct Metric.
-"""
+"""The fields for creating a new Count Distinct Metric."""
 input CreateCountDistinctMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name. If not specified, Propel will set the ID as unique name.
+  """ The Metric's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
-  """
-  The Dimension over which the count distinct operation is going to be performed.
+  """ The Dimension over which the count distinct operation is going to be performed.
   """
   dimension: DimensionInput!
 }
 
-"""
-The fields for creating a new Custom Metric.
-"""
+"""The fields for creating a new Custom Metric."""
 input CreateCustomMetricInput {
-  """
-  The Data Pool that powers this Metric.
-  """
+  """ The Data Pool that powers this Metric. """
   dataPool: ID!
-  """
-  The Metric's unique name. If not specified, Propel will set the ID as unique name.
+  """ The Metric's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Metric's description.
-  """
+  """ The Metric's description. """
   description: String
-  """
-  The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """ The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
   filters: [FilterInput!]
-  """
-  The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
+  """ The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
   dimensions: [DimensionInput!]
-  """
-  The expression that defines the aggregation function for this Metric.
+  """ The expression that defines the aggregation function for this Metric.
   """
   expression: String!
 }
@@ -2533,47 +1843,27 @@ type ValidateExpressionResult {
   reason: String
 }
 
-"""
-The fields for modifying a Metric.
-"""
+"""The fields for modifying a Metric."""
 input ModifyMetricInput {
-  """
-  The ID of the Metric to modify.
-  """
+  """The ID of the Metric to modify. """
   metric: ID!
-  """
-  The Metric's new unique name.
-  """
+  """ The Metric's new unique name. """
   uniqueName: String
-  """
-  The Metric's new description.
-  """
+  """ The Metric's new description. """
   description: String
-  """
-  The Metric's new Dimensions. Used to add or remove Dimensions.
-  """
+  """ The Metric's new Dimensions. Used to add or remove Dimensions. """
   dimensions: [DimensionInput!]
-  """
-  The Metric's new Filters. Used to add or remove Metric Filters.
-  """
+  """ The Metric's new Filters. Used to add or remove Metric Filters. """
   filters: [FilterInput!]
-  """
-  Enables or disables access control for the Metric.
-  """
+  """Enables or disables access control for the Metric."""
   accessControlEnabled: Boolean
 }
 
-"""
-The fields for migrating a Metric's Data Pool.
-"""
+"""The fields for migrating a Metric's Data Pool."""
 input MigrateMetricInput {
-  """
-  The Metric that is going to be migrated.
-  """
+  """ The Metric that is going to be migrated. """
   metricId: ID!
-  """
-  The DataPool to which the Metric is going to be migrated.
-  """
+  """ The DataPool to which the Metric is going to be migrated. """
   newDataPoolId: ID!
 }
 
@@ -2611,9 +1901,7 @@ The fields for querying a Sum Metric.
 input SumMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
-  """
-  The column to be summed.
-  """
+  """ The column to be summed. """
   measure: DimensionInput!
 }
 
@@ -2623,9 +1911,7 @@ The fields for querying an Average Metric.
 input AverageMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
-  """
-  The column to be averaged.
-  """
+  """ The column to be averaged. """
   measure: DimensionInput!
 }
 
@@ -2635,9 +1921,7 @@ The fields for querying a Min Metric.
 input MinMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
-  """
-  The column to calculate the minimum from.
-  """
+  """ The column to calculate the minimum from. """
   measure: DimensionInput!
 }
 
@@ -2647,9 +1931,7 @@ The fields for querying a Max Metric.
 input MaxMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
-  """
-  The column to calculate the maximum from.
-  """
+  """ The column to calculate the maximum from. """
   measure: DimensionInput!
 }
 
@@ -2659,9 +1941,7 @@ The fields for querying a Count Distinct Metric.
 input CountDistinctMetricQueryInput {
   "The Data Pool to which this Metric belongs."
   dataPool: DataPoolInput!
-  """
-  The column to count distinct values from.
-  """
+  """ The column to count distinct values from. """
   dimension: DimensionInput!
 }
 
@@ -2712,9 +1992,7 @@ input CounterInput {
   The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
   metric: MetricInput
-  """
-  The time range for calculating the counter.
-  """
+  """ The time range for calculating the counter."""
   timeRange: TimeRangeInput!
   """
   The time zone to use. Dates and times are always returned in UTC, but setting the time zone influences relative time ranges and granularities.
@@ -2722,12 +2000,10 @@ input CounterInput {
   You can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database). Defaults to "UTC".
   """
   timeZone: String
-  """
-  The Query Filters to apply before retrieving the counter data. If no Query Filters are provided, all data is included.
+  """ The Query Filters to apply before retrieving the counter data. If no Query Filters are provided, all data is included.
   """
   filters: [FilterInput!]
-  """
-  Optionally specifies the Propeller to use. This can be set when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """ Optionally specifies the Propeller to use. This can be set when querying from the Metric Playground or GraphQL Explorer. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
   """
   propeller: Propeller
 }
@@ -2754,9 +2030,7 @@ input TimeSeriesInput {
   The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
   metric: MetricInput
-  """
-  The time range for calculating the time series.
-  """
+  """ The time range for calculating the time series."""
   timeRange: TimeRangeInput!
   """
   The time zone to use. Dates and times are always returned in UTC, but setting the time zone influences relative time ranges and granularities.
@@ -2764,12 +2038,10 @@ input TimeSeriesInput {
   You can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database). Defaults to "UTC".
   """
   timeZone: String
-  """
-  The time granularity (hour, day, month, etc.) to aggregate the Metric values by.
+  """ The time granularity (hour, day, month, etc.) to aggregate the Metric values by.
   """
   granularity: TimeSeriesGranularity!
-  """
-  The Query Filters to apply before retrieving the time series data. If no Query Filters are provided, all data is included.
+  """ The Query Filters to apply before retrieving the time series data. If no Query Filters are provided, all data is included.
   """
   filters: [FilterInput!]
   """
@@ -2800,9 +2072,7 @@ input LeaderboardInput {
   The Metric to query. You can query a pre-configured Metric by ID or name, or you can query an ad hoc Metric that you define inline.
   """
   metric: MetricInput
-  """
-  The time range for calculating the leaderboard.
-  """
+  """ The time range for calculating the leaderboard."""
   timeRange: TimeRangeInput!
   """
   The time zone to use. Dates and times are always returned in UTC, but setting the time zone influences relative time ranges and granularities.
@@ -2810,20 +2080,16 @@ input LeaderboardInput {
   You can set this to "America/Los_Angeles", "Europe/Berlin", or any other value in the [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database). Defaults to "UTC".
   """
   timeZone: String
-  """
-  One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank.
+  """ One or many Dimensions to group the Metric values by. Typically, Dimensions in a leaderboard are what you want to compare and rank.
   """
   dimensions: [DimensionInput!]!
-  """
-  The sort order of the rows. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
+  """ The sort order of the rows. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
   """
   sort: Sort
-  """
-  The number of rows to be returned. It can be a number between 1 and 1,000.
+  """ The number of rows to be returned. It can be a number between 1 and 1,000.
   """
   rowLimit: Int!
-  """
-  The list of filters to apply before retrieving the leaderboard data. If no Query Filters are provided, all data is included.
+  """ The list of filters to apply before retrieving the leaderboard data. If no Query Filters are provided, all data is included.
   """
   filters: [FilterInput!]
   """
@@ -2842,35 +2108,23 @@ If both relative and absolute time ranges are provided, the relative time range 
 If a `LAST_N` relative time period is selected, an `n` ≥ 1 must be provided. If no `n` is provided or `n` < 1, a `BAD_REQUEST` error will be returned.
 """
 input TimeRangeInput {
-  """
-  The relative time period.
-  """
+  """The relative time period."""
   relative: RelativeTimeRange
-  """
-  The number of time units for the `LAST_N` relative periods.
-  """
+  """The number of time units for the `LAST_N` relative periods."""
   n: Int
-  """
-  The optional start timestamp (inclusive). Defaults to the timestamp of the earliest record in the Data Pool.
+  """ The optional start timestamp (inclusive). Defaults to the timestamp of the earliest record in the Data Pool.
   """
   start: DateTime
-  """
-  The optional end timestamp (exclusive). Defaults to the timestamp of the latest record in the Data Pool.
+  """ The optional end timestamp (exclusive). Defaults to the timestamp of the latest record in the Data Pool.
   """
   stop: DateTime
 }
 
-"""
-The available sort orders.
-"""
+"""The available sort orders."""
 enum Sort {
-  """
-  Sort in ascending order.
-  """
+  """Sort in ascending order."""
   ASC
-  """
-  Sort in descending order.
-  """
+  """Sort in descending order."""
   DESC
 }
 
@@ -2897,9 +2151,7 @@ enum RelativeTimeRange {
   Starts at the zeroth minute of the current hour and continues for 60 minutes.
   """
   THIS_HOUR
-  """
-  Starts at 12:00:00 AM of the current day and continues for 24 hours.
-  """
+  """Starts at 12:00:00 AM of the current day and continues for 24 hours."""
   TODAY
   """
   Starts on Monday, 12:00:00 AM of the current week and continues for seven days.
@@ -2941,8 +2193,7 @@ enum RelativeTimeRange {
   Starts on January 1st, 12:00:00 AM, the year before the current year, and continues for the duration of the year.
   """
   PREVIOUS_YEAR
-  """
-  Starts at the zeroth minute of the next hour and continues for 60 minutes.
+  """ Starts at the zeroth minute of the next hour and continues for 60 minutes.
   """
   NEXT_HOUR
   """
@@ -3017,41 +2268,23 @@ For example, if the granularity is set to `DAY`, then the the time series query 
 If there are no records for a given time series granularity, Propel will return the label and a value of "0" so that the time series can be properly visualized.
 """
 enum TimeSeriesGranularity {
-  """
-  Aggregates values by minute intervals.
-  """
+  """Aggregates values by minute intervals."""
   MINUTE
-  """
-  Aggregates values by 5-minute intervals.
-  """
+  """Aggregates values by 5-minute intervals."""
   FIVE_MINUTES
-  """
-  Aggregates values by 10-minute intervals.
-  """
+  """Aggregates values by 10-minute intervals."""
   TEN_MINUTES
-  """
-  Aggregates values by 15-minute intervals.
-  """
+  """Aggregates values by 15-minute intervals."""
   FIFTEEN_MINUTES
-  """
-  Aggregates values by hourly intervals.
-  """
+  """Aggregates values by hourly intervals."""
   HOUR
-  """
-  Aggregates values by daily intervals.
-  """
+  """Aggregates values by daily intervals."""
   DAY
-  """
-  Aggregates values by weekly intervals.
-  """
+  """Aggregates values by weekly intervals."""
   WEEK
-  """
-  Aggregates values by monthly intervals.
-  """
+  """Aggregates values by monthly intervals."""
   MONTH
-  """
-  Aggregates values by yearly intervals.
-  """
+  """Aggregates values by yearly intervals."""
   YEAR
 }
 
@@ -3087,64 +2320,44 @@ you could write
 Note that `and` takes precedence over `or`.
 """
 input FilterInput {
-  """
-  The name of the column to filter on.
-  """
+  """ The name of the column to filter on. """
   column: String!
-  """
-  The operation to perform when comparing the column and filter values.
+  """ The operation to perform when comparing the column and filter values.
   """
   operator: FilterOperator!
-  """
-  The value to compare the column to.
-  """
+  """ The value to compare the column to. """
   value: String
-  """
-  Additional filters to AND with this one. AND takes precedence over OR.
+  """ Additional filters to AND with this one. AND takes precedence over OR.
   """
   and: [FilterInput!]
-  """
-  Additional filters to OR with this one. AND takes precedence over OR.
+  """ Additional filters to OR with this one. AND takes precedence over OR.
   """
   or: [FilterInput!]
 }
 
-"""
-The available Filter operators.
-"""
+"""The available Filter operators."""
 enum FilterOperator {
-  """
-  Selects values that are equal to the specified value.
-  """
+  """ Selects values that are equal to the specified value."""
   EQUALS
-  """
-  Selects values that are not equal to the specified value.
-  """
+  """ Selects values that are not equal to the specified value."""
   NOT_EQUALS
-  """
-  Selects values that are greater than the specified value.
-  """
+  """ Selects values that are greater than the specified value."""
   GREATER_THAN
-  """
-  Selects values that are greater or equal to the specified value.
-  """
+  """ Selects values that are greater or equal to the specified value."""
   GREATER_THAN_OR_EQUAL_TO
-  """
-  Selects values that are less than the specified value.
-  """
+  """ Selects values that are less than the specified value."""
   LESS_THAN
-  """
-  Selects values that are less or equal to the specified value.
-  """
+  """ Selects values that are less or equal to the specified value."""
   LESS_THAN_OR_EQUAL_TO
-  """
-  Selects values that are null. This operator does not accept a value.
-  """
+  """ Selects values that are null. This operator does not accept a value. """
   IS_NULL
-  """
-  Selects values that are not null. This operator does not accept a value.
+  """ Selects values that are not null. This operator does not accept a value.
   """
   IS_NOT_NULL
+  """ Selects values that match the specified pattern. """
+  LIKE
+  """ "Selects values that do not match the specified pattern. """
+  NOT_LIKE
 }
 
 """
@@ -3168,12 +2381,9 @@ The fields for creating an Update Data Pool Records Job.
 ```
 """
 input UpdateDataPoolRecordsJobSetColumnInput {
-  """
-  The name of the column to update.
-  """
+  """ The name of the column to update. """
   column: String!
-  """
-  The value to which the column will be updated. Once evaluated, it should be of the same data type as the column.
+  """ The value to which the column will be updated. Once evaluated, it should be of the same data type as the column.
   """
   expression: String!
 }
@@ -3182,17 +2392,11 @@ input UpdateDataPoolRecordsJobSetColumnInput {
 The time series response object. It contains an array of time series labels and an array of Metric values for the given time range and Query Filters.
 """
 type TimeSeriesResponse {
-  """
-  The time series labels.
-  """
+  """The time series labels."""
   labels: [String!]!
-  """
-  The time series values.
-  """
+  """The time series values."""
   values: [String]!
-  """
-  The Query statistics and metadata.
-  """
+  """The Query statistics and metadata."""
   query: QueryInfo!
 }
 
@@ -3200,13 +2404,9 @@ type TimeSeriesResponse {
 The counter response object. It contains a single Metric value for the given time range and Query Filters.
 """
 type CounterResponse {
-  """
-  The value of the counter.
-  """
+  """The value of the counter."""
   value: String
-  """
-  The Query statistics and metadata.
-  """
+  """The Query statistics and metadata."""
   query: QueryInfo!
 }
 
@@ -3214,17 +2414,12 @@ type CounterResponse {
 The leaderboard response object. It contains an array of headers and a table (array of rows) with the selected Dimensions and corresponding Metric values for the given time range and Query Filters.
 """
 type LeaderboardResponse {
-  """
-  The table headers. It contains the Dimension and Metric names.
-  """
+  """ The table headers. It contains the Dimension and Metric names."""
   headers: [String!]!
-  """
-  An ordered array of rows. Each row contains the Dimension values and the corresponding Metric value. A Dimension value can be empty. A Metric value will never be empty.
+  """ An ordered array of rows. Each row contains the Dimension values and the corresponding Metric value. A Dimension value can be empty. A Metric value will never be empty.
   """
   rows: [[String]!]!
-  """
-  The Query statistics and metadata.
-  """
+  """The Query statistics and metadata."""
   query: QueryInfo!
 }
 
@@ -3232,165 +2427,91 @@ type LeaderboardResponse {
 The Query Info object. It contains metadata and statistics about a Query performed.
 """
 type QueryInfo {
-  """
-  The Query's unique identifier.
-  """
+  """The Query's unique identifier."""
   id: ID!
-  """
-  The date and time in UTC when the Query was created.
-  """
+  """The date and time in UTC when the Query was created."""
   createdAt: DateTime!
-  """
-  The unique identifier of the actor that performed the Query.
-  """
+  """The unique identifier of the actor that performed the Query."""
   createdBy: String!
-  """
-  The date and time in UTC when the Query was last modified.
-  """
+  """The date and time in UTC when the Query was last modified."""
   modifiedAt: DateTime!
-  """
-  The unique identifier of the actor that modified the Query.
-  """
+  """The unique identifier of the actor that modified the Query."""
   modifiedBy: String!
-  """
-  The bytes processed by the Query.
-  """
+  """The bytes processed by the Query."""
   bytesProcessed: String!
-  """
-  The duration of the Query in milliseconds.
-  """
+  """The duration of the Query in milliseconds."""
   durationInMilliseconds: Int!
-  """
-  The number of records processed by the Query.
-  """
+  """The number of records processed by the Query."""
   recordsProcessed: String!
-  """
-  The bytes returned by the Query.
-  """
+  """The bytes returned by the Query."""
   resultingBytes: Int!
-  """
-  The number of records returned by the Query.
-  """
+  """The number of records returned by the Query."""
   resultingRecords: Int!
-  """
-  If the Query was boosted, the Booster that was used.
-  """
+  """If the Query was boosted, the Booster that was used."""
   booster: Booster
-  """
-  The Propeller used for this query.
-  """
+  """The Propeller used for this query."""
   propeller: Propeller
-  """
-  The Query status.
-  """
+  """The Query status."""
   status: QueryStatus!
-  """
-  The Query type.
-  """
+  """The Query type."""
   type: QueryType!
-  """
-  The Query subtype.
-  """
+  """The Query subtype."""
   subtype: QuerySubtype
 }
 
-"""
-The Query status.
-"""
+"""The Query status."""
 enum QueryStatus {
-  """
-  The Query was completed succesfully.
-  """
+  """The Query was completed succesfully."""
   COMPLETED
-  """
-  The Query experienced an error.
-  """
+  """The Query experienced an error."""
   ERROR
-  """
-  The Query timed out.
-  """
+  """The Query timed out."""
   TIMED_OUT
 }
 
-"""
-The Query type.
-"""
+"""The Query type."""
 enum QueryType {
-  """
-  Indicates a Metric Query.
-  """
+  """Indicates a Metric Query."""
   METRIC
-  """
-  Indicates a Dimension Stats Query.
-  """
+  """Indicates a Dimension Stats Query."""
   STATS
-  """
-  Indicates a Report Query.
-  """
+  """Indicates a Report Query."""
   REPORT
-  """
-  Indicates a Record Table Query.
-  """
+  """Indicates a Record Table Query."""
   RECORDS
-  """
-  Indicates records queried by unique ID.
-  """
+  """Indicates records queried by unique ID."""
   RECORDS_BY_UNIQUE_ID
-  """
-  Indicates a SelectV1 Query.
-  """
+  """Indicates a SelectV1 Query."""
   SELECT
-  """
-  Indicates a SQL Query.
-  """
+  """Indicates a SQL Query."""
   SQL
-  """
-  Indicates a Top Values Query.
-  """
+  """Indicates a Top Values Query."""
   TOP_VALUES
 }
 
-"""
-The Query subtype.
-"""
+"""The Query subtype."""
 enum QuerySubtype {
-  """
-  Indicates a Metric counter Query.
-  """
+  """Indicates a Metric counter Query."""
   COUNTER
-  """
-  Indicates a Metric time series Query.
-  """
+  """Indicates a Metric time series Query."""
   TIME_SERIES
-  """
-  Indicates a Metric leaderboard Query.
-  """
+  """Indicates a Metric leaderboard Query."""
   LEADERBOARD
 }
 
-"""
-The Booster status.
-"""
+"""The Booster status."""
 enum BoosterStatus {
-  """
-  The Booster has been created. Propel will start optimizing the Data Pool soon.
+  """ The Booster has been created. Propel will start optimizing the Data Pool soon.
   """
   CREATED
-  """
-  Propel is setting up the Booster and optimizing the Data Pool.
-  """
+  """ Propel is setting up the Booster and optimizing the Data Pool. """
   OPTIMIZING
-  """
-  The Booster is now live and available to speed up Metric queries.
-  """
+  """ The Booster is now live and available to speed up Metric queries. """
   LIVE
-  """
-  Propel failed to setup the Booster. Please write to support. Alternatively, you can delete the Booster and try again.
+  """ Propel failed to setup the Booster. Please write to support. Alternatively, you can delete the Booster and try again.
   """
   FAILED
-  """
-  Propel is deleting the Booster and all of its associated data.
-  """
+  """ Propel is deleting the Booster and all of its associated data. """
   DELETING
 }
 
@@ -3405,25 +2526,15 @@ Boosters can be understood as an aggregating index. The index is formed from lef
 4. The Data Pool's timestamp column
 """
 type Booster implements Node {
-  """
-  The Booster's unique identifier.
-  """
+  """The Booster's unique identifier."""
   id: ID!
-  """
-  The Booster's Account.
-  """
+  """The Booster's Account."""
   account: Account!
-  """
-  The Booster's Environment.
-  """
+  """The Booster's Environment."""
   environment: Environment!
-  """
-  The Booster's creation date and time in UTC.
-  """
+  """The Booster's creation date and time in UTC."""
   createdAt: DateTime!
-  """
-  The Booster's last modification date and time in UTC.
-  """
+  """The Booster's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The Booster's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
@@ -3433,12 +2544,9 @@ type Booster implements Node {
   The Booster's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The Metric this Booster is associated to.
-  """
+  """ The Metric this Booster is associated to. """
   metric: Metric!
-  """
-  The status of the Booster (once LIVE it will be available for speeding up Metric queries).
+  """ The status of the Booster (once LIVE it will be available for speeding up Metric queries).
   """
   status: BoosterStatus!
   """
@@ -3451,17 +2559,11 @@ type Booster implements Node {
   In all other states, progress is null.
   """
   progress: Float
-  """
-  Dimensions included in the Booster.
-  """
+  """Dimensions included in the Booster."""
   dimensions: [Dimension!]!
-  """
-  The number of records in the Booster.
-  """
+  """ The number of records in the Booster. """
   recordCount: String
-  """
-  The amount of storage in terabytes used by the Booster.
-  """
+  """ The amount of storage in terabytes used by the Booster. """
   sizeInTerabytes: Float
 }
 
@@ -3476,9 +2578,7 @@ Boosters can be understood as an aggregating index. The index is formed from lef
 4. The Data Pool's timestamp column
 """
 input CreateBoosterInput {
-  """
-  The Booster's Metric.
-  """
+  """ The Booster's Metric. """
   metric: ID!
   """
   Dimensions to include in the Booster.
@@ -3491,27 +2591,17 @@ input CreateBoosterInput {
   dimensions: [DimensionInput!]!
 }
 
-"""
-The result of a mutation which creates or modifies a Booster.
-"""
+"""The result of a mutation which creates or modifies a Booster."""
 type BoosterResponse {
-  """
-  The Booster which was created or modified.
-  """
+  """ The Booster which was created or modified. """
   booster: Booster
 }
 
-"""
-The types of Policies that can be applied to a Metric.
-"""
+"""The types of Policies that can be applied to a Metric."""
 enum PolicyType {
-  """
-  Grants access to all Metric data.
-  """
+  """Grants access to all Metric data."""
   ALL_ACCESS
-  """
-  Grants access to a specified tenant's Metric data.
-  """
+  """Grants access to a specified tenant's Metric data."""
   TENANT_ACCESS
 }
 
@@ -3519,25 +2609,15 @@ enum PolicyType {
 The Policy type. It governs an Application's access to a Metric's data.
 """
 type Policy implements Node {
-  """
-  The Policy's unique identifier.
-  """
+  """The Policy's unique identifier."""
   id: ID!
-  """
-  The Policy's Account.
-  """
+  """The Policy's Account."""
   account: Account!
-  """
-  The Policy's Environment.
-  """
+  """The Policy's Environment."""
   environment: Environment!
-  """
-  The Policy's creation date and time in UTC.
-  """
+  """The Policy's creation date and time in UTC."""
   createdAt: DateTime!
-  """
-  The Policy's last modification date and time in UTC.
-  """
+  """The Policy's last modification date and time in UTC."""
   modifiedAt: DateTime!
   """
   The Policy's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
@@ -3547,59 +2627,35 @@ type Policy implements Node {
   The Policy's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The type of Policy.
-  """
+  """The type of Policy."""
   type: PolicyType!
-  """
-  The Application that is granted access.
-  """
+  """The Application that is granted access."""
   application: Application!
-  """
-  The Metric that the Application is granted access to.
-  """
+  """The Metric that the Application is granted access to."""
   metric: Metric!
 }
 
-"""
-The fields for creating a Policy.
-"""
+"""The fields for creating a Policy."""
 input CreatePolicyInput {
-  """
-  The Metric to which the Policy will be applied.
-  """
+  """ The Metric to which the Policy will be applied. """
   metric: ID!
-  """
-  The type of Policy to create.
-  """
+  """The type of Policy to create."""
   type: PolicyType!
-  """
-  The Application that will be granted access to the Metric.
-  """
+  """The Application that will be granted access to the Metric."""
   application: ID!
 }
 
-"""
-The fields for modifying a Policy.
-"""
+"""The fields for modifying a Policy."""
 input ModifyPolicyInput {
-  """
-  The Policy's unique identifier.
-  """
+  """The Policy's unique identifier."""
   policy: ID!
-  """
-  The type of Policy.
-  """
+  """The type of Policy."""
   type: PolicyType!
 }
 
-"""
-The result of a mutation which creates or modifies a Policy.
-"""
+"""The result of a mutation which creates or modifies a Policy."""
 type PolicyResponse {
-  """
-  The Policy which was created or modified.
-  """
+  """ The Policy which was created or modified. """
   policy: Policy
 }
 
@@ -3686,25 +2742,19 @@ type DeletionJob implements Node & Job {
   failedAt: DateTime
 }
 
-"""
-The response returned by the Deletion Job.
-"""
+"""The response returned by the Deletion Job."""
 type RequestDeleteResponse {
   "The Deletion Job that was just created."
   job: DeletionJob!
 }
 
-"""
-The response returned by the Deletion Job.
-"""
+"""The response returned by the Deletion Job."""
 type DeletionJobResponse {
   "The Deletion Job that was just created."
   job: DeletionJob!
 }
 
-"""
-The fields for creating a Deletion Job.
-"""
+"""The fields for creating a Deletion Job."""
 input DeletionRequestInput {
   "The Data Pool that is going to get the data deleted"
   dataPool: ID!
@@ -3712,9 +2762,7 @@ input DeletionRequestInput {
   filters: [FilterInput!]!
 }
 
-"""
-The fields for creating a Deletion Job.
-"""
+"""The fields for creating a Deletion Job."""
 input CreateDeletionJobInput {
   "The Data Pool that is going to get the data deleted"
   dataPool: ID!
@@ -3766,9 +2814,7 @@ type AddColumnToDataPoolJob implements Node & Job {
   failedAt: DateTime
 }
 
-"""
-The fields for creating an Add Column Job.
-"""
+"""The fields for creating an Add Column Job."""
 input CreateAddColumnToDataPoolJobInput {
   "The Data Pool to which the column will be added."
   dataPool: ID!
@@ -3780,9 +2826,7 @@ input CreateAddColumnToDataPoolJobInput {
   jsonProperty: String
 }
 
-"""
-The response returned by the Add Column Job.
-"""
+"""The response returned by the Add Column Job."""
 type AddColumnToDataPoolJobResponse {
   "The AddColumnToDataPool Job that was just created."
   job: AddColumnToDataPoolJob!
@@ -3829,9 +2873,7 @@ type UpdateDataPoolRecordsJob implements Node & Job {
   failedAt: DateTime
 }
 
-"""
-The fields for creating an Update Data Pool Records Job.
-"""
+"""The fields for creating an Update Data Pool Records Job."""
 input CreateUpdateDataPoolRecordsJobInput {
   "The Data Pool that is going to get its records updated."
   dataPool: ID!
@@ -3841,66 +2883,42 @@ input CreateUpdateDataPoolRecordsJobInput {
   set: [UpdateDataPoolRecordsJobSetColumnInput!]!
 }
 
-"""
-The response returned by the Update Data Pool Records Job.
-"""
+"""The response returned by the Update Data Pool Records Job."""
 type UpdateDataPoolRecordsJobResponse {
   "The UpdateDataPoolRecords Job that was just created."
   job: UpdateDataPoolRecordsJob!
 }
 
 type DataPoolAccessPolicy implements Node & Common {
-  """
-  The ID of the Data Pool Access Policy.
-  """
+  """ The ID of the Data Pool Access Policy. """
   id: ID!
-  """
-  The Data Pool Access Policy's unique name.
-  """
+  """ The Data Pool Access Policy's unique name. """
   uniqueName: String!
-  """
-  The Data Pool Access Policy's description.
-  """
+  """ The Data Pool Access Policy's description. """
   description: String!
-  """
-  The Data Pool Access Policy's Account.
-  """
+  """ The Data Pool Access Policy's Account. """
   account: Account!
-  """
-  The Data Pool Access Policy's Environment.
-  """
+  """ The Data Pool Access Policy's Environment. """
   environment: Environment!
-  """
-  The Data Pool Access Policy's creation date and time in UTC.
-  """
+  """ The Data Pool Access Policy's creation date and time in UTC. """
   createdAt: DateTime!
-  """
-  The Data Pool Access Policy's last modification date and time in UTC.
+  """ The Data Pool Access Policy's last modification date and time in UTC.
   """
   modifiedAt: DateTime!
-  """
-  The Data Pool Access Policy's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
+  """ The Data Pool Access Policy's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
   """
   createdBy: String!
-  """
-  The Data Pool Access Policy's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
+  """ The Data Pool Access Policy's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
   """
   modifiedBy: String!
-  """
-  The Data Pool to which the Access Policy belongs.
-  """
+  """ The Data Pool to which the Access Policy belongs. """
   dataPool: DataPool!
-  """
-  Columns that the Access Policy makes available for querying.
-  """
+  """ Columns that the Access Policy makes available for querying. """
   columns: [String!]!
-  """
-  Row-level filters that the Access Policy applies before executing queries.
+  """ Row-level filters that the Access Policy applies before executing queries.
   """
   rows: [Filter!]!
-  """
-  Applications that are assigned to this Data Pool Access Policy.
-  """
+  """ Applications that are assigned to this Data Pool Access Policy. """
   applications(first: Int, after: String, last: Int, before: String): ApplicationConnection!
 }
 
@@ -3909,13 +2927,9 @@ input CreateDataPoolAccessPolicyInput {
   The Data Pool Access Policy's unique name. If not specified, Propel will set the ID as unique name.
   """
   uniqueName: String
-  """
-  The Data Pool Access Policy's description.
-  """
+  """The Data Pool Access Policy's description."""
   description: String
-  """
-  The Data Pool to which the Access Policy belongs.
-  """
+  """ The Data Pool to which the Access Policy belongs. """
   dataPool: ID!
   """
   Columns that the Access Policy makes available for querying.
@@ -3923,35 +2937,26 @@ input CreateDataPoolAccessPolicyInput {
   If set to `["*"]`, all columns will be available for querying.
   """
   columns: [String!]!
-  """
-  Row-level filters that the Access Policy applies before executing queries.
+  """ Row-level filters that the Access Policy applies before executing queries.
   """
   rows: [FilterInput!]
 }
 
 type DataPoolAccessPolicyResponse {
-  """
-  The Data Pool Access Policy.
-  """
+  """ The Data Pool Access Policy. """
   dataPoolAccessPolicy: DataPoolAccessPolicy!
 }
 
 input ModifyDataPoolAccessPolicyInput {
   id: ID!
-  """
-  The Data Pool Access Policy's new unique name.
-  """
+  """The Data Pool Access Policy's new unique name."""
   uniqueName: String
-  """
-  The Data Pool Access Policy's new description.
-  """
+  """The Data Pool Access Policy's new description. """
   description: String
-  """
-  Columns that the Access Policy makes available for querying. If not provided this property will not be modified.
+  """ Columns that the Access Policy makes available for querying. If not provided this property will not be modified.
   """
   columns: [String!]
-  """
-  Row-level filters that the Access Policy applies before executing queries. If not provided this property will not be modified.
+  """ Row-level filters that the Access Policy applies before executing queries. If not provided this property will not be modified.
   """
   rows: [FilterInput!]
 }
@@ -4066,21 +3071,13 @@ type Mutation {
   Modifies a Data Pool with the provided unique name, description, and data retention time. If any of the optional arguments are omitted, those properties will be unchanged on the Data Pool.
   """
   modifyDataPool(input: modifyDataPoolInput!): DataPoolOrFailureResponse
-  """
-  Deprecated. Use `retryDataPoolSetup` instead.
-  """
+  """Deprecated. Use `retryDataPoolSetup` instead."""
   reconnectDataPool(input: idOrUniqueName!): DataPool @deprecated(reason: "Use `retryDataPoolSetup` instead")
-  """
-  Retries to set up the Data Pool identified by the given ID.
-  """
+  """Retries to set up the Data Pool identified by the given ID."""
   retryDataPoolSetup(id: ID!): DataPool
-  """
-  Retries to set up the Data Pool identified by the given unique name.
-  """
+  """Retries to set up the Data Pool identified by the given unique name."""
   retryDataPoolSetupByName(uniqueName: String!): DataPool
-  """
-  Extracts the schema from the table and updates the schema object.
-  """
+  """Extracts the schema from the table and updates the schema object."""
   inspectDataPoolSchema(input: idOrUniqueName!): DataPoolOrFailureResponse
   """
   Tests that Propel has access to the Data Pool's table in its corresponding Data Source and will be able to Sync data. Updates the status.
@@ -4094,13 +3091,9 @@ type Mutation {
   Deletes a Data Pool by unique name and returns its ID if the Data Pool was deleted successfully.
   """
   deleteDataPoolByName(uniqueName: String!): ID
-  """
-  Disables syncing of a Data Pool.
-  """
+  """ Disables syncing of a Data Pool. """
   disableSyncing(id: ID!): DataPool
-  """
-  Re-enables syncing of a Data Pool.
-  """
+  """ Re-enables syncing of a Data Pool. """
   enableSyncing(id: ID!): DataPool
   """
   Creates a new Count Metric from the given Data Pool and returns the newly created Metric (or an error message if creating the Metric fails).
@@ -4148,9 +3141,7 @@ type Mutation {
   Modifies a Metric by ID with the provided unique name, description, and Dimensions. If any of the optional arguments are omitted, those properties will be unchanged on the Metric.
   """
   modifyMetric(input: ModifyMetricInput): MetricResponse
-  """
-  Migrates a Metric from one Data Pool to another.
-  """
+  """Migrates a Metric from one Data Pool to another."""
   migrateMetric(input: MigrateMetricInput!): Metric
   """
   Deletes a Metric by ID and returns its ID if the Metric was deleted successfully.
@@ -4184,30 +3175,17 @@ type Mutation {
   Deletes a Policy. The associated Application will no longer have access to the Metric's data.
   """
   deletePolicy(id: ID!): ID @deprecated(reason: "Use Data Pool Access Policies instead")
-  """
-  Schedules a new Deletion Job on the specified Data Pool.
-  """
-  requestDelete(input: DeletionRequestInput!): RequestDeleteResponse!
-    @deprecated(reason: "This has been renamed to `createDeletionJob`")
-  """
-  Schedules a new Deletion Job on the specified Data Pool.
-  """
+  """Schedules a new Deletion Job on the specified Data Pool."""
+  requestDelete(input: DeletionRequestInput!): RequestDeleteResponse! @deprecated(reason: "This has been renamed to `createDeletionJob`")
+  """Schedules a new Deletion Job on the specified Data Pool."""
   createDeletionJob(input: CreateDeletionJobInput!): DeletionJobResponse!
-  """
-  Schedules a new AddColumnToDataPoolJob on the specified Data Pool.
-  """
+  """Schedules a new AddColumnToDataPoolJob on the specified Data Pool."""
   createAddColumnToDataPoolJob(input: CreateAddColumnToDataPoolJobInput!): AddColumnToDataPoolJobResponse!
-  """
-  Schedules a new UpdateDataPoolRecords Job on the specified Data Pool.
-  """
+  """Schedules a new UpdateDataPoolRecords Job on the specified Data Pool."""
   createUpdateDataPoolRecordsJob(input: CreateUpdateDataPoolRecordsJobInput!): UpdateDataPoolRecordsJobResponse!
-  """
-  Manually trigger a Sync for a Data Pool.
-  """
+  """Manually trigger a Sync for a Data Pool."""
   syncDataPool(dataPoolId: ID!): Sync
-  """
-  Manually trigger a re-Sync for a Data Pool.
-  """
+  """Manually trigger a re-Sync for a Data Pool."""
   resyncDataPool(dataPoolId: ID!): Sync
   """
   Creates a new HTTP Data Source from the given settings.
@@ -4256,29 +3234,19 @@ pages of the Data Grid table.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataGridConnection {
-  """
-  The Dat Grid table's headers.
-  """
+  """The Data Grid table's headers."""
   headers: [String!]!
   """
   An array of arrays containing the values of the Data Grid table's rows.
   """
   rows: [[String]!]!
-  """
-  The Query statistics and metadata.
-  """
+  """The Query statistics and metadata."""
   query: QueryInfo!
-  """
-  The Data Grid table's page info.
-  """
+  """The Data Grid table's page info."""
   pageInfo: PageInfo!
-  """
-  The Data Grid table's edges.
-  """
+  """The Data Grid table's edges."""
   edges: [DataGridEdge!]!
-  """
-  The Data Grid table's nodes.
-  """
+  """The Data Grid table's nodes."""
   nodes: [DataGridNode!]!
 }
 
@@ -4288,13 +3256,9 @@ The Data Grid edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataGridEdge {
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: DataGridNode!
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
 }
 
@@ -4306,31 +3270,49 @@ This type represents a single row of a Data Grid table.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataGridNode {
-  """
-  The Data Grid table's headers.
-  """
+  """The Data Grid table's headers."""
   headers: [String!]!
-  """
-  An array of the values for the row.
-  """
+  """An array of the values for the row."""
   row: [String]!
 }
 
-"""
-The fields for querying the top values in a given column.
-"""
+"""The fields for querying records by unique ID."""
+input RecordsByUniqueIdInput {
+  """ Optionally specifies the Propeller to use. Applications may not set this value. Instead, Application Queries always use the Propeller configured on the Application.
+  """
+  propeller: Propeller
+  """
+  The Data Pool to be queried. If a Data Pool ID is provided it will take precedence over the Data Pool name.
+  """
+  dataPoolId: ID
+  """
+  The Data Pool to be queried. If a Data Pool ID is provided it will take precedence over the Data Pool name.
+  """
+  dataPoolName: String
+  """The columns to retrieve."""
+  columns: [String!]!
+  """The unique IDs of the records to retrieve. """
+  uniqueIds: [String!]!
+}
+
+type RecordsByUniqueIdResponse {
+  """ The Data Pool columns for the record. """
+  columns: [String!]!
+  """An array of values for the record. """
+  values: [[String]!]!
+  """The Query statistics and metadata."""
+  query: QueryInfo!
+}
+
+"""The fields for querying the top values in a given column."""
 input TopValuesInput {
   """
   The Data Pool to be queried. A Data Pool ID or unique name can be provided.
   """
   dataPool: DataPoolInput!
-  """
-  The column to fetch the unique values from.
-  """
+  """The column to fetch the unique values from."""
   columnName: String!
-  """
-  The time range for calculating the top values.
-  """
+  """The time range for calculating the top values."""
   timeRange: TimeRangeInput!
   """
   The time zone to use. Dates and times are always returned in UTC, but setting the time zone influences relative time ranges and granularities.
@@ -4345,9 +3327,7 @@ input TopValuesInput {
 }
 
 type TopValuesResponse {
-  """
-  An array with the list of values.
-  """
+  """An array with the list of values. """
   values: [String!]!
 }
 
@@ -4460,17 +3440,11 @@ type Query {
   A Booster significantly improves the query performance for a Metric.
   """
   booster(id: ID!): Booster
-  """
-  Returns a Policy by ID.
-  """
+  """Returns a Policy by ID."""
   policy(id: ID!): Policy
-  """
-  Returns a Sync by ID.
-  """
+  """Returns a Sync by ID."""
   sync(id: ID!): Sync
-  """
-  Returns a table by ID.
-  """
+  """Returns a table by ID."""
   table(id: ID!): Table
   """
   Build a report, or table, consisting of multiple Metrics broken down by one-or-more dimensions.
@@ -4487,6 +3461,8 @@ type Query {
   This query returns the individual records of a Data Pool with the convenience of built-in pagination, filtering, and sorting.
   """
   dataGrid(input: DataGridInput!): DataGridConnection!
+  """This query returns records by the given unique IDs."""
+  recordsByUniqueId(input: RecordsByUniqueIdInput!): RecordsByUniqueIdResponse!
   """
   This query returns records by the given unique IDs.
   """
@@ -4524,13 +3500,7 @@ type Query {
   """
   This query returns the AddColumnToDataPool Job specified by a given status.
   """
-  addColumnToDataPoolJobByStatus(
-    status: JobStatus!
-    first: Int
-    after: String
-    last: Int
-    before: String
-  ): AddColumnToDataPoolJobConnection!
+  addColumnToDataPoolJobByStatus(status: JobStatus!, first: Int, after: String, last: Int, before: String): AddColumnToDataPoolJobConnection!
   """
   This query returns the UpdateDataPoolRecords Job specified by the given ID.
 
@@ -4541,13 +3511,7 @@ type Query {
   """
   This query returns the UpdateDataPoolRecords Job specified by a given status.
   """
-  updateDataPoolRecordsJobByStatus(
-    status: JobStatus!
-    first: Int
-    after: String
-    last: Int
-    before: String
-  ): UpdateDataPoolRecordsJobConnection!
+  updateDataPoolRecordsJobByStatus(status: JobStatus!, first: Int, after: String, last: Int, before: String): UpdateDataPoolRecordsJobConnection!
 }
 
 """
@@ -4556,17 +3520,11 @@ The Add column to Data Pool Job connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type AddColumnToDataPoolJobConnection {
-  """
-  The Add column to Data Pool Job connection's edges.
-  """
+  """The Add column to Data Pool Job connection's edges."""
   edges: [AddColumnToDataPoolJobEdge!]!
-  """
-  The Add column to Data Pool Job connection's nodes.
-  """
+  """The Add column to Data Pool Job connection's nodes."""
   nodes: [AddColumnToDataPoolJob!]!
-  """
-  The Add column to Data Pool Job connection's page info.
-  """
+  """The Add column to Data Pool Job connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4576,13 +3534,9 @@ The Add column to Data Pool Job edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type AddColumnToDataPoolJobEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: AddColumnToDataPoolJob!
 }
 
@@ -4592,17 +3546,11 @@ The Application connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type ApplicationConnection {
-  """
-  The Application connection's edges.
-  """
+  """The Application connection's edges."""
   edges: [ApplicationEdge!]!
-  """
-  The Application connection's nodes.
-  """
+  """The Application connection's nodes."""
   nodes: [Application!]!
-  """
-  The Application connection's page info.
-  """
+  """The Application connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4612,13 +3560,9 @@ The Application edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type ApplicationEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Application!
 }
 
@@ -4628,17 +3572,11 @@ The Booster connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type BoosterConnection {
-  """
-  The Booster connection's edges.
-  """
+  """The Booster connection's edges."""
   edges: [BoosterEdge!]!
-  """
-  The Booster connection's nodes.
-  """
+  """The Booster connection's nodes."""
   nodes: [Booster!]!
-  """
-  The Booster connection's page info.
-  """
+  """The Booster connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4648,13 +3586,9 @@ The Booster edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type BoosterEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Booster!
 }
 
@@ -4668,17 +3602,11 @@ type ColumnConnection {
   The time at which the columns were cached (i.e., the time at which they were introspected).
   """
   cachedAt: DateTime!
-  """
-  The column connection's edges.
-  """
+  """The column connection's edges."""
   edges: [ColumnEdge!]!
-  """
-  The column connection's nodes.
-  """
+  """The column connection's nodes."""
   nodes: [Column!]!
-  """
-  The column connection's page info.
-  """
+  """The column connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4688,13 +3616,9 @@ The column edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type ColumnEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Column!
 }
 
@@ -4704,17 +3628,11 @@ The Data Pool Access Policy connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataPoolAccessPolicyConnection {
-  """
-  The Data Pool Access Policy connection's edges.
-  """
+  """The Data Pool Access Policy connection's edges."""
   edges: [DataPoolAccessPolicyEdge!]!
-  """
-  The Data Pool Access Policy connection's nodes.
-  """
+  """The Data Pool Access Policy connection's nodes."""
   nodes: [DataPoolAccessPolicy!]!
-  """
-  The Data Pool Access Policy connection's page info.
-  """
+  """The Data Pool Access Policy connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4724,13 +3642,9 @@ The Data Pool Access Policy edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataPoolAccessPolicyEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: DataPoolAccessPolicy!
 }
 
@@ -4740,17 +3654,11 @@ The Data Pool column connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataPoolColumnConnection {
-  """
-  The Data Pool column connection's edges.
-  """
+  """The Data Pool column connection's edges."""
   edges: [DataPoolColumnEdge!]!
-  """
-  The Data Pool column connection's nodes.
-  """
+  """The Data Pool column connection's nodes."""
   nodes: [DataPoolColumn!]!
-  """
-  The Data Pool column connection's page info.
-  """
+  """The Data Pool column connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4760,13 +3668,9 @@ The Data Pool column edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataPoolColumnEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: DataPoolColumn!
 }
 
@@ -4776,17 +3680,11 @@ The Data Pool connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataPoolConnection {
-  """
-  The Data Pool connection's edges.
-  """
+  """The Data Pool connection's edges."""
   edges: [DataPoolEdge!]!
-  """
-  The Data Pool connection's nodes.
-  """
+  """The Data Pool connection's nodes."""
   nodes: [DataPool!]!
-  """
-  The Data Pool connection's page info.
-  """
+  """The Data Pool connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4796,13 +3694,9 @@ The Data Pool edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataPoolEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: DataPool!
 }
 
@@ -4812,17 +3706,11 @@ The Data Source connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataSourceConnection {
-  """
-  The Data Source connection's edges.
-  """
+  """The Data Source connection's edges."""
   edges: [DataSourceEdge!]!
-  """
-  The Data Source connection's nodes.
-  """
+  """The Data Source connection's nodes."""
   nodes: [DataSource!]!
-  """
-  The Data Source connection's page info.
-  """
+  """The Data Source connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4832,13 +3720,9 @@ The Data Source edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DataSourceEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: DataSource!
 }
 
@@ -4848,17 +3732,11 @@ The Deletion Job connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DeletionJobConnection {
-  """
-  The Deletion Job connection's edges.
-  """
+  """The Deletion Job connection's edges."""
   edges: [DeletionJobEdge!]!
-  """
-  The Deletion Job connection's nodes.
-  """
+  """The Deletion Job connection's nodes."""
   nodes: [DeletionJob!]!
-  """
-  The Deletion Job connection's page info.
-  """
+  """The Deletion Job connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4868,13 +3746,9 @@ The Deletion Job edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type DeletionJobEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: DeletionJob!
 }
 
@@ -4884,17 +3758,11 @@ The Metric connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type MetricConnection {
-  """
-  The Metric connection's edges.
-  """
+  """The Metric connection's edges."""
   edges: [MetricEdge!]!
-  """
-  The Metric connection's nodes.
-  """
+  """The Metric connection's nodes."""
   nodes: [Metric!]!
-  """
-  The Metric connection's page info.
-  """
+  """The Metric connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4904,13 +3772,9 @@ The Metric edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type MetricEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Metric!
 }
 
@@ -4920,17 +3784,11 @@ The Policy connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type PolicyConnection {
-  """
-  The Policy connection's edges.
-  """
+  """The Policy connection's edges."""
   edges: [PolicyEdge!]!
-  """
-  The Policy connection's nodes.
-  """
+  """The Policy connection's nodes."""
   nodes: [Policy!]!
-  """
-  The Policy connection's page info.
-  """
+  """The Policy connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4940,13 +3798,9 @@ The Policy edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type PolicyEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Policy!
 }
 
@@ -4956,17 +3810,11 @@ The Sync connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type SyncConnection {
-  """
-  The Sync connection's edges.
-  """
+  """The Sync connection's edges."""
   edges: [SyncEdge!]!
-  """
-  The Sync connection's nodes.
-  """
+  """The Sync connection's nodes."""
   nodes: [Sync!]!
-  """
-  The Sync connection's page info.
-  """
+  """The Sync connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -4976,13 +3824,9 @@ The Sync edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type SyncEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Sync!
 }
 
@@ -4996,17 +3840,11 @@ type TableConnection {
   The time at which the tables were cached (i.e., the time at which they were introspected).
   """
   cachedAt: DateTime!
-  """
-  The table connection's edges.
-  """
+  """The table connection's edges."""
   edges: [TableEdge!]!
-  """
-  The table connection's nodes.
-  """
+  """The table connection's nodes."""
   nodes: [Table!]!
-  """
-  The table connection's page info.
-  """
+  """The table connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -5016,13 +3854,9 @@ The table edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type TableEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: Table!
 }
 
@@ -5032,17 +3866,11 @@ The table introspection connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type TableIntrospectionConnection {
-  """
-  The table introspection connection's edges.
-  """
+  """The table introspection connection's edges."""
   edges: [TableIntrospectionEdge!]!
-  """
-  The table introspection connection's nodes.
-  """
+  """The table introspection connection's nodes."""
   nodes: [TableIntrospection!]!
-  """
-  The table introspection connection's page info.
-  """
+  """The table introspection connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -5052,13 +3880,9 @@ The table introspection edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type TableIntrospectionEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: TableIntrospection!
 }
 
@@ -5068,17 +3892,11 @@ The Update Data Pool records Job connection object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type UpdateDataPoolRecordsJobConnection {
-  """
-  The Update Data Pool records Job connection's edges.
-  """
+  """The Update Data Pool records Job connection's edges."""
   edges: [UpdateDataPoolRecordsJobEdge!]!
-  """
-  The Update Data Pool records Job connection's nodes.
-  """
+  """The Update Data Pool records Job connection's nodes."""
   nodes: [UpdateDataPoolRecordsJob!]!
-  """
-  The Update Data Pool records Job connection's page info.
-  """
+  """The Update Data Pool records Job connection's page info."""
   pageInfo: PageInfo!
 }
 
@@ -5088,24 +3906,16 @@ The Update Data Pool records Job edge object.
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
 """
 type UpdateDataPoolRecordsJobEdge {
-  """
-  The edge's cursor.
-  """
+  """The edge's cursor."""
   cursor: String!
-  """
-  The edge's node.
-  """
+  """The edge's node."""
   node: UpdateDataPoolRecordsJob!
 }
 
 input CreateHttpDataSourceInput {
-  """
-  The HTTP Data Source's connection settings
-  """
+  """The HTTP Data Source's connection settings"""
   connectionSettings: HttpConnectionSettingsInput!
-  """
-  The HTTP Data Source's description.
-  """
+  """The HTTP Data Source's description."""
   description: String
   """
   The HTTP Data Source's unique name. If not specified, Propel will set the ID as unique name.
@@ -5113,9 +3923,7 @@ input CreateHttpDataSourceInput {
   uniqueName: String
 }
 
-"""
-The HTTP Data Source connection settings.
-"""
+"""The HTTP Data Source connection settings."""
 type HttpConnectionSettings {
   """
   The HTTP Basic authentication settings for uploading new data.
@@ -5123,15 +3931,11 @@ type HttpConnectionSettings {
   If this parameter is not provided, anyone with the URL to your tables will be able to upload data. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
   """
   basicAuth: HttpBasicAuthSettings
-  """
-  The HTTP Data Source's tables.
-  """
+  """The HTTP Data Source's tables."""
   tables: [HttpDataSourceTable!]!
 }
 
-"""
-The HTTP Data Source connection settings.
-"""
+"""The HTTP Data Source connection settings."""
 input HttpConnectionSettingsInput {
   """
   The HTTP Basic authentication settings for uploading new data.
@@ -5139,9 +3943,7 @@ input HttpConnectionSettingsInput {
   If this parameter is not provided, anyone with the URL to your tables will be able to upload data. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
   """
   basicAuth: HttpBasicAuthInput
-  """
-  The HTTP Data Source's tables.
-  """
+  """The HTTP Data Source's tables."""
   tables: [HttpDataSourceTableInput!]!
 }
 
@@ -5154,9 +3956,7 @@ input ModifyHttpDataSourceInput {
   The HTTP Data Source's new description. If not provided this property will not be modified.
   """
   description: String
-  """
-  The ID or unique name of the HTTP Data Source to modify.
-  """
+  """The ID or unique name of the HTTP Data Source to modify."""
   idOrUniqueName: idOrUniqueName!
   """
   The HTTP Data Source's new unique name. If not provided this property will not be modified.
@@ -5164,9 +3964,7 @@ input ModifyHttpDataSourceInput {
   uniqueName: String
 }
 
-"""
-The HTTP Data Source connection settings.
-"""
+"""The HTTP Data Source connection settings."""
 input PartialHttpConnectionSettingsInput {
   """
   The HTTP Basic authentication settings for uploading new data.
@@ -5185,13 +3983,9 @@ input PartialHttpConnectionSettingsInput {
 }
 
 input CreateS3DataSourceInput {
-  """
-  The S3 Data Source's connection settings
-  """
+  """The S3 Data Source's connection settings"""
   connectionSettings: S3ConnectionSettingsInput!
-  """
-  The S3 Data Source's description.
-  """
+  """The S3 Data Source's description."""
   description: String
   """
   The S3 Data Source's unique name. If not specified, Propel will set the ID as unique name.
@@ -5208,9 +4002,7 @@ input ModifyS3DataSourceInput {
   The S3 Data Source's new description. If not provided this property will not be modified.
   """
   description: String
-  """
-  The ID or unique name of the S3 Data Source to modify.
-  """
+  """The ID or unique name of the S3 Data Source to modify."""
   idOrUniqueName: idOrUniqueName!
   """
   The S3 Data Source's new unique name. If not provided this property will not be modified.
@@ -5248,13 +4040,9 @@ type S3ConnectionSettings {
   The AWS access key ID for an IAM user with sufficient access to the S3 bucket.
   """
   awsAccessKeyId: String!
-  """
-  The name of the S3 bucket.
-  """
+  """The name of the S3 bucket."""
   bucket: String!
-  """
-  The S3 Data Source's tables.
-  """
+  """The S3 Data Source's tables."""
   tables: [S3DataSourceTable!]!
 }
 
@@ -5270,24 +4058,16 @@ input S3ConnectionSettingsInput {
   The AWS secret access key for an IAM user with sufficient access to the S3 bucket.
   """
   awsSecretAccessKey: String!
-  """
-  The name of the S3 bucket.
-  """
+  """The name of the S3 bucket."""
   bucket: String!
-  """
-  The S3 Data Source's tables.
-  """
+  """The S3 Data Source's tables."""
   tables: [S3DataSourceTableInput!]!
 }
 
 input CreateWebhookDataSourceInput {
-  """
-  The Webhook Data Source's connection settings
-  """
+  """The Webhook Data Source's connection settings"""
   connectionSettings: WebhookConnectionSettingsInput!
-  """
-  The Webhook Data Source's description.
-  """
+  """The Webhook Data Source's description."""
   description: String
   """
   The Webhook Data Source's unique name. If not specified, Propel will set the ID as unique name.
@@ -5304,9 +4084,7 @@ input ModifyWebhookDataSourceInput {
   The Webhook Data Source's new description. If not provided this property will not be modified.
   """
   description: String
-  """
-  The ID or unique name of the Webhook Data Source to modify.
-  """
+  """The ID or unique name of the Webhook Data Source to modify."""
   idOrUniqueName: idOrUniqueName!
   """
   The Webhook Data Source's new unique name. If not provided this property will not be modified.
@@ -5314,9 +4092,7 @@ input ModifyWebhookDataSourceInput {
   uniqueName: String
 }
 
-"""
-The Webhook Data Source connection settings.
-"""
+"""The Webhook Data Source connection settings."""
 input PartialWebhookConnectionSettingsInput {
   """
   The HTTP basic authentication settings for the Webhook Data Source URL. If this parameter is not provided, anyone with the webhook URL will be able to send events. While it's OK to test without HTTP Basic authentication, we recommend enabling it. If not provided this property will not be modified.
@@ -5328,55 +4104,37 @@ input PartialWebhookConnectionSettingsInput {
   basicAuthEnabled: Boolean
 }
 
-"""
-The Webhook Data Source connection settings.
-"""
+"""The Webhook Data Source connection settings."""
 type WebhookConnectionSettings {
   """
   The HTTP basic authentication settings for the Webhook Data Source URL. If this parameter is not provided, anyone with the webhook URL will be able to send events. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
   """
   basicAuth: HttpBasicAuthSettings
-  """
-  The additional columns for the Webhook Data Source table.
-  """
+  """The additional columns for the Webhook Data Source table."""
   columns: [WebhookDataSourceColumn!]
-  """
-  The tenant ID column, if configured.
-  """
+  """The tenant ID column, if configured."""
   tenant: String
-  """
-  The primary timestamp column.
-  """
+  """The primary timestamp column."""
   timestamp: String!
   """
   The unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
   """
   uniqueId: String
-  """
-  The Webhook URL for posting JSON events
-  """
+  """The Webhook URL for posting JSON events"""
   webhookUrl: String!
 }
 
-"""
-The Webhook Data Source connection settings.
-"""
+"""The Webhook Data Source connection settings."""
 input WebhookConnectionSettingsInput {
   """
   The HTTP basic authentication settings for the Webhook Data Source URL. If this parameter is not provided, anyone with the webhook URL will be able to send events. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
   """
   basicAuth: HttpBasicAuthInput
-  """
-  The additional columns for the Webhook Data Source table.
-  """
+  """The additional columns for the Webhook Data Source table."""
   columns: [WebhookDataSourceColumnInput!]
-  """
-  The tenant ID column, if configured.
-  """
+  """The tenant ID column, if configured."""
   tenant: String
-  """
-  The primary timestamp column.
-  """
+  """The primary timestamp column."""
   timestamp: String!
   """
   The unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
