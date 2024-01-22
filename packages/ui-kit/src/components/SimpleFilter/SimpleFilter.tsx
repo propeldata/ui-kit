@@ -51,7 +51,7 @@ const SimpleFilterComponent = ({
     setFilters(filterList)
   }
 
-  const autocompleteOptions = isStatic ? options ?? [] : data?.topValues.values ?? []
+  const autocompleteOptions = (isStatic ? options : data?.topValues.values) ?? []
 
   useEffect(() => {
     if (queryError != null) {
