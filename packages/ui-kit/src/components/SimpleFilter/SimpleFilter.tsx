@@ -26,7 +26,7 @@ const SimpleFilterComponent = ({
 
   const isStatic = !query
 
-  const { filters, setFilters } = useFilters()
+  const { setFilters } = useFilters()
 
   const columnName = query?.columnName ?? columnNameProp
   const timeZone = query?.timeZone ?? getTimeZone()
@@ -40,15 +40,13 @@ const SimpleFilterComponent = ({
   const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
     if (selectedOption == null) return
 
-    const newFilter: FilterInput = {
+    const filter: FilterInput = {
       column: columnName,
       operator: FilterOperator.Equals,
       value: typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
     }
 
-    const newFilterList = filters.filter((filter) => filter.id !== id).concat({ ...newFilter, id })
-
-    setFilters([...newFilterList])
+    setFilters((prev) => prev.filter((filter) => filter.id !== id).concat({ ...filter, id }))
   }
 
   const autocompleteOptions = isStatic ? options ?? [] : data?.topValues.values ?? []

@@ -10,7 +10,7 @@ export interface FilterContextValue {
   /** Filters that will be provided to the child components */
   filters: FilterInputWithId[]
   /** Setter function for the Filters */
-  setFilters: (filters: FilterInputWithId[]) => void
+  setFilters: React.Dispatch<React.SetStateAction<FilterInputWithId[]>>
 }
 
 export const FilterContext = createContext<FilterContextValue>({ filters: [], setFilters: () => {} })
