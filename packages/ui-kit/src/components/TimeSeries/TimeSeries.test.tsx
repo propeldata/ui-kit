@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
-import { RelativeTimeRange, TimeSeriesGranularity } from '../../helpers'
-import { Dom, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
-import { TimeSeries } from '../index'
+import { RelativeTimeRange, sleep, TimeSeriesGranularity } from '../../helpers'
+import { Dom, mockServer, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
+import { AccessTokenProvider, TimeSeries } from '..'
 
 const mockData = {
   labels: ['2023-07-01', '2023-07-02', '2023-07-03'],
@@ -129,5 +129,19 @@ describe('TimeSeries', () => {
     const chartLabels = chartInstance?.data.labels
 
     expect(chartLabels).toEqual(mockStaticData.labels.map((label) => label.replace('-', '.')))
+  })
+
+  it('Should NOT fetch data in static mode', async () => {
+    mockServer.events.on('request:start', async () => {
+      throw new Error('Should not fetch data in static mode')
+    })
+
+    dom = render(
+      <AccessTokenProvider accessToken="abc">
+        <TimeSeries labels={['a', 'b', 'c']} values={['100', '200', '300']} />
+      </AccessTokenProvider>
+    )
+
+    await sleep(100)
   })
 })

@@ -31,7 +31,8 @@ export function PieChartConnectedTest() {
               n: 90
             },
             refetchInterval,
-            retry: false
+            retry: false,
+            filters: []
           }}
           variant={chartType}
           styles={{

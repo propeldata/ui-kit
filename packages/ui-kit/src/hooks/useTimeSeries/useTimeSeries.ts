@@ -1,4 +1,4 @@
-import { TimeSeriesQueryProps, useAccessToken, useLog } from '../../components'
+import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
 import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
@@ -16,8 +16,9 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     metric,
     timeRange,
     granularity,
-    filters,
+    filters: filtersFromProp,
     refetchInterval,
+    enabled: enabledProp = true,
     retry,
     timeZone
   } = props
@@ -34,12 +35,19 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const enabled = accessToken != null
+  const { filters: filtersFromProvider } = useFilters()
+
+  const filters = filtersFromProp ?? filtersFromProvider
+
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
   if (!enabled && metric) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
+
+  // Define metric input
+  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
   /**
    * @hook react-query wrapper
@@ -58,7 +66,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     },
     {
       timeSeriesInput: {
-        metricName: metric,
+        ...metricInput,
         timeZone,
         timeRange: {
           relative: timeRange?.relative ?? null,
@@ -67,7 +75,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
           stop: timeRange?.stop ?? null
         },
         granularity: granularity as TimeSeriesGranularity,
-        filters: filters
+        filters
       }
     },
     {

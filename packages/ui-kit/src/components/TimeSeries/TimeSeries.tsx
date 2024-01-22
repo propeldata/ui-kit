@@ -106,7 +106,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const isFormatted = !!labelFormatter
     const zone = timeZone ?? getTimeZone()
 
-    const { data: serverData, isLoading, error: hasError } = useTimeSeries({ ...query, granularity, timeZone: zone })
+    const {
+      data: serverData,
+      isLoading,
+      error: hasError
+    } = useTimeSeries({ ...query, granularity, timeZone: zone, enabled: !isStatic })
 
     const renderChart = React.useCallback(
       (data?: TimeSeriesData) => {
