@@ -29,11 +29,11 @@ const SimpleFilterComponent = ({
   const { filters, setFilters } = useFilters()
 
   const columnName = query?.columnName ?? columnNameProp
-  const zone = query?.timeZone ?? getTimeZone()
+  const timeZone = query?.timeZone ?? getTimeZone()
 
   const log = useLog()
 
-  const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone: zone })
+  const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone })
 
   const isError = queryError != null || error != null
 
