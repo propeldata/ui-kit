@@ -41,6 +41,9 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
+  // Define metric input
+  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
+
   /**
    * @hook react-query wrapper
    * @param {CounterQuery} data
@@ -58,7 +61,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     },
     {
       counterInput: {
-        metricName: metric,
+        ...metricInput,
         timeZone: timeZone ?? getTimeZone(),
         timeRange: {
           relative: timeRange?.relative ?? null,

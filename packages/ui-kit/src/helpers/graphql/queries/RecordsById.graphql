@@ -1,0 +1,6 @@
+query RecordsByUniqueId($recordsByUniqueIdInput: RecordsByUniqueIdInput!) {
+  recordsByUniqueId(input: $recordsByUniqueIdInput) {
+    columns
+    values
+  }
+}

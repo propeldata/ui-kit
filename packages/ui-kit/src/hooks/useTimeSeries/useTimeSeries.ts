@@ -42,6 +42,9 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
+  // Define metric input
+  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
+
   /**
    * @hook react-query wrapper
    * @param {TimeSeriesQuery} data
@@ -59,7 +62,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     },
     {
       timeSeriesInput: {
-        metricName: metric,
+        ...metricInput,
         timeZone,
         timeRange: {
           relative: timeRange?.relative ?? null,

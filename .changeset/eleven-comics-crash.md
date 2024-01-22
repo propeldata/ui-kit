@@ -2,4 +2,4 @@
 '@propeldata/ui-kit': minor
 ---
 
-Add useDataGrid hook.
+Add Records By Id query hook

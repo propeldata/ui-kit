@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+  font-size: 12px;
+  table-layout: fixed;
+}
+
+table tr td {
+  border-top: 1px solid #e5e5e5;
+  padding: 10px 0;
+}
+
+table thead tr {
+  text-align: left;
+}
+
+table thead tr th {
+  text-align: left;
+  padding: 10px 0;
+}
