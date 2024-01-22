@@ -58,3 +58,11 @@ export interface QueryProps {
   /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
   propelApiUrl?: string
 }
+
+export interface DropdownOption {
+  /** The display label */
+  label?: string
+  /** The value that will be used when the option is selected */
+  value?: string
+  [x: string | number | symbol]: unknown
+}

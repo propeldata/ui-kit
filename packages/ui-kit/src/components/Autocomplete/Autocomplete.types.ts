@@ -1,15 +1,8 @@
 import { CSSProperties } from 'react'
 import { UseAutocompleteProps } from '@mui/base/useAutocomplete'
+import { DropdownOption } from '../shared.types'
 
-export interface AutocompleteOption {
-  /** The display label */
-  label?: string
-  /** The value that will be used when the option is selected */
-  value?: string
-  [x: string | number | symbol]: unknown
-}
-
-export interface AutocompleteProps extends UseAutocompleteProps<string | AutocompleteOption, false, false, boolean> {
+export interface AutocompleteProps extends UseAutocompleteProps<string | DropdownOption, false, false, boolean> {
   placeholder?: string
 
   /** Styles to be applied to the container element */

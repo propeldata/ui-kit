@@ -3,8 +3,8 @@ import { useTopValues } from '../../hooks'
 import { FilterInput, FilterOperator, getTimeZone } from '../../helpers'
 
 import { Autocomplete } from '../Autocomplete'
-import { AutocompleteOption } from '../Autocomplete/Autocomplete.types'
 import { useFilters } from '../FilterProvider/useFilters'
+import { DropdownOption } from '../shared.types'
 
 import { SimpleFilterProps } from './SimpleFilter.types'
 import { withContainer } from '../withContainer'
@@ -37,7 +37,7 @@ const SimpleFilterComponent = ({
 
   const isError = queryError != null || error != null
 
-  const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
+  const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: DropdownOption | string | null) => {
     if (selectedOption == null) return
 
     const filter: FilterInput = {

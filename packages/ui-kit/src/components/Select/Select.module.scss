@@ -1,0 +1,116 @@
+.CustomSelectIntroduction {
+  font-family: 'IBM Plex Sans', sans-serif;
+  box-sizing: border-box;
+  min-height: 34.2px;
+  padding: 8px;
+  width: 100%;
+  border-radius: var(--propel-border-radius-sm);
+  text-align: left;
+  line-height: 1.5;
+  background: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  color: var(--propel-text-primary);
+  position: relative;
+  box-shadow: var(--propel-shadow-sm);
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 120ms;
+
+  &:hover {
+    border: 1px solid var(--propel-accent);
+  }
+
+  &[aria-expanded='true'] {
+    border: 1px solid var(--propel-accent);
+    box-shadow: 0 0 0 3px #c7def7;
+  }
+}
+
+.CustomSelectIntroduction__disabled {
+  background-color: #cfcfcf;
+  cursor: not-allowed;
+  border: none;
+
+  &:hover {
+    border: none;
+  }
+}
+
+.CustomSelectIntroduction__listbox {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: var(--propel-space-xxs);
+  margin: var(--propel-space-xxs) 0;
+  border-radius: var(--propel-border-radius-sm);
+  overflow: auto;
+  outline: 0px;
+  background-color: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  color: var(--propel-text-primary);
+  box-shadow: var(--propel-shadow-sm);
+  position: absolute;
+  z-index: 9999;
+}
+
+.CustomSelectIntroduction__popper {
+  z-index: 1;
+}
+
+.CustomSelectIntroduction__option {
+  list-style: none;
+  padding: var(--propel-space-sm);
+  border-radius: var(--propel-border-radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--propel-space-sm);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--propel-accent);
+    color: var(--propel-text-primary);
+  }
+
+  &[aria-selected='true']:hover {
+    background-color: var(--propel-accent-hover);
+  }
+
+  &:hover {
+    background-color: var(--propel-color-blue25);
+  }
+}
+
+.CustomSelectIntroduction__indicator {
+  outline: 0;
+  box-shadow: none;
+  border: 0;
+  border-radius: 4px;
+  background-color: transparent;
+  align-self: center;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--propel-bg-secondary);
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.placeholder {
+  color: #757575;
+}
