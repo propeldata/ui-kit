@@ -21,6 +21,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     filters: filtersFromProp,
     refetchInterval,
     retry,
+    enabled: enabledProp = true,
     timeZone
   } = props
 
@@ -40,10 +41,10 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
 
   const filters = filtersFromProp ?? filtersFromProvider
 
-  const enabled = accessToken != null
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
-  if (!enabled && metric) {
+  if (accessToken == null && metric) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 

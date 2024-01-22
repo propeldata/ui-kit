@@ -18,6 +18,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     filters: filtersFromProp,
     refetchInterval,
     retry,
+    enabled: enabledProp = true,
     timeZone
   } = props
 
@@ -37,7 +38,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
 
   const filters = filtersFromProp ?? filtersFromProvider
 
-  const enabled = accessToken != null
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
   if (!enabled && metric) {
