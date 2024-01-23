@@ -1,5 +1,7 @@
 export * from './useCounter'
+export * from './useDataGrid'
 export * from './useLeaderboard'
+export * from './useRecordsById'
 export * from './useTimeSeries'
 export * from './useTopValues'
 export * from './types/Query.types'
