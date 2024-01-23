@@ -16,6 +16,8 @@
   justify-content: center;
   align-items: center;
   margin-top: var(--propel-space-sm);
+  font-family: var(--propel-font-family);
+  font-size: var(--propel-small-font-size);
 
   span {
     margin: 0;
@@ -24,12 +26,10 @@
   }
 
   span:first-child {
-    font-size: var(--propel-small-font-size);
     padding-right: var(--propel-space-xxs);
   }
 
   span:last-child {
-    font-size: var(--propel-small-font-size);
     font-weight: 700;
   }
 }
