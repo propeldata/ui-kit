@@ -38,7 +38,11 @@ const SimpleFilterComponent = ({
   const isError = queryError != null || error != null
 
   const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: DropdownOption | string | null) => {
-    if (selectedOption == null) return
+    if (selectedOption == null) {
+      const filterList = filters.filter((filter) => filter.id !== id)
+      setFilters(filterList)
+      return
+    }
 
     const filter: FilterInput = {
       column: columnName,

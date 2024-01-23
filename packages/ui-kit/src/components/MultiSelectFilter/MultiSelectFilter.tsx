@@ -38,7 +38,11 @@ const MultiSelectFilterBase = ({
 
   const handleChange = (_: React.SyntheticEvent | null, valueList: string | string[] | null) => {
     if (typeof valueList === 'string') throw new Error('MultiSelectFilter should be used with multiple enabled')
-    if (valueList == null) return
+    if (valueList == null) {
+      const filterList = filters.filter((filter) => filter.id !== id)
+      setFilters(filterList)
+      return
+    }
 
     const orFilter = { id, ...buildOrFilter(columnName ?? '', valueList) }
 
