@@ -1,5 +1,5 @@
 import type { ChartConfiguration } from 'chart.js'
-import { DimensionInput, Sort } from 'src/helpers'
+import { DimensionInput, Sort } from '../../helpers'
 import { ErrorFallbackProps } from '../ErrorFallback'
 import { DataComponentProps, QueryProps } from '../shared.types'
 

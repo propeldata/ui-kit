@@ -1,5 +1,5 @@
-import type { QueryProps } from 'src/components/shared.types'
-import type { DataPoolInput } from 'src/helpers'
+import type { QueryProps } from '../../components/shared.types'
+import type { DataPoolInput } from '../../helpers'
 
 export interface TopValuesQueryProps extends Omit<QueryProps, 'filters'> {
   /** The column to fetch the unique values from */
