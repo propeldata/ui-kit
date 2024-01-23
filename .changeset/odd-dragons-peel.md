@@ -2,4 +2,4 @@
 '@propeldata/ui-kit': patch
 ---
 
-Fixed type exports
+Fixed component and type exports
