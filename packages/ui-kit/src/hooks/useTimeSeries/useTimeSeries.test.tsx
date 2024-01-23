@@ -51,7 +51,7 @@ describe('useTimeSeries', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: TimeSeriesQueryProps) => (
+  const QueryClientProviderComponent = (props: TimeSeriesQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -62,7 +62,7 @@ describe('useTimeSeries', () => {
   })
 
   it('should useTimeSeries return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.labels[1])
     await dom.findByText(mockData.values[2])

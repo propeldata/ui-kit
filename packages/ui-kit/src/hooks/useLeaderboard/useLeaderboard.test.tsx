@@ -60,7 +60,7 @@ describe('useLeaderboard', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: LeaderboardQueryProps) => (
+  const QueryClientProviderComponent = (props: LeaderboardQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -71,7 +71,7 @@ describe('useLeaderboard', () => {
   })
 
   it('should useLeaderboard return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.headers[0])
     await dom.findByText(mockData.rows[0][1])

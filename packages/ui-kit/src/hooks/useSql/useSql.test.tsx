@@ -59,7 +59,7 @@ describe('useSql', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: SqlQueryProps) => (
+  const QueryClientProviderComponent = (props: SqlQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -70,7 +70,7 @@ describe('useSql', () => {
   })
 
   it('should useSql return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.columns[0]?.columnName)
     await dom.findByText(mockData.rows[0][1])
