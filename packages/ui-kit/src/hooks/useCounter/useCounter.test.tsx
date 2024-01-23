@@ -40,7 +40,7 @@ describe('useCounter', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: CounterQueryProps) => (
+  const QueryClientProviderComponent = (props: CounterQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -51,7 +51,7 @@ describe('useCounter', () => {
   })
 
   it('should useCounter return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.value)
   })

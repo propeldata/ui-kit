@@ -1,4 +1,4 @@
-import { FilterInput, MetricInput, TimeRangeInput } from 'src/helpers'
+import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
 import type { ErrorFallbackProps } from './ErrorFallback'
 import type { LoaderProps } from './Loader'
 
@@ -57,6 +57,9 @@ export interface QueryProps {
 
   /** This prop allows you to override the URL for Propel's GraphQL API. You shouldn't need to set this unless you are testing. */
   propelApiUrl?: string
+
+  /** When false, the component will not make any GraphQL requests, default is true. */
+  enabled?: boolean
 }
 
 export interface DropdownOption {

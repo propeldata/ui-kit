@@ -4,22 +4,21 @@ import type { Meta, StoryObj } from '@storybook/react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 
-import { useRecordsById } from './useRecordsById'
-import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.types'
+import { SqlQueryProps } from './Sql.types'
+import { useSql } from './useSql'
 import '../css/stories.css'
 
-const args: RecordsByIdQueryProps = {
+const args: SqlQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
-  dataPool: { id: process.env.STORYBOOK_WEBHOOK_DATAPOOL_ID ?? '' },
-  columns: ['foo', 'bar', '_propel_received_at'],
-  uniqueIds: ['1', '2', '3', '4', '5']
+  /* eslint-disable no-useless-escape */
+  query: `SELECT quantity, taco_name, sauce_name, restaurant_name, taco_total_price FROM \"TacoSoft Demo Data\" LIMIT 5`
 }
 
 const meta: Meta = {
-  title: 'Components/RecordsById',
+  title: 'Components/Sql',
   tags: ['pattern'],
   parameters: {
-    imports: ['useRecordsById', 'useAccessToken'],
+    imports: ['useSql', 'useAccessToken'],
     isFunction: true,
     codeTemplate: storybookCodeTemplate,
     transformBody: (body: string) =>
@@ -32,7 +31,6 @@ const meta: Meta = {
     }`,
           `${JSON.stringify(args)}`
         )
-        .replace(process.env.STORYBOOK_WEBHOOK_DATAPOOL_ID ?? '', '<PROPEL_DATAPOOL_ID>')
         .concat(' }')
   }
 } satisfies Meta
@@ -41,31 +39,29 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-let id = 0
-
-export const RecordsByIdStory: Story = {
+export const SqlStory: Story = {
   args,
   render: (args) =>
-    (function RecordsById() {
+    (function Sql() {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
-      const { data } = useRecordsById({ ...args, accessToken })
-      const { columns, values } = data?.recordsByUniqueId ?? {}
+      const { data } = useSql({ ...args, accessToken })
+      const { columns, rows } = data?.sqlV1 ?? {}
 
       return (
         <div>
           <table>
             <thead>
               <tr>
-                {columns?.map((header) => (
-                  <th key={id++}>{header}</th>
+                {columns?.map((col, index) => (
+                  <th key={index}>{col?.columnName}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {values?.map((row) => (
-                <tr key={id++}>
-                  {row?.map((cell) => (
-                    <td key={id++}>{cell}</td>
+              {rows?.map((row, i) => (
+                <tr key={i}>
+                  {row?.map((cell, k) => (
+                    <td key={k}>{cell}</td>
                   ))}
                 </tr>
               ))}

@@ -1,5 +1,5 @@
-import type { QueryProps } from 'src/components/shared.types'
-import type { DataPoolInput, Sort } from 'src/helpers'
+import type { QueryProps } from '../../components/shared.types'
+import type { DataPoolInput, Sort } from '../../helpers'
 
 export interface DataGridQueryProps extends Omit<QueryProps, 'metric'> {
   /** The columns to retrieve. */

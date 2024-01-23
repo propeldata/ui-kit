@@ -33,7 +33,7 @@ const SimpleFilterComponent = ({
 
   const log = useLog()
 
-  const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone })
+  const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone, enabled: !isStatic })
 
   const isError = queryError != null || error != null
 
