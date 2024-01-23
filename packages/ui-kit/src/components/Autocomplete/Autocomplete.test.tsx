@@ -23,7 +23,7 @@ describe('Autocomplete', () => {
   it('should enable selecting an option', async () => {
     const onChangeValue = jest.fn()
 
-    const onChange = (_: SyntheticEvent, value: AutocompleteOption | null) => {
+    const onChange = (_: SyntheticEvent, value: AutocompleteOption | string | null) => {
       onChangeValue(value)
     }
 

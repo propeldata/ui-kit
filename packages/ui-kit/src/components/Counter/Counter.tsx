@@ -42,7 +42,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
-    const { data, isLoading, error } = useCounter({ ...query, timeZone })
+    const { data, isLoading, error } = useCounter({ ...query, timeZone, enabled: !isStatic })
 
     const value = isStatic ? staticValue : data?.counter?.value
 

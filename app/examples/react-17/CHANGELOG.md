@@ -1,5 +1,22 @@
 # react-17
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [76537de]
+  - @propeldata/ui-kit@0.4.1
+
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [f8041e7]
+- Updated dependencies [84a9f9b]
+- Updated dependencies [70ad890]
+- Updated dependencies [d12f0e1]
+  - @propeldata/ui-kit@0.4.0
+
 ## 0.1.1
 
 ### Patch Changes

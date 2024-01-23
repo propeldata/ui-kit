@@ -1,8 +1,9 @@
 import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
-import { RelativeTimeRange } from '../../helpers'
-import { Dom, mockLeaderboardQuery, setupTestHandlers } from '../../testing'
+import { RelativeTimeRange, sleep } from '../../helpers'
+import { Dom, mockLeaderboardQuery, mockServer, setupTestHandlers } from '../../testing'
+import { AccessTokenProvider } from '../AccessTokenProvider'
 import { Leaderboard } from './Leaderboard'
 
 const mockData = {
@@ -225,5 +226,21 @@ describe('Leaderboard', () => {
     const values = await dom.findAllByText('true')
 
     expect(values).toHaveLength(3)
+  })
+
+  it('Should NOT fetch data in static mode', async () => {
+    jest.useRealTimers()
+
+    mockServer.events.on('request:start', async () => {
+      throw new Error('Should not fetch data in static mode')
+    })
+
+    dom = render(
+      <AccessTokenProvider accessToken="abc">
+        <Leaderboard {...mockData} />
+      </AccessTokenProvider>
+    )
+
+    await sleep(100)
   })
 })
