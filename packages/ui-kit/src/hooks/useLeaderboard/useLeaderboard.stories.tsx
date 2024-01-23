@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken, Sort } from '../../helpers'
 import { useLeaderboard } from './useLeaderboard'
-import './useLeaderboard.stories.css'
+import '../css/stories.css'
 
 const args = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
