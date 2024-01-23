@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-import { FilterInput } from 'src/helpers'
+import { FilterInput } from '../../helpers'
 
 interface FilterInputWithId extends FilterInput {
   id: symbol

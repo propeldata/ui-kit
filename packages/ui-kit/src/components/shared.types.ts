@@ -1,4 +1,4 @@
-import { FilterInput, MetricInput, TimeRangeInput } from 'src/helpers'
+import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
 import type { ErrorFallbackProps } from './ErrorFallback'
 import type { LoaderProps } from './Loader'
 

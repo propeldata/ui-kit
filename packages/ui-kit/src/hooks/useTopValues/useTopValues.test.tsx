@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '../../helpers'
 import { Dom, mockTopValuesQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { useTopValues } from './useTopValues'
-import { TopValuesQueryProps } from 'src/components/TopValues/TopValues.types'
+import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 
 const mockData = {
   values: ['a', 'b', 'c', 'd']
