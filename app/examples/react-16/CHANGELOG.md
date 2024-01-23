@@ -1,5 +1,16 @@
 # react-16
 
+## 0.1.4
+
+### Patch Changes
+
+- 9797ad6: Refactored PieChart Dimension query prop on receive a single dimension
+- Updated dependencies [30e01c3]
+- Updated dependencies [9797ad6]
+- Updated dependencies [1ff7296]
+- Updated dependencies [33eca9e]
+  - @propeldata/ui-kit@0.5.0
+
 ## 0.1.3
 
 ### Patch Changes
