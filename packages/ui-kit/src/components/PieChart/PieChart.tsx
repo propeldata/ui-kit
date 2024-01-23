@@ -60,7 +60,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: leaderboardData,
       isLoading: leaderboardIsLoading,
       error: leaderboardHasError
-    } = useLeaderboard({ ...query, enabled: !isStatic })
+    } = useLeaderboard({ ...query, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
 
     /**
      * Fetches the counter data from the API
@@ -262,7 +262,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           (hasError?.name === 'AccessTokenError' ||
             !query.metric ||
             !query.timeRange ||
-            !query.dimensions ||
+            !query.dimension ||
             !query.rowLimit)
         ) {
           // console.error(

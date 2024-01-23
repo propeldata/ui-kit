@@ -99,11 +99,9 @@ describe('PieChart', () => {
         query={{
           accessToken: 'test-token',
           metric: 'test-metric',
-          dimensions: [
-            {
-              columnName: 'test-column'
-            }
-          ],
+          dimension: {
+            columnName: 'test-column'
+          },
           rowLimit: 10,
           timeRange: {
             relative: RelativeTimeRange.LastNDays,
@@ -141,11 +139,9 @@ describe('PieChart', () => {
         query={{
           accessToken: 'test-token',
           metric: 'should-fail',
-          dimensions: [
-            {
-              columnName: 'test-column'
-            }
-          ],
+          dimension: {
+            columnName: 'test-column'
+          },
           rowLimit: 10,
           timeRange: {
             relative: RelativeTimeRange.LastNDays,

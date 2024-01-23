@@ -19,11 +19,9 @@ export function PieChartConnectedTest() {
         <PieChart
           card
           query={{
-            dimensions: [
-              {
-                columnName: REACT_APP_DIMENSION_1
-              }
-            ],
+            dimension: {
+              columnName: REACT_APP_DIMENSION_1
+            },
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             rowLimit: 8,
             timeRange: {
