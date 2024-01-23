@@ -61,7 +61,7 @@ describe('useRecordsById', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: RecordsByIdQueryProps) => (
+  const QueryClientProviderComponent = (props: RecordsByIdQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -72,7 +72,7 @@ describe('useRecordsById', () => {
   })
 
   it('should useRecordsById return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.columns[0])
     await dom.findByText(mockData.values[0][1])

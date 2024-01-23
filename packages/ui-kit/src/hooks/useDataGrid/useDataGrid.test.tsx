@@ -65,7 +65,7 @@ describe('useDataGrid', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: DataGridQueryProps) => (
+  const QueryClientProviderComponent = (props: DataGridQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -76,7 +76,7 @@ describe('useDataGrid', () => {
   })
 
   it('should useDataGrid return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.headers[0])
     await dom.findByText(mockData.rows[0][1])

@@ -1,5 +1,5 @@
 import type { ChartConfiguration } from 'chart.js'
-import { DimensionInput, Sort } from 'src/helpers'
+import { DimensionInput, Sort } from '../../helpers'
 import { ErrorFallbackProps } from '../ErrorFallback'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
@@ -45,8 +45,8 @@ export interface PieChartQueryProps extends QueryProps {
   /** The sort order of the rows. It can be ascending (ASC) or descending (DESC) order. Defaults to descending (DESC) order when not provided. */
   sort?: Sort
 
-  /** The variant the chart will display, can be either "pie" or "doughnut" */
-  dimensions?: DimensionInput[]
+  /** One Dimension to group the Metric values by. Typically, Dimension in a piechart is what you want to compare and rank. */
+  dimension?: DimensionInput
 }
 
 export interface PieChartProps extends ErrorFallbackProps, DataComponentProps {

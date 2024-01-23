@@ -1,5 +1,5 @@
-import type { QueryProps } from 'src/components/shared.types'
-import { DataPoolInput } from 'src/helpers'
+import type { QueryProps } from '../../components/shared.types'
+import { DataPoolInput } from '../../helpers'
 
 export interface RecordsByIdQueryProps extends Omit<QueryProps, 'timeZone' | 'timeRange' | 'metric' | 'filters'> {
   /** The Data Pool to be queried. A Data Pool ID or unique name can be provided. */

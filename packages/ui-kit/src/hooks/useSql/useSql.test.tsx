@@ -1,20 +1,23 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '../../helpers'
-import { Dom, mockLeaderboardQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
-import { LeaderboardQueryProps } from '../../components'
-import { useLeaderboard } from './useLeaderboard'
+import { Dom, mockSqlQuery, setupTestHandlers } from '../../testing'
+import { SqlQueryProps } from './Sql.types'
+import { useSql } from './useSql'
 
 const mockData = {
-  headers: ['header-1', 'header-2', 'header-3'],
-  rows: [['dim-1', 'dim-2', '30']]
+  columns: [{ columnName: 'column-1' }, { columnName: 'column-2' }],
+  rows: [
+    ['id-1', 'record-1'],
+    ['id-2', 'record-2']
+  ]
 }
 
 const handlers = [
-  mockLeaderboardQuery((req, res, ctx) => {
+  mockSqlQuery((req, res, ctx) => {
     return res(
       ctx.data({
-        leaderboard: mockData
+        sqlV1: mockData
       })
     )
   })
@@ -22,32 +25,28 @@ const handlers = [
 
 const mockQuery = {
   accessToken: 'token',
-  metric: 'Revenue',
-  timeRange: {
-    relative: RelativeTimeRange.LastNDays,
-    n: 30
-  }
+  query: `select * from "table_name" limit 5`
 }
 
-describe('useLeaderboard', () => {
+describe('useSql', () => {
   let dom: Dom
 
   const queryClient = new QueryClient()
 
-  // CustomComponent is a component that uses useLeaderboard hook
-  const CustomComponent = (props: LeaderboardQueryProps) => {
-    const { data } = useLeaderboard(props)
+  // CustomComponent is a component that uses useSQL hook
+  const CustomComponent = (props: SqlQueryProps) => {
+    const { data } = useSql(props)
     return (
       <table>
         <thead>
           <tr>
-            {data?.leaderboard?.headers?.map((header) => (
-              <th key={header}>{header}</th>
+            {data?.sqlV1?.columns?.map((col, index) => (
+              <th key={index}>{col?.columnName}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data?.leaderboard?.rows?.map((row, index) => (
+          {data?.sqlV1?.rows?.map((row, index) => (
             <tr key={index}>
               {row.map((cell, index) => (
                 <td key={index}>{cell}</td>
@@ -60,7 +59,7 @@ describe('useLeaderboard', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QueryClientProviderComponent = (props: LeaderboardQueryProps) => (
+  const QueryClientProviderComponent = (props: SqlQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -70,10 +69,10 @@ describe('useLeaderboard', () => {
     setupTestHandlers(handlers)
   })
 
-  it('should useLeaderboard return value', async () => {
+  it('should useSql return value', async () => {
     dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
-    await dom.findByText(mockData.headers[0])
+    await dom.findByText(mockData.columns[0]?.columnName)
     await dom.findByText(mockData.rows[0][1])
   })
 })

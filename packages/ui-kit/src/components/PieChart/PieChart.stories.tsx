@@ -74,11 +74,9 @@ const connectedParams = {
     n: 30
   },
   rowLimit: 5,
-  dimensions: [
-    {
-      columnName: process.env.STORYBOOK_DIMENSION_1 as string
-    }
-  ],
+  dimension: {
+    columnName: process.env.STORYBOOK_DIMENSION_1 as string
+  },
   sort: Sort.Asc
 }
 

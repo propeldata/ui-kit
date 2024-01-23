@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '../../helpers'
 import { Dom, mockTopValuesQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { useTopValues } from './useTopValues'
-import { TopValuesQueryProps } from 'src/components/TopValues/TopValues.types'
+import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 
 const mockData = {
   values: ['a', 'b', 'c', 'd']
@@ -50,7 +50,7 @@ describe('useTopValues', () => {
   }
 
   // Setup QueryClientProvider for react-query
-  const QuerClientProviderComponent = (props: TopValuesQueryProps) => (
+  const QueryClientProviderComponent = (props: TopValuesQueryProps) => (
     <QueryClientProvider client={queryClient}>
       <CustomComponent {...props} />
     </QueryClientProvider>
@@ -61,7 +61,7 @@ describe('useTopValues', () => {
   })
 
   it('should useTopValues return value', async () => {
-    dom = render(<QuerClientProviderComponent {...mockQuery} />)
+    dom = render(<QueryClientProviderComponent {...mockQuery} />)
 
     await dom.findByText(mockData.values[2])
   })
