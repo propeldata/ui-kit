@@ -1,0 +1,9 @@
+query Sql($sqlInput: SqlV1Input!) {
+  sqlV1(input: $sqlInput) {
+    columns {
+      columnName
+      type
+    }
+    rows
+  }
+}
