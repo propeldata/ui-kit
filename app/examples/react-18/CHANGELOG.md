@@ -1,5 +1,12 @@
 # react-18
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [76537de]
+  - @propeldata/ui-kit@0.4.1
+
 ## 0.1.2
 
 ### Patch Changes

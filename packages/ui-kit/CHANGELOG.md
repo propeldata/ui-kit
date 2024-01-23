@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.4.1
+
+### Patch Changes
+
+- 76537de: Export useDataGrid and useRecordsById
+
 ## 0.4.0
 
 ### Minor Changes
