@@ -2,4 +2,4 @@
 '@propeldata/ui-kit': patch
 ---
 
-fix some exports
+Export useDataGrid and useRecordsById
