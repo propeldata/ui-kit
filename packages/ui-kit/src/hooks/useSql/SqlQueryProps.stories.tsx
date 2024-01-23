@@ -3,7 +3,7 @@ import { QueryProps } from '../../components/shared.types'
 import type { SqlQueryProps } from './Sql.types'
 
 export const SqlQueryPropsComponent: React.FC<
-  SqlQueryProps & Omit<QueryProps, 'timeZone' | 'timeRange' | 'metric' | 'filters'>
+  SqlQueryProps & Pick<QueryProps, 'accessToken' | 'refetchInterval' | 'retry' | 'enabled' | 'propelApiUrl'>
 > = () => null
 
 const meta = {

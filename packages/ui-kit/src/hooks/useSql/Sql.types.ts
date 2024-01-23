@@ -7,9 +7,11 @@ import { QueryProps } from 'src/components/shared.types'
  * @property {string} accessToken - Access token used for the query.
  * @property {number} refetchInterval - Interval in milliseconds for refetching the data
  * @property {boolean} retry - Whether to retry on errors.
+ * @property {boolean} enabled - Whether to enable or not.
  * @property {string} propelApiUrl - To override the URL for Propel's GraphQL API.
  */
-export interface SqlQueryProps extends Omit<QueryProps, 'timeZone' | 'timeRange' | 'metric' | 'filters'> {
+export interface SqlQueryProps
+  extends Pick<QueryProps, 'accessToken' | 'refetchInterval' | 'retry' | 'enabled' | 'propelApiUrl'> {
   /** The SQL query. */
   query: string
 }

@@ -15,7 +15,8 @@ export const useSql = ({
   accessToken: accessTokenFromProp,
   propelApiUrl,
   refetchInterval,
-  retry
+  retry,
+  enabled: enabledProp = true
 }: SqlQueryProps): UseQueryProps<SqlQuery> => {
   const log = useLog()
 
@@ -29,7 +30,7 @@ export const useSql = ({
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const enabled = accessToken != null
+  const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
   if (!enabled) {
