@@ -1,5 +1,17 @@
 # @propeldata/ui-kit
 
+## 0.5.0
+
+### Minor Changes
+
+- 33eca9e: Add SQL query hook
+
+### Patch Changes
+
+- 30e01c3: Fixed font-family not applying to piechart
+- 9797ad6: Refactored PieChart Dimension query prop on receive a single dimension
+- 1ff7296: Fixed component and type exports
+
 ## 0.4.1
 
 ### Patch Changes
