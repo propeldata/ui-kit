@@ -1,4 +1,4 @@
-import { QueryProps } from 'src/components/shared.types'
+import { QueryProps } from '../../components/shared.types'
 
 /**
  * @interface SqlQueryProps
