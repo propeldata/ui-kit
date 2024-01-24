@@ -10,7 +10,6 @@ import { SimpleFilterProps } from './SimpleFilter.types'
 import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import componentStyles from './SimpleFilter.module.scss'
 import { useLog } from '../Log'
 
 const SimpleFilterComponent = ({
@@ -61,7 +60,13 @@ const SimpleFilterComponent = ({
 
   if (loading || (!isStatic && isLoading)) {
     return (
-      <Loader {...loaderProps} className={componentStyles.loader} style={{ ...autocompleteProps?.containerStyle }} />
+      <Loader
+        {...loaderProps}
+        style={{
+          width: autocompleteProps?.containerStyle?.width ?? 'auto',
+          height: autocompleteProps?.containerStyle?.height ?? 'auto'
+        }}
+      />
     )
   }
 
