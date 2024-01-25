@@ -59,7 +59,7 @@
   overflow: auto;
   outline: 0px;
   max-height: 300px;
-  z-index: 1;
+  z-index: 9999;
   background-color: var(--propel-bg-primary);
   border: 1px solid var(--propel-border-primary);
   color: var(--propel-text-primary);
@@ -94,4 +94,9 @@
       color: var(--propel-text-primary);
     }
   }
+}
+
+.autoCompleteOption {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

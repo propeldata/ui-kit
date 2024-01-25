@@ -1,5 +1,4 @@
 import React, { SyntheticEvent, useEffect, useRef } from 'react'
-import { useTopValues } from '../../hooks'
 import { FilterInput, FilterOperator, getTimeZone } from '../../helpers'
 
 import { Autocomplete } from '../Autocomplete'
@@ -10,8 +9,8 @@ import { SimpleFilterProps } from './SimpleFilter.types'
 import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import componentStyles from './SimpleFilter.module.scss'
 import { useLog } from '../Log'
+import { useTopValues } from '../../hooks'
 
 const SimpleFilterComponent = ({
   autocompleteProps,
@@ -38,7 +37,11 @@ const SimpleFilterComponent = ({
   const isError = queryError != null || error != null
 
   const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
-    if (selectedOption == null) return
+    if (selectedOption == null) {
+      const filterList = filters.filter((filter) => filter.id !== id)
+      setFilters(filterList)
+      return
+    }
 
     const filter: FilterInput = {
       column: columnName,
@@ -46,7 +49,7 @@ const SimpleFilterComponent = ({
       value: typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
     }
 
-    const filterList = filters.filter((filter) => filter.id !== id).concat({ ...filter, id })
+    const filterList = filters.filter((filter) => filter.id !== Symbol()).concat({ ...filter, id: Symbol() })
 
     setFilters(filterList)
   }
@@ -61,10 +64,15 @@ const SimpleFilterComponent = ({
 
   if (loading || (!isStatic && isLoading)) {
     return (
-      <Loader {...loaderProps} className={componentStyles.loader} style={{ ...autocompleteProps?.containerStyle }} />
+      <Loader
+        {...loaderProps}
+        style={{
+          width: autocompleteProps?.containerStyle?.width ?? 'auto',
+          height: autocompleteProps?.containerStyle?.height ?? 'auto'
+        }}
+      />
     )
   }
-
   return (
     <Autocomplete
       {...autocompleteProps}
