@@ -121,7 +121,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
             { name: 'preventOverflow', enabled: false }
           ]}
           style={{
-            width: anchorEl.clientWidth
+            width: anchorEl.clientWidth,
+            zIndex: 9999
           }}
           disablePortal
         >

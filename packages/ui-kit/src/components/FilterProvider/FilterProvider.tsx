@@ -17,10 +17,14 @@ export const FilterContext = createContext<FilterContextValue>({ filters: [], se
 
 export interface FilterContextProps {
   children?: React.ReactNode
+  /** Set of pre defined filters that will be used by all the child components */
+  baseFilters?: FilterInput[]
 }
 
-export const FilterProvider: React.FC<FilterContextProps> = ({ children }) => {
-  const [filters, setFilters] = useState<FilterInputWithId[]>([])
+export const FilterProvider: React.FC<FilterContextProps> = ({ children, baseFilters }) => {
+  const [filters, setFilters] = useState<FilterInputWithId[]>(
+    baseFilters?.map((filter) => ({ ...filter, id: Symbol() })) ?? []
+  )
 
   return <FilterContext.Provider value={{ filters, setFilters }}>{children}</FilterContext.Provider>
 }
