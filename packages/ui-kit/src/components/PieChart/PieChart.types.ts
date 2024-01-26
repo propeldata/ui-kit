@@ -31,6 +31,16 @@ export type ChartProps = {
 
   /** Sets the chart color palette */
   chartColorPalette?: string[]
+
+  /** Hides the total value on chart if it is set the true
+   * @default false
+   */
+  hideTotal?: boolean
+
+  /** Sets the position of the total value for Pie Chart
+   * @default top
+   */
+  totalPosition?: 'top' | 'bottom'
 }
 
 export type PieChartData = {
@@ -50,23 +60,26 @@ export interface PieChartQueryProps extends QueryProps {
 }
 
 export interface PieChartProps extends ErrorFallbackProps, DataComponentProps {
-  /** The variant the chart will respond to, can be either `pie` or `doughnut` */
+  /** The variant the chart will respond to, can be either `pie` or `doughnut`. */
   variant?: PieChartVariant
 
   /** When true, shows a skeleton loader */
   loading?: boolean
 
-  /** If passed along with `rows` the component will ignore the built-in GraphQL operations */
+  /** If passed along with `rows` the component will ignore the built-in GraphQL operations. */
   headers?: string[]
 
-  /** If passed along with `headers` the component will ignore the built-in GraphQL operations */
+  /** If passed along with `headers` the component will ignore the built-in GraphQL operations. */
   rows?: string[][]
 
   /** PieChart query props */
   query?: PieChartQueryProps
 
-  /** Optional props that are used to configure the chart component.  */
+  /** Optional props that are used to configure the chart component. */
   chartProps?: ChartProps
+
+  /** Provides className to style label list of chart. */
+  labelListClassName?: string
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'pie' | 'doughnut'>) => ChartConfiguration<'pie' | 'doughnut'>

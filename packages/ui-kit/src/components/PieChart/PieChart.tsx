@@ -29,6 +29,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       baseTheme = 'lightTheme',
       loading: isLoadingStatic = false,
       chartProps = {},
+      labelListClassName,
       chartConfigProps,
       ...rest
     }: PieChartProps,
@@ -76,6 +77,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const hasError = leaderboardHasError || counterHasError
 
     const isPie = variant === 'pie'
+
     const isDoughnut = variant === 'doughnut'
 
     const showValues = chartProps?.showValues ?? false
@@ -96,25 +98,43 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       [theme]
     )
 
+    const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
+
     const renderChart = React.useCallback(
       (data?: PieChartData) => {
         if (!canvasRef.current || !data || !theme || !chartConfig) {
           return
         }
 
-        const { chartColorPalette = defaultChartColorPalette, legendPosition = 'top', hideLegend = false } = chartProps
+        const {
+          chartColorPalette = defaultChartColorPalette,
+          legendPosition = 'top',
+          hideLegend = false,
+          hideTotal = false,
+          totalPosition = 'bottom'
+        } = chartProps
 
         const labels = data.rows?.map((row) => row[0]) ?? []
 
         const values = data.rows?.map((row) => Number(row[1])) ?? []
 
         const customChartLabelsPlugin: Plugin<'pie' | 'doughnut'> = getCustomChartLabelsPlugin({
-          theme
+          theme,
+          hideTotal
         })
 
         const customPlugins = {
           customCanvasBackgroundColor: {
             color: card ? theme?.bgPrimary : 'transparent'
+          },
+          title: {
+            display: isPie && !hideTotal,
+            text: `Total: ${totalValue.toLocaleString()}`,
+            position: totalPosition,
+            font: {
+              size: 14,
+              weight: 'normal'
+            }
           },
           legend: {
             display: showValues ? false : !hideLegend,
@@ -206,6 +226,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         chartConfig,
         isDoughnut,
         showValues,
+        isPie,
+        totalValue,
         defaultChartColorPalette,
         chartConfigProps
       ]
@@ -315,14 +337,12 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       return <Loader {...loaderProps} />
     }
 
-    const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
-
     const getListItem = () => {
       if (showValues) {
         const _rows = isStatic ? rows : fetchedData?.leaderboard?.rows
 
         return (
-          <div className={componentStyles.pieChartList}>
+          <div className={classnames(componentStyles.pieChartList, labelListClassName)}>
             <ul>
               {_rows?.map((row, index) => (
                 <li key={`label-${index}`}>
@@ -341,12 +361,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         <div>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
-        {isPie && (
-          <div className={componentStyles.pieChartTotalValue}>
-            <span>Total: </span>
-            <span>{totalValue.toLocaleString()}</span>
-          </div>
-        )}
         {getListItem()}
       </div>
     )

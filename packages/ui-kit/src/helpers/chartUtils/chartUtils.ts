@@ -74,12 +74,17 @@ export type CustomChartLabelsPluginProps = {
   showBarValues?: boolean
   /** Sets the position of the labels */
   labelPosition?: 'axis' | 'inside' | 'top'
+  /** Hides the total value on chart if it is set the true
+   * @default false
+   */
+  hideTotal?: boolean
 }
 
 export const getCustomChartLabelsPlugin = ({
   theme,
   showBarValues = false,
-  labelPosition = 'axis'
+  labelPosition = 'axis',
+  hideTotal = false
 }: CustomChartLabelsPluginProps): Plugin<ChartVariant> => {
   return {
     id: 'customChartLabelsPlugin',
@@ -125,7 +130,7 @@ export const getCustomChartLabelsPlugin = ({
         })
       }
 
-      if (datasetMeta.type === 'doughnut') {
+      if (datasetMeta.type === 'doughnut' && !hideTotal) {
         const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
         ctx.font = `12px ${theme?.tinyFontFamily}`
         ctx.fillText(
