@@ -58,3 +58,6 @@ jobs:
         with:
           version: yarn changeset version --snapshot
           publish: yarn release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
