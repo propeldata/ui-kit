@@ -1,5 +1,5 @@
 import { useAccessToken, useLog } from '../../components'
-import { TopValuesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTopValuesQuery } from '../../helpers'
+import { TopValuesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTopValuesQuery, TimeRangeInput } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 
@@ -44,7 +44,7 @@ export const useTopValues = ({
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
-  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper

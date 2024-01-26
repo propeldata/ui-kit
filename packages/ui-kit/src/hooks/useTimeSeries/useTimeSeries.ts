@@ -1,5 +1,5 @@
 import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
-import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
+import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity, TimeRangeInput } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
 /**
@@ -49,7 +49,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
-  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper

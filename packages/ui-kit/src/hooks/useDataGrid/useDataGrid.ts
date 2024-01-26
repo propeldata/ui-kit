@@ -1,5 +1,5 @@
 import { useAccessToken, useLog } from '../../components'
-import { DataGridQuery, useDataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort } from '../../helpers'
+import { DataGridQuery, useDataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
 
@@ -47,7 +47,7 @@ export const useDataGrid = ({
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
-  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 

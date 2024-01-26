@@ -1,5 +1,5 @@
 import { LeaderboardQueryProps, useAccessToken, useFilters, useLog } from '../../components'
-import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery } from '../../helpers'
+import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery, TimeRangeInput } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
 /**
@@ -51,7 +51,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
-  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper
