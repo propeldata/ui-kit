@@ -1,6 +1,6 @@
 {
   "name": "react-18",
-  "version": "0.1.5",
+  "version": "0.0.0-20240126235417",
   "private": true,
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"

@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.0.0-20240126235417
+
+### Patch Changes
+
+- 9e84071: Fixed chartConfigProps not passing some props
+
 ## 0.5.1
 
 ### Patch Changes
