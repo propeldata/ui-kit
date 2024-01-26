@@ -57,8 +57,4 @@ jobs:
         uses: changesets/action@v1
         with:
           version: yarn changeset version --snapshot
-        run: |
-          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
-          git config --global user.email "engineering@propeldata.com"
-          git config --global user.name "Propel Data Cloud, Inc."
-          yarn release --pre
+          publish: yarn release
