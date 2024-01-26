@@ -17,7 +17,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     sort,
     rowLimit,
     dimensions,
-    timeRange = {},
+    timeRange,
     filters: filtersFromProp,
     refetchInterval,
     retry,
