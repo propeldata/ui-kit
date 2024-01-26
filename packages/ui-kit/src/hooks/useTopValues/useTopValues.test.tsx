@@ -11,6 +11,13 @@ const mockData = {
 
 const handlers = [
   mockTopValuesQuery((req, res, ctx) => {
+    const dataPoolName = req.variables.topValuesInput.dataPool.name
+    const timeRange = req.variables.topValuesInput.timeRange
+
+    if (dataPoolName === 'not-receive-timerange' && timeRange != null) {
+      return res(ctx.errors([{ message: 'timeRange should not be provided' }]))
+    }
+
     return res(
       ctx.data({
         topValues: mockData
@@ -62,6 +69,12 @@ describe('useTopValues', () => {
 
   it('should useTopValues return value', async () => {
     dom = render(<QueryClientProviderComponent {...mockQuery} />)
+
+    await dom.findByText(mockData.values[2])
+  })
+
+  it('should not send timeRange when not provided', async () => {
+    dom = render(<QueryClientProviderComponent accessToken="token" dataPool={{ name: 'not-receive-timerange' }} />)
 
     await dom.findByText(mockData.values[2])
   })
