@@ -145,12 +145,50 @@ export const StaticDoughnutStory: Story = {
   render: (args) => <PieChart {...args} />
 }
 
-export const PieIsLegendHiddenStory: Story = {
+export const DoughnutIsLegendHiddenStory: Story = {
   name: 'Legend is hidden',
   args: {
+    variant: 'doughnut',
     query: connectedParams,
     chartProps: {
       hideLegend: true
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const DoughnutIsTotaldHiddenStory: Story = {
+  name: 'Doughnut total is hidden',
+  args: {
+    variant: 'doughnut',
+    query: connectedParams,
+    chartProps: {
+      hideTotal: true
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const PieIsTotaldHiddenStory: Story = {
+  name: 'Pie total is hidden',
+  args: {
+    query: connectedParams,
+    chartProps: {
+      hideTotal: true
+    },
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const PieTotalPositionStory: Story = {
+  name: 'Pie total on top',
+  args: {
+    query: connectedParams,
+    chartProps: {
+      totalPosition: 'top'
     },
     card: true
   },
