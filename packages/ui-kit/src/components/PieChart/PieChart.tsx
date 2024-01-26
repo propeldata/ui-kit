@@ -130,11 +130,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           title: {
             display: isPie && !hideTotal,
             text: `Total: ${totalValue.toLocaleString()}`,
-            position: totalPosition,
-            font: {
-              size: 14,
-              weight: 'normal'
-            }
+            position: totalPosition
           },
           legend: {
             display: showValues ? false : !hideLegend,
