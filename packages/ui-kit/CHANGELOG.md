@@ -1,5 +1,12 @@
 # @propeldata/ui-kit
 
+## 0.5.1
+
+### Patch Changes
+
+- 0e0c645: Fixed query hooks passing object with empty values for timeRange when not passed
+- 8eb5fc2: Fixed Pie Chart canvas height and add class to the label list
+
 ## 0.5.0
 
 ### Minor Changes
