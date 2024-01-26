@@ -12,6 +12,13 @@ const mockData = {
 
 const handlers = [
   mockTimeSeriesQuery((req, res, ctx) => {
+    const metric = req.variables.timeSeriesInput.metricName
+    const timeRange = req.variables.timeSeriesInput.timeRange
+
+    if (metric === 'not-receive-timerange' && timeRange != null) {
+      return res(ctx.errors([{ message: 'timeRange should not be provided' }]))
+    }
+
     return res(
       ctx.data({
         timeSeries: mockData
@@ -63,6 +70,13 @@ describe('useTimeSeries', () => {
 
   it('should useTimeSeries return value', async () => {
     dom = render(<QueryClientProviderComponent {...mockQuery} />)
+
+    await dom.findByText(mockData.labels[1])
+    await dom.findByText(mockData.values[2])
+  })
+
+  it('should not send timeRange when not provided', async () => {
+    dom = render(<QueryClientProviderComponent accessToken="token" metric="not-receive-timerange" />)
 
     await dom.findByText(mockData.labels[1])
     await dom.findByText(mockData.values[2])

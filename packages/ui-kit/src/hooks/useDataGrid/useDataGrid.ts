@@ -47,6 +47,8 @@ export const useDataGrid = ({
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
+  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
   /**
@@ -69,12 +71,7 @@ export const useDataGrid = ({
         columns: columns ?? [],
         dataPool: dataPoolInput,
         filters: filters ?? [],
-        timeRange: {
-          relative: timeRange?.relative ?? null,
-          n: timeRange?.n ?? null,
-          start: timeRange?.start ?? null,
-          stop: timeRange?.stop ?? null
-        },
+        ...withTimeRange,
         timeZone,
         orderByColumn,
         sort,

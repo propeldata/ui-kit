@@ -51,6 +51,8 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
+  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+
   /**
    * @hook react-query wrapper
    * @param {LeaderboardQuery} data
@@ -74,12 +76,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
         rowLimit: rowLimit ?? 100,
         dimensions: dimensions ?? [],
         timeZone: timeZone ?? getTimeZone(),
-        timeRange: {
-          relative: timeRange?.relative ?? null,
-          n: timeRange?.n ?? null,
-          start: timeRange?.start ?? null,
-          stop: timeRange?.stop ?? null
-        }
+        ...withTimeRange
       }
     },
     {

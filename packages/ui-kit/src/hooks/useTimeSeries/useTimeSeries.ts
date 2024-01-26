@@ -49,6 +49,8 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
+  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+
   /**
    * @hook react-query wrapper
    * @param {TimeSeriesQuery} data
@@ -68,12 +70,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
       timeSeriesInput: {
         ...metricInput,
         timeZone,
-        timeRange: {
-          relative: timeRange?.relative ?? null,
-          n: timeRange?.n ?? null,
-          start: timeRange?.start ?? null,
-          stop: timeRange?.stop ?? null
-        },
+        ...withTimeRange,
         granularity: granularity as TimeSeriesGranularity,
         filters
       }

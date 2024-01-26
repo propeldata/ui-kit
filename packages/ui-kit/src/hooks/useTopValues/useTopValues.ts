@@ -44,6 +44,8 @@ export const useTopValues = ({
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
+  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+
   /**
    * @hook react-query wrapper
    * @param {TopValuesQuery} data
@@ -64,12 +66,7 @@ export const useTopValues = ({
         columnName: columnName ?? '',
         dataPool: dataPoolInput,
         maxValues,
-        timeRange: {
-          relative: timeRange?.relative ?? null,
-          n: timeRange?.n ?? null,
-          start: timeRange?.start ?? null,
-          stop: timeRange?.stop ?? null
-        },
+        ...withTimeRange,
         timeZone
       }
     },
