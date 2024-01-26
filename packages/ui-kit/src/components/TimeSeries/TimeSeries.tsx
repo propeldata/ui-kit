@@ -179,25 +179,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         // @TODO: need to refactor this logic
         const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid, theme })
 
-        if (chartRef.current) {
-          const chart = chartRef.current
-          chart.data.labels = labels
-          chart.options.scales = {
-            ...chart.options.scales,
-            ...scales
-          }
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins
-          }
-
-          const dataset = chart.data.datasets[0]
-          dataset.data = values
-
-          chart.update()
-          return
-        }
-
         const options: ChartOptions<TimeSeriesChartVariant> = {
           responsive: true,
           maintainAspectRatio: false,
@@ -214,6 +195,32 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           data: dataset,
           options,
           plugins
+        }
+
+        if (chartRef.current) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          const customConfig = chartConfigProps?.(config)
+
+          const chart = chartRef.current
+
+          chart.data.labels = labels
+          chart.options.scales = {
+            ...chart.options.scales,
+            ...scales,
+            ...customConfig?.options?.scales
+          }
+          chart.options.plugins = {
+            ...chart.options.plugins,
+            ...customPlugins,
+            ...customConfig?.options?.plugins
+          }
+
+          const dataset = chart.data.datasets[0]
+          dataset.data = values
+
+          chart.update()
+          return
         }
 
         if (chartConfigProps) {
