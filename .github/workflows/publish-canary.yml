@@ -57,7 +57,7 @@ jobs:
         uses: changesets/action@v1
         with:
           version: yarn changeset version --snapshot
-          publish: yarn release
+          publish: yarn release --pre
         env:
           GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
