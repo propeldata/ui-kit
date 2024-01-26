@@ -48,7 +48,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
-  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper

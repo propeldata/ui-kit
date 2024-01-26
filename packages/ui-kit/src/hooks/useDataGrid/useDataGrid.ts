@@ -47,7 +47,7 @@ export const useDataGrid = ({
     log.error(accessTokenError ?? 'No access token provided.')
   }
 
-  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 

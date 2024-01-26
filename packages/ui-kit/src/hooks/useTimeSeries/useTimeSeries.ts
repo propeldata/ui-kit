@@ -49,7 +49,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
-  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper

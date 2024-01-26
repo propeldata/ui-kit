@@ -17,7 +17,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     sort,
     rowLimit,
     dimensions,
-    timeRange,
+    timeRange = {},
     filters: filtersFromProp,
     refetchInterval,
     retry,
@@ -51,7 +51,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
-  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper

@@ -44,7 +44,7 @@ export const useTopValues = ({
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
-  const withTimeRange = timeRange != null ? { ...timeRange } : {}
+  const withTimeRange = timeRange != null ? { timeRange: { ...timeRange } } : {}
 
   /**
    * @hook react-query wrapper

@@ -49,7 +49,7 @@ const SimpleFilterComponent = ({
       value: typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
     }
 
-    const filterList = filters.filter((filter) => filter.id !== Symbol()).concat({ ...filter, id: Symbol() })
+    const filterList = filters.filter((filter) => filter.id !== id).concat({ ...filter, id })
 
     setFilters(filterList)
   }
@@ -68,7 +68,7 @@ const SimpleFilterComponent = ({
         {...loaderProps}
         style={{
           width: autocompleteProps?.containerStyle?.width ?? 'auto',
-          height: autocompleteProps?.containerStyle?.height ?? 'auto'
+          height: autocompleteProps?.containerStyle?.height ?? loaderProps?.style?.height ?? '42px'
         }}
       />
     )
