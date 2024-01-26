@@ -54,11 +54,10 @@ jobs:
       # Release
       - name: Prerelease Version and Publish
         id: changesets
-        uses: changesets/action@v1
-        with:
-          version: yarn changeset version --snapshot
-          publish: yarn release --pre
-          commit: "chore: canary release"
+        run: |
+          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+          yarn changeset version --snapshot canary
+          yarn changeset publish --tag canary --no-git-tag
         env:
           GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
