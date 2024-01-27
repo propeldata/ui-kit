@@ -51,14 +51,12 @@ jobs:
         with:
           cache_fresh_start: 'true'
 
-      - name: Set up npm authentication
-      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
       # Release
       - name: Prerelease Version and Publish
         id: changesets
         run: |
           yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           yarn changeset version --snapshot canary
           yarn changeset publish --tag canary --no-git-tag
         env:
