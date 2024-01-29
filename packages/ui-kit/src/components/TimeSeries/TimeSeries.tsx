@@ -315,6 +315,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     // @TODO: encapsulate this logic in a shared hook/component
     // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading && serverData == null)) && !canvasRef.current) {
+      log.debug('Loading TimeSeries...')
       destroyChart()
       return <Loader {...loaderProps} />
     }
