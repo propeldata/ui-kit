@@ -1,5 +1,4 @@
 import React, { SyntheticEvent, useEffect, useRef } from 'react'
-import { useTopValues } from '../../hooks'
 import { FilterInput, FilterOperator, getTimeZone } from '../../helpers'
 
 import { Autocomplete } from '../Autocomplete'
@@ -10,8 +9,8 @@ import { SimpleFilterProps } from './SimpleFilter.types'
 import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
-import componentStyles from './SimpleFilter.module.scss'
 import { useLog } from '../Log'
+import { useTopValues } from '../../hooks'
 
 const SimpleFilterComponent = ({
   autocompleteProps,
@@ -65,10 +64,15 @@ const SimpleFilterComponent = ({
 
   if (loading || (!isStatic && isLoading)) {
     return (
-      <Loader {...loaderProps} className={componentStyles.loader} style={{ ...autocompleteProps?.containerStyle }} />
+      <Loader
+        {...loaderProps}
+        style={{
+          width: autocompleteProps?.containerStyle?.width ?? 'auto',
+          height: autocompleteProps?.containerStyle?.height ?? loaderProps?.style?.height ?? '42px'
+        }}
+      />
     )
   }
-
   return (
     <Autocomplete
       {...autocompleteProps}

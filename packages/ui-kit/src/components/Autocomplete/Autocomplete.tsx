@@ -143,7 +143,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
                 <li
                   key={index}
                   {...optionProps}
-                  className={classnames(optionProps.className, optionClassname)}
+                  className={classnames(componentStyles.autoCompleteOption, optionProps.className, optionClassname)}
                   style={{ ...optionProps.style, ...optionStyle }}
                 >
                   {optionLabel.label}

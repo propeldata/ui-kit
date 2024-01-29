@@ -11,6 +11,13 @@ const mockData = {
 
 const handlers = [
   mockCounterQuery((req, res, ctx) => {
+    const metric = req.variables.counterInput.metricName
+    const timeRange = req.variables.counterInput.timeRange
+
+    if (metric === 'not-receive-timerange' && timeRange != null) {
+      return res(ctx.errors([{ message: 'timeRange should not be provided' }]))
+    }
+
     return res(
       ctx.data({
         counter: mockData
@@ -52,6 +59,12 @@ describe('useCounter', () => {
 
   it('should useCounter return value', async () => {
     dom = render(<QueryClientProviderComponent {...mockQuery} />)
+
+    await dom.findByText(mockData.value)
+  })
+
+  it('should not send timeRange when not provided', async () => {
+    dom = render(<QueryClientProviderComponent accessToken="token" metric="not-receive-timerange" />)
 
     await dom.findByText(mockData.value)
   })

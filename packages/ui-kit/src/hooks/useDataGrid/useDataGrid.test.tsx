@@ -15,6 +15,13 @@ const mockData = {
 
 const handlers = [
   mockDataGridQuery((req, res, ctx) => {
+    const dataPoolName = req.variables.dataGridInput.dataPool.name
+    const timeRange = req.variables.dataGridInput.timeRange
+
+    if (dataPoolName === 'not-receive-timerange' && timeRange != null) {
+      return res(ctx.errors([{ message: 'timeRange should not be provided' }]))
+    }
+
     return res(
       ctx.data({
         dataGrid: mockData
@@ -77,6 +84,13 @@ describe('useDataGrid', () => {
 
   it('should useDataGrid return value', async () => {
     dom = render(<QueryClientProviderComponent {...mockQuery} />)
+
+    await dom.findByText(mockData.headers[0])
+    await dom.findByText(mockData.rows[0][1])
+  })
+
+  it('should not send timeRange when not provided', async () => {
+    dom = render(<QueryClientProviderComponent accessToken="token" dataPool={{ name: 'not-receive-timerange' }} />)
 
     await dom.findByText(mockData.headers[0])
     await dom.findByText(mockData.rows[0][1])

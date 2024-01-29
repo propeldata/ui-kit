@@ -1,5 +1,11 @@
 import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
-import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity } from '../../helpers'
+import {
+  TimeSeriesQuery,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  useTimeSeriesQuery,
+  TimeSeriesGranularity,
+  TimeRangeInput
+} from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
 /**
@@ -49,6 +55,8 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Define metric input
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+
   /**
    * @hook react-query wrapper
    * @param {TimeSeriesQuery} data
@@ -68,12 +76,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
       timeSeriesInput: {
         ...metricInput,
         timeZone,
-        timeRange: {
-          relative: timeRange?.relative ?? null,
-          n: timeRange?.n ?? null,
-          start: timeRange?.start ?? null,
-          stop: timeRange?.stop ?? null
-        },
+        ...withTimeRange,
         granularity: granularity as TimeSeriesGranularity,
         filters
       }

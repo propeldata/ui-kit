@@ -12,6 +12,13 @@ const mockData = {
 
 const handlers = [
   mockLeaderboardQuery((req, res, ctx) => {
+    const metric = req.variables.leaderboardInput.metricName
+    const timeRange = req.variables.leaderboardInput.timeRange
+
+    if (metric === 'not-receive-timerange' && timeRange != null) {
+      return res(ctx.errors([{ message: 'timeRange should not be provided' }]))
+    }
+
     return res(
       ctx.data({
         leaderboard: mockData
@@ -72,6 +79,13 @@ describe('useLeaderboard', () => {
 
   it('should useLeaderboard return value', async () => {
     dom = render(<QueryClientProviderComponent {...mockQuery} />)
+
+    await dom.findByText(mockData.headers[0])
+    await dom.findByText(mockData.rows[0][1])
+  })
+
+  it('should not send timeRange when not provided', async () => {
+    dom = render(<QueryClientProviderComponent accessToken="token" metric="not-receive-timerange" />)
 
     await dom.findByText(mockData.headers[0])
     await dom.findByText(mockData.rows[0][1])
