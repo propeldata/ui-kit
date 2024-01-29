@@ -1,17 +1,18 @@
-name: publish-release
+name: publish-canary
 
 on:
-  push:
-    branches:
-      - main
-
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to create a canary from'
+        required: true
 
 env:
   PROPELDATA_CI_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
 
 jobs:
   publish:
+    if: github.event.head_commit.message != 'release'
     runs-on: ubuntu-latest
     steps:
       # Setup
@@ -50,14 +51,14 @@ jobs:
         with:
           cache_fresh_start: 'true'
 
-      # Publish
-      - name: Create Release Pull Request or Publish to npm
+      # Release
+      - name: Prerelease Version and Publish
         id: changesets
-        uses: changesets/action@v1
-        with:
-          commit: 'ci: Version Packages'
-          version: yarn changeset version
-          publish: yarn release
+        run: |
+          yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          yarn changeset version --snapshot canary
+          yarn changeset publish --tag canary --no-git-tag
         env:
           GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
