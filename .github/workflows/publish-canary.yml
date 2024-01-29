@@ -51,6 +51,11 @@ jobs:
         with:
           cache_fresh_start: 'true'
 
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
       # Release
       - name: Prerelease Version and Publish
         id: changesets
