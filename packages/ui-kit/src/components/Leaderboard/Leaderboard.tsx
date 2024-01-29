@@ -163,16 +163,18 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
         }
 
-        if (chartRef.current) {
-          const customConfig = chartConfigProps?.(config)
+        if (chartConfigProps) {
+          config = chartConfigProps(config)
+        }
 
+        if (chartRef.current) {
           const chart = chartRef.current
           chart.data.labels = labels
           chart.data.datasets[0].data = values
           chart.options.plugins = {
             ...chart.options.plugins,
             ...customPlugins,
-            ...customConfig?.options?.plugins
+            ...config?.options?.plugins
           }
 
           if (chart.options.scales?.x && 'border' in chart.options.scales.x && chart.options.scales.x.border) {
@@ -187,15 +189,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
           chart.options.scales = {
             ...chart.options.scales,
-            ...customConfig?.options?.scales
+            ...config?.options?.scales
           }
 
           chart.update()
           return
-        }
-
-        if (chartConfigProps) {
-          config = chartConfigProps(config)
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config)

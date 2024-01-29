@@ -197,23 +197,26 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           plugins
         }
 
-        if (chartRef.current) {
+        if (chartConfigProps) {
+          // @TODO: fix this complex type
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          const customConfig = chartConfigProps?.(config)
+          config = chartConfigProps(config)
+        }
 
+        if (chartRef.current) {
           const chart = chartRef.current
 
           chart.data.labels = labels
           chart.options.scales = {
             ...chart.options.scales,
             ...scales,
-            ...customConfig?.options?.scales
+            ...config?.options?.scales
           }
           chart.options.plugins = {
             ...chart.options.plugins,
             ...customPlugins,
-            ...customConfig?.options?.plugins
+            ...config?.options?.plugins
           }
 
           const dataset = chart.data.datasets[0]
@@ -221,13 +224,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
           chart.update()
           return
-        }
-
-        if (chartConfigProps) {
-          // @TODO: fix this complex type
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          config = chartConfigProps(config)
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config)

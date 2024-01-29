@@ -188,6 +188,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
         }
 
+        if (chartConfigProps) {
+          config = chartConfigProps(config)
+        }
+
         if (chartRef.current) {
           const customConfig = chartConfigProps?.(config)
 
@@ -210,10 +214,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
           chart.update()
           return
-        }
-
-        if (chartConfigProps) {
-          config = chartConfigProps(config)
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config) as ChartJS
