@@ -22,6 +22,7 @@ jobs:
           token: ${{ secrets.PROPELDATA_CI_TOKEN }}
           # NOTE(mroberts): https://github.com/actions/checkout/issues/217
           fetch-depth: '0'
+          ref: ${{ github.event.inputs.branch }}
       - uses: actions/checkout@v3
         with:
           repository: propeldata/actions
@@ -53,9 +54,12 @@ jobs:
 
       # Release
       - name: Prerelease Version and Publish
+        id: changesets
         run: |
           yarn config set -H 'npmAuthToken' "${{secrets.NPM_TOKEN}}"
-          git config --global user.email "engineering@propeldata.com"
-          git config --global user.name "Propel Data Cloud, Inc."
-          yarn changeset version --snapshot
-          yarn release --pre
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          yarn changeset version --snapshot canary
+          yarn changeset publish --tag canary --no-git-tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROPELDATA_CI_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
