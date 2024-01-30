@@ -47,6 +47,10 @@ const SimpleFilter = (args: Story['args']) => {
             }
           : undefined
       }}
+      autocompleteProps={{
+        ...args?.autocompleteProps,
+        containerStyle: { ...args?.autocompleteProps?.containerStyle, width: '350px' }
+      }}
     />
   )
 }
@@ -73,37 +77,8 @@ const TimeSeries = (args: TimeSeriesProps) => {
   )
 }
 
-export const StaticStory: Story = {
-  name: 'Static',
-  args: {
-    columnName: 'Column Name',
-    options: ['Option 1', 'Option 2', 'Option 3']
-  },
-  render: (args) => (
-    <FilterProvider>
-      <SimpleFilter {...args} />
-    </FilterProvider>
-  )
-}
-
-export const StaticCustomLabelStory: Story = {
-  name: 'Static Custom Label',
-  args: {
-    columnName: 'Column Name',
-    options: [
-      { label: 'Option 1', value: 'option_1' },
-      { label: 'Option 2', value: 'option_2' }
-    ]
-  },
-  render: (args) => (
-    <FilterProvider>
-      <SimpleFilter {...args} />
-    </FilterProvider>
-  )
-}
-
-export const ConnectedStory: Story = {
-  name: 'Connected',
+export const SingleStory: Story = {
+  name: 'Single',
   args: {
     query: {
       columnName: process.env.STORYBOOK_DIMENSION_1 ?? '',
@@ -206,6 +181,19 @@ export const FreeSoloStory: Story = {
       freeSolo: true
     }
   },
+  decorators: [
+    (Story) => {
+      return (
+        <div>
+          <p style={{ color: 'var(--propel-text-primary)' }}>
+            <strong>Note:</strong> You can enable <code>freeSolo</code> in order to set values that are not in the
+            dropdown, for example, try typing <code>Queso Blanco</code> and press <code>ENTER</code>.
+          </p>
+          <Story />
+        </div>
+      )
+    }
+  ],
   render: (args) => (
     <FilterProvider>
       <SimpleFilter {...args} />
@@ -241,6 +229,19 @@ export const ErrorStory: Story = {
       placeholder: 'Search or type a sauce name'
     }
   },
+  decorators: [
+    (Story) => {
+      return (
+        <div>
+          <p style={{ color: 'var(--propel-text-primary)' }}>
+            <strong>Note:</strong> In case the API returns an error the component will work on <code>freeSolo</code>{' '}
+            mode.
+          </p>
+          <Story />
+        </div>
+      )
+    }
+  ],
   render: (args) => (
     <FilterProvider>
       <SimpleFilter {...args} />
@@ -253,6 +254,35 @@ export const ErrorStory: Story = {
         }}
         style={{ marginTop: '1rem' }}
       />
+    </FilterProvider>
+  )
+}
+
+export const StaticStory: Story = {
+  name: 'Static',
+  args: {
+    columnName: 'Column Name',
+    options: ['Option 1', 'Option 2', 'Option 3']
+  },
+  render: (args) => (
+    <FilterProvider>
+      <SimpleFilter {...args} />
+    </FilterProvider>
+  )
+}
+
+export const StaticCustomLabelStory: Story = {
+  name: 'Static Custom Label',
+  args: {
+    columnName: 'Column Name',
+    options: [
+      { label: 'Option 1', value: 'option_1' },
+      { label: 'Option 2', value: 'option_2' }
+    ]
+  },
+  render: (args) => (
+    <FilterProvider>
+      <SimpleFilter {...args} />
     </FilterProvider>
   )
 }
