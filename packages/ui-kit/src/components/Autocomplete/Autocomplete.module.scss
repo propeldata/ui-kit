@@ -8,9 +8,7 @@
   gap: var(--propel-space-xxs);
   padding: var(--propel-space-xxs);
   overflow: hidden;
-
   transition: all 100ms;
-
   box-sizing: border-box;
 
   &:hover {
@@ -31,7 +29,6 @@
   padding: var(--propel-space-xxs);
   outline: 0;
   flex: 1 0 auto;
-
   width: 100%;
 }
 
@@ -44,7 +41,6 @@
   align-self: center;
   padding: 0 2px;
   margin-right: 4px;
-
   display: flex;
   align-items: center;
 
