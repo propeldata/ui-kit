@@ -5,7 +5,7 @@ export type CounterQueryProps = QueryProps
 
 export interface CounterProps
   extends ThemeComponentProps,
-    Omit<React.ComponentProps<'span'>, 'style'>,
+    Omit<React.ComponentProps<'span'>, 'style' | 'className'>,
     DataComponentProps {
   /** If passed, the component will ignore the built-in GraphQL operations */
   value?: string

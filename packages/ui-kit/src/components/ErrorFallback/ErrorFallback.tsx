@@ -10,7 +10,9 @@ export const serverErrorMessage = {
   body: 'Sorry we are not able to connect at this time due to a technical error.'
 }
 
-export interface ErrorFallbackProps extends ThemeComponentProps, Omit<React.ComponentPropsWithoutRef<'div'>, 'style'> {
+export interface ErrorFallbackProps
+  extends ThemeComponentProps,
+    Omit<React.ComponentPropsWithoutRef<'div'>, 'style' | 'className'> {
   error?: {
     title: string
     body: string
