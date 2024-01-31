@@ -1,6 +1,5 @@
 import React from 'react'
-import { Chart as ChartJS, ChartConfiguration, ChartTypeRegistry, Plugin, PluginOptionsByType } from 'chart.js/auto'
-import { _DeepPartialObject } from 'chart.js/dist/types/utils'
+import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js/auto'
 import classnames from 'classnames'
 import componentStyles from './PieChart.module.scss'
 
@@ -193,8 +192,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         }
 
         if (chartRef.current) {
-          const customConfig = chartConfigProps?.(config)
-
           const chart = chartRef.current
 
           chart.data.labels = labels
@@ -202,15 +199,15 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             type: variant,
             data: values,
             backgroundColor: chartColorPalette,
-            ...datasets,
-            ...customConfig?.data.datasets[0]
+            ...datasets
           })
 
           chart.options.plugins = {
             ...chart.options.plugins,
-            ...customPlugins,
-            ...(customConfig?.options?.plugins as _DeepPartialObject<PluginOptionsByType<keyof ChartTypeRegistry>>)
+            ...customPlugins
           }
+
+          chartConfigProps?.(chart.config as ChartConfiguration<'pie' | 'doughnut'>)
 
           chart.update()
           return
