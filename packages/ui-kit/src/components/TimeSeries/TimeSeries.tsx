@@ -179,25 +179,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         // @TODO: need to refactor this logic
         const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid, theme })
 
-        if (chartRef.current) {
-          const chart = chartRef.current
-          chart.data.labels = labels
-          chart.options.scales = {
-            ...chart.options.scales,
-            ...scales
-          }
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins
-          }
-
-          const dataset = chart.data.datasets[0]
-          dataset.data = values
-
-          chart.update()
-          return
-        }
-
         const options: ChartOptions<TimeSeriesChartVariant> = {
           responsive: true,
           maintainAspectRatio: false,
@@ -221,6 +202,34 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           config = chartConfigProps(config)
+        }
+
+        if (chartRef.current) {
+          const chart = chartRef.current
+
+          chart.data.labels = labels
+          chart.options.scales = {
+            ...chart.options.scales,
+            ...scales,
+            ...config?.options?.scales
+          }
+          chart.options.plugins = {
+            ...chart.options.plugins,
+            ...customPlugins,
+            ...config?.options?.plugins
+          }
+
+          const dataset = chart.data.datasets[0]
+          dataset.data = values
+
+          Object.assign(chart.data.datasets[0], {
+            type: variant,
+            ...chart.data.datasets,
+            ...config?.data.datasets[0]
+          })
+
+          chart.update()
+          return
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config)
