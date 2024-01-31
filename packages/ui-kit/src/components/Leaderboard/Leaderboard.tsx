@@ -97,30 +97,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           customChartLabelsPlugin
         }
 
-        if (chartRef.current) {
-          const chart = chartRef.current
-          chart.data.labels = labels
-          chart.data.datasets[0].data = values
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins
-          }
-
-          // @TODO: need improvement
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          chart.options.scales.x.border.color = theme?.colorSecondary
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          chart.options.scales.x.grid.color = theme?.colorSecondary
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          chart.options.scales.y.grid.color = theme?.colorSecondary
-
-          chart.update()
-          return
-        }
-
         let config: ChartConfiguration<'bar'> = {
           ...chartConfig,
           type: 'bar',
@@ -189,6 +165,41 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         if (chartConfigProps) {
           config = chartConfigProps(config)
+        }
+
+        if (chartRef.current) {
+          const chart = chartRef.current
+          chart.data.labels = labels
+          chart.options.plugins = {
+            ...chart.options.plugins,
+            ...customPlugins,
+            ...config?.options?.plugins
+          }
+
+          chart.data.datasets[0].data = values
+          Object.assign(chart.data.datasets[0], {
+            type: variant,
+            ...chart.data.datasets,
+            ...config?.data.datasets[0]
+          })
+
+          if (chart.options.scales?.x && 'border' in chart.options.scales.x && chart.options.scales.x.border) {
+            chart.options.scales.x.border = { ...chart.options.scales.x.border, color: theme.colorSecondary }
+          }
+          if (chart.options.scales?.x?.grid != null) {
+            chart.options.scales.x.grid = { ...chart.options.scales.x.grid, color: theme.colorSecondary }
+          }
+          if (chart.options.scales?.y?.grid != null) {
+            chart.options.scales.y.grid = { ...chart.options.scales.y.grid, color: theme.colorSecondary }
+          }
+
+          chart.options.scales = {
+            ...chart.options.scales,
+            ...config?.options?.scales
+          }
+
+          chart.update()
+          return
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config)

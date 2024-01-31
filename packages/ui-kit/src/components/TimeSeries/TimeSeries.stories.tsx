@@ -342,7 +342,7 @@ export const ThemeStory: Story = {
   },
   decorators: [
     (Story) => {
-      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('darkTheme')
+      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
 
       const lightColors: ThemeTokenProps = {
         accent: '#3d3d3d',
