@@ -298,7 +298,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback {...errorFallbackProps} error={error} />
+      return <ErrorFallback error={error} {...errorFallbackProps} />
     }
 
     const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)

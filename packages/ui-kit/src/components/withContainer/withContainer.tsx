@@ -18,10 +18,10 @@ export const withContainer = <P extends object, C extends object>(
         <ErrorBoundary fallback={<ErrorFallback {...errorFallbackProps} />}>
           {componentProps?.card ? (
             <Card style={componentProps?.style} className={componentProps?.className}>
-              <WrappedComponent ref={ref} {...componentProps} />
+              <WrappedComponent ref={ref} {...props} />
             </Card>
           ) : (
-            <WrappedComponent ref={ref} {...componentProps} />
+            <WrappedComponent ref={ref} {...props} />
           )}
         </ErrorBoundary>
       </QueryClientProvider>

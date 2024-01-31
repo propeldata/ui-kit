@@ -328,7 +328,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback {...errorFallbackProps} error={error} />
+      return <ErrorFallback error={error} {...errorFallbackProps} />
     }
 
     const isNoContainerRef = (variant === 'pie' || variant === 'doughnut') && !canvasRef.current
