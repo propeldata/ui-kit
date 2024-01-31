@@ -210,17 +210,23 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           chart.data.labels = labels
           chart.options.scales = {
             ...chart.options.scales,
-            ...scales
+            ...scales,
+            ...config?.options?.scales
           }
           chart.options.plugins = {
             ...chart.options.plugins,
-            ...customPlugins
+            ...customPlugins,
+            ...config?.options?.plugins
           }
 
           const dataset = chart.data.datasets[0]
           dataset.data = values
 
-          chartConfigProps?.(chart.config as never)
+          Object.assign(chart.data.datasets[0], {
+            type: variant,
+            ...chart.data.datasets,
+            ...config?.data.datasets[0]
+          })
 
           chart.update()
           return

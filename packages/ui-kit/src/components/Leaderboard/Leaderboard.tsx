@@ -170,11 +170,18 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         if (chartRef.current) {
           const chart = chartRef.current
           chart.data.labels = labels
-          chart.data.datasets[0].data = values
           chart.options.plugins = {
             ...chart.options.plugins,
-            ...customPlugins
+            ...customPlugins,
+            ...config?.options?.plugins
           }
+
+          chart.data.datasets[0].data = values
+          Object.assign(chart.data.datasets[0], {
+            type: variant,
+            ...chart.data.datasets,
+            ...config?.data.datasets[0]
+          })
 
           if (chart.options.scales?.x && 'border' in chart.options.scales.x && chart.options.scales.x.border) {
             chart.options.scales.x.border = { ...chart.options.scales.x.border, color: theme.colorSecondary }
@@ -187,10 +194,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           }
 
           chart.options.scales = {
-            ...chart.options.scales
+            ...chart.options.scales,
+            ...config?.options?.scales
           }
-
-          chartConfigProps?.(chart.config as ChartConfiguration<'bar'>)
 
           chart.update()
           return

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Chart } from 'chart.js'
-import React from 'react'
+import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
   quotedStringRegex,
@@ -9,6 +9,8 @@ import {
   TimeSeriesGranularity,
   useStorybookAccessToken
 } from '../../helpers'
+import { ThemeTokenProps } from '../../themes'
+import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
@@ -322,5 +324,44 @@ export const ErrorStory: Story = {
       }
     }
   },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ThemeStory: Story = {
+  name: 'Theme',
+  args: {
+    variant: 'bar',
+    card: true,
+    ...dataset
+  },
+  decorators: [
+    (Story) => {
+      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
+
+      const lightColors: ThemeTokenProps = {
+        accent: '#3d3d3d',
+        accentHover: '#3d3d3dc6'
+      }
+
+      const darkColors: ThemeTokenProps = {
+        accent: '#adadad',
+        accentHover: '#ffffffc6'
+      }
+
+      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
+
+      return (
+        <ThemeProvider baseTheme={baseTheme} theme={theme}>
+          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
+            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
+              Switch theme
+            </button>
+            <span>{baseTheme}</span>
+          </div>
+          <Story />
+        </ThemeProvider>
+      )
+    }
+  ],
   render: (args) => <TimeSeries {...args} />
 }
