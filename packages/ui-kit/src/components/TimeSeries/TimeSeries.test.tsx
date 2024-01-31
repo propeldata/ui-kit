@@ -144,4 +144,20 @@ describe('TimeSeries', () => {
 
     await sleep(100)
   })
+
+  it('Should receive errorFallbackProp', () => {
+    dom = render(
+      <TimeSeries
+        errorFallbackProps={{
+          error: {
+            title: 'Custom title',
+            body: 'Custom body'
+          }
+        }}
+      />
+    )
+
+    dom.getByText('Custom title')
+    dom.getByText('Custom body')
+  })
 })
