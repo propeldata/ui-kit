@@ -332,7 +332,13 @@ export const ThemeStory: Story = {
   args: {
     variant: 'bar',
     card: true,
-    ...dataset
+    query: {
+      ...connectedParams,
+      timeRange: {
+        ...connectedParams.timeRange,
+        n: 90
+      }
+    }
   },
   decorators: [
     (Story) => {

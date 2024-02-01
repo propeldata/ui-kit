@@ -53,6 +53,8 @@ export type ThemeTokenProps = {
   accent?: CSSProperties['color']
   accentHover?: CSSProperties['color']
   colorGradient?: CSSProperties['color']
+  colorLoader?: CSSProperties['color']
+  colorLoaderAnimation?: CSSProperties['color']
 
   /**
    * Color Blue
@@ -121,6 +123,8 @@ export type ThemeCSSTokenProps = {
   '--propel-accent'?: CSSProperties['color']
   '--propel-accent-hover'?: CSSProperties['color']
   '--propel-color-gradient'?: CSSProperties['color']
+  '--propel-color-loader'?: CSSProperties['color']
+  '--propel-color-loader-animation'?: CSSProperties['color']
 
   '--propel-color-blue950'?: CSSProperties['color']
   '--propel-color-blue900'?: CSSProperties['color']
@@ -144,6 +148,9 @@ export interface ThemeCSSProperties extends React.CSSProperties, ThemeCSSTokenPr
 export type ThemeComponentProps = {
   /** Supports all standard CSS properties along with custom theme-based CSS variables */
   style?: ThemeCSSProperties
+
+  /** Provides a className for the ErrorFallback container */
+  className?: string
 
   /** Base theme to be used */
   baseTheme?: DefaultThemes
