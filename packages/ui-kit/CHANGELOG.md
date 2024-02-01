@@ -1,5 +1,13 @@
 # @propeldata/ui-kit
 
+## 0.5.2
+
+### Patch Changes
+
+- f358bd4: Added dark theme support for loader
+- e7226f3: Fixed errorFallbackProps not being passed correctly
+- 59cbf58: Fixed chartConfigProps not passing some props
+
 ## 0.5.1
 
 ### Patch Changes
