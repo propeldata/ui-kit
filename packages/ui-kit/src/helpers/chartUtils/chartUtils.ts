@@ -131,17 +131,18 @@ export const getCustomChartLabelsPlugin = ({
       }
 
       if (datasetMeta.type === 'doughnut' && !hideTotal) {
-        const { ctx } = chart
-
         const totalValue = dataset.data.reduce((a: number, c: number) => a + c, 0).toLocaleString()
 
         ctx.save()
+
         const xCoor = chart.getDatasetMeta(0).data[0].x
         const yCoor = chart.getDatasetMeta(0).data[0].y
+
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
         ctx.font = `12px ${theme?.tinyFontFamily}`
         ctx.fillText('Total', xCoor, yCoor - 12)
+
         ctx.font = `700 24px ${theme?.tinyFontFamily}`
         ctx.fillText(totalValue, xCoor, yCoor + 12)
       }
