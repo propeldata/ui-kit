@@ -126,6 +126,28 @@ export const DoughnutLegendBottomStory: Story = {
   render: (args) => <PieChart {...args} />
 }
 
+export const DoughnutValuesRightStory: Story = {
+  name: 'Doughnut values right',
+  args: {
+    variant: 'doughnut',
+    query: connectedParams,
+    card: true,
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        plugins: {
+          ...config.plugins,
+          legend: {
+            position: 'right'
+          }
+        }
+      }
+    })
+  },
+  render: (args) => <PieChart {...args} />
+}
+
 export const StaticPieStory: Story = {
   name: 'Static Pie with values',
   args: {
