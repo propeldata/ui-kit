@@ -11,6 +11,7 @@ import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import { PieChartProps, PieChartData } from './PieChart.types'
+import { emptyPlugin } from './plugins/empty'
 
 let idCounter = 0
 
@@ -143,6 +144,11 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               boxHeight: 6
             }
           },
+          emptyDoughnut: {
+            color: theme?.colorPrimary,
+            width: 2,
+            radiusDecrease: 20
+          },
           customChartLabelsPlugin
         }
 
@@ -185,7 +191,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               }
             }
           },
-          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
+          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin, emptyPlugin]
         }
 
         if (chartConfigProps) {

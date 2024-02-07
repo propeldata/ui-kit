@@ -29,7 +29,7 @@ const Icon = ({ color }: { color?: string }) => (
 )
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
-  ({ error = serverErrorMessage, className, style, baseTheme, ...rest }, forwardedRef) => {
+  ({ error = serverErrorMessage, className, style, baseTheme, color, ...rest }, forwardedRef) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     useSetupTheme({ componentContainer, baseTheme })
 
@@ -40,7 +40,7 @@ export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps
           style={{ ...style }}
           data-testid="error-fallback-container"
         >
-          <Icon />
+          <Icon color={color} />
           {error && (
             <>
               <p role="alert" aria-live="assertive">

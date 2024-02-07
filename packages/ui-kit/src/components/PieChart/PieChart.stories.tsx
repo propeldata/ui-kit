@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
+  FilterOperator,
   quotedStringRegex,
   RelativeTimeRange,
   Sort,
@@ -85,7 +86,7 @@ const connectedParams = {
 export const SingleDimensionPieStory: Story = {
   name: 'Pie',
   args: {
-    query: connectedParams,
+    query: {},
     card: true
   },
   render: (args) => <PieChart {...args} />
@@ -312,5 +313,23 @@ export const ThemeStory: Story = {
       )
     }
   ],
+  render: (args) => <PieChart {...args} />
+}
+
+export const EmptyPieStory: Story = {
+  name: 'Empty State',
+  args: {
+    query: {
+      ...connectedParams,
+      filters: [
+        {
+          column: 'tortilla_id',
+          operator: FilterOperator.IsNull
+        }
+      ]
+    },
+    card: true,
+    variant: 'pie'
+  },
   render: (args) => <PieChart {...args} />
 }
