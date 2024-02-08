@@ -323,7 +323,7 @@ export const EmptyPieStory: Story = {
       ...connectedParams,
       filters: [
         {
-          column: 'tortilla_id',
+          column: process.env.STORYBOOK_DIMENSION_4 ?? '',
           operator: FilterOperator.IsNull
         }
       ]

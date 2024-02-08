@@ -11,7 +11,7 @@ import { ErrorFallback } from '../ErrorFallback'
 import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
 import { PieChartProps, PieChartData } from './PieChart.types'
-import { emptyPlugin } from './plugins/empty'
+import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
 
@@ -191,7 +191,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               }
             }
           },
-          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin, emptyPlugin]
+          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin, emptyStatePlugin]
         }
 
         if (chartConfigProps) {

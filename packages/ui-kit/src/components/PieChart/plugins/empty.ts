@@ -1,6 +1,6 @@
 import { Chart } from 'chart.js'
 
-export const emptyPlugin = {
+export const emptyStatePlugin = {
   id: 'emptyDoughnut',
   afterDraw(
     chart: Chart,
@@ -19,7 +19,6 @@ export const emptyPlugin = {
     })
 
     if (!hasData) {
-      console.log('drawing')
       const {
         chartArea: { left, top, right, bottom },
         ctx
