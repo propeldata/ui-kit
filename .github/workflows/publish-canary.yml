@@ -18,7 +18,7 @@ jobs:
       # Setup
       - uses: actions/checkout@v3
         with:
-          repository: propeldata/ui-kit
+          repository: propeldata/actions
           # so that when we push tags, workflows are released, which does not happen with the default token
           token: ${{ secrets.PROPELDATA_CI_TOKEN }}
           # NOTE(mroberts): https://github.com/actions/checkout/issues/217
