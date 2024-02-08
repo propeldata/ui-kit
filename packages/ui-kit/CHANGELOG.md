@@ -1,5 +1,14 @@
 # @propeldata/ui-kit
 
+## 0.5.3
+
+### Patch Changes
+
+- ab2be35: - Fix PieChart empty state when no data is received from blank to a circle
+  - Fix ErrorFallback icon color prop not being passed
+- a0aec9b: Fixed bug in doughnut chart, where the total did not align correctly when the legend was rendered on the
+  right.
+
 ## 0.5.2
 
 ### Patch Changes

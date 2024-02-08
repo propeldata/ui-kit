@@ -1,5 +1,13 @@
 # react-16
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies [ab2be35]
+- Updated dependencies [a0aec9b]
+  - @propeldata/ui-kit@0.5.3
+
 ## 0.1.6
 
 ### Patch Changes
