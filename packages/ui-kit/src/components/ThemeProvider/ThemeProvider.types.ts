@@ -1,8 +1,39 @@
 import type { ChartConfiguration } from 'chart.js'
 import React from 'react'
 import type { ThemeTokenProps } from '../../themes/theme.types'
+import { ErrorFallbackProps } from '../ErrorFallback'
+import { LoaderProps } from '../Loader'
 
-export type ThemeContextProps = {
+interface CustomizableComponents {
+  /**
+   * A fallback react component that will be used when the component is in loading state.
+   *
+   * You can also use a callback to get the `LoaderProps` for your custom component or set a wrapper
+   * around the UI-Kit's Loader component.
+   *
+   * This component will be used by all the ThemeProvider's child components.
+   */
+  loaderFallback?: React.ReactNode | ((props: LoaderProps, baseComponent: React.ReactNode) => React.ReactNode)
+
+  /**
+   * A fallback react component that will be used when the component is in error state.
+   *
+   * You can also use a callback to get the `ErrorFallbackProps` for your custom component or set a wrapper
+   * around the UI-Kit's ErrorFallback component.
+   *
+   * This component will be used by all the ThemeProvider's child components.
+   */
+  errorFallback?: React.ReactNode | ((props: ErrorFallbackProps, baseComponent: React.ReactNode) => React.ReactNode)
+
+  /**
+   * A fallback react component that will be used when the component is in empty state, which means no data or empty data was received.
+   *
+   * This component will be used by all the ThemeProvider's child components.
+   */
+  emptyFallback?: React.ReactNode
+}
+
+export interface ThemeContextProps extends CustomizableComponents {
   theme?: ThemeTokenProps
 
   /**
@@ -17,7 +48,7 @@ export type ThemeContextProps = {
 
 export type DefaultThemes = 'lightTheme' | 'darkTheme'
 
-export interface ThemeProviderProps extends Pick<ThemeContextProps, 'globalChartConfigProps'> {
+export interface ThemeProviderProps extends Omit<ThemeContextProps, 'theme'> {
   /** Children components that the theme will be applied to. */
   children?: React.ReactNode
 
@@ -44,4 +75,9 @@ export type ChartVariant = 'bar' | 'line' | 'pie' | 'doughnut'
 export interface UseSetupThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
   /** The component root element to which the theme will be applied. */
   componentContainer?: HTMLElement | null
+}
+
+export interface UseSetupThemeResult<T extends ChartVariant> extends CustomizableComponents {
+  theme: ThemeStateProps
+  chartConfig?: ChartConfiguration<T>
 }

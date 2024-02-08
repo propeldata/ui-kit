@@ -73,7 +73,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
-    const { theme, chartConfig } = useSetupTheme<typeof type>({ componentContainer, baseTheme })
+    const { theme, chartConfig, loaderFallback } = useSetupTheme<typeof type>({ componentContainer, baseTheme })
     const log = useLog()
     const isLoadingStatic = loading
 
@@ -325,6 +325,24 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !canvasRef.current) {
       destroyChart()
+
+      if (typeof loaderFallback === 'function') {
+        return (
+          <>
+            {loaderFallback(
+              loaderProps ?? {},
+              <>
+                <Loader {...loaderProps} />
+              </>
+            )}
+          </>
+        )
+      }
+
+      if (loaderFallback != null) {
+        return <>{loaderFallback}</>
+      }
+
       return <Loader {...loaderProps} />
     }
 
