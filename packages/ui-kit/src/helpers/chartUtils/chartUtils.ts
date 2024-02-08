@@ -135,8 +135,8 @@ export const getCustomChartLabelsPlugin = ({
 
         ctx.save()
 
-        const xCoor = chart.getDatasetMeta(0).data[0].x
-        const yCoor = chart.getDatasetMeta(0).data[0].y
+        const xCoor = chart.getDatasetMeta(0).data[0]?.x
+        const yCoor = chart.getDatasetMeta(0).data[0]?.y
 
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
