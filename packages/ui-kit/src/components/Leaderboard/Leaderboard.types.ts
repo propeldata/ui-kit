@@ -49,7 +49,13 @@ export type LeaderboardChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps {
+export interface LeaderboardProps extends Omit<ErrorFallbackProps, 'error'>, DataComponentProps {
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
+
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 

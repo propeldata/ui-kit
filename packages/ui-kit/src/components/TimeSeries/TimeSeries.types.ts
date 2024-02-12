@@ -29,7 +29,13 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentProps {
+export interface TimeSeriesBaseProps extends Omit<ErrorFallbackProps, 'error'>, DataComponentProps {
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
+
   /** If passed along with `values` the component will ignore the built-in GraphQL operations */
   labels?: TimeSeriesData['labels']
 

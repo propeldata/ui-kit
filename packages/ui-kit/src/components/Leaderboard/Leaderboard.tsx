@@ -38,7 +38,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       labelFormatter,
       timeZone,
       loaderProps,
+      loaderFallback,
       errorFallbackProps,
+      errorFallback,
+      emptyFallback,
       style,
       card = false,
       ...rest
@@ -47,8 +50,23 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const { theme, chartConfig } = useSetupTheme<'bar'>({ componentContainer, baseTheme })
+
+    const {
+      theme,
+      chartConfig,
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme<'bar'>({
+      componentContainer,
+      baseTheme,
+      loaderFallback,
+      errorFallback,
+      emptyFallback
+    })
+
     const [propsMismatch, setPropsMismatch] = React.useState(false)
+    const [isEmptyState, setIsEmptyState] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -80,6 +98,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
+
+        if (values.length === 0 && emptyFallbackComponent) {
+          setIsEmptyState(true)
+          return
+        }
 
         const customChartLabelsPlugin: Plugin<'bar'> = getCustomChartLabelsPlugin({
           theme,
@@ -205,7 +228,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter]
+      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, emptyFallbackComponent]
     )
 
     const destroyChart = () => {
@@ -298,6 +321,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     if (hasError || propsMismatch) {
       destroyChart()
+
+      if (typeof errorFallbackComponent === 'function') {
+        return errorFallbackComponent(errorFallbackProps, ErrorFallback)
+      }
+
+      if (React.isValidElement(errorFallbackComponent)) {
+        return errorFallbackComponent
+      }
+
       return <ErrorFallback error={error} {...errorFallbackProps} />
     }
 
@@ -305,7 +337,20 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
       destroyChart()
+
+      if (typeof loaderFallbackComponent === 'function') {
+        return loaderFallbackComponent(loaderProps, Loader)
+      }
+
+      if (React.isValidElement(loaderFallbackComponent)) {
+        return loaderFallbackComponent
+      }
+
       return <Loader {...loaderProps} />
+    }
+
+    if (isEmptyState && emptyFallbackComponent) {
+      return emptyFallbackComponent
     }
 
     if (variant === 'bar') {

@@ -29,7 +29,8 @@ export const useTheme = (): ThemeStateProps | undefined => {
 /** A hook that sets up the theme. */
 export const useSetupTheme = <T extends ChartVariant>({
   componentContainer,
-  baseTheme = 'lightTheme'
+  baseTheme = 'lightTheme',
+  loaderFallback: loaderFallbackProp
 }: UseSetupThemeProps): UseSetupThemeResult<T> => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const [chartConfig, setChartConfig] = useState<ChartConfiguration<T>>()
@@ -121,7 +122,7 @@ export const useSetupTheme = <T extends ChartVariant>({
 
   const { emptyFallback, errorFallback, loaderFallback } = context ?? {}
 
-  return { theme, chartConfig, emptyFallback, errorFallback, loaderFallback }
+  return { theme, chartConfig, emptyFallback, errorFallback, loaderFallback: loaderFallbackProp || loaderFallback }
 }
 
 export const ThemeProvider = ({

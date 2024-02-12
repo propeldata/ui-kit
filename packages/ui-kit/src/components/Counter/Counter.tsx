@@ -22,7 +22,10 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       className,
       baseTheme,
       loaderProps,
+      loaderFallback,
       errorFallbackProps,
+      errorFallback,
+      emptyFallback,
       timeZone,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       card,
@@ -32,7 +35,12 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
   ) => {
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
-    useSetupTheme({ componentContainer, baseTheme })
+
+    const {
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme({ componentContainer, baseTheme, loaderFallback, errorFallback, emptyFallback })
 
     /**
      * If the user passes `value` attribute, it
@@ -41,14 +49,12 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     const isStatic = !query
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-
     const { data, isLoading, error } = useCounter({ ...query, timeZone, enabled: !isStatic })
-
     const value = isStatic ? staticValue : data?.counter?.value
 
     React.useEffect(() => {
       function handlePropsMismatch() {
-        if (isStatic && !value) {
+        if (isStatic && value === undefined) {
           // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
           setPropsMismatch(true)
           return
@@ -71,11 +77,31 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     }, [isStatic, value, query, isLoadingStatic, error?.name])
 
     if (error || propsMismatch) {
-      return <ErrorFallback error={null} {...errorFallbackProps} />
+      if (typeof errorFallbackComponent === 'function') {
+        return errorFallbackComponent(errorFallbackProps, ErrorFallback)
+      }
+
+      if (React.isValidElement(errorFallbackComponent)) {
+        return errorFallbackComponent
+      }
+
+      return <ErrorFallback error={null} style={{ height: 'auto' }} {...errorFallbackProps} />
     }
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref.current) {
-      return <Loader className={componentStyles.loader} {...loaderProps} isText />
+      if (typeof loaderFallbackComponent === 'function') {
+        return loaderFallbackComponent(loaderProps, Loader)
+      }
+
+      if (React.isValidElement(loaderFallbackComponent)) {
+        return loaderFallbackComponent
+      }
+
+      return <Loader className={componentStyles.loader} isText {...loaderProps} />
+    }
+
+    if ((value === '' || value === undefined || value === null) && emptyFallbackComponent) {
+      return emptyFallbackComponent
     }
 
     return (

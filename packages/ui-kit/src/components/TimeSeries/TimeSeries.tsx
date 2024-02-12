@@ -64,7 +64,10 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       baseTheme,
       chartConfigProps,
       loaderProps,
+      loaderFallback,
       errorFallbackProps,
+      errorFallback,
+      emptyFallback,
       card = false,
       chartProps = {},
       ...rest
@@ -73,7 +76,22 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
-    const { theme, chartConfig, loaderFallback } = useSetupTheme<typeof type>({ componentContainer, baseTheme })
+
+    const {
+      theme,
+      chartConfig,
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme<typeof type>({
+      componentContainer,
+      baseTheme,
+      loaderFallback,
+      errorFallback,
+      emptyFallback
+    })
+
+    const [isEmptyState, setIsEmptyState] = React.useState(false)
     const log = useLog()
     const isLoadingStatic = loading
 
@@ -129,6 +147,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
         const values = getNumericValues(data.values, log)
+
+        if (values.length === 0 && emptyFallbackComponent) {
+          setIsEmptyState(true)
+          return
+        }
 
         const plugins = [customCanvasBackgroundColor]
 
@@ -247,7 +270,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         labelFormatter,
         chartConfigProps,
         type,
-        chartConfig
+        chartConfig,
+        emptyFallbackComponent
       ]
     )
 
@@ -318,6 +342,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     if (hasError || propsMismatch) {
       destroyChart()
+
+      if (typeof errorFallbackComponent === 'function') {
+        return errorFallbackComponent(errorFallbackProps, ErrorFallback)
+      }
+
+      if (React.isValidElement(errorFallbackComponent)) {
+        return errorFallbackComponent
+      }
+
       return <ErrorFallback error={error} {...errorFallbackProps} />
     }
 
@@ -326,24 +359,19 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !canvasRef.current) {
       destroyChart()
 
-      if (typeof loaderFallback === 'function') {
-        return (
-          <>
-            {loaderFallback(
-              loaderProps ?? {},
-              <>
-                <Loader {...loaderProps} />
-              </>
-            )}
-          </>
-        )
+      if (typeof loaderFallbackComponent === 'function') {
+        return loaderFallbackComponent(loaderProps, Loader)
       }
 
-      if (loaderFallback != null) {
-        return <>{loaderFallback}</>
+      if (React.isValidElement(loaderFallbackComponent)) {
+        return loaderFallbackComponent
       }
 
       return <Loader {...loaderProps} />
+    }
+
+    if (isEmptyState && emptyFallbackComponent) {
+      return emptyFallbackComponent
     }
 
     return (
