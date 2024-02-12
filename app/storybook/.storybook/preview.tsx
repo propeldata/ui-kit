@@ -22,12 +22,7 @@ const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   }
 
   return (
-    <ThemeProvider
-      baseTheme={context.globals.theme}
-      // loaderFallback={(props, LoaderComponent) => <LoaderComponent {...props} isText />}
-      // errorFallback={(props, ErrorComponent) => <ErrorComponent {...props} error={{ title: 'Test', body: 'Wow' }} />}
-      // emptyFallback={<div>Empty</div>}
-    >
+    <ThemeProvider baseTheme={context.globals.theme}>
       <GlobalStyles />
       <Story />
     </ThemeProvider>
