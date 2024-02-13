@@ -85,7 +85,9 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
         return errorFallbackComponent
       }
 
-      return <ErrorFallback error={null} style={{ height: 'auto' }} {...errorFallbackProps} />
+      return (
+        <ErrorFallback error={null} {...errorFallbackProps} style={{ height: 'auto', ...errorFallbackProps?.style }} />
+      )
     }
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref.current) {
