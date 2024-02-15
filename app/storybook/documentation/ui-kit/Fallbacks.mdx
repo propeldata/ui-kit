@@ -1,0 +1,35 @@
+import { Meta, Source, Controls } from '@storybook/blocks'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as LogStories from '../../../../packages/ui-kit/src/components/Log/Log.stories'
+
+<Meta title="Customization/Fallbacks" />{' '}
+
+# Fallbacks
+
+It's possible to customize the `Loading`, `Error`, and `Empty` states of the UI Kit components. This is useful when you
+want to provide a consistent look and feel across your app. You can customize the fallbacks on a per-component basis, or
+globally for all components via `ThemeProvider`.
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { ThemeProvider, Counter, TimeSeries } from "@propeldata/ui-kit"
+
+    function App() {
+      return (
+        <ThemeProvider
+          loaderFallback={() => <div>Loading...</div>}
+          errorFallback={() => <h1>Error</h1>}
+          emptyFallback={() => <span>No Data</span>}
+        >
+          <Counter />
+
+          {/* A component-level customization of loaderFallback */}
+          <TimeSeries loaderFallback={() => <div>TimeSeries is loading...</div>} />
+        </ThemeProvider>
+      );
+    }
+
+`} />
