@@ -1,86 +1,105 @@
 import React, { SyntheticEvent, useEffect, useRef } from 'react'
-import { FilterInput, FilterOperator, getTimeZone } from '../../helpers'
-
+import { FilterInput, FilterOperator, getTimeZone, useForwardedRefCallback, withThemeWrapper } from '../../helpers'
+import { useTopValues } from '../../hooks'
 import { Autocomplete } from '../Autocomplete'
 import { AutocompleteOption } from '../Autocomplete/Autocomplete.types'
-import { useFilters } from '../FilterProvider/useFilters'
-
-import { SimpleFilterProps } from './SimpleFilter.types'
-import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { useFilters } from '../FilterProvider/useFilters'
+import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
-import { useTopValues } from '../../hooks'
+import { useSetupTheme } from '../ThemeProvider'
+import { withContainer } from '../withContainer'
+import { SimpleFilterProps } from './SimpleFilter.types'
 
-const SimpleFilterComponent = ({
-  autocompleteProps,
-  columnName: columnNameProp = '',
-  query,
-  error,
-  loading,
-  loaderProps,
-  options = []
-}: SimpleFilterProps) => {
-  const id = useRef(Symbol()).current
+const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProps>(
+  (
+    {
+      autocompleteProps,
+      columnName: columnNameProp = '',
+      query,
+      error,
+      loading,
+      loaderProps: loaderPropsInitial,
+      loaderFallback,
+      options = []
+    },
+    forwardedRef
+  ) => {
+    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
+    const themeWrapper = withThemeWrapper(setRef)
+    const { theme, loaderFallback: loaderFallbackComponent } = useSetupTheme({
+      componentContainer,
+      loaderFallback
+    })
 
-  const isStatic = !query
+    const id = useRef(Symbol()).current
 
-  const { filters, setFilters } = useFilters()
+    const isStatic = !query
 
-  const columnName = query?.columnName ?? columnNameProp
-  const timeZone = query?.timeZone ?? getTimeZone()
+    const { filters, setFilters } = useFilters()
 
-  const log = useLog()
+    const columnName = query?.columnName ?? columnNameProp
+    const timeZone = query?.timeZone ?? getTimeZone()
 
-  const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone, enabled: !isStatic })
+    const log = useLog()
 
-  const isError = queryError != null || error != null
+    const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone, enabled: !isStatic })
 
-  const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
-    if (selectedOption == null) {
-      const filterList = filters.filter((filter) => filter.id !== id)
+    const isError = queryError != null || error != null
+
+    const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
+      if (selectedOption == null) {
+        const filterList = filters.filter((filter) => filter.id !== id)
+        setFilters(filterList)
+        return
+      }
+
+      const filter: FilterInput = {
+        column: columnName,
+        operator: FilterOperator.Equals,
+        value:
+          typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
+      }
+
+      const filterList = filters.filter((filter) => filter.id !== id).concat({ ...filter, id })
+
       setFilters(filterList)
-      return
     }
 
-    const filter: FilterInput = {
-      column: columnName,
-      operator: FilterOperator.Equals,
-      value: typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
-    }
+    const autocompleteOptions = (isStatic ? options : data?.topValues.values) ?? []
 
-    const filterList = filters.filter((filter) => filter.id !== id).concat({ ...filter, id })
+    useEffect(() => {
+      if (queryError != null) {
+        log.error('Error fetching Top Values for SimpleFilter:', queryError.message)
+      }
+    }, [log, queryError])
 
-    setFilters(filterList)
-  }
-
-  const autocompleteOptions = (isStatic ? options : data?.topValues.values) ?? []
-
-  useEffect(() => {
-    if (queryError != null) {
-      log.error('Error fetching Top Values for SimpleFilter:', queryError.message)
-    }
-  }, [log, queryError])
-
-  if (loading || (!isStatic && isLoading)) {
-    return (
-      <Loader
-        {...loaderProps}
-        style={{
+    if (loading || (!isStatic && isLoading)) {
+      const loaderProps: LoaderProps = {
+        ...loaderPropsInitial,
+        style: {
           width: autocompleteProps?.containerStyle?.width ?? 'auto',
-          height: autocompleteProps?.containerStyle?.height ?? loaderProps?.style?.height ?? '42px'
-        }}
+          height: autocompleteProps?.containerStyle?.height ?? loaderPropsInitial?.style?.height ?? '42px'
+        }
+      }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader {...loaderProps} />
+    }
+    return (
+      <Autocomplete
+        {...autocompleteProps}
+        options={autocompleteOptions}
+        onChange={handleChange}
+        freeSolo={isError || autocompleteProps?.freeSolo}
       />
     )
   }
-  return (
-    <Autocomplete
-      {...autocompleteProps}
-      options={autocompleteOptions}
-      onChange={handleChange}
-      freeSolo={isError || autocompleteProps?.freeSolo}
-    />
-  )
-}
+)
+
+SimpleFilterComponent.displayName = 'SimpleFilter'
 
 export const SimpleFilter = withContainer(SimpleFilterComponent, ErrorFallback)

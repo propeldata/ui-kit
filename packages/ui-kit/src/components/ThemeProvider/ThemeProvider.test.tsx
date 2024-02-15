@@ -60,18 +60,18 @@ describe('useSetupTheme', () => {
 
     if (enableFallback === 'loader' && loaderFallbackComponent) {
       return typeof loaderFallbackComponent === 'function'
-        ? loaderFallbackComponent({}, Loader)
+        ? loaderFallbackComponent({ loaderProps: {}, Loader, theme })
         : loaderFallbackComponent
     }
 
     if (enableFallback === 'error' && errorFallbackComponent) {
       return typeof errorFallbackComponent === 'function'
-        ? errorFallbackComponent({}, ErrorFallback)
+        ? errorFallbackComponent({ errorFallbackProps: {}, ErrorFallback, theme })
         : errorFallbackComponent
     }
 
     if (enableFallback === 'empty' && emptyFallbackComponent) {
-      return emptyFallbackComponent
+      return typeof emptyFallbackComponent === 'function' ? emptyFallbackComponent({ theme }) : emptyFallbackComponent
     }
 
     return (
@@ -100,7 +100,7 @@ describe('useSetupTheme', () => {
     const emptyFallbackContent = 'No data available'
 
     render(
-      <ThemeProvider emptyFallback={<div>{emptyFallbackContent}</div>}>
+      <ThemeProvider emptyFallback={() => <div>{emptyFallbackContent}</div>}>
         <TestComponent enableFallback="empty" />
       </ThemeProvider>
     )
@@ -112,8 +112,8 @@ describe('useSetupTheme', () => {
     const emptyFallbackContent = 'No data available'
 
     render(
-      <ThemeProvider emptyFallback={<div>Global Empty State fallback</div>}>
-        <TestComponent enableFallback="empty" emptyFallback={<div>{emptyFallbackContent}</div>} />
+      <ThemeProvider emptyFallback={() => <div>Global Empty State fallback</div>}>
+        <TestComponent enableFallback="empty" emptyFallback={() => <div>{emptyFallbackContent}</div>} />
       </ThemeProvider>
     )
 
@@ -124,7 +124,7 @@ describe('useSetupTheme', () => {
     const errorFallbackContent = 'An error occurred'
 
     render(
-      <ThemeProvider errorFallback={<div>{errorFallbackContent}</div>}>
+      <ThemeProvider errorFallback={() => <div>{errorFallbackContent}</div>}>
         <TestComponent enableFallback="error" />
       </ThemeProvider>
     )
@@ -136,8 +136,8 @@ describe('useSetupTheme', () => {
     const errorFallbackContent = 'An error occurred'
 
     render(
-      <ThemeProvider errorFallback={<div>Global Error fallback</div>}>
-        <TestComponent enableFallback="error" errorFallback={<div>{errorFallbackContent}</div>} />
+      <ThemeProvider errorFallback={() => <div>Global Error fallback</div>}>
+        <TestComponent enableFallback="error" errorFallback={() => <div>{errorFallbackContent}</div>} />
       </ThemeProvider>
     )
 
@@ -148,7 +148,7 @@ describe('useSetupTheme', () => {
     const loaderFallbackContent = 'Loading...'
 
     render(
-      <ThemeProvider loaderFallback={<div>{loaderFallbackContent}</div>}>
+      <ThemeProvider loaderFallback={() => <div>{loaderFallbackContent}</div>}>
         <TestComponent enableFallback="loader" />
       </ThemeProvider>
     )
@@ -160,8 +160,8 @@ describe('useSetupTheme', () => {
     const loaderFallbackContent = 'Loading...'
 
     render(
-      <ThemeProvider loaderFallback={<div>Global Loader fallback</div>}>
-        <TestComponent enableFallback="loader" loaderFallback={<div>{loaderFallbackContent}</div>} />
+      <ThemeProvider loaderFallback={() => <div>Global Loader fallback</div>}>
+        <TestComponent enableFallback="loader" loaderFallback={() => <div>{loaderFallbackContent}</div>} />
       </ThemeProvider>
     )
 

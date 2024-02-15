@@ -1,5 +1,11 @@
 import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
-import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity, TimeRangeInput } from '../../helpers'
+import {
+  TimeSeriesQuery,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  useTimeSeriesQuery,
+  TimeSeriesGranularity,
+  TimeRangeInput
+} from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
 /**
@@ -56,7 +62,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
    * @param {TimeSeriesQuery} data
    * @returns {data: TimeSeriesQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -84,7 +90,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

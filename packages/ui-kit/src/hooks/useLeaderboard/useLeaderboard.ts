@@ -1,5 +1,11 @@
 import { LeaderboardQueryProps, useAccessToken, useFilters, useLog } from '../../components'
-import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, getTimeZone, useLeaderboardQuery, TimeRangeInput } from '../../helpers'
+import {
+  LeaderboardQuery,
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  getTimeZone,
+  useLeaderboardQuery,
+  TimeRangeInput
+} from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 
 /**
@@ -58,7 +64,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
    * @param {LeaderboardQuery} data
    * @returns {data: LeaderboardQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useLeaderboardQuery<LeaderboardQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useLeaderboardQuery<LeaderboardQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -88,7 +94,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

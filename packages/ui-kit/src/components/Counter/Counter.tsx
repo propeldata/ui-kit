@@ -1,14 +1,14 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useCombinedRefsCallback } from '../../helpers'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
+import { useCounter } from '../../hooks'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Counter.module.scss'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
-import { useCounter } from '../../hooks'
 
 export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
   (
@@ -21,9 +21,9 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       localize,
       className,
       baseTheme,
-      loaderProps,
+      loaderProps: loaderPropsInitial,
       loaderFallback,
-      errorFallbackProps,
+      errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
       emptyFallback,
       timeZone,
@@ -35,8 +35,10 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
   ) => {
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
+    const themeWrapper = withThemeWrapper(setRef)
 
     const {
+      theme,
       loaderFallback: loaderFallbackComponent,
       errorFallback: errorFallbackComponent,
       emptyFallback: emptyFallbackComponent
@@ -77,33 +79,31 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     }, [isStatic, value, query, isLoadingStatic, error?.name])
 
     if (error || propsMismatch) {
-      if (typeof errorFallbackComponent === 'function') {
-        return errorFallbackComponent(errorFallbackProps, ErrorFallback)
+      const errorFallbackProps: ErrorFallbackProps = {
+        error: null,
+        ...errorFallbackPropsInitial,
+        style: { height: 'auto', ...errorFallbackPropsInitial?.style }
       }
 
-      if (React.isValidElement(errorFallbackComponent)) {
-        return errorFallbackComponent
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
       }
 
-      return (
-        <ErrorFallback error={null} {...errorFallbackProps} style={{ height: 'auto', ...errorFallbackProps?.style }} />
-      )
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
-    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref.current) {
-      if (typeof loaderFallbackComponent === 'function') {
-        return loaderFallbackComponent(loaderProps, Loader)
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref?.current?.getAttribute('data-container')) {
+      const loaderProps: LoaderProps = { isText: true, ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
       }
 
-      if (React.isValidElement(loaderFallbackComponent)) {
-        return loaderFallbackComponent
-      }
-
-      return <Loader className={componentStyles.loader} isText {...loaderProps} />
+      return <Loader ref={setRef} className={componentStyles.loader} {...loaderProps} />
     }
 
     if ((value === '' || value === undefined || value === null) && emptyFallbackComponent) {
-      return emptyFallbackComponent
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     return (
@@ -115,6 +115,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
           className
         )}
         {...rest}
+        data-container
       >
         {getValueWithPrefixAndSufix({
           prefix: prefixValue,

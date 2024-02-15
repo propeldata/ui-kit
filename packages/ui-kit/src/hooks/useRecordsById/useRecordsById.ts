@@ -17,6 +17,7 @@ export const useRecordsById = ({
   accessToken: accessTokenFromProp,
   propelApiUrl,
   refetchInterval,
+  enabled: enabledProp = true,
   retry
 }: RecordsByIdQueryProps): UseQueryProps<RecordsByUniqueIdQuery> => {
   const log = useLog()
@@ -43,7 +44,7 @@ export const useRecordsById = ({
    * @param {RecordsByUniqueIdQuery} data
    * @returns {data: RecordsByUniqueIdQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useRecordsByUniqueIdQuery<RecordsByUniqueIdQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useRecordsByUniqueIdQuery<RecordsByUniqueIdQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -69,7 +70,7 @@ export const useRecordsById = ({
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

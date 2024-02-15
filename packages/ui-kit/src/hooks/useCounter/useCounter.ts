@@ -55,7 +55,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
    * @param {CounterQuery} data
    * @returns {data: CounterQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useCounterQuery<CounterQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useCounterQuery<CounterQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -82,7 +82,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

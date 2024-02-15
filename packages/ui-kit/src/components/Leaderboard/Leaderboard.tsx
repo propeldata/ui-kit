@@ -7,10 +7,11 @@ import {
   getCustomChartLabelsPlugin,
   getPixelFontSizeAsNumber,
   LeaderboardLabels,
-  useCombinedRefsCallback
+  useCombinedRefsCallback,
+  withThemeWrapper
 } from '../../helpers'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
@@ -37,9 +38,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       baseTheme = 'lightTheme',
       labelFormatter,
       timeZone,
-      loaderProps,
+      loaderProps: loaderPropsInitial,
       loaderFallback,
-      errorFallbackProps,
+      errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
       emptyFallback,
       style,
@@ -50,6 +51,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const themeWrapper = withThemeWrapper(setRef)
 
     const {
       theme,
@@ -322,40 +324,47 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     if (hasError || propsMismatch) {
       destroyChart()
 
-      if (typeof errorFallbackComponent === 'function') {
-        return errorFallbackComponent(errorFallbackProps, ErrorFallback)
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
       }
 
-      if (React.isValidElement(errorFallbackComponent)) {
-        return errorFallbackComponent
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
       }
 
-      return <ErrorFallback error={error} {...errorFallbackProps} />
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
-    const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
+    const isNoContainerRef =
+      (variant === 'bar' && !canvasRef.current) ||
+      (variant === 'table' && !innerRef?.current?.getAttribute('data-container'))
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
       destroyChart()
 
-      if (typeof loaderFallbackComponent === 'function') {
-        return loaderFallbackComponent(loaderProps, Loader)
+      const loaderProps: LoaderProps = { ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
       }
 
-      if (React.isValidElement(loaderFallbackComponent)) {
-        return loaderFallbackComponent
-      }
-
-      return <Loader {...loaderProps} />
+      return <Loader ref={setRef} {...loaderProps} />
     }
 
     if (isEmptyState && emptyFallbackComponent) {
-      return emptyFallbackComponent
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     if (variant === 'bar') {
       return (
-        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...rest}>
+        <div
+          ref={setRef}
+          className={classnames(componentStyles.rootLeaderboard, className)}
+          style={style}
+          {...rest}
+          data-container
+        >
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
       )
@@ -395,6 +404,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
         {...rest}
+        data-container
       >
         <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>
           <thead className={classnames(stickyHeader && componentStyles.stickyHeader)}>

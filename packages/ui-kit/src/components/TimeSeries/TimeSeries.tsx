@@ -9,10 +9,11 @@ import {
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
-  useForwardedRefCallback
+  useForwardedRefCallback,
+  withThemeWrapper
 } from '../../helpers'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
@@ -63,9 +64,9 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       className,
       baseTheme,
       chartConfigProps,
-      loaderProps,
+      loaderProps: loaderPropsInitial,
       loaderFallback,
-      errorFallbackProps,
+      errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
       emptyFallback,
       card = false,
@@ -75,6 +76,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     forwardedRef
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
+    const themeWrapper = withThemeWrapper(setRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
 
     const {
@@ -343,39 +345,39 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     if (hasError || propsMismatch) {
       destroyChart()
 
-      if (typeof errorFallbackComponent === 'function') {
-        return errorFallbackComponent(errorFallbackProps, ErrorFallback)
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
       }
 
-      if (React.isValidElement(errorFallbackComponent)) {
-        return errorFallbackComponent
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
       }
 
-      return <ErrorFallback error={error} {...errorFallbackProps} />
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
     // @TODO: encapsulate this logic in a shared hook/component
     // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
+
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !canvasRef.current) {
       destroyChart()
 
-      if (typeof loaderFallbackComponent === 'function') {
-        return loaderFallbackComponent(loaderProps, Loader)
+      const loaderProps: LoaderProps = { ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
       }
 
-      if (React.isValidElement(loaderFallbackComponent)) {
-        return loaderFallbackComponent
-      }
-
-      return <Loader {...loaderProps} />
+      return <Loader ref={setRef} {...loaderProps} />
     }
 
     if (isEmptyState && emptyFallbackComponent) {
-      return emptyFallbackComponent
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest}>
+      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest} data-container>
         <canvas
           id={id}
           ref={canvasRef}

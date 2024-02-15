@@ -1,16 +1,20 @@
-import React from 'react'
 import { Chart as ChartJS, ChartConfiguration, ChartTypeRegistry, Plugin, PluginOptionsByType } from 'chart.js/auto'
 import { _DeepPartialObject } from 'chart.js/dist/types/utils'
 import classnames from 'classnames'
-import componentStyles from './PieChart.module.scss'
-
-import { customCanvasBackgroundColor, getCustomChartLabelsPlugin, useCombinedRefsCallback } from '../../helpers'
-import { useSetupTheme } from '../ThemeProvider'
+import React from 'react'
+import {
+  customCanvasBackgroundColor,
+  getCustomChartLabelsPlugin,
+  useCombinedRefsCallback,
+  withThemeWrapper
+} from '../../helpers'
 import { useCounter, useLeaderboard } from '../../hooks'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
+import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
-import { PieChartProps, PieChartData } from './PieChart.types'
+import componentStyles from './PieChart.module.scss'
+import { PieChartData, PieChartProps } from './PieChart.types'
 import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
@@ -23,8 +27,11 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       rows,
       query,
       error,
-      loaderProps,
-      errorFallbackProps,
+      loaderProps: loaderPropsInitial,
+      loaderFallback,
+      errorFallbackProps: errorFallbackPropsInitial,
+      errorFallback,
+      emptyFallback,
       card = false,
       className,
       style,
@@ -39,7 +46,23 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const { theme, chartConfig } = useSetupTheme<'pie' | 'doughnut'>({ componentContainer, baseTheme })
+    const themeWrapper = withThemeWrapper(setRef)
+
+    const {
+      theme,
+      chartConfig,
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme<'pie' | 'doughnut'>({
+      componentContainer,
+      baseTheme,
+      loaderFallback,
+      errorFallback,
+      emptyFallback
+    })
+
+    const [isEmptyState, setIsEmptyState] = React.useState(false)
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
@@ -117,8 +140,12 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         } = chartProps
 
         const labels = data.rows?.map((row) => row[0]) ?? []
-
         const values = data.rows?.map((row) => Number(row[1])) ?? []
+
+        if (values.length === 0 && emptyFallbackComponent) {
+          setIsEmptyState(true)
+          return
+        }
 
         const customChartLabelsPlugin: Plugin<'pie' | 'doughnut'> = getCustomChartLabelsPlugin({
           theme,
@@ -236,7 +263,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         isPie,
         totalValue,
         defaultChartColorPalette,
-        chartConfigProps
+        chartConfigProps,
+        emptyFallbackComponent
       ]
     )
 
@@ -334,14 +362,35 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback error={error} {...errorFallbackProps} />
+
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
+      }
+
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
+      }
+
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
     const isNoContainerRef = (variant === 'pie' || variant === 'doughnut') && !canvasRef.current
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
       destroyChart()
-      return <Loader {...loaderProps} />
+
+      const loaderProps: LoaderProps = { ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader ref={setRef} {...loaderProps} />
+    }
+
+    if (isEmptyState && emptyFallbackComponent) {
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     const getListItem = () => {
@@ -364,7 +413,13 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     }
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
+      <div
+        ref={setRef}
+        className={classnames(componentStyles.rootPieChart, className)}
+        style={style}
+        {...rest}
+        data-container
+      >
         <div>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>

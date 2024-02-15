@@ -42,7 +42,7 @@ export const useSql = ({
    * @param {string} query - Sql query
    * @returns {data: SqlQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useSqlQuery<SqlQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useSqlQuery<SqlQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -66,7 +66,7 @@ export const useSql = ({
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

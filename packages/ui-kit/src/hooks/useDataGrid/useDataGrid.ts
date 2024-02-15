@@ -56,7 +56,7 @@ export const useDataGrid = ({
    * @param {DataGridQuery} data
    * @returns {data: DataGridQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useDataGridQuery<DataGridQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useDataGridQuery<DataGridQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -90,7 +90,7 @@ export const useDataGrid = ({
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

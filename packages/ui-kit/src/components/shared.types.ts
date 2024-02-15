@@ -1,6 +1,7 @@
 import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
-import type { ErrorFallbackProps, ErrorFallback } from './ErrorFallback'
-import type { LoaderProps, Loader } from './Loader'
+import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from './ErrorFallback'
+import type { Loader as LoaderComponent, LoaderProps } from './Loader'
+import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
 
 /** Shared props for the data components. */
 
@@ -13,9 +14,15 @@ export interface FallbackComponents {
    *
    * This component will be used by all the ThemeProvider's child components.
    */
-  loaderFallback?:
-    | React.ReactElement
-    | ((props: LoaderProps | undefined, baseComponent: typeof Loader) => React.ReactElement)
+  loaderFallback?: ({
+    loaderProps,
+    Loader,
+    theme
+  }: {
+    loaderProps: LoaderProps | undefined
+    Loader: typeof LoaderComponent
+    theme: ThemeStateProps
+  }) => React.ReactElement
 
   /**
    * A fallback react component that will be used when the component is in error state.
@@ -25,23 +32,29 @@ export interface FallbackComponents {
    *
    * This component will be used by all the ThemeProvider's child components.
    */
-  errorFallback?:
-    | React.ReactElement
-    | ((props: ErrorFallbackProps | undefined, baseComponent: typeof ErrorFallback) => React.ReactElement)
+  errorFallback?: ({
+    errorFallbackProps,
+    ErrorFallback,
+    theme
+  }: {
+    errorFallbackProps: ErrorFallbackProps | undefined
+    ErrorFallback: typeof ErrorFallbackComponent
+    theme: ThemeStateProps
+  }) => React.ReactElement
 
   /**
    * A fallback react component that will be used when the component is in empty state, which means no data or empty data was received.
    *
    * This component will be used by all the ThemeProvider's child components.
    */
-  emptyFallback?: React.ReactElement
+  emptyFallback?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
 }
 
 export interface DataComponentProps extends FallbackComponents {
-  /** Optional props that are used to configure the Loader component. */
+  /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `loaderFallback` instead */
   loaderProps?: LoaderProps
 
-  /** Optional props that are used to configure the ErrorFallback component. */
+  /** @deprecated ~~Optional props that are used to configure the ErrorFallback component.~~ This type is deprecated, use `errorFallback` instead */
   errorFallbackProps?: ErrorFallbackProps
 
   /** When true, wraps the component in a card */

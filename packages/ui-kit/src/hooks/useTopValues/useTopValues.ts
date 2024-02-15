@@ -51,7 +51,7 @@ export const useTopValues = ({
    * @param {TopValuesQuery} data
    * @returns {data: TopValuesQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useTopValuesQuery<TopValuesQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useTopValuesQuery<TopValuesQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -79,7 +79,7 @@ export const useTopValues = ({
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }
