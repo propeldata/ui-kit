@@ -204,7 +204,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             responsive: true,
             maintainAspectRatio: false,
             layout: {
-              padding: 4
+              padding: 10
             },
             plugins: {
               ...chartConfig.options?.plugins,
