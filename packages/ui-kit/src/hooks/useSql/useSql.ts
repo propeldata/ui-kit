@@ -1,6 +1,7 @@
-import { useAccessToken, useLog } from '../../components'
-import { SqlQuery, useSqlQuery, PROPEL_GRAPHQL_API_ENDPOINT } from '../../helpers'
+import { PROPEL_GRAPHQL_API_ENDPOINT, SqlQuery, useSqlQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from './../../components/Log/useLog'
 import { SqlQueryProps } from './Sql.types'
 
 /**

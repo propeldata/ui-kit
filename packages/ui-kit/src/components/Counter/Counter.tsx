@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
 import { useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
-import { useCounter } from '../../hooks'
+import { useCounter } from '../../hooks/useCounter'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'

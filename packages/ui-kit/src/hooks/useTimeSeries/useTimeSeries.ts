@@ -1,12 +1,15 @@
-import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
 import {
-  TimeSeriesQuery,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  useTimeSeriesQuery,
+  TimeRangeInput,
   TimeSeriesGranularity,
-  TimeRangeInput
+  TimeSeriesQuery,
+  useTimeSeriesQuery
 } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useFilters } from './../../components/FilterProvider/useFilters'
+import { useLog } from './../../components/Log/useLog'
+import { TimeSeriesQueryProps } from './../../components/TimeSeries/TimeSeries.types'
 
 /**
  * This hook allows you to query a Time Series using Propel's GraphQL API.

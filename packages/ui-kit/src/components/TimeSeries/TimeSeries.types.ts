@@ -1,7 +1,7 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
+import { ThemeComponentProps } from 'src/themes'
 import { TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
-import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
@@ -29,7 +29,7 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends Omit<ErrorFallbackProps, 'error'>, DataComponentProps {
+export interface TimeSeriesBaseProps extends ThemeComponentProps, DataComponentProps {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string

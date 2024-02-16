@@ -1,12 +1,15 @@
-import { LeaderboardQueryProps, useAccessToken, useFilters, useLog } from '../../components'
+import { LeaderboardQueryProps } from '../../components/Leaderboard/Leaderboard.types'
 import {
+  getTimeZone,
   LeaderboardQuery,
   PROPEL_GRAPHQL_API_ENDPOINT,
-  getTimeZone,
-  useLeaderboardQuery,
-  TimeRangeInput
+  TimeRangeInput,
+  useLeaderboardQuery
 } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useFilters } from './../../components/FilterProvider/useFilters'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query a Leaderboard using Propel's GraphQL API.

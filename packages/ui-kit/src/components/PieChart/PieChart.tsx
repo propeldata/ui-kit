@@ -8,7 +8,8 @@ import {
   useCombinedRefsCallback,
   withThemeWrapper
 } from '../../helpers'
-import { useCounter, useLeaderboard } from '../../hooks'
+import { useCounter } from '../../hooks/useCounter'
+import { useLeaderboard } from '../../hooks/useLeaderboard'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'

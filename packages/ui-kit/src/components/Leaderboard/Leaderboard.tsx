@@ -18,7 +18,7 @@ import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
-import { useLeaderboard } from '../../hooks'
+import { useLeaderboard } from '../../hooks/useLeaderboard'
 
 let idCounter = 0
 

@@ -1,7 +1,8 @@
-import { useAccessToken, useLog } from '../../components'
-import { TopValuesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTopValuesQuery, TimeRangeInput } from '../../helpers'
-import { UseQueryProps } from '../types/Query.types'
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
+import { PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, TopValuesQuery, useTopValuesQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query Top Values using Propel's GraphQL API.

@@ -1,7 +1,8 @@
-import { useAccessToken, useLog } from '../../components'
-import { RecordsByUniqueIdQuery, PROPEL_GRAPHQL_API_ENDPOINT, useRecordsByUniqueIdQuery } from '../../helpers'
-import { UseQueryProps } from '../types/Query.types'
 import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.types'
+import { PROPEL_GRAPHQL_API_ENDPOINT, RecordsByUniqueIdQuery, useRecordsByUniqueIdQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query Records By Id using Propel's GraphQL API.

@@ -1,7 +1,8 @@
-import { useAccessToken, useLog } from '../../components'
-import { DataGridQuery, useDataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput } from '../../helpers'
-import { UseQueryProps } from '../types/Query.types'
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
+import { DataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput, useDataGridQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query Data Grid using Propel's GraphQL API.
