@@ -40,19 +40,17 @@ export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps
         {...rest}
         data-testid="error-fallback-container"
       >
-        <div className={componentStyles.container}>
-          <Icon color={color} />
-          {error && (
-            <>
-              <p role="alert" aria-live="assertive">
-                {error.title}
-              </p>
-              <p role="alert" aria-live="assertive">
-                {error.body}
-              </p>
-            </>
-          )}
-        </div>
+        <Icon color={color} />
+        {error && (
+          <>
+            <p role="alert" aria-live="assertive">
+              {error.title}
+            </p>
+            <p role="alert" aria-live="assertive">
+              {error.body}
+            </p>
+          </>
+        )}
       </div>
     )
   }

@@ -102,7 +102,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       return <Loader ref={setRef} className={componentStyles.loader} {...loaderProps} />
     }
 
-    if ((value === '' || value === undefined || value === null) && emptyFallbackComponent) {
+    if ((value === '' || value === null) && emptyFallbackComponent) {
       return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
