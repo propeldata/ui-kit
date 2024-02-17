@@ -1,0 +1,70 @@
+import { Meta, Source, Canvas } from '@storybook/blocks'
+import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import * as CounterStories from '../../../../packages/ui-kit/src/components/Counter/Counter.stories'
+
+<Meta title="Customization/Fallbacks" />
+
+# Fallbacks
+
+It's possible to customize the `Loading`, `Error`, and `Empty` states of the UI Kit components. This is useful when you
+want to provide a consistent look and feel across your app. You can customize the fallbacks globally for all components
+via `ThemeProvider`.
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { ThemeProvider, Counter, TimeSeries } from "@propeldata/ui-kit"
+
+    function App() {
+      return (
+        <ThemeProvider
+          loaderFallback={() => <div>Loading...</div>}
+          errorFallback={() => <h1>Error</h1>}
+          emptyFallback={() => <span>No Data</span>}
+        >
+          <Counter />
+
+          {/* A component-level customization of loaderFallback */}
+          <TimeSeries loaderFallback={() => <div>TimeSeries is loading...</div>} />
+        </ThemeProvider>
+      );
+    }
+
+`} />
+
+Or you can customize the fallbacks on a per-component basis.
+
+<Canvas of={CounterStories.CustomErrorFallbackStory} sourceState="none" />
+
+{/* @TODO: make the custom SourceCode block able to properly display jsx syntax to remove this hardcoded example */}
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { Counter } from "@propeldata/ui-kit"
+
+    function App() {
+      return (
+        <Counter
+          query={{ accessToken: 'invalid-access-token' }}
+          card
+          errorFallback={({ theme }) => (
+            <div
+              style={{
+                border: \`1px solid \${theme?.errorPrimary}\`,
+                color: theme?.errorPrimary,
+                padding: '1rem'
+              }}
+            >
+              Custom error fallback
+            </div>
+          )}
+        />
+      );
+    }
+
+`} />

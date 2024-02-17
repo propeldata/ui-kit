@@ -1,6 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
+import { ThemeComponentProps } from 'src/themes'
 import { DimensionInput, LeaderboardLabels, Sort } from '../../helpers'
-import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
@@ -49,7 +49,13 @@ export type LeaderboardChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps {
+export interface LeaderboardProps extends ThemeComponentProps, DataComponentProps {
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
+
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 

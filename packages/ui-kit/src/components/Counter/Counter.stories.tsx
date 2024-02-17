@@ -184,3 +184,26 @@ export const SingleValueRefStory: Story = {
   },
   render: (args) => <Counter {...args} />
 }
+
+export const CustomErrorFallbackStory: Story = {
+  name: 'Custom ErrorFallback',
+  tags: ['pattern'],
+  args: {
+    query: {
+      accessToken: 'invalid-access-token'
+    },
+    card: true,
+    errorFallback: ({ theme }) => (
+      <div
+        style={{
+          border: `1px solid ${theme?.errorPrimary}`,
+          color: theme?.errorPrimary,
+          padding: '1rem'
+        }}
+      >
+        Custom error fallback
+      </div>
+    )
+  },
+  render: (args) => <Counter {...args} />
+}

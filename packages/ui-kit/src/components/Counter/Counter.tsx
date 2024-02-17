@@ -1,14 +1,14 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useCombinedRefsCallback } from '../../helpers'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
+import { useCounter } from '../../hooks/useCounter'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Counter.module.scss'
 import type { CounterProps } from './Counter.types'
 import { getValueWithPrefixAndSufix } from './utils'
-import { useCounter } from '../../hooks'
 
 export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
   (
@@ -21,8 +21,11 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       localize,
       className,
       baseTheme,
-      loaderProps,
-      errorFallbackProps,
+      loaderProps: loaderPropsInitial,
+      loaderFallback,
+      errorFallbackProps: errorFallbackPropsInitial,
+      errorFallback,
+      emptyFallback,
       timeZone,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       card,
@@ -32,7 +35,14 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
   ) => {
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
-    useSetupTheme({ componentContainer, baseTheme })
+    const themeWrapper = withThemeWrapper(setRef)
+
+    const {
+      theme,
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme({ componentContainer, baseTheme, loaderFallback, errorFallback, emptyFallback })
 
     /**
      * If the user passes `value` attribute, it
@@ -41,14 +51,12 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     const isStatic = !query
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-
     const { data, isLoading, error } = useCounter({ ...query, timeZone, enabled: !isStatic })
-
     const value = isStatic ? staticValue : data?.counter?.value
 
     React.useEffect(() => {
       function handlePropsMismatch() {
-        if (isStatic && !value) {
+        if (isStatic && value === undefined) {
           // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
           setPropsMismatch(true)
           return
@@ -71,11 +79,31 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     }, [isStatic, value, query, isLoadingStatic, error?.name])
 
     if (error || propsMismatch) {
-      return <ErrorFallback error={null} {...errorFallbackProps} />
+      const errorFallbackProps: ErrorFallbackProps = {
+        error: null,
+        ...errorFallbackPropsInitial,
+        style: { height: 'auto', ...errorFallbackPropsInitial?.style }
+      }
+
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
+      }
+
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
-    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref.current) {
-      return <Loader className={componentStyles.loader} {...loaderProps} isText />
+    if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref?.current?.getAttribute('data-container')) {
+      const loaderProps: LoaderProps = { isText: true, ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader ref={setRef} className={componentStyles.loader} {...loaderProps} />
+    }
+
+    if ((value === '' || value === null) && emptyFallbackComponent) {
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     return (
@@ -87,6 +115,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
           className
         )}
         {...rest}
+        data-container
       >
         {getValueWithPrefixAndSufix({
           prefix: prefixValue,

@@ -7,17 +7,18 @@ import {
   getCustomChartLabelsPlugin,
   getPixelFontSizeAsNumber,
   LeaderboardLabels,
-  useCombinedRefsCallback
+  useCombinedRefsCallback,
+  withThemeWrapper
 } from '../../helpers'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
-import { useLeaderboard } from '../../hooks'
+import { useLeaderboard } from '../../hooks/useLeaderboard'
 
 let idCounter = 0
 
@@ -37,8 +38,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       baseTheme = 'lightTheme',
       labelFormatter,
       timeZone,
-      loaderProps,
-      errorFallbackProps,
+      loaderProps: loaderPropsInitial,
+      loaderFallback,
+      errorFallbackProps: errorFallbackPropsInitial,
+      errorFallback,
+      emptyFallback,
       style,
       card = false,
       ...rest
@@ -47,8 +51,24 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const { theme, chartConfig } = useSetupTheme<'bar'>({ componentContainer, baseTheme })
+    const themeWrapper = withThemeWrapper(setRef)
+
+    const {
+      theme,
+      chartConfig,
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme<'bar'>({
+      componentContainer,
+      baseTheme,
+      loaderFallback,
+      errorFallback,
+      emptyFallback
+    })
+
     const [propsMismatch, setPropsMismatch] = React.useState(false)
+    const [isEmptyState, setIsEmptyState] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -80,6 +100,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
+
+        if (values.length === 0 && emptyFallbackComponent) {
+          setIsEmptyState(true)
+          return
+        }
 
         const customChartLabelsPlugin: Plugin<'bar'> = getCustomChartLabelsPlugin({
           theme,
@@ -205,7 +230,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter]
+      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, emptyFallbackComponent]
     )
 
     const destroyChart = () => {
@@ -298,19 +323,48 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback error={error} {...errorFallbackProps} />
+
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
+      }
+
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
+      }
+
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
-    const isNoContainerRef = (variant === 'bar' && !canvasRef.current) || (variant === 'table' && !innerRef.current)
+    const isNoContainerRef =
+      (variant === 'bar' && !canvasRef.current) ||
+      (variant === 'table' && !innerRef?.current?.getAttribute('data-container'))
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
       destroyChart()
-      return <Loader {...loaderProps} />
+
+      const loaderProps: LoaderProps = { ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader ref={setRef} {...loaderProps} />
+    }
+
+    if (isEmptyState && emptyFallbackComponent) {
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     if (variant === 'bar') {
       return (
-        <div ref={setRef} className={classnames(componentStyles.rootLeaderboard, className)} style={style} {...rest}>
+        <div
+          ref={setRef}
+          className={classnames(componentStyles.rootLeaderboard, className)}
+          style={style}
+          {...rest}
+          data-container
+        >
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
       )
@@ -350,6 +404,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
         {...rest}
+        data-container
       >
         <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>
           <thead className={classnames(stickyHeader && componentStyles.stickyHeader)}>

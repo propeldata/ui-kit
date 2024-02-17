@@ -1,8 +1,9 @@
 import type { ChartConfiguration } from 'chart.js'
 import React from 'react'
 import type { ThemeTokenProps } from '../../themes/theme.types'
+import { FallbackComponents } from '../shared.types'
 
-export type ThemeContextProps = {
+export interface ThemeContextProps extends FallbackComponents {
   theme?: ThemeTokenProps
 
   /**
@@ -17,7 +18,7 @@ export type ThemeContextProps = {
 
 export type DefaultThemes = 'lightTheme' | 'darkTheme'
 
-export interface ThemeProviderProps extends Pick<ThemeContextProps, 'globalChartConfigProps'> {
+export interface ThemeProviderProps extends Omit<ThemeContextProps, 'theme'> {
   /** Children components that the theme will be applied to. */
   children?: React.ReactNode
 
@@ -41,7 +42,12 @@ export type ThemeStateProps = ThemeTokenProps | undefined
 
 export type ChartVariant = 'bar' | 'line' | 'pie' | 'doughnut'
 
-export interface UseSetupThemeProps extends Pick<ThemeProviderProps, 'baseTheme'> {
+export interface UseSetupThemeProps extends Pick<ThemeProviderProps, 'baseTheme'>, FallbackComponents {
   /** The component root element to which the theme will be applied. */
   componentContainer?: HTMLElement | null
+}
+
+export interface UseSetupThemeResult<T extends ChartVariant> extends FallbackComponents {
+  theme: ThemeStateProps
+  chartConfig?: ChartConfiguration<T>
 }

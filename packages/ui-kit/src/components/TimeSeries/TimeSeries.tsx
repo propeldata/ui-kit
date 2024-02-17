@@ -9,10 +9,11 @@ import {
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
-  useForwardedRefCallback
+  useForwardedRefCallback,
+  withThemeWrapper
 } from '../../helpers'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
@@ -63,8 +64,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       className,
       baseTheme,
       chartConfigProps,
-      loaderProps,
-      errorFallbackProps,
+      loaderProps: loaderPropsInitial,
+      loaderFallback,
+      errorFallbackProps: errorFallbackPropsInitial,
+      errorFallback,
+      emptyFallback,
       card = false,
       chartProps = {},
       ...rest
@@ -72,8 +76,24 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     forwardedRef
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
+    const themeWrapper = withThemeWrapper(setRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
-    const { theme, chartConfig } = useSetupTheme<typeof type>({ componentContainer, baseTheme })
+
+    const {
+      theme,
+      chartConfig,
+      loaderFallback: loaderFallbackComponent,
+      errorFallback: errorFallbackComponent,
+      emptyFallback: emptyFallbackComponent
+    } = useSetupTheme<typeof type>({
+      componentContainer,
+      baseTheme,
+      loaderFallback,
+      errorFallback,
+      emptyFallback
+    })
+
+    const [isEmptyState, setIsEmptyState] = React.useState(false)
     const log = useLog()
     const isLoadingStatic = loading
 
@@ -129,6 +149,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
         const values = getNumericValues(data.values, log)
+
+        if (values.length === 0 && emptyFallbackComponent) {
+          setIsEmptyState(true)
+          return
+        }
 
         const plugins = [customCanvasBackgroundColor]
 
@@ -247,7 +272,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         labelFormatter,
         chartConfigProps,
         type,
-        chartConfig
+        chartConfig,
+        emptyFallbackComponent
       ]
     )
 
@@ -318,18 +344,40 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback error={error} {...errorFallbackProps} />
+
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
+      }
+
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
+      }
+
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
     // @TODO: encapsulate this logic in a shared hook/component
     // @TODO: refactor the logic around the loading state, static and server data, and errors handling (data fetching and props mismatch)
+
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !canvasRef.current) {
       destroyChart()
-      return <Loader {...loaderProps} />
+
+      const loaderProps: LoaderProps = { ...loaderPropsInitial }
+
+      if (loaderFallbackComponent) {
+        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader ref={setRef} {...loaderProps} />
+    }
+
+    if (isEmptyState && emptyFallbackComponent) {
+      return themeWrapper(emptyFallbackComponent({ theme }))
     }
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest}>
+      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest} data-container>
         <canvas
           id={id}
           ref={canvasRef}
