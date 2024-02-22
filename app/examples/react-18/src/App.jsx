@@ -15,5 +15,5 @@ async function fetchToken() {
 }
 
 export default function App() {
-  return <Dashboard fetchToken={fetchToken} reactVersion="17" envs={process.env} />
+  return <Dashboard fetchToken={fetchToken} reactVersion="18" envs={process.env} />
 }
