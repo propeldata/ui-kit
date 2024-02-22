@@ -232,26 +232,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         if (chartRef.current) {
           const chart = chartRef.current
 
-          chart.data.labels = labels
-          chart.options.scales = {
-            ...chart.options.scales,
-            ...scales,
-            ...config?.options?.scales
-          }
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins,
-            ...config?.options?.plugins
-          }
+          chart.options = { ...config.options }
 
-          const dataset = chart.data.datasets[0]
-          dataset.data = values
-
-          Object.assign(chart.data.datasets[0], {
-            type: variant,
-            ...chart.data.datasets,
-            ...config?.data.datasets[0]
-          })
+          if (JSON.stringify(chart.data) !== JSON.stringify(config.data)) {
+            chart.data = { ...config.data }
+          }
 
           chart.update()
           return

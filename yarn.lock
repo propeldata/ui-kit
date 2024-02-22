@@ -10779,9 +10779,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dashboard@workspace:^, dashboard@workspace:packages/examples/dashboard":
+"dashboard-example@workspace:^, dashboard-example@workspace:packages/examples/dashboard":
   version: 0.0.0-use.local
-  resolution: "dashboard@workspace:packages/examples/dashboard"
+  resolution: "dashboard-example@workspace:packages/examples/dashboard"
   dependencies:
     "@propeldata/ui-kit": "workspace:^"
     "@rollup/plugin-commonjs": ^25.0.7
@@ -20490,7 +20490,7 @@ __metadata:
   resolution: "react-16@workspace:app/examples/react-16"
   dependencies:
     "@propeldata/ui-kit": "workspace:^"
-    dashboard: "workspace:^"
+    dashboard-example: "workspace:^"
     react: ^16.8.0
     react-dom: ^16.8.0
     react-scripts: ^5.0.1
@@ -20501,7 +20501,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-17@workspace:app/examples/react-17"
   dependencies:
-    dashboard: "workspace:^"
+    dashboard-example: "workspace:^"
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: ^5.0.1
@@ -20513,7 +20513,7 @@ __metadata:
   resolution: "react-18@workspace:app/examples/react-18"
   dependencies:
     "@propeldata/ui-kit": "workspace:^"
-    dashboard: "workspace:^"
+    dashboard-example: "workspace:^"
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: ^5.0.1

@@ -1,6 +1,5 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { ThemeComponentProps } from 'src/themes'
 import { TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
@@ -29,7 +28,7 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends ThemeComponentProps, DataComponentProps {
+export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string

@@ -1,5 +1,4 @@
-import { Chart as ChartJS, ChartConfiguration, ChartTypeRegistry, Plugin, PluginOptionsByType } from 'chart.js/auto'
-import { _DeepPartialObject } from 'chart.js/dist/types/utils'
+import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js/auto'
 import classnames from 'classnames'
 import React from 'react'
 import {
@@ -15,7 +14,7 @@ import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './PieChart.module.scss'
-import { PieChartData, PieChartProps } from './PieChart.types'
+import { PieChartData, PieChartProps, PieChartVariant } from './PieChart.types'
 import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
@@ -55,7 +54,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       loaderFallback: loaderFallbackComponent,
       errorFallback: errorFallbackComponent,
       emptyFallback: emptyFallbackComponent
-    } = useSetupTheme<'pie' | 'doughnut'>({
+    } = useSetupTheme<PieChartVariant>({
       componentContainer,
       baseTheme,
       loaderFallback,
@@ -148,7 +147,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           return
         }
 
-        const customChartLabelsPlugin: Plugin<'pie' | 'doughnut'> = getCustomChartLabelsPlugin({
+        const customChartLabelsPlugin: Plugin<PieChartVariant> = getCustomChartLabelsPlugin({
           theme,
           hideTotal
         })
@@ -182,7 +181,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const datasets = isDoughnut ? { cutout: '75%' } : { cutout: '0' }
 
-        let config: ChartConfiguration<'pie' | 'doughnut'> = {
+        let config: ChartConfiguration<PieChartVariant> = {
           ...chartConfig,
           type: variant,
           data: {
@@ -223,27 +222,22 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         }
 
         if (chartConfigProps) {
+          // @TODO: fix this complex type
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           config = chartConfigProps(config)
         }
 
         if (chartRef.current) {
-          const customConfig = chartConfigProps?.(config)
-
           const chart = chartRef.current
 
-          chart.data.labels = labels
-          Object.assign(chart.data.datasets[0], {
-            type: variant,
-            data: values,
-            backgroundColor: chartColorPalette,
-            ...datasets,
-            ...customConfig?.data.datasets[0]
-          })
+          // const newOptions =
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          chart.options = { ...config.options }
 
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins,
-            ...(customConfig?.options?.plugins as _DeepPartialObject<PluginOptionsByType<keyof ChartTypeRegistry>>)
+          if (JSON.stringify(chart.data) !== JSON.stringify(config.data)) {
+            chart.data = { ...config.data }
           }
 
           chart.update()
@@ -432,4 +426,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
 PieChartComponent.displayName = 'PieChartComponent'
 
+// @TODO: fix this complex type
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const PieChart = withContainer(PieChartComponent, ErrorFallback) as typeof PieChartComponent

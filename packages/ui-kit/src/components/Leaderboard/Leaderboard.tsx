@@ -194,33 +194,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         if (chartRef.current) {
           const chart = chartRef.current
-          chart.data.labels = labels
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins,
-            ...config?.options?.plugins
-          }
 
-          chart.data.datasets[0].data = values
-          Object.assign(chart.data.datasets[0], {
-            type: variant,
-            ...chart.data.datasets,
-            ...config?.data.datasets[0]
-          })
+          chart.options = { ...config.options }
 
-          if (chart.options.scales?.x && 'border' in chart.options.scales.x && chart.options.scales.x.border) {
-            chart.options.scales.x.border = { ...chart.options.scales.x.border, color: theme.colorSecondary }
-          }
-          if (chart.options.scales?.x?.grid != null) {
-            chart.options.scales.x.grid = { ...chart.options.scales.x.grid, color: theme.colorSecondary }
-          }
-          if (chart.options.scales?.y?.grid != null) {
-            chart.options.scales.y.grid = { ...chart.options.scales.y.grid, color: theme.colorSecondary }
-          }
-
-          chart.options.scales = {
-            ...chart.options.scales,
-            ...config?.options?.scales
+          if (JSON.stringify(chart.data) !== JSON.stringify(config.data)) {
+            chart.data = { ...config.data }
           }
 
           chart.update()

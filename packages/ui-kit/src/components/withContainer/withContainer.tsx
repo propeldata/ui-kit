@@ -17,7 +17,7 @@ export const withContainer = <P extends object, C extends object>(
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary fallback={<ErrorFallback {...errorFallbackProps} />}>
           {componentProps?.card ? (
-            <Card style={componentProps?.style} className={componentProps?.className}>
+            <Card>
               <WrappedComponent ref={ref} {...props} />
             </Card>
           ) : (

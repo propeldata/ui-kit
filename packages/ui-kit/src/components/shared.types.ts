@@ -1,3 +1,4 @@
+import { ThemeComponentProps } from 'src/themes'
 import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
 import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from './ErrorFallback'
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
@@ -50,16 +51,18 @@ export interface FallbackComponents {
   emptyFallback?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
 }
 
-export interface DataComponentProps extends FallbackComponents {
-  /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `loaderFallback` instead */
-  loaderProps?: LoaderProps
+export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeComponentProps &
+  Omit<React.ComponentPropsWithoutRef<T>, 'style' | 'className'> &
+  FallbackComponents & {
+    /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `loaderFallback` instead */
+    loaderProps?: LoaderProps
 
-  /** @deprecated ~~Optional props that are used to configure the ErrorFallback component.~~ This type is deprecated, use `errorFallback` instead */
-  errorFallbackProps?: ErrorFallbackProps
+    /** @deprecated ~~Optional props that are used to configure the ErrorFallback component.~~ This type is deprecated, use `errorFallback` instead */
+    errorFallbackProps?: ErrorFallbackProps
 
-  /** When true, wraps the component in a card */
-  card?: boolean
-}
+    /** When true, wraps the component in a card */
+    card?: boolean
+  }
 
 export interface QueryProps {
   /** Indicates specific time zone region */

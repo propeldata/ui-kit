@@ -1,9 +1,8 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../helpers'
-import { ErrorFallbackProps } from '../ErrorFallback'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
-type PieChartVariant = 'pie' | 'doughnut'
+export type PieChartVariant = 'pie' | 'doughnut'
 
 export type ChartProps = {
   /** Sets the position of the labels */
@@ -59,7 +58,13 @@ export interface PieChartQueryProps extends QueryProps {
   dimension?: DimensionInput
 }
 
-export interface PieChartProps extends ErrorFallbackProps, DataComponentProps {
+export interface PieChartProps extends DataComponentProps<'div'> {
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
+
   /** The variant the chart will respond to, can be either `pie` or `doughnut`. */
   variant?: PieChartVariant
 
