@@ -24,8 +24,6 @@ const mockData2 = {
 
 export const PieChartStatic = () => {
   const [mockData, setMockData] = React.useState(mockData1)
-  // const [barsColor, setBarsColor] = React.useState('#ccc')
-  const [barsColor] = React.useState('#ccc')
   const [chartType, setChartType] = React.useState<PieChartVariant>('pie')
 
   const { data, isLoading, setIsLoading } = useFakeData(mockData)
@@ -42,18 +40,7 @@ export const PieChartStatic = () => {
     <div className="m-6">
       <h2 className="text-2xl">PieChart Static</h2>
       <div className="my-5">
-        <PieChart
-          card
-          headers={data?.headers}
-          rows={data?.rows}
-          variant={chartType}
-          loading={isLoading}
-          styles={{
-            bar: { backgroundColor: barsColor },
-            table: { height: '200px', backgroundColor: '#f5f5f5', header: { backgroundColor: '#f5f5f5' } },
-            canvas: { backgroundColor: '#f5f5f5' }
-          }}
-        />
+        <PieChart card headers={data?.headers} rows={data?.rows} variant={chartType} loading={isLoading} />
       </div>
       <div className="flex items-center gap-2 mt-1">
         <button
