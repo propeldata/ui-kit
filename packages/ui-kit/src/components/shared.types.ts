@@ -62,6 +62,9 @@ export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeCom
 
     /** When true, wraps the component in a card */
     card?: boolean
+
+    /** Props for the Card component */
+    cardProps?: React.ComponentPropsWithoutRef<'div'>
   }
 
 export interface QueryProps {
