@@ -54,10 +54,10 @@ export interface FallbackComponents {
 export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeComponentProps &
   Omit<React.ComponentPropsWithoutRef<T>, 'style' | 'className'> &
   FallbackComponents & {
-    /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `renderLoader` instead */
+    /** @deprecated Optional props that are used to configure the Loader component. This type is deprecated, use `renderLoader` instead. */
     loaderProps?: LoaderProps
 
-    /** @deprecated ~~Optional props that are used to configure the ErrorFallback component.~~ This type is deprecated, use `errorFallback` instead */
+    /** @deprecated Optional props that are used to configure the ErrorFallback component. This type is deprecated, use `errorFallback` instead. */
     errorFallbackProps?: ErrorFallbackProps
 
     /** When true, wraps the component in a card */

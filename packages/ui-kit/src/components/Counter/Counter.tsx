@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import React from 'react'
-import { useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
+import { getTimeZone, useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
 import { useCounter } from '../../hooks/useCounter'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
@@ -51,7 +51,11 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     const isStatic = !query
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-    const { data, isLoading, error } = useCounter({ ...query, timeZone, enabled: !isStatic })
+    const { data, isLoading, error } = useCounter({
+      ...query,
+      timeZone: getTimeZone(query?.timeZone ?? timeZone),
+      enabled: !isStatic
+    })
     const value = isStatic ? staticValue : data?.counter?.value
 
     React.useEffect(() => {

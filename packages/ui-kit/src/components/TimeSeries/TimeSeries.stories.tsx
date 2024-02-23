@@ -12,6 +12,7 @@ import {
 import { ThemeTokenProps } from '../../themes'
 import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
+import { TimeSeriesQueryProps } from './TimeSeries.types'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
@@ -64,7 +65,7 @@ const dataset = {
   values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 }
 
-const connectedParams = {
+const connectedParams: TimeSeriesQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {

@@ -12,6 +12,7 @@ import {
 import { ThemeTokenProps } from '../../themes'
 import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { PieChart as PieChartSource, PieChartComponent } from './PieChart'
+import { PieChartQueryProps } from './PieChart.types'
 
 const meta: Meta<typeof PieChartComponent> = {
   title: 'Components/PieChart',
@@ -69,7 +70,7 @@ const PieChart = (args: Story['args']) => {
   )
 }
 
-const connectedParams = {
+const connectedParams: PieChartQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {

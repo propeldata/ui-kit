@@ -21,6 +21,10 @@ describe('getTimeZone', () => {
     Intl.DateTimeFormat = originalDateTimeFormat // Restore original implementation after each test
   })
 
+  it('returns the value if provided', () => {
+    expect(getTimeZone('Europe/Berlin')).toBe('Europe/Berlin')
+  })
+
   it('returns the local time zone if available', () => {
     expect(getTimeZone()).toBe('America/New_York')
   })

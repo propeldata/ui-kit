@@ -33,17 +33,16 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
     })
 
     const id = useRef(Symbol()).current
-
     const isStatic = !query
 
     const { filters, setFilters } = useFilters()
-
     const columnName = query?.columnName ?? columnNameProp
-    const timeZone = query?.timeZone ?? getTimeZone()
-
     const log = useLog()
-
-    const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone, enabled: !isStatic })
+    const {
+      data,
+      error: queryError,
+      isLoading
+    } = useTopValues({ ...query, timeZone: getTimeZone(query?.timeZone), enabled: !isStatic })
 
     const isError = queryError != null || error != null
 

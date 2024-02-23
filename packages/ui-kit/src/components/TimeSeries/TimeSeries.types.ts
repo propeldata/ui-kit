@@ -50,7 +50,10 @@ export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
   /** Canvas role prop, if not passed we handle it */
   role?: string
 
-  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+  /**
+   * @deprecated Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC").
+   * Defaults to the client's local time zone.
+   * This type is deprecated, pass it via `query` instead */
   timeZone?: string
 
   /** TimeSeries query props */
@@ -59,7 +62,7 @@ export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
   /** Optional props that are used to configure the chart component. */
   chartProps?: TimeSeriesChartProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  /** @deprecated Format function for labels, must return an array with the new labels. This type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: TimeSeriesLabels) => TimeSeriesLabels
 }
 

@@ -6,6 +6,7 @@ import {
   formatLabels,
   getCustomChartLabelsPlugin,
   getPixelFontSizeAsNumber,
+  getTimeZone,
   LeaderboardLabels,
   useCombinedRefsCallback,
   withThemeWrapper
@@ -218,7 +219,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }
 
-    const { data: fetchedData, isLoading, error: hasError } = useLeaderboard({ ...query, timeZone, enabled: !isStatic })
+    const {
+      data: fetchedData,
+      isLoading,
+      error: hasError
+    } = useLeaderboard({ ...query, timeZone: getTimeZone(query?.timeZone ?? timeZone), enabled: !isStatic })
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',

@@ -84,7 +84,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
         sort: sort,
         rowLimit: rowLimit ?? 100,
         dimensions: dimensions ?? [],
-        timeZone: timeZone ?? getTimeZone(),
+        timeZone: getTimeZone(timeZone),
         ...withTimeRange
       }
     },

@@ -60,7 +60,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       labelFormatter,
       ariaLabel,
       role,
-      timeZone,
+      timeZone: timeZoneInitial,
       className,
       baseTheme,
       chartConfigProps,
@@ -124,13 +124,13 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const isStatic = !query
 
     const isFormatted = !!labelFormatter
-    const zone = timeZone ?? getTimeZone()
+    const timeZone = getTimeZone(query?.timeZone ?? timeZoneInitial)
 
     const {
       data: serverData,
       isLoading,
       error: hasError
-    } = useTimeSeries({ ...query, granularity, timeZone: zone, enabled: !isStatic })
+    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic })
 
     const renderChart = React.useCallback(
       (data?: TimeSeriesData) => {
@@ -202,7 +202,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         }
 
         // @TODO: need to refactor this logic
-        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid, theme })
+        const scales = getScales({
+          granularity,
+          isFormatted,
+          zone: timeZone,
+          chart: chartRef.current,
+          variant,
+          grid,
+          theme
+        })
 
         const options: ChartOptions<TimeSeriesChartVariant> = {
           responsive: true,
@@ -249,7 +257,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         hasError,
         isFormatted,
         variant,
-        zone,
+        timeZone,
         theme,
         card,
         chartProps,

@@ -67,7 +67,10 @@ export interface LeaderboardProps extends DataComponentProps<'div'> {
   /** When true, shows a skeleton loader */
   loading?: boolean
 
-  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
+  /**
+   * @deprecated Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC").
+   * Defaults to the client's local time zone.
+   * This type is deprecated, pass it via `query` instead. */
   timeZone?: string
 
   /** Leaderboard query props */
@@ -79,7 +82,7 @@ export interface LeaderboardProps extends DataComponentProps<'div'> {
   /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
   chartProps?: LeaderboardChartProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  /** @deprecated Format function for labels, must return an array with the new labels the type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: LeaderboardLabels) => LeaderboardLabels
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
