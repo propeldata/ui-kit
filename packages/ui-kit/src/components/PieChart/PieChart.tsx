@@ -28,10 +28,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       query,
       error,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
-      emptyFallback,
+      renderEmpty,
       card = false,
       className,
       style,
@@ -51,15 +51,15 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const {
       theme,
       chartConfig,
-      loaderFallback: loaderFallbackComponent,
+      renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
-      emptyFallback: emptyFallbackComponent
+      renderEmpty: renderEmptyComponent
     } = useSetupTheme<PieChartVariant>({
       componentContainer,
       baseTheme,
-      loaderFallback,
+      renderLoader,
       errorFallback,
-      emptyFallback
+      renderEmpty
     })
 
     const [isEmptyState, setIsEmptyState] = React.useState(false)
@@ -142,7 +142,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         const labels = data.rows?.map((row) => row[0]) ?? []
         const values = data.rows?.map((row) => Number(row[1])) ?? []
 
-        if (values.length === 0 && emptyFallbackComponent) {
+        if (values.length === 0 && renderEmptyComponent) {
           setIsEmptyState(true)
           return
         }
@@ -259,7 +259,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         totalValue,
         defaultChartColorPalette,
         chartConfigProps,
-        emptyFallbackComponent
+        renderEmptyComponent
       ]
     )
 
@@ -377,15 +377,15 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
       const loaderProps: LoaderProps = { ...loaderPropsInitial }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader ref={setRef} {...loaderProps} />
     }
 
-    if (isEmptyState && emptyFallbackComponent) {
-      return themeWrapper(emptyFallbackComponent({ theme }))
+    if (isEmptyState && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
     }
 
     const getListItem = () => {

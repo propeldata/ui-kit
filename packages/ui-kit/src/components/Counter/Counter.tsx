@@ -22,10 +22,10 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       className,
       baseTheme,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
-      emptyFallback,
+      renderEmpty,
       timeZone,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       card,
@@ -39,10 +39,10 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
 
     const {
       theme,
-      loaderFallback: loaderFallbackComponent,
+      renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
-      emptyFallback: emptyFallbackComponent
-    } = useSetupTheme({ componentContainer, baseTheme, loaderFallback, errorFallback, emptyFallback })
+      renderEmpty: renderEmptyComponent
+    } = useSetupTheme({ componentContainer, baseTheme, renderLoader, errorFallback, renderEmpty })
 
     /**
      * If the user passes `value` attribute, it
@@ -95,15 +95,15 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && !ref?.current?.getAttribute('data-container')) {
       const loaderProps: LoaderProps = { isText: true, ...loaderPropsInitial }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader ref={setRef} className={componentStyles.loader} {...loaderProps} />
     }
 
-    if ((value === '' || value === null) && emptyFallbackComponent) {
-      return themeWrapper(emptyFallbackComponent({ theme }))
+    if ((value === '' || value === null) && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
     }
 
     return (

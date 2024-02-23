@@ -20,16 +20,16 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
       error,
       loading,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       options = []
     },
     forwardedRef
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const themeWrapper = withThemeWrapper(setRef)
-    const { theme, loaderFallback: loaderFallbackComponent } = useSetupTheme({
+    const { theme, renderLoader: renderLoaderComponent } = useSetupTheme({
       componentContainer,
-      loaderFallback
+      renderLoader
     })
 
     const id = useRef(Symbol()).current
@@ -83,8 +83,8 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
         }
       }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader {...loaderProps} />

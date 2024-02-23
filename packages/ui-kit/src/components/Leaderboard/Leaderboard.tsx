@@ -39,10 +39,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       labelFormatter,
       timeZone,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
-      emptyFallback,
+      renderEmpty,
       style,
       card = false,
       ...rest
@@ -56,15 +56,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const {
       theme,
       chartConfig,
-      loaderFallback: loaderFallbackComponent,
+      renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
-      emptyFallback: emptyFallbackComponent
+      renderEmpty: renderEmptyComponent
     } = useSetupTheme<'bar'>({
       componentContainer,
       baseTheme,
-      loaderFallback,
+      renderLoader,
       errorFallback,
-      emptyFallback
+      renderEmpty
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -101,7 +101,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-        if (values.length === 0 && emptyFallbackComponent) {
+        if (values.length === 0 && renderEmptyComponent) {
           setIsEmptyState(true)
           return
         }
@@ -208,7 +208,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, emptyFallbackComponent]
+      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, renderEmptyComponent]
     )
 
     const destroyChart = () => {
@@ -323,15 +323,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
       const loaderProps: LoaderProps = { ...loaderPropsInitial }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader ref={setRef} {...loaderProps} />
     }
 
-    if (isEmptyState && emptyFallbackComponent) {
-      return themeWrapper(emptyFallbackComponent({ theme }))
+    if (isEmptyState && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
     }
 
     if (variant === 'bar') {

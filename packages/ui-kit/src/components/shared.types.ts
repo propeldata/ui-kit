@@ -8,24 +8,6 @@ import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
 
 export interface FallbackComponents {
   /**
-   * A fallback react component that will be used when the component is in loading state.
-   *
-   * You can also use a callback to get the `LoaderProps` for your custom component or set a wrapper
-   * around the UI-Kit's Loader component.
-   *
-   * This component will be used by all the ThemeProvider's child components.
-   */
-  loaderFallback?: ({
-    loaderProps,
-    Loader,
-    theme
-  }: {
-    loaderProps: LoaderProps | undefined
-    Loader: typeof LoaderComponent
-    theme: ThemeStateProps
-  }) => React.ReactElement
-
-  /**
    * A fallback react component that will be used when the component is in error state.
    *
    * You can also use a callback to get the `ErrorFallbackProps` for your custom component or set a wrapper
@@ -44,17 +26,35 @@ export interface FallbackComponents {
   }) => React.ReactElement
 
   /**
+   * A fallback react component that will be used when the component is in loading state.
+   *
+   * You can also use a callback to get the `LoaderProps` for your custom component or set a wrapper
+   * around the UI-Kit's Loader component.
+   *
+   * This component will be used by all the ThemeProvider's child components.
+   */
+  renderLoader?: ({
+    loaderProps,
+    Loader,
+    theme
+  }: {
+    loaderProps: LoaderProps | undefined
+    Loader: typeof LoaderComponent
+    theme: ThemeStateProps
+  }) => React.ReactElement
+
+  /**
    * A fallback react component that will be used when the component is in empty state, which means no data or empty data was received.
    *
    * This component will be used by all the ThemeProvider's child components.
    */
-  emptyFallback?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
+  renderEmpty?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
 }
 
 export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeComponentProps &
   Omit<React.ComponentPropsWithoutRef<T>, 'style' | 'className'> &
   FallbackComponents & {
-    /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `loaderFallback` instead */
+    /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `renderLoader` instead */
     loaderProps?: LoaderProps
 
     /** @deprecated ~~Optional props that are used to configure the ErrorFallback component.~~ This type is deprecated, use `errorFallback` instead */
