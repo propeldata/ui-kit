@@ -1,4 +1,4 @@
-import { ThemeComponentProps } from 'src/themes'
+import { ThemeComponentProps } from '../themes'
 import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
 import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from './ErrorFallback'
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
