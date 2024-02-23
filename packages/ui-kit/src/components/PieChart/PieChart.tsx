@@ -4,6 +4,7 @@ import React from 'react'
 import {
   customCanvasBackgroundColor,
   getCustomChartLabelsPlugin,
+  getTimeZone,
   useCombinedRefsCallback,
   withThemeWrapper
 } from '../../helpers'
@@ -32,6 +33,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
       renderEmpty,
+      timeZone: timeZoneInitial,
       card = false,
       className,
       style,
@@ -79,6 +81,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
      */
     const isStatic = !query
 
+    const timeZone = getTimeZone(query?.timeZone ?? timeZoneInitial)
+
     /**
      * Fetches the leaderboard data from the API
      */
@@ -86,7 +90,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: leaderboardData,
       isLoading: leaderboardIsLoading,
       error: leaderboardHasError
-    } = useLeaderboard({ ...query, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
+    } = useLeaderboard({ ...query, timeZone, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
 
     /**
      * Fetches the counter data from the API
@@ -95,7 +99,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: counterData,
       isLoading: counterIsLoading,
       error: counterHasError
-    } = useCounter({ ...query, enabled: !isStatic })
+    } = useCounter({ ...query, timeZone, enabled: !isStatic })
 
     const isLoading = leaderboardIsLoading || counterIsLoading
 

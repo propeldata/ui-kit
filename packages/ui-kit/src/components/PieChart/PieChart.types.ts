@@ -71,6 +71,9 @@ export interface PieChartProps extends DataComponentProps<'div'> {
   /** When true, shows a skeleton loader */
   loading?: boolean
 
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
+  timeZone?: string
+
   /** If passed along with `rows` the component will ignore the built-in GraphQL operations. */
   headers?: string[]
 

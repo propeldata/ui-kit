@@ -15,10 +15,7 @@ export interface CounterProps extends DataComponentProps<'span'> {
   /** When true, formats value to locale string */
   localize?: boolean
 
-  /**
-   * @deprecated ~~Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC").
-   * Defaults to the client's local time zone.~~
-   * This type is deprecated, pass it via `query` instead */
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
   timeZone?: string
 
   /** Counter query props */

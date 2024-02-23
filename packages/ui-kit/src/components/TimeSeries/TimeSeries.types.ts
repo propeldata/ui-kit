@@ -50,10 +50,7 @@ export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
   /** Canvas role prop, if not passed we handle it */
   role?: string
 
-  /**
-   * @deprecated Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC").
-   * Defaults to the client's local time zone.
-   * This type is deprecated, pass it via `query` instead */
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
   timeZone?: string
 
   /** TimeSeries query props */
