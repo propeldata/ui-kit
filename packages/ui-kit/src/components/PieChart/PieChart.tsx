@@ -235,7 +235,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         if (chartRef.current) {
           const chart = chartRef.current
 
-          // const newOptions =
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           chart.options = { ...config.options }
@@ -244,7 +243,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             chart.data = { ...config.data }
           }
 
-          chart.update()
+          chart.update('none')
           return
         }
 

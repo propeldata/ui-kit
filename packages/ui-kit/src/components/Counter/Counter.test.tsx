@@ -12,7 +12,17 @@ const mockData = {
 
 const handlers = [
   mockCounterQuery((req, res, ctx) => {
-    const { metricName } = req.variables.counterInput
+    const { metricName, timeZone } = req.variables.counterInput
+
+    if (metricName === 'test-time-zone') {
+      return res(
+        ctx.data({
+          counter: {
+            value: timeZone
+          }
+        })
+      )
+    }
 
     if (metricName === 'lack-of-data') {
       return res(
@@ -155,6 +165,37 @@ describe('Counter', () => {
     )
 
     await dom.findByText('true')
+  })
+
+  it('Should pass timeZone to the query', async () => {
+    dom = render(
+      <Counter
+        timeZone="Europe/Rome"
+        query={{
+          metric: 'test-time-zone',
+          accessToken: 'test-token',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
+        }}
+      />
+    )
+
+    await dom.findByText('Europe/Rome')
+  })
+
+  it('Should pass query.timeZone to the query', async () => {
+    dom = render(
+      <Counter
+        timeZone="Europe/Rome"
+        query={{
+          metric: 'test-time-zone',
+          timeZone: 'Europe/Berlin',
+          accessToken: 'test-token',
+          timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
+        }}
+      />
+    )
+
+    await dom.findByText('Europe/Berlin')
   })
 
   it('Should NOT fetch data in static mode', async () => {

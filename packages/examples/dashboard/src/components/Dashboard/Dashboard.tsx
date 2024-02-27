@@ -28,10 +28,9 @@ const GlobalStyles = () => {
 
 interface DashboardProps extends DashboardCommonProps {
   fetchToken: () => Promise<string>
-  reactVersion: string
 }
 
-export const Dashboard = ({ fetchToken, reactVersion, envs }: DashboardProps) => {
+export const Dashboard = ({ fetchToken, envs }: DashboardProps) => {
   const [theme, setTheme] = React.useState<DefaultThemes>('lightTheme')
   return (
     <AccessTokenProvider fetchToken={fetchToken}>
@@ -40,7 +39,7 @@ export const Dashboard = ({ fetchToken, reactVersion, envs }: DashboardProps) =>
           <GlobalStyles />
           <main style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-bg-secondary)' }}>
             <h1 className="px-6 py-3 text-3xl">
-              React {reactVersion} Testing App
+              React {React.version} Testing App
               <button className="m-3" onClick={() => setTheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')}>
                 {theme === 'lightTheme' ? '🌚' : '🌞'}
               </button>

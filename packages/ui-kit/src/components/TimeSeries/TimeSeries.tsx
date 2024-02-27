@@ -246,7 +246,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
             chart.data = { ...config.data }
           }
 
-          chart.update()
+          chart.update('none')
           return
         }
 

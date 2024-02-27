@@ -202,7 +202,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             chart.data = { ...config.data }
           }
 
-          chart.update()
+          chart.update('none')
           return
         }
 
