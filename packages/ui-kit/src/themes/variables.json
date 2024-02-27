@@ -3,106 +3,3812 @@
   "metadata": {},
   "collections": [
     {
-      "name": "Primitives",
+      "name": "_Primitives",
       "modes": [
         {
-          "name": "Mode 1",
+          "name": "Style",
           "variables": [
             {
-              "name": "color/blue/25",
+              "name": "Colors/Base/white",
               "type": "color",
               "isAlias": false,
-              "value": "#F5FAFF"
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
             },
             {
-              "name": "color/blue/50",
+              "name": "Colors/Base/black",
               "type": "color",
               "isAlias": false,
-              "value": "#EFF8FF"
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
             },
             {
-              "name": "spacing/0",
+              "name": "Colors/Base/transparent",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/25",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 252,
+                "g": 252,
+                "b": 253,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 152,
+                "g": 162,
+                "b": 179,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 34,
+                "b": 48,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 24,
+                "b": 40,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (light mode)/950",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/25",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 250,
+                "g": 250,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 245,
+                "g": 245,
+                "b": 246,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 241,
+                "b": 241,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 236,
+                "b": 237,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Gray (dark mode)/950",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/25",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 245,
+                "g": 250,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 239,
+                "g": 248,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 209,
+                "g": 233,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 178,
+                "g": 221,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 132,
+                "g": 202,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 83,
+                "g": 177,
+                "b": 253,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 73,
+                "b": 169,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 25,
+                "g": 65,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Brand/950",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 42,
+                "b": 86,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/25",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 251,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 243,
+                "b": 242,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 228,
+                "b": 226,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 205,
+                "b": 202,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 253,
+                "g": 162,
+                "b": 155,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 112,
+                "b": 102,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 68,
+                "b": 56,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 180,
+                "g": 35,
+                "b": 24,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 145,
+                "g": 32,
+                "b": 24,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 122,
+                "g": 39,
+                "b": 26,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Error/950",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 85,
+                "g": 22,
+                "b": 12,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/25",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 252,
+                "b": 245,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 250,
+                "b": 235,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 240,
+                "b": 199,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 223,
+                "b": 137,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 200,
+                "b": 75,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 253,
+                "g": 176,
+                "b": 34,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 247,
+                "g": 144,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 181,
+                "g": 71,
+                "b": 8,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 147,
+                "g": 55,
+                "b": 13,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 122,
+                "g": 46,
+                "b": 14,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Warning/950",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 78,
+                "g": 29,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/25",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 246,
+                "g": 254,
+                "b": 249,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 253,
+                "b": 243,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 250,
+                "b": 230,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 169,
+                "g": 239,
+                "b": 197,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 117,
+                "g": 224,
+                "b": 167,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 205,
+                "b": 137,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 178,
+                "b": 106,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 6,
+                "g": 118,
+                "b": 71,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 8,
+                "g": 93,
+                "b": 58,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 77,
+                "b": 49,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Success/950",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 5,
+                "g": 51,
+                "b": 33,
+                "a": 1
+              }
+            },
+            {
+              "name": "Spacing/0 (0px)",
               "type": "number",
               "isAlias": false,
               "value": 0
             },
             {
-              "name": "spacing/0_5",
+              "name": "Spacing/0․5 (2px)",
               "type": "number",
               "isAlias": false,
               "value": 2
             },
             {
-              "name": "spacing/1",
+              "name": "Spacing/1 (4px)",
               "type": "number",
               "isAlias": false,
               "value": 4
             },
             {
-              "name": "color/warning/25",
-              "type": "color",
+              "name": "Spacing/1․5  (6px)",
+              "type": "number",
               "isAlias": false,
-              "value": "#FFFBFA"
+              "value": 6
             },
             {
-              "name": "color/warning/50",
-              "type": "color",
+              "name": "Spacing/2 (8px)",
+              "type": "number",
               "isAlias": false,
-              "value": "#FEF3F2"
+              "value": 8
+            },
+            {
+              "name": "Spacing/3 (12px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 12
+            },
+            {
+              "name": "Spacing/4 (16px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 16
+            },
+            {
+              "name": "Spacing/5 (20px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 20
+            },
+            {
+              "name": "Spacing/6 (24px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 24
+            },
+            {
+              "name": "Spacing/8 (32px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 32
+            },
+            {
+              "name": "Spacing/10 (40px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 40
+            },
+            {
+              "name": "Spacing/12 (48px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 48
+            },
+            {
+              "name": "Spacing/16 (64px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 64
+            },
+            {
+              "name": "Spacing/20 (80px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 80
+            },
+            {
+              "name": "Spacing/24 (96px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 96
+            },
+            {
+              "name": "Spacing/32 (128px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 128
+            },
+            {
+              "name": "Spacing/40 (160px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 160
+            },
+            {
+              "name": "Spacing/48 (192px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 192
+            },
+            {
+              "name": "Spacing/56 (224px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 224
+            },
+            {
+              "name": "Spacing/64 (256px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 256
+            },
+            {
+              "name": "Spacing/80 (320px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 320
+            },
+            {
+              "name": "Spacing/96 (384px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 384
+            },
+            {
+              "name": "Spacing/120 (480px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 480
+            },
+            {
+              "name": "Spacing/140 (560px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 560
+            },
+            {
+              "name": "Spacing/160 (640px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 640
+            },
+            {
+              "name": "Spacing/180 (720px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 720
+            },
+            {
+              "name": "Spacing/192 (768px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 768
+            },
+            {
+              "name": "Spacing/256 (1,024px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 1024
+            },
+            {
+              "name": "Spacing/320 (1,280px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 1280
+            },
+            {
+              "name": "Spacing/360 (1,440px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 1440
+            },
+            {
+              "name": "Spacing/400 (1,600px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 1600
+            },
+            {
+              "name": "Spacing/480 (1,920px)",
+              "type": "number",
+              "isAlias": false,
+              "value": 1920
             }
           ]
         }
       ]
     },
     {
-      "name": "Tokens",
+      "name": "1. Color Modes",
+      "modes": [
+        {
+          "name": "Light mode",
+          "variables": [
+            {
+              "name": "Colors/Text/text-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 24,
+                "b": 40,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-primary_on-brand",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Colors/Base/white"
+              }
+            },
+            {
+              "name": "Colors/Text/text-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-secondary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 34,
+                "b": 48,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-secondary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 178,
+                "g": 221,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-tertiary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-tertiary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 178,
+                "g": 221,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-quarterary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 132,
+                "g": 202,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-white",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-placeholder",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-placeholder_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 25,
+                "g": 65,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-tertiary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-error-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 132,
+                "g": 202,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-error",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 253,
+                "g": 162,
+                "b": 155,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-brand-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-brand-solid_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Color",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 24,
+                "b": 40,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-secondaary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 34,
+                "b": 48,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-tertiary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quarterary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quinary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 152,
+                "g": 162,
+                "b": 179,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quinary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-senary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 152,
+                "g": 162,
+                "b": 179,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-brand-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-error-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 68,
+                "b": 56,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-warning-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 247,
+                "g": 144,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-success-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 178,
+                "b": 106,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 252,
+                "g": 252,
+                "b": 253,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-active",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-overlay",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 239,
+                "g": 248,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 239,
+                "g": 248,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 209,
+                "g": 233,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-solid_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-section",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 73,
+                "b": 169,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-section_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 243,
+                "b": 242,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-error-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 228,
+                "b": 226,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-error-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 250,
+                "b": 235,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-warning-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 254,
+                "g": 240,
+                "b": 199,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-warning-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 253,
+                "b": 243,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-success-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 250,
+                "b": 230,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-success-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-10",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.1
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-20",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.2
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-30",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.3
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-40",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.4
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.5
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-60",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.6
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-70",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.7
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-80",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.8
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-90",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.9
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-100",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Colors/Base/white"
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-10",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.1
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-20",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.2
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-30",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.3
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-40",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.4
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.5
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-60",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.6
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-70",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.7
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-80",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.8
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-90",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0.9
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 250,
+                "b": 251,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 152,
+                "g": 162,
+                "b": 179,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 34,
+                "b": 48,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 24,
+                "b": 40,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 239,
+                "g": 248,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 209,
+                "g": 233,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 178,
+                "g": 221,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-300",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Colors/Brand/300"
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 83,
+                "g": 177,
+                "b": 253,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            }
+          ]
+        },
+        {
+          "name": "Dark Mode",
+          "variables": [
+            {
+              "name": "Colors/Text/text-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 245,
+                "g": 245,
+                "b": 246,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-primary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 245,
+                "g": 245,
+                "b": 246,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-secondary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 236,
+                "b": 237,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-secondary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-tertiary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-tertiary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-quarterary_on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-white",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-placeholder",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-placeholder_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 245,
+                "g": 245,
+                "b": 246,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-brand-tertiary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 245,
+                "g": 245,
+                "b": 246,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 112,
+                "b": 102,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 253,
+                "g": 176,
+                "b": 34,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Text/text-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 205,
+                "b": 137,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-error-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 112,
+                "b": 102,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 83,
+                "g": 177,
+                "b": 253,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-error",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 68,
+                "b": 56,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-brand-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Border/border-brand-solid_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Color",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-secondaary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 236,
+                "b": 237,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-tertiary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quarterary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quinary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-quinary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-senary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-brand-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 68,
+                "b": 56,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-error-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 112,
+                "b": 102,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 247,
+                "g": 144,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-warning-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 253,
+                "g": 176,
+                "b": 34,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 178,
+                "b": 106,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Foreground color/fg-success-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 205,
+                "b": 137,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-primary-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-secondary-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-active",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-overlay",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-solid_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-section",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-brand-section_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-error-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-error-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 247,
+                "g": 144,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-warning-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-warning-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 178,
+                "b": 106,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-success-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "Colors/Background color/bg-success-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-10",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.1
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-20",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.2
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-30",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.3
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-40",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.4
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.5
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-60",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.6
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-70",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.7
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-80",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.8
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-90",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.9
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-white-100",
+              "type": "color",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Colors/Gray (dark mode)/950"
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-10",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.1
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-20",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.2
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-30",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.3
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-40",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.4
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.5
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-60",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.6
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-70",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.7
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-80",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.8
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-90",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.9
+              }
+            },
+            {
+              "name": "Component Colors/Alpha/alpha-black-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 236,
+                "b": 237,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/utility-gray-900",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 241,
+                "b": 241,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 42,
+                "b": 86,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 25,
+                "g": 65,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 73,
+                "b": 169,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 83,
+                "g": 177,
+                "b": 253,
+                "a": 1
+              }
+            },
+            {
+              "name": "Component Colors/Utility/Blue/utility-blue-700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 132,
+                "g": 202,
+                "b": 255,
+                "a": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Radius",
       "modes": [
         {
           "name": "Mode 1",
           "variables": [
             {
-              "name": "text/text-primary",
-              "type": "color",
-              "isAlias": true,
-              "value": {
-                "collection": "Primitives",
-                "name": "color/blue/25"
-              }
+              "name": "radius-none",
+              "type": "number",
+              "isAlias": false,
+              "value": 0
             },
             {
-              "name": "border/border-primary",
-              "type": "color",
-              "isAlias": true,
-              "value": {
-                "collection": "Primitives",
-                "name": "color/warning/25"
-              }
+              "name": "radius-xxs",
+              "type": "number",
+              "isAlias": false,
+              "value": 2
             },
             {
-              "name": "border/border-secondary",
-              "type": "color",
-              "isAlias": true,
-              "value": {
-                "collection": "Primitives",
-                "name": "color/warning/50"
-              }
+              "name": "radius-xs",
+              "type": "number",
+              "isAlias": false,
+              "value": 4
             },
             {
-              "name": "text/text-secondary",
-              "type": "color",
-              "isAlias": true,
-              "value": {
-                "collection": "Primitives",
-                "name": "color/blue/50"
-              }
+              "name": "radius-sm",
+              "type": "number",
+              "isAlias": false,
+              "value": 6
             },
+            {
+              "name": "radius-md",
+              "type": "number",
+              "isAlias": false,
+              "value": 8
+            },
+            {
+              "name": "radius-lg",
+              "type": "number",
+              "isAlias": false,
+              "value": 10
+            },
+            {
+              "name": "radius-xl",
+              "type": "number",
+              "isAlias": false,
+              "value": 12
+            },
+            {
+              "name": "radius-2xl",
+              "type": "number",
+              "isAlias": false,
+              "value": 16
+            },
+            {
+              "name": "radius-3xl",
+              "type": "number",
+              "isAlias": false,
+              "value": 20
+            },
+            {
+              "name": "radius-4xl",
+              "type": "number",
+              "isAlias": false,
+              "value": 24
+            },
+            {
+              "name": "radius-full",
+              "type": "number",
+              "isAlias": false,
+              "value": 9999
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Spacing",
+      "modes": [
+        {
+          "name": "Mode 1",
+          "variables": [
             {
               "name": "spacing-none",
               "type": "number",
               "isAlias": true,
               "value": {
-                "collection": "Primitives",
-                "name": "spacing/0"
+                "collection": "_Primitives",
+                "name": "Spacing/0 (0px)"
               }
             },
             {
@@ -110,8 +3816,8 @@
               "type": "number",
               "isAlias": true,
               "value": {
-                "collection": "Primitives",
-                "name": "spacing/0_5"
+                "collection": "_Primitives",
+                "name": "Spacing/0․5 (2px)"
               }
             },
             {
@@ -119,8 +3825,1120 @@
               "type": "number",
               "isAlias": true,
               "value": {
-                "collection": "Primitives",
-                "name": "spacing/1"
+                "collection": "_Primitives",
+                "name": "Spacing/1 (4px)"
+              }
+            },
+            {
+              "name": "spacing-sm",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/1․5  (6px)"
+              }
+            },
+            {
+              "name": "spacing-md",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/2 (8px)"
+              }
+            },
+            {
+              "name": "spacing-lg",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/3 (12px)"
+              }
+            },
+            {
+              "name": "spacing-xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/4 (16px)"
+              }
+            },
+            {
+              "name": "spacing-2xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/5 (20px)"
+              }
+            },
+            {
+              "name": "spacing-3xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/6 (24px)"
+              }
+            },
+            {
+              "name": "spacing-4xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/8 (32px)"
+              }
+            },
+            {
+              "name": "spacing-5xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/10 (40px)"
+              }
+            },
+            {
+              "name": "spacing-6xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/12 (48px)"
+              }
+            },
+            {
+              "name": "spacing-7xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/16 (64px)"
+              }
+            },
+            {
+              "name": "spacing-8xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/20 (80px)"
+              }
+            },
+            {
+              "name": "spacing-9xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/24 (96px)"
+              }
+            },
+            {
+              "name": "spacing-10xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/32 (128px)"
+              }
+            },
+            {
+              "name": "spacing-11xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/40 (160px)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Widths",
+      "modes": [
+        {
+          "name": "Mode 1",
+          "variables": [
+            {
+              "name": "width-xxs",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/80 (320px)"
+              }
+            },
+            {
+              "name": "width-xs",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/96 (384px)"
+              }
+            },
+            {
+              "name": "width-sm",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/120 (480px)"
+              }
+            },
+            {
+              "name": "width-md",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/140 (560px)"
+              }
+            },
+            {
+              "name": "width-lg",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/160 (640px)"
+              }
+            },
+            {
+              "name": "width-xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/192 (768px)"
+              }
+            },
+            {
+              "name": "width-2xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/256 (1,024px)"
+              }
+            },
+            {
+              "name": "width-3xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/320 (1,280px)"
+              }
+            },
+            {
+              "name": "width-4xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/360 (1,440px)"
+              }
+            },
+            {
+              "name": "width-5xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/400 (1,600px)"
+              }
+            },
+            {
+              "name": "width-6xl",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/480 (1,920px)"
+              }
+            },
+            {
+              "name": "width-min-width",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/48 (192px)"
+              }
+            },
+            {
+              "name": "paragraph-max-width",
+              "type": "number",
+              "isAlias": true,
+              "value": {
+                "collection": "_Primitives",
+                "name": "Spacing/180 (720px)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Typography",
+      "modes": [
+        {
+          "name": "Style",
+          "variables": [
+            {
+              "name": "Display 2xl/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 72,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 90,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display 2xl/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 72,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 90,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display 2xl/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 72,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 90,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display 2xl/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 72,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 90,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xl/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 60,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 72,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xl/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 60,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 72,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xl/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 60,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 72,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xl/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 60,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 72,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display lg/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 48,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 60,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display lg/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 48,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 60,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display lg/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 48,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 60,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display lg/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 48,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 60,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display md/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 36,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 44,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display md/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 36,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 44,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display md/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 36,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 44,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display md/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 36,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 44,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": -2,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display sm/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 30,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 38,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display sm/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 30,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 38,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display sm/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 30,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 38,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display sm/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 30,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 38,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xs/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 24,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 32,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xs/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 24,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 32,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xs/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 24,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 32,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Display xs/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 24,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 32,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xl/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 20,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 30,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xl/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 20,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 30,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xl/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 20,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 30,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text lg/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 18,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 28,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text lg/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 18,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 28,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text lg/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 18,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 28,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text lg/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 18,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 28,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text md/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 16,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 24,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text md/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 16,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 24,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text md/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 16,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 24,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text md/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 16,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 24,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text sm/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 14,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 20,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text sm/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 14,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 20,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text sm/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 14,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 20,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text sm/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 14,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 20,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text sm/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 12,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 18,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xs/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 12,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 18,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xs/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 12,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 18,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xs/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 12,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 18,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xxs/Regular",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 10,
+                "fontFamily": "Inter",
+                "fontWeight": "Regular",
+                "lineHeight": 16,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xxs/Medium",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 10,
+                "fontFamily": "Inter",
+                "fontWeight": "Medium",
+                "lineHeight": 16,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xxs/Semibold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 10,
+                "fontFamily": "Inter",
+                "fontWeight": "Semi Bold",
+                "lineHeight": 16,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            },
+            {
+              "name": "Text xxs/Bold",
+              "type": "typography",
+              "isAlias": false,
+              "value": {
+                "fontSize": 10,
+                "fontFamily": "Inter",
+                "fontWeight": "Bold",
+                "lineHeight": 16,
+                "lineHeightUnit": "PIXELS",
+                "letterSpacing": 0,
+                "letterSpacingUnit": "PERCENT",
+                "textCase": "ORIGINAL",
+                "textDecoration": "NONE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Effects",
+      "modes": [
+        {
+          "name": "Style",
+          "variables": [
+            {
+              "name": "Focus rings/ring-brand-shadow-xs",
+              "type": "effect",
+              "isAlias": false,
+              "value": {
+                "effects": [
+                  {
+                    "type": "DROP_SHADOW",
+                    "color": {
+                      "r": 46,
+                      "g": 144,
+                      "b": 250,
+                      "a": 0.2
+                    },
+                    "offset": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "radius": 0,
+                    "spread": 4
+                  },
+                  {
+                    "type": "DROP_SHADOW",
+                    "color": {
+                      "r": 46,
+                      "g": 144,
+                      "b": 250,
+                      "a": 0.05
+                    },
+                    "offset": {
+                      "x": 0,
+                      "y": 1
+                    },
+                    "radius": 2,
+                    "spread": 0
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Focus rings/ring-band",
+              "type": "effect",
+              "isAlias": false,
+              "value": {
+                "effects": [
+                  {
+                    "type": "DROP_SHADOW",
+                    "color": {
+                      "r": 21,
+                      "g": 112,
+                      "b": 239,
+                      "a": 0.24
+                    },
+                    "offset": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "radius": 0,
+                    "spread": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Shadows/shadow-xs",
+              "type": "effect",
+              "isAlias": false,
+              "value": {
+                "effects": [
+                  {
+                    "type": "DROP_SHADOW",
+                    "color": {
+                      "r": 16,
+                      "g": 24,
+                      "b": 40,
+                      "a": 0.05
+                    },
+                    "offset": {
+                      "x": 0,
+                      "y": 1
+                    },
+                    "radius": 2,
+                    "spread": 0
+                  }
+                ]
               }
             }
           ]
