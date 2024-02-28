@@ -1,6 +1,6 @@
 {
   "name": "dashboard-example",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
