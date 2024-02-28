@@ -45,23 +45,23 @@ describe('useSetupTheme', () => {
 
   const TestComponent: React.FC<TestComponentProps> = ({
     container,
-    loaderFallback,
+    renderLoader,
     errorFallback,
-    emptyFallback,
+    renderEmpty,
     enableFallback
   }) => {
     const {
       theme,
       chartConfig,
-      loaderFallback: loaderFallbackComponent,
+      renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
-      emptyFallback: emptyFallbackComponent
-    } = useSetupTheme({ componentContainer: container, loaderFallback, errorFallback, emptyFallback })
+      renderEmpty: renderEmptyComponent
+    } = useSetupTheme({ componentContainer: container, renderLoader, errorFallback, renderEmpty })
 
-    if (enableFallback === 'loader' && loaderFallbackComponent) {
-      return typeof loaderFallbackComponent === 'function'
-        ? loaderFallbackComponent({ loaderProps: {}, Loader, theme })
-        : loaderFallbackComponent
+    if (enableFallback === 'loader' && renderLoaderComponent) {
+      return typeof renderLoaderComponent === 'function'
+        ? renderLoaderComponent({ loaderProps: {}, Loader, theme })
+        : renderLoaderComponent
     }
 
     if (enableFallback === 'error' && errorFallbackComponent) {
@@ -70,8 +70,8 @@ describe('useSetupTheme', () => {
         : errorFallbackComponent
     }
 
-    if (enableFallback === 'empty' && emptyFallbackComponent) {
-      return typeof emptyFallbackComponent === 'function' ? emptyFallbackComponent({ theme }) : emptyFallbackComponent
+    if (enableFallback === 'empty' && renderEmptyComponent) {
+      return typeof renderEmptyComponent === 'function' ? renderEmptyComponent({ theme }) : renderEmptyComponent
     }
 
     return (
@@ -97,27 +97,27 @@ describe('useSetupTheme', () => {
   })
 
   it('should render empty fallback content when provided as a ThemeProvider prop', () => {
-    const emptyFallbackContent = 'No data available'
+    const renderEmptyContent = 'No data available'
 
     render(
-      <ThemeProvider emptyFallback={() => <div>{emptyFallbackContent}</div>}>
+      <ThemeProvider renderEmpty={() => <div>{renderEmptyContent}</div>}>
         <TestComponent enableFallback="empty" />
       </ThemeProvider>
     )
 
-    expect(screen.getByText(emptyFallbackContent)).toBeInTheDocument()
+    expect(screen.getByText(renderEmptyContent)).toBeInTheDocument()
   })
 
   it('should render empty fallback content when provided as a component prop, overriding ThemeProvider fallback settings', () => {
-    const emptyFallbackContent = 'No data available'
+    const renderEmptyContent = 'No data available'
 
     render(
-      <ThemeProvider emptyFallback={() => <div>Global Empty State fallback</div>}>
-        <TestComponent enableFallback="empty" emptyFallback={() => <div>{emptyFallbackContent}</div>} />
+      <ThemeProvider renderEmpty={() => <div>Global Empty State fallback</div>}>
+        <TestComponent enableFallback="empty" renderEmpty={() => <div>{renderEmptyContent}</div>} />
       </ThemeProvider>
     )
 
-    expect(screen.getByText(emptyFallbackContent)).toBeInTheDocument()
+    expect(screen.getByText(renderEmptyContent)).toBeInTheDocument()
   })
 
   it('should render error fallback content when provided as a ThemeProvider prop', () => {
@@ -145,26 +145,26 @@ describe('useSetupTheme', () => {
   })
 
   it('should render loader fallback content when provided as a ThemeProvider prop', () => {
-    const loaderFallbackContent = 'Loading...'
+    const renderLoaderContent = 'Loading...'
 
     render(
-      <ThemeProvider loaderFallback={() => <div>{loaderFallbackContent}</div>}>
+      <ThemeProvider renderLoader={() => <div>{renderLoaderContent}</div>}>
         <TestComponent enableFallback="loader" />
       </ThemeProvider>
     )
 
-    expect(screen.getByText(loaderFallbackContent)).toBeInTheDocument()
+    expect(screen.getByText(renderLoaderContent)).toBeInTheDocument()
   })
 
   it('should render loader fallback content when provided as a component prop, overriding ThemeProvider fallback settings', () => {
-    const loaderFallbackContent = 'Loading...'
+    const renderLoaderContent = 'Loading...'
 
     render(
-      <ThemeProvider loaderFallback={() => <div>Global Loader fallback</div>}>
-        <TestComponent enableFallback="loader" loaderFallback={() => <div>{loaderFallbackContent}</div>} />
+      <ThemeProvider renderLoader={() => <div>Global Loader fallback</div>}>
+        <TestComponent enableFallback="loader" renderLoader={() => <div>{renderLoaderContent}</div>} />
       </ThemeProvider>
     )
 
-    expect(screen.getByText(loaderFallbackContent)).toBeInTheDocument()
+    expect(screen.getByText(renderLoaderContent)).toBeInTheDocument()
   })
 })

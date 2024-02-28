@@ -60,15 +60,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       labelFormatter,
       ariaLabel,
       role,
-      timeZone,
+      timeZone: timeZoneInitial,
       className,
       baseTheme,
       chartConfigProps,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
-      emptyFallback,
+      renderEmpty,
       card = false,
       chartProps = {},
       ...rest
@@ -82,15 +82,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const {
       theme,
       chartConfig,
-      loaderFallback: loaderFallbackComponent,
+      renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
-      emptyFallback: emptyFallbackComponent
+      renderEmpty: renderEmptyComponent
     } = useSetupTheme<typeof type>({
       componentContainer,
       baseTheme,
-      loaderFallback,
+      renderLoader,
       errorFallback,
-      emptyFallback
+      renderEmpty
     })
 
     const [isEmptyState, setIsEmptyState] = React.useState(false)
@@ -124,13 +124,13 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const isStatic = !query
 
     const isFormatted = !!labelFormatter
-    const zone = timeZone ?? getTimeZone()
+    const timeZone = getTimeZone(query?.timeZone ?? timeZoneInitial)
 
     const {
       data: serverData,
       isLoading,
       error: hasError
-    } = useTimeSeries({ ...query, granularity, timeZone: zone, enabled: !isStatic })
+    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic })
 
     const renderChart = React.useCallback(
       (data?: TimeSeriesData) => {
@@ -150,7 +150,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
         const values = getNumericValues(data.values, log)
 
-        if (values.length === 0 && emptyFallbackComponent) {
+        if (values.length === 0 && renderEmptyComponent) {
           setIsEmptyState(true)
           return
         }
@@ -202,7 +202,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         }
 
         // @TODO: need to refactor this logic
-        const scales = getScales({ granularity, isFormatted, zone, chart: chartRef.current, variant, grid, theme })
+        const scales = getScales({
+          granularity,
+          isFormatted,
+          zone: timeZone,
+          chart: chartRef.current,
+          variant,
+          grid,
+          theme
+        })
 
         const options: ChartOptions<TimeSeriesChartVariant> = {
           responsive: true,
@@ -232,28 +240,13 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         if (chartRef.current) {
           const chart = chartRef.current
 
-          chart.data.labels = labels
-          chart.options.scales = {
-            ...chart.options.scales,
-            ...scales,
-            ...config?.options?.scales
-          }
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins,
-            ...config?.options?.plugins
+          chart.options = { ...config.options }
+
+          if (JSON.stringify(chart.data) !== JSON.stringify(config.data)) {
+            chart.data = { ...config.data }
           }
 
-          const dataset = chart.data.datasets[0]
-          dataset.data = values
-
-          Object.assign(chart.data.datasets[0], {
-            type: variant,
-            ...chart.data.datasets,
-            ...config?.data.datasets[0]
-          })
-
-          chart.update()
+          chart.update('none')
           return
         }
 
@@ -264,7 +257,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         hasError,
         isFormatted,
         variant,
-        zone,
+        timeZone,
         theme,
         card,
         chartProps,
@@ -273,7 +266,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         chartConfigProps,
         type,
         chartConfig,
-        emptyFallbackComponent
+        renderEmptyComponent
       ]
     )
 
@@ -365,15 +358,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
       const loaderProps: LoaderProps = { ...loaderPropsInitial }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader ref={setRef} {...loaderProps} />
     }
 
-    if (isEmptyState && emptyFallbackComponent) {
-      return themeWrapper(emptyFallbackComponent({ theme }))
+    if (isEmptyState && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
     }
 
     return (

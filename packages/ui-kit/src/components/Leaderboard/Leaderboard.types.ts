@@ -1,5 +1,4 @@
 import type { ChartConfiguration } from 'chart.js'
-import { ThemeComponentProps } from 'src/themes'
 import { DimensionInput, LeaderboardLabels, Sort } from '../../helpers'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
@@ -49,7 +48,7 @@ export type LeaderboardChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export interface LeaderboardProps extends ThemeComponentProps, DataComponentProps {
+export interface LeaderboardProps extends DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -80,7 +79,7 @@ export interface LeaderboardProps extends ThemeComponentProps, DataComponentProp
   /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
   chartProps?: LeaderboardChartProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  /** @deprecated Format function for labels, must return an array with the new labels the type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: LeaderboardLabels) => LeaderboardLabels
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */

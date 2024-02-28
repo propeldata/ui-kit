@@ -20,30 +20,29 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
       error,
       loading,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       options = []
     },
     forwardedRef
   ) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const themeWrapper = withThemeWrapper(setRef)
-    const { theme, loaderFallback: loaderFallbackComponent } = useSetupTheme({
+    const { theme, renderLoader: renderLoaderComponent } = useSetupTheme({
       componentContainer,
-      loaderFallback
+      renderLoader
     })
 
     const id = useRef(Symbol()).current
-
     const isStatic = !query
 
     const { filters, setFilters } = useFilters()
-
     const columnName = query?.columnName ?? columnNameProp
-    const timeZone = query?.timeZone ?? getTimeZone()
-
     const log = useLog()
-
-    const { data, error: queryError, isLoading } = useTopValues({ ...query, timeZone, enabled: !isStatic })
+    const {
+      data,
+      error: queryError,
+      isLoading
+    } = useTopValues({ ...query, timeZone: getTimeZone(query?.timeZone), enabled: !isStatic })
 
     const isError = queryError != null || error != null
 
@@ -83,8 +82,8 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
         }
       }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader {...loaderProps} />

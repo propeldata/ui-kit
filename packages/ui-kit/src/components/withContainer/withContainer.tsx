@@ -11,18 +11,13 @@ export const withContainer = <P extends object, C extends object>(
 ) => {
   const WithContainer = React.forwardRef<HTMLDivElement, P & C>((props, ref) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { errorFallbackProps, ...componentProps } = props as any
+    const { errorFallbackProps, card, cardProps, ...componentProps } = props as any
+    const wrappedComponent = <WrappedComponent ref={ref} errorFallbackProps={errorFallbackProps} {...componentProps} />
 
     return (
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary fallback={<ErrorFallback {...errorFallbackProps} />}>
-          {componentProps?.card ? (
-            <Card style={componentProps?.style} className={componentProps?.className}>
-              <WrappedComponent ref={ref} {...props} />
-            </Card>
-          ) : (
-            <WrappedComponent ref={ref} {...props} />
-          )}
+          {card ? <Card {...cardProps}>{wrappedComponent}</Card> : wrappedComponent}
         </ErrorBoundary>
       </QueryClientProvider>
     )

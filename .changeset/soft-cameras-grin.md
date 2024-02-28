@@ -2,4 +2,5 @@
 '@propeldata/ui-kit': patch
 ---
 
-Add fallbacks for Loading, Error, and Empty states
+Add `errorFallback` callback for Error state, `renderLoader` callback for Loading state, and `renderEmpty` callback for
+Empty state.

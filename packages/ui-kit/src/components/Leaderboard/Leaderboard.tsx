@@ -6,6 +6,7 @@ import {
   formatLabels,
   getCustomChartLabelsPlugin,
   getPixelFontSizeAsNumber,
+  getTimeZone,
   LeaderboardLabels,
   useCombinedRefsCallback,
   withThemeWrapper
@@ -39,10 +40,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       labelFormatter,
       timeZone,
       loaderProps: loaderPropsInitial,
-      loaderFallback,
+      renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
       errorFallback,
-      emptyFallback,
+      renderEmpty,
       style,
       card = false,
       ...rest
@@ -56,15 +57,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const {
       theme,
       chartConfig,
-      loaderFallback: loaderFallbackComponent,
+      renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
-      emptyFallback: emptyFallbackComponent
+      renderEmpty: renderEmptyComponent
     } = useSetupTheme<'bar'>({
       componentContainer,
       baseTheme,
-      loaderFallback,
+      renderLoader,
       errorFallback,
-      emptyFallback
+      renderEmpty
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -101,7 +102,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
 
-        if (values.length === 0 && emptyFallbackComponent) {
+        if (values.length === 0 && renderEmptyComponent) {
           setIsEmptyState(true)
           return
         }
@@ -194,43 +195,21 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         if (chartRef.current) {
           const chart = chartRef.current
-          chart.data.labels = labels
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins,
-            ...config?.options?.plugins
+
+          chart.options = { ...config.options }
+
+          if (JSON.stringify(chart.data) !== JSON.stringify(config.data)) {
+            chart.data = { ...config.data }
           }
 
-          chart.data.datasets[0].data = values
-          Object.assign(chart.data.datasets[0], {
-            type: variant,
-            ...chart.data.datasets,
-            ...config?.data.datasets[0]
-          })
-
-          if (chart.options.scales?.x && 'border' in chart.options.scales.x && chart.options.scales.x.border) {
-            chart.options.scales.x.border = { ...chart.options.scales.x.border, color: theme.colorSecondary }
-          }
-          if (chart.options.scales?.x?.grid != null) {
-            chart.options.scales.x.grid = { ...chart.options.scales.x.grid, color: theme.colorSecondary }
-          }
-          if (chart.options.scales?.y?.grid != null) {
-            chart.options.scales.y.grid = { ...chart.options.scales.y.grid, color: theme.colorSecondary }
-          }
-
-          chart.options.scales = {
-            ...chart.options.scales,
-            ...config?.options?.scales
-          }
-
-          chart.update()
+          chart.update('none')
           return
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, emptyFallbackComponent]
+      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, renderEmptyComponent]
     )
 
     const destroyChart = () => {
@@ -240,7 +219,11 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }
 
-    const { data: fetchedData, isLoading, error: hasError } = useLeaderboard({ ...query, timeZone, enabled: !isStatic })
+    const {
+      data: fetchedData,
+      isLoading,
+      error: hasError
+    } = useLeaderboard({ ...query, timeZone: getTimeZone(query?.timeZone ?? timeZone), enabled: !isStatic })
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',
@@ -345,15 +328,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
       const loaderProps: LoaderProps = { ...loaderPropsInitial }
 
-      if (loaderFallbackComponent) {
-        return themeWrapper(loaderFallbackComponent({ loaderProps, Loader, theme }))
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
       return <Loader ref={setRef} {...loaderProps} />
     }
 
-    if (isEmptyState && emptyFallbackComponent) {
-      return themeWrapper(emptyFallbackComponent({ theme }))
+    if (isEmptyState && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
     }
 
     if (variant === 'bar') {

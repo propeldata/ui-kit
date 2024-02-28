@@ -4,6 +4,7 @@ import './Counter.stories.css'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { quotedStringRegex, RelativeTimeRange, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { Counter as CounterSource, CounterComponent } from './Counter'
+import { CounterProps } from './Counter.types'
 
 const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
@@ -28,7 +29,7 @@ export default meta
 
 type Story = StoryObj<typeof CounterComponent>
 
-const connectedParams = {
+const connectedParams: CounterProps = {
   localize: true,
   prefixValue: '$',
   query: {

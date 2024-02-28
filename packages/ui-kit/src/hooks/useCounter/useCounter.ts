@@ -71,7 +71,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     {
       counterInput: {
         ...metricInput,
-        timeZone: timeZone ?? getTimeZone(),
+        timeZone: getTimeZone(timeZone),
         ...withTimeRange,
         filters
       }

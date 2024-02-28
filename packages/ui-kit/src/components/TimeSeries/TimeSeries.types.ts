@@ -1,6 +1,5 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { ThemeComponentProps } from 'src/themes'
 import { TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
@@ -29,7 +28,7 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends ThemeComponentProps, DataComponentProps {
+export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -51,7 +50,7 @@ export interface TimeSeriesBaseProps extends ThemeComponentProps, DataComponentP
   /** Canvas role prop, if not passed we handle it */
   role?: string
 
-  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
   timeZone?: string
 
   /** TimeSeries query props */
@@ -60,7 +59,7 @@ export interface TimeSeriesBaseProps extends ThemeComponentProps, DataComponentP
   /** Optional props that are used to configure the chart component. */
   chartProps?: TimeSeriesChartProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  /** @deprecated Format function for labels, must return an array with the new labels. This type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: TimeSeriesLabels) => TimeSeriesLabels
 }
 

@@ -13,6 +13,7 @@ import './Leaderboard.stories.css'
 import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
 import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { ThemeTokenProps } from '../../themes'
+import { LeaderboardQueryProps } from './Leaderboard.types'
 
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
@@ -86,7 +87,7 @@ const Leaderboard = (args: Story['args']) => {
   )
 }
 
-const connectedParams = {
+const connectedParams: LeaderboardQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
@@ -102,7 +103,7 @@ const connectedParams = {
   sort: Sort.Asc
 }
 
-const connectedParamsMultiDimensional = {
+const connectedParamsMultiDimensional: LeaderboardQueryProps = {
   ...connectedParams,
   dimensions: [
     {

@@ -30,8 +30,8 @@ export const useTheme = (): ThemeStateProps | undefined => {
 export const useSetupTheme = <T extends ChartVariant>({
   componentContainer,
   baseTheme = 'lightTheme',
-  loaderFallback: loaderFallbackProp,
-  emptyFallback: emptyFallbackProp,
+  renderLoader: renderLoaderProp,
+  renderEmpty: renderEmptyProp,
   errorFallback: errorFallbackProp
 }: UseSetupThemeProps): UseSetupThemeResult<T> => {
   const [theme, setTheme] = useState<ThemeStateProps>()
@@ -122,14 +122,14 @@ export const useSetupTheme = <T extends ChartVariant>({
     setTheme(parseComputedStyle(componentContainer))
   }, [context, componentContainer, baseTheme])
 
-  const { emptyFallback, errorFallback, loaderFallback } = context ?? {}
+  const { renderEmpty, errorFallback, renderLoader } = context ?? {}
 
   return {
     theme,
     chartConfig,
-    emptyFallback: emptyFallbackProp || emptyFallback,
+    renderEmpty: renderEmptyProp || renderEmpty,
     errorFallback: errorFallbackProp || errorFallback,
-    loaderFallback: loaderFallbackProp || loaderFallback
+    renderLoader: renderLoaderProp || renderLoader
   }
 }
 
@@ -138,9 +138,9 @@ export const ThemeProvider = ({
   baseTheme = 'lightTheme',
   theme: themeProp,
   globalChartConfigProps,
-  emptyFallback,
+  renderEmpty,
   errorFallback,
-  loaderFallback
+  renderLoader
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
@@ -169,7 +169,7 @@ export const ThemeProvider = ({
       className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}
       data-testid="theme-provider"
     >
-      <ThemeContext.Provider value={{ theme, globalChartConfigProps, emptyFallback, errorFallback, loaderFallback }}>
+      <ThemeContext.Provider value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader }}>
         {children}
       </ThemeContext.Provider>
     </div>

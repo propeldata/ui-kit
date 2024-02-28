@@ -1,3 +1,4 @@
+import { ThemeComponentProps } from '../themes'
 import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
 import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from './ErrorFallback'
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
@@ -6,24 +7,6 @@ import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
 /** Shared props for the data components. */
 
 export interface FallbackComponents {
-  /**
-   * A fallback react component that will be used when the component is in loading state.
-   *
-   * You can also use a callback to get the `LoaderProps` for your custom component or set a wrapper
-   * around the UI-Kit's Loader component.
-   *
-   * This component will be used by all the ThemeProvider's child components.
-   */
-  loaderFallback?: ({
-    loaderProps,
-    Loader,
-    theme
-  }: {
-    loaderProps: LoaderProps | undefined
-    Loader: typeof LoaderComponent
-    theme: ThemeStateProps
-  }) => React.ReactElement
-
   /**
    * A fallback react component that will be used when the component is in error state.
    *
@@ -43,23 +26,46 @@ export interface FallbackComponents {
   }) => React.ReactElement
 
   /**
+   * A fallback react component that will be used when the component is in loading state.
+   *
+   * You can also use a callback to get the `LoaderProps` for your custom component or set a wrapper
+   * around the UI-Kit's Loader component.
+   *
+   * This component will be used by all the ThemeProvider's child components.
+   */
+  renderLoader?: ({
+    loaderProps,
+    Loader,
+    theme
+  }: {
+    loaderProps: LoaderProps | undefined
+    Loader: typeof LoaderComponent
+    theme: ThemeStateProps
+  }) => React.ReactElement
+
+  /**
    * A fallback react component that will be used when the component is in empty state, which means no data or empty data was received.
    *
    * This component will be used by all the ThemeProvider's child components.
    */
-  emptyFallback?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
+  renderEmpty?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
 }
 
-export interface DataComponentProps extends FallbackComponents {
-  /** @deprecated ~~Optional props that are used to configure the Loader component.~~ This type is deprecated, use `loaderFallback` instead */
-  loaderProps?: LoaderProps
+export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeComponentProps &
+  Omit<React.ComponentPropsWithoutRef<T>, 'style' | 'className'> &
+  FallbackComponents & {
+    /** @deprecated Optional props that are used to configure the Loader component. This type is deprecated, use `renderLoader` instead. */
+    loaderProps?: LoaderProps
 
-  /** @deprecated ~~Optional props that are used to configure the ErrorFallback component.~~ This type is deprecated, use `errorFallback` instead */
-  errorFallbackProps?: ErrorFallbackProps
+    /** @deprecated Optional props that are used to configure the ErrorFallback component. This type is deprecated, use `errorFallback` instead. */
+    errorFallbackProps?: ErrorFallbackProps
 
-  /** When true, wraps the component in a card */
-  card?: boolean
-}
+    /** When true, wraps the component in a card */
+    card?: boolean
+
+    /** Props for the Card component */
+    cardProps?: React.ComponentPropsWithoutRef<'div'>
+  }
 
 export interface QueryProps {
   /** Indicates specific time zone region */
