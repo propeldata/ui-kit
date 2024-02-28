@@ -24,7 +24,18 @@ const mockData = {
 
 const handlers = [
   mockLeaderboardQuery((req, res, ctx) => {
-    const { metricName } = req.variables.leaderboardInput
+    const { metricName, timeZone } = req.variables.leaderboardInput
+
+    if (metricName === 'test-time-zone') {
+      return res(
+        ctx.data({
+          leaderboard: {
+            headers: ['TimeZone', 'value'],
+            rows: [[timeZone, '1']]
+          }
+        })
+      )
+    }
 
     if (metricName === 'should-fail') {
       return res(
@@ -167,6 +178,63 @@ describe('PieChart', () => {
 
       // TODO: this message suggests that the error is due to a network issue when it's not, maybe we should think about changing the message depending on the error
       await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
+    })
+  })
+
+  it('Should pass timeZone to the query', async () => {
+    dom = render(
+      <PieChart
+        timeZone="Europe/Rome"
+        query={{
+          accessToken: 'test-token',
+          metric: 'test-time-zone',
+          dimension: {
+            columnName: 'test-column'
+          },
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+      />
+    )
+
+    await waitFor(async () => {
+      const chartElement = dom.getByRole('img') as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels?.at(0)).toEqual('Europe/Rome')
+    })
+  })
+
+  it('Should pass query.timeZone to the query', async () => {
+    dom = render(
+      <PieChart
+        timeZone="Europe/Rome"
+        query={{
+          accessToken: 'test-token',
+          metric: 'test-time-zone',
+          timeZone: 'Europe/Berlin',
+          dimension: {
+            columnName: 'test-column'
+          },
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+      />
+    )
+
+    await waitFor(async () => {
+      const chartElement = dom.getByRole('img') as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels?.at(0)).toEqual('Europe/Berlin')
     })
   })
 

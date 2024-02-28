@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange, sleep, TimeSeriesGranularity } from '../../helpers'
@@ -18,7 +18,15 @@ const mockStaticData = {
 
 const handlers = [
   mockTimeSeriesQuery((req, res, ctx) => {
-    const { metricName } = req.variables.timeSeriesInput
+    const { metricName, timeZone } = req.variables.timeSeriesInput
+
+    if (metricName === 'test-time-zone') {
+      return res(
+        ctx.data({
+          timeSeries: { labels: [timeZone], values: ['1'] }
+        })
+      )
+    }
 
     if (metricName === 'should-fail') {
       return res(
@@ -129,6 +137,57 @@ describe('TimeSeries', () => {
     const chartLabels = chartInstance?.data.labels
 
     expect(chartLabels).toEqual(mockStaticData.labels.map((label) => label.replace('-', '.')))
+  })
+
+  it('Should pass timeZone to the query', async () => {
+    dom = render(
+      <TimeSeries
+        timeZone="Europe/Rome"
+        query={{
+          metric: 'test-time-zone',
+          accessToken: 'test-token',
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          },
+          granularity: TimeSeriesGranularity.Day
+        }}
+      />
+    )
+
+    await waitFor(async () => {
+      const chartElement = dom.getByRole('img') as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels?.at(0)).toEqual('Europe/Rome')
+    })
+  })
+
+  it('Should pass query.timeZone to the query', async () => {
+    dom = render(
+      <TimeSeries
+        timeZone="Europe/Rome"
+        query={{
+          metric: 'test-time-zone',
+          accessToken: 'test-token',
+          timeZone: 'Europe/Berlin',
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          },
+          granularity: TimeSeriesGranularity.Day
+        }}
+      />
+    )
+
+    await waitFor(async () => {
+      const chartElement = dom.getByRole('img') as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels?.at(0)).toEqual('Europe/Berlin')
+    })
   })
 
   it('Should NOT fetch data in static mode', async () => {

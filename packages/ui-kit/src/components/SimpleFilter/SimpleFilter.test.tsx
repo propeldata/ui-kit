@@ -17,7 +17,17 @@ jest.mock('../FilterProvider/useFilters', () => ({
 
 const handlers = [
   mockTopValuesQuery((req, res, ctx) => {
-    const columnName = req.variables.topValuesInput.columnName
+    const { columnName, timeZone } = req.variables.topValuesInput
+
+    if (columnName === 'test-time-zone') {
+      return res(
+        ctx.data({
+          topValues: {
+            values: [timeZone]
+          }
+        })
+      )
+    }
 
     if (columnName === 'should-fail') {
       return res(
@@ -97,6 +107,42 @@ describe('SimpleFilter', () => {
         column: 'test column',
         operator: FilterOperator.Equals,
         value: 'option 1'
+      }
+    ])
+  })
+
+  it('Should pass query.timeZone to the query', async () => {
+    dom = render(
+      <FilterProvider>
+        <SimpleFilter
+          query={{
+            accessToken: 'test token',
+            columnName: 'test-time-zone',
+            dataPool: {
+              name: 'test data pool'
+            },
+            maxValues: 1000,
+            timeZone: 'Europe/Berlin',
+            timeRange: {
+              relative: RelativeTimeRange.LastNDays,
+              n: 30
+            }
+          }}
+        />
+      </FilterProvider>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(dom.getByRole('button', { name: 'dropdown-button' }))
+      fireEvent.click(dom.getByText('Europe/Berlin'))
+    })
+
+    expect(setFilterMock).toHaveBeenCalledWith([
+      {
+        id: expect.any(Symbol),
+        column: 'test-time-zone',
+        operator: FilterOperator.Equals,
+        value: 'Europe/Berlin'
       }
     ])
   })
