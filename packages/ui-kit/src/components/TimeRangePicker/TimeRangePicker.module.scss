@@ -1,0 +1,21 @@
+.rootTimeRangePicker {
+  box-shadow: var(--propel-shadow-sm);
+  border-radius: var(--propel-border-radius-sm);
+  color: var(--propel-text-primary);
+  background-color: var(--propel-bg-primary);
+  border: 1px solid var(--propel-border-primary);
+  // display: flex;
+  // gap: var(--propel-space-xxs);
+  padding: var(--propel-space-xxs);
+  // overflow: hidden;
+  // transition: all 100ms;
+  // box-sizing: border-box;
+
+  // &:hover {
+  //   border: 1px solid var(--propel-accent);
+  // }
+}
+
+.today {
+  background-color: #ff0000;
+}
