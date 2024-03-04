@@ -1,0 +1,8 @@
+.highlighted {
+  background-color: var(--propel-color-blue25);
+  outline: none;
+}
+
+.highlighted[aria-selected='true'] {
+  background-color: var(--propel-accent-hover);
+}

@@ -6,9 +6,10 @@ import * as React from 'react'
 import classnames from 'classnames'
 import componentStyles from './Autocomplete.module.scss'
 import { useCombinedRefs } from '../../helpers'
-import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
+import { AutocompleteProps } from './Autocomplete.types'
 import { ChevronUpIcon } from '../Icons/ChevronUp'
 import { ChevronDownIcon } from '../Icons/ChevronDown'
+import { DropdownOption } from '../shared.types'
 
 // See full Autocomplete example here: https://mui.com/base-ui/react-autocomplete/#introduction
 export const Autocomplete = React.forwardRef(function Autocomplete(
@@ -132,11 +133,11 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
             style={{ ...getListboxProps().style, ...listStyle }}
           >
             {groupedOptions.map((option, index) => {
-              let optionLabel: AutocompleteOption
+              let optionLabel: DropdownOption
               if (typeof option === 'string') optionLabel = { label: option }
               else optionLabel = { ...option }
 
-              const optionProps = getOptionProps({ option: option as AutocompleteOption, index })
+              const optionProps = getOptionProps({ option: option as DropdownOption, index })
 
               return (
                 <li

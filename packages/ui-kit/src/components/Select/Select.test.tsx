@@ -2,9 +2,8 @@ import React, { SyntheticEvent } from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 
 import { Dom } from 'src/testing'
-import { DropdownOption } from '../shared.types'
 
-import { Autocomplete } from './Autocomplete'
+import { Option, Select } from './Select'
 
 const options = [
   {
@@ -18,24 +17,32 @@ const options = [
   }
 ]
 
-describe('Autocomplete', () => {
+describe('Select', () => {
   let dom: Dom
 
   it('should enable selecting an option', async () => {
     const onChangeValue = jest.fn()
 
-    const onChange = (_: SyntheticEvent, value: DropdownOption | string | null) => {
+    const onChange = (_: SyntheticEvent | null, value: string[] | string | null) => {
       onChangeValue(value)
     }
 
-    dom = render(<Autocomplete options={options} placeholder="Select or type" onChange={onChange} />)
+    dom = render(
+      <Select placeholder="Select or type" onChange={onChange}>
+        {options.map((option) => (
+          <Option key={option.label} value={option.label}>
+            {option.label}
+          </Option>
+        ))}
+      </Select>
+    )
 
-    const button = dom.getByRole('button', { name: 'dropdown-button' })
+    const button = dom.getByRole('button')
     fireEvent.click(button)
     await waitFor(async () => {
       fireEvent.click(await dom.findByText('Option 1'))
     })
 
-    expect(onChangeValue).toHaveBeenCalledWith({ label: 'Option 1' })
+    expect(onChangeValue).toHaveBeenCalledWith('Option 1')
   })
 })
