@@ -1,22 +1,5 @@
 import React from 'react'
-import {
-  AccessTokenProvider,
-  ThemeProvider,
-  useTheme,
-  FilterProvider,
-  SimpleFilter,
-  RelativeTimeRange
-} from '@propeldata/ui-kit'
-import {
-  TimeSeriesStaticTest,
-  TimeSeriesConnectedTest,
-  LeaderboardStaticTest,
-  LeaderboardConnectedTest,
-  CounterStaticTest,
-  CounterConnectedTest,
-  PieChartStaticTest,
-  PieChartConnectedTest
-} from 'components'
+import { Dashboard } from 'dashboard-example'
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
 
@@ -31,53 +14,6 @@ async function fetchToken() {
   return access_token
 }
 
-const GlobalStyles = () => {
-  const theme = useTheme()
-  if (document && theme) {
-    document.body.style.setProperty('--bg-color', theme.bgSecondary)
-  }
-  return null
-}
-
 export default function App() {
-  const [theme, setTheme] = React.useState('lightTheme')
-  return (
-    <AccessTokenProvider fetchToken={fetchToken}>
-      <FilterProvider>
-        <ThemeProvider baseTheme={theme}>
-          <GlobalStyles />
-          <main style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-bg-secondary)' }}>
-            <h1 className="px-6 py-3 text-3xl">
-              React 17 Testing App
-              <button className="m-3" onClick={() => setTheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')}>
-                {theme === 'lightTheme' ? '🌚' : '🌞'}
-              </button>
-            </h1>
-            <hr />
-            <div className="px-6 py-3 w-full flex justify-end">
-              <SimpleFilter
-                query={{
-                  columnName: process.env.REACT_APP_DIMENSION_1,
-                  dataPool: { name: process.env.REACT_APP_DATA_POOL_UNIQUE_NAME_1 },
-                  maxValues: 1000,
-                  timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
-                }}
-                autocompleteProps={{ containerStyle: { width: '500px' }, placeholder: 'Filter by taco name' }}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <TimeSeriesStaticTest />
-              <TimeSeriesConnectedTest />
-              <LeaderboardStaticTest />
-              <LeaderboardConnectedTest />
-              <CounterStaticTest />
-              <CounterConnectedTest />
-              <PieChartStaticTest />
-              <PieChartConnectedTest />
-            </div>
-          </main>
-        </ThemeProvider>
-      </FilterProvider>
-    </AccessTokenProvider>
-  )
+  return <Dashboard fetchToken={fetchToken} envs={process.env} />
 }

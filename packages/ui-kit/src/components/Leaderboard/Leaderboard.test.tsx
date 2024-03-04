@@ -17,7 +17,18 @@ const mockData = {
 
 const handlers = [
   mockLeaderboardQuery((req, res, ctx) => {
-    const { metricName } = req.variables.leaderboardInput
+    const { metricName, timeZone } = req.variables.leaderboardInput
+
+    if (metricName === 'test-time-zone') {
+      return res(
+        ctx.data({
+          leaderboard: {
+            headers: [timeZone],
+            rows: [['1']]
+          }
+        })
+      )
+    }
 
     if (metricName === 'should-fail') {
       return res(
@@ -228,6 +239,57 @@ describe('Leaderboard', () => {
     expect(values).toHaveLength(3)
   })
 
+  it('Should pass timeZone to the query', async () => {
+    dom = render(
+      <Leaderboard
+        timeZone="Europe/Rome"
+        query={{
+          accessToken: 'test-token',
+          metric: 'test-time-zone',
+          dimensions: [
+            {
+              columnName: 'test-column'
+            }
+          ],
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+        variant="table"
+      />
+    )
+
+    await dom.findByText('Europe/Rome')
+  })
+
+  it('Should pass query.timeZone to the query', async () => {
+    dom = render(
+      <Leaderboard
+        timeZone="Europe/Rome"
+        query={{
+          accessToken: 'test-token',
+          metric: 'test-time-zone',
+          timeZone: 'Europe/Berlin',
+          dimensions: [
+            {
+              columnName: 'test-column'
+            }
+          ],
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+        variant="table"
+      />
+    )
+
+    await dom.findByText('Europe/Berlin')
+  })
+
   it('Should NOT fetch data in static mode', async () => {
     jest.useRealTimers()
 
@@ -242,5 +304,21 @@ describe('Leaderboard', () => {
     )
 
     await sleep(100)
+  })
+
+  it('Should receive errorFallbackProp', () => {
+    dom = render(
+      <Leaderboard
+        errorFallbackProps={{
+          error: {
+            title: 'Custom title',
+            body: 'Custom body'
+          }
+        }}
+      />
+    )
+
+    dom.getByText('Custom title')
+    dom.getByText('Custom body')
   })
 })

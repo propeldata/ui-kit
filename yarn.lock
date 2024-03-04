@@ -8795,6 +8795,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"autoprefixer@npm:^10.4.17":
+  version: 10.4.17
+  resolution: "autoprefixer@npm:10.4.17::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fautoprefixer%2F-%2Fautoprefixer-10.4.17.tgz"
+  dependencies:
+    browserslist: ^4.22.2
+    caniuse-lite: ^1.0.30001578
+    fraction.js: ^4.3.7
+    normalize-range: ^0.1.2
+    picocolors: ^1.0.0
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    postcss: ^8.1.0
+  bin:
+    autoprefixer: bin/autoprefixer
+  checksum: 1b4cf4097507f9dc48cef3194f18a05901311c881380cc634b308fce54a6554cf2dcd20aec8384b44e994d4665ab12c63dc89492523f8d74ff5d4d5eb1469f8c
+  languageName: node
+  linkType: hard
+
 "available-typed-arrays@npm:^1.0.5":
   version: 1.0.5
   resolution: "available-typed-arrays@npm:1.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Favailable-typed-arrays%2F-%2Favailable-typed-arrays-1.0.5.tgz"
@@ -9535,6 +9553,13 @@ __metadata:
   version: 1.0.30001568
   resolution: "caniuse-lite@npm:1.0.30001568::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcaniuse-lite%2F-%2Fcaniuse-lite-1.0.30001568.tgz"
   checksum: 7092aaa246dc8531fbca5b47be91e92065db7e5c04cc9e3d864e848f8f1be769ac6754429e843a5e939f7331a771e8b0a1bc3b13495c66b748c65e2f5bdb1220
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001578":
+  version: 1.0.30001588
+  resolution: "caniuse-lite@npm:1.0.30001588::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcaniuse-lite%2F-%2Fcaniuse-lite-1.0.30001588.tgz"
+  checksum: 2ab5fcec8fd3ee5d817a44bf1fb69804a6924d190e476863fb519692cd3e85a3a775bf4a2b6ba793f8db592ca61255b7f77f3d773ff7d42b452216f180bcdd2f
   languageName: node
   linkType: hard
 
@@ -10753,6 +10778,31 @@ __metadata:
   checksum: d240b7757544460ae0586a341a53110ab0a61126570ef2d8c731e3eab3f0cb6e488e2609e6a69b46727635de49be20b071688698744417ff1b6c1d7ccd03e0de
   languageName: node
   linkType: hard
+
+"dashboard-example@workspace:^, dashboard-example@workspace:packages/examples/dashboard":
+  version: 0.0.0-use.local
+  resolution: "dashboard-example@workspace:packages/examples/dashboard"
+  dependencies:
+    "@propeldata/ui-kit": "workspace:^"
+    "@rollup/plugin-commonjs": ^25.0.7
+    "@rollup/plugin-node-resolve": ^15.2.3
+    "@rollup/plugin-terser": ^0.4.4
+    "@types/react": latest
+    "@types/react-dom": latest
+    autoprefixer: ^10.4.17
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    rollup: ^4.1.4
+    rollup-plugin-postcss: ^4.0.2
+    rollup-plugin-typescript2: ^0.36.0
+    tailwindcss: ^3.3.1
+    typescript: ^4.9.3
+  peerDependencies:
+    "@propeldata/ui-kit": "workspace:^"
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  languageName: unknown
+  linkType: soft
 
 "data-uri-to-buffer@npm:^4.0.0":
   version: 4.0.1
@@ -13199,7 +13249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fraction.js@npm:^4.3.6":
+"fraction.js@npm:^4.3.6, fraction.js@npm:^4.3.7":
   version: 4.3.7
   resolution: "fraction.js@npm:4.3.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffraction.js%2F-%2Ffraction.js-4.3.7.tgz"
   checksum: e1553ae3f08e3ba0e8c06e43a3ab20b319966dfb7ddb96fd9b5d0ee11a66571af7f993229c88ebbb0d4a816eb813a24ed48207b140d442a8f76f33763b8d1f3f
@@ -20440,10 +20490,10 @@ __metadata:
   resolution: "react-16@workspace:app/examples/react-16"
   dependencies:
     "@propeldata/ui-kit": "workspace:^"
+    dashboard-example: "workspace:^"
     react: ^16.8.0
     react-dom: ^16.8.0
     react-scripts: ^5.0.1
-    tailwindcss: ^3.3.1
   languageName: unknown
   linkType: soft
 
@@ -20451,11 +20501,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-17@workspace:app/examples/react-17"
   dependencies:
-    "@propeldata/ui-kit": "workspace:^"
+    dashboard-example: "workspace:^"
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: ^5.0.1
-    tailwindcss: ^3.3.1
   languageName: unknown
   linkType: soft
 
@@ -20464,10 +20513,10 @@ __metadata:
   resolution: "react-18@workspace:app/examples/react-18"
   dependencies:
     "@propeldata/ui-kit": "workspace:^"
+    dashboard-example: "workspace:^"
     react: ^18.2.0
     react-dom: ^18.2.0
     react-scripts: ^5.0.1
-    tailwindcss: ^3.3.1
   languageName: unknown
   linkType: soft
 

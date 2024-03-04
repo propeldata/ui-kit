@@ -1,15 +1,22 @@
-import React from 'react'
 import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js/auto'
 import classnames from 'classnames'
-import componentStyles from './PieChart.module.scss'
-
-import { customCanvasBackgroundColor, getCustomChartLabelsPlugin, useCombinedRefsCallback } from '../../helpers'
+import React from 'react'
+import {
+  customCanvasBackgroundColor,
+  getCustomChartLabelsPlugin,
+  getTimeZone,
+  useCombinedRefsCallback,
+  withThemeWrapper
+} from '../../helpers'
+import { useCounter } from '../../hooks/useCounter'
+import { useLeaderboard } from '../../hooks/useLeaderboard'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
-import { useCounter, useLeaderboard } from '../../hooks'
-import { ErrorFallback } from '../ErrorFallback'
-import { Loader } from '../Loader'
 import { withContainer } from '../withContainer'
-import { PieChartProps, PieChartData } from './PieChart.types'
+import componentStyles from './PieChart.module.scss'
+import { PieChartData, PieChartProps, PieChartVariant } from './PieChart.types'
+import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
 
@@ -21,8 +28,12 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       rows,
       query,
       error,
-      loaderProps,
-      errorFallbackProps,
+      loaderProps: loaderPropsInitial,
+      renderLoader,
+      errorFallbackProps: errorFallbackPropsInitial,
+      errorFallback,
+      renderEmpty,
+      timeZone: timeZoneInitial,
       card = false,
       className,
       style,
@@ -37,7 +48,23 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
   ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    const { theme, chartConfig } = useSetupTheme<'pie' | 'doughnut'>({ componentContainer, baseTheme })
+    const themeWrapper = withThemeWrapper(setRef)
+
+    const {
+      theme,
+      chartConfig,
+      renderLoader: renderLoaderComponent,
+      errorFallback: errorFallbackComponent,
+      renderEmpty: renderEmptyComponent
+    } = useSetupTheme<PieChartVariant>({
+      componentContainer,
+      baseTheme,
+      renderLoader,
+      errorFallback,
+      renderEmpty
+    })
+
+    const [isEmptyState, setIsEmptyState] = React.useState(false)
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
@@ -54,6 +81,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
      */
     const isStatic = !query
 
+    const timeZone = getTimeZone(query?.timeZone ?? timeZoneInitial)
+
     /**
      * Fetches the leaderboard data from the API
      */
@@ -61,7 +90,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: leaderboardData,
       isLoading: leaderboardIsLoading,
       error: leaderboardHasError
-    } = useLeaderboard({ ...query, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
+    } = useLeaderboard({ ...query, timeZone, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
 
     /**
      * Fetches the counter data from the API
@@ -70,7 +99,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: counterData,
       isLoading: counterIsLoading,
       error: counterHasError
-    } = useCounter({ ...query, enabled: !isStatic })
+    } = useCounter({ ...query, timeZone, enabled: !isStatic })
 
     const isLoading = leaderboardIsLoading || counterIsLoading
 
@@ -115,10 +144,14 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         } = chartProps
 
         const labels = data.rows?.map((row) => row[0]) ?? []
-
         const values = data.rows?.map((row) => Number(row[1])) ?? []
 
-        const customChartLabelsPlugin: Plugin<'pie' | 'doughnut'> = getCustomChartLabelsPlugin({
+        if (values.length === 0 && renderEmptyComponent) {
+          setIsEmptyState(true)
+          return
+        }
+
+        const customChartLabelsPlugin: Plugin<PieChartVariant> = getCustomChartLabelsPlugin({
           theme,
           hideTotal
         })
@@ -142,32 +175,17 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               boxHeight: 6
             }
           },
+          emptyDoughnut: {
+            color: theme?.colorPrimary,
+            width: 2,
+            radiusDecrease: 20
+          },
           customChartLabelsPlugin
         }
 
         const datasets = isDoughnut ? { cutout: '75%' } : { cutout: '0' }
 
-        if (chartRef.current) {
-          const chart = chartRef.current
-
-          chart.data.labels = labels
-          Object.assign(chart.data.datasets[0], {
-            type: variant,
-            data: values,
-            backgroundColor: chartColorPalette,
-            ...datasets
-          })
-
-          chart.options.plugins = {
-            ...chart.options.plugins,
-            ...customPlugins
-          }
-
-          chart.update()
-          return
-        }
-
-        let config: ChartConfiguration<'pie' | 'doughnut'> = {
+        let config: ChartConfiguration<PieChartVariant> = {
           ...chartConfig,
           type: variant,
           data: {
@@ -189,7 +207,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             responsive: true,
             maintainAspectRatio: false,
             layout: {
-              padding: 4
+              padding: 10
             },
             plugins: {
               ...chartConfig.options?.plugins,
@@ -204,11 +222,29 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               }
             }
           },
-          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin]
+          plugins: [customCanvasBackgroundColor, customChartLabelsPlugin, emptyStatePlugin]
         }
 
         if (chartConfigProps) {
+          // @TODO: fix this complex type
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           config = chartConfigProps(config)
+        }
+
+        if (chartRef.current) {
+          const chart = chartRef.current
+
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          chart.options = { ...config.options }
+
+          if (JSON.stringify(chart.data) !== JSON.stringify(config.data)) {
+            chart.data = { ...config.data }
+          }
+
+          chart.update('none')
+          return
         }
 
         chartRef.current = new ChartJS(canvasRef.current, config) as ChartJS
@@ -225,7 +261,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         isPie,
         totalValue,
         defaultChartColorPalette,
-        chartConfigProps
+        chartConfigProps,
+        renderEmptyComponent
       ]
     )
 
@@ -323,14 +360,35 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     if (hasError || propsMismatch) {
       destroyChart()
-      return <ErrorFallback {...errorFallbackProps} error={error} />
+
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
+      }
+
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
+      }
+
+      return <ErrorFallback ref={setRef} {...errorFallbackProps} />
     }
 
     const isNoContainerRef = (variant === 'pie' || variant === 'doughnut') && !canvasRef.current
 
     if (((isStatic && isLoadingStatic) || (!isStatic && isLoading)) && isNoContainerRef) {
       destroyChart()
-      return <Loader {...loaderProps} />
+
+      const loaderProps: LoaderProps = { ...loaderPropsInitial }
+
+      if (renderLoaderComponent) {
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader ref={setRef} {...loaderProps} />
+    }
+
+    if (isEmptyState && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
     }
 
     const getListItem = () => {
@@ -353,7 +411,13 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     }
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootPieChart, className)} style={style} {...rest}>
+      <div
+        ref={setRef}
+        className={classnames(componentStyles.rootPieChart, className)}
+        style={style}
+        {...rest}
+        data-container
+      >
         <div>
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
         </div>
@@ -365,4 +429,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
 PieChartComponent.displayName = 'PieChartComponent'
 
+// @TODO: fix this complex type
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const PieChart = withContainer(PieChartComponent, ErrorFallback) as typeof PieChartComponent

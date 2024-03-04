@@ -1,12 +1,8 @@
 import type { DataComponentProps, QueryProps } from '../shared.types'
-import type { ThemeComponentProps } from '../../themes'
 
 export type CounterQueryProps = QueryProps
 
-export interface CounterProps
-  extends ThemeComponentProps,
-    Omit<React.ComponentProps<'span'>, 'style'>,
-    DataComponentProps {
+export interface CounterProps extends DataComponentProps<'span'> {
   /** If passed, the component will ignore the built-in GraphQL operations */
   value?: string
 
@@ -19,7 +15,7 @@ export interface CounterProps
   /** When true, formats value to locale string */
   localize?: boolean
 
-  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
   timeZone?: string
 
   /** Counter query props */

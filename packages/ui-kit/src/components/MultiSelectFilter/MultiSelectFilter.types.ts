@@ -13,7 +13,7 @@ export interface MultiSelectFilterQueryProps extends Omit<QueryProps, 'metric' |
   maxValues?: number
 }
 
-export interface MultiSelectFilterProps extends Omit<DataComponentProps, 'card'> {
+export interface MultiSelectFilterProps extends Omit<DataComponentProps<'button'>, 'card'> {
   /** The possible values for the selected column, will be ignored if `query` is passed */
   options?: DropdownOption[] | string[]
 

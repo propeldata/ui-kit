@@ -24,7 +24,18 @@ const mockData = {
 
 const handlers = [
   mockLeaderboardQuery((req, res, ctx) => {
-    const { metricName } = req.variables.leaderboardInput
+    const { metricName, timeZone } = req.variables.leaderboardInput
+
+    if (metricName === 'test-time-zone') {
+      return res(
+        ctx.data({
+          leaderboard: {
+            headers: ['TimeZone', 'value'],
+            rows: [[timeZone, '1']]
+          }
+        })
+      )
+    }
 
     if (metricName === 'should-fail') {
       return res(
@@ -170,6 +181,63 @@ describe('PieChart', () => {
     })
   })
 
+  it('Should pass timeZone to the query', async () => {
+    dom = render(
+      <PieChart
+        timeZone="Europe/Rome"
+        query={{
+          accessToken: 'test-token',
+          metric: 'test-time-zone',
+          dimension: {
+            columnName: 'test-column'
+          },
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+      />
+    )
+
+    await waitFor(async () => {
+      const chartElement = dom.getByRole('img') as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels?.at(0)).toEqual('Europe/Rome')
+    })
+  })
+
+  it('Should pass query.timeZone to the query', async () => {
+    dom = render(
+      <PieChart
+        timeZone="Europe/Rome"
+        query={{
+          accessToken: 'test-token',
+          metric: 'test-time-zone',
+          timeZone: 'Europe/Berlin',
+          dimension: {
+            columnName: 'test-column'
+          },
+          rowLimit: 10,
+          timeRange: {
+            relative: RelativeTimeRange.LastNDays,
+            n: 30
+          }
+        }}
+      />
+    )
+
+    await waitFor(async () => {
+      const chartElement = dom.getByRole('img') as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels?.at(0)).toEqual('Europe/Berlin')
+    })
+  })
+
   it('Should NOT fetch data in static mode', async () => {
     jest.useRealTimers()
 
@@ -184,5 +252,21 @@ describe('PieChart', () => {
     )
 
     await sleep(100)
+  })
+
+  it('Should receive errorFallbackProp', () => {
+    dom = render(
+      <PieChart
+        errorFallbackProps={{
+          error: {
+            title: 'Custom title',
+            body: 'Custom body'
+          }
+        }}
+      />
+    )
+
+    dom.getByText('Custom title')
+    dom.getByText('Custom body')
   })
 })

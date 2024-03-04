@@ -1,6 +1,9 @@
-import { CounterQueryProps, useAccessToken, useFilters, useLog } from '../../components'
+import { CounterQueryProps } from '../../components/Counter/Counter.types'
 import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, useCounterQuery } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useFilters } from './../../components/FilterProvider/useFilters'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query a Counter using Propel's GraphQL API.
@@ -55,7 +58,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
    * @param {CounterQuery} data
    * @returns {data: CounterQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useCounterQuery<CounterQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useCounterQuery<CounterQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -68,7 +71,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     {
       counterInput: {
         ...metricInput,
-        timeZone: timeZone ?? getTimeZone(),
+        timeZone: getTimeZone(timeZone),
         ...withTimeRange,
         filters
       }
@@ -82,7 +85,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

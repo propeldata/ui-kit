@@ -10,7 +10,9 @@ export const serverErrorMessage = {
   body: 'Sorry we are not able to connect at this time due to a technical error.'
 }
 
-export interface ErrorFallbackProps extends ThemeComponentProps, Omit<React.ComponentPropsWithoutRef<'div'>, 'style'> {
+export interface ErrorFallbackProps
+  extends ThemeComponentProps,
+    Omit<React.ComponentPropsWithoutRef<'div'>, 'style' | 'className'> {
   error?: {
     title: string
     body: string
@@ -27,25 +29,28 @@ const Icon = ({ color }: { color?: string }) => (
 )
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
-  ({ error = serverErrorMessage, className, baseTheme, ...rest }, forwardedRef) => {
+  ({ error = serverErrorMessage, baseTheme, className, color, ...rest }, forwardedRef) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     useSetupTheme({ componentContainer, baseTheme })
 
     return (
-      <div ref={setRef} className={componentStyles.rootErrorFallback} {...rest}>
-        <div className={classnames(componentStyles.container, className)} data-testid="error-fallback-container">
-          <Icon />
-          {error && (
-            <>
-              <p role="alert" aria-live="assertive">
-                {error.title}
-              </p>
-              <p role="alert" aria-live="assertive">
-                {error.body}
-              </p>
-            </>
-          )}
-        </div>
+      <div
+        ref={setRef}
+        className={classnames(componentStyles.rootErrorFallback, className)}
+        {...rest}
+        data-testid="error-fallback-container"
+      >
+        <Icon color={color} />
+        {error && (
+          <>
+            <p role="alert" aria-live="assertive">
+              {error.title}
+            </p>
+            <p role="alert" aria-live="assertive">
+              {error.body}
+            </p>
+          </>
+        )}
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Chart } from 'chart.js'
-import React from 'react'
+import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
   quotedStringRegex,
@@ -9,7 +9,10 @@ import {
   TimeSeriesGranularity,
   useStorybookAccessToken
 } from '../../helpers'
+import { ThemeTokenProps } from '../../themes'
+import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
+import { TimeSeriesQueryProps } from './TimeSeries.types'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
@@ -62,7 +65,7 @@ const dataset = {
   values: [809, 984, 673, 530, 522, 471, 872, 578, 825, 619, 38, 326, 128, 615, 844, 58, 576, 28, 663, 189]
 }
 
-const connectedParams = {
+const connectedParams: TimeSeriesQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
@@ -322,5 +325,50 @@ export const ErrorStory: Story = {
       }
     }
   },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const ThemeStory: Story = {
+  name: 'Theme',
+  args: {
+    variant: 'bar',
+    card: true,
+    query: {
+      ...connectedParams,
+      timeRange: {
+        ...connectedParams.timeRange,
+        n: 90
+      }
+    }
+  },
+  decorators: [
+    (Story) => {
+      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
+
+      const lightColors: ThemeTokenProps = {
+        accent: '#3d3d3d',
+        accentHover: '#3d3d3dc6'
+      }
+
+      const darkColors: ThemeTokenProps = {
+        accent: '#adadad',
+        accentHover: '#ffffffc6'
+      }
+
+      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
+
+      return (
+        <ThemeProvider baseTheme={baseTheme} theme={theme}>
+          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
+            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
+              Switch theme
+            </button>
+            <span>{baseTheme}</span>
+          </div>
+          <Story />
+        </ThemeProvider>
+      )
+    }
+  ],
   render: (args) => <TimeSeries {...args} />
 }
