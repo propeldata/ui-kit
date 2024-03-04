@@ -48,6 +48,10 @@ const MultiSelectFilter = (args: Story['args']) => {
             }
           : undefined
       }}
+      selectProps={{
+        ...args?.selectProps,
+        containerStyle: { width: '350px' },
+      }}
     />
   )
 }
