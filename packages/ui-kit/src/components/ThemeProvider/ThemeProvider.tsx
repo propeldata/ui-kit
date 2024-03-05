@@ -9,7 +9,8 @@ import type {
   ThemeContextProps,
   ThemeProviderProps,
   ThemeStateProps,
-  UseSetupThemeProps
+  UseSetupThemeProps,
+  UseSetupThemeResult
 } from './ThemeProvider.types'
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
@@ -28,8 +29,11 @@ export const useTheme = (): ThemeStateProps | undefined => {
 /** A hook that sets up the theme. */
 export const useSetupTheme = <T extends ChartVariant>({
   componentContainer,
-  baseTheme = 'lightTheme'
-}: UseSetupThemeProps): { theme: ThemeStateProps; chartConfig?: ChartConfiguration<T> } => {
+  baseTheme = 'lightTheme',
+  renderLoader: renderLoaderProp,
+  renderEmpty: renderEmptyProp,
+  errorFallback: errorFallbackProp
+}: UseSetupThemeProps): UseSetupThemeResult<T> => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const [chartConfig, setChartConfig] = useState<ChartConfiguration<T>>()
   const context = useContext(ThemeContext)
@@ -118,14 +122,25 @@ export const useSetupTheme = <T extends ChartVariant>({
     setTheme(parseComputedStyle(componentContainer))
   }, [context, componentContainer, baseTheme])
 
-  return { theme, chartConfig }
+  const { renderEmpty, errorFallback, renderLoader } = context ?? {}
+
+  return {
+    theme,
+    chartConfig,
+    renderEmpty: renderEmptyProp || renderEmpty,
+    errorFallback: errorFallbackProp || errorFallback,
+    renderLoader: renderLoaderProp || renderLoader
+  }
 }
 
 export const ThemeProvider = ({
   children,
   baseTheme = 'lightTheme',
   theme: themeProp,
-  globalChartConfigProps
+  globalChartConfigProps,
+  renderEmpty,
+  errorFallback,
+  renderLoader
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
@@ -154,7 +169,9 @@ export const ThemeProvider = ({
       className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}
       data-testid="theme-provider"
     >
-      <ThemeContext.Provider value={{ theme, globalChartConfigProps }}>{children}</ThemeContext.Provider>
+      <ThemeContext.Provider value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader }}>
+        {children}
+      </ThemeContext.Provider>
     </div>
   )
 }

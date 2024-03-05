@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
+import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
+  FilterOperator,
   quotedStringRegex,
   RelativeTimeRange,
   Sort,
   storybookCodeTemplate,
   useStorybookAccessToken
 } from '../../helpers'
+import { ThemeTokenProps } from '../../themes'
+import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { PieChart as PieChartSource, PieChartComponent } from './PieChart'
+import { PieChartQueryProps } from './PieChart.types'
 
 const meta: Meta<typeof PieChartComponent> = {
   title: 'Components/PieChart',
@@ -66,7 +70,7 @@ const PieChart = (args: Story['args']) => {
   )
 }
 
-const connectedParams = {
+const connectedParams: PieChartQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
@@ -83,7 +87,7 @@ const connectedParams = {
 export const SingleDimensionPieStory: Story = {
   name: 'Pie',
   args: {
-    query: connectedParams,
+    query: {},
     card: true
   },
   render: (args) => <PieChart {...args} />
@@ -120,6 +124,28 @@ export const DoughnutLegendBottomStory: Story = {
       legendPosition: 'bottom'
     },
     card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const DoughnutValuesRightStory: Story = {
+  name: 'Doughnut values right',
+  args: {
+    variant: 'doughnut',
+    query: connectedParams,
+    card: true,
+    chartConfigProps: (config) => ({
+      ...config,
+      options: {
+        ...config.options,
+        plugins: {
+          ...config.plugins,
+          legend: {
+            position: 'right'
+          }
+        }
+      }
+    })
   },
   render: (args) => <PieChart {...args} />
 }
@@ -231,6 +257,80 @@ export const ShowValuesDoughnutStory: Story = {
       showValues: true
     },
     card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
+export const ThemeStory: Story = {
+  name: 'Theme',
+  args: {
+    variant: 'pie',
+    headers: pieHeaders,
+    rows: pieRows,
+    card: true
+  },
+  decorators: [
+    (Story) => {
+      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
+
+      const lightColors: ThemeTokenProps = {
+        colorBlue950: '#1a1919',
+        colorBlue900: '#2D3748',
+        colorBlue800: '#4A5568',
+        colorBlue700: '#718096',
+        colorBlue600: '#A0AEC0',
+        colorBlue500: '#CBD5E0',
+        colorBlue400: '#E2E8F0',
+        colorBlue300: '#EDF2F7',
+        colorBlue200: '#F7FAFC',
+        colorBlue100: '#FFFFFF'
+      }
+
+      const darkColors: ThemeTokenProps = {
+        colorBlue950: '#d9d9d9',
+        colorBlue900: '#F7FAFC',
+        colorBlue800: '#EDF2F7',
+        colorBlue700: '#E2E8F0',
+        colorBlue600: '#CBD5E0',
+        colorBlue500: '#A0AEC0',
+        colorBlue400: '#718096',
+        colorBlue300: '#4A5568',
+        colorBlue200: '#2D3748',
+        colorBlue100: '#1a1919'
+      }
+
+      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
+
+      return (
+        <ThemeProvider baseTheme={baseTheme} theme={theme}>
+          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
+            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
+              Switch theme
+            </button>
+            <span>{baseTheme}</span>
+          </div>
+          <Story />
+        </ThemeProvider>
+      )
+    }
+  ],
+  render: (args) => <PieChart {...args} />
+}
+
+export const EmptyPieStory: Story = {
+  name: 'Empty State',
+  args: {
+    query: {
+      ...connectedParams,
+      filters: [
+        {
+          column: process.env.STORYBOOK_DIMENSION_4 ?? '',
+          operator: FilterOperator.IsNull
+        }
+      ]
+    },
+    card: true,
+    variant: 'pie'
   },
   render: (args) => <PieChart {...args} />
 }

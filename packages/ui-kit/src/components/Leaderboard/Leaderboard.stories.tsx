@@ -1,5 +1,5 @@
 import type { Meta, StoryContext, StoryObj } from '@storybook/react'
-import React from 'react'
+import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import {
   quotedStringRegex,
@@ -11,6 +11,9 @@ import {
 import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
 import './Leaderboard.stories.css'
 import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
+import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
+import { ThemeTokenProps } from '../../themes'
+import { LeaderboardQueryProps } from './Leaderboard.types'
 
 const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
@@ -84,7 +87,7 @@ const Leaderboard = (args: Story['args']) => {
   )
 }
 
-const connectedParams = {
+const connectedParams: LeaderboardQueryProps = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',
   metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1,
   timeRange: {
@@ -100,7 +103,7 @@ const connectedParams = {
   sort: Sort.Asc
 }
 
-const connectedParamsMultiDimensional = {
+const connectedParamsMultiDimensional: LeaderboardQueryProps = {
   ...connectedParams,
   dimensions: [
     {
@@ -283,7 +286,7 @@ export const CustomStyleStory: Story = {
     `,
     codeTemplate: (body: string, context: StoryContext): string => `
       // Leaderboard.tsx
-      
+
       import { ${context?.parameters?.imports ?? ''} } from '@propeldata/ui-kit'
       import './Leaderboard.css'
 
@@ -304,5 +307,44 @@ export const CustomStyleStory: Story = {
       stickyHeader: true
     }
   },
+  render: (args) => <Leaderboard {...args} />
+}
+
+export const ThemeStory: Story = {
+  name: 'Theme',
+  args: {
+    headers: barHeaders,
+    rows: barRows,
+    card: true
+  },
+  decorators: [
+    (Story) => {
+      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
+
+      const lightColors: ThemeTokenProps = {
+        accent: '#3d3d3d',
+        accentHover: '#3d3d3dc6'
+      }
+
+      const darkColors: ThemeTokenProps = {
+        accent: '#adadad',
+        accentHover: '#ffffffc6'
+      }
+
+      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
+
+      return (
+        <ThemeProvider baseTheme={baseTheme} theme={theme}>
+          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
+            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
+              Switch theme
+            </button>
+            <span>{baseTheme}</span>
+          </div>
+          <Story />
+        </ThemeProvider>
+      )
+    }
+  ],
   render: (args) => <Leaderboard {...args} />
 }

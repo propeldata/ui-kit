@@ -1,5 +1,34 @@
 # @propeldata/ui-kit
 
+## 0.5.4
+
+### Patch Changes
+
+- a7a8439: [Counter, Leaderboard, PieChart, TimeSeries]: pass `query.timeZone` when provided
+- 6fdaf48: Provide `cardProps` to customize wrapper `Card` component
+- e312913: [TimeSeries, Leaderboard, PieChart] Fix custom chart config logic
+- 3952162: [PieChart] Fix chart rendering when Total is hidden
+- 62de7e0: [Counter] Adjust the size of ErrorFallback component
+- 5b59b82: Add `errorFallback` callback for Error state, `renderLoader` callback for Loading state, and `renderEmpty`
+  callback for Empty state.
+
+## 0.5.3
+
+### Patch Changes
+
+- ab2be35: - Fix PieChart empty state when no data is received from blank to a circle
+  - Fix ErrorFallback icon color prop not being passed
+- a0aec9b: Fixed bug in doughnut chart, where the total did not align correctly when the legend was rendered on the
+  right.
+
+## 0.5.2
+
+### Patch Changes
+
+- f358bd4: Added dark theme support for loader
+- e7226f3: Fixed errorFallbackProps not being passed correctly
+- 59cbf58: Fixed chartConfigProps not passing some props
+
 ## 0.5.1
 
 ### Patch Changes

@@ -4,6 +4,7 @@ import './Counter.stories.css'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { quotedStringRegex, RelativeTimeRange, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { Counter as CounterSource, CounterComponent } from './Counter'
+import { CounterProps } from './Counter.types'
 
 const meta: Meta<typeof CounterComponent> = {
   title: 'Components/Counter',
@@ -28,7 +29,7 @@ export default meta
 
 type Story = StoryObj<typeof CounterComponent>
 
-const connectedParams = {
+const connectedParams: CounterProps = {
   localize: true,
   prefixValue: '$',
   query: {
@@ -181,6 +182,29 @@ export const SingleValueRefStory: Story = {
         )
       }
     `
+  },
+  render: (args) => <Counter {...args} />
+}
+
+export const CustomErrorFallbackStory: Story = {
+  name: 'Custom ErrorFallback',
+  tags: ['pattern'],
+  args: {
+    query: {
+      accessToken: 'invalid-access-token'
+    },
+    card: true,
+    errorFallback: ({ theme }) => (
+      <div
+        style={{
+          border: `1px solid ${theme?.errorPrimary}`,
+          color: theme?.errorPrimary,
+          padding: '1rem'
+        }}
+      >
+        Custom error fallback
+      </div>
+    )
   },
   render: (args) => <Counter {...args} />
 }

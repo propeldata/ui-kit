@@ -1,7 +1,6 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
-import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
@@ -29,7 +28,13 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentProps {
+export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
+
   /** If passed along with `values` the component will ignore the built-in GraphQL operations */
   labels?: TimeSeriesData['labels']
 
@@ -45,7 +50,7 @@ export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentPr
   /** Canvas role prop, if not passed we handle it */
   role?: string
 
-  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone. */
+  /** Time zone to use (for example, "America/Los_Angeles", "Europe/Berlin", or "UTC"). Defaults to the client's local time zone */
   timeZone?: string
 
   /** TimeSeries query props */
@@ -54,7 +59,7 @@ export interface TimeSeriesBaseProps extends ErrorFallbackProps, DataComponentPr
   /** Optional props that are used to configure the chart component. */
   chartProps?: TimeSeriesChartProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  /** @deprecated Format function for labels, must return an array with the new labels. This type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: TimeSeriesLabels) => TimeSeriesLabels
 }
 

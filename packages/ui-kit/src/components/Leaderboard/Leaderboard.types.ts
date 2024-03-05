@@ -1,6 +1,5 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, LeaderboardLabels, Sort } from '../../helpers'
-import type { ErrorFallbackProps } from '../ErrorFallback'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
@@ -49,7 +48,13 @@ export type LeaderboardChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps {
+export interface LeaderboardProps extends DataComponentProps<'div'> {
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
+
   /** The variant the chart will respond to, can be either `bar` or `table` */
   variant?: LeaderboardChartVariant
 
@@ -74,7 +79,7 @@ export interface LeaderboardProps extends ErrorFallbackProps, DataComponentProps
   /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
   chartProps?: LeaderboardChartProps
 
-  /** @deprecated ~~Format function for labels, must return an array with the new labels~~ the type is deprecated, use `chartConfigProps` instead */
+  /** @deprecated Format function for labels, must return an array with the new labels the type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: LeaderboardLabels) => LeaderboardLabels
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */

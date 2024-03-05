@@ -1,6 +1,15 @@
-import { TimeSeriesQueryProps, useAccessToken, useLog, useFilters } from '../../components'
-import { TimeSeriesQuery, PROPEL_GRAPHQL_API_ENDPOINT, useTimeSeriesQuery, TimeSeriesGranularity, TimeRangeInput } from '../../helpers'
+import {
+  PROPEL_GRAPHQL_API_ENDPOINT,
+  TimeRangeInput,
+  TimeSeriesGranularity,
+  TimeSeriesQuery,
+  useTimeSeriesQuery
+} from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useFilters } from './../../components/FilterProvider/useFilters'
+import { useLog } from './../../components/Log/useLog'
+import { TimeSeriesQueryProps } from './../../components/TimeSeries/TimeSeries.types'
 
 /**
  * This hook allows you to query a Time Series using Propel's GraphQL API.
@@ -56,7 +65,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
    * @param {TimeSeriesQuery} data
    * @returns {data: TimeSeriesQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useTimeSeriesQuery<TimeSeriesQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -84,7 +93,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

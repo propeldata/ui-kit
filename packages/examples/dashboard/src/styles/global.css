@@ -1,0 +1,19 @@
+body {
+  font-family: 'Inter', sans-serif;
+
+  margin: 0;
+  padding: 0;
+
+  height: 100vh;
+
+  background-color: var(--bg-color);
+}
+
+.border-2 {
+  border-color: var(--propel-border-primary);
+  background-color: transparent;
+}
+
+.custom-leaderboard {
+  height: 300px;
+}

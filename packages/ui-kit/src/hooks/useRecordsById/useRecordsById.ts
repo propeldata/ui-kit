@@ -1,7 +1,8 @@
-import { useAccessToken, useLog } from '../../components'
-import { RecordsByUniqueIdQuery, PROPEL_GRAPHQL_API_ENDPOINT, useRecordsByUniqueIdQuery } from '../../helpers'
-import { UseQueryProps } from '../types/Query.types'
 import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.types'
+import { PROPEL_GRAPHQL_API_ENDPOINT, RecordsByUniqueIdQuery, useRecordsByUniqueIdQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query Records By Id using Propel's GraphQL API.
@@ -17,6 +18,7 @@ export const useRecordsById = ({
   accessToken: accessTokenFromProp,
   propelApiUrl,
   refetchInterval,
+  enabled: enabledProp = true,
   retry
 }: RecordsByIdQueryProps): UseQueryProps<RecordsByUniqueIdQuery> => {
   const log = useLog()
@@ -43,7 +45,7 @@ export const useRecordsById = ({
    * @param {RecordsByUniqueIdQuery} data
    * @returns {data: RecordsByUniqueIdQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useRecordsByUniqueIdQuery<RecordsByUniqueIdQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useRecordsByUniqueIdQuery<RecordsByUniqueIdQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -69,7 +71,7 @@ export const useRecordsById = ({
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }

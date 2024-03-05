@@ -60,6 +60,8 @@ export const themeTokens: (keyof ThemeTokenProps)[] = [
   'accent',
   'accentHover',
   'colorGradient',
+  'colorLoader',
+  'colorLoaderAnimation',
 
   // Colors Blue
   'colorBlue950',

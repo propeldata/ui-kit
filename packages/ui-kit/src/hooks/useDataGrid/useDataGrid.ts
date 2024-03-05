@@ -1,7 +1,8 @@
-import { useAccessToken, useLog } from '../../components'
-import { DataGridQuery, useDataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput } from '../../helpers'
-import { UseQueryProps } from '../types/Query.types'
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
+import { DataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput, useDataGridQuery } from '../../helpers'
+import { UseQueryProps } from '../types/Query.types'
+import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from './../../components/Log/useLog'
 
 /**
  * This hook allows you to query Data Grid using Propel's GraphQL API.
@@ -56,7 +57,7 @@ export const useDataGrid = ({
    * @param {DataGridQuery} data
    * @returns {data: DataGridQuery | undefined, isInitialLoading: boolean, error: Error | undefined}
    */
-  const { data, error, isInitialLoading } = useDataGridQuery<DataGridQuery, Error>(
+  const { data, error, isInitialLoading, isLoading } = useDataGridQuery<DataGridQuery, Error>(
     {
       endpoint: propelApiUrl ?? PROPEL_GRAPHQL_API_ENDPOINT,
       fetchParams: {
@@ -90,7 +91,7 @@ export const useDataGrid = ({
 
   return {
     data,
-    isLoading: isInitialLoading ?? isLoadingAccessToken,
+    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }
