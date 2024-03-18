@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react'
+import { render, waitFor, fireEvent } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange, sleep, TimeSeriesGranularity } from '../../helpers'
@@ -24,6 +24,14 @@ const handlers = [
       return res(
         ctx.data({
           timeSeries: { labels: [timeZone], values: ['1'] }
+        })
+      )
+    }
+
+    if (metricName === 'lack-of-data') {
+      return res(
+        ctx.data({
+          timeSeries: { labels: [timeZone], values: [] }
         })
       )
     }
@@ -137,6 +145,49 @@ describe('TimeSeries', () => {
     const chartLabels = chartInstance?.data.labels
 
     expect(chartLabels).toEqual(mockStaticData.labels.map((label) => label.replace('-', '.')))
+  })
+
+  it('Should show error state when data is empty', async () => {
+    const TestWrapper = () => {
+      const [metric, setMetric] = React.useState<string>('lack-of-data')
+
+      return (
+        <>
+          <button data-testid="change-metric" onClick={() => setMetric('test-metric')}>
+            Change Metric
+          </button>
+          <TimeSeries
+            renderEmpty={() => <h1>Empty State</h1>}
+            query={{
+              metric,
+              accessToken: 'test-token',
+              timeRange: {
+                relative: RelativeTimeRange.LastNDays,
+                n: 30
+              },
+              granularity: TimeSeriesGranularity.Day
+            }}
+          />
+        </>
+      )
+    }
+
+    dom = render(<TestWrapper />)
+
+    await dom.findByText('Empty State')
+
+    fireEvent.click(dom.getByTestId('change-metric'))
+
+    await waitFor(async () => {
+      const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+
+      const chartData = chartInstance?.data.datasets[0].data
+      const chartLabels = chartInstance?.data.labels
+
+      expect(chartLabels).toEqual(mockData.labels)
+      expect(chartData).toEqual(mockData.values.map((value) => Number(value)))
+    })
   })
 
   it('Should pass timeZone to the query', async () => {

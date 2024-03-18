@@ -6,6 +6,7 @@ import {
   getCustomChartLabelsPlugin,
   getTimeZone,
   useCombinedRefsCallback,
+  useConnectedData,
   withThemeWrapper
 } from '../../helpers'
 import { useCounter } from '../../hooks/useCounter'
@@ -39,7 +40,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       style,
       baseTheme = 'lightTheme',
       loading: isLoadingStatic = false,
-      chartProps = {},
+      chartProps,
       labelListClassName,
       chartConfigProps,
       ...rest
@@ -64,7 +65,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       renderEmpty
     })
 
-    const [isEmptyState, setIsEmptyState] = React.useState(false)
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
@@ -129,6 +129,18 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
 
+    const destroyChart = React.useCallback(() => {
+      if (chartRef.current) {
+        chartRef.current.destroy()
+        chartRef.current = null
+      }
+    }, [chartRef])
+
+    const { data, isEmptyState, setData } = useConnectedData<PieChartData>({
+      destroyChart,
+      isDataEmpty: (data) => data.rows?.length === 0
+    })
+
     const renderChart = React.useCallback(
       (data?: PieChartData) => {
         if (!canvasRef.current || !data || !theme || !chartConfig) {
@@ -141,15 +153,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           hideLegend = false,
           hideTotal = false,
           totalPosition = 'bottom'
-        } = chartProps
+        } = chartProps ?? {}
 
         const labels = data.rows?.map((row) => row[0]) ?? []
         const values = data.rows?.map((row) => Number(row[1])) ?? []
-
-        if (values.length === 0 && renderEmptyComponent) {
-          setIsEmptyState(true)
-          return
-        }
 
         const customChartLabelsPlugin: Plugin<PieChartVariant> = getCustomChartLabelsPlugin({
           theme,
@@ -261,17 +268,15 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         isPie,
         totalValue,
         defaultChartColorPalette,
-        chartConfigProps,
-        renderEmptyComponent
+        chartConfigProps
       ]
     )
 
-    const destroyChart = () => {
-      if (chartRef.current) {
-        chartRef.current.destroy()
-        chartRef.current = null
+    React.useEffect(() => {
+      if (!isEmptyState) {
+        renderChart(data)
       }
-    }
+    }, [isEmptyState, data, renderChart])
 
     const otherLabel = chartProps?.otherLabel ?? 'Other'
 
@@ -342,21 +347,21 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     React.useEffect(() => {
       if (isStatic) {
-        renderChart({ headers, rows })
+        setData({ headers, rows })
       }
-    }, [isStatic, isLoadingStatic, variant, headers, rows, renderChart])
+    }, [isStatic, isLoadingStatic, variant, headers, rows, setData])
 
     React.useEffect(() => {
       if (fetchedData?.leaderboard && !isStatic) {
-        renderChart(fetchedData.leaderboard)
+        setData(fetchedData.leaderboard)
       }
-    }, [fetchedData, variant, isStatic, renderChart])
+    }, [fetchedData, variant, isStatic, setData])
 
     React.useEffect(() => {
       return () => {
         destroyChart()
       }
-    }, [])
+    }, [destroyChart])
 
     if (hasError || propsMismatch) {
       destroyChart()
@@ -388,6 +393,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     }
 
     if (isEmptyState && renderEmptyComponent) {
+      destroyChart()
+
       return themeWrapper(renderEmptyComponent({ theme }))
     }
 

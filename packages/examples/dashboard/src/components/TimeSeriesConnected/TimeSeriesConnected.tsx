@@ -7,6 +7,7 @@ export const TimeSeriesConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 } }
   const [chartType, setChartType] = React.useState<TimeSeriesChartVariant>('bar')
   const [pointStyle, setPointStyle] = React.useState('cross')
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
+  const [n, SetN] = React.useState<number>(30)
 
   const handleSwitchRefetchInterval = () => {
     setRefetchInterval(refetchInterval ? undefined : 1000)
@@ -22,7 +23,7 @@ export const TimeSeriesConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 } }
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             timeRange: {
               relative: RelativeTimeRange.LastNDays,
-              n: 30
+              n
             },
             granularity: TimeSeriesGranularity.Day,
             refetchInterval,
@@ -69,6 +70,9 @@ export const TimeSeriesConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 } }
         )}
         <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
           Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
+        </button>
+        <button className="border-2 p-1 h-9" onClick={() => SetN(n === 0 ? 30 : 0)}>
+          No data: {n === 0 ? 'On' : 'Off'}
         </button>
       </div>
     </div>
