@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { AccessTokenProvider } from '../AccessTokenProvider'
@@ -165,6 +165,36 @@ describe('Counter', () => {
     )
 
     await dom.findByText('true')
+  })
+
+  it('Should show error state when data is empty', async () => {
+    const TestWrapper = () => {
+      const [metric, setMetric] = React.useState<string>('lack-of-data')
+
+      return (
+        <>
+          <button data-testid="change-metric" onClick={() => setMetric('test-metric')}>
+            Change Metric
+          </button>
+          <Counter
+            renderEmpty={() => <h1>Empty State</h1>}
+            query={{
+              metric,
+              accessToken: 'test-token',
+              timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
+            }}
+          />
+        </>
+      )
+    }
+
+    dom = render(<TestWrapper />)
+
+    await dom.findByText('Empty State')
+
+    fireEvent.click(dom.getByTestId('change-metric'))
+
+    await dom.findByText(mockData.value)
   })
 
   it('Should pass timeZone to the query', async () => {

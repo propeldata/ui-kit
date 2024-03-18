@@ -35,7 +35,14 @@ export const Dashboard = ({ fetchToken, envs }: DashboardProps) => {
   return (
     <AccessTokenProvider fetchToken={fetchToken}>
       <FilterProvider>
-        <ThemeProvider baseTheme={theme}>
+        <ThemeProvider
+          baseTheme={theme}
+          renderEmpty={() => (
+            <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', height: 300 }}>
+              No Data
+            </div>
+          )}
+        >
           <GlobalStyles />
           <main style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-bg-secondary)' }}>
             <h1 className="px-6 py-3 text-3xl">
