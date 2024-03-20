@@ -1,5 +1,12 @@
 # react-17
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [903e63d]
+  - dashboard-example@0.5.5
+
 ## 0.1.8
 
 ### Patch Changes
