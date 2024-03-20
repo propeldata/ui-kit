@@ -9,7 +9,7 @@ import {
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
-  useConnectedData,
+  useEmptyableData,
   useForwardedRefCallback,
   withThemeWrapper
 } from '../../helpers'
@@ -141,8 +141,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       chartRef.current = null
     }, [chartRef])
 
-    const { data, isEmptyState, setData } = useConnectedData<TimeSeriesData>({
-      destroyChart,
+    const { data, isEmptyState, setData } = useEmptyableData<TimeSeriesData>({
+      onEmptyData: destroyChart,
       isDataEmpty: (data) => !data.values || !data.labels || data.values.length === 0
     })
 
