@@ -9,7 +9,7 @@ import {
   getTimeZone,
   LeaderboardLabels,
   useCombinedRefsCallback,
-  useConnectedData,
+  useEmptyableData,
   withThemeWrapper
 } from '../../helpers'
 import { useLeaderboard } from '../../hooks/useLeaderboard'
@@ -92,8 +92,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }, [chartRef])
 
-    const { data, isEmptyState, setData } = useConnectedData<LeaderboardData>({
-      destroyChart,
+    const { data, isEmptyState, setData } = useEmptyableData<LeaderboardData>({
+      onEmptyData: destroyChart,
       isDataEmpty: (data) => data.rows?.length === 0
     })
 

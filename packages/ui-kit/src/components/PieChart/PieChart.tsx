@@ -6,7 +6,7 @@ import {
   getCustomChartLabelsPlugin,
   getTimeZone,
   useCombinedRefsCallback,
-  useConnectedData,
+  useEmptyableData,
   withThemeWrapper
 } from '../../helpers'
 import { useCounter } from '../../hooks/useCounter'
@@ -136,8 +136,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       }
     }, [chartRef])
 
-    const { data, isEmptyState, setData } = useConnectedData<PieChartData>({
-      destroyChart,
+    const { data, isEmptyState, setData } = useEmptyableData<PieChartData>({
+      onEmptyData: destroyChart,
       isDataEmpty: (data) => data.rows?.length === 0
     })
 
