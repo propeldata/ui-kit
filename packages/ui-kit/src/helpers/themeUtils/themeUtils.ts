@@ -40,7 +40,7 @@ export const parseComputedStyle = (themeContainer: HTMLElement) => {
   themeDict.forEach((item) => {
     const cssVarValue = computedStyle.getPropertyValue(item.cssVarName)
     if (cssVarValue) {
-      Object.assign(theme, { [item.name]: cssVarValue })
+      Object.assign(theme, { [item.name]: cssVarValue.replace(/"/g, '') })
     }
   })
   return theme

@@ -1,3 +1,5 @@
+@use './generated/tokens';
+
 .commonTokens {
   /* Typography - Regular */
   --propel-font-family: 'Inter';
@@ -31,12 +33,19 @@
   --propel-error-secondary: #fecdca;
 
   /* Spacing */
+  /* @deprecated This prop is deprecated, use `--propel-spacing-xxs` instead. */
   --propel-space-xxs: 4px;
+  /* @deprecated This prop is deprecated, use `--propel-spacing-xs` instead. */
   --propel-space-xs: 8px;
+  /* @deprecated This prop is deprecated, use `--propel-spacing-sm` instead. */
   --propel-space-sm: 10px;
+  /* @deprecated This prop is deprecated, use `--propel-spacing-md` instead. */
   --propel-space-md: 16px;
+  /* @deprecated This prop is deprecated, use `--propel-spacing-lg` instead. */
   --propel-space-lg: 24px;
+  /* @deprecated This prop is deprecated, use `--propel-spacing-xl` instead. */
   --propel-space-xl: 32px;
+  /* @deprecated This prop is deprecated, use `--propel-spacing-xxl` instead. */
   --propel-space-xxl: 40px;
 
   /* Border radius */
@@ -47,16 +56,18 @@
   --propel-shadow-sm: 0px 2px 4px 0px rgba(17, 19, 34, 0.1);
 
   /* Color Blue (Brand)*/
-  --propel-color-blue950: #102A56;
+  --propel-color-blue950: #102a56;
   --propel-color-blue900: #194185;
-  --propel-color-blue800: #1849A9;
-  --propel-color-blue700: #175CD3;
-  --propel-color-blue600: #1570EF;
-  --propel-color-blue500: #2E90FA;
-  --propel-color-blue400: #53B1FD;
-  --propel-color-blue300: #84CAFF;
-  --propel-color-blue200: #B2DDFF;
-  --propel-color-blue100: #D1E9FF;
-  --propel-color-blue50: #EFF8FF;
-  --propel-color-blue25: #F5FAFF;
+  --propel-color-blue800: #1849a9;
+  --propel-color-blue700: #175cd3;
+  --propel-color-blue600: #1570ef;
+  --propel-color-blue500: #2e90fa;
+  --propel-color-blue400: #53b1fd;
+  --propel-color-blue300: #84caff;
+  --propel-color-blue200: #b2ddff;
+  --propel-color-blue100: #d1e9ff;
+  --propel-color-blue50: #eff8ff;
+  --propel-color-blue25: #f5faff;
+
+  @extend .tokens;
 }

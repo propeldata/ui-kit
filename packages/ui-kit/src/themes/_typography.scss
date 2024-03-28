@@ -1,4 +1,5 @@
 /** Typography */
+@use './generated/typography';
 
 .typographyRegular {
   color: var(--propel-text-secondary);

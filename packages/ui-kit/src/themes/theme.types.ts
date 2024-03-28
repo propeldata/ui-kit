@@ -25,12 +25,19 @@ export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
   h1FontWeight?: CSSProperties['fontWeight']
   h1LineHeight?: CSSProperties['lineHeight']
 
+  /** @deprecated This type is deprecated, use `spacingXxs` instead */
   spaceXxs?: CSSProperties['margin']
+  /** @deprecated This type is deprecated, use `spacingXs` instead */
   spaceXs?: CSSProperties['margin']
+  /** @deprecated This type is deprecated, use `spacingSm` instead */
   spaceSm?: CSSProperties['margin']
+  /** @deprecated This type is deprecated, use `spacingMd` instead */
   spaceMd?: CSSProperties['margin']
+  /** @deprecated This type is deprecated, use `spacingLg` instead */
   spaceLg?: CSSProperties['margin']
+  /** @deprecated This type is deprecated, use `spacingXl` instead */
   spaceXl?: CSSProperties['margin']
+  /** @deprecated This type is deprecated, use `spacingXxl` instead */
   spaceXxl?: CSSProperties['margin']
 
   borderRadiusXs?: CSSProperties['borderRadius']

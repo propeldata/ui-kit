@@ -1,10 +1,9 @@
 /** darkTheme.scss */
 
 @use './common';
+@use './generated/darkTheme';
 
 .darkTheme {
-  @extend .commonTokens;
-
   --propel-color-primary: #2e90fa;
   --propel-color-secondary: rgba(46, 144, 250, 0.35);
   --propel-bg-primary: #202939;
@@ -17,4 +16,6 @@
   --propel-color-gradient: linear-gradient(180deg, rgba(46, 144, 250, 0.35) -11.58%, rgba(46, 144, 250, 0.05) 100%);
   --propel-color-loader: #2d2d2d;
   --propel-color-loader-animation: #00000020;
+
+  @extend .darkTheme;
 }

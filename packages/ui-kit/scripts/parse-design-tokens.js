@@ -154,12 +154,12 @@ const themes = variablesJSON.collections.find(({ name }) => name === '1. Color M
 
 // Parse light theme
 const lightTheme = themes
-  .find(({ name }) => name.toLowerCase() === 'light mode')
+  .find(({ name }) => name.toLowerCase() === 'light')
   .variables.map((variable) => getToken(slugifyStr(variable.name.split('/').pop()), variable, tokens))
 
 // Parse dark theme
 const darkTheme = themes
-  .find(({ name }) => name.toLowerCase() === 'dark mode')
+  .find(({ name }) => name.toLowerCase() === 'dark')
   .variables.map((variable) => getToken(slugifyStr(variable.name.split('/').pop()), variable, tokens))
 
 // Define the directory path you want to create
