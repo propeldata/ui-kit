@@ -45,9 +45,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/cssinjs@npm:^1.18.4":
-  version: 1.18.4
-  resolution: "@ant-design/cssinjs@npm:1.18.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Fcssinjs%2F-%2Fcssinjs-1.18.4.tgz"
+"@ant-design/cssinjs@npm:^1.18.5":
+  version: 1.18.5
+  resolution: "@ant-design/cssinjs@npm:1.18.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Fcssinjs%2F-%2Fcssinjs-1.18.5.tgz"
   dependencies:
     "@babel/runtime": ^7.11.1
     "@emotion/hash": ^0.8.0
@@ -59,7 +59,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: c6028097929a9948d1e9d5441aeab51ff824edacf98976fb06c146397c7cc9b2fc3f88765a0d93345b1fbbf6b766f638260652d5637fcbf6e6bbafe4e79e60bd
+  checksum: 97f14379963f3a53258ecb8fede45a663f3afc3bfaf2a85403309ff024c3ed38d26ec0e15630742bc2447a9a4faaaeb2672f0f6b0b4db64b219523cfafb98039
   languageName: node
   linkType: hard
 
@@ -70,9 +70,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:^5.0.0, @ant-design/icons@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@ant-design/icons@npm:5.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Ficons%2F-%2Ficons-5.3.1.tgz"
+"@ant-design/icons@npm:^5.0.0, @ant-design/icons@npm:^5.3.5":
+  version: 5.3.5
+  resolution: "@ant-design/icons@npm:5.3.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Ficons%2F-%2Ficons-5.3.5.tgz"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/icons-svg": ^4.4.0
@@ -82,7 +82,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: b244ed7c36609cf361382ae4f17cb172470c0ac4d9505e98dc09cae625d89df9840df68c8c1fdb0e7603fccc4394b3986da2bab4535d03cfad80cafdbf4bcebb
+  checksum: fb62939d1b5d780a3555d4caacd60713c6cac4e89e58a4c73d8117fb305b591196f064543e714db0853687dd5c15b2322d8a808c8c59c4fdb5c5060639db3aaa
   languageName: node
   linkType: hard
 
@@ -1771,12 +1771,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.6, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.24.0":
-  version: 7.24.0
-  resolution: "@babel/runtime@npm:7.24.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.24.0.tgz"
+"@babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.6, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.24.1":
+  version: 7.24.1
+  resolution: "@babel/runtime@npm:7.24.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.24.1.tgz"
   dependencies:
     regenerator-runtime: ^0.14.0
-  checksum: 7a6a5d40fbdd68491ec183ba2e631c07415119960083b4fd76564cce3751e9acd2f12ab89575e38496fa389fa06d458732776e69ee1858e366cc3fbdb049f847
+  checksum: 5c8f3b912ba949865f03b3cf8395c60e1f4ebd1033fbd835bdfe81b6cac8a87d85bc3c7aded5fcdf07be044c9ab8c818f467abe0deca50020c72496782639572
   languageName: node
   linkType: hard
 
@@ -4479,6 +4479,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^25.0.7
     "@rollup/plugin-node-resolve": ^15.2.3
     "@rollup/plugin-terser": ^0.4.4
+    "@storybook/addon-actions": ^8.0.5
     "@storybook/blocks": ^7.2.1
     "@storybook/react": ^7.2.0
     "@storybook/theming": ^7.4.0
@@ -4497,6 +4498,7 @@ __metadata:
     chart.js: ^4.1.2
     chartjs-adapter-luxon: 1.2.1
     classnames: ^2.3.2
+    date-fns: ^3.3.1
     dotenv: ^16.0.3
     graphql: ^16.6.0
     jest: ^27.5.1
@@ -4506,6 +4508,7 @@ __metadata:
     msw: ^1.3.2
     raw-loader: ^4.0.2
     react: ^18.2.0
+    react-day-picker: ^8.10.0
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
     rollup: ^4.1.4
@@ -5088,7 +5091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rc-component/color-picker@npm:~1.5.2":
+"@rc-component/color-picker@npm:~1.5.3":
   version: 1.5.3
   resolution: "@rc-component/color-picker@npm:1.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rc-component%2Fcolor-picker%2F-%2Fcolor-picker-1.5.3.tgz"
   dependencies:
@@ -5500,6 +5503,20 @@ __metadata:
     polished: ^4.2.2
     uuid: ^9.0.0
   checksum: 305070099dbc6db0e00c5b329433c332202042ee6a86b545cd79899c116edeed5421c6eb23aec7af25bac57a657632657acd9b2d41f10a42b4623f0db41a2906
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-actions@npm:^8.0.5":
+  version: 8.0.5
+  resolution: "@storybook/addon-actions@npm:8.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Faddon-actions%2F-%2Faddon-actions-8.0.5.tgz"
+  dependencies:
+    "@storybook/core-events": 8.0.5
+    "@storybook/global": ^5.0.0
+    "@types/uuid": ^9.0.1
+    dequal: ^2.0.2
+    polished: ^4.2.2
+    uuid: ^9.0.0
+  checksum: d82bbdb6c0c443095ee88176bf7dd512e41d0df94909c5fd77166dec66f783bf053a444c336f12db9f0c5680128eaba50957d89806569657bf46a899210924a0
   languageName: node
   linkType: hard
 
@@ -6140,6 +6157,15 @@ __metadata:
   dependencies:
     ts-dedent: ^2.0.0
   checksum: c813945147c19c509215a75b340ed9d368d439b24bb26a0f1ba6974372e5e641a9764882322e4484a14b5d7ab10841183dd12df582fb400a24fff00a236e2c2f
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:8.0.5":
+  version: 8.0.5
+  resolution: "@storybook/core-events@npm:8.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Fcore-events%2F-%2Fcore-events-8.0.5.tgz"
+  dependencies:
+    ts-dedent: ^2.0.0
+  checksum: d21293b760f16ce63ccbf6829213de5b7cdd54cb495a23a0311ae2edd388336e0fc6752f92f6c79115435a156258516d0ff5cd658189ca18a2b2cdd3382684c1
   languageName: node
   linkType: hard
 
@@ -8608,16 +8634,16 @@ __metadata:
   linkType: hard
 
 "antd@npm:^5.10.3":
-  version: 5.15.2
-  resolution: "antd@npm:5.15.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fantd%2F-%2Fantd-5.15.2.tgz"
+  version: 5.15.4
+  resolution: "antd@npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fantd%2F-%2Fantd-5.15.4.tgz"
   dependencies:
     "@ant-design/colors": ^7.0.2
-    "@ant-design/cssinjs": ^1.18.4
-    "@ant-design/icons": ^5.3.1
+    "@ant-design/cssinjs": ^1.18.5
+    "@ant-design/icons": ^5.3.5
     "@ant-design/react-slick": ~1.0.2
-    "@babel/runtime": ^7.24.0
+    "@babel/runtime": ^7.24.1
     "@ctrl/tinycolor": ^3.6.1
-    "@rc-component/color-picker": ~1.5.2
+    "@rc-component/color-picker": ~1.5.3
     "@rc-component/mutate-observer": ^1.1.0
     "@rc-component/tour": ~1.14.2
     "@rc-component/trigger": ^2.0.0
@@ -8627,13 +8653,13 @@ __metadata:
     qrcode.react: ^3.1.0
     rc-cascader: ~3.24.0
     rc-checkbox: ~3.2.0
-    rc-collapse: ~3.7.2
+    rc-collapse: ~3.7.3
     rc-dialog: ~9.4.0
     rc-drawer: ~7.1.0
     rc-dropdown: ~4.2.0
     rc-field-form: ~1.42.1
     rc-image: ~7.6.0
-    rc-input: ~1.4.3
+    rc-input: ~1.4.5
     rc-input-number: ~9.0.0
     rc-mentions: ~2.11.1
     rc-menu: ~9.13.0
@@ -8662,7 +8688,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 38f91a54eb020693c2580341fe03c5989bc1bb4cdfe6e86e7f4c04321e8f7f16aebf7a25a091d32070225eec6f01abc27a58d512949b8b911ffceeacaeb7534f
+  checksum: caa93fa98977044be2e3e17150a707c77e25b4224a9201f0fe2dbd5c4f3c573bf82d31bb2ef1526dba28519c9496dcf7600390cc649dd5c75c03ce4ede3ec5c6
   languageName: node
   linkType: hard
 
@@ -11073,6 +11099,13 @@ __metadata:
   version: 2.2.2
   resolution: "dataloader@npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdataloader%2F-%2Fdataloader-2.2.2.tgz"
   checksum: 4dabd247089c29f194e94d5434d504f99156c5c214a03463c20f3f17f40398d7e179edee69a27c16e315519ac8739042a810090087ae26449a0e685156a02c65
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-3.3.1.tgz"
+  checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283
   languageName: node
   linkType: hard
 
@@ -20197,9 +20230,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-collapse@npm:~3.7.2":
-  version: 3.7.2
-  resolution: "rc-collapse@npm:3.7.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frc-collapse%2F-%2Frc-collapse-3.7.2.tgz"
+"rc-collapse@npm:~3.7.3":
+  version: 3.7.3
+  resolution: "rc-collapse@npm:3.7.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frc-collapse%2F-%2Frc-collapse-3.7.3.tgz"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: 2.x
@@ -20208,7 +20241,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: b8e295fbd96325545bab7f7e4014fe5bb606ce973544479e3012704439b910215e5197e0e26bdc08d42d2321e7694c5e2d5a6c1bd81b790e03826b2bf60791b5
+  checksum: c77c615d9501149aac02cb80dacb1f2f6fa7cca4659ee175b520e8d6089c5f09b0c919d2173e46af71a0815c897d404a89b6a069a3ad41b1a3ddc1cbb1c302cf
   languageName: node
   linkType: hard
 
@@ -20306,7 +20339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-input@npm:~1.4.0, rc-input@npm:~1.4.3":
+"rc-input@npm:~1.4.0, rc-input@npm:~1.4.5":
   version: 1.4.5
   resolution: "rc-input@npm:1.4.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frc-input%2F-%2Frc-input-1.4.5.tgz"
   dependencies:
@@ -20784,6 +20817,16 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: e432b7cb0df57e8f0bcdc3b012d2e93fcbcb6092c9e0f85654788d5ebfc4442536d8cc35b2418061ba3c4afb8b7788cc101c606d86a1732407921de7a9244c8d
+  languageName: node
+  linkType: hard
+
+"react-day-picker@npm:^8.10.0":
+  version: 8.10.0
+  resolution: "react-day-picker@npm:8.10.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-day-picker%2F-%2Freact-day-picker-8.10.0.tgz"
+  peerDependencies:
+    date-fns: ^2.28.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: a265e8c2f3f0e92e5a23e2edeca40fe67c67c00bae64aa9e1a99c6fe7f58b2f697b538937822b8f68d4b890d7903a06f074f1365deb465a0aeef1a14c701cc65
   languageName: node
   linkType: hard
 
