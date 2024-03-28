@@ -43,6 +43,7 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/addon-actions": "^8.0.5",
     "@storybook/blocks": "^7.2.1",
     "@storybook/react": "^7.2.0",
     "@storybook/theming": "^7.4.0",

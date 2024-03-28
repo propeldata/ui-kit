@@ -122,14 +122,15 @@ export const useSetupTheme = <T extends ChartVariant>({
     setTheme(parseComputedStyle(componentContainer))
   }, [context, componentContainer, baseTheme])
 
-  const { renderEmpty, errorFallback, renderLoader } = context ?? {}
+  const { renderEmpty, errorFallback, renderLoader, components } = context ?? {}
 
   return {
     theme,
     chartConfig,
     renderEmpty: renderEmptyProp || renderEmpty,
     errorFallback: errorFallbackProp || errorFallback,
-    renderLoader: renderLoaderProp || renderLoader
+    renderLoader: renderLoaderProp || renderLoader,
+    components
   }
 }
 
@@ -140,7 +141,8 @@ export const ThemeProvider = ({
   globalChartConfigProps,
   renderEmpty,
   errorFallback,
-  renderLoader
+  renderLoader,
+  components
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
@@ -170,7 +172,9 @@ export const ThemeProvider = ({
       className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}
       data-testid="theme-provider"
     >
-      <ThemeContext.Provider value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader }}>
+      <ThemeContext.Provider
+        value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader, components }}
+      >
         {children}
       </ThemeContext.Provider>
     </div>

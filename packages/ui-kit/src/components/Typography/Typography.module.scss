@@ -1,0 +1,26 @@
+@use '../../themes/typography';
+
+.rootCard {
+  padding: 0;
+  margin: 0;
+}
+
+.regular {
+  @extend .typographyRegular;
+}
+
+.tiny {
+  @extend .typographyTiny;
+}
+
+.small {
+  @extend .typographySmall;
+}
+
+.typographyHeading1 {
+  @extend .typographyRegular;
+}
+
+.block {
+  display: block;
+}

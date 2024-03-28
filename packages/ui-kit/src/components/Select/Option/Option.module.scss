@@ -1,0 +1,14 @@
+@use '../../../themes/typography';
+
+.rootOption {
+  @extend .typographySmall;
+
+  padding: var(--propel-space-sm) var(--propel-space-md);
+  margin: 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--propel-bg-secondary);
+    border-radius: var(--propel-border-radius-sm);
+  }
+}

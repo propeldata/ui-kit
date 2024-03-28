@@ -1,0 +1,27 @@
+.rootSelect {
+  width: fit-content;
+}
+
+.popper {
+  z-index: 9999;
+  padding: var(--propel-space-sm);
+  background-color: var(--propel-bg-primary);
+  border-radius: var(--propel-border-radius-sm);
+  border-width: 1px;
+  border-color: var(--propel-border-primary);
+  border-style: solid;
+  color: var(--propel-text-secondary);
+  display: flex;
+  min-width: fit-content;
+  box-shadow: var(--propel-shadow-sm);
+  margin-top: var(--propel-space-xs) !important;
+
+  ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+  }
+}
