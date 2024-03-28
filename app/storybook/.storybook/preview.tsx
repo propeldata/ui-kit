@@ -16,13 +16,20 @@ const GlobalStyles = () => {
   return null
 }
 
+const MyCustomButton = ({ children }: React.ComponentPropsWithoutRef<'button'>) => <button>{children}</button>
+
 const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   if (context.parameters.skipThemeProvider) {
     return <Story />
   }
 
   return (
-    <ThemeProvider baseTheme={context.globals.theme}>
+    <ThemeProvider
+      baseTheme={context.globals.theme}
+      // components={{
+      //   Button: (props) => <MyCustomButton {...props} />
+      // }}
+    >
       <GlobalStyles />
       <Story />
     </ThemeProvider>

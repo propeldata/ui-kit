@@ -2,9 +2,9 @@ import { Meta, Source, Canvas } from '@storybook/blocks'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as CounterStories from '../../../../packages/ui-kit/src/components/Counter/Counter.stories'
 
-<Meta title="Customization/Fallbacks" />
+<Meta title="Customization/Default components" />
 
-# Fallbacks
+# Default components
 
 It's possible to customize the `Loading`, `Error`, and `Empty` states of the UI Kit components. This is useful when you
 want to provide a consistent look and feel across your app. You can customize the fallbacks globally for all components
@@ -23,6 +23,10 @@ via `ThemeProvider`.
           renderLoader={() => <div>Loading...</div>}
           errorFallback={() => <h1>Error</h1>}
           renderEmpty={() => <span>No Data</span>}
+          components={{
+            Input: ({ props }) => <MyCustomInput {...props} />
+            Button: ({ props }) => <MyCustomButton {...props} />
+          }}
         >
           <Counter />
 
