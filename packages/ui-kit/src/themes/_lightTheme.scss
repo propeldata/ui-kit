@@ -1,6 +1,7 @@
 /** lightTheme.scss */
 
 @use './common';
+@use './generated/darkTheme';
 
 .lightTheme {
   @extend .commonTokens;
@@ -17,4 +18,6 @@
   --propel-color-gradient: linear-gradient(180deg, rgba(46, 144, 250, 0.35) -11.58%, rgba(46, 144, 250, 0.05) 100%);
   --propel-color-loader: #e9e9e9;
   --propel-color-loader-animation: #ffffff20;
+
+  @extend .lightTheme;
 }

@@ -9,7 +9,7 @@
           "name": "Style",
           "variables": [
             {
-              "name": "Colors/Base/white",
+              "name": "base-white",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -20,7 +20,7 @@
               }
             },
             {
-              "name": "Colors/Base/black",
+              "name": "base-black",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -31,7 +31,7 @@
               }
             },
             {
-              "name": "Colors/Base/transparent",
+              "name": "base-transparent",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -42,7 +42,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/25",
+              "name": "gray-light-25",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -53,7 +53,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/50",
+              "name": "gray-light-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -64,7 +64,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/100",
+              "name": "gray-light-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -75,7 +75,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/200",
+              "name": "gray-light-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -86,7 +86,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/300",
+              "name": "gray-light-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -97,7 +97,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/400",
+              "name": "gray-light-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -108,7 +108,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/500",
+              "name": "gray-light-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -119,7 +119,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/600",
+              "name": "gray-light-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -130,7 +130,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/700",
+              "name": "gray-light-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -141,7 +141,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/800",
+              "name": "gray-light-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -152,7 +152,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/900",
+              "name": "gray-light-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -163,7 +163,7 @@
               }
             },
             {
-              "name": "Colors/Gray (light mode)/950",
+              "name": "gray-light-950",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -174,7 +174,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/25",
+              "name": "gray-dark-25",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -185,7 +185,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/50",
+              "name": "gray-dark-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -196,7 +196,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/100",
+              "name": "gray-dark-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -207,7 +207,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/200",
+              "name": "gray-dark-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -218,7 +218,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/300",
+              "name": "gray-dark-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -229,7 +229,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/400",
+              "name": "gray-dark-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -240,7 +240,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/500",
+              "name": "gray-dark-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -251,7 +251,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/600",
+              "name": "gray-dark-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -262,7 +262,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/700",
+              "name": "gray-dark-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -273,7 +273,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/800",
+              "name": "gray-dark-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -284,7 +284,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/900",
+              "name": "gray-dark-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -295,7 +295,7 @@
               }
             },
             {
-              "name": "Colors/Gray (dark mode)/950",
+              "name": "gray-dark-950",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -306,7 +306,7 @@
               }
             },
             {
-              "name": "Colors/Brand/25",
+              "name": "brand-25",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -317,7 +317,7 @@
               }
             },
             {
-              "name": "Colors/Brand/50",
+              "name": "brand-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -328,7 +328,7 @@
               }
             },
             {
-              "name": "Colors/Brand/100",
+              "name": "brand-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -339,7 +339,7 @@
               }
             },
             {
-              "name": "Colors/Brand/200",
+              "name": "brand-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -350,7 +350,7 @@
               }
             },
             {
-              "name": "Colors/Brand/300",
+              "name": "brand-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -361,7 +361,7 @@
               }
             },
             {
-              "name": "Colors/Brand/400",
+              "name": "brand-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -372,7 +372,7 @@
               }
             },
             {
-              "name": "Colors/Brand/500",
+              "name": "brand-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -383,7 +383,7 @@
               }
             },
             {
-              "name": "Colors/Brand/600",
+              "name": "brand-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -394,7 +394,7 @@
               }
             },
             {
-              "name": "Colors/Brand/700",
+              "name": "brand-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -405,7 +405,7 @@
               }
             },
             {
-              "name": "Colors/Brand/800",
+              "name": "brand-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -416,7 +416,7 @@
               }
             },
             {
-              "name": "Colors/Brand/900",
+              "name": "brand-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -427,7 +427,7 @@
               }
             },
             {
-              "name": "Colors/Brand/950",
+              "name": "brand-950",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -438,7 +438,7 @@
               }
             },
             {
-              "name": "Colors/Error/25",
+              "name": "error-25",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -449,7 +449,7 @@
               }
             },
             {
-              "name": "Colors/Error/50",
+              "name": "error-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -460,7 +460,7 @@
               }
             },
             {
-              "name": "Colors/Error/100",
+              "name": "error-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -471,7 +471,7 @@
               }
             },
             {
-              "name": "Colors/Error/200",
+              "name": "error-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -482,7 +482,7 @@
               }
             },
             {
-              "name": "Colors/Error/300",
+              "name": "error-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -493,7 +493,7 @@
               }
             },
             {
-              "name": "Colors/Error/400",
+              "name": "error-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -504,7 +504,7 @@
               }
             },
             {
-              "name": "Colors/Error/500",
+              "name": "error-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -515,7 +515,7 @@
               }
             },
             {
-              "name": "Colors/Error/600",
+              "name": "error-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -526,7 +526,7 @@
               }
             },
             {
-              "name": "Colors/Error/700",
+              "name": "error-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -537,7 +537,7 @@
               }
             },
             {
-              "name": "Colors/Error/800",
+              "name": "error-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -548,7 +548,7 @@
               }
             },
             {
-              "name": "Colors/Error/900",
+              "name": "error-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -559,7 +559,7 @@
               }
             },
             {
-              "name": "Colors/Error/950",
+              "name": "error-950",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -570,7 +570,7 @@
               }
             },
             {
-              "name": "Colors/Warning/25",
+              "name": "warning-25",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -581,7 +581,7 @@
               }
             },
             {
-              "name": "Colors/Warning/50",
+              "name": "warning-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -592,7 +592,7 @@
               }
             },
             {
-              "name": "Colors/Warning/100",
+              "name": "warning-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -603,7 +603,7 @@
               }
             },
             {
-              "name": "Colors/Warning/200",
+              "name": "warning-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -614,7 +614,7 @@
               }
             },
             {
-              "name": "Colors/Warning/300",
+              "name": "warning-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -625,7 +625,7 @@
               }
             },
             {
-              "name": "Colors/Warning/400",
+              "name": "warning-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -636,7 +636,7 @@
               }
             },
             {
-              "name": "Colors/Warning/500",
+              "name": "warning-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -647,7 +647,7 @@
               }
             },
             {
-              "name": "Colors/Warning/600",
+              "name": "warning-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -658,7 +658,7 @@
               }
             },
             {
-              "name": "Colors/Warning/700",
+              "name": "warning-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -669,7 +669,7 @@
               }
             },
             {
-              "name": "Colors/Warning/800",
+              "name": "warning-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -680,7 +680,7 @@
               }
             },
             {
-              "name": "Colors/Warning/900",
+              "name": "warning-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -691,7 +691,7 @@
               }
             },
             {
-              "name": "Colors/Warning/950",
+              "name": "warning-950",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -702,7 +702,7 @@
               }
             },
             {
-              "name": "Colors/Success/25",
+              "name": "success-25",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -713,7 +713,7 @@
               }
             },
             {
-              "name": "Colors/Success/50",
+              "name": "success-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -724,7 +724,7 @@
               }
             },
             {
-              "name": "Colors/Success/100",
+              "name": "success-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -735,7 +735,7 @@
               }
             },
             {
-              "name": "Colors/Success/200",
+              "name": "success-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -746,7 +746,7 @@
               }
             },
             {
-              "name": "Colors/Success/300",
+              "name": "success-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -757,7 +757,7 @@
               }
             },
             {
-              "name": "Colors/Success/400",
+              "name": "success-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -768,7 +768,7 @@
               }
             },
             {
-              "name": "Colors/Success/500",
+              "name": "success-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -779,7 +779,7 @@
               }
             },
             {
-              "name": "Colors/Success/600",
+              "name": "success-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -790,7 +790,7 @@
               }
             },
             {
-              "name": "Colors/Success/700",
+              "name": "success-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -801,7 +801,7 @@
               }
             },
             {
-              "name": "Colors/Success/800",
+              "name": "success-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -812,7 +812,7 @@
               }
             },
             {
-              "name": "Colors/Success/900",
+              "name": "success-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -823,7 +823,7 @@
               }
             },
             {
-              "name": "Colors/Success/950",
+              "name": "success-950",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -834,193 +834,193 @@
               }
             },
             {
-              "name": "Spacing/0 (0px)",
+              "name": "spacing-0-0px",
               "type": "number",
               "isAlias": false,
               "value": 0
             },
             {
-              "name": "Spacing/0․5 (2px)",
+              "name": "spacing-0d5-2px",
               "type": "number",
               "isAlias": false,
               "value": 2
             },
             {
-              "name": "Spacing/1 (4px)",
+              "name": "spacing-1-4px",
               "type": "number",
               "isAlias": false,
               "value": 4
             },
             {
-              "name": "Spacing/1․5  (6px)",
+              "name": "spacing-1d5-6px",
               "type": "number",
               "isAlias": false,
               "value": 6
             },
             {
-              "name": "Spacing/2 (8px)",
+              "name": "spacing-2-8px",
               "type": "number",
               "isAlias": false,
               "value": 8
             },
             {
-              "name": "Spacing/3 (12px)",
+              "name": "spacing-3-12px",
               "type": "number",
               "isAlias": false,
               "value": 12
             },
             {
-              "name": "Spacing/4 (16px)",
+              "name": "spacing-4-16px",
               "type": "number",
               "isAlias": false,
               "value": 16
             },
             {
-              "name": "Spacing/5 (20px)",
+              "name": "spacing-5-20px",
               "type": "number",
               "isAlias": false,
               "value": 20
             },
             {
-              "name": "Spacing/6 (24px)",
+              "name": "spacing-6-24px",
               "type": "number",
               "isAlias": false,
               "value": 24
             },
             {
-              "name": "Spacing/8 (32px)",
+              "name": "spacing-8-32px",
               "type": "number",
               "isAlias": false,
               "value": 32
             },
             {
-              "name": "Spacing/10 (40px)",
+              "name": "spacing-10-40px",
               "type": "number",
               "isAlias": false,
               "value": 40
             },
             {
-              "name": "Spacing/12 (48px)",
+              "name": "spacing-12-48px",
               "type": "number",
               "isAlias": false,
               "value": 48
             },
             {
-              "name": "Spacing/16 (64px)",
+              "name": "spacing-16-64px",
               "type": "number",
               "isAlias": false,
               "value": 64
             },
             {
-              "name": "Spacing/20 (80px)",
+              "name": "spacing-20-80px",
               "type": "number",
               "isAlias": false,
               "value": 80
             },
             {
-              "name": "Spacing/24 (96px)",
+              "name": "spacing-24-96px",
               "type": "number",
               "isAlias": false,
               "value": 96
             },
             {
-              "name": "Spacing/32 (128px)",
+              "name": "spacing-32-128px",
               "type": "number",
               "isAlias": false,
               "value": 128
             },
             {
-              "name": "Spacing/40 (160px)",
+              "name": "spacing-40-160px",
               "type": "number",
               "isAlias": false,
               "value": 160
             },
             {
-              "name": "Spacing/48 (192px)",
+              "name": "spacing-48-192px",
               "type": "number",
               "isAlias": false,
               "value": 192
             },
             {
-              "name": "Spacing/56 (224px)",
+              "name": "spacing-56-224px",
               "type": "number",
               "isAlias": false,
               "value": 224
             },
             {
-              "name": "Spacing/64 (256px)",
+              "name": "spacing-64-256px",
               "type": "number",
               "isAlias": false,
               "value": 256
             },
             {
-              "name": "Spacing/80 (320px)",
+              "name": "spacing-80-320px",
               "type": "number",
               "isAlias": false,
               "value": 320
             },
             {
-              "name": "Spacing/96 (384px)",
+              "name": "spacing-96-384px",
               "type": "number",
               "isAlias": false,
               "value": 384
             },
             {
-              "name": "Spacing/120 (480px)",
+              "name": "spacing-120-480px",
               "type": "number",
               "isAlias": false,
               "value": 480
             },
             {
-              "name": "Spacing/140 (560px)",
+              "name": "spacing-140-560px",
               "type": "number",
               "isAlias": false,
               "value": 560
             },
             {
-              "name": "Spacing/160 (640px)",
+              "name": "spacing-160-640px",
               "type": "number",
               "isAlias": false,
               "value": 640
             },
             {
-              "name": "Spacing/180 (720px)",
+              "name": "spacing-180-720px",
               "type": "number",
               "isAlias": false,
               "value": 720
             },
             {
-              "name": "Spacing/192 (768px)",
+              "name": "spacing-192-768px",
               "type": "number",
               "isAlias": false,
               "value": 768
             },
             {
-              "name": "Spacing/256 (1,024px)",
+              "name": "spacing-256-1024px",
               "type": "number",
               "isAlias": false,
               "value": 1024
             },
             {
-              "name": "Spacing/320 (1,280px)",
+              "name": "spacing-320-1280px",
               "type": "number",
               "isAlias": false,
               "value": 1280
             },
             {
-              "name": "Spacing/360 (1,440px)",
+              "name": "spacing-360-1440px",
               "type": "number",
               "isAlias": false,
               "value": 1440
             },
             {
-              "name": "Spacing/400 (1,600px)",
+              "name": "spacing-400-1600px",
               "type": "number",
               "isAlias": false,
               "value": 1600
             },
             {
-              "name": "Spacing/480 (1,920px)",
+              "name": "spacing-480-1920px",
               "type": "number",
               "isAlias": false,
               "value": 1920
@@ -1033,10 +1033,10 @@
       "name": "1. Color Modes",
       "modes": [
         {
-          "name": "Light mode",
+          "name": "light",
           "variables": [
             {
-              "name": "Colors/Text/text-primary",
+              "name": "text-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1047,104 +1047,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-primary_on-brand",
-              "type": "color",
-              "isAlias": true,
-              "value": {
-                "collection": "_Primitives",
-                "name": "Colors/Base/white"
-              }
-            },
-            {
-              "name": "Colors/Text/text-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 52,
-                "g": 64,
-                "b": 84,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-secondary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 24,
-                "g": 34,
-                "b": 48,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-secondary_on-brand",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 178,
-                "g": 221,
-                "b": 255,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-tertiary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 71,
-                "g": 84,
-                "b": 103,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-tertiary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 52,
-                "g": 64,
-                "b": 84,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-tertiary_on-brand",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 178,
-                "g": 221,
-                "b": 255,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-quarterary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 102,
-                "g": 112,
-                "b": 133,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-quarterary_on-brand",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 132,
-                "g": 202,
-                "b": 255,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-white",
+              "name": "text-primary-on-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1155,7 +1058,73 @@
               }
             },
             {
-              "name": "Colors/Text/text-disabled",
+              "name": "text-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-secondary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 34,
+                "b": 48,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-secondary-on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 178,
+                "g": 221,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-tertiary_hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-tertiary-on-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 178,
+                "g": 221,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-quarterary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1166,172 +1135,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-placeholder",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 102,
-                "g": 112,
-                "b": 133,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-placeholder_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 208,
-                "g": 213,
-                "b": 221,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-brand-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 25,
-                "g": 65,
-                "b": 133,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-brand-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 23,
-                "g": 92,
-                "b": 211,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-brand-tertiary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-brand-tertiary_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-error-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 217,
-                "g": 45,
-                "b": 32,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-warning-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 220,
-                "g": 104,
-                "b": 3,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Text/text-success-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 7,
-                "g": 148,
-                "b": 85,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 208,
-                "g": 213,
-                "b": 221,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-disabled",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 208,
-                "g": 213,
-                "b": 221,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-tertiary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 242,
-                "g": 244,
-                "b": 247,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 234,
-                "g": 236,
-                "b": 240,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-error-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 217,
-                "g": 45,
-                "b": 32,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-disabled_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 234,
-                "g": 236,
-                "b": 240,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-brand",
+              "name": "text-quarterary-on-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1342,7 +1146,216 @@
               }
             },
             {
-              "name": "Colors/Border/border-error",
+              "name": "text-white",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-placeholder",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-placeholder-subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 25,
+                "g": 65,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 92,
+                "b": 211,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-brand-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-brand-tertiary-alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "text-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 242,
+                "g": 244,
+                "b": 247,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-brand-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-disabled_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 234,
+                "g": 236,
+                "b": 240,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-brand-solid-alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-brand",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 132,
+                "g": 202,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-error",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1353,205 +1366,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-brand-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-brand-solid_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Color",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 16,
-                "g": 24,
-                "b": 40,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 52,
-                "g": 64,
-                "b": 84,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-secondaary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 24,
-                "g": 34,
-                "b": 48,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-tertiary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 71,
-                "g": 84,
-                "b": 103,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-tertiary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 52,
-                "g": 64,
-                "b": 84,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quarterary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 102,
-                "g": 112,
-                "b": 133,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quarterary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 71,
-                "g": 84,
-                "b": 103,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quinary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 152,
-                "g": 162,
-                "b": 179,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quinary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 102,
-                "g": 112,
-                "b": 133,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-senary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 208,
-                "g": 213,
-                "b": 221,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-disabled",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 152,
-                "g": 162,
-                "b": 179,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-disabled_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 208,
-                "g": 213,
-                "b": 221,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-brand-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-brand-primary_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-brand-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 46,
-                "g": 144,
-                "b": 250,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-error-primary",
+              "name": "border-error-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1562,7 +1377,183 @@
               }
             },
             {
-              "name": "Colors/Foreground color/fg-error-secondary",
+              "name": "foreground-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 16,
+                "g": 24,
+                "b": 40,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-secondary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 24,
+                "g": 34,
+                "b": 48,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-tertiary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 52,
+                "g": 64,
+                "b": 84,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quarterary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 84,
+                "b": 103,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quinary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 152,
+                "g": 162,
+                "b": 179,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quinary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 102,
+                "g": 112,
+                "b": 133,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-senary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 152,
+                "g": 162,
+                "b": 179,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-disabled-subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 208,
+                "g": 213,
+                "b": 221,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-brand-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-error-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1573,7 +1564,7 @@
               }
             },
             {
-              "name": "Colors/Foreground color/fg-warning-primary",
+              "name": "foreground-warning-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1584,7 +1575,7 @@
               }
             },
             {
-              "name": "Colors/Foreground color/fg-warning-secondary",
+              "name": "foreground-warning-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1595,7 +1586,7 @@
               }
             },
             {
-              "name": "Colors/Foreground color/fg-success-primary",
+              "name": "foreground-success-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1606,7 +1597,7 @@
               }
             },
             {
-              "name": "Colors/Foreground color/fg-success-secondary",
+              "name": "foreground-success-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1617,7 +1608,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-primary",
+              "name": "background-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1628,7 +1619,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-primary_alt",
+              "name": "background-primary-alt",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1639,7 +1630,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-primary_hover",
+              "name": "background-primary-hover",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1650,7 +1641,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-primary-solid",
+              "name": "background-primary-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1661,7 +1652,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-secondary",
+              "name": "background-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1672,7 +1663,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-secondary_alt",
+              "name": "background-secondary-alt",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1683,7 +1674,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-secondary_hover",
+              "name": "background-secondary-hover",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1694,7 +1685,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-secondary_subtle",
+              "name": "background-secondary-subtle",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1705,7 +1696,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-secondary-solid",
+              "name": "background-secondary-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1716,7 +1707,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-tertiary",
+              "name": "background-tertiary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1727,7 +1718,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-quarterary",
+              "name": "background-quarterary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1738,7 +1729,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-active",
+              "name": "background-active",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1749,7 +1740,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-disabled",
+              "name": "background-disabled",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1760,7 +1751,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-disabled_subtle",
+              "name": "background-disabled-subtle",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1771,7 +1762,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-overlay",
+              "name": "background-overlay",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1782,7 +1773,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-primary",
+              "name": "background-brand-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1793,7 +1784,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-primary_alt",
+              "name": "background-brand-primary-alt",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1804,7 +1795,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-secondary",
+              "name": "background-brand-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1815,7 +1806,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-solid",
+              "name": "background-brand-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1826,7 +1817,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-solid_hover",
+              "name": "background-brand-solid-hover",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1837,7 +1828,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-section",
+              "name": "background-brand-section",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1848,7 +1839,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-brand-section_subtle",
+              "name": "background-brand-section_subtle",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1859,7 +1850,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-error-primary",
+              "name": "background-error-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1870,7 +1861,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-error-secondary",
+              "name": "colors-background-error-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1881,7 +1872,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-error-solid",
+              "name": "background-error-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1892,7 +1883,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-warning-primary",
+              "name": "background-warning-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1903,7 +1894,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-warning-secondary",
+              "name": "background-warning-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1914,7 +1905,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-warning-solid",
+              "name": "background-warning-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1925,7 +1916,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-success-primary",
+              "name": "background-success-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1936,7 +1927,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-success-secondary",
+              "name": "background-success-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1947,7 +1938,7 @@
               }
             },
             {
-              "name": "Colors/Background color/bg-success-solid",
+              "name": "background-success-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1958,7 +1949,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-10",
+              "name": "component-alpha-white-10",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1969,7 +1960,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-20",
+              "name": "component-alpha-white-20",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1980,7 +1971,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-30",
+              "name": "component-alpha-white-30",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -1991,7 +1982,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-40",
+              "name": "component-alpha-white-40",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2002,7 +1993,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-50",
+              "name": "component-alpha-white-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2013,7 +2004,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-60",
+              "name": "component-alpha-white-60",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2024,7 +2015,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-70",
+              "name": "component-alpha-white-70",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2035,7 +2026,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-80",
+              "name": "component-alpha-white-80",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2046,7 +2037,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-90",
+              "name": "component-alpha-white-90",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2057,16 +2048,18 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-white-100",
+              "name": "component-alpha-white-100",
               "type": "color",
-              "isAlias": true,
+              "isAlias": false,
               "value": {
-                "collection": "_Primitives",
-                "name": "Colors/Base/white"
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-10",
+              "name": "component-alpha-black-10",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2077,7 +2070,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-20",
+              "name": "component-alpha-black-20",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2088,7 +2081,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-30",
+              "name": "component-alpha-black-30",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2099,7 +2092,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-40",
+              "name": "component-alpha-black-40",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2110,7 +2103,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-50",
+              "name": "component-alpha-black-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2121,7 +2114,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-60",
+              "name": "component-alpha-black-60",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2132,7 +2125,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-70",
+              "name": "component-alpha-black-70",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2143,7 +2136,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-80",
+              "name": "component-alpha-black-80",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2154,7 +2147,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-90",
+              "name": "component-alpha-black-90",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2165,7 +2158,7 @@
               }
             },
             {
-              "name": "Component Colors/Alpha/alpha-black-100",
+              "name": "component-alpha-black-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2176,7 +2169,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-50",
+              "name": "component-utility-gray-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2187,7 +2180,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-100",
+              "name": "component-utility-gray-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2198,18 +2191,16 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-200",
+              "name": "component-utility-gray-200",
               "type": "color",
-              "isAlias": false,
+              "isAlias": true,
               "value": {
-                "r": 234,
-                "g": 236,
-                "b": 240,
-                "a": 1
+                "collection": "_Primitives",
+                "name": "gray-light-200"
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-300",
+              "name": "component-utility-gray-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2220,7 +2211,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-400",
+              "name": "component-utility-gray-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2231,7 +2222,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-500",
+              "name": "component-utility-gray-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2242,7 +2233,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-600",
+              "name": "component-utility-gray-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2253,7 +2244,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-700",
+              "name": "component-utility-gray-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2264,7 +2255,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-800",
+              "name": "component-utility-gray-800",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2275,7 +2266,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-900",
+              "name": "component-utility-gray-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2286,7 +2277,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-50",
+              "name": "component-utility-blue-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2297,7 +2288,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-100",
+              "name": "component-utility-blue-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2308,7 +2299,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-200",
+              "name": "component-utility-blue-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2319,16 +2310,18 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-300",
+              "name": "component-utility-blue-300",
               "type": "color",
-              "isAlias": true,
+              "isAlias": false,
               "value": {
-                "collection": "_Primitives",
-                "name": "Colors/Brand/300"
+                "r": 132,
+                "g": 202,
+                "b": 255,
+                "a": 1
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-400",
+              "name": "component-utility-blue-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2339,7 +2332,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-500",
+              "name": "component-utility-blue-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2350,7 +2343,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-600",
+              "name": "component-utility-blue-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2361,23 +2354,21 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-700",
+              "name": "component-utility-blue-700",
               "type": "color",
-              "isAlias": false,
+              "isAlias": true,
               "value": {
-                "r": 23,
-                "g": 92,
-                "b": 211,
-                "a": 1
+                "collection": "_Primitives",
+                "name": "brand-700"
               }
             }
           ]
         },
         {
-          "name": "Dark Mode",
+          "name": "dark",
           "variables": [
             {
-              "name": "Colors/Text/text-primary",
+              "name": "text-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2388,7 +2379,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-primary_on-brand",
+              "name": "text-primary-on-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2399,7 +2390,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-secondary",
+              "name": "text-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2410,7 +2401,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-secondary_hover",
+              "name": "text-secondary_hover",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2421,7 +2412,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-secondary_on-brand",
+              "name": "text-secondary-on-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2432,7 +2423,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-tertiary",
+              "name": "text-tertiary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2443,7 +2434,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-tertiary_hover",
+              "name": "text-tertiary_hover",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2454,7 +2445,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-tertiary_on-brand",
+              "name": "text-tertiary-on-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2465,7 +2456,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-quarterary",
+              "name": "text-quarterary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2476,7 +2467,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-quarterary_on-brand",
+              "name": "text-quarterary-on-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2487,7 +2478,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-white",
+              "name": "text-white",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2498,7 +2489,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-disabled",
+              "name": "text-disabled",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2509,7 +2500,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-placeholder",
+              "name": "text-placeholder",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2520,7 +2511,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-placeholder_subtle",
+              "name": "text-placeholder-subtle",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2531,7 +2522,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-brand-primary",
+              "name": "text-brand-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2542,7 +2533,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-brand-secondary",
+              "name": "text-brand-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2553,7 +2544,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-brand-tertiary",
+              "name": "text-brand-tertiary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2564,7 +2555,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-brand-tertiary_alt",
+              "name": "text-brand-tertiary-alt",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2575,7 +2566,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-error-primary",
+              "name": "text-error-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2586,7 +2577,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-warning-primary",
+              "name": "text-warning-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2597,7 +2588,7 @@
               }
             },
             {
-              "name": "Colors/Text/text-success-primary",
+              "name": "text-success-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2608,7 +2599,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-primary",
+              "name": "border-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2619,7 +2610,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-disabled",
+              "name": "border-disabled",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2630,7 +2621,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-tertiary",
+              "name": "border-tertiary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2641,7 +2632,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-secondary",
+              "name": "border-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2652,18 +2643,18 @@
               }
             },
             {
-              "name": "Colors/Border/border-error-solid",
+              "name": "border-brand-solid",
               "type": "color",
               "isAlias": false,
               "value": {
-                "r": 249,
-                "g": 112,
-                "b": 102,
+                "r": 46,
+                "g": 144,
+                "b": 250,
                 "a": 1
               }
             },
             {
-              "name": "Colors/Border/border-disabled_subtle",
+              "name": "border-disabled_subtle",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2674,7 +2665,18 @@
               }
             },
             {
-              "name": "Colors/Border/border-brand",
+              "name": "border-brand-solid-alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "border-brand",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2685,7 +2687,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-error",
+              "name": "border-error",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2696,216 +2698,7 @@
               }
             },
             {
-              "name": "Colors/Border/border-brand-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 46,
-                "g": 144,
-                "b": 250,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Border/border-brand-solid_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 51,
-                "g": 55,
-                "b": 65,
-                "a": 1
-              }
-            },
-            {
-              "name": "Color",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 206,
-                "g": 207,
-                "b": 210,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-secondaary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 236,
-                "g": 236,
-                "b": 237,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-tertiary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 148,
-                "g": 150,
-                "b": 156,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-tertiary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 206,
-                "g": 207,
-                "b": 210,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quarterary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 148,
-                "g": 150,
-                "b": 156,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quarterary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 206,
-                "g": 207,
-                "b": 210,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quinary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 133,
-                "g": 136,
-                "b": 142,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-quinary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 148,
-                "g": 150,
-                "b": 156,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-senary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 97,
-                "g": 100,
-                "b": 108,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-disabled",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 133,
-                "g": 136,
-                "b": 142,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-disabled_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 97,
-                "g": 100,
-                "b": 108,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-brand-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 46,
-                "g": 144,
-                "b": 250,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-brand-primary_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 206,
-                "g": 207,
-                "b": 210,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-brand-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 46,
-                "g": 144,
-                "b": 250,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-error-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 240,
-                "g": 68,
-                "b": 56,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-error-secondary",
+              "name": "border-error-solid",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -2916,599 +2709,7 @@
               }
             },
             {
-              "name": "Colors/Foreground color/fg-warning-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 247,
-                "g": 144,
-                "b": 9,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-warning-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 253,
-                "g": 176,
-                "b": 34,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-success-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 23,
-                "g": 178,
-                "b": 106,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Foreground color/fg-success-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 71,
-                "g": 205,
-                "b": 137,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-primary_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 22,
-                "g": 27,
-                "b": 38,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-primary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-primary-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 22,
-                "g": 27,
-                "b": 38,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 22,
-                "g": 27,
-                "b": 38,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-secondary_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-secondary_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-secondary_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 22,
-                "g": 27,
-                "b": 38,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-secondary-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 97,
-                "g": 100,
-                "b": 108,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-tertiary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-quarterary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 51,
-                "g": 55,
-                "b": 65,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-active",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-disabled",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-disabled_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 22,
-                "g": 27,
-                "b": 38,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-overlay",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 46,
-                "g": 144,
-                "b": 250,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-primary_alt",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 21,
-                "g": 112,
-                "b": 239,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-solid_hover",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 46,
-                "g": 144,
-                "b": 250,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-section",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-brand-section_subtle",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-error-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 217,
-                "g": 45,
-                "b": 32,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-error-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 217,
-                "g": 45,
-                "b": 32,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-error-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 217,
-                "g": 45,
-                "b": 32,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-warning-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 247,
-                "g": 144,
-                "b": 9,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-warning-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 220,
-                "g": 104,
-                "b": 3,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-warning-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 220,
-                "g": 104,
-                "b": 3,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-success-primary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 23,
-                "g": 178,
-                "b": 106,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-success-secondary",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 7,
-                "g": 148,
-                "b": 85,
-                "a": 1
-              }
-            },
-            {
-              "name": "Colors/Background color/bg-success-solid",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 7,
-                "g": 148,
-                "b": 85,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-10",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.1
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-20",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.2
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-30",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.3
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-40",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.4
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-50",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.5
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-60",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.6
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-70",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.7
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-80",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.8
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-90",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 12,
-                "g": 17,
-                "b": 29,
-                "a": 0.9
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-white-100",
-              "type": "color",
-              "isAlias": true,
-              "value": {
-                "collection": "_Primitives",
-                "name": "Colors/Gray (dark mode)/950"
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-10",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.1
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-20",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.2
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-30",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.3
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-40",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.4
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-50",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.5
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-60",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.6
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-70",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.7
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-80",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.8
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-90",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 0.9
-              }
-            },
-            {
-              "name": "Component Colors/Alpha/alpha-black-100",
+              "name": "foreground-primary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3519,84 +2720,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-50",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 22,
-                "g": 27,
-                "b": 38,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-100",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 31,
-                "g": 36,
-                "b": 47,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-200",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 51,
-                "g": 55,
-                "b": 65,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-300",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 51,
-                "g": 55,
-                "b": 65,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-400",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 97,
-                "g": 100,
-                "b": 108,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-500",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 133,
-                "g": 136,
-                "b": 142,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-600",
-              "type": "color",
-              "isAlias": false,
-              "value": {
-                "r": 148,
-                "g": 150,
-                "b": 156,
-                "a": 1
-              }
-            },
-            {
-              "name": "Component Colors/Utility/utility-gray-700",
+              "name": "foreground-secondary",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3607,7 +2731,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-800",
+              "name": "foreground-secondary-hover",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3618,7 +2742,865 @@
               }
             },
             {
-              "name": "Component Colors/Utility/utility-gray-900",
+              "name": "foreground-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-tertiary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quarterary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quinary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-quinary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-senary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-disabled-subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-brand-primary_alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 240,
+                "g": 68,
+                "b": 56,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-error-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 249,
+                "g": 112,
+                "b": 102,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 247,
+                "g": 144,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-warning-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 253,
+                "g": 176,
+                "b": 34,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 178,
+                "b": 106,
+                "a": 1
+              }
+            },
+            {
+              "name": "foreground-success-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 71,
+                "g": 205,
+                "b": 137,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-primary-alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-primary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-primary-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-secondary-alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-secondary-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-secondary-subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-secondary-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-tertiary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-quarterary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-active",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-disabled",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-disabled-subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-overlay",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-primary-alt",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 21,
+                "g": 112,
+                "b": 239,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-solid-hover",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 46,
+                "g": 144,
+                "b": 250,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-section",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-brand-section_subtle",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-error-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "colors-background-error-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-error-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 217,
+                "g": 45,
+                "b": 32,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-warning-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 247,
+                "g": 144,
+                "b": 9,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-warning-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-warning-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 220,
+                "g": 104,
+                "b": 3,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-success-primary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 23,
+                "g": 178,
+                "b": 106,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-success-secondary",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "background-success-solid",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 7,
+                "g": 148,
+                "b": 85,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-alpha-white-10",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.1
+              }
+            },
+            {
+              "name": "component-alpha-white-20",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.2
+              }
+            },
+            {
+              "name": "component-alpha-white-30",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.3
+              }
+            },
+            {
+              "name": "component-alpha-white-40",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.4
+              }
+            },
+            {
+              "name": "component-alpha-white-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.5
+              }
+            },
+            {
+              "name": "component-alpha-white-60",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.6
+              }
+            },
+            {
+              "name": "component-alpha-white-70",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.7
+              }
+            },
+            {
+              "name": "component-alpha-white-80",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.8
+              }
+            },
+            {
+              "name": "component-alpha-white-90",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 0.9
+              }
+            },
+            {
+              "name": "component-alpha-white-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 12,
+                "g": 17,
+                "b": 29,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-alpha-black-10",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.1
+              }
+            },
+            {
+              "name": "component-alpha-black-20",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.2
+              }
+            },
+            {
+              "name": "component-alpha-black-30",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.3
+              }
+            },
+            {
+              "name": "component-alpha-black-40",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.4
+              }
+            },
+            {
+              "name": "component-alpha-black-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.5
+              }
+            },
+            {
+              "name": "component-alpha-black-60",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.6
+              }
+            },
+            {
+              "name": "component-alpha-black-70",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.7
+              }
+            },
+            {
+              "name": "component-alpha-black-80",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.8
+              }
+            },
+            {
+              "name": "component-alpha-black-90",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 0.9
+              }
+            },
+            {
+              "name": "component-alpha-black-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-50",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 22,
+                "g": 27,
+                "b": 38,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-100",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 31,
+                "g": 36,
+                "b": 47,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-200",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-300",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 51,
+                "g": 55,
+                "b": 65,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-400",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 97,
+                "g": 100,
+                "b": 108,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-500",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 133,
+                "g": 136,
+                "b": 142,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-600",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 148,
+                "g": 150,
+                "b": 156,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-700",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 206,
+                "g": 207,
+                "b": 210,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-800",
+              "type": "color",
+              "isAlias": false,
+              "value": {
+                "r": 236,
+                "g": 236,
+                "b": 237,
+                "a": 1
+              }
+            },
+            {
+              "name": "component-utility-gray-900",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3629,7 +3611,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-50",
+              "name": "component-utility-blue-50",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3640,7 +3622,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-100",
+              "name": "component-utility-blue-100",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3651,7 +3633,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-200",
+              "name": "component-utility-blue-200",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3662,7 +3644,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-300",
+              "name": "component-utility-blue-300",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3673,7 +3655,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-400",
+              "name": "component-utility-blue-400",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3684,7 +3666,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-500",
+              "name": "component-utility-blue-500",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3695,7 +3677,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-600",
+              "name": "component-utility-blue-600",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3706,7 +3688,7 @@
               }
             },
             {
-              "name": "Component Colors/Utility/Blue/utility-blue-700",
+              "name": "component-utility-blue-700",
               "type": "color",
               "isAlias": false,
               "value": {
@@ -3808,7 +3790,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/0 (0px)"
+                "name": "spacing-0-0px"
               }
             },
             {
@@ -3817,7 +3799,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/0․5 (2px)"
+                "name": "spacing-0d5-2px"
               }
             },
             {
@@ -3826,7 +3808,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/1 (4px)"
+                "name": "spacing-1-4px"
               }
             },
             {
@@ -3835,7 +3817,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/1․5  (6px)"
+                "name": "spacing-1d5-6px"
               }
             },
             {
@@ -3844,7 +3826,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/2 (8px)"
+                "name": "spacing-2-8px"
               }
             },
             {
@@ -3853,7 +3835,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/3 (12px)"
+                "name": "spacing-3-12px"
               }
             },
             {
@@ -3862,7 +3844,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/4 (16px)"
+                "name": "spacing-4-16px"
               }
             },
             {
@@ -3871,7 +3853,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/5 (20px)"
+                "name": "spacing-5-20px"
               }
             },
             {
@@ -3880,7 +3862,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/6 (24px)"
+                "name": "spacing-6-24px"
               }
             },
             {
@@ -3889,7 +3871,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/8 (32px)"
+                "name": "spacing-8-32px"
               }
             },
             {
@@ -3898,7 +3880,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/10 (40px)"
+                "name": "spacing-10-40px"
               }
             },
             {
@@ -3907,7 +3889,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/12 (48px)"
+                "name": "spacing-12-48px"
               }
             },
             {
@@ -3916,7 +3898,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/16 (64px)"
+                "name": "spacing-16-64px"
               }
             },
             {
@@ -3925,7 +3907,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/20 (80px)"
+                "name": "spacing-20-80px"
               }
             },
             {
@@ -3934,7 +3916,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/24 (96px)"
+                "name": "spacing-24-96px"
               }
             },
             {
@@ -3943,7 +3925,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/32 (128px)"
+                "name": "spacing-32-128px"
               }
             },
             {
@@ -3952,7 +3934,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/40 (160px)"
+                "name": "spacing-40-160px"
               }
             }
           ]
@@ -3971,7 +3953,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/80 (320px)"
+                "name": "spacing-80-320px"
               }
             },
             {
@@ -3980,7 +3962,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/96 (384px)"
+                "name": "spacing-96-384px"
               }
             },
             {
@@ -3989,7 +3971,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/120 (480px)"
+                "name": "spacing-120-480px"
               }
             },
             {
@@ -3998,7 +3980,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/140 (560px)"
+                "name": "spacing-140-560px"
               }
             },
             {
@@ -4007,7 +3989,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/160 (640px)"
+                "name": "spacing-160-640px"
               }
             },
             {
@@ -4016,7 +3998,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/192 (768px)"
+                "name": "spacing-192-768px"
               }
             },
             {
@@ -4025,7 +4007,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/256 (1,024px)"
+                "name": "spacing-256-1024px"
               }
             },
             {
@@ -4034,7 +4016,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/320 (1,280px)"
+                "name": "spacing-320-1280px"
               }
             },
             {
@@ -4043,7 +4025,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/360 (1,440px)"
+                "name": "spacing-360-1440px"
               }
             },
             {
@@ -4052,7 +4034,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/400 (1,600px)"
+                "name": "spacing-400-1600px"
               }
             },
             {
@@ -4061,7 +4043,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/480 (1,920px)"
+                "name": "spacing-480-1920px"
               }
             },
             {
@@ -4070,7 +4052,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/48 (192px)"
+                "name": "spacing-48-192px"
               }
             },
             {
@@ -4079,7 +4061,7 @@
               "isAlias": true,
               "value": {
                 "collection": "_Primitives",
-                "name": "Spacing/180 (720px)"
+                "name": "spacing-180-720px"
               }
             }
           ]
@@ -4093,7 +4075,7 @@
           "name": "Style",
           "variables": [
             {
-              "name": "Display 2xl/Regular",
+              "name": "display-2xl/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4109,7 +4091,7 @@
               }
             },
             {
-              "name": "Display 2xl/Medium",
+              "name": "display-2xl/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4125,7 +4107,7 @@
               }
             },
             {
-              "name": "Display 2xl/Semibold",
+              "name": "display-2xl/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4141,7 +4123,7 @@
               }
             },
             {
-              "name": "Display 2xl/Bold",
+              "name": "display-2xl/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4157,7 +4139,7 @@
               }
             },
             {
-              "name": "Display xl/Regular",
+              "name": "display-xl/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4173,7 +4155,7 @@
               }
             },
             {
-              "name": "Display xl/Medium",
+              "name": "display-xl/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4189,7 +4171,7 @@
               }
             },
             {
-              "name": "Display xl/Semibold",
+              "name": "display-xl/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4205,7 +4187,7 @@
               }
             },
             {
-              "name": "Display xl/Bold",
+              "name": "display-xl/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4221,7 +4203,7 @@
               }
             },
             {
-              "name": "Display lg/Regular",
+              "name": "display-lg/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4237,7 +4219,7 @@
               }
             },
             {
-              "name": "Display lg/Medium",
+              "name": "display-lg/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4253,7 +4235,7 @@
               }
             },
             {
-              "name": "Display lg/Semibold",
+              "name": "display-lg/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4269,7 +4251,7 @@
               }
             },
             {
-              "name": "Display lg/Bold",
+              "name": "display-lg/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4285,7 +4267,7 @@
               }
             },
             {
-              "name": "Display md/Regular",
+              "name": "display-md/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4301,7 +4283,7 @@
               }
             },
             {
-              "name": "Display md/Medium",
+              "name": "display-md/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4317,7 +4299,7 @@
               }
             },
             {
-              "name": "Display md/Semibold",
+              "name": "display-md/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4333,7 +4315,7 @@
               }
             },
             {
-              "name": "Display md/Bold",
+              "name": "display-md/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4349,7 +4331,7 @@
               }
             },
             {
-              "name": "Display sm/Regular",
+              "name": "display-sm/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4365,7 +4347,7 @@
               }
             },
             {
-              "name": "Display sm/Medium",
+              "name": "display-sm/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4381,7 +4363,7 @@
               }
             },
             {
-              "name": "Display sm/Semibold",
+              "name": "display-sm/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4397,7 +4379,7 @@
               }
             },
             {
-              "name": "Display sm/Bold",
+              "name": "display-sm/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4413,7 +4395,7 @@
               }
             },
             {
-              "name": "Display xs/Regular",
+              "name": "display-xs/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4429,7 +4411,7 @@
               }
             },
             {
-              "name": "Display xs/Medium",
+              "name": "display-xs/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4445,7 +4427,7 @@
               }
             },
             {
-              "name": "Display xs/Semibold",
+              "name": "display-xs/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4461,7 +4443,7 @@
               }
             },
             {
-              "name": "Display xs/Bold",
+              "name": "display-xs/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4477,7 +4459,7 @@
               }
             },
             {
-              "name": "Text xl/Medium",
+              "name": "text-xl/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4493,7 +4475,7 @@
               }
             },
             {
-              "name": "Text xl/Semibold",
+              "name": "text-xl/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4509,7 +4491,7 @@
               }
             },
             {
-              "name": "Text xl/Bold",
+              "name": "text-xl/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4525,7 +4507,7 @@
               }
             },
             {
-              "name": "Text lg/Regular",
+              "name": "text-lg/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4541,7 +4523,7 @@
               }
             },
             {
-              "name": "Text lg/Medium",
+              "name": "text-lg/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4557,7 +4539,7 @@
               }
             },
             {
-              "name": "Text lg/Semibold",
+              "name": "text-lg/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4573,7 +4555,7 @@
               }
             },
             {
-              "name": "Text lg/Bold",
+              "name": "text-lg/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4589,7 +4571,7 @@
               }
             },
             {
-              "name": "Text md/Regular",
+              "name": "text-md/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4605,7 +4587,7 @@
               }
             },
             {
-              "name": "Text md/Medium",
+              "name": "text-md/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4621,7 +4603,7 @@
               }
             },
             {
-              "name": "Text md/Semibold",
+              "name": "text-md/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4637,7 +4619,7 @@
               }
             },
             {
-              "name": "Text md/Bold",
+              "name": "text-md/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4653,7 +4635,7 @@
               }
             },
             {
-              "name": "Text sm/Regular",
+              "name": "text-sm/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4669,7 +4651,7 @@
               }
             },
             {
-              "name": "Text sm/Medium",
+              "name": "text-sm/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4685,7 +4667,7 @@
               }
             },
             {
-              "name": "Text sm/Semibold",
+              "name": "text-sm/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4701,7 +4683,7 @@
               }
             },
             {
-              "name": "Text sm/Bold",
+              "name": "text-sm/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4717,7 +4699,7 @@
               }
             },
             {
-              "name": "Text sm/Bold",
+              "name": "text-sm/bold2",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4733,7 +4715,7 @@
               }
             },
             {
-              "name": "Text xs/Regular",
+              "name": "text-xs/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4749,7 +4731,7 @@
               }
             },
             {
-              "name": "Text xs/Medium",
+              "name": "text-xs/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4765,7 +4747,7 @@
               }
             },
             {
-              "name": "Text xs/Semibold",
+              "name": "text-xs/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4781,7 +4763,7 @@
               }
             },
             {
-              "name": "Text xxs/Regular",
+              "name": "text-xxs/regular",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4797,7 +4779,7 @@
               }
             },
             {
-              "name": "Text xxs/Medium",
+              "name": "text-xxs/medium",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4813,7 +4795,7 @@
               }
             },
             {
-              "name": "Text xxs/Semibold",
+              "name": "text-xxs/semibold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4829,7 +4811,7 @@
               }
             },
             {
-              "name": "Text xxs/Bold",
+              "name": "text-xxs/bold",
               "type": "typography",
               "isAlias": false,
               "value": {
@@ -4855,7 +4837,7 @@
           "name": "Style",
           "variables": [
             {
-              "name": "Focus rings/ring-brand-shadow-xs",
+              "name": "focus-rings/ring-brand-shadow-xs",
               "type": "effect",
               "isAlias": false,
               "value": {
@@ -4894,7 +4876,7 @@
               }
             },
             {
-              "name": "Focus rings/ring-band",
+              "name": "focus-rings/ring-band",
               "type": "effect",
               "isAlias": false,
               "value": {
@@ -4918,7 +4900,7 @@
               }
             },
             {
-              "name": "Shadows/shadow-xs",
+              "name": "shadows/shadow-xs",
               "type": "effect",
               "isAlias": false,
               "value": {
