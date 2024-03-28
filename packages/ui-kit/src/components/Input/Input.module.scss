@@ -1,6 +1,6 @@
 @use '../../themes/typography';
 
-.rootButton {
+.rootInput {
   @extend .typographySmall;
 
   padding: var(--propel-space-sm) var(--propel-space-md);
@@ -11,11 +11,27 @@
   border-color: var(--propel-border-primary);
   border-style: solid;
   color: var(--propel-text-secondary);
-  cursor: pointer;
+  cursor: text;
   white-space: nowrap;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: fit-content;
+
+  & input {
+    @extend .typographySmall;
+
+    border: none;
+    padding: 0;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+    &:disabled {
+      background-color: transparent;
+    }
+  }
 
   &:hover {
     color: var(--propel-text-primary);
@@ -27,6 +43,10 @@
     box-shadow: 0 0 0 3px #c7def7;
   }
 
+  &.error {
+    border-color: var(--propel-error-primary);
+  }
+
   &.disabled {
     color: var(--propel-color-secondary);
     &:hover {
@@ -34,23 +54,9 @@
       border-color: var(--propel-border-primary);
       cursor: default;
     }
-    & svg {
-      color: var(--propel-color-secondary);
-    }
   }
+}
 
-  &.startAdornment {
-    justify-content: flex-start;
-  }
-
-  &.endAdornment,
-  &.startAdornment.endAdornment {
-    justify-content: space-between;
-  }
-
-  &.primary {
-    background-color: var(--propel-accent-hover);
-    border-color: var(--propel-accent);
-    color: #ffffff;
-  }
+.small {
+  padding: var(--propel-space-xs) var(--propel-space-md);
 }
