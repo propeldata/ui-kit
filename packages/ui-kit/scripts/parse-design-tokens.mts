@@ -3,7 +3,6 @@ import path from 'path'
 import slugify from 'slugify'
 import ora from 'ora'
 
-const __dirname = path.resolve()
 const GENERATED_WARNING =
   'This file is generated automatically by scripts/parse-design-tokens.js. Do not edit manually.'
 
