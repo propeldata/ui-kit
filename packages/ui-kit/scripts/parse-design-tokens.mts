@@ -109,8 +109,16 @@ const generateTypographyValue = (key: string, type: 'number' | 'string', value: 
 // Write design token content to file
 const writeToFileSync = (fileName: string, content: string): void => {
   // const fullPath = path.join('./src/themes/generated/', fileName)
-  const fullPath = `./src/themes/generated/${fileName}`
-  console.log('=====', fullPath)
+  const fullPath = path.join('./src/themes/generated/', fileName)
+  const dirName = path.dirname(fullPath)
+
+  console.log('=====', { fullPath, dirName })
+
+  // Check if the directory exists; if not, create it
+  if (!fs.existsSync(dirName)) {
+    fs.mkdirSync(dirName, { recursive: true })
+  }
+  // const fullPath = `./src/themes/generated/${fileName}`
 
   fs.writeFileSync(fullPath, content)
 }
@@ -244,13 +252,13 @@ const main = async () => {
     const darkTheme = getThemeTokens({ name: 'dark', themes, variables, tokens })
 
     // Check if the generated directory exists, if not create it
-    const dirPath = path.join(__dirname, '../src/themes/generated')
+    // const dirPath = path.join(__dirname, '../src/themes/generated')
 
-    console.log('----------', dirPath)
+    // console.log('----------', dirPath)
 
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true })
-    }
+    // if (!fs.existsSync(dirPath)) {
+    //   fs.mkdirSync(dirPath, { recursive: true })
+    // }
 
     // Generate _variables.scss
     writeToFileSync(
