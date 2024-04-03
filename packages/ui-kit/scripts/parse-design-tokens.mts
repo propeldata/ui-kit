@@ -109,7 +109,7 @@ const generateTypographyValue = (key: string, type: 'number' | 'string', value: 
 // Write design token content to file
 const writeToFileSync = (fileName: string, content: string): void => {
   // const fullPath = path.join('./src/themes/generated/', fileName)
-  const fullPath = path.join(__dirname, './src/themes/generated/', fileName)
+  const fullPath = `./src/themes/generated/${fileName}`
   console.log('=====', fullPath)
 
   fs.writeFileSync(fullPath, content)
