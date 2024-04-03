@@ -110,7 +110,7 @@ const writeToFileSync = (fileName: string, content: string): void => {
   const fullPath = path.join('./src/themes/generated/', fileName)
   const dirName = path.dirname(fullPath)
 
-  // Check if the directory exists; if not, create it
+  // Check if the directory exists. If not, create it
   if (!fs.existsSync(dirName)) {
     fs.mkdirSync(dirName, { recursive: true })
   }
