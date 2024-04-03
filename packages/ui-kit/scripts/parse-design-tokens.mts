@@ -242,6 +242,9 @@ const main = async () => {
 
     // Check if the generated directory exists, if not create it
     const dirPath = path.join(__dirname, '../src/themes/generated')
+
+    console.log('----------', dirPath)
+
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true })
     }
