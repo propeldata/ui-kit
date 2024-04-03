@@ -7,14 +7,14 @@
   "module": "dist/esm/index.module.js",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "rm -rf dist && yarn graphql:build && yarn parse-design-tokens && yarn validate-design-tokens && yarn typecheck && rollup -c",
+    "build": "rm -rf dist && yarn graphql:build && yarn design-tokens:sync && yarn typecheck && rollup -c",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "yarn graphql:build && jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json",
-    "parse-design-tokens": "node ./scripts/parse-design-tokens.js",
-    "validate-design-tokens": "yarn build-css && node ./scripts/validate-design-tokens.js",
-    "build-css": "sass src:src/generated"
+    "design-tokens:sync": "rm -rf ./scripts/dist && rm -rf ./packages/ui-kit/src/themes/generated && tsc -p ./scripts/tsconfig.json && yarn design-tokens:parse && yarn design-tokens:validate",
+    "design-tokens:parse": "node ./scripts/dist/parse-design-tokens.mjs",
+    "design-tokens:validate": "node ./scripts/dist/validate-design-tokens.mjs"
   },
   "publishConfig": {
     "access": "public",
@@ -53,6 +53,8 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^27.5.1",
     "@types/luxon": "^3.3.2",
+    "@types/node": "^20.12.3",
+    "@types/ora": "^3.2.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/testing-library__jest-dom": "^5.14.7",
@@ -63,6 +65,7 @@
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^27.5.1",
     "msw": "^1.3.2",
+    "ora": "^8.0.1",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-docgen-typescript": "^2.2.2",
@@ -72,6 +75,7 @@
     "rollup-plugin-typescript2": "^0.36.0",
     "sass": "^1.69.5",
     "slugify": "^1.6.6",
+    "ts-node": "^10.9.2",
     "typescript": "^4.9.3"
   },
   "peerDependencies": {

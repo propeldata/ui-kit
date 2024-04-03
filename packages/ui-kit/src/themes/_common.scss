@@ -1,3 +1,5 @@
+// @deprecated - all tokens in this file are deprecated in favor of the generated tokens and should be removed in the future
+
 @use './generated/tokens';
 
 .commonTokens {
@@ -33,19 +35,12 @@
   --propel-error-secondary: #fecdca;
 
   /* Spacing */
-  /* @deprecated This prop is deprecated, use `--propel-spacing-xxs` instead. */
   --propel-space-xxs: 4px;
-  /* @deprecated This prop is deprecated, use `--propel-spacing-xs` instead. */
   --propel-space-xs: 8px;
-  /* @deprecated This prop is deprecated, use `--propel-spacing-sm` instead. */
   --propel-space-sm: 10px;
-  /* @deprecated This prop is deprecated, use `--propel-spacing-md` instead. */
   --propel-space-md: 16px;
-  /* @deprecated This prop is deprecated, use `--propel-spacing-lg` instead. */
   --propel-space-lg: 24px;
-  /* @deprecated This prop is deprecated, use `--propel-spacing-xl` instead. */
   --propel-space-xl: 32px;
-  /* @deprecated This prop is deprecated, use `--propel-spacing-xxl` instead. */
   --propel-space-xxl: 40px;
 
   /* Border radius */

@@ -26,6 +26,12 @@ module.exports = {
     }
   ],
   external: externalPackages,
+  onwarn: (warning, warn) => {
+    if (warning.message.includes('Module level directives cause errors when bundled, "use client" in')) {
+      return
+    }
+    warn(warning)
+  },
   plugins: [
     nodeResolve(),
     commonjs(),

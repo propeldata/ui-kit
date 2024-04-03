@@ -8609,6 +8609,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
             ["@types/luxon", "npm:3.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.4.2.tgz"],\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["@types/ora", "npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"],\
             ["@types/react", "npm:18.2.60::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.60.tgz"],\
             ["@types/react-dom", "npm:18.2.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.19.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8623,6 +8625,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.4.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"],\
             ["raw-loader", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fraw-loader%2F-%2Fraw-loader-4.0.2.tgz"],\
             ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
@@ -8632,6 +8635,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-typescript2", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.36.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-typescript2%2F-%2Frollup-plugin-typescript2-0.36.0.tgz"],\
             ["sass", "npm:1.71.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass%2F-%2Fsass-1.71.1.tgz"],\
             ["slugify", "npm:1.6.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fslugify%2F-%2Fslugify-1.6.6.tgz"],\
+            ["ts-node", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
@@ -8670,6 +8674,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
             ["@types/luxon", "npm:3.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.4.2.tgz"],\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["@types/ora", "npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"],\
             ["@types/react", "npm:18.2.60::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.60.tgz"],\
             ["@types/react-dom", "npm:18.2.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.19.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8684,6 +8690,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.4.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"],\
             ["raw-loader", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fraw-loader%2F-%2Fraw-loader-4.0.2.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
@@ -8693,6 +8700,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-typescript2", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.36.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-typescript2%2F-%2Frollup-plugin-typescript2-0.36.0.tgz"],\
             ["sass", "npm:1.71.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass%2F-%2Fsass-1.71.1.tgz"],\
             ["slugify", "npm:1.6.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fslugify%2F-%2Fslugify-1.6.6.tgz"],\
+            ["ts-node", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
@@ -8731,6 +8739,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
             ["@types/luxon", "npm:3.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.4.2.tgz"],\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["@types/ora", "npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"],\
             ["@types/react", "npm:18.2.60::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.60.tgz"],\
             ["@types/react-dom", "npm:18.2.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.19.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8745,6 +8755,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.4.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"],\
             ["raw-loader", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fraw-loader%2F-%2Fraw-loader-4.0.2.tgz"],\
             ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
@@ -8754,6 +8765,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-typescript2", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.36.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-typescript2%2F-%2Frollup-plugin-typescript2-0.36.0.tgz"],\
             ["sass", "npm:1.71.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass%2F-%2Fsass-1.71.1.tgz"],\
             ["slugify", "npm:1.6.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fslugify%2F-%2Fslugify-1.6.6.tgz"],\
+            ["ts-node", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
@@ -8790,6 +8802,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/graphql", null],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
             ["@types/luxon", "npm:3.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.4.2.tgz"],\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["@types/ora", "npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"],\
             ["@types/react", "npm:18.2.60::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.60.tgz"],\
             ["@types/react-dom", "npm:18.2.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.19.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8804,6 +8818,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.4.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"],\
             ["raw-loader", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fraw-loader%2F-%2Fraw-loader-4.0.2.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
@@ -8813,6 +8828,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-typescript2", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.36.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-typescript2%2F-%2Frollup-plugin-typescript2-0.36.0.tgz"],\
             ["sass", "npm:1.71.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass%2F-%2Fsass-1.71.1.tgz"],\
             ["slugify", "npm:1.6.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fslugify%2F-%2Fslugify-1.6.6.tgz"],\
+            ["ts-node", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "packagePeers": [\
@@ -8848,6 +8864,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:14.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40testing-library%2Fuser-event%2F-%2Fuser-event-14.5.2.tgz"],\
             ["@types/jest", "npm:27.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fjest%2F-%2Fjest-27.5.2.tgz"],\
             ["@types/luxon", "npm:3.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fluxon%2F-%2Fluxon-3.4.2.tgz"],\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["@types/ora", "npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"],\
             ["@types/react", "npm:18.2.60::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact%2F-%2Freact-18.2.60.tgz"],\
             ["@types/react-dom", "npm:18.2.19::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Freact-dom%2F-%2Freact-dom-18.2.19.tgz"],\
             ["@types/testing-library__jest-dom", "npm:5.14.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Ftesting-library__jest-dom%2F-%2Ftesting-library__jest-dom-5.14.9.tgz"],\
@@ -8862,6 +8880,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-environment-jsdom", "npm:27.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fjest-environment-jsdom%2F-%2Fjest-environment-jsdom-27.5.1.tgz"],\
             ["luxon", "npm:3.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fluxon%2F-%2Fluxon-3.4.4.tgz"],\
             ["msw", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmsw%2F-%2Fmsw-1.3.2.tgz"],\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"],\
             ["raw-loader", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fraw-loader%2F-%2Fraw-loader-4.0.2.tgz"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\
             ["react-docgen-typescript", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-docgen-typescript%2F-%2Freact-docgen-typescript-2.2.2.tgz"],\
@@ -8871,6 +8890,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["rollup-plugin-typescript2", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.36.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-typescript2%2F-%2Frollup-plugin-typescript2-0.36.0.tgz"],\
             ["sass", "npm:1.71.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsass%2F-%2Fsass-1.71.1.tgz"],\
             ["slugify", "npm:1.6.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fslugify%2F-%2Fslugify-1.6.6.tgz"],\
+            ["ts-node", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "linkType": "SOFT"\
@@ -15102,6 +15122,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["undici-types", "npm:5.26.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-20.12.3-ffb076b5dd-982544a014.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["undici-types", "npm:5.26.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fundici-types%2F-%2Fundici-types-5.26.5.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/node-fetch", [\
@@ -15130,6 +15158,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-normalize-package-data-npm-2.4.4-78224f2f95-65dff72b54.zip/node_modules/@types/normalize-package-data/",\
           "packageDependencies": [\
             ["@types/normalize-package-data", "npm:2.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnormalize-package-data%2F-%2Fnormalize-package-data-2.4.4.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/ora", [\
+        ["npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz", {\
+          "packageLocation": "./.yarn/cache/@types-ora-npm-3.2.0-7fca93bd88-dba266e595.zip/node_modules/@types/ora/",\
+          "packageDependencies": [\
+            ["@types/ora", "npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"],\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -20675,6 +20713,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["emoji-regex", [\
+        ["npm:10.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femoji-regex%2F-%2Femoji-regex-10.3.0.tgz", {\
+          "packageLocation": "./.yarn/cache/emoji-regex-npm-10.3.0-922cc9e5ef-5da48edfeb.zip/node_modules/emoji-regex/",\
+          "packageDependencies": [\
+            ["emoji-regex", "npm:10.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femoji-regex%2F-%2Femoji-regex-10.3.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:8.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femoji-regex%2F-%2Femoji-regex-8.0.0.tgz", {\
           "packageLocation": "./.yarn/cache/emoji-regex-npm-8.0.0-04877beef2-d4c5c39d5a.zip/node_modules/emoji-regex/",\
           "packageDependencies": [\
@@ -23055,6 +23100,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["get-east-asian-width", [\
+        ["npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fget-east-asian-width%2F-%2Fget-east-asian-width-1.2.0.tgz", {\
+          "packageLocation": "./.yarn/cache/get-east-asian-width-npm-1.2.0-fec8370d4a-ea55f4d4a4.zip/node_modules/get-east-asian-width/",\
+          "packageDependencies": [\
+            ["get-east-asian-width", "npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fget-east-asian-width%2F-%2Fget-east-asian-width-1.2.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["get-intrinsic", [\
         ["npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fget-intrinsic%2F-%2Fget-intrinsic-1.2.4.tgz", {\
           "packageLocation": "./.yarn/cache/get-intrinsic-npm-1.2.4-c565f03c1c-414e3cdf2c.zip/node_modules/get-intrinsic/",\
@@ -24573,6 +24627,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-interactive", "npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-interactive%2F-%2Fis-interactive-1.0.0.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-interactive%2F-%2Fis-interactive-2.0.0.tgz", {\
+          "packageLocation": "./.yarn/cache/is-interactive-npm-2.0.0-4ac4328a6a-e8d52ad490.zip/node_modules/is-interactive/",\
+          "packageDependencies": [\
+            ["is-interactive", "npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-interactive%2F-%2Fis-interactive-2.0.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["is-lambda", [\
@@ -24877,6 +24938,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/is-unicode-supported-npm-0.1.0-dc2618649f-a2aab86ee7.zip/node_modules/is-unicode-supported/",\
           "packageDependencies": [\
             ["is-unicode-supported", "npm:0.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-0.1.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-1.3.0.tgz", {\
+          "packageLocation": "./.yarn/cache/is-unicode-supported-npm-1.3.0-c781e440b5-20a1fc161a.zip/node_modules/is-unicode-supported/",\
+          "packageDependencies": [\
+            ["is-unicode-supported", "npm:1.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-1.3.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-2.0.0.tgz", {\
+          "packageLocation": "./.yarn/cache/is-unicode-supported-npm-2.0.0-da1e66e950-000b80639d.zip/node_modules/is-unicode-supported/",\
+          "packageDependencies": [\
+            ["is-unicode-supported", "npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-2.0.0.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -27009,6 +27084,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-unicode-supported", "npm:0.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-0.1.0.tgz"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flog-symbols%2F-%2Flog-symbols-6.0.0.tgz", {\
+          "packageLocation": "./.yarn/cache/log-symbols-npm-6.0.0-5cf9cf6256-510cdda367.zip/node_modules/log-symbols/",\
+          "packageDependencies": [\
+            ["log-symbols", "npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flog-symbols%2F-%2Flog-symbols-6.0.0.tgz"],\
+            ["chalk", "npm:5.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchalk%2F-%2Fchalk-5.3.0.tgz"],\
+            ["is-unicode-supported", "npm:1.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-1.3.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["log-update", [\
@@ -28499,6 +28583,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["log-symbols", "npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flog-symbols%2F-%2Flog-symbols-4.1.0.tgz"],\
             ["strip-ansi", "npm:6.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrip-ansi%2F-%2Fstrip-ansi-6.0.1.tgz"],\
             ["wcwidth", "npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fwcwidth%2F-%2Fwcwidth-1.0.1.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz", {\
+          "packageLocation": "./.yarn/cache/ora-npm-8.0.1-31be9b64ee-894061df20.zip/node_modules/ora/",\
+          "packageDependencies": [\
+            ["ora", "npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"],\
+            ["chalk", "npm:5.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchalk%2F-%2Fchalk-5.3.0.tgz"],\
+            ["cli-cursor", "npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcli-cursor%2F-%2Fcli-cursor-4.0.0.tgz"],\
+            ["cli-spinners", "npm:2.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcli-spinners%2F-%2Fcli-spinners-2.9.2.tgz"],\
+            ["is-interactive", "npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-interactive%2F-%2Fis-interactive-2.0.0.tgz"],\
+            ["is-unicode-supported", "npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-2.0.0.tgz"],\
+            ["log-symbols", "npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flog-symbols%2F-%2Flog-symbols-6.0.0.tgz"],\
+            ["stdin-discarder", "npm:0.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstdin-discarder%2F-%2Fstdin-discarder-0.2.2.tgz"],\
+            ["string-width", "npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring-width%2F-%2Fstring-width-7.1.0.tgz"],\
+            ["strip-ansi", "npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrip-ansi%2F-%2Fstrip-ansi-7.1.0.tgz"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -35508,6 +35608,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["stdin-discarder", [\
+        ["npm:0.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstdin-discarder%2F-%2Fstdin-discarder-0.2.2.tgz", {\
+          "packageLocation": "./.yarn/cache/stdin-discarder-npm-0.2.2-e847c02109-642ffd05bd.zip/node_modules/stdin-discarder/",\
+          "packageDependencies": [\
+            ["stdin-discarder", "npm:0.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstdin-discarder%2F-%2Fstdin-discarder-0.2.2.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["stop-iteration-iterator", [\
         ["npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstop-iteration-iterator%2F-%2Fstop-iteration-iterator-1.0.0.tgz", {\
           "packageLocation": "./.yarn/cache/stop-iteration-iterator-npm-1.0.0-68a47799cc-d04173690b.zip/node_modules/stop-iteration-iterator/",\
@@ -35681,6 +35790,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["string-width", "npm:5.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring-width%2F-%2Fstring-width-5.1.2.tgz"],\
             ["eastasianwidth", "npm:0.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Feastasianwidth%2F-%2Feastasianwidth-0.2.0.tgz"],\
             ["emoji-regex", "npm:9.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femoji-regex%2F-%2Femoji-regex-9.2.2.tgz"],\
+            ["strip-ansi", "npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrip-ansi%2F-%2Fstrip-ansi-7.1.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring-width%2F-%2Fstring-width-7.1.0.tgz", {\
+          "packageLocation": "./.yarn/cache/string-width-npm-7.1.0-1070ad92ba-a183573fe7.zip/node_modules/string-width/",\
+          "packageDependencies": [\
+            ["string-width", "npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring-width%2F-%2Fstring-width-7.1.0.tgz"],\
+            ["emoji-regex", "npm:10.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femoji-regex%2F-%2Femoji-regex-10.3.0.tgz"],\
+            ["get-east-asian-width", "npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fget-east-asian-width%2F-%2Fget-east-asian-width-1.2.0.tgz"],\
             ["strip-ansi", "npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrip-ansi%2F-%2Fstrip-ansi-7.1.0.tgz"]\
           ],\
           "linkType": "HARD"\
@@ -36681,6 +36800,49 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ts-node", "npm:10.9.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.1.tgz"]\
           ],\
           "linkType": "SOFT"\
+        }],\
+        ["npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz", {\
+          "packageLocation": "./.yarn/cache/ts-node-npm-10.9.2-7f3b61d60d-fde256c907.zip/node_modules/ts-node/",\
+          "packageDependencies": [\
+            ["ts-node", "npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz", {\
+          "packageLocation": "./.yarn/__virtual__/ts-node-virtual-3019298e1a/0/cache/ts-node-npm-10.9.2-7f3b61d60d-fde256c907.zip/node_modules/ts-node/",\
+          "packageDependencies": [\
+            ["ts-node", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"],\
+            ["@cspotcode/source-map-support", "npm:0.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40cspotcode%2Fsource-map-support%2F-%2Fsource-map-support-0.8.1.tgz"],\
+            ["@swc/core", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:1.4.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40swc%2Fcore%2F-%2Fcore-1.4.2.tgz"],\
+            ["@swc/wasm", null],\
+            ["@tsconfig/node10", "npm:1.0.9::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode10%2F-%2Fnode10-1.0.9.tgz"],\
+            ["@tsconfig/node12", "npm:1.0.11::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode12%2F-%2Fnode12-1.0.11.tgz"],\
+            ["@tsconfig/node14", "npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode14%2F-%2Fnode14-1.0.3.tgz"],\
+            ["@tsconfig/node16", "npm:1.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tsconfig%2Fnode16%2F-%2Fnode16-1.0.4.tgz"],\
+            ["@types/node", "npm:20.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.3.tgz"],\
+            ["@types/swc__core", null],\
+            ["@types/swc__wasm", null],\
+            ["@types/typescript", null],\
+            ["acorn", "npm:8.11.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Facorn%2F-%2Facorn-8.11.3.tgz"],\
+            ["acorn-walk", "npm:8.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Facorn-walk%2F-%2Facorn-walk-8.3.2.tgz"],\
+            ["arg", "npm:4.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Farg%2F-%2Farg-4.1.3.tgz"],\
+            ["create-require", "npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcreate-require%2F-%2Fcreate-require-1.1.1.tgz"],\
+            ["diff", "npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdiff%2F-%2Fdiff-4.0.2.tgz"],\
+            ["make-error", "npm:1.3.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fmake-error%2F-%2Fmake-error-1.3.6.tgz"],\
+            ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"],\
+            ["v8-compile-cache-lib", "npm:3.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fv8-compile-cache-lib%2F-%2Fv8-compile-cache-lib-3.0.1.tgz"],\
+            ["yn", "npm:3.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fyn%2F-%2Fyn-3.1.1.tgz"]\
+          ],\
+          "packagePeers": [\
+            "@swc/core",\
+            "@swc/wasm",\
+            "@types/node",\
+            "@types/swc__core",\
+            "@types/swc__wasm",\
+            "@types/typescript",\
+            "typescript"\
+          ],\
+          "linkType": "HARD"\
         }],\
         ["virtual:e49423d52f4bda37dbf4c98c8edcd4c1cf1f36cf9f542548762d19adc2f9e9a4a6f88a436d7351080114b7bc8936ccdd8dc4d27d829ec8b49b1892ad3328c006#npm:10.9.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.1.tgz", {\
           "packageLocation": "./.yarn/__virtual__/ts-node-virtual-141aaace52/0/cache/ts-node-npm-10.9.1-c0f0a0dcb7-090adff130.zip/node_modules/ts-node/",\
