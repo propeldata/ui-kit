@@ -99,7 +99,7 @@ export const getCustomChartLabelsPlugin = ({
       ctx.save()
       ctx.textAlign = 'left'
       ctx.textBaseline = 'middle'
-      ctx.font = `${theme?.tinyFontWeight} ${theme?.tinyFontSize} ${theme?.tinyFontFamily}`
+      ctx.font = `${theme?.textXxsRegularFontWeight} ${theme?.textXxsRegularFontSize} ${theme?.textXxsRegularFontFamily}`
       ctx.fillStyle = theme?.textPrimary ?? '#ffffff'
 
       const datasetIndex = args.index
@@ -140,10 +140,10 @@ export const getCustomChartLabelsPlugin = ({
 
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
-        ctx.font = `12px ${theme?.tinyFontFamily}`
+        ctx.font = `12px ${theme?.textXxsRegularFontFamily}`
         ctx.fillText('Total', xCoor, yCoor - 12)
 
-        ctx.font = `700 24px ${theme?.tinyFontFamily}`
+        ctx.font = `700 24px ${theme?.textXxsRegularFontFamily}`
         ctx.fillText(totalValue, xCoor, yCoor + 12)
       }
     }

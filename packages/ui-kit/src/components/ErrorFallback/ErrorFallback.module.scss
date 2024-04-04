@@ -1,7 +1,7 @@
-@use '../../themes/typography';
+@use '../../themes/common';
 
 .rootErrorFallback {
-  @extend .typographyRegular;
+  @extend .textMdRegular;
   max-width: 263px;
   height: var(--propel-component-height);
   margin: auto;

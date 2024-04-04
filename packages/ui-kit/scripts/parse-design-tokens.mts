@@ -76,9 +76,10 @@ const parseValue = (variable: VariableProps): string => {
       return `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`
     case 'number':
       return `${value}px`
-    case 'effect':
+    case 'effect': {
       const { offset, radius, spread, color } = value.effects[0]
       return `${offset.x}px ${offset.y}px ${radius}px ${spread}px rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+    }
     default:
       return value.toString()
   }
@@ -119,17 +120,12 @@ const writeToFileSync = (fileName: string, content: string): void => {
 }
 
 // Read Figma variables from JSON file
-const getJSONFromFile = async (): Promise<VariablesJSONProps> =>
-  new Promise(async (resolve, reject) => {
-    try {
-      const data = await fsPromises.readFile('./src/themes/variables.json', 'utf-8')
-      const variablesJSON: VariablesJSONProps = JSON.parse(data)
+const getJSONFromFile = async (): Promise<VariablesJSONProps> => {
+  const data = await fsPromises.readFile('./src/themes/variables.json', 'utf-8')
+  const variablesJSON: VariablesJSONProps = JSON.parse(data)
 
-      resolve(variablesJSON)
-    } catch (error) {
-      reject()
-    }
-  })
+  return variablesJSON
+}
 
 // Get theme tokens
 
@@ -170,7 +166,7 @@ const main = async () => {
 
     // Parse variables
     variablesJSON.collections
-      .filter(({ name }) => ['_Primitives', '2. Radius', 'Effects'].includes(name))
+      .filter(({ name }) => ['_Primitives'].includes(name))
       .forEach((collection) => {
         collection.modes[0].variables.forEach((variable) => {
           variables.push(generateTokenValue(slugifyStr(variable.name), variable, variables))
@@ -179,7 +175,7 @@ const main = async () => {
 
     // Parse tokens
     variablesJSON.collections
-      .filter(({ name }) => ['3. Spacing', '4. Widths'].includes(name))
+      .filter(({ name }) => ['2. Radius', '3. Spacing', '4. Widths', 'Effects'].includes(name))
       .forEach((collection) => {
         collection.modes[0].variables.forEach((variable) => {
           tokens.push(generateTokenValue(slugifyStr(variable.name), variable, variables))
@@ -249,80 +245,91 @@ const main = async () => {
     // Generate _variables.scss
     writeToFileSync(
       '_variables.scss',
-      `// ${GENERATED_WARNING}\n
-.variables {
-${variables.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n')}
-}\n`
+      [
+        `// ${GENERATED_WARNING}\n`,
+        '.variables {',
+        variables.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n'),
+        '}'
+      ].join('\n')
     )
 
     // Generate _tokens.scss
     writeToFileSync(
       '_tokens.scss',
-      `// ${GENERATED_WARNING}\n
-@use './variables';\n
-.tokens {
-  @extend .variables;
-
-${tokens.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n')}
-}\n
-${typographyClasses
-  .map(
-    (typographyClass) => `.${typographyClass.className} {
-${typographyClass.props.map(({ prop, value }) => `  ${prop}: ${value};`).join('\n')}
-}\n`
-  )
-  .join('\n')}
-`
+      [
+        `// ${GENERATED_WARNING}\n`,
+        "@use './variables';\n",
+        '.tokens {',
+        '  @extend .variables;\n',
+        tokens.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n'),
+        '}\n',
+        typographyClasses
+          .map((typographyClass) =>
+            [
+              `.${typographyClass.className} {`,
+              '  @extend .variables;\n',
+              typographyClass.props.map(({ prop, value }) => `  ${prop}: ${value};`).join('\n'),
+              '}\n'
+            ].join('\n')
+          )
+          .join('\n')
+      ].join('\n')
     )
 
-    // Generate _lightTheme.scss
-    writeToFileSync(
-      '_lightTheme.scss',
-      `// ${GENERATED_WARNING}\n
-@use './tokens';
-
-.lightTheme {
-  @extend .tokens;
-
-${lightTheme?.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n')}
-}\n`
-    )
-
-    // Generate _darkTheme.scss
-    writeToFileSync(
-      '_darkTheme.scss',
-      `// ${GENERATED_WARNING}\n
-@use './tokens';
-
-.darkTheme {
-  @extend .tokens;
-
-${darkTheme?.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n')}
-}\n`
-    )
+    // Generate _lightTheme.scss and _darkTheme.scss
+    const themesList = [
+      { name: 'lightTheme', theme: lightTheme },
+      { name: 'darkTheme', theme: darkTheme }
+    ]
+    themesList.forEach(({ name, theme }) => {
+      writeToFileSync(
+        `_${name}.scss`,
+        [
+          `// ${GENERATED_WARNING}\n`,
+          "@use './tokens';\n",
+          `.${name} {`,
+          '  @extend .tokens;\n',
+          theme?.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n'),
+          '}'
+        ].join('\n')
+      )
+    })
 
     // Generate theme.types.ts
     writeToFileSync(
       'theme.types.ts',
-      `// ${GENERATED_WARNING}\n
-export type ThemeTokenGeneratedProps = {
-${tokens.map(({ jsName, type }) => `  ${jsName}?: ${type};`).join('\n')}
-}
-
-export type ThemeCSSTokenGeneratedProps = {
-${lightTheme?.map(({ cssName, type }) => `  '${cssName}'?: ${type};`).join('\n')}
-}\n`
+      [
+        `// ${GENERATED_WARNING}\n`,
+        'export type ThemeTokenGeneratedProps = {',
+        tokens.map(({ jsName }) => `  ${jsName}?: string;`).join('\n'),
+        '}\n',
+        'export type ThemeCSSTokenGeneratedProps = {',
+        lightTheme?.map(({ cssName }) => `  '${cssName}'?: string;`).join('\n'),
+        '}'
+      ].join('\n')
     )
 
     // Generate themeTokens.ts
     writeToFileSync(
       'themeTokens.ts',
-      `// ${GENERATED_WARNING}\n
-import type { ThemeTokenGeneratedProps } from './theme.types'
+      [
+        `// ${GENERATED_WARNING}\n`,
+        "import type { ThemeTokenGeneratedProps } from './theme.types'\n",
+        'export const themeTokensGenerated: (keyof ThemeTokenGeneratedProps)[] = [',
+        tokens.map(({ jsName }) => `  '${jsName}',`).join('\n'),
+        ']'
+      ].join('\n')
+    )
 
-export const themeTokensGenerated: (keyof ThemeTokenGeneratedProps)[] = [
-${tokens.map(({ jsName }) => `  '${jsName}',`).join('\n')}
-]\n`
+    // Generate themeDict.ts
+    writeToFileSync(
+      'themeDict.ts',
+      [
+        `// ${GENERATED_WARNING}\n`,
+        'export const themeDict = [',
+        tokens.map(({ jsName, cssName }) => `  { name: '${jsName}', cssVarName: '${cssName}' },`).join('\n'),
+        ']'
+      ].join('\n')
     )
 
     spinner.succeed('Parse design variables and tokens')

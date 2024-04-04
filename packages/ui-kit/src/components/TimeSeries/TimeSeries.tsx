@@ -218,7 +218,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           maintainAspectRatio: false,
           plugins: customPlugins,
           layout: {
-            padding: parseInt(theme?.spaceXxs as string)
+            padding: parseInt(theme?.spacingXs ?? '') ?? 4
           },
           scales
         }

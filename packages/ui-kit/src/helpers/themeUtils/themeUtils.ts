@@ -17,13 +17,7 @@
  */
 
 import type { ThemeTokenProps } from '../../themes/theme.types'
-import { themeTokens } from '../../themes/themeTokens'
-import { camelCaseToKebabCase } from '../camelCaseToKebabCase'
-
-const themeDict = themeTokens.map((themeToken) => ({
-  name: themeToken,
-  cssVarName: `--propel-${camelCaseToKebabCase(themeToken)}`
-}))
+import { themeDict } from '../../themes/themeDict'
 
 /**
  * Parses the computed style of a given HTML element and extracts theme-related properties.
@@ -39,6 +33,7 @@ export const parseComputedStyle = (themeContainer: HTMLElement) => {
 
   themeDict.forEach((item) => {
     const cssVarValue = computedStyle.getPropertyValue(item.cssVarName)
+
     if (cssVarValue) {
       Object.assign(theme, { [item.name]: cssVarValue.replace(/"/g, '') })
     }
@@ -69,7 +64,7 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
  */
 export const setContainerStyle = (themeContainer: HTMLElement, theme: ThemeTokenProps) => {
   themeDict.forEach((item) => {
-    const themePropValue = theme[item.name]?.toString()
+    const themePropValue = theme[item.name as keyof ThemeTokenProps]?.toString()
     if (themePropValue) {
       themeContainer.style.setProperty(item.cssVarName, themePropValue)
     }

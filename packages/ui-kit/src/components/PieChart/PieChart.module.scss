@@ -1,8 +1,7 @@
-@use "../../themes/typography";
-@use "../../themes/common";
+@use '../../themes/common';
 
 .rootPieChart {
-  @extend .typographyTiny;
+  @extend .textXxsRegular;
   overflow: auto;
   padding: 0;
 
@@ -15,18 +14,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: var(--propel-space-sm);
-  font-family: var(--propel-font-family);
-  font-size: var(--propel-small-font-size);
+  margin-top: var(--propel-spacing-md);
+  font-family: var(--propel-text-md-regular-font-family);
+  font-size: var(--propel-text-xs-regular-font-size);
 
   span {
     margin: 0;
-    line-height: var(--propel-tiny-line-height);
+    line-height: var(--propel-text-xxs-regular-line-height);
     color: var(--propel-text-secondary);
   }
 
   span:first-child {
-    padding-right: var(--propel-space-xxs);
+    padding-right: var(--propel-spacing-xs);
   }
 
   span:last-child {
@@ -35,8 +34,8 @@
 }
 
 .pieChartList {
-  @extend .typographySmall;
-  margin-top: var(--propel-space-md);
+  @extend .textXsRegular;
+  margin-top: var(--propel-spacing-xl);
 
   ul {
     max-width: 18rem;
@@ -46,7 +45,7 @@
 
     li {
       display: flex;
-      padding: var(--propel-space-xxs) 0;
+      padding: var(--propel-spacing-xs) 0;
       justify-content: space-between;
 
       & > span {
@@ -56,11 +55,11 @@
 
       & > span:first-child {
         &:before {
-          content: "";
+          content: '';
           display: inline-block;
           width: 0.75rem;
           height: 0.75rem;
-          margin-right: var(--propel-space-xs);
+          margin-right: var(--propel-spacing-md);
           border-radius: 50%;
           background-color: var(--color-blue-800);
         }

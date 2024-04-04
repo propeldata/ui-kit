@@ -1,7 +1,8 @@
-@use '../../themes/typography';
+@use '../../themes/common';
 
 .rootCounter {
-  @extend .typographyHeading1;
+  @extend .displayLgBold;
+
   color: var(--propel-text-primary);
   white-space: nowrap;
   transition: opacity 0.2s ease-in-out;
@@ -13,5 +14,5 @@
 }
 
 .loader {
-  @extend .typographyHeading1;
+  @extend .displayLgBold;
 }

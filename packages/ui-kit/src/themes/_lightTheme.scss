@@ -2,7 +2,7 @@
 // @deprecated - all tokens in this file are deprecated in favor of the generated tokens and should be removed in the future
 
 @use './common';
-@use './generated/darkTheme';
+@use './generated/lightTheme';
 
 .lightTheme {
   @extend .commonTokens;

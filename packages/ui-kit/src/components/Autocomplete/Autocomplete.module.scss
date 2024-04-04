@@ -1,12 +1,12 @@
 .rootAutocomplete {
-  box-shadow: var(--propel-shadow-sm);
-  border-radius: var(--propel-border-radius-sm);
+  box-shadow: var(--propel-shadows-shadow-xs);
+  border-radius: var(--propel-radius-xs);
   color: var(--propel-text-primary);
   background-color: var(--propel-bg-primary);
   border: 1px solid var(--propel-border-primary);
   display: flex;
-  gap: var(--propel-space-xxs);
-  padding: var(--propel-space-xxs);
+  gap: var(--propel-spacing-xs);
+  padding: var(--propel-spacing-xs);
   overflow: hidden;
   transition: all 100ms;
   box-sizing: border-box;
@@ -26,7 +26,7 @@
   background: inherit;
   border: none;
   border-radius: inherit;
-  padding: var(--propel-space-xxs);
+  padding: var(--propel-spacing-xs);
   outline: 0;
   flex: 1 0 auto;
   width: 100%;
@@ -52,10 +52,10 @@
 
 .autocompleteList {
   box-sizing: border-box;
-  padding: var(--propel-space-xxs);
-  margin: var(--propel-space-xxs) 0;
+  padding: var(--propel-spacing-xs);
+  margin: var(--propel-spacing-xs) 0;
   width: 100%;
-  border-radius: var(--propel-border-radius-sm);
+  border-radius: var(--propel-radius-xs);
   overflow: auto;
   outline: 0px;
   max-height: 300px;
@@ -63,12 +63,12 @@
   background-color: var(--propel-bg-primary);
   border: 1px solid var(--propel-border-primary);
   color: var(--propel-text-primary);
-  box-shadow: var(--propel-shadow-sm);
+  box-shadow: var(--propel-shadows-shadow-xs);
 
   li {
     list-style: none;
-    padding: var(--propel-space-sm);
-    border-radius: var(--propel-border-radius-sm);
+    padding: var(--propel-spacing-xl);
+    border-radius: var(--propel-radius-xs);
     cursor: default;
 
     &:last-of-type {

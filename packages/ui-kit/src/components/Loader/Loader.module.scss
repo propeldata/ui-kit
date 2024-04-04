@@ -1,7 +1,7 @@
-@use '../../themes/typography';
+@use '../../themes/common';
 
 .rootLoader {
-  @extend .typographyRegular;
+  @extend .textMdRegular;
   overflow: auto;
   width: 100%;
   height: auto;
