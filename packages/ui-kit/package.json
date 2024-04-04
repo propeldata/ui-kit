@@ -10,7 +10,7 @@
     "build": "rm -rf dist && yarn graphql:build && yarn design-tokens:sync && yarn typecheck && rollup -c",
     "graphql:build": "rm -rf src/helpers/graphql/generated && yarn graphql:gen",
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
-    "test": "yarn graphql:build && jest",
+    "test": "jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json",
     "design-tokens:sync": "rm -rf ./scripts/dist && rm -rf ./packages/ui-kit/src/themes/generated && tsc -p ./scripts/tsconfig.json && yarn design-tokens:parse && yarn design-tokens:validate",
     "design-tokens:parse": "node ./scripts/dist/parse-design-tokens.mjs",
