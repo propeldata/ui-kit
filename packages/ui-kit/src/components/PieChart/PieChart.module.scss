@@ -2,6 +2,7 @@
 
 .rootPieChart {
   @extend .textXxsRegular;
+  color: var(--propel-text-primary);
   overflow: auto;
   padding: 0;
 
@@ -35,6 +36,7 @@
 
 .pieChartList {
   @extend .textXsRegular;
+  color: var(--propel-text-secondary);
   margin-top: var(--propel-spacing-xl);
 
   ul {

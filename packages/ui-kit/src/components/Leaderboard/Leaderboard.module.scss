@@ -2,6 +2,7 @@
 
 .rootLeaderboard {
   @extend .textXxsRegular;
+  color: var(--propel-text-secondary);
   overflow: auto;
   padding: 0;
 
@@ -66,11 +67,13 @@
     td {
       text-align: left;
       padding: var(--propel-spacing-md) var(--propel-spacing-md) var(--propel-spacing-md) 0;
+      color: var(--propel-text-secondary);
       @extend .textXsRegular;
     }
 
     td {
       @extend .textXsRegular;
+      color: var(--propel-text-secondary);
       border-bottom: 1px solid var(--propel-color-secondary);
     }
 
