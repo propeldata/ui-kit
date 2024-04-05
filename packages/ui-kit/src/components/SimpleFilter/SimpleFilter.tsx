@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useEffect, useRef } from 'react'
 import { FilterInput, FilterOperator, getTimeZone, useForwardedRefCallback, withThemeWrapper } from '../../helpers'
 import { useTopValues } from '../../hooks'
 import { Autocomplete } from '../Autocomplete'
-import { AutocompleteOption } from '../Autocomplete/Autocomplete.types'
+import { DropdownOption } from '../shared.types'
 import { ErrorFallback } from '../ErrorFallback'
 import { useFilters } from '../FilterProvider/useFilters'
 import { Loader, LoaderProps } from '../Loader'
@@ -46,7 +46,7 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
 
     const isError = queryError != null || error != null
 
-    const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
+    const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: DropdownOption | string | null) => {
       if (selectedOption == null) {
         const filterList = filters.filter((filter) => filter.id !== id)
         setFilters(filterList)

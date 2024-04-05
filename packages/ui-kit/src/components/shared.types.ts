@@ -113,3 +113,11 @@ export interface QueryProps {
   /** When false, the component will not make any GraphQL requests, default is true. */
   enabled?: boolean
 }
+
+export interface DropdownOption {
+  /** The display label */
+  label?: string
+  /** The value that will be used when the option is selected */
+  value?: string
+  [x: string | number | symbol]: unknown
+}
