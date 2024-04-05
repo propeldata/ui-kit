@@ -72,7 +72,7 @@ export const useSetupTheme = <T extends ChartVariant>({
       },
       plugins: {
         tooltip: {
-          padding: parseInt(theme.spaceXs as string),
+          padding: parseInt(theme.spacingMd ?? '') ?? 8,
           backgroundColor: theme.bgPrimary ?? '',
           bodyColor: theme.textSecondary ?? '',
           titleColor: theme.textSecondary ?? '',
@@ -80,10 +80,10 @@ export const useSetupTheme = <T extends ChartVariant>({
           borderWidth: 1,
           cornerRadius: 4,
           titleFont: {
-            size: getPixelFontSizeAsNumber(theme.tinyFontSize),
+            size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize),
             weight: 'bold',
-            lineHeight: theme.tinyLineHeight,
-            family: theme.fontFamily
+            lineHeight: theme.textXxsRegularLineHeight,
+            family: theme.textXxsRegularFontFamily
           }
         }
       }
@@ -151,6 +151,7 @@ export const ThemeProvider = ({
     }
 
     clearContainerStyle(ref.current)
+
     const baseThemeStyleProps = parseComputedStyle(ref.current)
 
     if (typeof themeProp === 'string') {

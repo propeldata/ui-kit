@@ -4,9 +4,9 @@ import { prettier } from '../../src/utils'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as ThemeProviderStories from '../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
 import rawThemesScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/themes.module.scss'
-import rawCommonScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_common.scss'
-import rawLightThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_lightTheme.scss'
-import rawDarkThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/_darkTheme.scss'
+import rawCommonScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_tokens.scss'
+import rawLightThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_lightTheme.scss'
+import rawDarkThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_darkTheme.scss'
 
 <Meta title="Customization/Theming" />
 
@@ -35,9 +35,9 @@ unique needs.
 
 Each token in the theme object is represented as both a
 [CSS Custom Property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and a corresponding
-JavaScript property, e.g. `--propel-font-family` and `fontFamily`. The CSS Custom Properties are prefixed with
-`--propel-` which helps to prevent any potential naming collisions with other stylesheets. Further details are available
-in the <LinkTo kind="API/ThemeTokenProps" story="overview">API section</LinkTo>.
+JavaScript property, e.g. `--propel-text-md-regular-font-family` and `textMdRegularFontFamily`. The CSS Custom
+Properties are prefixed with `--propel-` which helps to prevent any potential naming collisions with other stylesheets.
+Further details are available in the <LinkTo kind="API/ThemeTokenProps" story="overview">API section</LinkTo>.
 
 ### Default values
 

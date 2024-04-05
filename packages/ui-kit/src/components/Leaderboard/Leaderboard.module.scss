@@ -1,7 +1,8 @@
-@use '../../themes/typography';
+@use '../../themes/common';
 
 .rootLeaderboard {
-  @extend .typographyTiny;
+  @extend .textXxsRegular;
+  color: var(--propel-text-secondary);
   overflow: auto;
   padding: 0;
 
@@ -25,7 +26,7 @@
     [data-role='table-value'] {
       right: 0;
       text-align: right;
-      padding-left: var(--propel-space-sm);
+      padding-left: var(--propel-spacing-md);
       white-space: nowrap;
       width: 1%;
     }
@@ -49,7 +50,7 @@
           left: 0;
           top: 0;
           background-color: var(--propel-border-primary);
-          box-shadow: var(--propel-shadow-sm);
+          box-shadow: var(--propel-shadows-shadow-xs);
           width: 1px;
           height: 100%;
           z-index: 9999;
@@ -65,12 +66,14 @@
     th,
     td {
       text-align: left;
-      padding: var(--propel-space-sm) var(--propel-space-sm) var(--propel-space-sm) 0;
-      @extend .typographySmall;
+      padding: var(--propel-spacing-md) var(--propel-spacing-md) var(--propel-spacing-md) 0;
+      color: var(--propel-text-secondary);
+      @extend .textXsRegular;
     }
 
     td {
-      @extend .typographySmall;
+      @extend .textXsRegular;
+      color: var(--propel-text-secondary);
       border-bottom: 1px solid var(--propel-color-secondary);
     }
 

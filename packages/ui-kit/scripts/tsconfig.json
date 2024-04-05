@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "strict": true,
+    "outDir": "dist",
+    "lib": ["ESNext", "DOM"]
+  },
+  "include": ["./**/*.mts"],
+  "exclude": ["dist"]
+}

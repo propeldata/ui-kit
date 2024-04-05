@@ -140,7 +140,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 data: values,
                 backgroundColor: theme?.accent,
                 barThickness: labelPosition === 'top' ? 8 : 17,
-                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
+                borderRadius: parseInt(theme.radiusXs as string) ?? 4,
                 borderWidth: 0
               }
             ]
@@ -169,7 +169,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 },
                 ticks: {
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
                   }
                 },
                 beginAtZero: true
@@ -187,7 +187,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 ticks: {
                   padding: 17,
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
                   }
                 }
               }

@@ -1,4 +1,7 @@
 /** Typography */
+// @deprecated - all tokens in this file are deprecated in favor of the generated tokens and should be removed in the future
+
+@use './generated/tokens';
 
 .typographyRegular {
   color: var(--propel-text-secondary);

@@ -68,7 +68,7 @@ export const ThemeProviderCustomizeViaJSPropsStory: Story = {
   args: {
     theme: {
       textPrimary: '#532ab4',
-      borderRadiusSm: '20px'
+      radiusSm: '20px'
     }
   },
   render: (args) => (
