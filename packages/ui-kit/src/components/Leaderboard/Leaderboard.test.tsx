@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react'
+import { render, waitFor, fireEvent } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange, sleep } from '../../helpers'
@@ -26,6 +26,14 @@ const handlers = [
             headers: [timeZone],
             rows: [['1']]
           }
+        })
+      )
+    }
+
+    if (metricName === 'lack-of-data') {
+      return res(
+        ctx.data({
+          leaderboard: { ...mockData, rows: [] }
         })
       )
     }
@@ -237,6 +245,57 @@ describe('Leaderboard', () => {
     const values = await dom.findAllByText('true')
 
     expect(values).toHaveLength(3)
+  })
+
+  it('Should show error state when data is empty', async () => {
+    const TestWrapper = () => {
+      const [metric, setMetric] = React.useState<string>('lack-of-data')
+
+      return (
+        <>
+          <button data-testid="change-metric" onClick={() => setMetric('test-metric')}>
+            Change Metric
+          </button>
+          <Leaderboard
+            renderEmpty={() => <h1>Empty State</h1>}
+            query={{
+              accessToken: 'test-token',
+              metric,
+              dimensions: [
+                {
+                  columnName: 'test-column'
+                }
+              ],
+              rowLimit: 10,
+              timeRange: {
+                relative: RelativeTimeRange.LastNDays,
+                n: 30
+              }
+            }}
+          />
+        </>
+      )
+    }
+
+    dom = render(<TestWrapper />)
+
+    await dom.findByText('Empty State')
+
+    fireEvent.click(dom.getByTestId('change-metric'))
+
+    await waitFor(async () => {
+      const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+
+      const chartData = chartInstance?.data.datasets[0].data
+      const chartLabels = chartInstance?.data.labels
+
+      const resultingRows = mockData.rows.map((row) => parseInt(row[row.length - 1]))
+      const resultingLabels = mockData.rows.map((row) => row.slice(0, row.length - 1))
+
+      expect(chartData).toEqual(resultingRows)
+      expect(chartLabels).toEqual(resultingLabels)
+    })
   })
 
   it('Should pass timeZone to the query', async () => {

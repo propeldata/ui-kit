@@ -13,6 +13,7 @@ export const LeaderboardConnected = ({
   const [barsColor, setBarsColor] = React.useState('#75BFFF')
   const [chartType, setChartType] = React.useState<LeaderboardChartVariant>('bar')
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
+  const [n, SetN] = React.useState<number>(30)
 
   const handleSwitchRefetchInterval = () => {
     setRefetchInterval(refetchInterval ? undefined : 1000)
@@ -40,7 +41,7 @@ export const LeaderboardConnected = ({
             rowLimit: 8,
             timeRange: {
               relative: RelativeTimeRange.LastNDays,
-              n: 30
+              n
             },
             refetchInterval,
             retry: false
@@ -74,6 +75,9 @@ export const LeaderboardConnected = ({
         </select>
         <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
           Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
+        </button>
+        <button className="border-2 p-1 h-9" onClick={() => SetN(n === 0 ? 30 : 0)}>
+          No data: {n === 0 ? 'On' : 'Off'}
         </button>
       </div>
     </div>

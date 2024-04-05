@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.5.5
+
+### Patch Changes
+
+- 903e63d: [Counter, TimeSeries, Leaderboard, PieChart]: fix renderEmpty update logic
+
 ## 0.5.4
 
 ### Patch Changes

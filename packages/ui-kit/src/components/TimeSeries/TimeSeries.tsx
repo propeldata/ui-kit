@@ -9,9 +9,11 @@ import {
   customCanvasBackgroundColor,
   formatLabels,
   getTimeZone,
+  useEmptyableData,
   useForwardedRefCallback,
   withThemeWrapper
 } from '../../helpers'
+import { useTimeSeries } from '../../hooks'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
@@ -20,7 +22,6 @@ import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import { getDefaultGranularity, getNumericValues, getScales, tooltipTitleCallback } from './utils'
-import { useTimeSeries } from '../../hooks'
 
 let idCounter = 0
 
@@ -70,7 +71,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       errorFallback,
       renderEmpty,
       card = false,
-      chartProps = {},
+      chartProps,
       ...rest
     },
     forwardedRef
@@ -93,7 +94,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       renderEmpty
     })
 
-    const [isEmptyState, setIsEmptyState] = React.useState(false)
     const log = useLog()
     const isLoadingStatic = loading
 
@@ -132,28 +132,29 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       error: hasError
     } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic })
 
+    const destroyChart = React.useCallback(() => {
+      if (!chartRef.current) {
+        return
+      }
+
+      chartRef.current.destroy()
+      chartRef.current = null
+    }, [chartRef])
+
+    const { data, isEmptyState, setData } = useEmptyableData<TimeSeriesData>({
+      onEmptyData: destroyChart,
+      isDataEmpty: (data) => !data.values || !data.labels || data.values.length === 0
+    })
+
     const renderChart = React.useCallback(
-      (data?: TimeSeriesData) => {
-        if (
-          !canvasRef.current ||
-          !data?.labels ||
-          !data.values ||
-          hasError ||
-          (variant !== 'bar' && variant !== 'line') ||
-          !theme
-        ) {
+      (data: TimeSeriesData) => {
+        if (!canvasRef.current || hasError || !theme) {
           return
         }
 
-        const { grid = false, fillArea = false } = chartProps
-
+        const { grid = false, fillArea = false } = chartProps ?? {}
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
-        const values = getNumericValues(data.values, log)
-
-        if (values.length === 0 && renderEmptyComponent) {
-          setIsEmptyState(true)
-          return
-        }
+        const values = getNumericValues(data.values ?? [], log)
 
         const plugins = [customCanvasBackgroundColor]
 
@@ -265,19 +266,15 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         labelFormatter,
         chartConfigProps,
         type,
-        chartConfig,
-        renderEmptyComponent
+        chartConfig
       ]
     )
 
-    const destroyChart = React.useCallback(() => {
-      if (!chartRef.current) {
-        return
+    React.useEffect(() => {
+      if (!isEmptyState && data) {
+        renderChart(data)
       }
-
-      chartRef.current.destroy()
-      chartRef.current = null
-    }, [chartRef])
+    }, [isEmptyState, data, renderChart])
 
     // @TODO: we should abstract this logic to a hook
     React.useEffect(() => {
@@ -316,18 +313,18 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     React.useEffect(() => {
       if (isStatic) {
-        renderChart({ labels, values })
+        setData({ labels, values })
       }
-    }, [isStatic, isLoadingStatic, variant, labels, values, renderChart])
+    }, [isStatic, isLoadingStatic, variant, labels, values, setData])
 
     React.useEffect(() => {
       if (serverData && !isStatic) {
         const labels = serverData.timeSeries?.labels ?? []
         const values = (serverData.timeSeries?.values ?? []).map((value) => (value == null ? null : Number(value)))
 
-        renderChart({ labels, values })
+        setData({ labels, values })
       }
-    }, [serverData, variant, isStatic, renderChart])
+    }, [serverData, variant, isStatic, setData])
 
     React.useEffect(() => {
       return () => {

@@ -1,8 +1,8 @@
-import { render, waitFor } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
 import { RelativeTimeRange, sleep } from '../../helpers'
-import { Dom, mockLeaderboardQuery, mockCounterQuery, setupTestHandlers, mockServer } from '../../testing'
+import { Dom, mockCounterQuery, mockLeaderboardQuery, mockServer, setupTestHandlers } from '../../testing'
 import { AccessTokenProvider } from '../AccessTokenProvider'
 import { PieChart } from './PieChart'
 
@@ -37,6 +37,14 @@ const handlers = [
       )
     }
 
+    if (metricName === 'lack-of-data') {
+      return res(
+        ctx.data({
+          leaderboard: { ...mockData, rows: [] }
+        })
+      )
+    }
+
     if (metricName === 'should-fail') {
       return res(
         ctx.errors([
@@ -63,6 +71,14 @@ const handlers = [
             message: 'something went wrong'
           }
         ])
+      )
+    }
+
+    if (metricName === 'lack-of-data') {
+      return res(
+        ctx.data({
+          counter: { value: 0 }
+        })
       )
     }
 
@@ -178,6 +194,62 @@ describe('PieChart', () => {
 
       // TODO: this message suggests that the error is due to a network issue when it's not, maybe we should think about changing the message depending on the error
       await dom.findByText('Sorry we are not able to connect at this time due to a technical error.')
+    })
+  })
+
+  it('Should show error state when data is empty', async () => {
+    const TestWrapper = () => {
+      const [metric, setMetric] = React.useState<string>('lack-of-data')
+
+      return (
+        <>
+          <button data-testid="change-metric" onClick={() => setMetric('test-metric')}>
+            Change Metric
+          </button>
+          <PieChart
+            renderEmpty={() => <h1>Empty State</h1>}
+            query={{
+              accessToken: 'test-token',
+              metric,
+              dimension: {
+                columnName: 'test-column'
+              },
+              rowLimit: 10,
+              timeRange: {
+                relative: RelativeTimeRange.LastNDays,
+                n: 30
+              }
+            }}
+          />
+        </>
+      )
+    }
+
+    dom = render(<TestWrapper />)
+    await dom.findByText('Empty State')
+
+    fireEvent.click(dom.getByTestId('change-metric'))
+
+    await waitFor(async () => {
+      const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
+
+      const chartData = chartInstance?.data.datasets[0].data
+      const chartLabels = chartInstance?.data.labels
+
+      // extend mock data with other value
+      // Total value = 87560
+      // existing mock data total= 76560
+      // other value = 11000
+      const extendedMockData = {
+        headers: [...mockData.headers],
+        rows: [...mockData.rows, ['Other', '11000']]
+      }
+      const resultingRows = extendedMockData.rows.map((row) => parseInt(row[row.length - 1]))
+      const resultingLabels = extendedMockData.rows.map((row) => row[0])
+
+      expect(chartData).toEqual(resultingRows)
+      expect(chartLabels).toEqual(resultingLabels)
     })
   })
 

@@ -9,8 +9,10 @@ import {
   getTimeZone,
   LeaderboardLabels,
   useCombinedRefsCallback,
+  useEmptyableData,
   withThemeWrapper
 } from '../../helpers'
+import { useLeaderboard } from '../../hooks/useLeaderboard'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
@@ -19,7 +21,6 @@ import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
-import { useLeaderboard } from '../../hooks/useLeaderboard'
 
 let idCounter = 0
 
@@ -34,8 +35,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       className,
       chartConfigProps,
       loading: isLoadingStatic = false,
-      tableProps = {},
-      chartProps = {},
+      tableProps,
+      chartProps,
       baseTheme = 'lightTheme',
       labelFormatter,
       timeZone,
@@ -69,7 +70,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
-    const [isEmptyState, setIsEmptyState] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
     const id = `leaderboard-${idRef.current}`
@@ -85,13 +85,25 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
      */
     const isStatic = !query
 
+    const destroyChart = React.useCallback(() => {
+      if (chartRef.current) {
+        chartRef.current.destroy()
+        chartRef.current = null
+      }
+    }, [chartRef])
+
+    const { data, isEmptyState, setData } = useEmptyableData<LeaderboardData>({
+      onEmptyData: destroyChart,
+      isDataEmpty: (data) => data.rows?.length === 0
+    })
+
     const renderChart = React.useCallback(
       (data?: LeaderboardData) => {
         if (!canvasRef.current || !data || variant === 'table' || !theme || !chartConfig) {
           return
         }
 
-        const { labelPosition = 'axis', showBarValues = false } = chartProps
+        const { labelPosition = 'axis', showBarValues = false } = chartProps ?? {}
 
         const labels =
           formatLabels({
@@ -101,11 +113,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const values =
           data.rows?.map((row) => (row[row.length - 1] === null ? null : Number(row[row.length - 1]))) || []
-
-        if (values.length === 0 && renderEmptyComponent) {
-          setIsEmptyState(true)
-          return
-        }
 
         const customChartLabelsPlugin: Plugin<'bar'> = getCustomChartLabelsPlugin({
           theme,
@@ -209,15 +216,14 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter, renderEmptyComponent]
+      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter]
     )
 
-    const destroyChart = () => {
-      if (chartRef.current) {
-        chartRef.current.destroy()
-        chartRef.current = null
+    React.useEffect(() => {
+      if (!isEmptyState) {
+        renderChart(data)
       }
-    }
+    }, [isEmptyState, data, renderChart])
 
     const {
       data: fetchedData,
@@ -276,33 +282,33 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
     React.useEffect(() => {
       if (isStatic) {
-        renderChart({ headers, rows })
+        setData({ headers, rows })
       }
-    }, [isStatic, isLoadingStatic, variant, headers, rows, renderChart])
+    }, [isStatic, isLoadingStatic, variant, headers, rows, setData])
 
     React.useEffect(() => {
       if (fetchedData?.leaderboard && !isStatic) {
-        renderChart(fetchedData.leaderboard)
+        setData(fetchedData.leaderboard)
       }
-    }, [fetchedData, variant, isStatic, renderChart])
+    }, [fetchedData, variant, isStatic, setData])
 
     React.useEffect(() => {
       if (variant === 'table') {
         destroyChart()
       }
-    }, [variant])
+    }, [variant, destroyChart])
 
     React.useEffect(() => {
       return () => {
         destroyChart()
       }
-    }, [])
+    }, [destroyChart])
 
     React.useEffect(() => {
       if (variant === 'table') {
         destroyChart()
       }
-    }, [variant])
+    }, [variant, destroyChart])
 
     if (hasError || propsMismatch) {
       destroyChart()
@@ -336,6 +342,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     }
 
     if (isEmptyState && renderEmptyComponent) {
+      destroyChart()
+
       return themeWrapper(renderEmptyComponent({ theme }))
     }
 
@@ -377,7 +385,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       prefixValue,
       sufixValue,
       stickyValues = false
-    } = tableProps
+    } = tableProps ?? {}
 
     const isValueBar = isValidValueBar && hasValueBar
 

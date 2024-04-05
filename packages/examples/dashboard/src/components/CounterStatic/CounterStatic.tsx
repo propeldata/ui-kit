@@ -28,7 +28,13 @@ export const CounterStatic = () => {
     <div className="m-6">
       <h2 className="text-2xl">Counter Static</h2>
       <div className="my-5">
-        <Counter card value={data?.value} loading={isLoading} style={{ color: fontColor }} />
+        <Counter
+          renderEmpty={() => <div style={{ display: 'flex', flex: 1, alignItems: 'center', height: 67 }}>No Data</div>}
+          card
+          value={data?.value}
+          loading={isLoading}
+          style={{ color: fontColor }}
+        />
       </div>
       <div className="flex items-center gap-2 mt-1">
         <button
@@ -45,6 +51,12 @@ export const CounterStatic = () => {
         />
         <button className="border-2 p-1 h-9" onClick={handleReFetchMock}>
           Refetch Mock
+        </button>
+        <button
+          className="border-2 p-1 h-9"
+          onClick={() => setMockData(mockData.value === '' ? mockData1 : { value: '' })}
+        >
+          No data: {mockData.value === '' ? 'On' : 'Off'}
         </button>
       </div>
     </div>

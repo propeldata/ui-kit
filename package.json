@@ -64,5 +64,10 @@
     "**/*.{css,md,json,graphql}": [
       "prettier --write"
     ]
+  },
+  "resolutions": {
+    "axios": "1.6.7",
+    "follow-redirects": "1.15.6",
+    "ip": "2.0.1"
   }
 }

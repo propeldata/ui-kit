@@ -1,5 +1,13 @@
 # dashboard-example
 
+## 0.5.5
+
+### Patch Changes
+
+- 903e63d: [Counter, TimeSeries, Leaderboard, PieChart]: fix renderEmpty update logic
+- Updated dependencies [903e63d]
+  - @propeldata/ui-kit@0.5.5
+
 ## 0.5.4
 
 ### Patch Changes
