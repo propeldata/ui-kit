@@ -1,5 +1,12 @@
-import type { QueryProps } from '../../components/shared.types'
+import React from 'react'
+
+import type { DataComponentProps, QueryProps } from '../../components/shared.types'
 import type { DataPoolInput, Sort } from '../../helpers'
+
+export type DataGridData = {
+  headers?: string[]
+  rows?: Array<string | null>
+}
 
 export interface DataGridQueryProps extends Omit<QueryProps, 'metric'> {
   /** The columns to retrieve. */
@@ -38,4 +45,16 @@ export interface DataGridQueryProps extends Omit<QueryProps, 'metric'> {
 
   /** The cursor to use when paging backward. */
   before?: string
+}
+
+export interface RowProps {
+  styles: CSSStyleSheet
+}
+
+type RowCallbackArguments = { props: RowProps; RowComponent: React.ReactElement; CellComponent: React.ReactElement }
+
+export interface DataGridProps extends DataComponentProps<'div'> {
+  rowOverride?: React.ReactElement | ((args: RowCallbackArguments) => React.ReactElement)
+  query?: DataGridQueryProps
+  resizable?: boolean
 }

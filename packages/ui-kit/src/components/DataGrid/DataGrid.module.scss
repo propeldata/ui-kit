@@ -1,0 +1,51 @@
+.table {
+  border-spacing: 0;
+  background-color: var(--propel-bg-primary);
+
+  border-collapse: collapse;
+
+  border: 1px solid var(--propel-text-primary);
+  color: var(--propel-text-primary);
+}
+
+.tableHead {
+  border: 1px solid var(--propel-text-primary);
+}
+
+.tableBody {
+
+}
+
+.tableRow {
+}
+
+.tableCell {
+  border: 1px solid var(--propel-text-primary);
+}
+
+
+.tableCellHead {
+  text-align: left;
+  border: 1px solid var(--propel-text-primary);
+
+  position: relative;
+}
+
+.resizer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  right: 0px;
+}
+
+.tableCellHead:hover > .resizer {
+  opacity: 1;
+}

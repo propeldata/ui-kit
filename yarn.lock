@@ -4485,6 +4485,7 @@ __metadata:
     "@swc/core": ^1.3.68
     "@swc/jest": ^0.2.26
     "@tanstack/react-query": ^4.29.17
+    "@tanstack/react-table": ^8.15.3
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
@@ -7002,6 +7003,25 @@ __metadata:
     react-native:
       optional: true
   checksum: 1aff0a476859386f8d32253fa0d0bde7b81769a6d4d4d9cbd78778f0f955459a3bdb7ee27a0d2ee7373090f12998b45df80db0b5b313bd0a7a39d36c6e8e51c5
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-table@npm:^8.15.3":
+  version: 8.15.3
+  resolution: "@tanstack/react-table@npm:8.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-table%2F-%2Freact-table-8.15.3.tgz"
+  dependencies:
+    "@tanstack/table-core": 8.15.3
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 0c250fd5d567b9ce8fda81b7cf03f0064f35d0bf6df7612c3b00874e5943c3a3ac9cc2070c4d67367f1932905a624d59715f3eb32af53b4aa25d54b2441d8e12
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.15.3":
+  version: 8.15.3
+  resolution: "@tanstack/table-core@npm:8.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Ftable-core%2F-%2Ftable-core-8.15.3.tgz"
+  checksum: eab528dcbb994cd8182f099e5b59f416b3b9cde08e88c676614f3484bc6172c7e3e3d895d1e35fa64a749b237390bc665b01187286ee37ac0417d8286953dad9
   languageName: node
   linkType: hard
 
