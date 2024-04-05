@@ -15,7 +15,7 @@ interface GetAllFilesProps {
 }
 
 // Recursive function to get all files in a given directory
-const getAllFiles = ({ dirPath, type, arrayOfFiles = [] }: GetAllFilesProps): string[] => {
+export const getAllFiles = ({ dirPath, type, arrayOfFiles = [] }: GetAllFilesProps): string[] => {
   const files = fs.readdirSync(dirPath)
 
   files.forEach((file) => {
@@ -36,14 +36,14 @@ const getAllFiles = ({ dirPath, type, arrayOfFiles = [] }: GetAllFilesProps): st
 }
 
 // Extract CSS variables with --propel- prefix from a given file
-const extractCSSVariables = (file: string): string[] => {
+export const extractCSSVariables = (file: string): string[] => {
   const fileContent = fs.readFileSync(file, 'utf8')
   const regex = /--propel-[\w-]+/g // Regex updated to match only variables starting with --propel-
   return fileContent.match(regex) || []
 }
 
 // Get a list of propel's CSS variables from all CSS files in the given directory
-const getCSSVariables = (dirPath: string, type: 'current' | 'new'): string[] => {
+export const getCSSVariables = (dirPath: string, type: 'current' | 'new'): string[] => {
   const files = getAllFiles({ dirPath, type })
   const allVariables = new Set<string>()
 
@@ -58,7 +58,7 @@ const getCSSVariables = (dirPath: string, type: 'current' | 'new'): string[] => 
 }
 
 // Build SASS files into CSS
-const buildSASSFiles = async (spinner: Ora): Promise<void> => {
+export const buildSASSFiles = async (spinner: Ora): Promise<void> => {
   try {
     const { stderr } = await execAsync('sass src:src/generated')
     if (stderr) throw new Error(stderr)
@@ -70,7 +70,7 @@ const buildSASSFiles = async (spinner: Ora): Promise<void> => {
 }
 
 // Compare current and new CSS variables, and log any missing variables
-const validateDesignTokens = (spinner: Ora): void => {
+export const validateDesignTokens = (spinner: Ora): void => {
   spinner.start('Validating design tokens...')
   let validationFailed = false
 

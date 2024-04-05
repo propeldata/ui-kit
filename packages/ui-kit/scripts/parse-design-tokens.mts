@@ -55,21 +55,27 @@ type VariablesJSONProps = {
   }[]
 }
 
+type TypographyClassProps = {
+  className: string
+  props: { prop: string; value: string }[]
+}
+
 // Slugify string with strict mode
-const slugifyStr = (str: string): string => slugify(str.replaceAll('/', '-'), { lower: true, strict: true })
+export const slugifyStr = (str: string): string => slugify(str.replaceAll('/', '-'), { lower: true, strict: true })
 
 // Convert kebab-case to camelCase
-const kebabCaseToCamelCase = (kebabStr: string): string =>
+export const kebabCaseToCamelCase = (kebabStr: string): string =>
   kebabStr
     .split('-')
     .map((word, index) => (index === 0 ? word : word[0].toUpperCase() + word.slice(1)))
     .join('')
 
 // Convert camelCase to kebab-case
-const camelCaseToKebabCase = (camelStr: string): string => camelStr.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
+export const camelCaseToKebabCase = (camelStr: string): string =>
+  camelStr.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 
 // Parse Figma variable value
-const parseValue = (variable: VariableProps): string => {
+export const parseValue = (variable: VariableProps): string => {
   const { type, value } = variable
   switch (type) {
     case 'color':
@@ -86,7 +92,7 @@ const parseValue = (variable: VariableProps): string => {
 }
 
 // Parse Figma alias value
-const parseAlias = (variable: VariableProps, tokenData: TokenDataProps[]): string => {
+export const parseAlias = (variable: VariableProps, tokenData: TokenDataProps[]): string => {
   const { value } = variable
   const tokenKey = slugifyStr(value.name)
   const tokenValue = tokenData.find((token) => token.cssName === `--propel-${tokenKey}`)
@@ -94,7 +100,7 @@ const parseAlias = (variable: VariableProps, tokenData: TokenDataProps[]): strin
 }
 
 // Generate design token data
-const generateTokenValue = (key: string, value: any, tokenData: TokenDataProps[]): TokenDataProps => ({
+export const generateTokenValue = (key: string, value: any, tokenData: TokenDataProps[]): TokenDataProps => ({
   cssName: `--propel-${key}`,
   jsName: kebabCaseToCamelCase(key),
   kind: value.kind,
@@ -103,11 +109,11 @@ const generateTokenValue = (key: string, value: any, tokenData: TokenDataProps[]
 })
 
 // Generate typography token data
-const generateTypographyValue = (key: string, type: 'number' | 'string', value: string): TokenDataProps =>
+export const generateTypographyValue = (key: string, type: 'number' | 'string', value: string): TokenDataProps =>
   generateTokenValue(key, { type, value, kind: 'typography' }, [])
 
 // Write design token content to file
-const writeToFileSync = (fileName: string, content: string): void => {
+export const writeToFileSync = (fileName: string, content: string): void => {
   const fullPath = path.join('./src/themes/generated/', fileName)
   const dirName = path.dirname(fullPath)
 
@@ -120,7 +126,7 @@ const writeToFileSync = (fileName: string, content: string): void => {
 }
 
 // Read Figma variables from JSON file
-const getJSONFromFile = async (): Promise<VariablesJSONProps> => {
+export const getJSONFromFile = async (): Promise<VariablesJSONProps> => {
   const data = await fsPromises.readFile('./src/themes/variables.json', 'utf-8')
   const variablesJSON: VariablesJSONProps = JSON.parse(data)
 
@@ -129,7 +135,7 @@ const getJSONFromFile = async (): Promise<VariablesJSONProps> => {
 
 // Get theme tokens
 
-const getThemeTokens = ({
+export const getThemeTokens = ({
   name,
   themes,
   variables,
@@ -153,14 +159,14 @@ const getThemeTokens = ({
 const main = async () => {
   const spinner = ora({ text: 'Parsing design variables and tokens...', color: 'yellow' }).start()
 
-  const variablesJSON = await getJSONFromFile()
-
-  if (!variablesJSON) {
-    spinner.fail('Failed to parse variables.json')
-    throw new Error('Failed to parse variables.json')
-  }
-
   try {
+    const variablesJSON = await getJSONFromFile()
+
+    if (!variablesJSON) {
+      spinner.fail('Failed to parse variables.json')
+      throw new Error('Failed to parse variables.json')
+    }
+
     const variables: TokenDataProps[] = []
     const tokens: TokenDataProps[] = []
 
@@ -182,18 +188,14 @@ const main = async () => {
         })
       })
 
-    type typographyClassProps = {
-      className: string
-      props: { prop: string; value: string }[]
-    }
-    const typographyClasses: typographyClassProps[] = []
+    const typographyClasses: TypographyClassProps[] = []
 
     variablesJSON.collections
       ?.find(({ name }) => name === 'Typography')
       ?.modes?.find(({ name }) => name.toLowerCase() === 'style')
       ?.variables?.forEach((variable) => {
         const key = slugifyStr(variable.name)
-        const typographyClass: typographyClassProps = {
+        const typographyClass: TypographyClassProps = {
           className: kebabCaseToCamelCase(key),
           props: []
         }
