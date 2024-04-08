@@ -22,7 +22,19 @@ import classNames from 'classnames'
 const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 
 export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>(
-  ({ baseTheme, query, renderLoader, errorFallback, renderEmpty, resizable: isResizable = false }, forwardedRef) => {
+  (
+    {
+      baseTheme,
+      query,
+      renderLoader,
+      errorFallback,
+      renderEmpty,
+      resizable: isResizable = false,
+      tableProps,
+      cellProps
+    },
+    forwardedRef
+  ) => {
     // const innerRef = React.useRef<HTMLDivElement>(null)
     // const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     // const themeWrapper = withThemeWrapper(setRef)
@@ -70,12 +82,15 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
       columnResizeMode: 'onChange',
-      columnResizeDirection: 'ltr'
+      columnResizeDirection: 'ltr',
+      defaultColumn: {
+        width: 'auto'
+      }
     })
 
     return (
       <div>
-        <table className={componentStyles.table}>
+        <table className={componentStyles.table} {...tableProps}>
           <thead
             className={componentStyles.tableHead}
             {...{
@@ -104,10 +119,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         {...{
                           onDoubleClick: () => header.column.resetSize(),
                           onMouseDown: header.getResizeHandler(),
-                          onTouchStart: header.getResizeHandler(),
-                          className: `resizer ${table.options.columnResizeDirection} ${
-                            header.column.getIsResizing() ? 'isResizing' : ''
-                          }`
+                          onTouchStart: header.getResizeHandler()
                         }}
                         className={classNames(componentStyles.resizer)}
                       />
@@ -121,7 +133,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
             {table.getRowModel().rows.map((row) => (
               <tr className={componentStyles.tableRow} key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td className={componentStyles.tableCell} key={cell.id}>
+                  <td className={componentStyles.tableCell} {...cellProps} key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

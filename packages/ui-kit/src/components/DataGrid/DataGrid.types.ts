@@ -57,4 +57,8 @@ export interface DataGridProps extends DataComponentProps<'div'> {
   rowOverride?: React.ReactElement | ((args: RowCallbackArguments) => React.ReactElement)
   query?: DataGridQueryProps
   resizable?: boolean
+  /** Props to be applied to the `table` element */
+  tableProps?: React.HTMLAttributes<HTMLTableElement>
+  /** Props to be applied to the `td` elements */
+  cellProps?: React.HTMLAttributes<HTMLTableCellElement>
 }

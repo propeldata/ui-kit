@@ -58,7 +58,20 @@ export const Basic: Story = {
       dataPool: {
         id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
       },
-      columns: ['restaurant_id', 'taco_name', 'restaurant_name', 'sauce_name', 'tortilla_name']
+      columns: ['taco_name', 'sauce_name', 'tortilla_name', 'restaurant_name']
+    },
+    cellProps: {
+      style: {
+        textOverflow: 'ellipsis',
+        overflow: 'auto',
+        whiteSpace: 'nowrap',
+        textWrap: 'nowrap'
+      }
+    },
+    tableProps: {
+      style: {
+        width: 'max-content'
+      }
     },
     resizable: true
   },
