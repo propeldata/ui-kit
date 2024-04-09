@@ -71,4 +71,8 @@ export const ReportComponent = React.forwardRef((props: Props) => {
 
 ReportComponent.displayName = 'ReportComponent'
 
+/**
+ * @deprecated
+ * This component is EXPERIMENTAL, we do not recommend using it in production.
+ */
 export const Report = withContainer(ReportComponent, ErrorFallback) as typeof ReportComponent
