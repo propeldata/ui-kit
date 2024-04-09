@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+
+  height: 100%;
+
+  gap: 1rem;
+}
+
+.loader {
+  height: 100% !important;
+}
+
+.loader > div[data-role="loader-animation"] {
+  height: 100% !important;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
