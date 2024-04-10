@@ -22,6 +22,7 @@ export default meta
 
 export const Basic: Story = {
   args: {
+    title: 'My Report',
     layout: [
       ['timeSeries', 'timeSeries', 'leaderboard'],
       ['counter1', 'counter2', 'leaderboard'],
@@ -36,6 +37,7 @@ export const Basic: Story = {
           values
         }
       }`,
+        title: 'Time Series Title',
         type: 'timeSeries',
         variables: `{
         "input": {
@@ -157,7 +159,7 @@ export const Basic: Story = {
     ]
   },
   render: (args) => (
-    <AccessTokenProvider accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3Njk2MjksImNsaWVudF9pZCI6IjNhdDY2YjByaWlnazlyZ2JyYzBpcjE3OGY0IiwiZXhwIjoxNzEyNzczMjI5LCJpYXQiOjE3MTI3Njk2MjksImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiJmMTZhZDJlNC04OTEyLTRiMGUtODEyZS0wNzkzM2I3ZDk3NjYiLCJzY29wZSI6ImFkbWluIG1ldHJpYzpxdWVyeSBtZXRyaWM6c3RhdHMiLCJzdWIiOiIzYXQ2NmIwcmlpZ2s5cmdicmMwaXIxNzhmNCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.7nnbyMY65NaiD4prMq9mRqDLT9jxYD3WF7r0LMo0Px0">
+    <AccessTokenProvider accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3Nzg2NzQsImNsaWVudF9pZCI6IjNhdDY2YjByaWlnazlyZ2JyYzBpcjE3OGY0IiwiZXhwIjoxNzEyNzgyMjc0LCJpYXQiOjE3MTI3Nzg2NzQsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI0MGUwZGJjNi02NTNhLTQ3MWQtYTExZC00MDM4ODMwOGNiZDMiLCJzY29wZSI6ImFkbWluIG1ldHJpYzpxdWVyeSBtZXRyaWM6c3RhdHMiLCJzdWIiOiIzYXQ2NmIwcmlpZ2s5cmdicmMwaXIxNzhmNCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.HbMBSp_k5ljRucPm8ih0udlnk0ITEP7m5sxtIix2Mr4">
       <Report {...args} />
     </AccessTokenProvider>
   )
@@ -215,9 +217,9 @@ export const Connected: Story = {
   args: {
     query: {
       accessToken:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3NzEzODgsImNsaWVudF9pZCI6IkFQUDAxSEZQVFc4NjM1WVQ2Q1E5MjVFNUtZM1JOIiwiZXhwIjoxNzEyNzc0OTg4LCJpYXQiOjE3MTI3NzEzODgsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMjA3OWM0NTUtYzg2Mi00ZWM0LTgyYmQtODRmOGEwNzY3NDE5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgbWV0cmljOnN0YXRzIGRhdGFfcG9vbDpxdWVyeSBkYXRhX3Bvb2w6cmVhZCBkYXRhX3Bvb2w6c3RhdHMgYWRtaW4gYXBwbGljYXRpb246YWRtaW4gbWV0cmljOnJlYWQiLCJzdWIiOiJBUFAwMUhGUFRXODYzNVlUNkNROTI1RTVLWTNSTiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.DImh1Mu2OMrxji5G6tWEQ2m7bnQ_YvuDdC2j84pdCOU',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3NzkzNzEsImNsaWVudF9pZCI6IkFQUDAxSEZQVFc4NjM1WVQ2Q1E5MjVFNUtZM1JOIiwiZXhwIjoxNzEyNzgyOTcxLCJpYXQiOjE3MTI3NzkzNzEsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiOTc5OThhYzgtOWMzMC00OTgxLWI2NDMtMzZiNTU0ODk4YzAxIiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgbWV0cmljOnN0YXRzIGRhdGFfcG9vbDpxdWVyeSBkYXRhX3Bvb2w6cmVhZCBkYXRhX3Bvb2w6c3RhdHMgYWRtaW4gYXBwbGljYXRpb246YWRtaW4gbWV0cmljOnJlYWQiLCJzdWIiOiJBUFAwMUhGUFRXODYzNVlUNkNROTI1RTVLWTNSTiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.YaZO2h-rt3puhecWBkWYqMI55VBRIOp5CqQx1WOG_JM',
       propelApiUrl: 'https://api.us-east-2.dev.propeldata.com/graphql',
-      reportId: 'RPT01HV4GY04A4B1054KCK3EV08AR'
+      reportId: 'RPT01HV4RBM3WETGC1F9ERQZGBENG'
     }
   },
   render: (args) => <Report {...args} />

@@ -1,4 +1,27 @@
 .container {
+  height: 100%;
+  align-items: center;
+}
+
+.container > header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container > header > p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.container > header > p > a {
+  color: #7f56d9;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.reportGrid {
   display: grid;
 
   height: 100%;
@@ -16,10 +39,20 @@
 
 .card {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.cardTitle {
+  align-self: flex-start;
+}
+
+.cardTitle > h2 {
+  margin: 0;
+  font-size: 18px;
 }

@@ -68,5 +68,7 @@ export function useReportComponents(charts: Array<ChartProp | null | undefined> 
     }
   }, [accessToken, fetchers])
 
+  console.log(result)
+
   return { charts: charts?.map((chart, idx) => ({ ...chart, result: result != null ? result[idx] : null })), isLoading }
 }

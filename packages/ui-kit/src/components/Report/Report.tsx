@@ -24,6 +24,7 @@ const componentMap = {
 
 export const ReportComponent = React.forwardRef((props: ReportProps) => {
   const {
+    title: titleProp,
     layout: layoutProp,
     charts: chartsProp,
     clickable = false,
@@ -39,6 +40,7 @@ export const ReportComponent = React.forwardRef((props: ReportProps) => {
 
   const charts = isStatic ? chartsProp : data?.report?.charts
   const layout = isStatic ? layoutProp : data?.report?.layout
+  const title = isStatic ? titleProp : data?.report?.uniqueName
 
   const { charts: reportCharts, isLoading: isLoadingComponents } = useReportComponents(charts, {
     propelApiUrl: propelApiUrl ?? query?.propelApiUrl,
@@ -50,35 +52,49 @@ export const ReportComponent = React.forwardRef((props: ReportProps) => {
   const gridTemplateAreas = buildGridTemplateAreas(layout)
 
   return (
-    <div
-      className={componentStyles.container}
-      style={{
-        gridTemplateAreas,
-        gridTemplateRows: layout?.map(() => '1fr').join(' '),
-        gridTemplateColumns: layout?.[0]?.map(() => '1fr').join(' ')
-      }}
-    >
-      {reportCharts?.map((chart, chartIdx) => (
-        <Card
-          key={`${chart.id}-${chartIdx}`}
-          {...reportCardProps}
-          className={classNames(
-            componentStyles.card,
-            clickable && componentStyles.clickable,
-            reportCardProps?.className
-          )}
-          onClick={(e) => clickable && (onCardClick?.(chart) ?? reportCardProps?.onClick?.(e))}
-          style={{ ...reportCardProps?.style, gridArea: `report-area-${chart.id}` }}
-        >
-          {!isLoading ? (
-            chart.result != null &&
-            chart.type != null &&
-            componentMap[chart.type as 'timeSeries' | 'leaderboard' | 'counter']({ ...chart.result[chart.type] })
-          ) : (
-            <Loader className={componentStyles.loader} />
-          )}
-        </Card>
-      ))}
+    <div className={componentStyles.container}>
+      {title != null && (
+        <header>
+          <h1 className={componentStyles.title}>{title}</h1>
+          <p>
+            Powered by{' '}
+            <a href="https://www.propeldata.com/" target="_blank" rel="noreferrer">
+              Propel
+            </a>
+          </p>
+        </header>
+      )}
+      <div
+        className={componentStyles.reportGrid}
+        style={{
+          gridTemplateAreas,
+          gridTemplateRows: layout?.map(() => '1fr').join(' '),
+          gridTemplateColumns: layout?.[0]?.map(() => '1fr').join(' ')
+        }}
+      >
+        {reportCharts?.map((chart, chartIdx) => (
+          <Card
+            key={`${chart.id}-${chartIdx}`}
+            {...reportCardProps}
+            className={classNames(
+              componentStyles.card,
+              clickable && componentStyles.clickable,
+              reportCardProps?.className
+            )}
+            onClick={(e) => clickable && (onCardClick?.(chart) ?? reportCardProps?.onClick?.(e))}
+            style={{ ...reportCardProps?.style, gridArea: `report-area-${chart.id}` }}
+          >
+            <div className={componentStyles.cardTitle}>{chart.title != null && <h2>{chart.title}</h2>}</div>
+            {!isLoading ? (
+              chart.result != null &&
+              chart.type != null &&
+              componentMap[chart.type as 'timeSeries' | 'leaderboard' | 'counter']({ ...chart.result[chart.type] })
+            ) : (
+              <Loader className={componentStyles.loader} />
+            )}
+          </Card>
+        ))}
+      </div>
     </div>
   )
 })

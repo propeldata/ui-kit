@@ -1,5 +1,6 @@
 export interface ChartProp {
   id?: string
+  title?: string
   query?: string
   type?: 'timeSeries' | 'leaderboard' | 'counter' | '' | string
   variables?: string
@@ -24,6 +25,7 @@ export interface ReportQueryProp {
 }
 
 export interface ReportProps {
+  title?: string
   layout?: string[][]
   charts?: ChartProp[]
   clickable?: boolean
