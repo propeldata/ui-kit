@@ -7,21 +7,13 @@ import { Card } from '../Card'
 import { useReportComponents } from '../../hooks'
 
 import componentStyles from './Report.module.scss'
-import { ChartProp } from './Report.types'
+import { ReportProps } from './Report.types'
 import { buildGridTemplateAreas } from './utils'
 import { TimeSeries, TimeSeriesProps } from '../TimeSeries'
 import { Leaderboard, LeaderboardProps } from '../Leaderboard'
 import { Counter, CounterProps } from '../Counter'
 import { Loader } from '../Loader'
-
-interface Props {
-  layout: string[][]
-  charts: ChartProp[]
-  clickable?: boolean
-  onCardClick?: (chart: ChartProp) => void
-  reportCardProps?: React.HTMLAttributes<HTMLDivElement>
-  propelApiUrl?: string
-}
+import { useReport } from '../../hooks/useReport'
 
 const componentMap = {
   timeSeries: (args: TimeSeriesProps) => <TimeSeries {...args} />,
@@ -30,10 +22,30 @@ const componentMap = {
   '': () => null
 }
 
-export const ReportComponent = React.forwardRef((props: Props) => {
-  const { layout, charts, clickable = false, onCardClick, reportCardProps, propelApiUrl } = props
+export const ReportComponent = React.forwardRef((props: ReportProps) => {
+  const {
+    layout: layoutProp,
+    charts: chartsProp,
+    clickable = false,
+    onCardClick,
+    reportCardProps,
+    propelApiUrl,
+    query
+  } = props
 
-  const { charts: reportCharts, isLoading } = useReportComponents(charts, { propelApiUrl })
+  const isStatic = query?.accessToken == null
+
+  const { data, isLoading: isLoadingReport } = useReport({ ...query, enabled: !isStatic })
+
+  const charts = isStatic ? chartsProp : data?.report?.charts
+  const layout = isStatic ? layoutProp : data?.report?.layout
+
+  const { charts: reportCharts, isLoading: isLoadingComponents } = useReportComponents(charts, {
+    propelApiUrl: propelApiUrl ?? query?.propelApiUrl,
+    accessToken: query?.accessToken
+  })
+
+  const isLoading = (!isStatic && isLoadingReport) || isLoadingComponents
 
   const gridTemplateAreas = buildGridTemplateAreas(layout)
 
@@ -42,11 +54,11 @@ export const ReportComponent = React.forwardRef((props: Props) => {
       className={componentStyles.container}
       style={{
         gridTemplateAreas,
-        gridTemplateRows: layout.map(() => '1fr').join(' '),
-        gridTemplateColumns: layout[0].map(() => '1fr').join(' ')
+        gridTemplateRows: layout?.map(() => '1fr').join(' '),
+        gridTemplateColumns: layout?.[0]?.map(() => '1fr').join(' ')
       }}
     >
-      {reportCharts.map((chart, chartIdx) => (
+      {reportCharts?.map((chart, chartIdx) => (
         <Card
           key={`${chart.id}-${chartIdx}`}
           {...reportCardProps}
@@ -59,7 +71,9 @@ export const ReportComponent = React.forwardRef((props: Props) => {
           style={{ ...reportCardProps?.style, gridArea: `report-area-${chart.id}` }}
         >
           {!isLoading ? (
-            chart.result != null && componentMap[chart.type]({ ...chart.result[chart.type] })
+            chart.result != null &&
+            chart.type != null &&
+            componentMap[chart.type as 'timeSeries' | 'leaderboard' | 'counter']({ ...chart.result[chart.type] })
           ) : (
             <Loader className={componentStyles.loader} />
           )}

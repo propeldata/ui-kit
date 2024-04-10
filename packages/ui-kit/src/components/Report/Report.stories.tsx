@@ -157,7 +157,7 @@ export const Basic: Story = {
     ]
   },
   render: (args) => (
-    <AccessTokenProvider accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI2ODQ0MzMsImNsaWVudF9pZCI6IjNhdDY2YjByaWlnazlyZ2JyYzBpcjE3OGY0IiwiZXhwIjoxNzEyNjg4MDMzLCJpYXQiOjE3MTI2ODQ0MzMsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI4M2FlY2Y4Mi01ZmI4LTRjNzgtOTcxMi0wOTY3MzdkYjMyMjAiLCJzY29wZSI6ImFkbWluIG1ldHJpYzpxdWVyeSBtZXRyaWM6c3RhdHMiLCJzdWIiOiIzYXQ2NmIwcmlpZ2s5cmdicmMwaXIxNzhmNCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.G7sOqKXgrXzx7g8LlecJHdxkI4oNaFQBRiwVfWiWf5Y">
+    <AccessTokenProvider accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3Njk2MjksImNsaWVudF9pZCI6IjNhdDY2YjByaWlnazlyZ2JyYzBpcjE3OGY0IiwiZXhwIjoxNzEyNzczMjI5LCJpYXQiOjE3MTI3Njk2MjksImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiJmMTZhZDJlNC04OTEyLTRiMGUtODEyZS0wNzkzM2I3ZDk3NjYiLCJzY29wZSI6ImFkbWluIG1ldHJpYzpxdWVyeSBtZXRyaWM6c3RhdHMiLCJzdWIiOiIzYXQ2NmIwcmlpZ2s5cmdicmMwaXIxNzhmNCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.7nnbyMY65NaiD4prMq9mRqDLT9jxYD3WF7r0LMo0Px0">
       <Report {...args} />
     </AccessTokenProvider>
   )
@@ -209,4 +209,16 @@ export const Test: Story = {
       <Report {...args} />
     </AccessTokenProvider>
   )
+}
+
+export const Connected: Story = {
+  args: {
+    query: {
+      accessToken:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3NzEzODgsImNsaWVudF9pZCI6IkFQUDAxSEZQVFc4NjM1WVQ2Q1E5MjVFNUtZM1JOIiwiZXhwIjoxNzEyNzc0OTg4LCJpYXQiOjE3MTI3NzEzODgsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIuZGV2LnByb3BlbGRhdGEuY29tIiwianRpIjoiMjA3OWM0NTUtYzg2Mi00ZWM0LTgyYmQtODRmOGEwNzY3NDE5Iiwic2NvcGUiOiJtZXRyaWM6cXVlcnkgbWV0cmljOnN0YXRzIGRhdGFfcG9vbDpxdWVyeSBkYXRhX3Bvb2w6cmVhZCBkYXRhX3Bvb2w6c3RhdHMgYWRtaW4gYXBwbGljYXRpb246YWRtaW4gbWV0cmljOnJlYWQiLCJzdWIiOiJBUFAwMUhGUFRXODYzNVlUNkNROTI1RTVLWTNSTiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.DImh1Mu2OMrxji5G6tWEQ2m7bnQ_YvuDdC2j84pdCOU',
+      propelApiUrl: 'https://api.us-east-2.dev.propeldata.com/graphql',
+      reportId: 'RPT01HV4GY04A4B1054KCK3EV08AR'
+    }
+  },
+  render: (args) => <Report {...args} />
 }

@@ -1,0 +1,12 @@
+query Report($id: ID!) {
+  report(id: $id) {
+    layout
+    charts {
+      id
+      type
+      title
+      query
+      variables
+    }
+  }
+}
