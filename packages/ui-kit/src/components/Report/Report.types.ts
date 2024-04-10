@@ -24,8 +24,8 @@ export interface ReportQueryProp {
 }
 
 export interface ReportProps {
-  layout: string[][]
-  charts: ChartProp[]
+  layout?: string[][]
+  charts?: ChartProp[]
   clickable?: boolean
   onCardClick?: (chart: ChartProp | null | undefined) => void
   reportCardProps?: React.HTMLAttributes<HTMLDivElement>
