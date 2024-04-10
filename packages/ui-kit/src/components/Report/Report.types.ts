@@ -33,4 +33,6 @@ export interface ReportProps {
   reportCardProps?: React.HTMLAttributes<HTMLDivElement>
   propelApiUrl?: string
   query?: ReportQueryProp
+  className?: string
+  style?: React.CSSProperties
 }

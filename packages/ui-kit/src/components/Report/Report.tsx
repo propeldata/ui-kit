@@ -22,7 +22,7 @@ const componentMap = {
   '': () => null
 }
 
-export const ReportComponent = React.forwardRef((props: ReportProps) => {
+export const ReportComponent = React.forwardRef<HTMLDivElement, ReportProps>((props, ref) => {
   const {
     title: titleProp,
     layout: layoutProp,
@@ -31,7 +31,10 @@ export const ReportComponent = React.forwardRef((props: ReportProps) => {
     onCardClick,
     reportCardProps,
     propelApiUrl,
-    query
+    query,
+    className,
+    style,
+    ...rest
   } = props
 
   const isStatic = query?.accessToken == null
@@ -52,7 +55,7 @@ export const ReportComponent = React.forwardRef((props: ReportProps) => {
   const gridTemplateAreas = buildGridTemplateAreas(layout)
 
   return (
-    <div className={componentStyles.container}>
+    <div ref={ref} className={classNames(componentStyles.container, className)} style={style} {...rest}>
       {title != null && (
         <header>
           <h1 className={componentStyles.title}>{title}</h1>
