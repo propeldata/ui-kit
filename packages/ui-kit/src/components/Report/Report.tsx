@@ -5,6 +5,7 @@ import { ErrorFallback } from '../ErrorFallback'
 import { withContainer } from '../withContainer'
 import { Card } from '../Card'
 import { useReportComponents } from '../../hooks'
+import { PieChartProps, PieChart } from '../PieChart'
 
 import componentStyles from './Report.module.scss'
 import { ReportProps } from './Report.types'
@@ -16,9 +17,17 @@ import { Loader } from '../Loader'
 import { useReport } from '../../hooks/useReport'
 
 const componentMap = {
-  timeSeries: (args: TimeSeriesProps) => <TimeSeries {...args} />,
+  timeSeries: (args: TimeSeriesProps) => <TimeSeries style={{ maxHeight: '240px' }} {...args} />,
   leaderboard: (args: LeaderboardProps) => <Leaderboard {...args} style={{ height: '100%' }} />,
   counter: (args: CounterProps) => <Counter {...args} />,
+  pie: (args: PieChartProps) => (
+    <PieChart
+      className={componentStyles.pie}
+      chartProps={{ hideLegend: true }}
+      chartConfigProps={(config) => ({ ...config, options: { ...config.options, maintainAspectRatio: true } })}
+      {...args}
+    />
+  ),
   '': () => null
 }
 
@@ -87,14 +96,18 @@ export const ReportComponent = React.forwardRef<HTMLDivElement, ReportProps>((pr
             onClick={(e) => clickable && (onCardClick?.(chart) ?? reportCardProps?.onClick?.(e))}
             style={{ ...reportCardProps?.style, gridArea: `report-area-${chart.id}` }}
           >
-            <div className={componentStyles.cardTitle}>{chart.title != null && <h2>{chart.title}</h2>}</div>
-            {!isLoading ? (
-              chart.result != null &&
-              chart.type != null &&
-              componentMap[chart.type as 'timeSeries' | 'leaderboard' | 'counter']({ ...chart.result[chart.type] })
-            ) : (
-              <Loader className={componentStyles.loader} />
-            )}
+            <header className={componentStyles.cardTitle}>{chart.title != null && <h2>{chart.title}</h2>}</header>
+            <div>
+              {!isLoading ? (
+                chart.result != null &&
+                chart.type != null &&
+                componentMap[chart.type as 'timeSeries' | 'leaderboard' | 'counter' | 'pie']({
+                  ...chart.result[chart.type === 'pie' ? 'leaderboard' : chart.type]
+                })
+              ) : (
+                <Loader className={componentStyles.loader} />
+              )}
+            </div>
           </Card>
         ))}
       </div>

@@ -4,6 +4,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { quotedStringRegex, storybookCodeTemplate } from '../../helpers'
 import { Report } from './Report'
 import { AccessTokenProvider } from '../AccessTokenProvider'
+import { ThemeProvider } from '../ThemeProvider'
 
 type Story = StoryObj<typeof Report>
 
@@ -60,9 +61,35 @@ export const Basic: Story = {
       },
       {
         id: `leaderboard`,
-        query: ``,
-        type: '',
-        variables: `{}`
+        query: `query LeaderboardQuery($input: LeaderboardInput!) {
+          leaderboard(input: $input) {
+            headers
+            rows
+          }
+        }`,
+        type: 'pie',
+        variables: `{
+          "input": {
+            "metric": {
+              "count": {
+                "dataPool": {
+                  "name": "TacoSoft Demo Data"
+                }
+              }
+            },
+            "sort": "DESC",
+            "timeZone": "UTC",
+            "timeRange": {
+              "relative": "LAST_N_DAYS",
+              "n": 30
+            },
+            "rowLimit": 10,
+            "dimensions": [{
+              "columnName": "taco_name"
+            }],
+            "filters": []
+          }
+        }`
       },
       {
         id: 'counter1',
@@ -159,7 +186,7 @@ export const Basic: Story = {
     ]
   },
   render: (args) => (
-    <AccessTokenProvider accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3Nzg2NzQsImNsaWVudF9pZCI6IjNhdDY2YjByaWlnazlyZ2JyYzBpcjE3OGY0IiwiZXhwIjoxNzEyNzgyMjc0LCJpYXQiOjE3MTI3Nzg2NzQsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI0MGUwZGJjNi02NTNhLTQ3MWQtYTExZC00MDM4ODMwOGNiZDMiLCJzY29wZSI6ImFkbWluIG1ldHJpYzpxdWVyeSBtZXRyaWM6c3RhdHMiLCJzdWIiOiIzYXQ2NmIwcmlpZ2s5cmdicmMwaXIxNzhmNCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.HbMBSp_k5ljRucPm8ih0udlnk0ITEP7m5sxtIix2Mr4">
+    <AccessTokenProvider accessToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3RpbWUiOjE3MTI3ODcwMzUsImNsaWVudF9pZCI6IjNhdDY2YjByaWlnazlyZ2JyYzBpcjE3OGY0IiwiZXhwIjoxNzEyNzkwNjM1LCJpYXQiOjE3MTI3ODcwMzUsImlzcyI6Imh0dHBzOi8vYXV0aC51cy1lYXN0LTIucHJvcGVsZGF0YS5jb20iLCJqdGkiOiI2MmY4MmFlZC1jZThiLTQ4YWQtYWM3Yy1mMmIzMDYxNGIwZGYiLCJzY29wZSI6ImFkbWluIG1ldHJpYzpxdWVyeSBtZXRyaWM6c3RhdHMiLCJzdWIiOiIzYXQ2NmIwcmlpZ2s5cmdicmMwaXIxNzhmNCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInZlcnNpb24iOjF9.al0_llTjzf19gNFDevWj0zs0NbegXtTSZ1PokD3-aLg">
       <Report {...args} />
     </AccessTokenProvider>
   )

@@ -38,10 +38,14 @@
 }
 
 .card {
+  display: block;
+}
+
+.card > div {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .clickable {
@@ -55,4 +59,8 @@
 .cardTitle > h2 {
   margin: 0;
   font-size: 18px;
+}
+
+.pie > div > canvas {
+  max-height: 240px !important;
 }
