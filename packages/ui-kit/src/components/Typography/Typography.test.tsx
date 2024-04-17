@@ -4,10 +4,9 @@ import { Typography } from './Typography'
 
 jest.mock('./Typography.module.scss', () => ({
   rootTypography: 'rootTypography',
-  regular: 'regular',
-  tiny: 'tiny',
-  small: 'small',
-  Heading1: 'Heading1',
+  textMdRegular: 'textMdRegular',
+  textXxsRegular: 'textXxsRegular',
+  textSmRegular: 'textSmRegular',
   block: 'block'
 }))
 
@@ -17,7 +16,7 @@ describe('Typography', () => {
 
     const typography = screen.getByTestId('typography')
     expect(typography.tagName).toBe('SPAN')
-    expect(typography).toHaveClass('rootTypography', 'regular')
+    expect(typography).toHaveClass('rootTypography', 'textMdRegular')
     expect(typography).toHaveTextContent('Default Text')
   })
 
@@ -28,11 +27,10 @@ describe('Typography', () => {
     expect(typography.tagName).toBe(element.toUpperCase())
   })
 
-  it.each<[variant: 'regular' | 'tiny' | 'small' | 'Heading1', expectedClass: string]>([
-    ['regular', 'regular'],
-    ['tiny', 'tiny'],
-    ['small', 'small'],
-    ['Heading1', 'Heading1']
+  it.each<[variant: 'textMdRegular' | 'textXxsRegular' | 'textSmRegular', expectedClass: string]>([
+    ['textMdRegular', 'textMdRegular'],
+    ['textXxsRegular', 'textXxsRegular'],
+    ['textSmRegular', 'textSmRegular']
   ])('applies %s variant class', (variant, expectedClass) => {
     render(<Typography variant={variant}>Text</Typography>)
 

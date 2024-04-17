@@ -9,6 +9,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   overridable?: boolean
   baseTheme?: DefaultThemes
   variant?: 'default' | 'primary'
+  size?: 'default' | 'small'
   startAdornment?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
   endAdornment?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
 }
@@ -20,6 +21,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
     className,
     disabled,
     variant = 'default',
+    size = 'default',
     startAdornment,
     endAdornment,
     overridable,
@@ -49,6 +51,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
         { [componentStyles.startAdornment]: startAdornment },
         { [componentStyles.endAdornment]: endAdornment },
         { [componentStyles[variant]]: variant && variant !== 'default' },
+        { [componentStyles[size]]: size && size !== 'default' },
         className
       )}
     >

@@ -55,11 +55,41 @@ export const DisabledStory: Story = {
   render: (args) => <Input {...args} />
 }
 
-export const AdornmentsStory: Story = {
+export const ErrorStory: Story = {
+  name: 'Error',
+  args: {
+    value: 'Input value',
+    error: true
+  },
+  render: (args) => <Input {...args} />
+}
+
+export const EndAdornmentsStory: Story = {
   name: 'End Adornment',
   args: {
-    style: { width: 300 },
+    style: { width: 214 },
     value: 'Input value',
+    endAdornment: () => <ChevronDownIcon />
+  },
+  render: (args) => <Input {...args} />
+}
+
+export const SmallStory: Story = {
+  name: 'Small',
+  args: {
+    value: 'Input value',
+    size: 'small'
+  },
+  render: (args) => <Input {...args} />
+}
+
+export const SmallEndAdornmentsStory: Story = {
+  name: 'Small End Adornment',
+  args: {
+    style: { width: 183 },
+    value: 'Input value',
+    size: 'small',
+    disabled: true,
     endAdornment: () => <ChevronDownIcon />
   },
   render: (args) => <Input {...args} />

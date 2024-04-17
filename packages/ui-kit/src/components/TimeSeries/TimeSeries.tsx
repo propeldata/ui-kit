@@ -160,7 +160,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.bgPrimary : 'transparent'
+            color: card ? theme?.backgroundPrimary : 'transparent'
           },
           legend: {
             display: false
@@ -172,7 +172,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        let backgroundColor: Color | CanvasGradient = theme?.accent ?? ''
+        let backgroundColor: Color | CanvasGradient = theme?.backgroundBrandSolid ?? ''
 
         const fill = fillArea && variant === 'line'
         if (fill) {
@@ -180,8 +180,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           if (ctx) {
             backgroundColor = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight)
             // @TODO: need to refactor this logic due to the possible different types of the color value, e.g. hex, rgb, rgba, etc.
-            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.accentHover, 0.35))
-            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.accentHover, 0.05))
+            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.backgroundBrandSolidHover, 0.35))
+            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.backgroundBrandSolidHover, 0.05))
           }
         }
 
@@ -191,12 +191,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
             {
               data: values,
               backgroundColor: backgroundColor,
-              hoverBackgroundColor: theme?.accentHover,
-              borderColor: theme?.accent,
-              pointBackgroundColor: theme?.accentHover,
-              pointHoverBackgroundColor: theme?.accentHover,
+              hoverBackgroundColor: theme?.backgroundBrandSolidHover,
+              borderColor: theme?.backgroundBrandSolid,
+              pointBackgroundColor: theme?.backgroundBrandSolidHover,
+              pointHoverBackgroundColor: theme?.backgroundBrandSolidHover,
               pointHoverBorderWidth: 2,
-              pointHoverBorderColor: theme?.bgPrimary,
+              pointHoverBorderColor: theme?.backgroundPrimary,
               fill
             } as ChartDataset<TimeSeriesChartVariant>
           ]

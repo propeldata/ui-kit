@@ -11,12 +11,12 @@ import './global.css'
 const GlobalStyles = () => {
   const theme = useTheme()
   if (document && theme) {
-    document.body.style.setProperty('--bg-color', theme.bgSecondary as string)
+    document.body.style.setProperty('--bg-color', theme.backgroundSecondary as string)
   }
   return null
 }
 
-const MyCustomButton = ({ children }: React.ComponentPropsWithoutRef<'button'>) => <button>{children}</button>
+// const MyCustomButton = ({ children }: React.ComponentPropsWithoutRef<'button'>) => <button>{children}</button>
 
 const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   if (context.parameters.skipThemeProvider) {

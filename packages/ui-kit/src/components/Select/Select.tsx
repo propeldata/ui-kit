@@ -10,18 +10,10 @@ import { Option } from './Option'
 import componentStyles from './Select.module.scss'
 
 export interface SelectProps
-  extends Pick<ButtonProps, 'startAdornment' | 'endAdornment'>,
+  extends Pick<ButtonProps, 'startAdornment' | 'endAdornment' | 'size'>,
     MUISelectProps<string, false> {
   options?: SelectOptionDefinition<string>[]
 }
-// interface SelectProps
-//   extends Pick<ButtonProps, 'startAdornment' | 'endAdornment'>,
-//     Pick<SelectOwnProps<string, false>, 'onChange' | 'value' | 'children'> {
-//   options?: SelectOptionDefinition<string>[]
-//   // children?: React.ReactNode | React.ReactNode[]
-//   placeholder?: string
-//   // value?: string
-// }
 
 const ButtonSlot = prepareForSlot(Button)
 
@@ -34,6 +26,7 @@ export const Select = ({
   className,
   slotProps,
   listboxOpen,
+  size = 'default',
   ...rest
 }: SelectProps) => {
   const [listboxVisible, setListboxVisible] = React.useState(listboxOpen ?? false)
@@ -60,11 +53,23 @@ export const Select = ({
         {...rest}
         slots={{ root: ButtonSlot }}
         slotProps={{
-          root: getButtonProps({ startAdornment, endAdornment, value: value ?? undefined }),
+          root: getButtonProps({
+            startAdornment,
+            endAdornment,
+            size,
+            value: value ?? undefined,
+            className: classNames(componentStyles.button, componentStyles.rootButton, {
+              [componentStyles[size]]: size && size !== 'default'
+            })
+          }),
           popper: {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            className: classNames(componentStyles.popper, slotProps?.popper?.className),
+            className: classNames(
+              componentStyles.popper,
+              { [componentStyles[size]]: size && size !== 'default' },
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              slotProps?.popper?.className
+            ),
             disablePortal: true,
             open
           }

@@ -3,7 +3,7 @@ import React from 'react'
 import { FormField } from './FormField'
 
 jest.mock('./FormField.module.scss', () => ({
-  formField: 'formField'
+  rootFormField: 'rootFormField'
 }))
 
 describe('FormField', () => {
@@ -34,7 +34,7 @@ describe('FormField', () => {
     )
 
     const formFieldElement = screen.getByTestId('form-field')
-    expect(formFieldElement).toHaveClass('formField')
+    expect(formFieldElement).toHaveClass('rootFormField')
     expect(formFieldElement).toHaveClass(additionalClass)
   })
 })

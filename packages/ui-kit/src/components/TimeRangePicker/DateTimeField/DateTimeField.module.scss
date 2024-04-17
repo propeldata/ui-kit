@@ -1,13 +1,9 @@
 .rootDateTimeField {
   display: flex;
-  gap: var(--propel-space-md);
+  gap: var(--propel-spacing-md);
   flex: 1;
 }
 
 .formField {
   flex: 1;
-}
-
-.inputSmall {
-  padding: var(--propel-space-xs) var(--propel-space-md);
 }

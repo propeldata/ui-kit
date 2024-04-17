@@ -77,8 +77,7 @@ export const SingleValueStory: Story = {
   args: {
     ...connectedParams,
     style: {
-      width: 'fit-content',
-      '--propel-accent': 'red'
+      width: 'fit-content'
     },
     card: true
   },
@@ -197,8 +196,8 @@ export const CustomErrorFallbackStory: Story = {
     errorFallback: ({ theme }) => (
       <div
         style={{
-          border: `1px solid ${theme?.errorPrimary}`,
-          color: theme?.errorPrimary,
+          border: `1px solid ${theme?.borderError}`,
+          color: theme?.textErrorPrimary,
           padding: '1rem'
         }}
       >

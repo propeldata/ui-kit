@@ -230,7 +230,6 @@ const main = async () => {
 
           if (typographyValue) {
             variables.push(typographyValue)
-            tokens.push(typographyValue)
             typographyClass.props.push({ prop: valueKeyPropMapping[valueKey], value: `var(--propel-${propKey})` })
           }
         }
@@ -297,13 +296,18 @@ const main = async () => {
       )
     })
 
+    const tsItems = [...tokens, ...variables]
+    if (lightTheme) {
+      tsItems.push(...lightTheme)
+    }
+
     // Generate theme.types.ts
     writeToFileSync(
       'theme.types.ts',
       [
         `// ${GENERATED_WARNING}\n`,
         'export type ThemeTokenGeneratedProps = {',
-        tokens.map(({ jsName }) => `  ${jsName}?: string;`).join('\n'),
+        tsItems.map(({ jsName }) => `  ${jsName}?: string;`).join('\n'),
         '}\n',
         'export type ThemeCSSTokenGeneratedProps = {',
         lightTheme?.map(({ cssName }) => `  '${cssName}'?: string;`).join('\n'),
@@ -318,7 +322,7 @@ const main = async () => {
         `// ${GENERATED_WARNING}\n`,
         "import type { ThemeTokenGeneratedProps } from './theme.types'\n",
         'export const themeTokensGenerated: (keyof ThemeTokenGeneratedProps)[] = [',
-        tokens.map(({ jsName }) => `  '${jsName}',`).join('\n'),
+        tsItems.map(({ jsName }) => `  '${jsName}',`).join('\n'),
         ']'
       ].join('\n')
     )
@@ -329,7 +333,7 @@ const main = async () => {
       [
         `// ${GENERATED_WARNING}\n`,
         'export const themeDict = [',
-        tokens.map(({ jsName, cssName }) => `  { name: '${jsName}', cssVarName: '${cssName}' },`).join('\n'),
+        tsItems.map(({ jsName, cssName }) => `  { name: '${jsName}', cssVarName: '${cssName}' },`).join('\n'),
         ']'
       ].join('\n')
     )

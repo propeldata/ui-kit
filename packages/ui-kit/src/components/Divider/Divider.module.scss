@@ -1,5 +1,6 @@
 .rootDivider {
-  margin: var(--propel-space-xxs) 0;
+  margin: var(--propel-spacing-md) 0;
+  padding: 0 !important;
   height: 1px;
   background-color: var(--propel-border-primary);
 }

@@ -4,6 +4,8 @@ import { ThemeTokenGeneratedProps, ThemeCSSTokenGeneratedProps } from './generat
 
 export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
   baseTheme?: DefaultThemes
+  componentHeight?: CSSProperties['height']
+  transitionEaseTime?: CSSProperties['transitionDuration']
 
   /** @deprecated This property is deprecated, use `textMdRegularFontFamily` instead */
   fontFamily?: CSSProperties['fontFamily']
@@ -64,9 +66,6 @@ export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
   shadowSm?: CSSProperties['boxShadow']
 
   /** @deprecated This property will be deprecated soon */
-  componentHeight?: CSSProperties['height']
-
-  /** @deprecated This property will be deprecated soon */
   successPrimary?: CSSProperties['color']
   /** @deprecated This property will be deprecated soon */
   successSecondary?: CSSProperties['color']
@@ -84,12 +83,6 @@ export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
   /** @deprecated This property will be deprecated soon */
   bgSecondary?: CSSProperties['color']
   /** @deprecated This property will be deprecated soon */
-  textPrimary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  textSecondary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  borderPrimary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
   accent?: CSSProperties['color']
   /** @deprecated This property will be deprecated soon */
   accentHover?: CSSProperties['color']
@@ -103,21 +96,36 @@ export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
   /**
    * Color Blue
    */
+  /** @deprecated This property will be deprecated soon */
   colorBlue950?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue900?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue800?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue700?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue600?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue500?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue400?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue300?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue200?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue100?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue50?: CSSProperties['color']
+  /** @deprecated This property will be deprecated soon */
   colorBlue25?: CSSProperties['color']
 }
 
 export interface ThemeCSSTokenProps extends ThemeCSSTokenGeneratedProps {
+  '--propel-component-height'?: CSSProperties['height']
+  '--propel-transition-ease-time'?: CSSProperties['height']
+
   /** @deprecated This property is deprecated, use `--propel-text-md-regular-font-family` instead */
   '--propel-font-family'?: CSSProperties['fontFamily']
   /** @deprecated This property is deprecated, use `--propel-text-md-regular-font-size` instead */
@@ -176,8 +184,6 @@ export interface ThemeCSSTokenProps extends ThemeCSSTokenGeneratedProps {
   /** @deprecated This property is deprecated, use `shadowsShadowXs` instead */
   '--propel-shadow-sm'?: CSSProperties['boxShadow']
 
-  '--propel-component-height'?: CSSProperties['height']
-
   /** @deprecated This property is deprecated */
   '--propel-success-primary'?: CSSProperties['color']
   /** @deprecated This property is deprecated */
@@ -195,13 +201,6 @@ export interface ThemeCSSTokenProps extends ThemeCSSTokenGeneratedProps {
   '--propel-bg-primary'?: CSSProperties['color']
   /** @deprecated This property will be deprecated soon */
   '--propel-bg-secondary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-text-primary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-text-secondary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  /** @deprecated This property will be deprecated soon */
-  '--propel-border-primary'?: CSSProperties['color']
   /** @deprecated This property will be deprecated soon */
   '--propel-accent'?: CSSProperties['color']
   /** @deprecated This property will be deprecated soon */

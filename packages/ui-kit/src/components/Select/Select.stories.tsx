@@ -66,3 +66,13 @@ export const DefaultStory: Story = {
   },
   render: (args) => <Select {...args} />
 }
+
+export const SmallStory: Story = {
+  name: 'Small',
+  args: {
+    options,
+    size: 'small',
+    placeholder: 'Select an option'
+  },
+  render: (args) => <Select {...args} />
+}

@@ -59,7 +59,25 @@ export const DisabledStory: Story = {
 export const AdornmentsStory: Story = {
   name: 'Adornments',
   args: {
-    style: { width: 300 },
+    style: { width: 200 },
+    startAdornment: () => <ChevronUpIcon />,
+    endAdornment: () => <ChevronDownIcon />
+  },
+  render: (args) => <Button {...args}>Button Tex</Button>
+}
+
+export const SmallStory: Story = {
+  name: 'Small',
+  args: {
+    size: 'small'
+  },
+  render: (args) => <Button {...args}>Button Tex</Button>
+}
+
+export const SmallAdornmentsStory: Story = {
+  name: 'Small Adornments',
+  args: {
+    size: 'small',
     startAdornment: () => <ChevronUpIcon />,
     endAdornment: () => <ChevronDownIcon />
   },

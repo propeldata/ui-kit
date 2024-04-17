@@ -69,7 +69,6 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const popupOpen = Boolean(anchorEl)
 
     const getLastNOption = React.useCallback(() => {
-      console.log('getLastNOption')
       const relativeOption = lastNOptions.find((option) => option.label === lastNOption)
       return {
         uid: 'last-n',
@@ -191,7 +190,11 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       caption_label: classNames(styles.caption_label, componentStyles.caption_label),
       caption_end: classNames(styles.caption_end, componentStyles.caption_end),
       caption_start: classNames(styles.caption_start, componentStyles.caption_start),
+      head_cell: classNames(styles.head_cell, componentStyles.head_cell),
+      cell: classNames(styles.cell, componentStyles.cell),
       button: classNames(styles.button, componentStyles.button),
+      day_today: classNames(styles.day_today, componentStyles.day_today),
+      day_selected: classNames(styles.day_selected, componentStyles.day_selected),
       day_range_start: classNames(styles.day_range_start, componentStyles.day_range_start),
       day_range_end: classNames(styles.day_range_end, componentStyles.day_range_end),
       day_range_middle: classNames(styles.day_range_middle, componentStyles.day_range_middle),
@@ -207,10 +210,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           placeholder="Date Range"
           onListboxOpenChange={setSelectOpen}
           listboxOpen={selectOpen}
-          // options={[
-          //   { label: 'Today111', value: 'today' },
-          //   { label: 'Time Picker111', value: FROM_DATE_UNTIL_NOW }
-          // ]}
+          size="small"
           slotProps={{
             popper: { className: componentStyles.timeRangePickerPopper }
           }}
@@ -256,21 +256,23 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                 <Input
                   type="number"
                   value={lastN}
+                  size="small"
                   onChange={(event) => {
                     setLastN(Number(event?.currentTarget?.value))
                     changeLastNParams()
                   }}
-                  style={{ width: 40, padding: theme?.spaceXxs }}
+                  style={{ width: 50, padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
                 />{' '}
                 <Select
                   value={lastNOption}
+                  size="small"
                   onChange={(_, value) => {
                     if (value !== null) {
                       setLastNOption(value)
                       changeLastNParams()
                     }
                   }}
-                  style={{ width: 'fit-content', padding: theme?.spaceXxs }}
+                  style={{ padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
                 >
                   {lastNOptions.map(({ label }) => (
                     <Option key={label} value={label}>
@@ -297,20 +299,16 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
             { name: 'flip', enabled: false },
             { name: 'preventOverflow', enabled: false }
           ]}
-          // style={{
-          //   width: anchorEl?.clientWidth,
-          //   zIndex: 9999
-          // }}
           disablePortal
         >
           <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
             <div className={componentStyles.timeRangePicker}>
               <div className={componentStyles.timeRangePickerHeader}>
-                <Typography style={{ fontWeight: 'bold' }}>
+                <Typography variant="textMdSemibold">
                   Select a {datepickerMode === FROM_DATE_UNTIL_NOW ? 'start date' : 'date range'}
                 </Typography>
                 <CloseIcon
-                  style={{ cursor: 'pointer', padding: theme?.spaceXs, margin: `-${theme?.spaceXs}` }}
+                  style={{ cursor: 'pointer', padding: theme?.spacingSm, margin: `-${theme?.spacing3xl}` }}
                   onClick={onCancel}
                 />
               </div>
@@ -344,13 +342,14 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
               </div>
               {datepickerRange?.from && datepickerRange?.to && (
                 <>
-                  <Divider as="div" style={{ margin: `${theme?.spaceXs} 0px` }} />
+                  <Divider as="div" />
                   <div className={componentStyles[datepickerMode]}>
-                    <Typography variant="small">
-                      <strong>Start:</strong> {format(datepickerRange.from, CUSTOM_RANGE_FORMAT)}
+                    <Typography variant="textXsRegular">
+                      <span style={{ color: theme?.textQuarterary }}>Start:</span>{' '}
+                      {format(datepickerRange.from, CUSTOM_RANGE_FORMAT)}
                     </Typography>
-                    <Typography variant="small">
-                      <strong>End:</strong>{' '}
+                    <Typography variant="textXsRegular">
+                      <span style={{ color: theme?.textQuarterary }}>End:</span>{' '}
                       {datepickerMode === FROM_DATE_UNTIL_NOW
                         ? `Now ${format(datepickerRange.to, 'MMMM dd, yyyy')}`
                         : format(datepickerRange.to, CUSTOM_RANGE_FORMAT)}
@@ -358,19 +357,19 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   </div>
                 </>
               )}
-              <Divider as="div" style={{ margin: `${theme?.spaceSm} 0px` }} />
+              <Divider as="div" />
               <div className={componentStyles.timeRangePickerActions}>
                 {datepickerMode === CUSTOM_DATE_RANGE && (
                   <div style={{ flex: 4, display: 'flex' }}>
-                    <Button style={{ flex: 0.25 }} overridable onClick={onClear}>
+                    <Button size="small" style={{ flex: 0.25 }} overridable onClick={onClear}>
                       Clear
                     </Button>
                   </div>
                 )}
-                <Button overridable style={{ flex: 1 }} onClick={onCancel}>
+                <Button size="small" overridable style={{ flex: 1 }} onClick={onCancel}>
                   Cancel
                 </Button>
-                <Button overridable variant="primary" style={{ flex: 1 }} onClick={onApply}>
+                <Button size="small" overridable variant="primary" style={{ flex: 1 }} onClick={onApply}>
                   Apply
                 </Button>
               </div>

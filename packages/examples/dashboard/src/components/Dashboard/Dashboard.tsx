@@ -21,7 +21,7 @@ import { TimeSeriesStatic } from '../TimeSeriesStatic'
 const GlobalStyles = () => {
   const theme = useTheme()
   if (document && theme) {
-    document.body.style.setProperty('--bg-color', theme.bgSecondary as string)
+    document.body.style.setProperty('--bg-color', theme.backgroundSecondary as string)
   }
   return null
 }
@@ -44,7 +44,9 @@ export const Dashboard = ({ fetchToken, envs }: DashboardProps) => {
           )}
         >
           <GlobalStyles />
-          <main style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-bg-secondary)' }}>
+          <main
+            style={{ color: 'var(--propel-text-secondary)', backgroundColor: 'var(--propel-background-secondary)' }}
+          >
             <h1 className="px-6 py-3 text-3xl">
               React {React.version} Testing App
               <button className="m-3" onClick={() => setTheme(theme === 'lightTheme' ? 'darkTheme' : 'lightTheme')}>

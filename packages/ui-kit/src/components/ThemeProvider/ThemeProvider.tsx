@@ -49,7 +49,7 @@ export const useSetupTheme = <T extends ChartVariant>({
 
     config.options = {
       color: theme.textSecondary ?? '',
-      backgroundColor: theme.accent ?? '',
+      backgroundColor: theme.backgroundBrandSolid ?? '',
       borderColor: theme.borderPrimary ?? '',
       elements: {
         point: {
@@ -58,13 +58,13 @@ export const useSetupTheme = <T extends ChartVariant>({
           radius: 0,
           borderWidth: 2,
           hoverRadius: 6,
-          hoverBorderColor: theme.bgPrimary ?? '',
-          backgroundColor: theme.accentHover ?? '',
-          hoverBackgroundColor: theme.accentHover ?? ''
+          hoverBorderColor: theme.backgroundPrimary ?? '',
+          backgroundColor: theme.backgroundBrandSolidHover ?? '',
+          hoverBackgroundColor: theme.backgroundBrandSolidHover ?? ''
         },
         bar: {
           borderWidth: 0,
-          hoverBackgroundColor: theme.accentHover ?? ''
+          hoverBackgroundColor: theme.backgroundBrandSolidHover ?? ''
         },
         line: {
           borderWidth: 3
@@ -73,7 +73,7 @@ export const useSetupTheme = <T extends ChartVariant>({
       plugins: {
         tooltip: {
           padding: parseInt(theme.spacingMd ?? '') ?? 8,
-          backgroundColor: theme.bgPrimary ?? '',
+          backgroundColor: theme.backgroundPrimary ?? '',
           bodyColor: theme.textSecondary ?? '',
           titleColor: theme.textSecondary ?? '',
           borderColor: theme.borderPrimary ?? '',

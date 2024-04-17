@@ -9,8 +9,8 @@ export interface FormFieldProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export const FormField = ({ label, children, ...rest }: FormFieldProps) => (
-  <div {...rest} className={classNames(componentStyles.formField, rest.className)} data-testid="form-field">
-    <Typography variant="small">{label}</Typography>
+  <div {...rest} className={classNames(componentStyles.rootFormField, rest.className)} data-testid="form-field">
+    <Typography variant="textXsRegular">{label}</Typography>
     {children}
   </div>
 )

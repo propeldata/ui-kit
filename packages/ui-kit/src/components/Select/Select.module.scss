@@ -1,20 +1,26 @@
-.rootSelect {
-  width: fit-content;
+@use '../../themes/generated/tokens';
+
+.rootButton {
+  @extend .textMdRegular;
+
+  &.small {
+    @extend .textSmRegular;
+  }
 }
 
 .popper {
   z-index: 9999;
-  padding: var(--propel-space-sm);
-  background-color: var(--propel-bg-primary);
-  border-radius: var(--propel-border-radius-sm);
+  padding: var(--propel-spacing-lg);
+  background-color: var(--propel-background-primary);
+  border-radius: var(--propel-radius-sm);
   border-width: 1px;
-  border-color: var(--propel-border-primary);
+  border-color: var(--propel-border-secondary);
   border-style: solid;
   color: var(--propel-text-secondary);
   display: flex;
   min-width: fit-content;
-  box-shadow: var(--propel-shadow-sm);
-  margin-top: var(--propel-space-xs) !important;
+  box-shadow: var(--propel-shadows-shadow-xs);
+  margin-top: var(--propel-spacing-xxs) !important;
 
   ul {
     width: 100%;
@@ -23,5 +29,16 @@
     display: flex;
     flex-direction: column;
     list-style-type: none;
+  }
+}
+
+.small {
+  ul {
+    li {
+      @extend .textSmRegular;
+
+      padding: var(--propel-spacing-md) var(--propel-spacing-xl);
+      gap: var(--propel-spacing-xxs);
+    }
   }
 }

@@ -1,24 +1,28 @@
-@use '../../themes/typography';
+@use '../../themes/generated/tokens';
 
 .rootCard {
   padding: 0;
   margin: 0;
 }
 
-.regular {
-  @extend .typographyRegular;
+.textMdRegular {
+  @extend .textMdRegular;
 }
 
-.tiny {
-  @extend .typographyTiny;
+.textMdSemibold {
+  @extend .textMdSemibold;
 }
 
-.small {
-  @extend .typographySmall;
+.textXsRegular {
+  @extend .textXsRegular;
 }
 
-.typographyHeading1 {
-  @extend .typographyRegular;
+.textXxsRegular {
+  @extend .textXxsRegular;
+}
+
+.textSmRegular {
+  @extend .textSmRegular;
 }
 
 .block {
