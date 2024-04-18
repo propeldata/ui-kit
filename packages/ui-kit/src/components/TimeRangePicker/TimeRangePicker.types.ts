@@ -1,20 +1,5 @@
-import { DateRange } from 'react-day-picker'
-import type { RelativeTimeRange } from '../../helpers'
+import type { TimeRangeInput } from '../../helpers'
 import type { DefaultThemes } from '../ThemeProvider'
-
-export type RelativeProps = {
-  /** Specifies the type of relative time range, such as "last n days" or "last n months". */
-  relative: RelativeTimeRange
-
-  /** The quantity of the relative time unit to apply, e.g., '30' in "last 30 days". */
-  n?: number
-}
-
-/**
- * Defines the possible values for a date range option.
- * This can be either a specific date range or a relative time range.
- */
-export type DateRangeOptionValue = RelativeProps | DateRange
 
 export type DateRangeOptionsProps = {
   /** A unique identifier for the date range option, used to distinguish between different options. */
@@ -24,7 +9,7 @@ export type DateRangeOptionsProps = {
   label?: string
 
   /** The value of the date range option, which can be either a specific date range or a relative time range. */
-  value?: DateRangeOptionValue
+  value?: TimeRangeInput
 }
 
 export interface TimeRangePickerProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {

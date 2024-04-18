@@ -27,6 +27,8 @@ import {
 import componentStyles from './TimeRangePicker.module.scss'
 import { DateRangeOptionsProps, TimeRangePickerProps } from './TimeRangePicker.types'
 
+const formatDateTime = (value: Date | undefined, valueFormat: string) => (value ? format(value, valueFormat) : '')
+
 export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerProps>(
   (
     {
@@ -94,10 +96,10 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       if (selectedOption?.uid === 'last-n') {
         label = `Last ${lastN} ${lastNOption}`
       } else if (selectedOption?.uid === FROM_DATE_UNTIL_NOW) {
-        label = `${format(datepickerRange?.from ?? '', DATE_FORMAT)} - Now`
+        label = `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - Now`
       } else if (selectedOption?.uid === CUSTOM_DATE_RANGE) {
-        label = `${format(datepickerRange?.from ?? '', DATE_FORMAT)} - ${format(
-          datepickerRange?.to ?? '',
+        label = `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - ${formatDateTime(
+          datepickerRange?.to,
           DATE_FORMAT
         )}`
       } else if (selectedOption) {
@@ -122,8 +124,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         (selectedOption?.uid === CUSTOM_DATE_RANGE || selectedOption?.uid === FROM_DATE_UNTIL_NOW)
       ) {
         selectedOption.value = {
-          from: datepickerRange.from,
-          to: datepickerRange.to
+          start: datepickerRange.from,
+          stop: datepickerRange.to
         }
       } else if (selectedOption?.uid === 'last-n') {
         selectedOption.value = getLastNOption()?.value
@@ -196,11 +198,14 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         uid: datepickerMode === CUSTOM_DATE_RANGE ? CUSTOM_DATE_RANGE : FROM_DATE_UNTIL_NOW,
         label:
           datepickerMode === CUSTOM_DATE_RANGE
-            ? `${format(datepickerRange?.from ?? '', DATE_FORMAT)} - ${format(datepickerRange?.to ?? '', DATE_FORMAT)}`
-            : `${format(datepickerRange?.from ?? '', DATE_FORMAT)} - Now`,
+            ? `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - ${formatDateTime(
+                datepickerRange?.to,
+                DATE_FORMAT
+              )}`
+            : `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - Now`,
         value: {
-          from: datepickerRange.from,
-          to: datepickerRange.to
+          start: datepickerRange.from,
+          stop: datepickerRange.to
         }
       }
 
@@ -244,7 +249,6 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           }}
           onChange={(event, value) => {
             if (value === FROM_DATE_UNTIL_NOW || value === 'custom-fixed-date-range') {
-              setDatepickerRange({ from: undefined, to: new Date() })
               event?.stopPropagation()
               setSelectOpen(false)
               setAnchorEl(componentContainer)
@@ -252,8 +256,11 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
 
             if (value === FROM_DATE_UNTIL_NOW) {
               const now = new Date()
-              setDatepickerMode(FROM_DATE_UNTIL_NOW)
               setSelectedRange({ from: startOfDay(now), to: now })
+              if (!datepickerRange?.to) {
+                setDatepickerRange({ from: undefined, to: now })
+              }
+              setDatepickerMode(FROM_DATE_UNTIL_NOW)
               return
             }
 
@@ -288,7 +295,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   size="small"
                   role="spinbutton"
                   onChange={onLastNChange}
-                  style={{ width: 50, padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
+                  style={{ width: 56, padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
                 />{' '}
                 <Select
                   value={lastNOption}
@@ -367,13 +374,13 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   <div className={componentStyles[datepickerMode]}>
                     <Typography variant="textXsRegular">
                       <span style={{ color: theme?.textQuarterary }}>Start:</span>{' '}
-                      {format(datepickerRange.from, CUSTOM_RANGE_FORMAT)}
+                      {formatDateTime(datepickerRange.from, CUSTOM_RANGE_FORMAT)}
                     </Typography>
                     <Typography variant="textXsRegular">
                       <span style={{ color: theme?.textQuarterary }}>End:</span>{' '}
                       {datepickerMode === FROM_DATE_UNTIL_NOW
-                        ? `Now ${format(datepickerRange.to, 'MMMM dd, yyyy')}`
-                        : format(datepickerRange.to, CUSTOM_RANGE_FORMAT)}
+                        ? `Now ${formatDateTime(datepickerRange.to, 'MMMM dd, yyyy')}`
+                        : formatDateTime(datepickerRange.to, CUSTOM_RANGE_FORMAT)}
                     </Typography>
                   </div>
                 </>
