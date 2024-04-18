@@ -5,6 +5,7 @@
   margin: 0;
 }
 
+// Add new variant when needed. Check themes/generated/_tokens.scss for available variants.
 .textMdRegular {
   @extend .textMdRegular;
 }

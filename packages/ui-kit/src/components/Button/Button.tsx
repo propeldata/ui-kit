@@ -20,6 +20,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
     children,
     className,
     disabled,
+    role = 'button',
     variant = 'default',
     size = 'default',
     startAdornment,
@@ -43,6 +44,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
     <button
       {...getRootProps()}
       {...rest}
+      role={role}
       className={classnames(
         componentStyles.rootButton,
         { [componentStyles.focus]: focusVisible },

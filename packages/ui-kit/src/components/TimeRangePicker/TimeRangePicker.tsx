@@ -68,6 +68,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     )
     const popupOpen = Boolean(anchorEl)
 
+    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+
     const getLastNOption = React.useCallback(() => {
       const relativeOption = lastNOptions.find((option) => option.label === lastNOption)
       return {
@@ -138,15 +140,41 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       onChange(selectedOption)
     }, [selectedOption, onChange])
 
-    const changeLastNParams = React.useCallback(() => {
-      const timeoutId = setTimeout(() => {
-        setSelectedOption(getLastNOption())
-      }, 500)
-
-      return () => {
-        clearTimeout(timeoutId)
+    const debouncedUpdate = React.useCallback(() => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
       }
-    }, [getLastNOption])
+
+      timeoutRef.current = setTimeout(() => {
+        const newOption = getLastNOption()
+        setSelectedOption(newOption)
+      }, 500)
+    }, [getLastNOption, setSelectedOption])
+
+    const onLastNChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLastN(Number(event.currentTarget.value))
+        debouncedUpdate()
+      },
+      [debouncedUpdate]
+    )
+
+    const onLastNOption = React.useCallback(
+      (
+        _:
+          | React.MouseEvent<Element, MouseEvent>
+          | React.KeyboardEvent<Element>
+          | React.FocusEvent<Element, Element>
+          | null,
+        value: string | null
+      ) => {
+        if (value !== null) {
+          setLastNOption(value)
+          debouncedUpdate()
+        }
+      },
+      [debouncedUpdate]
+    )
 
     const onCancel = React.useCallback(() => {
       setDatepickerRange(selectedRange)
@@ -216,6 +244,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           }}
           onChange={(event, value) => {
             if (value === FROM_DATE_UNTIL_NOW || value === 'custom-fixed-date-range') {
+              setDatepickerRange({ from: undefined, to: new Date() })
               event?.stopPropagation()
               setSelectOpen(false)
               setAnchorEl(componentContainer)
@@ -257,21 +286,14 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   type="number"
                   value={lastN}
                   size="small"
-                  onChange={(event) => {
-                    setLastN(Number(event?.currentTarget?.value))
-                    changeLastNParams()
-                  }}
+                  role="spinbutton"
+                  onChange={onLastNChange}
                   style={{ width: 50, padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
                 />{' '}
                 <Select
                   value={lastNOption}
                   size="small"
-                  onChange={(_, value) => {
-                    if (value !== null) {
-                      setLastNOption(value)
-                      changeLastNParams()
-                    }
-                  }}
+                  onChange={onLastNOption}
                   style={{ padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
                 >
                   {lastNOptions.map(({ label }) => (

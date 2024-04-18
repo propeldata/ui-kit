@@ -4,6 +4,7 @@ import componentStyles from './Typography.module.scss'
 
 export type TypographyProps<T extends React.ElementType = 'span'> = React.ComponentPropsWithoutRef<T> & {
   as?: T
+  // Add new variant when needed. themes/generated/_tokens.scss for available variants.
   variant?: 'textMdRegular' | 'textMdSemibold' | 'textXsRegular' | 'textXxsRegular' | 'textSmRegular'
   block?: boolean
 }
