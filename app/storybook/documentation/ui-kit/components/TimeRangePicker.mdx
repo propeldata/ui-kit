@@ -1,0 +1,61 @@
+import { ArgTypes, Meta, Source } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as TimeRangePickerStories from '../../../../../packages/ui-kit/src/components/TimeRangePicker/TimeRangePicker.stories'
+import * as DateRangeOptionsPropsStories from '../../../../../packages/ui-kit/src/components/TimeRangePicker/DateRangeOptionsProps.stories'
+import * as DateRangeOptionValueStories from '../../../../../packages/ui-kit/src/components/TimeRangePicker/DateRangeOptionValue.stories'
+
+<Meta title="Components/TimeRangePicker" of={TimeRangePickerStories} />
+
+# TimeRangePicker overview
+
+The `TimeRangePicker` component is a versatile tool for selecting date ranges within your front-end applications. It
+allows users to pick a predefined range, a custom fixed date range, or a dynamic period up to the current date, with
+additional settings to fine-tune the selection such as last `n`-days. Features include disabling specific options and a
+fully controllable state via props.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={TimeRangePickerStories.DefaultStory} />
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { TimeRangePicker } from "@propeldata/ui-kit"
+
+    function App() {
+      return (
+        <TimeRangePicker />
+      );
+    }
+
+`} />
+
+## Props API
+
+The following table describes the props available for the TimeRangePicker component:
+
+<ArgTypes of={TimeRangePickerStories.DefaultStory} sort="alpha" />
+
+### `DateRangeOptionsProps`
+
+<ArgTypes of={DateRangeOptionsPropsStories.Primary} sort="alpha" />
+
+### `DateRangeOptionValue`
+
+<ArgTypes of={DateRangeOptionValueStories.Primary} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props and classes available to the components
+mentioned here.
+
+- <LinkTo kind="API/DateRangeOptionsProps" story="overview">
+    DateRangeOptionsProps
+  </LinkTo>
+- <LinkTo kind="API/DateRangeOptionValue" story="overview">
+    DateRangeOptionValue
+  </LinkTo>
