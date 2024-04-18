@@ -112,7 +112,7 @@ describe('TimeRangePicker', () => {
     expect(mockOnChange).toHaveBeenCalledWith({
       uid: 'custom-fixed-date-range',
       label: '04/01/2022 - 04/15/2022',
-      value: { from: fromDateTime, to: toDateTime }
+      value: { start: fromDateTime, stop: toDateTime }
     })
   })
 
@@ -140,7 +140,7 @@ describe('TimeRangePicker', () => {
     expect(mockOnChange).toHaveBeenCalledWith({
       uid: 'from-custom-date-until-now',
       label: `04/01/2022 - Now`,
-      value: { from: fromDateTime, to: now }
+      value: { start: fromDateTime, stop: now }
     })
 
     jest.useRealTimers()
