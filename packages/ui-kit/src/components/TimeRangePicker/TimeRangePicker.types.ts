@@ -53,7 +53,7 @@ export interface TimeRangePickerProps extends Omit<React.ComponentPropsWithoutRe
   defaultValue?: DateRangeOptionsProps
 
   /** Controls the current value of the picker through a structured object, enabling controlled component behavior. */
-  value?: DateRangeOptionsProps
+  value?: DateRangeOptionsProps | null
 
   /** A function that allows for customizing the list of quick selection options based on default options provided. */
   options?: (defaultOptions: DateRangeOptionsProps[]) => DateRangeOptionsProps[] | undefined

@@ -311,7 +311,6 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         </Select>
         <Popper
           open={popupOpen}
-          // open={true}
           anchorEl={anchorEl}
           placement="bottom-start"
           slots={{
