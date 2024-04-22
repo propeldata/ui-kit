@@ -1,7 +1,11 @@
 @use '../../themes/generated/tokens';
 
 .timeRangePickerPopper {
-  width: 300px;
+  min-width: 300px;
+}
+
+.timeRangePickerPopper {
+  z-index: 9999;
 }
 
 .timeRangePicker {

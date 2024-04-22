@@ -50,7 +50,6 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       baseTheme,
       componentContainer
     })
-
     const options = React.useMemo(() => (optionsProp ? optionsProp(defaultOptions) : defaultOptions), [optionsProp])
     const [defaultValue] = React.useState(defaultValueProp)
 
@@ -71,9 +70,17 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const popupOpen = Boolean(anchorEl)
 
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+    const lastNRef = React.useRef(lastN)
+    const lastNOptionRef = React.useRef(lastNOption)
+
+    React.useEffect(() => {
+      lastNRef.current = lastN
+      lastNOptionRef.current = lastNOption
+    }, [lastN, lastNOption])
 
     const getLastNOption = React.useCallback(() => {
       const relativeOption = lastNOptions.find((option) => option.label === lastNOption)
+
       return {
         uid: 'last-n',
         label: `Last ${lastN} ${lastNOption}`,
@@ -86,16 +93,14 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
 
     React.useEffect(() => {
       if (value) {
-        setSelectedOption(value)
+        setSelectedOption({ ...value })
       }
     }, [value])
 
     React.useEffect(() => {
       let label: string | undefined
 
-      if (selectedOption?.uid === 'last-n') {
-        label = `Last ${lastN} ${lastNOption}`
-      } else if (selectedOption?.uid === FROM_DATE_UNTIL_NOW) {
+      if (selectedOption?.uid === FROM_DATE_UNTIL_NOW) {
         label = `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - Now`
       } else if (selectedOption?.uid === CUSTOM_DATE_RANGE) {
         label = `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - ${formatDateTime(
@@ -111,7 +116,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       }
 
       setSelectedOptionLabel(label)
-    }, [options, selectedOption, lastN, lastNOption, datepickerRange])
+    }, [options, selectedOption, datepickerRange])
 
     // Init selected option if defaultValue is set
     React.useEffect(() => {
@@ -135,12 +140,14 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     }, [selectedOption, datepickerRange, options, getLastNOption])
 
     React.useEffect(() => {
-      if (!(selectedOption && selectedOption.value && onChange)) {
+      if (value?.value === selectedOption?.value) {
         return
       }
 
-      onChange(selectedOption)
-    }, [selectedOption, onChange])
+      if (selectedOption && onChange) {
+        onChange({ ...selectedOption })
+      }
+    }, [selectedOption, value, onChange])
 
     const debouncedUpdate = React.useCallback(() => {
       if (timeoutRef.current) {
@@ -148,10 +155,26 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       }
 
       timeoutRef.current = setTimeout(() => {
-        const newOption = getLastNOption()
+        const newOption = {
+          uid: 'last-n',
+          label: `Last ${lastNRef.current} ${lastNOptionRef.current}`,
+          value: {
+            relative:
+              lastNOptions.find((option) => option.label === lastNOptionRef.current)?.value ?? lastNOptions[0].value,
+            n: lastNRef.current
+          }
+        }
+
         setSelectedOption(newOption)
+        setSelectedOptionLabel(newOption.label)
       }, 500)
-    }, [getLastNOption, setSelectedOption])
+
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+      }
+    }, [setSelectedOption, setSelectedOptionLabel])
 
     const onLastNChange = React.useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -320,12 +343,31 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           open={popupOpen}
           anchorEl={anchorEl}
           placement="bottom-start"
+          className={componentStyles.timeRangePickerPopper}
           slots={{
             root: 'div'
           }}
+          popperOptions={{ placement: 'bottom-start' }}
           modifiers={[
-            { name: 'flip', enabled: false },
-            { name: 'preventOverflow', enabled: false }
+            {
+              name: 'flip',
+              enabled: true,
+              options: {
+                fallbackPlacements: ['bottom-end', 'top-start', 'top-end'],
+                rootBoundary: 'viewport'
+              }
+            },
+            {
+              name: 'preventOverflow',
+              enabled: true,
+              options: {
+                mainAxis: true,
+                altAxis: true,
+                tether: true,
+                boundary: 'viewport',
+                rootBoundary: 'document'
+              }
+            }
           ]}
           disablePortal
         >

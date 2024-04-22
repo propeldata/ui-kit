@@ -17,71 +17,86 @@ export interface SelectProps
 
 const ButtonSlot = prepareForSlot(Button)
 
-export const Select = ({
-  options,
-  startAdornment,
-  endAdornment = () => <ChevronDownIcon size={18} />,
-  value: valueProp = undefined,
-  children,
-  className,
-  slotProps,
-  listboxOpen,
-  size = 'default',
-  ...rest
-}: SelectProps) => {
-  const [listboxVisible, setListboxVisible] = React.useState(listboxOpen ?? false)
-  const { getButtonProps, value, open } = useSelect<string, false>({
-    onOpenChange: setListboxVisible,
-    open: listboxVisible,
-    value: valueProp,
-    ...rest
-  })
+export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
+  (
+    {
+      options,
+      startAdornment,
+      endAdornment = () => <ChevronDownIcon size={18} />,
+      value: valueProp = undefined,
+      children,
+      className,
+      slotProps,
+      listboxOpen,
+      size = 'default',
+      onListboxOpenChange,
+      ...rest
+    },
+    forwardedRef
+  ) => {
+    const [listboxVisible, setListboxVisible] = React.useState(listboxOpen ?? false)
+    const { getButtonProps, value, open } = useSelect<string, false>({
+      onOpenChange: setListboxVisible,
+      open: listboxVisible,
+      value: valueProp,
+      ...rest
+    })
 
-  React.useEffect(() => {
-    setListboxVisible(listboxOpen ?? false)
-  }, [listboxOpen])
+    React.useEffect(() => {
+      if (onListboxOpenChange) {
+        onListboxOpenChange(listboxVisible)
+      }
+    }, [onListboxOpenChange, listboxVisible])
 
-  React.useEffect(() => {
-    setListboxVisible(false)
-  }, [value])
+    React.useEffect(() => {
+      setListboxVisible(listboxOpen ?? false)
+    }, [listboxOpen])
 
-  return (
-    <ClickAwayListener onClickAway={() => setListboxVisible(false)}>
-      <MUISelect
-        value={value}
-        className={classNames(componentStyles.rootSelect, className)}
-        {...rest}
-        slots={{ root: ButtonSlot }}
-        slotProps={{
-          root: getButtonProps({
-            startAdornment,
-            endAdornment,
-            size,
-            value: value ?? undefined,
-            className: classNames(componentStyles.button, componentStyles.rootButton, {
-              [componentStyles[size]]: size && size !== 'default'
-            })
-          }),
-          popper: {
-            className: classNames(
-              componentStyles.popper,
-              { [componentStyles[size]]: size && size !== 'default' },
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              slotProps?.popper?.className
-            ),
-            disablePortal: true,
-            open
-          }
-        }}
-      >
-        {children && !options && children}
-        {options?.map((option, idx) => (
-          <Option key={idx} {...option}>
-            {option.label}
-          </Option>
-        ))}
-      </MUISelect>
-    </ClickAwayListener>
-  )
-}
+    React.useEffect(() => {
+      setListboxVisible(false)
+    }, [value])
+
+    return (
+      <ClickAwayListener onClickAway={() => setListboxVisible(false)}>
+        <MUISelect
+          ref={forwardedRef}
+          value={value}
+          className={classNames(componentStyles.rootSelect, className)}
+          {...rest}
+          slots={{ root: ButtonSlot }}
+          slotProps={{
+            root: getButtonProps({
+              startAdornment,
+              endAdornment,
+              size,
+              value: value ?? undefined,
+              className: classNames(componentStyles.button, componentStyles.rootButton, {
+                [componentStyles[size]]: size && size !== 'default'
+              })
+            }),
+            popper: {
+              className: classNames(
+                componentStyles.popper,
+                { [componentStyles[size]]: size && size !== 'default' },
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                slotProps?.popper?.className
+              ),
+              disablePortal: true,
+              open
+            }
+          }}
+        >
+          {children && !options && children}
+          {options?.map((option, idx) => (
+            <Option key={idx} {...option}>
+              {option.label}
+            </Option>
+          ))}
+        </MUISelect>
+      </ClickAwayListener>
+    )
+  }
+)
+
+Select.displayName = 'Select'

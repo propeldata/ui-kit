@@ -90,8 +90,8 @@ export const CustomOptionsStory: Story = {
         uid: 'yesterday',
         label: 'Yesterday',
         value: {
-          from: startOfYesterday(),
-          to: endOfYesterday()
+          start: startOfYesterday(),
+          stop: endOfYesterday()
         }
       })
       return newOptions
