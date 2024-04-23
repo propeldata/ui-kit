@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
+import { QueryClient, QueryClientProvider } from '../../graphql'
 import { Dom, mockTimeSeriesQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { TimeSeriesQueryProps } from '../../components'
 import { useTimeSeries } from './useTimeSeries'

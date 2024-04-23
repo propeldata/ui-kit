@@ -1,4 +1,4 @@
-import { DataPoolInput } from '../../helpers'
+import { DataPoolInput } from '../../graphql'
 import { AutocompleteOption, AutocompleteProps } from '../Autocomplete/Autocomplete.types'
 import { DataComponentProps, QueryProps } from '../shared.types'
 

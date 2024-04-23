@@ -6,7 +6,7 @@ import {
   RelativeTimeRange,
   TimeSeriesGranularity,
   TimeSeriesQuery
-} from '../../helpers'
+} from '../../graphql'
 
 import { Dom, mockCounterQuery, mockLeaderboardQuery, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
 import { Counter } from '../Counter'

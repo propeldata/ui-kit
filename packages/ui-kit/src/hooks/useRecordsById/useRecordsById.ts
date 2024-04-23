@@ -1,5 +1,5 @@
 import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.types'
-import { PROPEL_GRAPHQL_API_ENDPOINT, RecordsByUniqueIdQuery, useRecordsByUniqueIdQuery } from '../../helpers'
+import { PROPEL_GRAPHQL_API_ENDPOINT, RecordsByUniqueIdQuery, useRecordsByUniqueIdQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useLog } from './../../components/Log/useLog'

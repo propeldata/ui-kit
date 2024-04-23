@@ -1,10 +1,11 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
 
-import { fetchStorybookAccessToken, RelativeTimeRange, storybookCodeTemplate } from '../../helpers'
+import { Counter, TimeSeries } from '..'
 import axiosInstance from '../../../../../app/storybook/src/axios'
+import { RelativeTimeRange } from '../../graphql'
+import { fetchStorybookAccessToken, storybookCodeTemplate } from '../../helpers'
 import { AccessTokenProvider } from './AccessTokenProvider'
-import { TimeSeries, Counter } from '..'
 
 const meta: Meta = {
   title: 'PROVIDERS/AccessTokenProvider',

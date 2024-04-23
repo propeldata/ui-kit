@@ -1,5 +1,5 @@
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
-import { DataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput, useDataGridQuery } from '../../helpers'
+import { DataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput, useDataGridQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useLog } from './../../components/Log/useLog'

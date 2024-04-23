@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
+import { QueryClient, QueryClientProvider } from '../../graphql'
 import { Dom, mockTopValuesQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { useTopValues } from './useTopValues'
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'

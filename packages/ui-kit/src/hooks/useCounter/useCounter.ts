@@ -1,5 +1,6 @@
 import { CounterQueryProps } from '../../components/Counter/Counter.types'
-import { CounterQuery, getTimeZone, PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, useCounterQuery } from '../../helpers'
+import { CounterQuery, PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, useCounterQuery } from '../../graphql'
+import { getTimeZone } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useFilters } from './../../components/FilterProvider/useFilters'

@@ -1,5 +1,5 @@
 import { ThemeComponentProps } from '../themes'
-import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
+import { FilterInput, MetricInput, TimeRangeInput } from '../graphql'
 import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from './ErrorFallback'
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
 import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'

@@ -1,9 +1,9 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Chart, registerables } from 'chart.js'
-
+import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken, TimeSeriesGranularity } from '../../helpers'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
+import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { useTimeSeries } from './useTimeSeries'
 
 Chart.register(...registerables)

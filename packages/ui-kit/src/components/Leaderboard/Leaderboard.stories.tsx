@@ -1,18 +1,13 @@
+import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
 import type { Meta, StoryContext, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import {
-  quotedStringRegex,
-  RelativeTimeRange,
-  Sort,
-  storybookCodeTemplate,
-  useStorybookAccessToken
-} from '../../helpers'
+import { RelativeTimeRange, Sort } from '../../graphql'
+import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { ThemeTokenProps } from '../../themes'
+import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
 import './Leaderboard.stories.css'
-import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
-import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
-import { ThemeTokenProps } from '../../themes'
 import { LeaderboardQueryProps } from './Leaderboard.types'
 
 const meta: Meta<typeof LeaderboardComponent> = {

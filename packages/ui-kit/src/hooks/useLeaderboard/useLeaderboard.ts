@@ -1,11 +1,6 @@
 import { LeaderboardQueryProps } from '../../components/Leaderboard/Leaderboard.types'
-import {
-  getTimeZone,
-  LeaderboardQuery,
-  PROPEL_GRAPHQL_API_ENDPOINT,
-  TimeRangeInput,
-  useLeaderboardQuery
-} from '../../helpers'
+import { LeaderboardQuery, PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, useLeaderboardQuery } from '../../graphql'
+import { getTimeZone } from '../../helpers'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useFilters } from './../../components/FilterProvider/useFilters'

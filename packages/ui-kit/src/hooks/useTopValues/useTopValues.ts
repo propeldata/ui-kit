@@ -1,5 +1,5 @@
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
-import { PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, TopValuesQuery, useTopValuesQuery } from '../../helpers'
+import { PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, TopValuesQuery, useTopValuesQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useLog } from './../../components/Log/useLog'
