@@ -2696,6 +2696,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^5.0.18":
+  version: 5.0.18
+  resolution: "@fontsource/inter@npm:5.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fontsource%2Finter%2F-%2Finter-5.0.18.tgz"
+  checksum: 2c880a308313a667f70cdf5e83739f28ace9346e342b9539eea7795c157a8e5a537b792faa149322273609feb54a141193534a110fb641b7e38d8f19a5bd0a21
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/add@npm:^4.0.0":
   version: 4.0.1
   resolution: "@graphql-codegen/add@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.1.tgz"
@@ -20850,6 +20857,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-16@workspace:app/examples/react-16"
   dependencies:
+    "@fontsource/inter": ^5.0.18
     "@propeldata/ui-kit": "workspace:^"
     dashboard-example: "workspace:^"
     react: ^16.8.0
@@ -20862,6 +20870,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-17@workspace:app/examples/react-17"
   dependencies:
+    "@fontsource/inter": ^5.0.18
     dashboard-example: "workspace:^"
     react: ^17.0.0
     react-dom: ^17.0.0
@@ -20873,6 +20882,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-18@workspace:app/examples/react-18"
   dependencies:
+    "@fontsource/inter": ^5.0.18
     "@propeldata/ui-kit": "workspace:^"
     dashboard-example: "workspace:^"
     react: ^18.2.0

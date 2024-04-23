@@ -6,6 +6,7 @@
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.0.18",
     "@propeldata/ui-kit": "workspace:^",
     "dashboard-example": "workspace:^",
     "react": "^16.8.0",

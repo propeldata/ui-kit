@@ -1,5 +1,9 @@
 import React from 'react'
 import { Dashboard } from 'dashboard-example'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/inter/700.css'
 
 const { REACT_APP_CLIENT_ID, REACT_APP_CLIENT_SECRET } = process.env
 
