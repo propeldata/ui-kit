@@ -58,22 +58,26 @@ export const Basic: Story = {
       dataPool: {
         id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
       },
-      columns: ['taco_name', 'sauce_name', 'tortilla_name', 'restaurant_name']
+      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id']
     },
-    cellProps: {
-      style: {
-        textOverflow: 'ellipsis',
-        overflow: 'auto',
-        whiteSpace: 'nowrap',
-        textWrap: 'nowrap'
-      }
-    },
-    tableProps: {
-      style: {
-        width: 'max-content'
-      }
-    },
+    // cellProps: {
+    //   style: {
+    //     textOverflow: 'ellipsis',
+    //     overflow: 'auto',
+    //     whiteSpace: 'nowrap',
+    //     textWrap: 'nowrap'
+    //   }
+    // },
+    // tableProps: {
+    //   style: {
+    //     width: 'max-content'
+    //   }
+    // },
     resizable: true
   },
-  render: (args) => <DataGrid {...args} />
+  render: (args) => (
+    <div style={{ width: '100%' }}>
+      <DataGrid {...args} />
+    </div>
+  )
 }

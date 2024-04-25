@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
   useReactTable,
   createColumnHelper,
   getCoreRowModel,
   flexRender,
-  getSortedRowModel
+  getSortedRowModel,
+  Row,
+  Cell
 } from '@tanstack/react-table'
 
 import { withContainer } from '../withContainer'
@@ -16,6 +18,8 @@ import { useDataGrid } from '../../hooks'
 import { DataGridData, DataGridProps } from './DataGrid.types'
 import componentStyles from './DataGrid.module.scss'
 import classNames from 'classnames'
+import { Drawer } from './Drawer'
+import { CellElement, RowElement } from './Drawer.types'
 
 // let idDataGrid = 0
 
@@ -56,6 +60,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     // const idRef = React.useRef(idDataGrid++)
     // const id = `data-grid-${idRef.current}`
 
+    const [isOpenDrawer, setIsOpenDrawer] = useState(false)
+    const [selectedRow, setSelectedRow] = useState<RowElement | null>(null)
+    const [selectedCell, setSelectedCell] = useState<CellElement | null>(null)
+
     const isStatic = !query
 
     const { data: dataGridData } = useDataGrid({ ...query, enabled: !isStatic })
@@ -83,64 +91,126 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       getSortedRowModel: getSortedRowModel(),
       columnResizeMode: 'onChange',
       columnResizeDirection: 'ltr',
-      defaultColumn: {
-        width: 'auto'
-      }
+      enableColumnResizing: true
     })
 
+    useEffect(() => {
+      function handleKeyPress(event: KeyboardEvent) {
+        if (event.key === 'Escape') {
+          handleCloseDrawer()
+        }
+      }
+
+      document.addEventListener('keydown', handleKeyPress)
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyPress)
+      }
+    }, [])
+
+    const handleRowIndexClick = (row: Row<string[]>) => {
+      setSelectedCell(null)
+      setSelectedRow({
+        id: row.id,
+        cells: row.getVisibleCells().map((cell) => ({
+          id: cell.id,
+          header: cell.column.id,
+          value: cell.getValue() as string
+        }))
+      })
+      setIsOpenDrawer(true)
+    }
+
+    const handleRowCellClick = (cell: Cell<string[], unknown>) => {
+      setSelectedRow(null)
+      setSelectedCell({
+        id: cell.id,
+        header: cell.column.id,
+        value: cell.getValue() as string
+      })
+      setIsOpenDrawer(true)
+    }
+
+    const handleCloseDrawer = () => {
+      setIsOpenDrawer(false)
+      setSelectedRow(null)
+      setSelectedCell(null)
+    }
+
     return (
-      <div>
-        <table className={componentStyles.table} {...tableProps}>
-          <thead
-            className={componentStyles.tableHead}
-            {...{
-              style: {
-                width: isResizable ? table.getCenterTotalSize() : 'initial'
-              }
-            }}
-          >
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr className={componentStyles.tableRow} key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    {...{
-                      key: header.id,
-                      colSpan: header.colSpan,
-                      style: {
-                        width: isResizable ? header.getSize() : 'initial'
-                      }
-                    }}
-                    className={componentStyles.tableCellHead}
-                    key={header.id}
+      <div className={componentStyles.container}>
+        <div className={componentStyles.tableContainer}>
+          <table className={componentStyles.table} {...tableProps}>
+            <thead
+              className={componentStyles.tableHead}
+              {...{
+                style: {
+                  width: isResizable ? table.getCenterTotalSize() : 'initial'
+                }
+              }}
+            >
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr className={componentStyles.tableRow} key={headerGroup.id}>
+                  <th className={classNames(componentStyles.tableCellHead, componentStyles.tableIndexHeader)} />
+                  {headerGroup.headers.map((header) => (
+                    <th
+                      {...{
+                        colSpan: header.colSpan,
+                        style: {
+                          width: isResizable ? header.getSize() : 'initial'
+                        }
+                      }}
+                      className={componentStyles.tableCellHead}
+                      key={header.id}
+                    >
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {isResizable && (
+                        <div
+                          {...{
+                            onDoubleClick: () => header.column.resetSize(),
+                            onMouseDown: header.getResizeHandler(),
+                            onTouchStart: header.getResizeHandler()
+                          }}
+                          className={classNames(componentStyles.resizer)}
+                        />
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody className={componentStyles.tableBody}>
+              {table.getRowModel().rows.map((row, index) => (
+                <tr className={componentStyles.tableRow} key={row.id}>
+                  <td
+                    style={{ maxWidth: '32px' }}
+                    onClick={() => handleRowIndexClick(row)}
+                    className={classNames(componentStyles.tableCell, componentStyles.tableIndexCell, {
+                      [componentStyles.selectedRow]: row.id === selectedRow?.id
+                    })}
+                    {...cellProps}
                   >
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    {isResizable && (
-                      <div
-                        {...{
-                          onDoubleClick: () => header.column.resetSize(),
-                          onMouseDown: header.getResizeHandler(),
-                          onTouchStart: header.getResizeHandler()
-                        }}
-                        className={classNames(componentStyles.resizer)}
-                      />
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className={componentStyles.tableBody}>
-            {table.getRowModel().rows.map((row) => (
-              <tr className={componentStyles.tableRow} key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td className={componentStyles.tableCell} {...cellProps} key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <div>{index + 1}</div>
                   </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  {row.getVisibleCells().map((cell, index) => (
+                    <td
+                      onClick={() => handleRowCellClick(cell)}
+                      className={classNames(componentStyles.tableCell, {
+                        [componentStyles.selectedRow]:
+                          cell.id === selectedRow?.cells[index].id || cell.id === selectedCell?.id
+                      })}
+                      {...cellProps}
+                      key={cell.id}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <Drawer isOpen={isOpenDrawer} row={selectedRow} cell={selectedCell} onClose={handleCloseDrawer} />
       </div>
     )
   }
