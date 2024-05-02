@@ -6,14 +6,7 @@ import { Select as SelectSource } from './Select'
 const meta: Meta<typeof SelectSource> = {
   title: 'Components/Select',
   component: SelectSource,
-  tags: ['pattern'],
-  // argTypes: {
-  //   baseTheme: {
-  //     table: {
-  //       disable: true
-  //     }
-  //   }
-  // },
+  tags: ['devOnly'],
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Select',
@@ -53,15 +46,6 @@ export const DefaultStory: Story = {
   name: 'Default',
   args: {
     options,
-    // children: [
-    //   <Option key="today" value="today">
-    //     Today
-    //   </Option>,
-    //   <Option key="tomorrow" value="tomorrow">
-    //     Tomorrow
-    //   </Option>
-    // ],
-    // value: 'Thu Mar 14 2024',
     placeholder: 'Select an option'
   },
   render: (args) => <Select {...args} />

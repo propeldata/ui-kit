@@ -5,7 +5,7 @@ export const CountDistinctMetricQueryInputComponent: React.FC<CountDistinctMetri
 
 const meta = {
   title: 'API/CountDistinctMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: CountDistinctMetricQueryInputComponent
 } satisfies Meta<typeof CountDistinctMetricQueryInputComponent>
 

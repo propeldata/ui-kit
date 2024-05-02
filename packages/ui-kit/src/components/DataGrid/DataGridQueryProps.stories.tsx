@@ -6,7 +6,7 @@ export const DataGridQueryPropsComponent: React.FC<DataGridQueryProps & Omit<Que
 
 const meta = {
   title: 'API/DataGridQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: DataGridQueryPropsComponent
 } satisfies Meta<typeof DataGridQueryPropsComponent>
 

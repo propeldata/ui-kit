@@ -8,7 +8,7 @@ export const SqlQueryPropsComponent: React.FC<
 
 const meta = {
   title: 'API/SqlQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: SqlQueryPropsComponent
 } satisfies Meta<typeof SqlQueryPropsComponent>
 

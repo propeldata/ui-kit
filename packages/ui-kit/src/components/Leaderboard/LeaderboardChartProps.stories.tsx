@@ -5,7 +5,7 @@ export const LeaderboardChartPropsComponent: React.FC<LeaderboardChartProps> = (
 
 const meta = {
   title: 'API/LeaderboardChartProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: LeaderboardChartPropsComponent
 } satisfies Meta<typeof LeaderboardChartPropsComponent>
 

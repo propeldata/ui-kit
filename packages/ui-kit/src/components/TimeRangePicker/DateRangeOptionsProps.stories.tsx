@@ -5,7 +5,7 @@ export const DateRangeOptionsPropsComponent: React.FC<DateRangeOptionsProps> = (
 
 const meta = {
   title: 'API/DateRangeOptionsProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: DateRangeOptionsPropsComponent
 } satisfies Meta<typeof DateRangeOptionsPropsComponent>
 

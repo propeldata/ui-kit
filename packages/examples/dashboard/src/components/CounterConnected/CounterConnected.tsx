@@ -2,17 +2,9 @@ import { Counter } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
 
-export const CounterConnected = ({
-  envs: { REACT_APP_METRIC_UNIQUE_NAME_1 },
-  timeRange: timeRangeProp
-}: ConnectedComponentProps) => {
+export const CounterConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 }, timeRange }: ConnectedComponentProps) => {
   const [fontColor, setFontColor] = React.useState('#101828')
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
-  const [timeRange, setTimeRange] = React.useState(timeRangeProp)
-
-  React.useEffect(() => {
-    setTimeRange(timeRangeProp)
-  }, [timeRangeProp])
 
   const handleSwitchRefetchInterval = () => {
     setRefetchInterval(refetchInterval ? undefined : 1000)

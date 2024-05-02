@@ -8,7 +8,7 @@ import { Button as ButtonSource } from './Button'
 const meta: Meta<typeof ButtonSource> = {
   title: 'Components/Button',
   component: ButtonSource,
-  tags: ['pattern'],
+  tags: ['devOnly'],
   argTypes: {
     baseTheme: {
       table: {

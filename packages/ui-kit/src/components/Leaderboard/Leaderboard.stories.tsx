@@ -276,7 +276,7 @@ export const StringValuesStory: Story = {
 
 export const CustomStyleStory: Story = {
   name: 'Custom styles',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: 'Leaderboard',
     rawCss: `

@@ -8,7 +8,7 @@ import { TimeSeries, Counter } from '..'
 
 const meta: Meta = {
   title: 'PROVIDERS/AccessTokenProvider',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: 'TimeSeries, Counter, AccessTokenProvider',
     codeTemplate: storybookCodeTemplate

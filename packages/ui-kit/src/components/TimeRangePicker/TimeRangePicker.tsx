@@ -39,7 +39,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       disableOptions = false,
       disabled = false,
       options: optionsProp,
-      defaultValue: defaultValueProp,
+      defaultValue,
       value,
       onChange
     },
@@ -51,7 +51,6 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       componentContainer
     })
     const options = React.useMemo(() => (optionsProp ? optionsProp(defaultOptions) : defaultOptions), [optionsProp])
-    const [defaultValue] = React.useState(defaultValueProp)
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
     const [selectOpen, setSelectOpen] = React.useState(false)
@@ -294,7 +293,10 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
 
             if (value === 'last-n') {
               event?.stopPropagation()
-              setSelectedOption(getLastNOption())
+              const lastNOption = getLastNOption()
+              setSelectedOption(lastNOption)
+              setSelectedOptionLabel(lastNOption.label)
+              setSelectOpen(false)
               return
             }
 

@@ -24,7 +24,7 @@ const args = {
 
 const meta: Meta = {
   title: 'Components/LeaderboardTable',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useLeaderboard', 'useAccessToken'],
     isFunction: true,

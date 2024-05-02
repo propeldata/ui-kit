@@ -78,9 +78,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
               className: classNames(
                 componentStyles.popper,
                 { [componentStyles[size]]: size && size !== 'default' },
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                slotProps?.popper?.className
+                slotProps?.popper != null && 'className' in slotProps.popper && slotProps?.popper?.className
               ),
               disablePortal: true,
               open

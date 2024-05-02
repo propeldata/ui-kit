@@ -5,7 +5,7 @@ export const FilterInputComponent: React.FC<FilterInput> = () => null
 
 const meta = {
   title: 'API/FilterInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: FilterInputComponent
 } satisfies Meta<typeof FilterInputComponent>
 

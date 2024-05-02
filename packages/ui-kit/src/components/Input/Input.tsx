@@ -37,10 +37,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, forw
       onClick={() => ref.current?.focus()}
       className={classnames(
         componentStyles.rootInput,
-        { [componentStyles.error]: error },
-        { [componentStyles.focus]: focused },
-        { [componentStyles.disabled]: disabled },
-        { [componentStyles[size]]: size && size !== 'default' },
+        {
+          [componentStyles.error]: error,
+          [componentStyles.focus]: focused,
+          [componentStyles.disabled]: disabled,
+          [componentStyles[size]]: size && size !== 'default'
+        },
         className
       )}
     >

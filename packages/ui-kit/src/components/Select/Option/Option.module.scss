@@ -7,8 +7,19 @@
   margin: 0;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:focus-within {
     background-color: var(--propel-background-active);
     border-radius: var(--propel-radius-sm);
+  }
+}
+
+.highlighted {
+  background-color: var(--propel-background-secondary-hover);
+  border-radius: var(--propel-radius-sm);
+
+  &:hover {
+    background-color: var(--propel-background-secondary-hover);
   }
 }

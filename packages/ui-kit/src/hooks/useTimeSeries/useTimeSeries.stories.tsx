@@ -20,7 +20,7 @@ const args = {
 
 const meta: Meta = {
   title: 'Components/TimeSeriesChart',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useTimeSeries', 'useAccessToken'],
     isFunction: true,

@@ -12,7 +12,7 @@ export interface OptionProps extends React.ComponentPropsWithoutRef<'li'> {
 
 export const Option = React.forwardRef<HTMLLIElement, OptionProps>(
   ({ baseTheme, className, children, value, disabled = false, ...rest }, forwardedRef) => {
-    const { getRootProps } = useOption({
+    const { getRootProps, highlighted } = useOption({
       value,
       disabled,
       label: children
@@ -26,7 +26,13 @@ export const Option = React.forwardRef<HTMLLIElement, OptionProps>(
         {...getRootProps()}
         {...rest}
         value={value}
-        className={classnames(componentStyles.rootOption, className)}
+        className={classnames(
+          componentStyles.rootOption,
+          {
+            [componentStyles.highlighted]: highlighted
+          },
+          className
+        )}
         ref={setRef}
       >
         {children}

@@ -12,7 +12,8 @@
     "graphql:gen": "graphql-codegen --config src/helpers/graphql/codegen.yml && node src/helpers/graphql/script.cjs src/helpers/graphql/generated/index.ts",
     "test": "jest",
     "test:coverage": "jest --ci --coverage --json --outputFile=coverage/coverage.json",
-    "design-tokens:sync": "rm -rf ./scripts/dist && rm -rf ./packages/ui-kit/src/themes/generated && tsc -p ./scripts/tsconfig.json && yarn design-tokens:parse && yarn design-tokens:validate",
+    "design-tokens:sync": "yarn design-tokens:clean && tsc -p ./scripts/tsconfig.json && yarn design-tokens:parse && yarn design-tokens:validate",
+    "design-tokens:clean": "rm -rf ./scripts/dist && rm -rf ./src/generated && rm -rf ./src/themes/generated",
     "design-tokens:parse": "node ./scripts/dist/parse-design-tokens.mjs",
     "design-tokens:validate": "node ./scripts/dist/validate-design-tokens.mjs"
   },

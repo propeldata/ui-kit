@@ -7,7 +7,7 @@ import { Input as InputSource } from './Input'
 const meta: Meta<typeof InputSource> = {
   title: 'Components/Input',
   component: InputSource,
-  tags: ['pattern'],
+  tags: ['devOnly'],
   argTypes: {
     baseTheme: {
       table: {

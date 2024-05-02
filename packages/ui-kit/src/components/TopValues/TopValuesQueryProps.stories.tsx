@@ -6,7 +6,7 @@ export const TopValuesQueryPropsComponent: React.FC<TopValuesQueryProps & Omit<Q
 
 const meta = {
   title: 'API/TopValuesQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: TopValuesQueryPropsComponent
 } satisfies Meta<typeof TopValuesQueryPropsComponent>
 

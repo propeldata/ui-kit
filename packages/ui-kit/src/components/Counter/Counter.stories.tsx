@@ -86,7 +86,7 @@ export const SingleValueStory: Story = {
 
 export const ValueInCardStory: Story = {
   name: 'Value in card',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     ...connectedParams,
     style: {
@@ -128,7 +128,7 @@ export const StringValueStory: Story = {
 
 export const SingleValueCustomStyleStory: Story = {
   name: 'Single value custom style',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     ...connectedParams,
     card: true,
@@ -150,7 +150,7 @@ export const SingleValueCustomStyleStory: Story = {
 
 export const SingleValueRefStory: Story = {
   name: 'Single value with ref',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     value: '49291',
     localize: true,
@@ -187,7 +187,7 @@ export const SingleValueRefStory: Story = {
 
 export const CustomErrorFallbackStory: Story = {
   name: 'Custom ErrorFallback',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     query: {
       accessToken: 'invalid-access-token'

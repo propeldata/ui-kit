@@ -7,20 +7,20 @@ jest.mock('./Divider.module.scss', () => ({
 }))
 
 describe('Divider', () => {
-  it('renders as an `li` by default', () => {
+  it('renders as an `hr` by default', () => {
     render(<Divider />)
 
     const divider = screen.getByRole('separator')
     expect(divider).toBeInTheDocument()
     expect(divider).toHaveClass('rootDivider')
-    expect(divider.tagName).toBe('LI')
+    expect(divider.tagName).toBe('HR')
   })
 
   it('renders as the specified element using `as` prop', () => {
-    render(<Divider as="hr" />)
+    render(<Divider as="div" />)
 
     const divider = screen.getByRole('separator')
-    expect(divider.tagName).toBe('HR')
+    expect(divider.tagName).toBe('DIV')
   })
 
   it('accepts and applies additional class names', () => {

@@ -47,13 +47,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
       role={role}
       className={classnames(
         componentStyles.rootButton,
-        { [componentStyles.focus]: focusVisible },
-        { [componentStyles.disabled]: disabled },
-        { [componentStyles.active]: active },
-        { [componentStyles.startAdornment]: startAdornment },
-        { [componentStyles.endAdornment]: endAdornment },
-        { [componentStyles[variant]]: variant && variant !== 'default' },
-        { [componentStyles[size]]: size && size !== 'default' },
+        {
+          [componentStyles.focus]: focusVisible,
+          [componentStyles.disabled]: disabled,
+          [componentStyles.active]: active,
+          [componentStyles.startAdornment]: startAdornment,
+          [componentStyles.endAdornment]: endAdornment,
+          [componentStyles[variant]]: variant && variant !== 'default',
+          [componentStyles[size]]: size && size !== 'default'
+        },
         className
       )}
     >
