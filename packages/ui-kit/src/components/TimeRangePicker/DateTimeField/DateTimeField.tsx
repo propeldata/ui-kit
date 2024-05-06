@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import {
   addDays,
   addMinutes,
@@ -11,18 +12,19 @@ import {
 } from 'date-fns'
 import React, { Dispatch, SetStateAction } from 'react'
 import { DateRange } from 'react-day-picker'
+import { useCombinedRefsCallback, getDateTimeFormatPattern } from '../../../helpers'
 import { FormField } from '../../FormField'
 import { Input } from '../../Input'
+import { DefaultThemes, useSetupTheme } from '../../ThemeProvider'
 import componentStyles from './DateTimeField.module.scss'
 
-export type DateTimeFieldProps = {
+export interface DateTimeFieldProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'onChange'> {
+  baseTheme?: DefaultThemes
   dateRange?: DateRange | null
   rangeRole: 'from' | 'to'
   onChange?: Dispatch<SetStateAction<DateRange | null>>
+  locale?: string
 }
-
-const DATE_FORMAT = 'yyyy/MM/dd'
-const TIME_FORMAT = 'HH:mm:ss'
 
 const validateDateRange = (dateRange: DateRange | null | undefined, rangeRole: 'from' | 'to', parsedValue: Date) =>
   isValid(parsedValue) &&
@@ -30,187 +32,206 @@ const validateDateRange = (dateRange: DateRange | null | undefined, rangeRole: '
     ? isAfter(dateRange?.to ?? addDays(parsedValue, 1), parsedValue)
     : isBefore(dateRange?.from ?? subDays(parsedValue, 1), parsedValue))
 
-export const DateTimeField = ({ dateRange, rangeRole, onChange }: DateTimeFieldProps) => {
-  const dateRef = React.useRef<HTMLInputElement>(null)
-  const timeRef = React.useRef<HTMLInputElement>(null)
-  const [dateError, setDateError] = React.useState(false)
-  const [timeError, setTimeError] = React.useState(false)
-  const value = dateRange && rangeRole ? dateRange[rangeRole] : null
+export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps>(
+  ({ baseTheme, className, dateRange, locale = 'en-US', rangeRole, onChange, ...rest }, forwardedRef) => {
+    const innerRef = React.useRef<HTMLDivElement>(null)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ forwardedRef, innerRef })
+    useSetupTheme({ componentContainer, baseTheme })
 
-  React.useEffect(() => {
-    if (!value) {
-      setDateError(false)
-      setTimeError(false)
-    }
+    const dateFormatPattern = getDateTimeFormatPattern({
+      locale,
+      options: { year: 'numeric', month: '2-digit', day: '2-digit' }
+    })
+    const timeFormatPattern = getDateTimeFormatPattern({
+      locale,
+      options: { hour: '2-digit', minute: '2-digit', second: '2-digit' }
+    })
 
-    if (dateRef.current) {
-      dateRef.current.value = value ? dateFormat(value, DATE_FORMAT) : ''
-    }
+    const dateRef = React.useRef<HTMLInputElement>(null)
+    const timeRef = React.useRef<HTMLInputElement>(null)
+    const [dateError, setDateError] = React.useState(false)
+    const [timeError, setTimeError] = React.useState(false)
+    const value = dateRange && rangeRole ? dateRange[rangeRole] : null
 
-    if (timeRef.current) {
-      timeRef.current.value = value ? dateFormat(value, TIME_FORMAT) : ''
-    }
-  }, [value])
+    React.useEffect(() => {
+      if (!value) {
+        setDateError(false)
+        setTimeError(false)
+      }
 
-  const getParsedDateTime = React.useCallback(() => {
-    const dateParts: string[] = []
-    const formatParts: string[] = []
+      if (dateRef.current) {
+        dateRef.current.value = value ? dateFormat(value, dateFormatPattern) : ''
+      }
 
-    if (dateRef.current && dateRef.current.value !== '') {
-      dateParts.push(dateRef.current?.value.trim())
-      formatParts.push(DATE_FORMAT)
-    }
-    if (timeRef.current && timeRef.current.value !== '') {
-      dateParts.push(timeRef.current?.value.trim())
-      formatParts.push(TIME_FORMAT)
-    }
+      if (timeRef.current) {
+        timeRef.current.value = value ? dateFormat(value, timeFormatPattern) : ''
+      }
+    }, [dateFormatPattern, timeFormatPattern, value])
 
-    const parsedValue = parse(dateParts.join(' '), formatParts.join(' '), value ?? new Date())
+    const getParsedDateTime = React.useCallback(() => {
+      const dateParts: string[] = []
+      const formatParts: string[] = []
 
-    return {
-      parsedValue,
-      isDateRangeValid: validateDateRange(dateRange, rangeRole, parsedValue)
-    }
-  }, [value, dateRange, rangeRole])
+      if (dateRef.current && dateRef.current.value !== '') {
+        dateParts.push(dateRef.current?.value.trim())
+        formatParts.push(dateFormatPattern)
+      }
+      if (timeRef.current && timeRef.current.value !== '') {
+        dateParts.push(timeRef.current?.value.trim())
+        formatParts.push(timeFormatPattern)
+      }
 
-  const isDateValid = React.useCallback(
-    () => isValid(parse(dateRef.current?.value ?? '', DATE_FORMAT, value ?? new Date())),
-    [value]
-  )
-  const isTimeValid = React.useCallback(
-    () => isValid(parse(timeRef.current?.value ?? '', TIME_FORMAT, value ?? new Date())),
-    [value]
-  )
+      const parsedValue = parse(dateParts.join(' '), formatParts.join(' '), value ?? new Date())
 
-  const submitValue = React.useCallback(
-    (event: React.FocusEvent<HTMLInputElement>) => {
-      const { currentTarget } = event
-      const setError = currentTarget === dateRef.current ? setDateError : setTimeError
-      const { parsedValue, isDateRangeValid } = getParsedDateTime()
-      const isFieldValid = currentTarget === dateRef.current ? isDateValid() : isTimeValid()
+      return {
+        parsedValue,
+        isDateRangeValid: validateDateRange(dateRange, rangeRole, parsedValue)
+      }
+    }, [dateFormatPattern, timeFormatPattern, value, dateRange, rangeRole])
 
-      setError(!isFieldValid)
+    const isDateValid = React.useCallback(
+      () => isValid(parse(dateRef.current?.value ?? '', dateFormatPattern, value ?? new Date())),
+      [dateFormatPattern, value]
+    )
+    const isTimeValid = React.useCallback(
+      () => isValid(parse(timeRef.current?.value ?? '', timeFormatPattern, value ?? new Date())),
+      [timeFormatPattern, value]
+    )
 
-      if (!isFieldValid) {
+    const submitValue = React.useCallback(
+      (event: React.FocusEvent<HTMLInputElement>) => {
+        const { currentTarget } = event
+        const setError = currentTarget === dateRef.current ? setDateError : setTimeError
+        const { parsedValue, isDateRangeValid } = getParsedDateTime()
+        const isFieldValid = currentTarget === dateRef.current ? isDateValid() : isTimeValid()
+
+        setError(!isFieldValid)
+
+        if (!isFieldValid) {
+          return
+        }
+
+        setError(isDateValid() && isTimeValid() && !isDateRangeValid)
+
+        if (isDateRangeValid && onChange) {
+          onChange((prevRange) => ({
+            ...prevRange,
+            from: rangeRole === 'from' ? parsedValue : prevRange?.from,
+            to: rangeRole === 'to' ? parsedValue : prevRange?.to
+          }))
+        }
+      },
+      [rangeRole, getParsedDateTime, onChange, isDateValid, isTimeValid]
+    )
+
+    const onBlur = React.useCallback(
+      (event: React.FocusEvent<HTMLInputElement>) => {
+        const setError = event.currentTarget === dateRef.current ? setDateError : setTimeError
+
+        if (event.currentTarget?.value === '') {
+          setError(false)
+          return
+        }
+
+        submitValue(event)
+      },
+      [submitValue]
+    )
+
+    React.useEffect(() => {
+      if (!value) {
         return
       }
 
-      setError(isDateValid() && isTimeValid() && !isDateRangeValid)
+      const { isDateRangeValid } = getParsedDateTime()
 
-      if (isDateRangeValid && onChange) {
-        onChange((prevRange) => ({
-          ...prevRange,
-          from: rangeRole === 'from' ? parsedValue : prevRange?.from,
-          to: rangeRole === 'to' ? parsedValue : prevRange?.to
-        }))
+      if (isDateRangeValid) {
+        setDateError(false)
+        setTimeError(false)
       }
-    },
-    [rangeRole, getParsedDateTime, onChange, isDateValid, isTimeValid]
-  )
+    }, [value, dateRange, rangeRole, getParsedDateTime])
 
-  const onBlur = React.useCallback(
-    (event: React.FocusEvent<HTMLInputElement>) => {
-      const setError = event.currentTarget === dateRef.current ? setDateError : setTimeError
-
-      if (event.currentTarget?.value === '') {
-        setError(false)
-        return
-      }
-
-      submitValue(event)
-    },
-    [submitValue]
-  )
-
-  React.useEffect(() => {
-    if (!value) {
-      return
-    }
-
-    const { isDateRangeValid } = getParsedDateTime()
-
-    if (isDateRangeValid) {
-      setDateError(false)
-      setTimeError(false)
-    }
-  }, [value, dateRange, rangeRole, getParsedDateTime])
-
-  const getInputValue = React.useCallback(
-    (inputValue: string, format: string, adjustDate: typeof addDays) => {
-      const val = inputValue ? parse(inputValue, format, value ?? new Date()) : new Date()
-      if (!isValid(val)) {
-        return undefined
-      }
-      return dateFormat(adjustDate(val, 1), format)
-    },
-    [value]
-  )
-
-  const onKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      const { currentTarget } = event
-      const inputValue = currentTarget.value
-      let newValue: string | undefined
-
-      if (event.key === 'ArrowUp') {
-        event.preventDefault()
-
-        if (currentTarget === dateRef.current) {
-          newValue = getInputValue(inputValue, DATE_FORMAT, addDays)
+    const getInputValue = React.useCallback(
+      (inputValue: string, format: string, adjustDate: typeof addDays) => {
+        const val = inputValue ? parse(inputValue, format, value ?? new Date()) : new Date()
+        if (!isValid(val)) {
+          return undefined
         }
-        if (currentTarget === timeRef.current) {
-          newValue = getInputValue(inputValue, TIME_FORMAT, addMinutes)
+        return dateFormat(adjustDate(val, 1), format)
+      },
+      [value]
+    )
+
+    const onKeyDown = React.useCallback(
+      (event: React.KeyboardEvent<HTMLInputElement>) => {
+        const { currentTarget } = event
+        const inputValue = currentTarget.value
+        let newValue: string | undefined
+
+        if (event.key === 'ArrowUp') {
+          event.preventDefault()
+
+          if (currentTarget === dateRef.current) {
+            newValue = getInputValue(inputValue, dateFormatPattern, addDays)
+          }
+          if (currentTarget === timeRef.current) {
+            newValue = getInputValue(inputValue, timeFormatPattern, addMinutes)
+          }
         }
-      }
-      if (event.key === 'ArrowDown') {
-        event.preventDefault()
+        if (event.key === 'ArrowDown') {
+          event.preventDefault()
 
-        if (currentTarget === dateRef.current) {
-          newValue = getInputValue(inputValue, DATE_FORMAT, subDays)
+          if (currentTarget === dateRef.current) {
+            newValue = getInputValue(inputValue, dateFormatPattern, subDays)
+          }
+          if (currentTarget === timeRef.current) {
+            newValue = getInputValue(inputValue, timeFormatPattern, subMinutes)
+          }
         }
-        if (currentTarget === timeRef.current) {
-          newValue = getInputValue(inputValue, TIME_FORMAT, subMinutes)
+
+        if (event.key === 'Enter') {
+          event.preventDefault()
+          currentTarget.blur()
         }
-      }
 
-      if (event.key === 'Enter') {
-        event.preventDefault()
-        currentTarget.blur()
-      }
+        if (newValue) {
+          currentTarget.value = newValue
+        }
+      },
+      [dateFormatPattern, timeFormatPattern, getInputValue]
+    )
 
-      if (newValue) {
-        currentTarget.value = newValue
-      }
-    },
-    [getInputValue]
-  )
+    const labelPrefix = rangeRole === 'from' ? 'Start' : 'End'
 
-  const labelPrefix = rangeRole === 'from' ? 'Start' : 'End'
+    return (
+      <div ref={setRef} {...rest} className={classnames(componentStyles.rootDateTimeField, className)}>
+        <FormField label={`${labelPrefix} Date`} className={componentStyles.formField}>
+          <Input
+            data-testid="date-input"
+            type="text"
+            placeholder={dateFormatPattern}
+            size="small"
+            ref={dateRef}
+            error={dateError}
+            onKeyDown={onKeyDown}
+            onBlur={onBlur}
+          />
+        </FormField>
+        <FormField label={`${labelPrefix} Time`} className={componentStyles.formField}>
+          <Input
+            data-testid="time-input"
+            type="text"
+            placeholder={timeFormatPattern}
+            size="small"
+            ref={timeRef}
+            error={timeError}
+            onKeyDown={onKeyDown}
+            onBlur={onBlur}
+          />
+        </FormField>
+      </div>
+    )
+  }
+)
 
-  return (
-    <div className={componentStyles.rootDateTimeField}>
-      <FormField label={`${labelPrefix} Date`} className={componentStyles.formField}>
-        <Input
-          type="text"
-          placeholder="YYYY/MM/DD"
-          size="small"
-          ref={dateRef}
-          error={dateError}
-          onKeyDown={onKeyDown}
-          onBlur={onBlur}
-        />
-      </FormField>
-      <FormField label={`${labelPrefix} Time`} className={componentStyles.formField}>
-        <Input
-          type="text"
-          placeholder="00:00:00"
-          size="small"
-          ref={timeRef}
-          error={timeError}
-          onKeyDown={onKeyDown}
-          onBlur={onBlur}
-        />
-      </FormField>
-    </div>
-  )
-}
+DateTimeField.displayName = 'DateTimeField'

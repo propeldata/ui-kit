@@ -1,44 +1,29 @@
-import { useOption } from '@mui/base/useOption'
+import { Option as MUIOption } from '@mui/base/Option'
 import classnames from 'classnames'
 import * as React from 'react'
 import { useForwardedRefCallback } from '../../../helpers'
 import { DefaultThemes, useSetupTheme } from '../../ThemeProvider'
 import componentStyles from './Option.module.scss'
 
+type OptionValue = string | number
+
 export interface OptionProps extends React.ComponentPropsWithoutRef<'li'> {
   disabled?: boolean
   baseTheme?: DefaultThemes
+  value: OptionValue
 }
 
-export const Option = React.forwardRef<HTMLLIElement, OptionProps>(
-  ({ baseTheme, className, children, value, disabled = false, ...rest }, forwardedRef) => {
-    const { getRootProps, highlighted } = useOption({
-      value,
-      disabled,
-      label: children
-    })
+export const Option = React.forwardRef<HTMLLIElement, OptionProps>(({ className, ...rest }, ref) => {
+  const { componentContainer, setRef } = useForwardedRefCallback(ref)
+  useSetupTheme({ componentContainer, baseTheme: rest.baseTheme })
 
-    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    useSetupTheme({ componentContainer, baseTheme })
+  return (
+    <MUIOption<OptionValue, typeof Option>
+      ref={setRef}
+      {...rest}
+      className={classnames(componentStyles.rootOption, className)}
+    />
+  )
+})
 
-    return (
-      <li
-        {...getRootProps()}
-        {...rest}
-        value={value}
-        className={classnames(
-          componentStyles.rootOption,
-          {
-            [componentStyles.highlighted]: highlighted
-          },
-          className
-        )}
-        ref={setRef}
-      >
-        {children}
-      </li>
-    )
-  }
-)
-
-Option.displayName = 'List'
+Option.displayName = 'Option'

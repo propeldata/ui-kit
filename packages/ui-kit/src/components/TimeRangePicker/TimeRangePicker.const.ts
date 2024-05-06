@@ -71,8 +71,20 @@ export const lastNOptions = [
   { label: 'years', value: RelativeTimeRange.LastNYears }
 ]
 
-export const DATE_FORMAT = 'MM/dd/yyyy'
-export const CUSTOM_RANGE_FORMAT = 'MMMM dd, yyyy, HH:mm:ss'
+export const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+}
+
+export const CUSTOM_RANGE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+}
 
 export const FROM_DATE_UNTIL_NOW = 'from-custom-date-until-now'
 export const CUSTOM_DATE_RANGE = 'custom-fixed-date-range'

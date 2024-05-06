@@ -1,11 +1,11 @@
 import { ClickAwayListener } from '@mui/base/ClickAwayListener'
 import { Popper } from '@mui/base/Popper'
 import classNames from 'classnames'
-import { format, startOfDay } from 'date-fns'
+import { startOfDay, intlFormat } from 'date-fns'
 import React from 'react'
 import { ClassNames, DateRange, DayPicker } from 'react-day-picker'
 import styles from 'react-day-picker/dist/style.module.css'
-import { useForwardedRefCallback } from '../../helpers'
+import { getLocale, useForwardedRefCallback } from '../../helpers'
 import { Button } from '../Button'
 import { Divider } from '../Divider'
 import { CalendarIcon } from '../Icons/Calendar'
@@ -18,16 +18,17 @@ import { Typography } from '../Typography'
 import { DateTimeField } from './DateTimeField'
 import {
   CUSTOM_DATE_RANGE,
-  CUSTOM_RANGE_FORMAT,
-  DATE_FORMAT,
   defaultOptions,
   FROM_DATE_UNTIL_NOW,
+  CUSTOM_RANGE_FORMAT_OPTIONS,
+  DATE_FORMAT_OPTIONS,
   lastNOptions
 } from './TimeRangePicker.const'
 import componentStyles from './TimeRangePicker.module.scss'
 import { DateRangeOptionsProps, TimeRangePickerProps } from './TimeRangePicker.types'
 
-const formatDateTime = (value: Date | undefined, valueFormat: string) => (value ? format(value, valueFormat) : '')
+const formatDateTime = (value: Date | undefined, locale: string, valueFormat?: Intl.DateTimeFormatOptions) =>
+  value ? intlFormat(value, valueFormat ?? DATE_FORMAT_OPTIONS, { locale }) : ''
 
 export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerProps>(
   (
@@ -38,6 +39,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       disableCustomRelative = false,
       disableOptions = false,
       disabled = false,
+      locale: localeProp,
       options: optionsProp,
       defaultValue,
       value,
@@ -50,6 +52,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       baseTheme,
       componentContainer
     })
+
+    const locale = localeProp ?? getLocale()
     const options = React.useMemo(() => (optionsProp ? optionsProp(defaultOptions) : defaultOptions), [optionsProp])
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -100,12 +104,9 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       let label: string | undefined
 
       if (selectedOption?.uid === FROM_DATE_UNTIL_NOW) {
-        label = `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - Now`
+        label = `${formatDateTime(datepickerRange?.from, locale)} - Now`
       } else if (selectedOption?.uid === CUSTOM_DATE_RANGE) {
-        label = `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - ${formatDateTime(
-          datepickerRange?.to,
-          DATE_FORMAT
-        )}`
+        label = `${formatDateTime(datepickerRange?.from, locale)} - ${formatDateTime(datepickerRange?.to, locale)}`
       } else if (selectedOption) {
         label = options?.find((option) => option.uid === selectedOption.uid)?.label
       }
@@ -115,7 +116,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       }
 
       setSelectedOptionLabel(label)
-    }, [options, selectedOption, datepickerRange])
+    }, [locale, options, selectedOption, datepickerRange])
 
     // Init selected option if defaultValue is set
     React.useEffect(() => {
@@ -220,11 +221,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         uid: datepickerMode === CUSTOM_DATE_RANGE ? CUSTOM_DATE_RANGE : FROM_DATE_UNTIL_NOW,
         label:
           datepickerMode === CUSTOM_DATE_RANGE
-            ? `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - ${formatDateTime(
-                datepickerRange?.to,
-                DATE_FORMAT
-              )}`
-            : `${formatDateTime(datepickerRange?.from, DATE_FORMAT)} - Now`,
+            ? `${formatDateTime(datepickerRange?.from, locale)} - ${formatDateTime(datepickerRange?.to, locale)}`
+            : `${formatDateTime(datepickerRange?.from, locale)} - Now`,
         value: {
           start: datepickerRange.from,
           stop: datepickerRange.to
@@ -234,7 +232,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       setSelectedOption(option)
 
       setAnchorEl(null)
-    }, [datepickerMode, datepickerRange])
+    }, [locale, datepickerMode, datepickerRange])
 
     const datePickerClassNames: ClassNames = {
       ...styles,
@@ -407,9 +405,19 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                 className={componentStyles.timeRangePickerInputs}
                 style={{ width: datepickerMode === CUSTOM_DATE_RANGE ? 576 : 264 }}
               >
-                <DateTimeField rangeRole="from" dateRange={datepickerRange} onChange={setDatepickerRange} />
+                <DateTimeField
+                  rangeRole="from"
+                  dateRange={datepickerRange}
+                  locale={locale}
+                  onChange={setDatepickerRange}
+                />
                 {datepickerMode === CUSTOM_DATE_RANGE && (
-                  <DateTimeField rangeRole="to" dateRange={datepickerRange} onChange={setDatepickerRange} />
+                  <DateTimeField
+                    rangeRole="to"
+                    dateRange={datepickerRange}
+                    locale={locale}
+                    onChange={setDatepickerRange}
+                  />
                 )}
               </div>
               {datepickerRange?.from && datepickerRange?.to && (
@@ -418,13 +426,17 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   <div className={componentStyles[datepickerMode]}>
                     <Typography variant="textXsRegular">
                       <span style={{ color: theme?.textQuarterary }}>Start:</span>{' '}
-                      {formatDateTime(datepickerRange.from, CUSTOM_RANGE_FORMAT)}
+                      {formatDateTime(datepickerRange.from, locale, CUSTOM_RANGE_FORMAT_OPTIONS)}
                     </Typography>
                     <Typography variant="textXsRegular">
                       <span style={{ color: theme?.textQuarterary }}>End:</span>{' '}
                       {datepickerMode === FROM_DATE_UNTIL_NOW
-                        ? `Now ${formatDateTime(datepickerRange.to, 'MMMM dd, yyyy')}`
-                        : formatDateTime(datepickerRange.to, CUSTOM_RANGE_FORMAT)}
+                        ? `Now ${formatDateTime(datepickerRange.to, locale, {
+                            year: 'numeric',
+                            month: 'long',
+                            day: '2-digit'
+                          })}`
+                        : formatDateTime(datepickerRange.to, locale, CUSTOM_RANGE_FORMAT_OPTIONS)}
                     </Typography>
                   </div>
                 </>

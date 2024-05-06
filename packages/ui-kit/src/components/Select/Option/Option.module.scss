@@ -7,19 +7,15 @@
   margin: 0;
   cursor: pointer;
 
-  &:hover,
-  &:focus,
-  &:focus-within {
+  &:hover {
     background-color: var(--propel-background-active);
     border-radius: var(--propel-radius-sm);
   }
-}
 
-.highlighted {
-  background-color: var(--propel-background-secondary-hover);
-  border-radius: var(--propel-radius-sm);
-
-  &:hover {
+  &:focus,
+  &:focus-visible {
     background-color: var(--propel-background-secondary-hover);
+    border-radius: var(--propel-radius-sm);
+    outline: none;
   }
 }

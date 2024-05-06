@@ -40,6 +40,9 @@ export interface TimeRangePickerProps extends Omit<React.ComponentPropsWithoutRe
   /** Controls the current value of the picker through a structured object, enabling controlled component behavior. */
   value?: DateRangeOptionsProps
 
+  /** The locale used to format the date and time values, e.g. `en-US`. */
+  locale?: string
+
   /** A function that allows for customizing the list of quick selection options based on default options provided. */
   options?: (defaultOptions: DateRangeOptionsProps[]) => DateRangeOptionsProps[] | undefined
 
