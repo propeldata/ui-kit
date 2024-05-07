@@ -27,8 +27,14 @@ import {
 import componentStyles from './TimeRangePicker.module.scss'
 import { DateRangeOptionsProps, TimeRangePickerProps } from './TimeRangePicker.types'
 
-const formatDateTime = (value: Date | undefined, locale: string, valueFormat?: Intl.DateTimeFormatOptions) =>
-  value ? intlFormat(value, valueFormat ?? DATE_FORMAT_OPTIONS, { locale }) : ''
+const formatDateTime = (value: Date | undefined, locale: string, valueFormat?: Intl.DateTimeFormatOptions) => {
+  try {
+    return value ? intlFormat(value, valueFormat ?? DATE_FORMAT_OPTIONS, { locale }) : ''
+  } catch (e) {
+    console.error(e)
+    return ''
+  }
+}
 
 export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerProps>(
   (
@@ -53,7 +59,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       componentContainer
     })
 
-    const locale = localeProp ?? getLocale()
+    const locale = localeProp || getLocale()
     const options = React.useMemo(() => (optionsProp ? optionsProp(defaultOptions) : defaultOptions), [optionsProp])
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)

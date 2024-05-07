@@ -25,3 +25,12 @@ export const DefaultStory: Story = {
   },
   render: (args) => <DateTimeField {...args} />
 }
+
+export const GermanLocaleStory: Story = {
+  name: 'German Locale',
+  args: {
+    style: { width: 400 },
+    locale: 'de-DE'
+  },
+  render: (args) => <DateTimeField {...args} />
+}
