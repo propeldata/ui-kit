@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { Select } from './Select'
+import { Option } from './Option'
 
 jest.mock('../Icons/ChevronDown', () => ({
   ChevronDownIcon: () => <div data-testid="chevron-down-icon" />
@@ -14,7 +15,15 @@ describe('Select', () => {
   ]
 
   it('renders with provided options', () => {
-    render(<Select options={options} />)
+    render(
+      <Select>
+        {options.map((option) => (
+          <Option key={option.value} value={option}>
+            {option.label}
+          </Option>
+        ))}
+      </Select>
+    )
 
     options.forEach((option) => {
       expect(screen.getByText(option.label)).toBeInTheDocument()
@@ -22,7 +31,15 @@ describe('Select', () => {
   })
 
   it('toggles listbox visibility when clicking the button', () => {
-    render(<Select options={[{ value: '1', label: 'Option 1' }]} />)
+    render(
+      <Select>
+        {[{ value: '1', label: 'Option 1' }].map((option) => (
+          <Option key={option.value} value={option}>
+            {option.label}
+          </Option>
+        ))}
+      </Select>
+    )
 
     const combobox = screen.getByRole('combobox')
     fireEvent.click(combobox)
@@ -32,7 +49,15 @@ describe('Select', () => {
   })
 
   it('displays endAdornment correctly', () => {
-    render(<Select options={options} />)
+    render(
+      <Select>
+        {options.map((option) => (
+          <Option key={option.value} value={option}>
+            {option.label}
+          </Option>
+        ))}
+      </Select>
+    )
 
     expect(screen.getByTestId('chevron-down-icon')).toBeInTheDocument()
   })

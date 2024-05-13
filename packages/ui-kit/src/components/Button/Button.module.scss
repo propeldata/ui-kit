@@ -67,6 +67,12 @@
       background-color: var(--propel-background-brand-solid-hover);
       border-color: var(--propel-background-brand-solid-hover);
     }
+
+    &.disabled {
+      color: var(--propel-text-disabled);
+      background-color: var(--propel-background-disabled-subtle);
+      border-color: var(--propel-border-primary);
+    }
   }
 
   &.small {

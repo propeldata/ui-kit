@@ -12,7 +12,7 @@ const meta = {
 export default meta
 export const Primary: StoryObj<typeof meta> = {
   args: {
-    uid: '',
+    key: '',
     label: '',
     value: undefined
   }

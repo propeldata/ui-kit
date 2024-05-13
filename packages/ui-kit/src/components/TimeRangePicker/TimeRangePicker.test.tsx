@@ -18,9 +18,9 @@ describe('TimeRangePicker', () => {
 
   it('initializes with default values correctly', async () => {
     const defaultValue = {
-      uid: 'last-30-days',
+      value: 'last-30-days',
       label: 'Last 30 days',
-      value: { relative: RelativeTimeRange.LastNDays, n: 30 }
+      params: { relative: RelativeTimeRange.LastNDays, n: 30 }
     }
 
     render(<TimeRangePicker defaultValue={defaultValue} onChange={jest.fn()} />)
@@ -39,9 +39,9 @@ describe('TimeRangePicker', () => {
 
     await waitFor(() =>
       expect(mockOnChange).toHaveBeenCalledWith({
-        uid: 'this-month',
+        value: 'this-month',
         label: 'This month',
-        value: { relative: RelativeTimeRange.ThisMonth }
+        params: { relative: RelativeTimeRange.ThisMonth }
       })
     )
   })
@@ -82,7 +82,7 @@ describe('TimeRangePicker', () => {
   it('applies a custom date range correctly', async () => {
     render(<TimeRangePicker onChange={mockOnChange} />)
 
-    fireEvent.click(await screen.findByText('Custom fixed date range'))
+    fireEvent.click(await screen.findByText('Custom date range'))
 
     const allDateInputs = await screen.getAllByTestId('date-input')
     const allTimeInputs = await screen.getAllByTestId('time-input')
@@ -110,19 +110,19 @@ describe('TimeRangePicker', () => {
     const toDateTime = new Date('2022-04-15T17:00:00')
 
     expect(mockOnChange).toHaveBeenCalledWith({
-      uid: 'custom-fixed-date-range',
-      label: '04/01/2022 - 04/15/2022',
-      value: { start: fromDateTime, stop: toDateTime }
+      value: 'custom-fixed-date-range',
+      label: '04/01/2022 – 04/15/2022',
+      params: { start: fromDateTime, stop: toDateTime }
     })
   })
 
-  it('applies the "From custom date until now" range correctly', async () => {
+  it('applies the "From date until now" range correctly', async () => {
     const now = new Date('2024-04-18T08:58:01.733Z')
     jest.useFakeTimers().setSystemTime(now)
 
     render(<TimeRangePicker onChange={mockOnChange} />)
 
-    fireEvent.click(await screen.findByText('From custom date until now...'))
+    fireEvent.click(await screen.findByText('From date until now'))
 
     const dateInput = await screen.getByTestId('date-input')
     const timeInput = await screen.getByTestId('time-input')
@@ -138,9 +138,9 @@ describe('TimeRangePicker', () => {
     const fromDateTime = new Date('2022-01-04T08:00:00')
 
     expect(mockOnChange).toHaveBeenCalledWith({
-      uid: 'from-custom-date-until-now',
-      label: `01/04/2022 - Now`,
-      value: { start: fromDateTime, stop: now }
+      value: 'from-custom-date-until-now',
+      label: `01/04/2022 – Now`,
+      params: { start: fromDateTime, stop: now }
     })
 
     jest.useRealTimers()
@@ -149,7 +149,7 @@ describe('TimeRangePicker', () => {
   it('validates date and time entries correctly', async () => {
     render(<TimeRangePicker onChange={jest.fn()} />)
 
-    fireEvent.click(await screen.findByText('Custom fixed date range'))
+    fireEvent.click(await screen.findByText('Custom date range'))
 
     const allDateInputs = await screen.getAllByTestId('date-input')
     const allTimeInputs = await screen.getAllByTestId('time-input')

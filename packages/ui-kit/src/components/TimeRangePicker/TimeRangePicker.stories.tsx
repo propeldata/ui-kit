@@ -33,10 +33,10 @@ const TimeRangePicker = (args: Story['args']) => {
 }
 
 const value365 = {
-  uid: 'last-365-days'
+  value: 'last-365-days'
 }
 const value90 = {
-  uid: 'last-90-days'
+  value: 'last-90-days'
 }
 
 const TimeRangePickerControlled = (args: Story['args']) => {
@@ -65,7 +65,7 @@ export const DefaultValueStory: Story = {
   name: 'Default value',
   args: {
     defaultValue: {
-      uid: 'last-365-days'
+      value: 'last-365-days'
     }
   },
   render: (args) => <TimeRangePicker {...args} />
@@ -75,7 +75,7 @@ export const ControlledValueStory: Story = {
   name: 'Controlled value',
   args: {
     value: {
-      uid: 'last-365-days'
+      value: 'last-365-days'
     }
   },
   render: (args) => <TimeRangePickerControlled {...args} />
@@ -85,11 +85,11 @@ export const CustomOptionsStory: Story = {
   name: 'Custom options',
   args: {
     options: (defaultOptions) => {
-      const newOptions = defaultOptions.filter((option) => option.uid === 'last-365-days')
+      const newOptions = defaultOptions.filter((option) => option.value === 'last-365-days')
       newOptions.push({
-        uid: 'yesterday',
+        value: 'yesterday',
         label: 'Yesterday',
-        value: {
+        params: {
           start: startOfYesterday(),
           stop: endOfYesterday()
         }

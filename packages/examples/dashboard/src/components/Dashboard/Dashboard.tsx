@@ -35,7 +35,7 @@ interface DashboardProps extends DashboardCommonProps {
 export const Dashboard = ({ fetchToken, envs }: DashboardProps) => {
   const [theme, setTheme] = React.useState<DefaultThemes>('lightTheme')
   const [timeRange, setTimeRange] = React.useState<DateRangeOptionsProps | undefined>({
-    uid: 'last-90-days'
+    value: 'last-90-days'
   })
 
   return (
@@ -76,13 +76,13 @@ export const Dashboard = ({ fetchToken, envs }: DashboardProps) => {
               {timeRange?.value && (
                 <>
                   <TimeSeriesStatic />
-                  <TimeSeriesConnected envs={envs} timeRange={timeRange?.value} />
+                  <TimeSeriesConnected envs={envs} timeRange={timeRange?.params} />
                   <LeaderboardStatic />
-                  <LeaderboardConnected envs={envs} timeRange={timeRange?.value} />
+                  <LeaderboardConnected envs={envs} timeRange={timeRange?.params} />
                   <CounterStatic />
-                  <CounterConnected envs={envs} timeRange={timeRange?.value} />
+                  <CounterConnected envs={envs} timeRange={timeRange?.params} />
                   <PieChartStatic />
-                  <PieChartConnected envs={envs} timeRange={timeRange?.value} />
+                  <PieChartConnected envs={envs} timeRange={timeRange?.params} />
                 </>
               )}
             </div>

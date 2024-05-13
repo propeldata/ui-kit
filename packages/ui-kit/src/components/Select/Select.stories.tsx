@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { storybookCodeTemplate } from '../../helpers'
 import { Select as SelectSource } from './Select'
+import { Option } from './Option'
 
 const meta: Meta<typeof SelectSource> = {
   title: 'Components/Select',
@@ -28,16 +29,7 @@ const Select = (args: Story['args']) => {
 
   return (
     <div style={{ display: 'block' }}>
-      <SelectSource
-        {...args}
-        value={value}
-        onChange={(_, value) => {
-          const option = options.find((option) => option.value === value)
-          if (option) {
-            setValue(option.label)
-          }
-        }}
-      />
+      <SelectSource {...args} value={value} onChange={(_, val) => setValue(val)} />
     </div>
   )
 }
@@ -45,7 +37,11 @@ const Select = (args: Story['args']) => {
 export const DefaultStory: Story = {
   name: 'Default',
   args: {
-    options,
+    children: options.map((option) => (
+      <Option key={option.value} value={option}>
+        {option.label}
+      </Option>
+    )),
     placeholder: 'Select an option'
   },
   render: (args) => <Select {...args} />
@@ -54,7 +50,11 @@ export const DefaultStory: Story = {
 export const SmallStory: Story = {
   name: 'Small',
   args: {
-    options,
+    children: options.map((option) => (
+      <Option key={option.value} value={option}>
+        {option.label}
+      </Option>
+    )),
     size: 'small',
     placeholder: 'Select an option'
   },

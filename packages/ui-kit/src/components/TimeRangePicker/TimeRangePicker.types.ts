@@ -3,13 +3,13 @@ import type { DefaultThemes } from '../ThemeProvider'
 
 export type DateRangeOptionsProps = {
   /** A unique identifier for the date range option, used to distinguish between different options. */
-  uid: string
+  value: string
 
   /** A human-readable label that describes the date range option. */
   label?: string
 
   /** The value of the date range option, which can be either a specific date range or a relative time range. */
-  value?: TimeRangeInput
+  params?: TimeRangeInput
 }
 
 export interface TimeRangePickerProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {
@@ -40,7 +40,7 @@ export interface TimeRangePickerProps extends Omit<React.ComponentPropsWithoutRe
   /** Controls the current value of the picker through a structured object, enabling controlled component behavior. */
   value?: DateRangeOptionsProps
 
-  /** The locale used to format the date and time values, e.g. `en-US`. */
+  /** The locale used to format the date and time values, e.g. "en-US". */
   locale?: string
 
   /** A function that allows for customizing the list of quick selection options based on default options provided. */

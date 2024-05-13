@@ -209,7 +209,7 @@ const main = async () => {
 
             // Wrap font family with quotes
             if (valueKey === 'fontFamily') {
-              value = `'${value}'`
+              value = `'${value}', sans-serif`
             }
 
             // Map font weight from string value to number

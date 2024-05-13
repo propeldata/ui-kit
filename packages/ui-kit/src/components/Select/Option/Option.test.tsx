@@ -7,13 +7,16 @@ jest.mock('./Option.module.scss', () => ({
   rootOption: 'rootOption'
 }))
 
+const OPTION = {
+  value: '1',
+  label: 'Option 1'
+}
+
 describe('Option', () => {
   it('renders children correctly', () => {
-    const childText = 'Option 1'
-
     render(
       <Select>
-        <Option value="1">{childText}</Option>
+        <Option value={OPTION}>{OPTION.label}</Option>
       </Select>
     )
 
@@ -21,14 +24,14 @@ describe('Option', () => {
 
     screen.getByRole('option')
 
-    expect(screen.getByRole('option')).toHaveTextContent(childText)
+    expect(screen.getByRole('option')).toHaveTextContent(OPTION.label)
   })
 
   it('handles disabled prop', () => {
     render(
       <Select>
-        <Option value="1" disabled>
-          Disabled Option
+        <Option value={OPTION} disabled>
+          {OPTION.label}
         </Option>
       </Select>
     )
@@ -43,8 +46,8 @@ describe('Option', () => {
 
     render(
       <Select>
-        <Option value="1" className={customClass}>
-          Option with custom class
+        <Option value={OPTION} className={customClass}>
+          {OPTION.label}
         </Option>
       </Select>
     )
@@ -59,8 +62,8 @@ describe('Option', () => {
 
     render(
       <Select>
-        <Option value="1" data-testid={testId}>
-          Option with data-testid
+        <Option value={OPTION} data-testid={testId}>
+          {OPTION.label}
         </Option>
       </Select>
     )

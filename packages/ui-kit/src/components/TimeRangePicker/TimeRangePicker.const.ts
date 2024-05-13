@@ -3,61 +3,61 @@ import { RelativeTimeRange } from '../../helpers'
 
 export const defaultOptions: DateRangeOptionsProps[] = [
   {
-    uid: 'today',
+    value: 'today',
     label: 'Today',
-    value: {
+    params: {
       relative: RelativeTimeRange.Today
     }
   },
   {
-    uid: 'this-week',
+    value: 'this-week',
     label: 'This week',
-    value: {
+    params: {
       relative: RelativeTimeRange.ThisWeek
     }
   },
   {
-    uid: 'this-month',
+    value: 'this-month',
     label: 'This month',
-    value: {
+    params: {
       relative: RelativeTimeRange.ThisMonth
     }
   },
   {
-    uid: 'this-year',
+    value: 'this-year',
     label: 'This year',
-    value: {
+    params: {
       relative: RelativeTimeRange.ThisYear
     }
   },
   {
-    uid: 'last-7-days',
+    value: 'last-7-days',
     label: 'Last 7 days',
-    value: {
+    params: {
       relative: RelativeTimeRange.LastNDays,
       n: 7
     }
   },
   {
-    uid: 'last-30-days',
+    value: 'last-30-days',
     label: 'Last 30 days',
-    value: {
+    params: {
       relative: RelativeTimeRange.LastNDays,
       n: 30
     }
   },
   {
-    uid: 'last-90-days',
+    value: 'last-90-days',
     label: 'Last 90 days',
-    value: {
+    params: {
       relative: RelativeTimeRange.LastNDays,
       n: 90
     }
   },
   {
-    uid: 'last-365-days',
+    value: 'last-365-days',
     label: 'Last 365 days',
-    value: {
+    params: {
       relative: RelativeTimeRange.LastNDays,
       n: 365
     }
