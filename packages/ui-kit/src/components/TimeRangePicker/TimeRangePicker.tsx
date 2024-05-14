@@ -1,7 +1,7 @@
 import { ClickAwayListener } from '@mui/base/ClickAwayListener'
 import { Popper } from '@mui/base/Popper'
 import classNames from 'classnames'
-import { intlFormat, set, startOfDay } from 'date-fns'
+import { intlFormat, startOfDay } from 'date-fns'
 import React from 'react'
 import { ClassNames, DateRange, DayPicker } from 'react-day-picker'
 import styles from 'react-day-picker/dist/style.module.css'
