@@ -71,13 +71,21 @@ const SelectComponent = <T extends OptionValue>(
             [componentStyles[size]]: size && size !== 'default'
           })
         }),
-        listbox: getListboxProps(),
+        listbox: getListboxProps({}),
         popper: {
           className: classNames(
             componentStyles.popper,
             { [componentStyles[size]]: size && size !== 'default' },
             slotProps?.popper != null && 'className' in slotProps.popper && slotProps?.popper?.className
           ),
+          onBlur: (event: React.FocusEvent<HTMLDivElement>) => {
+            const isPopupBlur = !event.currentTarget.contains(event.relatedTarget)
+            setTimeout(() => {
+              if (isPopupBlur && listboxVisible) {
+                setListboxVisible(false)
+              }
+            }, 100)
+          },
           disablePortal: true,
           open
         }

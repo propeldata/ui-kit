@@ -59,14 +59,14 @@
   }
 }
 
-.from-custom-date-until-now {
+.from-date-until-now {
   display: flex;
   flex-direction: column;
   gap: var(--propel-spacing-xs);
   margin: var(--propel-spacing-lg) var(--propel-spacing-3xl);
 }
 
-.custom-fixed-date-range {
+.custom-date-range {
   display: flex;
   flex-direction: row;
   margin: var(--propel-spacing-lg) var(--propel-spacing-3xl);

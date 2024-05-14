@@ -20,13 +20,8 @@
   transition: background-color var(--propel-transition-ease-time) ease,
     border-color var(--propel-transition-ease-time) ease, color var(--propel-transition-ease-time) ease;
 
-  &:focus,
-  &:focus-visible {
-    border-color: var(--propel-border-brand-solid-alt);
-    outline: none;
-  }
-
   &:hover,
+  &:focus-visible,
   &.focus {
     outline: none;
     color: var(--propel-text-secondary);

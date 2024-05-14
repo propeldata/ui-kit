@@ -86,5 +86,5 @@ export const CUSTOM_RANGE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
   second: '2-digit'
 }
 
-export const FROM_DATE_UNTIL_NOW = 'from-custom-date-until-now'
-export const CUSTOM_DATE_RANGE = 'custom-fixed-date-range'
+export const FROM_DATE_UNTIL_NOW = 'from-date-until-now'
+export const CUSTOM_DATE_RANGE = 'custom-date-range'

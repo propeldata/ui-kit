@@ -110,7 +110,7 @@ describe('TimeRangePicker', () => {
     const toDateTime = new Date('2022-04-15T17:00:00')
 
     expect(mockOnChange).toHaveBeenCalledWith({
-      value: 'custom-fixed-date-range',
+      value: 'custom-date-range',
       label: '04/01/2022 – 04/15/2022',
       params: { start: fromDateTime, stop: toDateTime }
     })
@@ -138,7 +138,7 @@ describe('TimeRangePicker', () => {
     const fromDateTime = new Date('2022-01-04T08:00:00')
 
     expect(mockOnChange).toHaveBeenCalledWith({
-      value: 'from-custom-date-until-now',
+      value: 'from-date-until-now',
       label: `01/04/2022 – Now`,
       params: { start: fromDateTime, stop: now }
     })

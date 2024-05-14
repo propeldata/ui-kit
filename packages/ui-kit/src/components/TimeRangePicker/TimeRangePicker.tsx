@@ -1,7 +1,7 @@
 import { ClickAwayListener } from '@mui/base/ClickAwayListener'
 import { Popper } from '@mui/base/Popper'
 import classNames from 'classnames'
-import { intlFormat, startOfDay } from 'date-fns'
+import { intlFormat, set, startOfDay } from 'date-fns'
 import React from 'react'
 import { ClassNames, DateRange, DayPicker } from 'react-day-picker'
 import styles from 'react-day-picker/dist/style.module.css'
@@ -74,6 +74,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const [lastNOption, setLastNOption] = React.useState<OptionValue | null>(
       lastNOptions.find((option) => option.label === 'days') ?? null
     )
+    const lastNRef = React.useRef(lastN)
+    const lastNOptionRef = React.useRef(lastNOption)
 
     const [selectedOption, setSelectedOption] = React.useState<DateRangeOptionsProps | null>(defaultValue)
     const [datepickerRange, setDatepickerRange] = React.useState<DateRange | null>(null)
@@ -85,20 +87,13 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const popupOpen = Boolean(anchorEl)
 
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
-    const lastNRef = React.useRef(lastN)
-    const lastNOptionRef = React.useRef(lastNOption)
-
-    React.useEffect(() => {
-      lastNRef.current = lastN
-      lastNOptionRef.current = lastNOption
-    }, [lastN, lastNOption])
 
     const getLastNOption = React.useCallback(() => {
       const relativeOption = lastNOptions.find((option) => option.label === lastNOption?.label)
 
       return {
         value: 'last-n',
-        label: `Last ${lastN} ${lastNOption}`,
+        label: `Last ${lastNRef.current} ${lastNOptionRef.current?.label}`,
         params: {
           relative: relativeOption?.value ?? lastNOptions[0].value,
           n: lastN
@@ -106,11 +101,26 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       }
     }, [lastN, lastNOption])
 
+    const [lastNOptionValue, setLastNOptionValue] = React.useState<DateRangeOptionsProps>(getLastNOption())
+    const [fromDateUntilNow, setFromDateUntilNow] = React.useState<DateRangeOptionsProps>({
+      value: FROM_DATE_UNTIL_NOW
+    })
+    const [customDateRange, setCustomDateRange] = React.useState<DateRangeOptionsProps>({ value: CUSTOM_DATE_RANGE })
+
+    React.useEffect(() => {
+      setLastNOptionValue(getLastNOption())
+    }, [getLastNOption])
+
     React.useEffect(() => {
       if (value) {
         setSelectedOption({ ...value })
       }
     }, [value])
+
+    React.useEffect(() => {
+      lastNRef.current = lastN
+      lastNOptionRef.current = lastNOption
+    }, [lastN, lastNOption])
 
     // Init selected option if defaultValue is set
     React.useEffect(() => {
@@ -129,13 +139,13 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           stop: datepickerRange.to
         }
       } else if (selectedOption?.value === 'last-n') {
-        initSelectedOption = getLastNOption()
+        initSelectedOption = lastNOptionValue
       } else if (selectedOption) {
         initSelectedOption = options?.find((option) => option.value === selectedOption.value) ?? null
       }
 
       setSelectedOption({ ...initSelectedOption } as DateRangeOptionsProps)
-    }, [selectedOption, datepickerRange, options, getLastNOption])
+    }, [selectedOption, datepickerRange, options, lastNOptionValue])
 
     React.useEffect(() => {
       if (value?.value === selectedOption?.value) {
@@ -167,18 +177,12 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       }
 
       timeoutRef.current = setTimeout(() => {
-        const newOption = {
-          value: 'last-n',
-          label: `Last ${lastNRef.current} ${lastNOptionRef.current?.label}`,
-          params: {
-            relative:
-              lastNOptions.find((option) => option.label === lastNOptionRef.current?.label)?.value ??
-              lastNOptions[0].value,
-            n: lastNRef.current
-          }
-        }
+        setLastN(lastNRef.current)
+        setLastNOption(lastNOptionRef.current)
 
-        setSelectedOption(newOption)
+        const newValue = getLastNOption()
+        setLastNOptionValue(newValue)
+        setSelectedOption(newValue)
       }, 500)
 
       return () => {
@@ -186,7 +190,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           clearTimeout(timeoutRef.current)
         }
       }
-    }, [setSelectedOption])
+    }, [getLastNOption])
 
     const onLastNChange = React.useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -239,10 +243,41 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         }
       }
 
+      if (datepickerMode === FROM_DATE_UNTIL_NOW) {
+        setFromDateUntilNow(option)
+      }
+
+      if (datepickerMode === CUSTOM_DATE_RANGE) {
+        setCustomDateRange(option)
+      }
+
       setSelectedOption(option)
 
       setAnchorEl(null)
     }, [locale, datepickerMode, datepickerRange])
+
+    const onFromDateUntilNow = React.useCallback(
+      (event: React.MouseEvent<HTMLLIElement>) => {
+        event.stopPropagation()
+        const now = new Date()
+        setSelectedRange({ from: startOfDay(now), to: now })
+        setDatepickerRange({ from: datepickerRange?.from, to: now })
+        setDatepickerMode(FROM_DATE_UNTIL_NOW)
+        setSelectOpen(false)
+        setAnchorEl(componentContainer)
+      },
+      [datepickerRange, componentContainer]
+    )
+
+    const onCustomDateRange = React.useCallback(
+      (event: React.MouseEvent<HTMLLIElement>) => {
+        event.stopPropagation()
+        setDatepickerMode(CUSTOM_DATE_RANGE)
+        setSelectOpen(false)
+        setAnchorEl(componentContainer)
+      },
+      [componentContainer]
+    )
 
     const datePickerClassNames: ClassNames = {
       ...styles,
@@ -283,29 +318,9 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
               return
             }
 
-            if (newValue?.value === FROM_DATE_UNTIL_NOW || newValue?.value === 'custom-fixed-date-range') {
-              event?.stopPropagation()
-              setSelectOpen(false)
-              setAnchorEl(componentContainer)
-            }
-
-            if (newValue?.value === FROM_DATE_UNTIL_NOW) {
-              const now = new Date()
-              setSelectedRange({ from: startOfDay(now), to: now })
-              setDatepickerRange({ from: undefined, to: now })
-              setDatepickerMode(FROM_DATE_UNTIL_NOW)
-              return
-            }
-
-            if (newValue?.value === 'custom-fixed-date-range') {
-              setDatepickerMode(CUSTOM_DATE_RANGE)
-              return
-            }
-
             if (newValue?.value === 'last-n') {
               event?.stopPropagation()
-              const lastNOption = getLastNOption()
-              setSelectedOption(lastNOption)
+              setSelectedOption(newValue)
               setSelectOpen(false)
               return
             }
@@ -315,12 +330,12 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         >
           {!disableOptions &&
             options?.map((option) => (
-              <Option key={option.value} value={{ value: option.value }}>
+              <Option key={option.value} value={option}>
                 {option.label}
               </Option>
             ))}
           {!disableCustomRelative && (
-            <Option value={{ value: 'last-n' }} className={componentStyles.lastN}>
+            <Option value={lastNOptionValue} className={componentStyles.lastN}>
               In the last
               {/* This prevents the parent Option component from executing logic handling when the user interacts with nested inputs. */}
               {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
@@ -349,8 +364,16 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
             </Option>
           )}
           {(!disableDateUntilNow || !disableCustomRange) && <Divider />}
-          {!disableDateUntilNow && <Option value={{ value: FROM_DATE_UNTIL_NOW }}>From date until now</Option>}
-          {!disableCustomRange && <Option value={{ value: CUSTOM_DATE_RANGE }}>Custom date range</Option>}
+          {!disableDateUntilNow && (
+            <Option value={fromDateUntilNow} onClick={onFromDateUntilNow}>
+              From date until now
+            </Option>
+          )}
+          {!disableCustomRange && (
+            <Option value={customDateRange} onClick={onCustomDateRange}>
+              Custom date range
+            </Option>
+          )}
         </Select>
         <Popper
           open={popupOpen}
