@@ -1,23 +1,25 @@
 import classNames from 'classnames'
-import React, { ComponentPropsWithoutRef, forwardRef, TextareaHTMLAttributes, useEffect, useRef } from 'react'
-import { useCombinedRefs } from '../../helpers'
+import React, { useRef } from 'react'
 
 import componentStyles from './Drawer.module.scss'
 import { DrawerProps } from './Drawer.types'
-import { CloseIcon, CopyIcon } from './icons'
+import { ArrowDownIcon, CloseIcon, CopyIcon } from './icons'
 import { getDisplayValue } from './utils'
 
 // TODO: abstract Drawer to a generic component?
 export function Drawer(props: DrawerProps) {
-  const { isOpen, row, cell, onClose } = props
+  const { isOpen, row, cell, onClose, onCsvDownload, ...rest } = props
 
   const drawerRef = useRef<HTMLDivElement>(null)
 
   const displayRow = cell ? { id: cell.id, cells: [cell] } : row
 
   return (
-    <div ref={drawerRef} className={classNames(componentStyles.container, !isOpen && componentStyles.hidden)}>
+    <div ref={drawerRef} className={classNames(componentStyles.container, !isOpen && componentStyles.hidden)} {...rest}>
       <header className={classNames(componentStyles.header)}>
+        <button type="button" className={componentStyles.downloadButton} onClick={onCsvDownload}>
+          <ArrowDownIcon />
+        </button>
         <button type="button" className={componentStyles.closeButton} onClick={onClose}>
           <CloseIcon />
         </button>

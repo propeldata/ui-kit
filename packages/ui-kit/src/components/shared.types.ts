@@ -113,3 +113,23 @@ export interface QueryProps {
   /** When false, the component will not make any GraphQL requests, default is true. */
   enabled?: boolean
 }
+
+export interface PaginationProps {
+  /**
+   * The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+   * @default 50
+   * */
+  first?: number
+
+  /**
+   * The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
+   * @default 50
+   * */
+  last?: number
+
+  /** The cursor to use when paging forward. */
+  after?: string
+
+  /** The cursor to use when paging backward. */
+  before?: string
+}

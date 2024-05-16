@@ -1,6 +1,6 @@
 import React from 'react'
 
-import type { DataComponentProps, QueryProps } from '../../components/shared.types'
+import type { DataComponentProps, PaginationProps, QueryProps } from '../../components/shared.types'
 import type { DataPoolInput, Sort } from '../../helpers'
 
 export type DataGridData = {
@@ -8,7 +8,7 @@ export type DataGridData = {
   rows?: Array<string | null>
 }
 
-export interface DataGridQueryProps extends Omit<QueryProps, 'metric'> {
+export interface DataGridQueryProps extends Omit<QueryProps, 'metric'>, PaginationProps {
   /** The columns to retrieve. */
   columns?: string[]
 
@@ -27,24 +27,6 @@ export interface DataGridQueryProps extends Omit<QueryProps, 'metric'> {
    * @default 'DESC'
    * */
   sort?: Sort
-
-  /**
-   * The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
-   * @default 50
-   * */
-  first?: number
-
-  /**
-   * The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
-   * @default 50
-   * */
-  last?: number
-
-  /** The cursor to use when paging forward. */
-  after?: string
-
-  /** The cursor to use when paging backward. */
-  before?: string
 }
 
 export interface RowProps {
@@ -61,4 +43,10 @@ export interface DataGridProps extends DataComponentProps<'div'> {
   tableProps?: React.HTMLAttributes<HTMLTableElement>
   /** Props to be applied to the `td` elements */
   cellProps?: React.HTMLAttributes<HTMLTableCellElement>
+  /** Default page size for uncontrolled pagination, if passed, query controlled pagination props will be ignored */
+  defaultPageSize?: number
+  /** If passed along with `rows` the component will ignore the built-in GraphQL operations */
+  headers?: string[]
+  /** If passed along with `headers` the component will ignore the built-in GraphQL operations */
+  rows?: (string | null)[][]
 }

@@ -1,8 +1,11 @@
-export interface DrawerProps {
+import { ComponentPropsWithoutRef } from 'react'
+
+export interface DrawerProps extends ComponentPropsWithoutRef<'div'> {
   isOpen: boolean
   row?: RowElement | null
   cell?: CellElement | null
   onClose: () => void
+  onCsvDownload: () => void
 }
 
 export interface RowElement {
