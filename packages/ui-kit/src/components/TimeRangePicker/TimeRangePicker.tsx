@@ -319,6 +319,10 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
               return
             }
 
+            if (newValue?.value === FROM_DATE_UNTIL_NOW || newValue?.value === CUSTOM_DATE_RANGE) {
+              return
+            }
+
             if (newValue?.value === 'last-n') {
               event?.stopPropagation()
               setSelectedOption(newValue)
