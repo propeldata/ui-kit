@@ -54,6 +54,10 @@ const SelectComponent = <T extends OptionValue>(
     setListboxVisible(false)
   }, [value])
 
+  const listbox = getListboxProps()
+  // Prevent a weird behavior when select is nested in another select
+  listbox.onBlur = () => {}
+
   return (
     <MUISelect<T, false>
       ref={forwardedRef}
@@ -71,7 +75,7 @@ const SelectComponent = <T extends OptionValue>(
             [componentStyles[size]]: size && size !== 'default'
           })
         }),
-        listbox: getListboxProps({}),
+        listbox,
         popper: {
           className: classNames(
             componentStyles.popper,

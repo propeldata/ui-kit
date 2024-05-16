@@ -74,6 +74,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const [lastNOption, setLastNOption] = React.useState<OptionValue | null>(
       lastNOptions.find((option) => option.label === 'days') ?? null
     )
+
     const lastNRef = React.useRef(lastN)
     const lastNOptionRef = React.useRef(lastNOption)
 
@@ -89,17 +90,17 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
     const getLastNOption = React.useCallback(() => {
-      const relativeOption = lastNOptions.find((option) => option.label === lastNOption?.label)
+      const relativeOption = lastNOptions.find((option) => option.label === lastNOptionRef.current?.label)
 
       return {
         value: 'last-n',
         label: `Last ${lastNRef.current} ${lastNOptionRef.current?.label}`,
         params: {
           relative: relativeOption?.value ?? lastNOptions[0].value,
-          n: lastN
+          n: lastNRef.current
         }
       }
-    }, [lastN, lastNOption])
+    }, [])
 
     const [lastNOptionValue, setLastNOptionValue] = React.useState<DateRangeOptionsProps>(getLastNOption())
     const [fromDateUntilNow, setFromDateUntilNow] = React.useState<DateRangeOptionsProps>({
@@ -354,9 +355,9 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   onChange={(_, value) => onLastNOption(value)}
                   style={{ padding: `${theme?.spacingXs} ${theme?.spacingMd}` }}
                 >
-                  {lastNOptions.map((lastNOption) => (
-                    <Option key={lastNOption.label} value={lastNOption}>
-                      {lastNOption.label}
+                  {lastNOptions.map((option) => (
+                    <Option key={option.label} value={option}>
+                      {option.label}
                     </Option>
                   ))}
                 </Select>
