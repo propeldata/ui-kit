@@ -25,20 +25,43 @@ const SelectComponent = <T extends OptionValue>(
     children,
     className,
     slotProps,
-    listboxOpen,
+    listboxOpen = false,
     size = 'default',
     onListboxOpenChange,
     ...rest
   }: SelectProps<T>,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>
 ) => {
-  const [listboxVisible, setListboxVisible] = React.useState(listboxOpen ?? false)
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+  const [listboxVisible, setListboxVisible] = React.useState(listboxOpen)
   const { getButtonProps, getListboxProps, value, contextValue, open } = useSelect<T>({
     onOpenChange: setListboxVisible,
     open: listboxVisible,
     value: valueProp,
     ...rest
   })
+
+  const onPopupBlur = React.useCallback(
+    (event: React.FocusEvent<HTMLDivElement>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
+      const isPopupBlur = !event.currentTarget.contains(event.relatedTarget)
+      timeoutRef.current = setTimeout(() => {
+        if (isPopupBlur && listboxVisible) {
+          setListboxVisible(false)
+        }
+      }, 100)
+
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+      }
+    },
+    [listboxVisible]
+  )
 
   React.useEffect(() => {
     if (onListboxOpenChange) {
@@ -47,7 +70,7 @@ const SelectComponent = <T extends OptionValue>(
   }, [onListboxOpenChange, listboxVisible])
 
   React.useEffect(() => {
-    setListboxVisible(listboxOpen ?? false)
+    setListboxVisible(listboxOpen)
   }, [listboxOpen])
 
   React.useEffect(() => {
@@ -82,14 +105,7 @@ const SelectComponent = <T extends OptionValue>(
             { [componentStyles[size]]: size && size !== 'default' },
             slotProps?.popper != null && 'className' in slotProps.popper && slotProps?.popper?.className
           ),
-          onBlur: (event: React.FocusEvent<HTMLDivElement>) => {
-            const isPopupBlur = !event.currentTarget.contains(event.relatedTarget)
-            setTimeout(() => {
-              if (isPopupBlur && listboxVisible) {
-                setListboxVisible(false)
-              }
-            }, 100)
-          },
+          onBlur: onPopupBlur,
           disablePortal: true,
           open
         }

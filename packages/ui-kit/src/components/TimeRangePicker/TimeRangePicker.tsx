@@ -308,7 +308,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           startAdornment={() => <CalendarIcon size={16} />}
           value={selectedOption}
           placeholder="Date Range"
-          onListboxOpenChange={setSelectOpen}
+          onListboxOpenChange={(listboxOpen) => setSelectOpen(listboxOpen)}
           listboxOpen={selectOpen}
           size="small"
           slotProps={{
