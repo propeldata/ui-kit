@@ -32,6 +32,7 @@ const SelectComponent = <T extends OptionValue>(
   }: SelectProps<T>,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>
 ) => {
+  const popperRef = React.useRef<HTMLDivElement>(null)
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
   const [listboxVisible, setListboxVisible] = React.useState(listboxOpen)
   const { getButtonProps, getListboxProps, value, contextValue, open } = useSelect<T>({
@@ -41,27 +42,22 @@ const SelectComponent = <T extends OptionValue>(
     ...rest
   })
 
-  const onPopupBlur = React.useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
+  const onKeyDown = React.useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    timeoutRef.current = setTimeout(() => {
+      if (!popperRef.current?.contains(document.activeElement)) {
+        setListboxVisible(false)
+      }
+    }, 100)
+
+    return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
       }
-
-      const isPopupBlur = !event.currentTarget.contains(event.relatedTarget)
-      timeoutRef.current = setTimeout(() => {
-        if (isPopupBlur && listboxVisible) {
-          setListboxVisible(false)
-        }
-      }, 100)
-
-      return () => {
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current)
-        }
-      }
-    },
-    [listboxVisible]
-  )
+    }
+  }, [])
 
   React.useEffect(() => {
     if (onListboxOpenChange) {
@@ -79,7 +75,13 @@ const SelectComponent = <T extends OptionValue>(
 
   const listbox = getListboxProps()
   // Prevent a weird behavior when select is nested in another select
-  listbox.onBlur = () => {}
+  listbox.onBlur = React.useCallback((event: React.FocusEvent<HTMLElement>) => {
+    if (!popperRef.current?.contains(event.relatedTarget)) {
+      setTimeout(() => {
+        setListboxVisible(false)
+      }, 100)
+    }
+  }, [])
 
   return (
     <MUISelect<T, false>
@@ -100,12 +102,13 @@ const SelectComponent = <T extends OptionValue>(
         }),
         listbox,
         popper: {
+          ref: popperRef,
           className: classNames(
             componentStyles.popper,
             { [componentStyles[size]]: size && size !== 'default' },
             slotProps?.popper != null && 'className' in slotProps.popper && slotProps?.popper?.className
           ),
-          onBlur: onPopupBlur,
+          onKeyDown,
           disablePortal: true,
           open
         }
