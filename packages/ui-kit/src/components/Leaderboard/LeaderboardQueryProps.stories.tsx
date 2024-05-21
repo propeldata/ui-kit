@@ -5,7 +5,7 @@ export const LeaderboardQueryPropsComponent: React.FC<LeaderboardQueryProps> = (
 
 const meta = {
   title: 'API/LeaderboardQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: LeaderboardQueryPropsComponent
 } satisfies Meta<typeof LeaderboardQueryPropsComponent>
 

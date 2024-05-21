@@ -1,5 +1,5 @@
 import React from 'react'
-import componentStyles from './ValueBar.module.css'
+import componentStyles from './ValueBar.module.scss'
 
 export interface LeaderBoardValueProps {
   value: number

@@ -5,7 +5,7 @@ export const LeaderboardTablePropsComponent: React.FC<LeaderboardTableProps> = (
 
 const meta = {
   title: 'API/LeaderboardTableProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: LeaderboardTablePropsComponent
 } satisfies Meta<typeof LeaderboardTablePropsComponent>
 

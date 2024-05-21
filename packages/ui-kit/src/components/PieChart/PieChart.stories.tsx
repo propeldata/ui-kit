@@ -9,8 +9,7 @@ import {
   storybookCodeTemplate,
   useStorybookAccessToken
 } from '../../helpers'
-import { ThemeTokenProps } from '../../themes'
-import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
+import { DefaultThemes, ThemeProvider, useSetupTheme } from '../ThemeProvider'
 import { PieChart as PieChartSource, PieChartComponent } from './PieChart'
 import { PieChartQueryProps } from './PieChart.types'
 
@@ -272,34 +271,7 @@ export const ThemeStory: Story = {
   decorators: [
     (Story) => {
       const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
-
-      const lightColors: ThemeTokenProps = {
-        colorBlue950: '#1a1919',
-        colorBlue900: '#2D3748',
-        colorBlue800: '#4A5568',
-        colorBlue700: '#718096',
-        colorBlue600: '#A0AEC0',
-        colorBlue500: '#CBD5E0',
-        colorBlue400: '#E2E8F0',
-        colorBlue300: '#EDF2F7',
-        colorBlue200: '#F7FAFC',
-        colorBlue100: '#FFFFFF'
-      }
-
-      const darkColors: ThemeTokenProps = {
-        colorBlue950: '#d9d9d9',
-        colorBlue900: '#F7FAFC',
-        colorBlue800: '#EDF2F7',
-        colorBlue700: '#E2E8F0',
-        colorBlue600: '#CBD5E0',
-        colorBlue500: '#A0AEC0',
-        colorBlue400: '#718096',
-        colorBlue300: '#4A5568',
-        colorBlue200: '#2D3748',
-        colorBlue100: '#1a1919'
-      }
-
-      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
+      const { theme } = useSetupTheme({ baseTheme })
 
       return (
         <ThemeProvider baseTheme={baseTheme} theme={theme}>

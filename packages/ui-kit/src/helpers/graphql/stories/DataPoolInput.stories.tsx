@@ -5,7 +5,7 @@ export const DataPoolInputComponent: React.FC<DataPoolInput> = () => null
 
 const meta = {
   title: 'API/DataPoolInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: DataPoolInputComponent,
   argTypes: {
     id: {

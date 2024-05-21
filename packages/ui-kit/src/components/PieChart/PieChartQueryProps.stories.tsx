@@ -5,7 +5,7 @@ export const PieChartQueryPropsComponent: React.FC<PieChartQueryProps> = () => n
 
 const meta = {
   title: 'API/PieChartQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: PieChartQueryPropsComponent
 } satisfies Meta<typeof PieChartQueryPropsComponent>
 

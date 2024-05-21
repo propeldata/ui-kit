@@ -7,7 +7,7 @@
 
 .custom-leaderboard table {
   height: 200px;
-  --propel-accent: #1db954;
+  --propel-background-brand-solid: #1db954;
 }
 
 .custom-leaderboard table thead tr th {

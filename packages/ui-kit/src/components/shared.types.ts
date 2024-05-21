@@ -3,10 +3,15 @@ import { FilterInput, MetricInput, TimeRangeInput } from '../helpers'
 import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from './ErrorFallback'
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
 import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
+import { ButtonProps } from './Button'
 
 /** Shared props for the data components. */
 
 export interface FallbackComponents {
+  components?: {
+    Button?: (props: ButtonProps) => React.ReactElement
+  }
+
   /**
    * A fallback react component that will be used when the component is in error state.
    *

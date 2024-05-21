@@ -5,7 +5,7 @@ export const DimensionInputComponent: React.FC<DimensionInput> = () => null
 
 const meta = {
   title: 'API/DimensionInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: DimensionInputComponent
 } satisfies Meta<typeof DimensionInputComponent>
 

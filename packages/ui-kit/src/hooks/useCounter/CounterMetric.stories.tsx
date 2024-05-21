@@ -58,7 +58,7 @@ const args = {
 
 const meta: Meta = {
   title: 'Components/Metric',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useCounter', 'useAccessToken'],
     isFunction: true,

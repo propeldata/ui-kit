@@ -5,7 +5,7 @@ export const ErrorFallbackComponent: React.FC<ErrorFallbackProps> = () => null
 
 const meta = {
   title: 'API/ErrorFallbackProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: ErrorFallbackComponent
 } satisfies Meta<typeof ErrorFallbackComponent>
 

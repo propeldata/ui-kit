@@ -5,7 +5,7 @@ export const MetricInputComponent: React.FC<MetricInput> = () => null
 
 const meta = {
   title: 'API/MetricInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: MetricInputComponent,
   argTypes: {
     average: {

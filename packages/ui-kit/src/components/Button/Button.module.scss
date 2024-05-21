@@ -1,0 +1,88 @@
+@use '../../themes/generated/tokens';
+
+.rootButton {
+  @extend .textMdRegular;
+
+  padding: var(--propel-spacing-lg) var(--propel-spacing-4xl);
+  gap: var(--propel-spacing-lg);
+  background-color: var(--propel-background-primary);
+  border-radius: var(--propel-radius-sm);
+  border-width: 1px;
+  border-color: var(--propel-border-primary);
+  border-style: solid;
+  color: var(--propel-text-quarterary);
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  transition: background-color var(--propel-transition-ease-time) ease,
+    border-color var(--propel-transition-ease-time) ease, color var(--propel-transition-ease-time) ease;
+
+  &:hover,
+  &:focus-visible,
+  &.focus {
+    outline: none;
+    color: var(--propel-text-secondary);
+    border-color: var(--propel-border-brand-solid);
+  }
+
+  &.disabled {
+    color: var(--propel-text-disabled);
+    &:hover {
+      color: var(--propel-text-disabled);
+      border-color: var(--propel-border-primary);
+      cursor: default;
+    }
+    & svg {
+      color: var(--propel-text-disabled);
+    }
+  }
+
+  &.startAdornment {
+    justify-content: flex-start;
+    padding-left: var(--propel-spacing-xl);
+  }
+
+  &.endAdornment,
+  &.startAdornment.endAdornment {
+    justify-content: space-between;
+    padding-right: var(--propel-spacing-xl);
+    padding-left: var(--propel-spacing-xl);
+  }
+
+  &.primary {
+    background-color: var(--propel-background-brand-solid);
+    border-color: var(--propel-background-brand-solid);
+    color: #ffffff;
+
+    &:hover,
+    &.focus {
+      background-color: var(--propel-background-brand-solid-hover);
+      border-color: var(--propel-background-brand-solid-hover);
+    }
+
+    &.disabled {
+      color: var(--propel-text-disabled);
+      background-color: var(--propel-background-disabled-subtle);
+      border-color: var(--propel-border-primary);
+    }
+  }
+
+  &.small {
+    @extend .textSmSemibold;
+
+    padding: var(--propel-spacing-md) var(--propel-spacing-4xl);
+
+    &.startAdornment {
+      padding-left: var(--propel-spacing-lg);
+    }
+
+    &.endAdornment,
+    &.startAdornment.endAdornment {
+      padding-right: var(--propel-spacing-lg);
+      padding-left: var(--propel-spacing-lg);
+    }
+  }
+}

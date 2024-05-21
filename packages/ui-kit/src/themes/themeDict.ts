@@ -4,6 +4,10 @@ import { themeDict as themeDictGenerated } from './generated/themeDict'
 export const themeDict = [
   ...themeDictGenerated,
 
+  // Utils
+  { name: 'componentHeight', cssVarName: '--propel-component-height' },
+  { name: 'transitionEaseTime', cssVarName: '--propel-transition-ease-time' },
+
   // Typography - Base
   { name: 'fontFamily', cssVarName: '--propel-font-family' },
   { name: 'fontSize', cssVarName: '--propel-font-size' },
@@ -44,9 +48,6 @@ export const themeDict = [
   // Shadows
   { name: 'shadowSm', cssVarName: '--propel-shadow-sm' },
 
-  // Utils
-  { name: 'componentHeight', cssVarName: '--propel-component-height' },
-
   // Colors
   { name: 'successPrimary', cssVarName: '--propel-success-primary' },
   { name: 'successSecondary', cssVarName: '--propel-success-secondary' },
@@ -57,9 +58,6 @@ export const themeDict = [
   { name: 'colorSecondary', cssVarName: '--propel-color-secondary' },
   { name: 'bgPrimary', cssVarName: '--propel-bg-primary' },
   { name: 'bgSecondary', cssVarName: '--propel-bg-secondary' },
-  { name: 'textPrimary', cssVarName: '--propel-text-primary' },
-  { name: 'textSecondary', cssVarName: '--propel-text-secondary' },
-  { name: 'borderPrimary', cssVarName: '--propel-border-primary' },
   { name: 'accent', cssVarName: '--propel-accent' },
   { name: 'accentHover', cssVarName: '--propel-accent-hover' },
   { name: 'colorGradient', cssVarName: '--propel-color-gradient' },

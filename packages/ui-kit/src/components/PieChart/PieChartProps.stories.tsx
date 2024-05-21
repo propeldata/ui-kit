@@ -5,7 +5,7 @@ export const PieChartPropsComponent: React.FC<ChartProps> = () => null
 
 const meta = {
   title: 'API/PieChartProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: PieChartPropsComponent
 } satisfies Meta<typeof PieChartPropsComponent>
 

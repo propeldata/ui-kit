@@ -41,7 +41,7 @@ const Counter: React.FC<unknown> = () => {
 
 const meta: Meta<typeof Counter> = {
   title: 'Getting started/Logger',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: Counter,
   parameters: {
     imports: 'Counter, LogProvider, LogLevel',

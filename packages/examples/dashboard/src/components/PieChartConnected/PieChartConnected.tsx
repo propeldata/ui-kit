@@ -1,13 +1,18 @@
-import { PieChart, PieChartVariant, RelativeTimeRange } from '@propeldata/ui-kit'
+import { PieChart, PieChartVariant } from '@propeldata/ui-kit'
 import React from 'react'
-import { DashboardCommonProps } from '../../shared.types'
+import { ConnectedComponentProps } from '../../shared.types'
 
 export const PieChartConnected = ({
-  envs: { REACT_APP_METRIC_UNIQUE_NAME_1, REACT_APP_DIMENSION_1 = '' }
-}: DashboardCommonProps) => {
+  envs: { REACT_APP_METRIC_UNIQUE_NAME_1, REACT_APP_DIMENSION_1 = '' },
+  timeRange: timeRangeProp
+}: ConnectedComponentProps) => {
   const [chartType, setChartType] = React.useState<PieChartVariant>('pie')
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
-  const [n, SetN] = React.useState<number>(90)
+  const [timeRange, setTimeRange] = React.useState(timeRangeProp)
+
+  React.useEffect(() => {
+    setTimeRange(timeRangeProp)
+  }, [timeRangeProp])
 
   const handleSwitchRefetchInterval = () => {
     setRefetchInterval(refetchInterval ? undefined : 1000)
@@ -25,10 +30,7 @@ export const PieChartConnected = ({
             },
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             rowLimit: 8,
-            timeRange: {
-              relative: RelativeTimeRange.LastNDays,
-              n
-            },
+            timeRange,
             refetchInterval,
             retry: false,
             filters: []
@@ -48,8 +50,8 @@ export const PieChartConnected = ({
         <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
           Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
         </button>
-        <button className="border-2 p-1 h-9" onClick={() => SetN(n === 0 ? 30 : 0)}>
-          No data: {n === 0 ? 'On' : 'Off'}
+        <button className="border-2 p-1 h-9" onClick={() => setTimeRange({ n: 0 })}>
+          No data: {timeRange?.n ? 'On' : 'Off'}
         </button>
       </div>
     </div>

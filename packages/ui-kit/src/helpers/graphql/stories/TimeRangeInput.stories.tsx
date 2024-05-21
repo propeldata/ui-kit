@@ -5,7 +5,7 @@ export const TimeRangeInputComponent: React.FC<TimeRangeInput> = () => null
 
 const meta = {
   title: 'API/TimeRangeInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: TimeRangeInputComponent
 } satisfies Meta<typeof TimeRangeInputComponent>
 

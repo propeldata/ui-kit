@@ -32,7 +32,7 @@ const Leaderboard = (args: any) => <LeaderboardSource {...args} />
 
 export const ThemeProviderCustomizeViaCssClassNameStory: Story = {
   name: 'ThemeProvider customize via css class name',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     rawCss: `
       // my-themes.css
@@ -64,7 +64,7 @@ export const ThemeProviderCustomizeViaCssClassNameStory: Story = {
 
 export const ThemeProviderCustomizeViaJSPropsStory: Story = {
   name: 'ThemeProvider customize via js props',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     theme: {
       textPrimary: '#532ab4',
@@ -80,7 +80,7 @@ export const ThemeProviderCustomizeViaJSPropsStory: Story = {
 
 export const ThemeProviderChartConfigStory: Story = {
   name: 'ThemeProvider customize chart config',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     globalChartConfigProps: (chartConfig) => {
       chartConfig.options = {

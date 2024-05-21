@@ -1,13 +1,20 @@
-import { RelativeTimeRange, TimeSeries, TimeSeriesChartVariant, TimeSeriesGranularity } from '@propeldata/ui-kit'
+import { TimeSeries, TimeSeriesChartVariant, TimeSeriesGranularity } from '@propeldata/ui-kit'
 import React from 'react'
-import { DashboardCommonProps } from '../../shared.types'
+import { ConnectedComponentProps } from '../../shared.types'
 
-export const TimeSeriesConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 } }: DashboardCommonProps) => {
+export const TimeSeriesConnected = ({
+  envs: { REACT_APP_METRIC_UNIQUE_NAME_1 },
+  timeRange: timeRangeProp
+}: ConnectedComponentProps) => {
   const [chartColor, setChartColor] = React.useState('#75BFFF')
   const [chartType, setChartType] = React.useState<TimeSeriesChartVariant>('bar')
   const [pointStyle, setPointStyle] = React.useState('cross')
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
-  const [n, SetN] = React.useState<number>(30)
+  const [timeRange, setTimeRange] = React.useState(timeRangeProp)
+
+  React.useEffect(() => {
+    setTimeRange(timeRangeProp)
+  }, [timeRangeProp])
 
   const handleSwitchRefetchInterval = () => {
     setRefetchInterval(refetchInterval ? undefined : 1000)
@@ -21,10 +28,7 @@ export const TimeSeriesConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 } }
           card
           query={{
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
-            timeRange: {
-              relative: RelativeTimeRange.LastNDays,
-              n
-            },
+            timeRange,
             granularity: TimeSeriesGranularity.Day,
             refetchInterval,
             retry: false
@@ -71,8 +75,8 @@ export const TimeSeriesConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 } }
         <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
           Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
         </button>
-        <button className="border-2 p-1 h-9" onClick={() => SetN(n === 0 ? 30 : 0)}>
-          No data: {n === 0 ? 'On' : 'Off'}
+        <button className="border-2 p-1 h-9" onClick={() => setTimeRange({ n: 0 })}>
+          No data: {timeRange?.n === 0 ? 'On' : 'Off'}
         </button>
       </div>
     </div>

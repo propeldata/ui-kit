@@ -5,7 +5,7 @@ export const CountMetricQueryInputComponent: React.FC<CountMetricQueryInput> = (
 
 const meta = {
   title: 'API/CountMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: CountMetricQueryInputComponent
 } satisfies Meta<typeof CountMetricQueryInputComponent>
 

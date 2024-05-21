@@ -5,7 +5,7 @@ export const MaxMetricQueryInputComponent: React.FC<MaxMetricQueryInput> = () =>
 
 const meta = {
   title: 'API/MaxMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: MaxMetricQueryInputComponent
 } satisfies Meta<typeof MaxMetricQueryInputComponent>
 

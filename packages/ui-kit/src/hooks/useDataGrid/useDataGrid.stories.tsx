@@ -10,9 +10,13 @@ import '../css/stories.css'
 
 const args: DataGridQueryProps = {
   dataPool: {
-    name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
+    name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1 ?? ''
   },
-  columns: [process.env.STORYBOOK_DIMENSION_1, process.env.STORYBOOK_DIMENSION_2, process.env.STORYBOOK_DIMENSION_3],
+  columns: [
+    process.env.STORYBOOK_DIMENSION_1 ?? '',
+    process.env.STORYBOOK_DIMENSION_2 ?? '',
+    process.env.STORYBOOK_DIMENSION_3 ?? ''
+  ],
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
     n: 30
@@ -24,7 +28,7 @@ const args: DataGridQueryProps = {
 
 const meta: Meta = {
   title: 'Components/DataGrid',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useDataGrid', 'useAccessToken'],
     isFunction: true,

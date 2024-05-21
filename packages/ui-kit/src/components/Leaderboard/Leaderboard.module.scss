@@ -19,7 +19,7 @@
 
     .stickyColumn {
       position: sticky;
-      background-color: var(--propel-bg-primary);
+      background-color: var(--propel-background-primary);
       right: 0;
     }
 
@@ -74,7 +74,7 @@
     td {
       @extend .textXsRegular;
       color: var(--propel-text-secondary);
-      border-bottom: 1px solid var(--propel-color-secondary);
+      border-bottom: 1px solid var(--propel-border-primary);
     }
 
     th {
@@ -95,7 +95,7 @@
 .stickyHeader {
   tr {
     th {
-      background-color: var(--propel-bg-primary);
+      background-color: var(--propel-background-primary);
       position: sticky;
       top: 0;
       z-index: 9999;

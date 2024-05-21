@@ -5,7 +5,7 @@ export const LoaderComponent: React.FC<LoaderProps> = () => null
 
 const meta = {
   title: 'API/LoaderProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: LoaderComponent
 } satisfies Meta<typeof LoaderComponent>
 

@@ -5,7 +5,7 @@ export const TimeSeriesQueryPropsComponent: React.FC<TimeSeriesQueryProps> = () 
 
 const meta = {
   title: 'API/TimeSeriesQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: TimeSeriesQueryPropsComponent
 } satisfies Meta<typeof TimeSeriesQueryPropsComponent>
 

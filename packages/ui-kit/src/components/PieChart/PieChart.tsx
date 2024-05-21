@@ -113,16 +113,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const defaultChartColorPalette = React.useMemo(
       () => [
-        theme?.colorBlue800,
-        theme?.colorBlue700,
-        theme?.colorBlue600,
-        theme?.colorBlue500,
-        theme?.colorBlue400,
-        theme?.colorBlue300,
-        theme?.colorBlue200,
-        theme?.colorBlue100,
-        theme?.colorBlue50,
-        theme?.colorBlue25
+        theme?.brand900,
+        theme?.brand700,
+        theme?.brand600,
+        theme?.brand500,
+        theme?.brand400,
+        theme?.brand300,
+        theme?.brand200,
+        theme?.brand100,
+        theme?.brand50,
+        theme?.brand25
       ],
       [theme]
     )
@@ -165,7 +165,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.bgPrimary : 'transparent'
+            color: card ? theme?.backgroundPrimary : 'transparent'
           },
           title: {
             display: isPie && !hideTotal,
@@ -183,7 +183,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             }
           },
           emptyDoughnut: {
-            color: theme?.colorPrimary,
+            color: theme?.backgroundBrandPrimary,
             width: 2,
             radiusDecrease: 20
           },

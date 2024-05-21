@@ -5,7 +5,7 @@ export const SimpleFilterQueryPropsComponent: React.FC<SimpleFilterQueryProps> =
 
 const meta = {
   title: 'API/SimpleFilterQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: SimpleFilterQueryPropsComponent
 } satisfies Meta<typeof SimpleFilterQueryPropsComponent>
 

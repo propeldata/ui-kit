@@ -77,8 +77,7 @@ export const SingleValueStory: Story = {
   args: {
     ...connectedParams,
     style: {
-      width: 'fit-content',
-      '--propel-accent': 'red'
+      width: 'fit-content'
     },
     card: true
   },
@@ -87,7 +86,7 @@ export const SingleValueStory: Story = {
 
 export const ValueInCardStory: Story = {
   name: 'Value in card',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     ...connectedParams,
     style: {
@@ -129,7 +128,7 @@ export const StringValueStory: Story = {
 
 export const SingleValueCustomStyleStory: Story = {
   name: 'Single value custom style',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     ...connectedParams,
     card: true,
@@ -151,7 +150,7 @@ export const SingleValueCustomStyleStory: Story = {
 
 export const SingleValueRefStory: Story = {
   name: 'Single value with ref',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     value: '49291',
     localize: true,
@@ -188,7 +187,7 @@ export const SingleValueRefStory: Story = {
 
 export const CustomErrorFallbackStory: Story = {
   name: 'Custom ErrorFallback',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     query: {
       accessToken: 'invalid-access-token'
@@ -197,8 +196,8 @@ export const CustomErrorFallbackStory: Story = {
     errorFallback: ({ theme }) => (
       <div
         style={{
-          border: `1px solid ${theme?.errorPrimary}`,
-          color: theme?.errorPrimary,
+          border: `1px solid ${theme?.borderError}`,
+          color: theme?.textErrorPrimary,
           padding: '1rem'
         }}
       >
