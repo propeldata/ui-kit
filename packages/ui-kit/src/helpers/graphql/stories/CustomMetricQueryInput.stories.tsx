@@ -5,7 +5,7 @@ export const CustomMetricQueryInputComponent: React.FC<CustomMetricQueryInput> =
 
 const meta = {
   title: 'API/CustomMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: CustomMetricQueryInputComponent
 } satisfies Meta<typeof CustomMetricQueryInputComponent>
 

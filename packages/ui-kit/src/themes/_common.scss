@@ -1,36 +1,40 @@
+@use './generated/tokens';
+
 .commonTokens {
-  /* Typography - Regular */
+  --propel-component-height: 300px;
+  --propel-transition-ease-time: 300ms;
+
+  /* @deprecated Typography - Regular */
   --propel-font-family: 'Inter';
   --propel-font-size: 16px;
   --propel-font-weight: 400;
   --propel-line-height: 150%;
 
-  /* Typography - Tiny */
+  /* @deprecated Typography - Tiny */
   --propel-tiny-font-family: 'Inter';
   --propel-tiny-font-size: 0.625rem;
   --propel-tiny-font-weight: 400;
   --propel-tiny-line-height: 150%;
 
-  /* Typography - Small */
+  /* @deprecated Typography - Small */
   --propel-small-font-family: 'Inter';
   --propel-small-font-size: 0.75rem;
   --propel-small-font-weight: 400;
   --propel-small-line-height: 150%;
 
-  /* Typography - Heading 1 */
+  /* @deprecated Typography - Heading 1 */
   --propel-h1-font-family: 'Inter';
   --propel-h1-font-size: 3.5rem;
   --propel-h1-font-weight: 600;
   --propel-h1-line-height: 120%;
 
-  /* Common colors */
-  --propel-component-height: 300px;
+  /* @deprecated Common colors */
   --propel-success-primary: #669f2a;
   --propel-success-secondary: #ceeab0;
   --propel-error-primary: #f04438;
   --propel-error-secondary: #fecdca;
 
-  /* Spacing */
+  /* @deprecated Spacing */
   --propel-space-xxs: 4px;
   --propel-space-xs: 8px;
   --propel-space-sm: 10px;
@@ -39,24 +43,26 @@
   --propel-space-xl: 32px;
   --propel-space-xxl: 40px;
 
-  /* Border radius */
+  /* @deprecated Border radius */
   --propel-border-radius-xs: 2px;
   --propel-border-radius-sm: 4px;
 
-  /* Shadows */
+  /* @deprecated Shadows */
   --propel-shadow-sm: 0px 2px 4px 0px rgba(17, 19, 34, 0.1);
 
-  /* Color Blue (Brand)*/
-  --propel-color-blue950: #102A56;
+  /* @deprecatedColor Blue (Brand)*/
+  --propel-color-blue950: #102a56;
   --propel-color-blue900: #194185;
-  --propel-color-blue800: #1849A9;
-  --propel-color-blue700: #175CD3;
-  --propel-color-blue600: #1570EF;
-  --propel-color-blue500: #2E90FA;
-  --propel-color-blue400: #53B1FD;
-  --propel-color-blue300: #84CAFF;
-  --propel-color-blue200: #B2DDFF;
-  --propel-color-blue100: #D1E9FF;
-  --propel-color-blue50: #EFF8FF;
-  --propel-color-blue25: #F5FAFF;
+  --propel-color-blue800: #1849a9;
+  --propel-color-blue700: #175cd3;
+  --propel-color-blue600: #1570ef;
+  --propel-color-blue500: #2e90fa;
+  --propel-color-blue400: #53b1fd;
+  --propel-color-blue300: #84caff;
+  --propel-color-blue200: #b2ddff;
+  --propel-color-blue100: #d1e9ff;
+  --propel-color-blue50: #eff8ff;
+  --propel-color-blue25: #f5faff;
+
+  @extend .tokens;
 }

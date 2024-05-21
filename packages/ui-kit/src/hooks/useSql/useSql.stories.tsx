@@ -16,7 +16,7 @@ const args: SqlQueryProps = {
 
 const meta: Meta = {
   title: 'Components/Sql',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useSql', 'useAccessToken'],
     isFunction: true,

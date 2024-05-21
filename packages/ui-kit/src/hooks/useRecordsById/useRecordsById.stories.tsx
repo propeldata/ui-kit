@@ -17,7 +17,7 @@ const args: RecordsByIdQueryProps = {
 
 const meta: Meta = {
   title: 'Components/RecordsById',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useRecordsById', 'useAccessToken'],
     isFunction: true,

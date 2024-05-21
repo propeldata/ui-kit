@@ -157,7 +157,7 @@ export const BarGridStory: Story = {
 
 export const CustomChartStory: Story = {
   name: 'Custom chart',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     variant: 'line',
     query: connectedParams,
@@ -212,7 +212,7 @@ export const CustomChartStory: Story = {
 
 export const CustomStyleStory: Story = {
   name: 'Custom style',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     variant: 'bar',
     query: connectedParams,
@@ -235,7 +235,7 @@ export const CustomStyleStory: Story = {
 
 export const ChartOnClickStory: Story = {
   name: 'Chart onClick event',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     variant: 'bar',
     query: connectedParams,
@@ -254,7 +254,7 @@ export const ChartOnClickStory: Story = {
 
 export const ChartLabelFormatStory: Story = {
   name: 'Chart format xAxis via labelFormat prop',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     variant: 'bar',
     query: connectedParams,
@@ -272,7 +272,7 @@ export const ChartLabelFormatStory: Story = {
 
 export const ChartFormatXLabelsStory: Story = {
   name: 'Chart format xAxis labels',
-  tags: ['pattern'],
+  tags: ['hidden'],
   args: {
     variant: 'bar',
     query: connectedParams,
@@ -315,7 +315,7 @@ export const StaticStory: Story = {
 
 export const ErrorStory: Story = {
   name: 'Error',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: { imports: 'TimeSeries' },
   args: {
     errorFallbackProps: {

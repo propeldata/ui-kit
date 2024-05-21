@@ -1,23 +1,23 @@
 .rootAutocomplete {
-  box-shadow: var(--propel-shadow-sm);
-  border-radius: var(--propel-border-radius-sm);
+  box-shadow: var(--propel-shadows-shadow-xs);
+  border-radius: var(--propel-radius-xs);
   color: var(--propel-text-primary);
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
   border: 1px solid var(--propel-border-primary);
   display: flex;
-  gap: var(--propel-space-xxs);
-  padding: var(--propel-space-xxs);
+  gap: var(--propel-spacing-xs);
+  padding: var(--propel-spacing-xs);
   overflow: hidden;
   transition: all 100ms;
   box-sizing: border-box;
 
   &:hover {
-    border: 1px solid var(--propel-accent);
+    border: 1px solid var(--propel-border-brand);
   }
 }
 
 .rootAutocomplete__focused {
-  border: 1px solid var(--propel-accent);
+  border: 1px solid var(--propel-border-brand);
   box-shadow: 0 0 0 3px #c7def7;
 }
 
@@ -26,7 +26,7 @@
   background: inherit;
   border: none;
   border-radius: inherit;
-  padding: var(--propel-space-xxs);
+  padding: var(--propel-spacing-xs);
   outline: 0;
   flex: 1 0 auto;
   width: 100%;
@@ -45,30 +45,30 @@
   align-items: center;
 
   &:hover {
-    background-color: var(--propel-bg-secondary);
+    background-color: var(--propel-background-secondary);
     cursor: pointer;
   }
 }
 
 .autocompleteList {
   box-sizing: border-box;
-  padding: var(--propel-space-xxs);
-  margin: var(--propel-space-xxs) 0;
+  padding: var(--propel-spacing-xs);
+  margin: var(--propel-spacing-xs) 0;
   width: 100%;
-  border-radius: var(--propel-border-radius-sm);
+  border-radius: var(--propel-radius-xs);
   overflow: auto;
   outline: 0px;
   max-height: 300px;
   z-index: 9999;
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
   border: 1px solid var(--propel-border-primary);
   color: var(--propel-text-primary);
-  box-shadow: var(--propel-shadow-sm);
+  box-shadow: var(--propel-shadows-shadow-xs);
 
   li {
     list-style: none;
-    padding: var(--propel-space-sm);
-    border-radius: var(--propel-border-radius-sm);
+    padding: var(--propel-spacing-md);
+    border-radius: var(--propel-radius-xs);
     cursor: default;
 
     &:last-of-type {
@@ -76,22 +76,22 @@
     }
 
     &:hover {
-      background-color: var(--propel-color-blue25);
+      background-color: var(--propel-background-primary-hover);
       cursor: pointer;
     }
 
     &[class^='Mui-focused'] {
-      background-color: var(--propel-color-blue25);
+      background-color: var(--propel-brand-25);
     }
 
     &[aria-selected='true'] {
-      background-color: var(--propel-accent);
-      color: var(--propel-text-primary);
+      background-color: var(--propel-background-brand-solid);
+      color: var(--propel-text-white);
     }
 
     &[aria-selected='true']:hover {
-      background-color: var(--propel-accent-hover);
-      color: var(--propel-text-primary);
+      background-color: var(--propel-background-brand-solid-hover);
+      color: var(--propel-text-white);
     }
   }
 }

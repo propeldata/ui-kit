@@ -33,7 +33,7 @@ const fractionUnicode = (numerator: string, denominator: string) => (
 
 const meta: Meta = {
   title: 'Components/Fraction',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useCounter', 'useAccessToken'],
     isFunction: true,

@@ -1,6 +1,9 @@
 import type { ThemeTokenProps } from './theme.types'
+import { themeTokensGenerated } from './generated/themeTokens'
 
 export const themeTokens: (keyof ThemeTokenProps)[] = [
+  ...themeTokensGenerated,
+
   // Typography - Base
   'fontFamily',
   'fontSize',
@@ -54,9 +57,6 @@ export const themeTokens: (keyof ThemeTokenProps)[] = [
   'colorSecondary',
   'bgPrimary',
   'bgSecondary',
-  'textPrimary',
-  'textSecondary',
-  'borderPrimary',
   'accent',
   'accentHover',
   'colorGradient',

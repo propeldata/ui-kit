@@ -45,9 +45,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/cssinjs@npm:^1.18.4":
-  version: 1.18.4
-  resolution: "@ant-design/cssinjs@npm:1.18.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Fcssinjs%2F-%2Fcssinjs-1.18.4.tgz"
+"@ant-design/cssinjs@npm:^1.18.5":
+  version: 1.18.5
+  resolution: "@ant-design/cssinjs@npm:1.18.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Fcssinjs%2F-%2Fcssinjs-1.18.5.tgz"
   dependencies:
     "@babel/runtime": ^7.11.1
     "@emotion/hash": ^0.8.0
@@ -59,7 +59,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: c6028097929a9948d1e9d5441aeab51ff824edacf98976fb06c146397c7cc9b2fc3f88765a0d93345b1fbbf6b766f638260652d5637fcbf6e6bbafe4e79e60bd
+  checksum: 97f14379963f3a53258ecb8fede45a663f3afc3bfaf2a85403309ff024c3ed38d26ec0e15630742bc2447a9a4faaaeb2672f0f6b0b4db64b219523cfafb98039
   languageName: node
   linkType: hard
 
@@ -70,9 +70,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:^5.0.0, @ant-design/icons@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "@ant-design/icons@npm:5.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Ficons%2F-%2Ficons-5.3.1.tgz"
+"@ant-design/icons@npm:^5.0.0, @ant-design/icons@npm:^5.3.5":
+  version: 5.3.5
+  resolution: "@ant-design/icons@npm:5.3.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40ant-design%2Ficons%2F-%2Ficons-5.3.5.tgz"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/icons-svg": ^4.4.0
@@ -82,7 +82,7 @@ __metadata:
   peerDependencies:
     react: ">=16.0.0"
     react-dom: ">=16.0.0"
-  checksum: b244ed7c36609cf361382ae4f17cb172470c0ac4d9505e98dc09cae625d89df9840df68c8c1fdb0e7603fccc4394b3986da2bab4535d03cfad80cafdbf4bcebb
+  checksum: fb62939d1b5d780a3555d4caacd60713c6cac4e89e58a4c73d8117fb305b591196f064543e714db0853687dd5c15b2322d8a808c8c59c4fdb5c5060639db3aaa
   languageName: node
   linkType: hard
 
@@ -1771,12 +1771,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.6, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.24.0":
-  version: 7.24.0
-  resolution: "@babel/runtime@npm:7.24.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.24.0.tgz"
+"@babel/runtime@npm:^7.22.5, @babel/runtime@npm:^7.23.6, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.24.1":
+  version: 7.24.1
+  resolution: "@babel/runtime@npm:7.24.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40babel%2Fruntime%2F-%2Fruntime-7.24.1.tgz"
   dependencies:
     regenerator-runtime: ^0.14.0
-  checksum: 7a6a5d40fbdd68491ec183ba2e631c07415119960083b4fd76564cce3751e9acd2f12ab89575e38496fa389fa06d458732776e69ee1858e366cc3fbdb049f847
+  checksum: 5c8f3b912ba949865f03b3cf8395c60e1f4ebd1033fbd835bdfe81b6cac8a87d85bc3c7aded5fcdf07be044c9ab8c818f467abe0deca50020c72496782639572
   languageName: node
   linkType: hard
 
@@ -4479,6 +4479,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^25.0.7
     "@rollup/plugin-node-resolve": ^15.2.3
     "@rollup/plugin-terser": ^0.4.4
+    "@storybook/addon-actions": ^8.0.5
     "@storybook/blocks": ^7.2.1
     "@storybook/react": ^7.2.0
     "@storybook/theming": ^7.4.0
@@ -4491,6 +4492,8 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^27.5.1
     "@types/luxon": ^3.3.2
+    "@types/node": ^20.12.3
+    "@types/ora": ^3.2.0
     "@types/react": latest
     "@types/react-dom": latest
     "@types/testing-library__jest-dom": ^5.14.7
@@ -4498,6 +4501,7 @@ __metadata:
     chart.js: ^4.1.2
     chartjs-adapter-luxon: 1.2.1
     classnames: ^2.3.2
+    date-fns: ^3.3.1
     dotenv: ^16.0.3
     graphql: ^16.6.0
     jest: ^27.5.1
@@ -4505,14 +4509,18 @@ __metadata:
     jest-environment-jsdom: ^27.5.1
     luxon: ^3.4.1
     msw: ^1.3.2
+    ora: ^8.0.1
     raw-loader: ^4.0.2
     react: ^18.2.0
+    react-day-picker: ^8.10.0
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
     rollup: ^4.1.4
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-typescript2: ^0.36.0
     sass: ^1.69.5
+    slugify: ^1.6.6
+    ts-node: ^10.9.2
     typescript: ^4.9.3
   peerDependencies:
     graphql: ^16.6
@@ -5089,7 +5097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rc-component/color-picker@npm:~1.5.2":
+"@rc-component/color-picker@npm:~1.5.3":
   version: 1.5.3
   resolution: "@rc-component/color-picker@npm:1.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rc-component%2Fcolor-picker%2F-%2Fcolor-picker-1.5.3.tgz"
   dependencies:
@@ -5501,6 +5509,20 @@ __metadata:
     polished: ^4.2.2
     uuid: ^9.0.0
   checksum: 305070099dbc6db0e00c5b329433c332202042ee6a86b545cd79899c116edeed5421c6eb23aec7af25bac57a657632657acd9b2d41f10a42b4623f0db41a2906
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-actions@npm:^8.0.5":
+  version: 8.0.5
+  resolution: "@storybook/addon-actions@npm:8.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Faddon-actions%2F-%2Faddon-actions-8.0.5.tgz"
+  dependencies:
+    "@storybook/core-events": 8.0.5
+    "@storybook/global": ^5.0.0
+    "@types/uuid": ^9.0.1
+    dequal: ^2.0.2
+    polished: ^4.2.2
+    uuid: ^9.0.0
+  checksum: d82bbdb6c0c443095ee88176bf7dd512e41d0df94909c5fd77166dec66f783bf053a444c336f12db9f0c5680128eaba50957d89806569657bf46a899210924a0
   languageName: node
   linkType: hard
 
@@ -6141,6 +6163,15 @@ __metadata:
   dependencies:
     ts-dedent: ^2.0.0
   checksum: c813945147c19c509215a75b340ed9d368d439b24bb26a0f1ba6974372e5e641a9764882322e4484a14b5d7ab10841183dd12df582fb400a24fff00a236e2c2f
+  languageName: node
+  linkType: hard
+
+"@storybook/core-events@npm:8.0.5":
+  version: 8.0.5
+  resolution: "@storybook/core-events@npm:8.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40storybook%2Fcore-events%2F-%2Fcore-events-8.0.5.tgz"
+  dependencies:
+    ts-dedent: ^2.0.0
+  checksum: d21293b760f16ce63ccbf6829213de5b7cdd54cb495a23a0311ae2edd388336e0fc6752f92f6c79115435a156258516d0ff5cd658189ca18a2b2cdd3382684c1
   languageName: node
   linkType: hard
 
@@ -7603,10 +7634,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^20.12.3":
+  version: 20.12.5
+  resolution: "@types/node@npm:20.12.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-20.12.5.tgz"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 38358c091392bb3def1136772ada4ccd39a9429d459160b5ab728b690d2f15f2212eafd9e65ce716e270f70a4e6927ebffccfefc08dabdf68f4016c1fc8a7938
+  languageName: node
+  linkType: hard
+
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.4
   resolution: "@types/normalize-package-data@npm:2.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnormalize-package-data%2F-%2Fnormalize-package-data-2.4.4.tgz"
   checksum: 65dff72b543997b7be8b0265eca7ace0e34b75c3e5fee31de11179d08fa7124a7a5587265d53d0409532ecb7f7fba662c2012807963e1f9b059653ec2c83ee05
+  languageName: node
+  linkType: hard
+
+"@types/ora@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@types/ora@npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fora%2F-%2Fora-3.2.0.tgz"
+  dependencies:
+    ora: "*"
+  checksum: dba266e595627c78aee8e4d2dd7f552c3389f520d27b6474164bf0180a7941c72618b02ef4efcbb02e0a8ae43faf407f9c67ffe35760101fe6b1290bbe46158b
   languageName: node
   linkType: hard
 
@@ -8628,16 +8677,16 @@ __metadata:
   linkType: hard
 
 "antd@npm:^5.10.3":
-  version: 5.15.2
-  resolution: "antd@npm:5.15.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fantd%2F-%2Fantd-5.15.2.tgz"
+  version: 5.15.4
+  resolution: "antd@npm:5.15.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fantd%2F-%2Fantd-5.15.4.tgz"
   dependencies:
     "@ant-design/colors": ^7.0.2
-    "@ant-design/cssinjs": ^1.18.4
-    "@ant-design/icons": ^5.3.1
+    "@ant-design/cssinjs": ^1.18.5
+    "@ant-design/icons": ^5.3.5
     "@ant-design/react-slick": ~1.0.2
-    "@babel/runtime": ^7.24.0
+    "@babel/runtime": ^7.24.1
     "@ctrl/tinycolor": ^3.6.1
-    "@rc-component/color-picker": ~1.5.2
+    "@rc-component/color-picker": ~1.5.3
     "@rc-component/mutate-observer": ^1.1.0
     "@rc-component/tour": ~1.14.2
     "@rc-component/trigger": ^2.0.0
@@ -8647,13 +8696,13 @@ __metadata:
     qrcode.react: ^3.1.0
     rc-cascader: ~3.24.0
     rc-checkbox: ~3.2.0
-    rc-collapse: ~3.7.2
+    rc-collapse: ~3.7.3
     rc-dialog: ~9.4.0
     rc-drawer: ~7.1.0
     rc-dropdown: ~4.2.0
     rc-field-form: ~1.42.1
     rc-image: ~7.6.0
-    rc-input: ~1.4.3
+    rc-input: ~1.4.5
     rc-input-number: ~9.0.0
     rc-mentions: ~2.11.1
     rc-menu: ~9.13.0
@@ -8682,7 +8731,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 38f91a54eb020693c2580341fe03c5989bc1bb4cdfe6e86e7f4c04321e8f7f16aebf7a25a091d32070225eec6f01abc27a58d512949b8b911ffceeacaeb7534f
+  checksum: caa93fa98977044be2e3e17150a707c77e25b4224a9201f0fe2dbd5c4f3c573bf82d31bb2ef1526dba28519c9496dcf7600390cc649dd5c75c03ce4ede3ec5c6
   languageName: node
   linkType: hard
 
@@ -9841,7 +9890,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:5.3.0":
+"chalk@npm:5.3.0, chalk@npm:^5.3.0":
   version: 5.3.0
   resolution: "chalk@npm:5.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fchalk%2F-%2Fchalk-5.3.0.tgz"
   checksum: 623922e077b7d1e9dedaea6f8b9e9352921f8ae3afe739132e0e00c275971bdd331268183b2628cf4ab1727c45ea1f28d7e24ac23ce1db1eb653c414ca8a5a80
@@ -10084,7 +10133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-spinners@npm:^2.5.0":
+"cli-spinners@npm:^2.5.0, cli-spinners@npm:^2.9.2":
   version: 2.9.2
   resolution: "cli-spinners@npm:2.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcli-spinners%2F-%2Fcli-spinners-2.9.2.tgz"
   checksum: 1bd588289b28432e4676cb5d40505cfe3e53f2e4e10fbe05c8a710a154d6fe0ce7836844b00d6858f740f2ffe67cdc36e0fce9c7b6a8430e80e6388d5aa4956c
@@ -11096,6 +11145,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdate-fns%2F-%2Fdate-fns-3.3.1.tgz"
+  checksum: 6245e93a47de28ac96dffd4d62877f86e6b64854860ae1e00a4f83174d80bc8e59bd1259cf265223fb2ddce5c8e586dc9cc210f0d052faba2f7660e265877283
+  languageName: node
+  linkType: hard
+
 "dayjs@npm:^1.11.10":
   version: 1.11.10
   resolution: "dayjs@npm:1.11.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fdayjs%2F-%2Fdayjs-1.11.10.tgz"
@@ -11746,6 +11802,13 @@ __metadata:
   version: 0.8.1
   resolution: "emittery@npm:0.8.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femittery%2F-%2Femittery-0.8.1.tgz"
   checksum: 2457e8c7b0688bb006126f2c025b2655abe682f66b184954122a8a065b5277f9813d49d627896a10b076b81c513ec5f491fd9c14fbd42c04b95ca3c9f3c365ee
+  languageName: node
+  linkType: hard
+
+"emoji-regex@npm:^10.3.0":
+  version: 10.3.0
+  resolution: "emoji-regex@npm:10.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Femoji-regex%2F-%2Femoji-regex-10.3.0.tgz"
+  checksum: 5da48edfeb9462fb1ae5495cff2d79129974c696853fb0ce952cbf560f29a2756825433bf51cfd5157ec7b9f93f46f31d712e896d63e3d8ac9c3832bdb45ab73
   languageName: node
   linkType: hard
 
@@ -13705,6 +13768,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-east-asian-width@npm:^1.0.0":
+  version: 1.2.0
+  resolution: "get-east-asian-width@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fget-east-asian-width%2F-%2Fget-east-asian-width-1.2.0.tgz"
+  checksum: ea55f4d4a42c4b00d3d9be3111bc17eb0161f60ed23fc257c1390323bb780a592d7a8bdd550260fd4627dabee9a118cdfa3475ae54edca35ebcd3bdae04179e3
+  languageName: node
+  linkType: hard
+
 "get-intrinsic@npm:^1.0.2, get-intrinsic@npm:^1.1.1, get-intrinsic@npm:^1.1.3, get-intrinsic@npm:^1.2.0, get-intrinsic@npm:^1.2.1, get-intrinsic@npm:^1.2.2":
   version: 1.2.2
   resolution: "get-intrinsic@npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fget-intrinsic%2F-%2Fget-intrinsic-1.2.2.tgz"
@@ -14966,6 +15036,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-interactive@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "is-interactive@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-interactive%2F-%2Fis-interactive-2.0.0.tgz"
+  checksum: e8d52ad490bed7ae665032c7675ec07732bbfe25808b0efbc4d5a76b1a1f01c165f332775c63e25e9a03d319ebb6b24f571a9e902669fc1e40b0a60b5be6e26c
+  languageName: node
+  linkType: hard
+
 "is-lambda@npm:^1.0.1":
   version: 1.0.1
   resolution: "is-lambda@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-lambda%2F-%2Fis-lambda-1.0.1.tgz"
@@ -15222,6 +15299,20 @@ __metadata:
   version: 0.1.0
   resolution: "is-unicode-supported@npm:0.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-0.1.0.tgz"
   checksum: a2aab86ee7712f5c2f999180daaba5f361bdad1efadc9610ff5b8ab5495b86e4f627839d085c6530363c6d6d4ecbde340fb8e54bdb83da4ba8e0865ed5513c52
+  languageName: node
+  linkType: hard
+
+"is-unicode-supported@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "is-unicode-supported@npm:1.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-1.3.0.tgz"
+  checksum: 20a1fc161afafaf49243551a5ac33b6c4cf0bbcce369fcd8f2951fbdd000c30698ce320de3ee6830497310a8f41880f8066d440aa3eb0a853e2aa4836dd89abc
+  languageName: node
+  linkType: hard
+
+"is-unicode-supported@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "is-unicode-supported@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fis-unicode-supported%2F-%2Fis-unicode-supported-2.0.0.tgz"
+  checksum: 000b80639dedaf59a385f1c0a57f97a4d1435e0723716f24cc19ad94253a7a0a9f838bdc9ac49b10a29ac93b01f52ae9b2ed358a8876caf1eb74d73b4ede92b2
   languageName: node
   linkType: hard
 
@@ -17119,6 +17210,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"log-symbols@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "log-symbols@npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flog-symbols%2F-%2Flog-symbols-6.0.0.tgz"
+  dependencies:
+    chalk: ^5.3.0
+    is-unicode-supported: ^1.3.0
+  checksum: 510cdda36700cbcd87a2a691ea08d310a6c6b449084018f7f2ec4f732ca5e51b301ff1327aadd96f53c08318e616276c65f7fe22f2a16704fb0715d788bc3c33
+  languageName: node
+  linkType: hard
+
 "log-update@npm:^4.0.0":
   version: 4.0.0
   resolution: "log-update@npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Flog-update%2F-%2Flog-update-4.0.0.tgz"
@@ -18356,6 +18457,23 @@ __metadata:
     prelude-ls: ^1.2.1
     type-check: ^0.4.0
   checksum: 09281999441f2fe9c33a5eeab76700795365a061563d66b098923eb719251a42bdbe432790d35064d0816ead9296dbeb1ad51a733edf4167c96bd5d0882e428a
+  languageName: node
+  linkType: hard
+
+"ora@npm:*, ora@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "ora@npm:8.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fora%2F-%2Fora-8.0.1.tgz"
+  dependencies:
+    chalk: ^5.3.0
+    cli-cursor: ^4.0.0
+    cli-spinners: ^2.9.2
+    is-interactive: ^2.0.0
+    is-unicode-supported: ^2.0.0
+    log-symbols: ^6.0.0
+    stdin-discarder: ^0.2.1
+    string-width: ^7.0.0
+    strip-ansi: ^7.1.0
+  checksum: 894061df204cc2b97b410d3b6073303b725bb0a25cec1fa8718632968a5ac5a965fe3dbc1dc7c481a17880b21b68547e64d5fd1a6d6c723f352c14b8d03843d9
   languageName: node
   linkType: hard
 
@@ -20217,9 +20335,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-collapse@npm:~3.7.2":
-  version: 3.7.2
-  resolution: "rc-collapse@npm:3.7.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frc-collapse%2F-%2Frc-collapse-3.7.2.tgz"
+"rc-collapse@npm:~3.7.3":
+  version: 3.7.3
+  resolution: "rc-collapse@npm:3.7.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frc-collapse%2F-%2Frc-collapse-3.7.3.tgz"
   dependencies:
     "@babel/runtime": ^7.10.1
     classnames: 2.x
@@ -20228,7 +20346,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: b8e295fbd96325545bab7f7e4014fe5bb606ce973544479e3012704439b910215e5197e0e26bdc08d42d2321e7694c5e2d5a6c1bd81b790e03826b2bf60791b5
+  checksum: c77c615d9501149aac02cb80dacb1f2f6fa7cca4659ee175b520e8d6089c5f09b0c919d2173e46af71a0815c897d404a89b6a069a3ad41b1a3ddc1cbb1c302cf
   languageName: node
   linkType: hard
 
@@ -20326,7 +20444,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rc-input@npm:~1.4.0, rc-input@npm:~1.4.3":
+"rc-input@npm:~1.4.0, rc-input@npm:~1.4.5":
   version: 1.4.5
   resolution: "rc-input@npm:1.4.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frc-input%2F-%2Frc-input-1.4.5.tgz"
   dependencies:
@@ -20804,6 +20922,16 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: e432b7cb0df57e8f0bcdc3b012d2e93fcbcb6092c9e0f85654788d5ebfc4442536d8cc35b2418061ba3c4afb8b7788cc101c606d86a1732407921de7a9244c8d
+  languageName: node
+  linkType: hard
+
+"react-day-picker@npm:^8.10.0":
+  version: 8.10.0
+  resolution: "react-day-picker@npm:8.10.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-day-picker%2F-%2Freact-day-picker-8.10.0.tgz"
+  peerDependencies:
+    date-fns: ^2.28.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: a265e8c2f3f0e92e5a23e2edeca40fe67c67c00bae64aa9e1a99c6fe7f58b2f697b538937822b8f68d4b890d7903a06f074f1365deb465a0aeef1a14c701cc65
   languageName: node
   linkType: hard
 
@@ -22353,6 +22481,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"slugify@npm:^1.6.6":
+  version: 1.6.6
+  resolution: "slugify@npm:1.6.6::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fslugify%2F-%2Fslugify-1.6.6.tgz"
+  checksum: 04773c2d3b7aea8d2a61fa47cc7e5d29ce04e1a96cbaec409da57139df906acb3a449fac30b167d203212c806e73690abd4ff94fbad0a9a7b7ea109a2a638ae9
+  languageName: node
+  linkType: hard
+
 "smart-buffer@npm:^4.2.0":
   version: 4.2.0
   resolution: "smart-buffer@npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsmart-buffer%2F-%2Fsmart-buffer-4.2.0.tgz"
@@ -22651,6 +22786,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stdin-discarder@npm:^0.2.1":
+  version: 0.2.2
+  resolution: "stdin-discarder@npm:0.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstdin-discarder%2F-%2Fstdin-discarder-0.2.2.tgz"
+  checksum: 642ffd05bd5b100819d6b24a613d83c6e3857c6de74eb02fc51506fa61dc1b0034665163831873868157c4538d71e31762bcf319be86cea04c3aba5336470478
+  languageName: node
+  linkType: hard
+
 "stop-iteration-iterator@npm:^1.0.0":
   version: 1.0.0
   resolution: "stop-iteration-iterator@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstop-iteration-iterator%2F-%2Fstop-iteration-iterator-1.0.0.tgz"
@@ -22810,6 +22952,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"string-width@npm:^7.0.0":
+  version: 7.1.0
+  resolution: "string-width@npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring-width%2F-%2Fstring-width-7.1.0.tgz"
+  dependencies:
+    emoji-regex: ^10.3.0
+    get-east-asian-width: ^1.0.0
+    strip-ansi: ^7.1.0
+  checksum: a183573fe7209e0d294f661846d33f8caf72aa86d983e5b48a0ed45ab15bcccb02c6f0344b58b571988871105457137b8207855ea536827dbc4a376a0f31bf8f
+  languageName: node
+  linkType: hard
+
 "string.prototype.matchall@npm:^4.0.6, string.prototype.matchall@npm:^4.0.8":
   version: 4.0.10
   resolution: "string.prototype.matchall@npm:4.0.10::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstring.prototype.matchall%2F-%2Fstring.prototype.matchall-4.0.10.tgz"
@@ -22898,7 +23051,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strip-ansi@npm:^7.0.1":
+"strip-ansi@npm:^7.0.1, strip-ansi@npm:^7.1.0":
   version: 7.1.0
   resolution: "strip-ansi@npm:7.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstrip-ansi%2F-%2Fstrip-ansi-7.1.0.tgz"
   dependencies:
@@ -23651,6 +23804,44 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: 090adff1302ab20bd3486e6b4799e90f97726ed39e02b39e566f8ab674fd5bd5f727f43615debbfc580d33c6d9d1c6b1b3ce7d8e3cca3e20530a145ffa232c35
+  languageName: node
+  linkType: hard
+
+"ts-node@npm:^10.9.2":
+  version: 10.9.2
+  resolution: "ts-node@npm:10.9.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fts-node%2F-%2Fts-node-10.9.2.tgz"
+  dependencies:
+    "@cspotcode/source-map-support": ^0.8.0
+    "@tsconfig/node10": ^1.0.7
+    "@tsconfig/node12": ^1.0.7
+    "@tsconfig/node14": ^1.0.0
+    "@tsconfig/node16": ^1.0.2
+    acorn: ^8.4.1
+    acorn-walk: ^8.1.1
+    arg: ^4.1.0
+    create-require: ^1.1.0
+    diff: ^4.0.1
+    make-error: ^1.1.1
+    v8-compile-cache-lib: ^3.0.1
+    yn: 3.1.1
+  peerDependencies:
+    "@swc/core": ">=1.2.50"
+    "@swc/wasm": ">=1.2.50"
+    "@types/node": "*"
+    typescript: ">=2.7"
+  peerDependenciesMeta:
+    "@swc/core":
+      optional: true
+    "@swc/wasm":
+      optional: true
+  bin:
+    ts-node: dist/bin.js
+    ts-node-cwd: dist/bin-cwd.js
+    ts-node-esm: dist/bin-esm.js
+    ts-node-script: dist/bin-script.js
+    ts-node-transpile-only: dist/bin-transpile.js
+    ts-script: dist/bin-script-deprecated.js
+  checksum: fde256c9073969e234526e2cfead42591b9a2aec5222bac154b0de2fa9e4ceb30efcd717ee8bc785a56f3a119bdd5aa27b333d9dbec94ed254bd26f8944c67ac
   languageName: node
   linkType: hard
 

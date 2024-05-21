@@ -122,7 +122,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.bgPrimary : 'transparent'
+            color: card ? theme?.backgroundPrimary : 'transparent'
           },
           legend: {
             display: false
@@ -138,9 +138,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             datasets: [
               {
                 data: values,
-                backgroundColor: theme?.accent,
+                backgroundColor: theme?.backgroundBrandSolid,
                 barThickness: labelPosition === 'top' ? 8 : 17,
-                borderRadius: parseInt(theme?.borderRadiusXs as string) ?? 4,
+                borderRadius: parseInt(theme.radiusXs as string) ?? 4,
                 borderWidth: 0
               }
             ]
@@ -162,14 +162,14 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 display: true,
                 grid: {
                   drawOnChartArea: false,
-                  color: theme.colorSecondary
+                  color: theme.borderPrimary
                 },
                 border: {
-                  color: theme.colorSecondary
+                  color: theme.borderPrimary
                 },
                 ticks: {
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
                   }
                 },
                 beginAtZero: true
@@ -179,7 +179,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 grid: {
                   drawOnChartArea: true,
                   drawTicks: false,
-                  color: theme.colorSecondary
+                  color: theme.borderPrimary
                 },
                 border: {
                   display: false
@@ -187,7 +187,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 ticks: {
                   padding: 17,
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.tinyFontSize)
+                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
                   }
                 }
               }

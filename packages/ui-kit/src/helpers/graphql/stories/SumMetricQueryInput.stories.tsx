@@ -5,7 +5,7 @@ export const SumMetricQueryInputComponent: React.FC<SumMetricQueryInput> = () =>
 
 const meta = {
   title: 'API/SumMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: SumMetricQueryInputComponent
 } satisfies Meta<typeof SumMetricQueryInputComponent>
 

@@ -49,7 +49,7 @@ export const useSetupTheme = <T extends ChartVariant>({
 
     config.options = {
       color: theme.textSecondary ?? '',
-      backgroundColor: theme.accent ?? '',
+      backgroundColor: theme.backgroundBrandSolid ?? '',
       borderColor: theme.borderPrimary ?? '',
       elements: {
         point: {
@@ -58,13 +58,13 @@ export const useSetupTheme = <T extends ChartVariant>({
           radius: 0,
           borderWidth: 2,
           hoverRadius: 6,
-          hoverBorderColor: theme.bgPrimary ?? '',
-          backgroundColor: theme.accentHover ?? '',
-          hoverBackgroundColor: theme.accentHover ?? ''
+          hoverBorderColor: theme.backgroundPrimary ?? '',
+          backgroundColor: theme.backgroundBrandSolidHover ?? '',
+          hoverBackgroundColor: theme.backgroundBrandSolidHover ?? ''
         },
         bar: {
           borderWidth: 0,
-          hoverBackgroundColor: theme.accentHover ?? ''
+          hoverBackgroundColor: theme.backgroundBrandSolidHover ?? ''
         },
         line: {
           borderWidth: 3
@@ -72,18 +72,18 @@ export const useSetupTheme = <T extends ChartVariant>({
       },
       plugins: {
         tooltip: {
-          padding: parseInt(theme.spaceXs as string),
-          backgroundColor: theme.bgPrimary ?? '',
+          padding: parseInt(theme.spacingMd ?? '') ?? 8,
+          backgroundColor: theme.backgroundPrimary ?? '',
           bodyColor: theme.textSecondary ?? '',
           titleColor: theme.textSecondary ?? '',
           borderColor: theme.borderPrimary ?? '',
           borderWidth: 1,
           cornerRadius: 4,
           titleFont: {
-            size: getPixelFontSizeAsNumber(theme.tinyFontSize),
+            size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize),
             weight: 'bold',
-            lineHeight: theme.tinyLineHeight,
-            family: theme.fontFamily
+            lineHeight: theme.textXxsRegularLineHeight,
+            family: theme.textXxsRegularFontFamily
           }
         }
       }
@@ -122,14 +122,15 @@ export const useSetupTheme = <T extends ChartVariant>({
     setTheme(parseComputedStyle(componentContainer))
   }, [context, componentContainer, baseTheme])
 
-  const { renderEmpty, errorFallback, renderLoader } = context ?? {}
+  const { renderEmpty, errorFallback, renderLoader, components } = context ?? {}
 
   return {
     theme,
     chartConfig,
     renderEmpty: renderEmptyProp || renderEmpty,
     errorFallback: errorFallbackProp || errorFallback,
-    renderLoader: renderLoaderProp || renderLoader
+    renderLoader: renderLoaderProp || renderLoader,
+    components
   }
 }
 
@@ -140,7 +141,8 @@ export const ThemeProvider = ({
   globalChartConfigProps,
   renderEmpty,
   errorFallback,
-  renderLoader
+  renderLoader,
+  components
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
@@ -151,6 +153,7 @@ export const ThemeProvider = ({
     }
 
     clearContainerStyle(ref.current)
+
     const baseThemeStyleProps = parseComputedStyle(ref.current)
 
     if (typeof themeProp === 'string') {
@@ -169,7 +172,9 @@ export const ThemeProvider = ({
       className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}
       data-testid="theme-provider"
     >
-      <ThemeContext.Provider value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader }}>
+      <ThemeContext.Provider
+        value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader, components }}
+      >
         {children}
       </ThemeContext.Provider>
     </div>

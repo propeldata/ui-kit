@@ -5,7 +5,7 @@ export const MinMetricQueryInputComponent: React.FC<MinMetricQueryInput> = () =>
 
 const meta = {
   title: 'API/MinMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: MinMetricQueryInputComponent
 } satisfies Meta<typeof MinMetricQueryInputComponent>
 

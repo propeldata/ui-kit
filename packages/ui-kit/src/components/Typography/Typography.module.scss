@@ -1,0 +1,31 @@
+@use '../../themes/generated/tokens';
+
+.rootCard {
+  padding: 0;
+  margin: 0;
+}
+
+// Add new variant when needed. Check themes/generated/_tokens.scss for available variants.
+.textMdRegular {
+  @extend .textMdRegular;
+}
+
+.textMdSemibold {
+  @extend .textMdSemibold;
+}
+
+.textXsRegular {
+  @extend .textXsRegular;
+}
+
+.textXxsRegular {
+  @extend .textXxsRegular;
+}
+
+.textSmRegular {
+  @extend .textSmRegular;
+}
+
+.block {
+  display: block;
+}

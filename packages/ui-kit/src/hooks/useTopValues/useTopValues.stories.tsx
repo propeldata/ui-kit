@@ -9,7 +9,7 @@ import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 
 const args: TopValuesQueryProps = {
   dataPool: {
-    name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
+    name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1 ?? ''
   },
   columnName: process.env.STORYBOOK_COLUMN_NAME_1,
   maxValues: 5,
@@ -21,7 +21,7 @@ const args: TopValuesQueryProps = {
 
 const meta: Meta = {
   title: 'Components/TopValues',
-  tags: ['pattern'],
+  tags: ['hidden'],
   parameters: {
     imports: ['useTopValues', 'useAccessToken'],
     isFunction: true,

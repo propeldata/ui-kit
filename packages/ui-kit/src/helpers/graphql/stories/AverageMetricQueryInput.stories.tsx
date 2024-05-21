@@ -5,7 +5,7 @@ export const AverageMetricQueryInputComponent: React.FC<AverageMetricQueryInput>
 
 const meta = {
   title: 'API/AverageMetricQueryInput',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: AverageMetricQueryInputComponent
 } satisfies Meta<typeof AverageMetricQueryInputComponent>
 

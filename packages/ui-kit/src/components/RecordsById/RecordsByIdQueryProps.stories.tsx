@@ -8,7 +8,7 @@ export const RecordsByIdQueryPropsComponent: React.FC<
 
 const meta = {
   title: 'API/RecordsByIdQueryProps',
-  tags: ['pattern'],
+  tags: ['hidden'],
   component: RecordsByIdQueryPropsComponent
 } satisfies Meta<typeof RecordsByIdQueryPropsComponent>
 

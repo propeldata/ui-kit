@@ -1,0 +1,21 @@
+@use '../../../themes/generated/tokens';
+
+.rootOption {
+  @extend .textMdRegular;
+
+  padding: var(--propel-spacing-xl) var(--propel-spacing-4xl);
+  margin: 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--propel-background-active);
+    border-radius: var(--propel-radius-sm);
+  }
+
+  &:focus,
+  &:focus-visible {
+    background-color: var(--propel-background-secondary-hover);
+    border-radius: var(--propel-radius-sm);
+    outline: none;
+  }
+}
