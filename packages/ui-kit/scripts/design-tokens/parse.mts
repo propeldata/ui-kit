@@ -1,8 +1,9 @@
 import fs, { promises as fsPromises } from 'fs'
-import path from 'path'
-import slugify from 'slugify'
 import ora from 'ora'
-// import { getCSSVariables } from './validate-design-tokens.mjs'
+import path from 'path'
+import { buildSASSFiles, camelCaseToKebabCase, getCSSVariables, kebabCaseToCamelCase, slugifyStr } from './shared.mjs'
+
+const env = process.env.NODE_ENV || 'development'
 
 const GENERATED_WARNING =
   'This file is generated automatically by scripts/parse-design-tokens.js. Do not edit manually.'
@@ -60,28 +61,6 @@ type TypographyClassProps = {
   className: string
   props: { prop: string; value: string }[]
 }
-
-export const getArgValue = (argName: string) => {
-  const index = process.argv.findIndex((arg) => arg.startsWith(`--${argName}=`))
-  if (index === -1) {
-    return null
-  }
-  return process.argv[index].split('=')[1]
-}
-
-// Slugify string with strict mode
-export const slugifyStr = (str: string): string => slugify(str.replaceAll('/', '-'), { lower: true, strict: true })
-
-// Convert kebab-case to camelCase
-export const kebabCaseToCamelCase = (kebabStr: string): string =>
-  kebabStr
-    .split('-')
-    .map((word, index) => (index === 0 ? word : word[0].toUpperCase() + word.slice(1)))
-    .join('')
-
-// Convert camelCase to kebab-case
-export const camelCaseToKebabCase = (camelStr: string): string =>
-  camelStr.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 
 // Parse Figma variable value
 export const parseValue = (variable: VariableProps): string => {
@@ -165,12 +144,11 @@ export const getThemeTokens = ({
       )
     )
 
-const main = async () => {
-  const mode = getArgValue('mode')
-  const inInUseMode = mode === 'in-use'
+const main = async (isProdEnv = false) => {
+  let succeedMessage = 'Parse design variables and tokens'
 
   const spinner = ora({
-    text: `Parsing design variables and tokens${inInUseMode ? ' (ONLY IN USE)' : ''}...`,
+    text: `Parsing design variables and tokens...`,
     color: 'yellow'
   }).start()
 
@@ -254,19 +232,20 @@ const main = async () => {
 
     const themes = variablesJSON.collections.find(({ name }) => name === '1. Color Modes')?.modes
 
-    // if (inInUseMode) {
-    //   const currentVariablesList = getCSSVariables('./src', 'current')
-    //   console.log('========', currentVariablesList.length)
+    if (isProdEnv) {
+      await buildSASSFiles(spinner)
 
-    //   console.log('Before variables: ', variables.length)
-    //   console.log('Before tokens: ', tokens.length)
+      const currentVariablesList = getCSSVariables('./src', 'current')
+      const statsBefore = {
+        variables: variables.length,
+        tokens: tokens.length
+      }
 
-    //   variables = variables.filter((variable) => currentVariablesList.includes(variable.cssName))
-    //   tokens = tokens.filter((token) => currentVariablesList.includes(token.cssName))
+      variables = variables.filter((variable) => currentVariablesList.includes(variable.cssName))
+      tokens = tokens.filter((token) => currentVariablesList.includes(token.cssName))
 
-    //   console.log('After variables: ', variables.length)
-    //   console.log('After tokens: ', tokens.length)
-    // }
+      succeedMessage = `Filter out all design variables (${variables.length} from ${statsBefore.variables}) and tokens (${tokens.length} from ${statsBefore.tokens}) not in use`
+    }
 
     // Parse theme tokens
     const lightTheme = getThemeTokens({ name: 'light', themes, variables, tokens })
@@ -364,7 +343,7 @@ const main = async () => {
       ].join('\n')
     )
 
-    spinner.succeed('Parse design variables and tokens')
+    spinner.succeed(succeedMessage)
   } catch (err) {
     console.error(err)
     spinner.fail('Failed to parse design variables and tokens')
@@ -372,3 +351,7 @@ const main = async () => {
 }
 
 main()
+
+if (env === 'production') {
+  main(true)
+}

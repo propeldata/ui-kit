@@ -1,10 +1,23 @@
-import fs from 'fs'
-import path from 'path'
-import ora, { Ora } from 'ora'
 import { exec } from 'child_process'
+import fs from 'fs'
+import { Ora } from 'ora'
+import path from 'path'
+import slugify from 'slugify'
 import { promisify } from 'util'
 
-const FAILED_MESSAGE = 'Design tokens validation failed'
+// Slugify string with strict mode
+export const slugifyStr = (str: string): string => slugify(str.replaceAll('/', '-'), { lower: true, strict: true })
+
+// Convert kebab-case to camelCase
+export const kebabCaseToCamelCase = (kebabStr: string): string =>
+  kebabStr
+    .split('-')
+    .map((word, index) => (index === 0 ? word : word[0].toUpperCase() + word.slice(1)))
+    .join('')
+
+// Convert camelCase to kebab-case
+export const camelCaseToKebabCase = (camelStr: string): string =>
+  camelStr.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 
 const execAsync = promisify(exec)
 
@@ -23,13 +36,11 @@ export const getAllFiles = ({ dirPath, type, arrayOfFiles = [] }: GetAllFilesPro
     if (fs.statSync(fullPath).isDirectory()) {
       const options: GetAllFilesProps = { dirPath: fullPath, type, arrayOfFiles }
       if (type === 'current' && file !== 'themes') {
-        // console.log(file)
         arrayOfFiles = getAllFiles(options)
       } else if (type === 'new' && file === 'generated') {
         arrayOfFiles = getAllFiles(options)
       }
     } else if (file.endsWith('.css') || (type === 'new' && file.endsWith('.scss'))) {
-      // console.log(fullPath, file.endsWith('.css'), type === 'new' && file.endsWith('.scss'))
       arrayOfFiles.push(fullPath)
     }
   })
@@ -47,7 +58,6 @@ export const extractCSSVariables = (file: string): string[] => {
 // Get a list of propel's CSS variables from all CSS files in the given directory
 export const getCSSVariables = (dirPath: string, type: 'current' | 'new'): string[] => {
   const files = getAllFiles({ dirPath, type })
-  // console.log(files)
   const allVariables = new Set<string>()
 
   files.forEach((file) => {
@@ -71,41 +81,3 @@ export const buildSASSFiles = async (spinner: Ora): Promise<void> => {
     throw error
   }
 }
-
-// Compare current and new CSS variables, and log any missing variables
-export const validateDesignTokens = (spinner: Ora): void => {
-  spinner.start('Validating design tokens...')
-  let validationFailed = false
-
-  const currentVariablesList = getCSSVariables('./src', 'current')
-  spinner.succeed(`Tokens in use: ${currentVariablesList.length}`)
-  spinner.succeed(JSON.stringify(currentVariablesList, null, 2))
-  const newVariablesList = getCSSVariables('./src/themes', 'new')
-
-  currentVariablesList.forEach((variable) => {
-    if (!newVariablesList.includes(variable)) {
-      spinner.warn(`Design token '${variable}' is not defined`)
-      validationFailed = true
-    }
-  })
-
-  if (validationFailed) {
-    throw new Error(FAILED_MESSAGE)
-  }
-
-  spinner.succeed('Validate design tokens')
-}
-
-async function main() {
-  const spinner = ora({ text: 'Building SASS files...', color: 'yellow' }).start()
-
-  try {
-    await buildSASSFiles(spinner)
-    validateDesignTokens(spinner)
-  } catch (error) {
-    spinner.fail(FAILED_MESSAGE)
-    console.error(error)
-  }
-}
-
-main()
