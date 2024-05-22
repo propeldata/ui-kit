@@ -1,10 +1,10 @@
 overwrite: true
 legacyMode: true
 generates:
-  src/helpers/graphql/generated/index.ts:
-    schema: src/helpers/graphql/public.graphql
+  src/graphql/generated/index.ts:
+    schema: src/graphql/public.graphql
     documents:
-      - src/helpers/graphql/queries/**/*.graphql
+      - src/graphql/queries/**/*.graphql
     plugins:
       - add
       - typescript
@@ -19,9 +19,9 @@ generates:
   # Mocks
 
   src/testing/generated/index.ts:
-    schema: src/helpers/graphql/public.graphql
+    schema: src/graphql/public.graphql
     documents:
-      - src/helpers/graphql/queries/**/*.graphql
+      - src/graphql/queries/**/*.graphql
     plugins:
       - add
       - typescript

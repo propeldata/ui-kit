@@ -1,12 +1,13 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken, Sort } from '../../helpers'
+import { RelativeTimeRange, Sort } from '../../graphql'
+import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 
-import { useDataGrid } from './useDataGrid'
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
 import '../css/stories.css'
+import { useDataGrid } from './useDataGrid'
 
 const args: DataGridQueryProps = {
   dataPool: {

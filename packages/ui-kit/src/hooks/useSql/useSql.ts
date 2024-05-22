@@ -1,4 +1,4 @@
-import { PROPEL_GRAPHQL_API_ENDPOINT, SqlQuery, useSqlQuery } from '../../helpers'
+import { PROPEL_GRAPHQL_API_ENDPOINT, SqlQuery, useSqlQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useLog } from './../../components/Log/useLog'

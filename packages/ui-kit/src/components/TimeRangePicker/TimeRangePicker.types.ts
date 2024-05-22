@@ -1,4 +1,4 @@
-import type { TimeRangeInput } from '../../helpers'
+import type { TimeRangeInput } from '../../graphql'
 import type { DefaultThemes } from '../ThemeProvider'
 
 export type DateRangeOptionsProps = {

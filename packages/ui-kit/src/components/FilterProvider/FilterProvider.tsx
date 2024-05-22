@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-import { FilterInput } from '../../helpers'
+import { FilterInput } from '../../graphql'
 
 interface FilterInputWithId extends FilterInput {
   id: symbol

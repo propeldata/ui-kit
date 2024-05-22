@@ -4,7 +4,7 @@ import {
   TimeSeriesGranularity,
   TimeSeriesQuery,
   useTimeSeriesQuery
-} from '../../helpers'
+} from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useFilters } from './../../components/FilterProvider/useFilters'

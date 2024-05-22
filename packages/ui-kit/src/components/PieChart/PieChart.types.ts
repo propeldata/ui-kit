@@ -1,5 +1,5 @@
 import type { ChartConfiguration } from 'chart.js'
-import { DimensionInput, Sort } from '../../helpers'
+import { DimensionInput, Sort } from '../../graphql'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'

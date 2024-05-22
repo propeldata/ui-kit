@@ -2,13 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Chart } from 'chart.js'
 import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import {
-  quotedStringRegex,
-  RelativeTimeRange,
-  storybookCodeTemplate,
-  TimeSeriesGranularity,
-  useStorybookAccessToken
-} from '../../helpers'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
+import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { ThemeTokenProps } from '../../themes'
 import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'

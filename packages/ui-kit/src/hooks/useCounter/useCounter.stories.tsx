@@ -1,8 +1,8 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-
+import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken } from '../../helpers'
+import { RelativeTimeRange } from '../../graphql'
+import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { useCounter } from './useCounter'
 
 const args = {

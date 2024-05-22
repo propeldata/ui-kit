@@ -1,8 +1,8 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
-import { Dom, mockLeaderboardQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
+import React from 'react'
 import { LeaderboardQueryProps } from '../../components'
+import { QueryClient, QueryClientProvider } from '../../graphql'
+import { Dom, mockLeaderboardQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { useLeaderboard } from './useLeaderboard'
 
 const mockData = {

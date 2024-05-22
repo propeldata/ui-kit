@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useEffect, useRef } from 'react'
-import { FilterInput, FilterOperator, getTimeZone, useForwardedRefCallback, withThemeWrapper } from '../../helpers'
+import { FilterInput, FilterOperator } from '../../graphql'
+import { getTimeZone, useForwardedRefCallback, withThemeWrapper } from '../../helpers'
 import { useTopValues } from '../../hooks'
 import { Autocomplete } from '../Autocomplete'
 import { AutocompleteOption } from '../Autocomplete/Autocomplete.types'
