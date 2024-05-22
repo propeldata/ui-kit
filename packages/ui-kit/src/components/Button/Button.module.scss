@@ -1,7 +1,7 @@
 @use '../../themes/generated/tokens';
 
 .rootButton {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
 
   padding: var(--propel-spacing-lg) var(--propel-spacing-4xl);
   gap: var(--propel-spacing-lg);
@@ -71,7 +71,7 @@
   }
 
   &.small {
-    @extend .textSmSemibold;
+    @extend %textSmSemibold;
 
     padding: var(--propel-spacing-md) var(--propel-spacing-4xl);
 

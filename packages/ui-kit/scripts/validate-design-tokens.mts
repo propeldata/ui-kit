@@ -23,11 +23,13 @@ export const getAllFiles = ({ dirPath, type, arrayOfFiles = [] }: GetAllFilesPro
     if (fs.statSync(fullPath).isDirectory()) {
       const options: GetAllFilesProps = { dirPath: fullPath, type, arrayOfFiles }
       if (type === 'current' && file !== 'themes') {
+        // console.log(file)
         arrayOfFiles = getAllFiles(options)
       } else if (type === 'new' && file === 'generated') {
         arrayOfFiles = getAllFiles(options)
       }
     } else if (file.endsWith('.css') || (type === 'new' && file.endsWith('.scss'))) {
+      // console.log(fullPath, file.endsWith('.css'), type === 'new' && file.endsWith('.scss'))
       arrayOfFiles.push(fullPath)
     }
   })
@@ -45,6 +47,7 @@ export const extractCSSVariables = (file: string): string[] => {
 // Get a list of propel's CSS variables from all CSS files in the given directory
 export const getCSSVariables = (dirPath: string, type: 'current' | 'new'): string[] => {
   const files = getAllFiles({ dirPath, type })
+  // console.log(files)
   const allVariables = new Set<string>()
 
   files.forEach((file) => {
@@ -75,6 +78,8 @@ export const validateDesignTokens = (spinner: Ora): void => {
   let validationFailed = false
 
   const currentVariablesList = getCSSVariables('./src', 'current')
+  spinner.succeed(`Tokens in use: ${currentVariablesList.length}`)
+  spinner.succeed(JSON.stringify(currentVariablesList, null, 2))
   const newVariablesList = getCSSVariables('./src/themes', 'new')
 
   currentVariablesList.forEach((variable) => {

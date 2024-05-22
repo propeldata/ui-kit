@@ -1,7 +1,8 @@
-@use '../../themes/common';
+// @use '../../themes/common';
+@use '../../themes/generated/tokens';
 
 .rootLoader {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
   color: var(--propel-text-secondary);
   overflow: auto;
   width: 100%;

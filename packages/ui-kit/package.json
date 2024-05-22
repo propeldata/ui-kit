@@ -15,6 +15,7 @@
     "design-tokens:sync": "yarn design-tokens:clean && tsc -p ./scripts/tsconfig.json && yarn design-tokens:parse && yarn design-tokens:validate",
     "design-tokens:clean": "rm -rf ./scripts/dist && rm -rf ./src/generated && rm -rf ./src/themes/generated",
     "design-tokens:parse": "node ./scripts/dist/parse-design-tokens.mjs",
+    "design-tokens:parse-in-use": "rm -rf ./scripts/dist && tsc -p ./scripts/tsconfig.json && node ./scripts/dist/parse-design-tokens.mjs --mode=in-use",
     "design-tokens:validate": "node ./scripts/dist/validate-design-tokens.mjs"
   },
   "publishConfig": {

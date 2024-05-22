@@ -79,7 +79,7 @@
 }
 
 .caption_label {
-  @extend .textSmRegular;
+  @extend %textSmRegular;
 
   position: absolute;
   left: 0;
@@ -92,11 +92,11 @@
 }
 
 .head_cell {
-  @extend .textSmRegular;
+  @extend %textSmRegular;
 }
 
 .cell {
-  @extend .textSmRegular;
+  @extend %textSmRegular;
 }
 
 .nav {
@@ -118,7 +118,7 @@
 }
 
 .button {
-  @extend .textSmRegular;
+  @extend %textSmRegular;
 
   padding: 10px var(--propel-spacing-md);
   border-width: 1px;

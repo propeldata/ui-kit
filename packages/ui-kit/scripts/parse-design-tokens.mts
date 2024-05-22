@@ -2,6 +2,7 @@ import fs, { promises as fsPromises } from 'fs'
 import path from 'path'
 import slugify from 'slugify'
 import ora from 'ora'
+// import { getCSSVariables } from './validate-design-tokens.mjs'
 
 const GENERATED_WARNING =
   'This file is generated automatically by scripts/parse-design-tokens.js. Do not edit manually.'
@@ -58,6 +59,14 @@ type VariablesJSONProps = {
 type TypographyClassProps = {
   className: string
   props: { prop: string; value: string }[]
+}
+
+export const getArgValue = (argName: string) => {
+  const index = process.argv.findIndex((arg) => arg.startsWith(`--${argName}=`))
+  if (index === -1) {
+    return null
+  }
+  return process.argv[index].split('=')[1]
 }
 
 // Slugify string with strict mode
@@ -157,7 +166,13 @@ export const getThemeTokens = ({
     )
 
 const main = async () => {
-  const spinner = ora({ text: 'Parsing design variables and tokens...', color: 'yellow' }).start()
+  const mode = getArgValue('mode')
+  const inInUseMode = mode === 'in-use'
+
+  const spinner = ora({
+    text: `Parsing design variables and tokens${inInUseMode ? ' (ONLY IN USE)' : ''}...`,
+    color: 'yellow'
+  }).start()
 
   try {
     const variablesJSON = await getJSONFromFile()
@@ -167,8 +182,8 @@ const main = async () => {
       throw new Error('Failed to parse variables.json')
     }
 
-    const variables: TokenDataProps[] = []
-    const tokens: TokenDataProps[] = []
+    let variables: TokenDataProps[] = []
+    let tokens: TokenDataProps[] = []
 
     // Parse variables
     variablesJSON.collections
@@ -239,6 +254,20 @@ const main = async () => {
 
     const themes = variablesJSON.collections.find(({ name }) => name === '1. Color Modes')?.modes
 
+    // if (inInUseMode) {
+    //   const currentVariablesList = getCSSVariables('./src', 'current')
+    //   console.log('========', currentVariablesList.length)
+
+    //   console.log('Before variables: ', variables.length)
+    //   console.log('Before tokens: ', tokens.length)
+
+    //   variables = variables.filter((variable) => currentVariablesList.includes(variable.cssName))
+    //   tokens = tokens.filter((token) => currentVariablesList.includes(token.cssName))
+
+    //   console.log('After variables: ', variables.length)
+    //   console.log('After tokens: ', tokens.length)
+    // }
+
     // Parse theme tokens
     const lightTheme = getThemeTokens({ name: 'light', themes, variables, tokens })
     const darkTheme = getThemeTokens({ name: 'dark', themes, variables, tokens })
@@ -248,7 +277,7 @@ const main = async () => {
       '_variables.scss',
       [
         `// ${GENERATED_WARNING}\n`,
-        '.variables {',
+        '%variables {',
         variables.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n'),
         '}'
       ].join('\n')
@@ -260,15 +289,14 @@ const main = async () => {
       [
         `// ${GENERATED_WARNING}\n`,
         "@use './variables';\n",
-        '.tokens {',
-        '  @extend .variables;\n',
+        '%tokens {',
+        '  @extend %variables;\n',
         tokens.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n'),
         '}\n',
         typographyClasses
           .map((typographyClass) =>
             [
-              `.${typographyClass.className} {`,
-              '  @extend .variables;\n',
+              `%${typographyClass.className} {`,
               typographyClass.props.map(({ prop, value }) => `  ${prop}: ${value};`).join('\n'),
               '}\n'
             ].join('\n')
@@ -287,9 +315,7 @@ const main = async () => {
         `_${name}.scss`,
         [
           `// ${GENERATED_WARNING}\n`,
-          "@use './tokens';\n",
-          `.${name} {`,
-          '  @extend .tokens;\n',
+          `%${name} {`,
           theme?.map(({ cssName, value }) => `  ${cssName}: ${value};`).join('\n'),
           '}'
         ].join('\n')

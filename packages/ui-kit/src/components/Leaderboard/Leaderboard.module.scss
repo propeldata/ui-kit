@@ -1,7 +1,8 @@
-@use '../../themes/common';
+// @use '../../themes/common';
+@use '../../themes/generated/tokens';
 
 .rootLeaderboard {
-  @extend .textXxsRegular;
+  @extend %textXxsRegular;
   color: var(--propel-text-secondary);
   overflow: auto;
   padding: 0;
@@ -68,11 +69,11 @@
       text-align: left;
       padding: var(--propel-spacing-md) var(--propel-spacing-md) var(--propel-spacing-md) 0;
       color: var(--propel-text-secondary);
-      @extend .textXsRegular;
+      @extend %textXsRegular;
     }
 
     td {
-      @extend .textXsRegular;
+      @extend %textXsRegular;
       color: var(--propel-text-secondary);
       border-bottom: 1px solid var(--propel-border-primary);
     }

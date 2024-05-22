@@ -1,7 +1,8 @@
-@use '../../themes/common';
+// @use '../../themes/common';
+@use '../../themes/generated/tokens';
 
 .rootPieChart {
-  @extend .textXxsRegular;
+  @extend %textXxsRegular;
   color: var(--propel-text-primary);
   overflow: auto;
   padding: 0;
@@ -35,7 +36,7 @@
 }
 
 .pieChartList {
-  @extend .textXsRegular;
+  @extend %textXsRegular;
   color: var(--propel-text-secondary);
   margin-top: var(--propel-spacing-xl);
 

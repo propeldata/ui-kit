@@ -5,7 +5,7 @@
 @use './generated/darkTheme';
 
 .darkTheme {
-  @extend .commonTokens;
+  @extend %commonTokens;
 
   --propel-color-primary: #2e90fa;
   --propel-color-secondary: rgba(46, 144, 250, 0.35);
@@ -18,5 +18,5 @@
   --propel-color-loader: #2d2d2d;
   --propel-color-loader-animation: #00000020;
 
-  @extend .darkTheme;
+  @extend %darkTheme;
 }
