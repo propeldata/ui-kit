@@ -1,5 +1,16 @@
 # dashboard-example
 
+## 1.0.0
+
+### Patch Changes
+
+- 153289d: Provides a fix for missing Inter font
+- Updated dependencies [153289d]
+- Updated dependencies [d91d97f]
+- Updated dependencies [aa54d0f]
+- Updated dependencies [d91d97f]
+  - @propeldata/ui-kit@0.6.0
+
 ## 0.5.5
 
 ### Patch Changes
