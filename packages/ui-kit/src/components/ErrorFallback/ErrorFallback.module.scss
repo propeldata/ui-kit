@@ -1,7 +1,8 @@
-@use '../../themes/common';
+// @use '../../themes/common';
+@use '../../themes/generated/tokens';
 
 .rootErrorFallback {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
   color: var(--propel-text-secondary);
   max-width: 263px;
   height: var(--propel-component-height);

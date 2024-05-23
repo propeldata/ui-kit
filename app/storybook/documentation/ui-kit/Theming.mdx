@@ -3,10 +3,7 @@ import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../src/utils'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
 import * as ThemeProviderStories from '../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
-import rawThemesScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/themes.module.scss'
-import rawCommonScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_tokens.scss'
-import rawLightThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_lightTheme.scss'
-import rawDarkThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_darkTheme.scss'
+import rawThemesScss from '!!raw-loader!../../../../packages/ui-kit/src/generated/themes/themes.module.css'
 
 <Meta title="Customization/Theming" />
 
@@ -41,24 +38,12 @@ Further details are available in the <LinkTo kind="API/ThemeTokenProps" story="o
 
 ### Default values
 
-The content in `themes.module.scss` serves as the foundational entry point for theming within the UI Kit.
+The content in `themes.module.scss` defines design tokens for a UI Kit, supporting both light and dark themes. It
+includes typography styles for various text sizes and weights, spacing units, and border radii. A comprehensive colour
+palette covers text, borders, and backgrounds for both themes. Deprecated variables are also listed for phasing out
+older styles.
 
 <Source language="css" format="dedent" dark code={rawThemesScss} />
-
-The `common.scss` file contains the **common** theme configuration, defining a series of CSS custom properties that are
-shared by both the light and dark themes.
-
-<Source language="css" format="dedent" dark code={rawCommonScss} />
-
-The `lightTheme.scss` file sets up the **light theme** for the UI Kit, defining a series of CSS custom properties
-specific to this theme.
-
-<Source language="css" format="dedent" dark code={rawLightThemeScss} />
-
-The `darkTheme.scss` file sets up the **dark theme** for the UI Kit, defining a series of CSS custom properties specific
-to this theme.
-
-<Source language="css" format="dedent" dark code={rawDarkThemeScss} />
 
 ### Customizing the Theme
 

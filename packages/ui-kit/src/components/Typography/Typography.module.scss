@@ -7,23 +7,23 @@
 
 // Add new variant when needed. Check themes/generated/_tokens.scss for available variants.
 .textMdRegular {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
 }
 
 .textMdSemibold {
-  @extend .textMdSemibold;
+  @extend %textMdSemibold;
 }
 
 .textXsRegular {
-  @extend .textXsRegular;
+  @extend %textXsRegular;
 }
 
 .textXxsRegular {
-  @extend .textXxsRegular;
+  @extend %textXxsRegular;
 }
 
 .textSmRegular {
-  @extend .textSmRegular;
+  @extend %textSmRegular;
 }
 
 .block {

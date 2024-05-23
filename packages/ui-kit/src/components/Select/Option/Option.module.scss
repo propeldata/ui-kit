@@ -1,7 +1,7 @@
 @use '../../../themes/generated/tokens';
 
 .rootOption {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
 
   padding: var(--propel-spacing-xl) var(--propel-spacing-4xl);
   margin: 0;

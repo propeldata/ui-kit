@@ -1,6 +1,6 @@
 @use './generated/tokens';
 
-.commonTokens {
+%commonTokens {
   --propel-component-height: 300px;
   --propel-transition-ease-time: 300ms;
 
@@ -64,5 +64,5 @@
   --propel-color-blue50: #eff8ff;
   --propel-color-blue25: #f5faff;
 
-  @extend .tokens;
+  @extend %tokens;
 }

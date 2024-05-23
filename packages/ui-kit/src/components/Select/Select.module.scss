@@ -1,10 +1,10 @@
 @use '../../themes/generated/tokens';
 
 .rootButton {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
 
   &.small {
-    @extend .textSmRegular;
+    @extend %textSmRegular;
   }
 }
 
@@ -35,7 +35,7 @@
 .small {
   ul {
     li {
-      @extend .textSmRegular;
+      @extend %textSmRegular;
 
       padding: var(--propel-spacing-md) var(--propel-spacing-xl);
       gap: var(--propel-spacing-xxs);

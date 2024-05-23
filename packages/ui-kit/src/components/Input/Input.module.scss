@@ -1,7 +1,7 @@
 @use '../../themes/generated/tokens';
 
 .rootInput {
-  @extend .textMdRegular;
+  @extend %textMdRegular;
 
   padding: var(--propel-spacing-lg) var(--propel-spacing-xl);
   gap: var(--propel-spacing-lg);
@@ -21,7 +21,7 @@
   transition: border-color var(--propel-transition-ease-time) ease, box-shadow var(--propel-transition-ease-time) ease;
 
   & input {
-    @extend .textMdRegular;
+    @extend %textMdRegular;
 
     border: none;
     padding: 0;
@@ -67,12 +67,12 @@
 }
 
 .small {
-  @extend .textSmRegular;
+  @extend %textSmRegular;
 
   padding: var(--propel-spacing-md) var(--propel-spacing-lg);
   gap: var(--propel-spacing-md);
 
   & input {
-    @extend .textSmRegular;
+    @extend %textSmRegular;
   }
 }

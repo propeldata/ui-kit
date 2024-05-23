@@ -5,6 +5,7 @@
     "target": "ESNext",
     "strict": true,
     "outDir": "dist",
+    "rootDir": ".",
     "lib": ["ESNext", "DOM"]
   },
   "include": ["./**/*.mts"],

@@ -1,10 +1,23 @@
-@use '../../themes/common';
+// @use '../../themes/common';
+@use '../../themes/generated/tokens';
 
 .rootPieChart {
-  @extend .textXxsRegular;
+  @extend %textXxsRegular;
   color: var(--propel-text-primary);
   overflow: auto;
   padding: 0;
+
+  --pie-bg-25: var(--propel-brand-25);
+  --pie-bg-50: var(--propel-brand-50);
+  --pie-bg-100: var(--propel-brand-100);
+  --pie-bg-200: var(--propel-brand-200);
+  --pie-bg-300: var(--propel-brand-300);
+  --pie-bg-400: var(--propel-brand-400);
+  --pie-bg-500: var(--propel-brand-500);
+  --pie-bg-600: var(--propel-brand-600);
+  --pie-bg-700: var(--propel-brand-700);
+  --pie-bg-900: var(--propel-brand-900);
+  --pie-bg-empty: var(--propel-background-brand-primary);
 
   canvas {
     height: var(--propel-component-height);
@@ -35,7 +48,7 @@
 }
 
 .pieChartList {
-  @extend .textXsRegular;
+  @extend %textXsRegular;
   color: var(--propel-text-secondary);
   margin-top: var(--propel-spacing-xl);
 
