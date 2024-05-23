@@ -232,6 +232,10 @@ const main = async (isProdEnv = false) => {
 
     const themes = variablesJSON.collections.find(({ name }) => name === '1. Color Modes')?.modes
 
+    // Parse theme tokens
+    let lightTheme = getThemeTokens({ name: 'light', themes, variables, tokens })
+    let darkTheme = getThemeTokens({ name: 'dark', themes, variables, tokens })
+
     if (isProdEnv) {
       await buildSASSFiles(spinner)
 
@@ -243,13 +247,11 @@ const main = async (isProdEnv = false) => {
 
       variables = variables.filter((variable) => currentVariablesList.includes(variable.cssName))
       tokens = tokens.filter((token) => currentVariablesList.includes(token.cssName))
+      lightTheme = lightTheme?.filter((token) => currentVariablesList.includes(token.cssName))
+      darkTheme = darkTheme?.filter((token) => currentVariablesList.includes(token.cssName))
 
       succeedMessage = `Filter out all design variables (${variables.length} from ${statsBefore.variables}) and tokens (${tokens.length} from ${statsBefore.tokens}) not in use`
     }
-
-    // Parse theme tokens
-    const lightTheme = getThemeTokens({ name: 'light', themes, variables, tokens })
-    const darkTheme = getThemeTokens({ name: 'dark', themes, variables, tokens })
 
     // Generate _variables.scss
     writeToFileSync(
