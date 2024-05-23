@@ -60,7 +60,9 @@ export const Connected: Story = {
       },
       columns: ['taco_name']
     },
-    defaultPageSize: 10,
+    paginationProps: {
+      defaultPageSize: 10
+    },
     // cellProps: {
     //   style: {
     //     textOverflow: 'ellipsis',
@@ -74,7 +76,7 @@ export const Connected: Story = {
     //     width: 'max-content'
     //   }
     // },
-    resizable: true
+    resizable: false
   },
   render: (args) => (
     <div style={{ width: '100%', maxHeight: '600px' }}>
@@ -85,7 +87,9 @@ export const Connected: Story = {
 
 export const Static: Story = {
   args: {
-    defaultPageSize: 10,
+    paginationProps: {
+      defaultPageSize: 10
+    },
     headers: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id'],
     rows: [
       [
@@ -94,97 +98,6 @@ export const Static: Story = {
         'Spinach',
         'f38ed454-a907-43b4-b362-cd4dd197dd03',
         'a37d3001-f953-47e3-b1ed-149f8897d094'
-      ],
-      [
-        'Breakfast',
-        'La Taqueria',
-        'Corn',
-        'f38ed454-a907-43b4-b362-cd4dd197dd03',
-        'e3643b7e-c287-45b2-80c3-b93c82840b46'
-      ],
-      [
-        'Pollo',
-        'Taqueria Cancun',
-        'Flour',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        '9f940297-3ba7-4389-86af-f63c6416c405'
-      ],
-      [
-        'Al Pastor',
-        'Taqueria Cancun',
-        'Whole Wheat',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'a3b1f97d-b4cc-479c-9a7e-cc3751747f97'
-      ],
-      [
-        'Veggie',
-        'Taqueria Cancun',
-        'Spinach',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'a3b1f97d-b4cc-479c-9a7e-cc3751747f97'
-      ],
-      [
-        'Chorizo',
-        'Taqueria Cancun',
-        'Whole Wheat',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        '25cdef0f-c358-4788-9645-f9625b9a219f'
-      ],
-      [
-        'Barbacoa',
-        'Taqueria Cancun',
-        'Whole Wheat',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'a3b1f97d-b4cc-479c-9a7e-cc3751747f97'
-      ],
-      [
-        'Breakfast',
-        'Taqueria Cancun',
-        'Flour',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        '9f940297-3ba7-4389-86af-f63c6416c405'
-      ],
-      [
-        'Fish',
-        'Taqueria Cancun',
-        'Nopal',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'eb08c249-6855-4074-a476-75ecce863a7c'
-      ],
-      [
-        'Carnitas',
-        'Taqueria Cancun',
-        'Nopal',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'a3b1f97d-b4cc-479c-9a7e-cc3751747f97'
-      ],
-      [
-        'Barbacoa',
-        'Taqueria Cancun',
-        'Whole Wheat',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'a3b1f97d-b4cc-479c-9a7e-cc3751747f97'
-      ],
-      [
-        'Breakfast',
-        'Taqueria Cancun',
-        'Flour',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        '9f940297-3ba7-4389-86af-f63c6416c405'
-      ],
-      [
-        'Fish',
-        'Taqueria Cancun',
-        'Nopal',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'eb08c249-6855-4074-a476-75ecce863a7c'
-      ],
-      [
-        'Carnitas',
-        'Taqueria Cancun',
-        'Nopal',
-        '9bdde1f8-cbe2-4dba-bca1-14352a152173',
-        'a3b1f97d-b4cc-479c-9a7e-cc3751747f97'
       ]
     ],
 

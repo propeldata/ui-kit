@@ -2,7 +2,7 @@ import React from 'react'
 
 export type UseEmptyableDataProps<T> = {
   isDataEmpty: (data: T) => boolean
-  onEmptyData: () => void
+  onEmptyData?: () => void
 }
 
 /**
@@ -24,7 +24,7 @@ export const useEmptyableData = <T>({ onEmptyData, isDataEmpty }: UseEmptyableDa
     setIsEmptyState(isEmptyStateVal)
 
     if (isEmptyStateVal) {
-      onEmptyData()
+      onEmptyData?.()
       return
     }
   }, [data, onEmptyData, isDataEmpty])

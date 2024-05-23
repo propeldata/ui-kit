@@ -4,8 +4,8 @@ import type { DataComponentProps, PaginationProps, QueryProps } from '../../comp
 import type { DataPoolInput, Sort } from '../../helpers'
 
 export type DataGridData = {
-  headers?: string[]
-  rows?: Array<string | null>
+  headers?: string[] | null
+  rows?: (string | null)[][]
 }
 
 export interface DataGridQueryProps extends Omit<QueryProps, 'metric'>, PaginationProps {
@@ -33,20 +33,26 @@ export interface RowProps {
   styles: CSSStyleSheet
 }
 
-type RowCallbackArguments = { props: RowProps; RowComponent: React.ReactElement; CellComponent: React.ReactElement }
-
 export interface DataGridProps extends DataComponentProps<'div'> {
-  rowOverride?: React.ReactElement | ((args: RowCallbackArguments) => React.ReactElement)
   query?: DataGridQueryProps
   resizable?: boolean
   /** Props to be applied to the `table` element */
   tableProps?: React.HTMLAttributes<HTMLTableElement>
   /** Props to be applied to the `td` elements */
   cellProps?: React.HTMLAttributes<HTMLTableCellElement>
-  /** Default page size for uncontrolled pagination, if passed, query controlled pagination props will be ignored */
-  defaultPageSize?: number
   /** If passed along with `rows` the component will ignore the built-in GraphQL operations */
   headers?: string[]
   /** If passed along with `headers` the component will ignore the built-in GraphQL operations */
   rows?: (string | null)[][]
+  /** When true, shows a skeleton loader */
+  loading?: boolean
+  /** Props that will affect pagination */
+  paginationProps?: DataGridPaginationProps
+}
+
+interface DataGridPaginationProps {
+  /** Default page size for uncontrolled pagination, if passed, query controlled pagination props will be ignored */
+  defaultPageSize?: number
+  /** Options that will populate the pagination select, if not passed, default options will be used (10, 50, 100) */
+  pageSizeOptions?: number[]
 }

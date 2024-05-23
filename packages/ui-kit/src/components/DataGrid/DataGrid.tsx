@@ -22,8 +22,11 @@ import classNames from 'classnames'
 import { Drawer } from './Drawer'
 import { CellElement, RowElement } from './Drawer.types'
 import { PaginationProps } from '../shared.types'
-
-// let idDataGrid = 0
+import { Button } from '../Button'
+import { Select } from '../Select'
+import { Option } from '../Select/Option'
+import { Loader } from './Loader'
+import { DEFAULT_PAGE_SIZE_OPTIONS, MINIMUM_TABLE_HEIGHT } from './consts'
 
 const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 
@@ -40,30 +43,34 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       resizable: isResizable = false,
       tableProps,
       cellProps,
-      defaultPageSize: defaultPageSizeProp
+      loading,
+      loaderProps,
+      errorFallbackProps,
+      ...rest
     },
     forwardedRef
   ) => {
-    // const innerRef = React.useRef<HTMLDivElement>(null)
-    // const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
-    // const themeWrapper = withThemeWrapper(setRef)
+    const innerRef = React.useRef<HTMLDivElement>(null)
+    const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
+    const themeWrapper = withThemeWrapper(setRef)
 
-    // const {
-    //   theme,
-    //   chartConfig,
-    //   renderLoader: renderLoaderComponent,
-    //   errorFallback: errorFallbackComponent,
-    //   renderEmpty: renderEmptyComponent
-    // } = useSetupTheme<'bar'>({
-    //   componentContainer,
-    //   baseTheme,
-    //   renderLoader,
-    //   errorFallback,
-    //   renderEmpty
-    // })
+    const {
+      theme,
+      renderLoader: renderLoaderComponent,
+      errorFallback: errorFallbackComponent,
+      renderEmpty: renderEmptyComponent
+    } = useSetupTheme({
+      componentContainer,
+      baseTheme,
+      renderLoader,
+      errorFallback,
+      renderEmpty
+    })
 
-    // const idRef = React.useRef(idDataGrid++)
-    // const id = `data-grid-${idRef.current}`
+    const paginationProps = rest.paginationProps ?? {}
+    const { defaultPageSize: defaultPageSizeProp, pageSizeOptions: pageSizeOptionsProp } = paginationProps
+
+    const pageSizeOptions = pageSizeOptionsProp ?? DEFAULT_PAGE_SIZE_OPTIONS
 
     const [pageSize, setPageSize] = useState(defaultPageSizeProp ?? query?.first ?? 10)
 
@@ -75,7 +82,23 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const isStatic = !query
 
-    const { data: dataGridData } = useDataGrid({ ...query, ...pagination, enabled: !isStatic })
+    const {
+      data: dataGridData,
+      isLoading: isLoadingDataGridData,
+      error: queryError
+    } = useDataGrid({ ...query, ...pagination, enabled: !isStatic })
+
+    const isLoading = isStatic ? loading : isLoadingDataGridData
+
+    const { isEmptyState, setData } = useEmptyableData<DataGridData>({
+      isDataEmpty: (data) => !data.headers || !data.rows || data.rows.length === 0 || data.headers.length === 0
+    })
+
+    useEffect(() => {
+      if (dataGridData) {
+        setData({ headers: dataGridData.dataGrid.headers, rows: dataGridData.dataGrid.rows })
+      }
+    }, [dataGridData, setData])
 
     const headers = useMemo(
       () => (isStatic ? headersProp : dataGridData?.dataGrid.headers),
@@ -199,11 +222,38 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       a.click()
     }
 
+    if (isLoading) {
+      if (renderLoaderComponent) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore - renderLoaderComponent doesn't accept something different to the skeleton loader, we need to fix this
+        return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
+      }
+
+      return <Loader />
+    }
+
+    if (queryError != null) {
+      if (errorFallbackComponent) {
+        return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
+      }
+
+      return <ErrorFallback {...errorFallbackProps} />
+    }
+
+    if (isEmptyState && renderEmptyComponent) {
+      return themeWrapper(renderEmptyComponent({ theme }))
+    }
+
     return (
       <div className={componentStyles.wrapper}>
         <div className={componentStyles.container}>
           <div className={componentStyles.tableContainer}>
-            <table ref={tableRef} className={componentStyles.table} {...tableProps}>
+            <table
+              ref={tableRef}
+              className={componentStyles.table}
+              style={{ width: isResizable ? 'initial' : '100%' }}
+              {...tableProps}
+            >
               <thead
                 className={componentStyles.tableHead}
                 {...{
@@ -274,7 +324,12 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
             </table>
           </div>
           <Drawer
-            style={{ maxHeight: tableRef.current?.clientHeight }}
+            style={{
+              maxHeight:
+                tableRef.current?.clientHeight != null && tableRef.current.clientHeight >= MINIMUM_TABLE_HEIGHT
+                  ? tableRef.current.clientHeight
+                  : '100%'
+            }}
             isOpen={isOpenDrawer}
             row={selectedRow}
             cell={selectedCell}
@@ -283,53 +338,45 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           />
         </div>
         <div className={componentStyles.footer}>
-          {isStatic ? (
-            <>
-              <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-              <select
-                id="data-grid-rows-per-page"
-                value={pageSize}
-                onChange={(event) => {
-                  const size = Number(event.target.value)
-                  setPageSize(size)
+          <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
+          <Select
+            className={componentStyles.paginationSelect}
+            id="data-grid-rows-per-page"
+            value={{ value: pageSize.toString(), label: pageSize.toString() }}
+            onChange={(_, newValue) => {
+              if (newValue != null) {
+                const size = Number(newValue?.value)
+                setPageSize(size)
+                if (isStatic) {
                   setClientPagination((prev) => ({ ...prev, pageSize: size }))
-                }}
-              >
-                <option value={10}>10</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-              </select>
-              <button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()} type="button">
-                &lt;
-              </button>
-              <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()} type="button">
-                &gt;
-              </button>
-            </>
-          ) : (
-            <>
-              <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-              <select
-                id="data-grid-rows-per-page"
-                value={pageSize}
-                onChange={(event) => {
-                  const size = Number(event.target.value)
-                  setPageSize(size)
+                } else {
                   setPagination((prev) => ({ ...prev, first: size }))
-                }}
-              >
-                <option value={10}>10</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-              </select>
-              <button disabled={!hasPreviousPage} onClick={handlePaginateBack} type="button">
-                &lt;
-              </button>
-              <button disabled={!hasNextPage} onClick={handlePaginateNext} type="button">
-                &gt;
-              </button>
-            </>
-          )}
+                }
+              }
+            }}
+          >
+            {pageSizeOptions.map((size) => (
+              <Option key={size} value={{ value: size }}>
+                {size}
+              </Option>
+            ))}
+          </Select>
+          <Button
+            className={componentStyles.paginationButton}
+            disabled={!hasPreviousPage}
+            onClick={handlePaginateBack}
+            type="button"
+          >
+            &lt;
+          </Button>
+          <Button
+            className={componentStyles.paginationButton}
+            disabled={!hasNextPage}
+            onClick={handlePaginateNext}
+            type="button"
+          >
+            &gt;
+          </Button>
         </div>
       </div>
     )
