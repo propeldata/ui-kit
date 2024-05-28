@@ -46,6 +46,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       loading,
       loaderProps,
       errorFallbackProps,
+      disablePagination = false,
+      tableLinesLayout = 'both',
       ...rest
     },
     forwardedRef
@@ -82,11 +84,13 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const isStatic = !query
 
+    const withPagination = disablePagination ? {} : pagination
+
     const {
       data: dataGridData,
       isLoading: isLoadingDataGridData,
       error: queryError
-    } = useDataGrid({ ...query, ...pagination, enabled: !isStatic })
+    } = useDataGrid({ ...query, ...withPagination, enabled: !isStatic })
 
     const isLoading = isStatic ? loading : isLoadingDataGridData
 
@@ -140,13 +144,14 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const [clientPagination, setClientPagination] = useState({ pageIndex: 0, pageSize })
 
-    const reactTablePagination = isStatic
-      ? {
-          getPaginationRowModel: getPaginationRowModel(),
-          state: { pagination: clientPagination },
-          onPaginationChange: setClientPagination
-        }
-      : {}
+    const reactTablePagination =
+      isStatic && !disablePagination
+        ? {
+            getPaginationRowModel: getPaginationRowModel(),
+            state: { pagination: clientPagination },
+            onPaginationChange: setClientPagination
+          }
+        : {}
 
     const table = useReactTable({
       data: tanstackTableData,
@@ -156,6 +161,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       columnResizeMode: 'onChange',
       columnResizeDirection: 'ltr',
       enableColumnResizing: true,
+      defaultColumn: {
+        size: 200,
+        minSize: 10,
+        maxSize: 500
+      },
       ...reactTablePagination
     })
 
@@ -229,7 +239,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
-      return <Loader />
+      return <Loader disablePagination={disablePagination} />
     }
 
     if (queryError != null) {
@@ -244,6 +254,12 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       return themeWrapper(renderEmptyComponent({ theme }))
     }
 
+    const linesStyle = {
+      vertical: componentStyles.verticalLines,
+      horizontal: componentStyles.horizontalLines,
+      both: componentStyles.bothLines
+    }[tableLinesLayout]
+
     return (
       <div className={componentStyles.wrapper}>
         <div className={componentStyles.container}>
@@ -251,7 +267,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
             <table
               ref={tableRef}
               className={componentStyles.table}
-              style={{ width: isResizable ? 'initial' : '100%' }}
+              style={{ width: isResizable ? table.getCenterTotalSize() : '100%' }}
               {...tableProps}
             >
               <thead
@@ -264,16 +280,24 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               >
                 {table.getHeaderGroups().map((headerGroup) => (
                   <tr className={componentStyles.tableRow} key={headerGroup.id}>
-                    <th className={classNames(componentStyles.tableCellHead, componentStyles.tableIndexHeader)}></th>
+                    <th
+                      className={classNames(
+                        componentStyles.tableCellHead,
+                        componentStyles.tableIndexHeader,
+                        linesStyle
+                      )}
+                    ></th>
                     {headerGroup.headers.map((header) => (
                       <th
+                        {...cellProps}
+                        className={classNames(componentStyles.tableCellHead, linesStyle, cellProps?.className)}
                         {...{
                           colSpan: header.colSpan,
                           style: {
+                            ...cellProps?.style,
                             width: isResizable ? header.getSize() : 'initial'
                           }
                         }}
-                        className={componentStyles.tableCellHead}
                         key={header.id}
                       >
                         {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
@@ -296,23 +320,34 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                 {table.getRowModel().rows.map((row, index) => (
                   <tr className={componentStyles.tableRow} key={row.id}>
                     <td
-                      style={{ maxWidth: '32px' }}
-                      onClick={() => handleRowIndexClick(row)}
-                      className={classNames(componentStyles.tableCell, componentStyles.tableIndexCell, {
-                        [componentStyles.selectedRow]: row.id === selectedRow?.id
-                      })}
                       {...cellProps}
+                      style={{ maxWidth: '32px', width: '32px', ...cellProps?.style }}
+                      onClick={() => handleRowIndexClick(row)}
+                      className={classNames(
+                        componentStyles.tableCell,
+                        componentStyles.tableIndexCell,
+                        {
+                          [componentStyles.selectedRow]: row.id === selectedRow?.id
+                        },
+                        linesStyle
+                      )}
                     >
                       <div>{index + 1}</div>
                     </td>
                     {row.getVisibleCells().map((cell, index) => (
                       <td
-                        onClick={() => handleRowCellClick(cell)}
-                        className={classNames(componentStyles.tableCell, {
-                          [componentStyles.selectedRow]:
-                            cell.id === selectedRow?.cells[index].id || cell.id === selectedCell?.id
-                        })}
                         {...cellProps}
+                        onClick={() => handleRowCellClick(cell)}
+                        style={{ ...cellProps?.style }}
+                        className={classNames(
+                          componentStyles.tableCell,
+                          {
+                            [componentStyles.selectedRow]:
+                              cell.id === selectedRow?.cells[index].id || cell.id === selectedCell?.id
+                          },
+                          linesStyle,
+                          cellProps?.className
+                        )}
                         key={cell.id}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -337,47 +372,49 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
             onCsvDownload={handleCsvDownload}
           />
         </div>
-        <div className={componentStyles.footer}>
-          <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-          <Select
-            className={componentStyles.paginationSelect}
-            id="data-grid-rows-per-page"
-            value={{ value: pageSize.toString(), label: pageSize.toString() }}
-            onChange={(_, newValue) => {
-              if (newValue != null) {
-                const size = Number(newValue?.value)
-                setPageSize(size)
-                if (isStatic) {
-                  setClientPagination((prev) => ({ ...prev, pageSize: size }))
-                } else {
-                  setPagination((prev) => ({ ...prev, first: size }))
+        {!disablePagination && (
+          <div className={componentStyles.footer}>
+            <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
+            <Select
+              className={componentStyles.paginationSelect}
+              id="data-grid-rows-per-page"
+              value={{ value: pageSize.toString(), label: pageSize.toString() }}
+              onChange={(_, newValue) => {
+                if (newValue != null) {
+                  const size = Number(newValue?.value)
+                  setPageSize(size)
+                  if (isStatic) {
+                    setClientPagination((prev) => ({ ...prev, pageSize: size }))
+                  } else {
+                    setPagination((prev) => ({ ...prev, first: size }))
+                  }
                 }
-              }
-            }}
-          >
-            {pageSizeOptions.map((size) => (
-              <Option key={size} value={{ value: size }}>
-                {size}
-              </Option>
-            ))}
-          </Select>
-          <Button
-            className={componentStyles.paginationButton}
-            disabled={!hasPreviousPage}
-            onClick={handlePaginateBack}
-            type="button"
-          >
-            &lt;
-          </Button>
-          <Button
-            className={componentStyles.paginationButton}
-            disabled={!hasNextPage}
-            onClick={handlePaginateNext}
-            type="button"
-          >
-            &gt;
-          </Button>
-        </div>
+              }}
+            >
+              {pageSizeOptions.map((size) => (
+                <Option key={size} value={{ value: size }}>
+                  {size}
+                </Option>
+              ))}
+            </Select>
+            <Button
+              className={componentStyles.paginationButton}
+              disabled={!hasPreviousPage}
+              onClick={handlePaginateBack}
+              type="button"
+            >
+              &lt;
+            </Button>
+            <Button
+              className={componentStyles.paginationButton}
+              disabled={!hasNextPage}
+              onClick={handlePaginateNext}
+              type="button"
+            >
+              &gt;
+            </Button>
+          </div>
+        )}
       </div>
     )
   }

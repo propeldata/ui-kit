@@ -48,6 +48,10 @@ export interface DataGridProps extends DataComponentProps<'div'> {
   loading?: boolean
   /** Props that will affect pagination */
   paginationProps?: DataGridPaginationProps
+  /** If true, the pagination footer will be hidden */
+  disablePagination?: boolean
+  /** Determines how the table lines are shown, defaults to "both" */
+  tableLinesLayout?: 'vertical' | 'horizontal' | 'both'
 }
 
 interface DataGridPaginationProps {

@@ -15,18 +15,20 @@ const DataGrid = (args: Story['args']) => {
   }
 
   return (
-    <DataGridSource
-      ref={ref}
-      {...{
-        ...args,
-        query: args?.query
-          ? {
-              ...args?.query,
-              accessToken
-            }
-          : undefined
-      }}
-    />
+    <div style={{ maxHeight: '400px' }}>
+      <DataGridSource
+        ref={ref}
+        {...{
+          ...args,
+          query: args?.query
+            ? {
+                ...args?.query,
+                accessToken
+              }
+            : undefined
+        }}
+      />
+    </div>
   )
 }
 
@@ -52,73 +54,85 @@ type Story = StoryObj<typeof DataGridComponent>
 
 export default meta
 
-export const Connected: Story = {
+export const Basic: Story = {
   args: {
     query: {
       dataPool: {
         id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
       },
-      columns: ['taco_name']
+      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
     paginationProps: {
-      defaultPageSize: 10
+      defaultPageSize: 50
     },
-    // cellProps: {
-    //   style: {
-    //     textOverflow: 'ellipsis',
-    //     overflow: 'auto',
-    //     whiteSpace: 'nowrap',
-    //     textWrap: 'nowrap'
-    //   }
-    // },
-    // tableProps: {
-    //   style: {
-    //     width: 'max-content'
-    //   }
-    // },
     resizable: false
   },
-  render: (args) => (
-    <div style={{ width: '100%', maxHeight: '600px' }}>
-      <DataGrid {...args} />
-    </div>
-  )
+  render: (args) => <DataGrid {...args} />
 }
 
-export const Static: Story = {
+export const Vertical: Story = {
   args: {
-    paginationProps: {
-      defaultPageSize: 10
+    query: {
+      dataPool: {
+        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+      },
+      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
-    headers: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id'],
-    rows: [
-      [
-        'Al Pastor',
-        'La Taqueria',
-        'Spinach',
-        'f38ed454-a907-43b4-b362-cd4dd197dd03',
-        'a37d3001-f953-47e3-b1ed-149f8897d094'
-      ]
-    ],
+    paginationProps: {
+      defaultPageSize: 50
+    },
+    resizable: false,
+    tableLinesLayout: 'vertical'
+  },
+  render: (args) => <DataGrid {...args} />
+}
 
-    // cellProps: {
-    //   style: {
-    //     textOverflow: 'ellipsis',
-    //     overflow: 'auto',
-    //     whiteSpace: 'nowrap',
-    //     textWrap: 'nowrap'
-    //   }
-    // },
-    // tableProps: {
-    //   style: {
-    //     width: 'max-content'
-    //   }
-    // },
+export const Horizontal: Story = {
+  args: {
+    query: {
+      dataPool: {
+        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+      },
+      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
+    },
+    paginationProps: {
+      defaultPageSize: 50
+    },
+    resizable: false,
+    tableLinesLayout: 'horizontal'
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
+export const Resizable: Story = {
+  args: {
+    query: {
+      dataPool: {
+        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+      },
+      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
+    },
+    paginationProps: {
+      defaultPageSize: 50
+    },
     resizable: true
   },
-  render: (args) => (
-    <div style={{ width: '100%', maxHeight: '600px' }}>
-      <DataGrid {...args} />
-    </div>
-  )
+  render: (args) => <DataGrid {...args} />
+}
+
+export const CustomPaginationOptions: Story = {
+  args: {
+    query: {
+      dataPool: {
+        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+      },
+      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
+    },
+    paginationProps: {
+      defaultPageSize: 25,
+      pageSizeOptions: [5, 10, 25, 30]
+    },
+    resizable: true
+  },
+  render: (args) => <DataGrid {...args} />
 }
