@@ -12,7 +12,8 @@ import {
 
 import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
-import { DataGridConnection, useCombinedRefsCallback, useEmptyableData, withThemeWrapper } from '../../helpers'
+import { useCombinedRefsCallback, useEmptyableData, withThemeWrapper } from '../../helpers'
+import { DataGridConnection } from '../../graphql'
 import { useSetupTheme } from '../ThemeProvider'
 import { useDataGrid } from '../../hooks'
 
