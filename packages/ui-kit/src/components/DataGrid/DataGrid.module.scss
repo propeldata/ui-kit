@@ -176,11 +176,17 @@
   justify-content: flex-end;
   align-items: center;
 }
+.footerRows {
+  display: flex;
+  margin: 0 10px;
+  gap: 4px;
+  align-items: center;
+}
 
 .paginationButton {
   width: 32px;
   height: 32px;
-  padding: 0;
+  padding: 0 !important;
 }
 
 .paginationSelect {

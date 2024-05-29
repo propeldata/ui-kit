@@ -50,9 +50,11 @@ const LoaderComponent = ({ disablePagination = false }: LoaderProps) => {
       </div>
       {!disablePagination && (
         <div className={componentStyles.footer}>
-          <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-          <div style={{ width: '64px' }}>
-            <SkeletonLoader className={componentStyles.selectSkeleton}>Select</SkeletonLoader>
+          <div className={componentStyles.footerRows}>
+            <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
+            <div style={{ width: '64px' }}>
+              <SkeletonLoader className={componentStyles.selectSkeleton}>Select</SkeletonLoader>
+            </div>
           </div>
           <Button className={componentStyles.paginationButton} disabled type="button">
             &lt;

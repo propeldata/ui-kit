@@ -44,8 +44,6 @@ const meta: Meta<typeof DataGridComponent> = {
   },
   parameters: {
     controls: { sort: 'alpha' },
-    // imports: 'Leaderboard, RelativeTimeRange',
-    // transformBody: (body: string) => body.replace(quotedStringRegex('LAST_N_DAYS'), 'RelativeTimeRange.LastNDays'),
     codeTemplate: storybookCodeTemplate
   }
 }
@@ -58,7 +56,7 @@ export const Basic: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+        name: 'TacoSoft Demo Data'
       },
       columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
@@ -91,7 +89,7 @@ export const Horizontal: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+        name: 'TacoSoft Demo Data'
       },
       columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
@@ -108,7 +106,7 @@ export const Resizable: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+        name: 'TacoSoft Demo Data'
       },
       columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
@@ -124,7 +122,7 @@ export const CustomPaginationOptions: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+        name: 'TacoSoft Demo Data'
       },
       columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },

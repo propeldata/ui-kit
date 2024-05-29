@@ -95,7 +95,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const isLoading = isStatic ? loading : isLoadingDataGridData
 
     const { isEmptyState, setData } = useEmptyableData<DataGridData>({
-      isDataEmpty: (data) => !data.headers || !data.rows || data.rows.length === 0 || data.headers.length === 0
+      isDataEmpty: (data) => !data?.headers || !data?.rows || data?.rows.length === 0 || data?.headers?.length === 0
     })
 
     useEffect(() => {
@@ -116,12 +116,22 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const hasPreviousPage = pageInfo?.hasPreviousPage ?? false
 
     const handlePaginateNext = () => {
+      if (isStatic) {
+        table.nextPage()
+        return
+      }
+
       if (pageInfo != null) {
         setPagination({ first: pageSize, after: pageInfo.endCursor ?? '' })
       }
     }
 
     const handlePaginateBack = () => {
+      if (isStatic) {
+        table.previousPage()
+        return
+      }
+
       if (pageInfo != null) {
         setPagination({ last: pageSize, before: pageInfo.startCursor ?? '' })
       }
@@ -374,42 +384,46 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         </div>
         {!disablePagination && (
           <div className={componentStyles.footer}>
-            <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-            <Select
-              className={componentStyles.paginationSelect}
-              id="data-grid-rows-per-page"
-              value={{ value: pageSize.toString(), label: pageSize.toString() }}
-              onChange={(_, newValue) => {
-                if (newValue != null) {
-                  const size = Number(newValue?.value)
-                  setPageSize(size)
-                  if (isStatic) {
-                    setClientPagination((prev) => ({ ...prev, pageSize: size }))
-                  } else {
-                    setPagination((prev) => ({ ...prev, first: size }))
+            <div className={componentStyles.footerRows}>
+              <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
+              <Select
+                className={componentStyles.paginationSelect}
+                id="data-grid-rows-per-page"
+                value={{ value: pageSize.toString(), label: pageSize.toString() }}
+                onChange={(_, newValue) => {
+                  if (newValue != null) {
+                    const size = Number(newValue?.value)
+                    setPageSize(size)
+                    if (isStatic) {
+                      setClientPagination((prev) => ({ ...prev, pageSize: size }))
+                    } else {
+                      setPagination((prev) => ({ ...prev, first: size }))
+                    }
                   }
-                }
-              }}
-            >
-              {pageSizeOptions.map((size) => (
-                <Option key={size} value={{ value: size }}>
-                  {size}
-                </Option>
-              ))}
-            </Select>
+                }}
+              >
+                {pageSizeOptions.map((size) => (
+                  <Option key={size} value={{ value: size }}>
+                    {size}
+                  </Option>
+                ))}
+              </Select>
+            </div>
             <Button
               className={componentStyles.paginationButton}
-              disabled={!hasPreviousPage}
+              disabled={isStatic ? !table.getCanPreviousPage() : !hasPreviousPage}
               onClick={handlePaginateBack}
               type="button"
+              data-testid="propel-datagrid-paginate-back"
             >
               &lt;
             </Button>
             <Button
               className={componentStyles.paginationButton}
-              disabled={!hasNextPage}
+              disabled={isStatic ? !table.getCanNextPage() : !hasNextPage}
               onClick={handlePaginateNext}
               type="button"
+              data-testid="propel-datagrid-paginate-next"
             >
               &gt;
             </Button>
