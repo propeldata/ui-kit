@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
+import { QueryClient, QueryClientProvider } from '../../graphql'
 import { Dom, mockRecordsByUniqueIdQuery, setupTestHandlers } from '../../testing'
 import { RecordsByIdQueryProps } from '../../components'
 import { useRecordsById } from './useRecordsById'

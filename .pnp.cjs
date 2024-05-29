@@ -6259,6 +6259,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@fontsource/inter", [\
+        ["npm:5.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fontsource%2Finter%2F-%2Finter-5.0.18.tgz", {\
+          "packageLocation": "./.yarn/cache/@fontsource-inter-npm-5.0.18-72e7e0ef36-2c880a3083.zip/node_modules/@fontsource/inter/",\
+          "packageDependencies": [\
+            ["@fontsource/inter", "npm:5.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fontsource%2Finter%2F-%2Finter-5.0.18.tgz"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@graphql-codegen/add", [\
         ["npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Fadd%2F-%2Fadd-4.0.1.tgz", {\
           "packageLocation": "./.yarn/cache/@graphql-codegen-add-npm-4.0.1-786353689d-0a1ee993cd.zip/node_modules/@graphql-codegen/add/",\
@@ -33457,6 +33466,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./app/examples/react-16/",\
           "packageDependencies": [\
             ["react-16", "workspace:app/examples/react-16"],\
+            ["@fontsource/inter", "npm:5.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fontsource%2Finter%2F-%2Finter-5.0.18.tgz"],\
             ["@propeldata/ui-kit", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#workspace:packages/ui-kit"],\
             ["dashboard-example", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#workspace:packages/examples/dashboard"],\
             ["react", "npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.14.0.tgz"],\
@@ -33471,6 +33481,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./app/examples/react-17/",\
           "packageDependencies": [\
             ["react-17", "workspace:app/examples/react-17"],\
+            ["@fontsource/inter", "npm:5.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fontsource%2Finter%2F-%2Finter-5.0.18.tgz"],\
             ["dashboard-example", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#workspace:packages/examples/dashboard"],\
             ["react", "npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-17.0.2.tgz"],\
             ["react-dom", "virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#npm:17.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-17.0.2.tgz"],\
@@ -33484,6 +33495,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./app/examples/react-18/",\
           "packageDependencies": [\
             ["react-18", "workspace:app/examples/react-18"],\
+            ["@fontsource/inter", "npm:5.0.18::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fontsource%2Finter%2F-%2Finter-5.0.18.tgz"],\
             ["@propeldata/ui-kit", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#workspace:packages/ui-kit"],\
             ["dashboard-example", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#workspace:packages/examples/dashboard"],\
             ["react", "npm:18.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-18.2.0.tgz"],\

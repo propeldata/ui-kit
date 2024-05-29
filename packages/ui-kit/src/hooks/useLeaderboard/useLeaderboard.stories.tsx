@@ -1,10 +1,10 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-
+import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, RelativeTimeRange, useStorybookAccessToken, Sort } from '../../helpers'
-import { useLeaderboard } from './useLeaderboard'
+import { RelativeTimeRange, Sort } from '../../graphql'
+import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import '../css/stories.css'
+import { useLeaderboard } from './useLeaderboard'
 
 const args = {
   accessToken: '<PROPEL_ACCESS_TOKEN>',

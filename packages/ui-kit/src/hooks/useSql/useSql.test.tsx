@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
+import { QueryClient, QueryClientProvider } from '../../graphql'
 import { Dom, mockSqlQuery, setupTestHandlers } from '../../testing'
 import { SqlQueryProps } from './Sql.types'
 import { useSql } from './useSql'

@@ -1,6 +1,7 @@
 import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
-import { TimeSeriesGranularity, TimeSeriesLabels } from '../../helpers'
+import { TimeSeriesGranularity } from '../../graphql'
+import { TimeSeriesLabels } from '../../helpers'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>

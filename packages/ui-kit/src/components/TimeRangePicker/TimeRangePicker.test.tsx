@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
-import { RelativeTimeRange } from '../../helpers'
+import { RelativeTimeRange } from '../../graphql'
 import { TimeRangePicker } from './TimeRangePicker'
 
 jest.mock('./TimeRangePicker.module.scss', () => ({

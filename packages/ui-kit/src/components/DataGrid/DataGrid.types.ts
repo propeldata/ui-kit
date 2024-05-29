@@ -1,7 +1,7 @@
 import React from 'react'
 
 import type { DataComponentProps, PaginationProps, QueryProps } from '../../components/shared.types'
-import type { DataPoolInput, Sort } from '../../helpers'
+import type { DataPoolInput, Sort } from '../../graphql'
 
 export type DataGridData = {
   headers?: string[] | null

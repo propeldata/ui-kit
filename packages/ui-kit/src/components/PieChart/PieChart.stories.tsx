@@ -1,14 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import {
-  FilterOperator,
-  quotedStringRegex,
-  RelativeTimeRange,
-  Sort,
-  storybookCodeTemplate,
-  useStorybookAccessToken
-} from '../../helpers'
+import { FilterOperator, RelativeTimeRange, Sort } from '../../graphql'
+import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { DefaultThemes, ThemeProvider, useSetupTheme } from '../ThemeProvider'
 import { PieChart as PieChartSource, PieChartComponent } from './PieChart'
 import { PieChartQueryProps } from './PieChart.types'

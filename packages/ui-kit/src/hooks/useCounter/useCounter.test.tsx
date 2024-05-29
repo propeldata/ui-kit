@@ -1,8 +1,8 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
-import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
+import React from 'react'
 import { CounterQueryProps } from '../../components'
+import { QueryClient, QueryClientProvider } from '../../graphql'
+import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { useCounter } from './useCounter'
 
 const mockData = {

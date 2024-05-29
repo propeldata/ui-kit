@@ -1,5 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
-import { DimensionInput, LeaderboardLabels, Sort } from '../../helpers'
+import { DimensionInput, Sort } from '../../graphql'
+import { LeaderboardLabels } from '../../helpers'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'

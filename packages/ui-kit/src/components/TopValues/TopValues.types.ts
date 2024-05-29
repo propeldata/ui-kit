@@ -1,5 +1,5 @@
 import type { QueryProps } from '../../components/shared.types'
-import type { DataPoolInput } from '../../helpers'
+import type { DataPoolInput } from '../../graphql'
 
 export interface TopValuesQueryProps extends Omit<QueryProps, 'filters'> {
   /** The column to fetch the unique values from */

@@ -1,17 +1,12 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import {
-  quotedStringRegex,
-  RelativeTimeRange,
-  storybookCodeTemplate,
-  TimeSeriesGranularity,
-  useStorybookAccessToken
-} from '../../helpers'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
+import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { FilterProvider } from '../FilterProvider/FilterProvider'
-import { SimpleFilter as SimpleFilterSource } from './SimpleFilter'
 import { TimeSeries as TimeSeriesSource, TimeSeriesProps } from '../TimeSeries'
+import { SimpleFilter as SimpleFilterSource } from './SimpleFilter'
 
 const meta: Meta<typeof SimpleFilterSource> = {
   title: 'Components/SimpleFilter',

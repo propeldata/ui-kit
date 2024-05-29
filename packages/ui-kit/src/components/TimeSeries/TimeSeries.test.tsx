@@ -1,9 +1,10 @@
-import { render, waitFor, fireEvent } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 import { Chart } from 'chart.js'
 import React from 'react'
-import { RelativeTimeRange, sleep, TimeSeriesGranularity } from '../../helpers'
-import { Dom, mockServer, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
 import { AccessTokenProvider, TimeSeries } from '..'
+import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
+import { sleep } from '../../helpers'
+import { Dom, mockServer, mockTimeSeriesQuery, setupTestHandlers } from '../../testing'
 
 const mockData = {
   labels: ['2023-07-01', '2023-07-02', '2023-07-03'],

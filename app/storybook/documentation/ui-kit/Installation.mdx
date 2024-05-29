@@ -32,6 +32,51 @@ To install the Propel UI Kit components, run the following command:
   `}
 />
 
+## Inter font
+
+The UI-kit uses the Inter font by default. Add it to your project via Fontsource, or with the Google Fonts CDN.
+
+<Source
+  language="bash"
+  format="dedent"
+  dark
+  code={`
+    yarn add @fontsource/inter
+  `}
+/>
+
+Then you can import it in your app entry point like this:
+
+<Source
+  language="typescript"
+  format="dedent"
+  dark
+  code={`
+    import '@fontsource/inter/400.css'
+    import '@fontsource/inter/500.css'
+    import '@fontsource/inter/600.css'
+    import '@fontsource/inter/700.css'
+  `}
+/>
+
+### Google Web Fonts
+
+To install Inter through the Google Web Fonts CDN, add the following code inside your project's tag:
+
+<Source
+  language="html"
+  format="dedent"
+  dark
+  code={`
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=family=Inter:wght@400;500;600;700&display=swap"
+    />
+  `}
+/>
+
 You can read more about the why and [core principles](../?path=/docs/getting-started-overview--overview#core-principles)
 behind the Propel UI Kit.
 

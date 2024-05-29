@@ -1,8 +1,8 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '../../helpers'
-import { Dom, mockDataGridQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
+import React from 'react'
 import { DataGridQueryProps } from '../../components'
+import { QueryClient, QueryClientProvider } from '../../graphql'
+import { Dom, mockDataGridQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { useDataGrid } from './useDataGrid'
 
 const mockData = {

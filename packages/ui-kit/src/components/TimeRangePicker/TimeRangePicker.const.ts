@@ -1,5 +1,5 @@
 import { DateRangeOptionsProps } from './TimeRangePicker.types'
-import { RelativeTimeRange } from '../../helpers'
+import { RelativeTimeRange } from '../../graphql'
 
 export const defaultOptions: DateRangeOptionsProps[] = [
   {
