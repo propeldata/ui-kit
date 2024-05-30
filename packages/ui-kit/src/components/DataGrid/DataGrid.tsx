@@ -49,7 +49,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       errorFallbackProps,
       disablePagination = false,
       tableLinesLayout = 'both',
-      ...rest
+      paginationProps: paginationPropsProp
     },
     forwardedRef
   ) => {
@@ -70,7 +70,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       renderEmpty
     })
 
-    const paginationProps = rest.paginationProps ?? {}
+    const paginationProps = paginationPropsProp ?? {}
     const { defaultPageSize: defaultPageSizeProp, pageSizeOptions: pageSizeOptionsProp } = paginationProps
 
     const pageSizeOptions = pageSizeOptionsProp ?? DEFAULT_PAGE_SIZE_OPTIONS
