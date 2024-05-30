@@ -226,10 +226,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const handleCsvDownload = () => {
       const csvRows: string[] = []
 
-      const headers = dataGridData?.dataGrid.headers
       csvRows.push(headers?.join(',') + '\n' ?? '')
-
-      const rows = dataGridData?.dataGrid.rows
       rows?.forEach((row) => {
         csvRows.push(row?.join(',') + '\n' ?? '')
       })
