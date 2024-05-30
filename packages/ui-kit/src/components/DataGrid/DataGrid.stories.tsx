@@ -72,7 +72,7 @@ export const Vertical: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HB9W3DCA1756WT6CJ6BV9H48'
+        name: 'TacoSoft Demo Data'
       },
       columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
