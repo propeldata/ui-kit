@@ -3,7 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
 
   max-height: inherit;
   min-height: inherit;
@@ -33,11 +33,11 @@
 
   height: inherit;
   max-height: inherit;
-  min-height: 300px;
+  min-height: var(--propel-component-height);
 }
 
 .table {
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
 
   border-collapse: separate;
   border-spacing: 0;
@@ -46,7 +46,7 @@
 }
 
 .tableHead {
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
 
   position: sticky;
   top: 0px;
@@ -114,7 +114,7 @@
   position: sticky;
   left: 0;
   top: 0;
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
   z-index: 2;
   border-left: 1px solid var(--propel-border-primary);
 
@@ -130,7 +130,7 @@
   min-width: var(--propel-spacing-4xl);
   left: 0;
 
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
   z-index: 1;
   user-select: none;
   padding: 0;
@@ -160,12 +160,12 @@
   }
 
   &.selectedRow {
-    background-color: var(--propel-bg-primary);
+    background-color: var(--propel-background-primary);
   }
 
   &.selectedRow {
     & > div {
-      background-color: var(--propel-accent);
+      background-color: var(--propel-background-brand-secondary);
     }
   }
 }
@@ -174,8 +174,8 @@
   position: absolute;
   top: 0;
   height: 100%;
-  width: 5px;
-  background: var(--propel-accent);
+  width: var(--propel-spacing-xs);
+  background: var(--propel-background-brand-secondary);
   cursor: col-resize;
   user-select: none;
   touch-action: none;
@@ -202,8 +202,8 @@
   @extend .textXsRegular;
 
   display: flex;
-  margin: 0 10px;
-  gap: 4px;
+  margin: 0 var(--propel-spacing-md);
+  gap: var(--propel-spacing-xs);
   align-items: center;
 }
 
@@ -223,7 +223,7 @@
 
   > div {
     width: 100%;
-    height: 18px;
+    height: var(--propel-text-xs-regular-line-height);
     display: block;
   }
 }
@@ -236,5 +236,5 @@
     display: block;
   }
 
-  border-radius: var(--propel-border-radius-sm);
+  border-radius: var(--propel-radius-sm);
 }

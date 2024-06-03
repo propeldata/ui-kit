@@ -1,7 +1,7 @@
 @use '../../themes/generated/tokens';
 
 .container {
-  background-color: var(--propel-bg-primary);
+  background-color: var(--propel-background-primary);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -37,7 +37,7 @@
 .valueContainer {
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
+  margin-bottom: var(--propel-spacing-lg);
 }
 
 .value {
@@ -60,7 +60,7 @@
 .divider {
   height: 1px;
   background-color: var(--propel-border-primary);
-  margin: 12px 0;
+  margin: var(--propel-spacing-lg) 0;
 }
 
 .header {
