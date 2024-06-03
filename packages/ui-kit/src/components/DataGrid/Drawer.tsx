@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-import React, { useRef } from 'react'
+import React, { Fragment, useRef } from 'react'
+import { Typography } from '../Typography'
 
 import componentStyles from './Drawer.module.scss'
 import { DrawerProps } from './Drawer.types'
@@ -26,10 +27,10 @@ export function Drawer(props: DrawerProps) {
       </header>
       <main className={componentStyles.main}>
         {displayRow?.cells.map((cell, idx) => (
-          <>
-            <div key={`${cell.header}-${cell.value}-${idx}`} className={componentStyles.valueContainer}>
+          <Fragment key={`${cell.header}-${cell.value}-${idx}`}>
+            <div className={componentStyles.valueContainer}>
               <div>
-                <span className={componentStyles.label}>{cell.header}</span>
+                <Typography variant="textSmRegular">{cell.header}</Typography>
                 <button
                   className={componentStyles.closeButton}
                   onClick={() => navigator.clipboard.writeText(cell.value)}
@@ -40,7 +41,7 @@ export function Drawer(props: DrawerProps) {
               <code className={componentStyles.value}>{getDisplayValue(cell.value)}</code>
             </div>
             {row && idx < row.cells.length - 1 && <div className={componentStyles.divider}></div>}
-          </>
+          </Fragment>
         ))}
       </main>
     </div>

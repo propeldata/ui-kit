@@ -49,7 +49,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       errorFallbackProps,
       disablePagination = false,
       tableLinesLayout = 'both',
-      paginationProps: paginationPropsProp
+      paginationProps: paginationPropsProp,
+      className,
+      ...rest
     },
     forwardedRef
   ) => {
@@ -98,6 +100,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const { isEmptyState, setData } = useEmptyableData<DataGridData>({
       isDataEmpty: (data) => !data?.headers || !data?.rows || data?.rows.length === 0 || data?.headers?.length === 0
     })
+
+    const pageSizeOptionValues = React.useMemo(
+      () => pageSizeOptions.map((size) => ({ value: size, label: String(size) })),
+      [pageSizeOptions]
+    )
 
     useEffect(() => {
       if (dataGridData) {
@@ -247,7 +254,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
-      return <Loader disablePagination={disablePagination} />
+      return <Loader disablePagination={disablePagination} {...rest} />
     }
 
     if (queryError != null) {
@@ -269,7 +276,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     }[tableLinesLayout]
 
     return (
-      <div className={componentStyles.wrapper}>
+      <div {...rest} className={classNames(componentStyles.wrapper, className)}>
         <div className={componentStyles.container}>
           <div className={componentStyles.tableContainer}>
             <table
@@ -329,7 +336,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   <tr className={componentStyles.tableRow} key={row.id}>
                     <td
                       {...cellProps}
-                      style={{ maxWidth: '32px', width: '32px', ...cellProps?.style }}
+                      style={{ maxWidth: theme?.spacing4xl, width: theme?.spacing4xl, ...cellProps?.style }}
                       onClick={() => handleRowIndexClick(row)}
                       className={classNames(
                         componentStyles.tableCell,
@@ -387,7 +394,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               <Select
                 className={componentStyles.paginationSelect}
                 id="data-grid-rows-per-page"
-                value={{ value: pageSize.toString(), label: pageSize.toString() }}
+                size="small"
+                value={pageSizeOptionValues.find((option) => option.value === pageSize)}
                 onChange={(_, newValue) => {
                   if (newValue != null) {
                     const size = Number(newValue?.value)
@@ -400,9 +408,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   }
                 }}
               >
-                {pageSizeOptions.map((size) => (
-                  <Option key={size} value={{ value: size }}>
-                    {size}
+                {pageSizeOptionValues.map((option) => (
+                  <Option key={option.value} value={option}>
+                    {option.label}
                   </Option>
                 ))}
               </Select>

@@ -1,3 +1,5 @@
+@use '../../themes/generated/tokens';
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -53,8 +55,12 @@
 }
 
 .tableCell {
-  border-bottom: 1px solid var(--propel-color-secondary);
-  border-right: 1px solid var(--propel-color-secondary);
+  @extend .textXsRegular;
+  padding: var(--propel-spacing-md) var(--propel-spacing-lg);
+  cursor: pointer;
+
+  border-bottom: 1px solid var(--propel-border-primary);
+  border-right: 1px solid var(--propel-border-primary);
   text-overflow: ellipsis;
   white-space: nowrap;
   box-sizing: border-box;
@@ -62,55 +68,66 @@
   max-width: 800px;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-.tableCell.horizontalLines {
-  border-right: none;
-}
-.tableCell.verticalLines {
-  border-bottom: none;
-}
 
-.tableCell.selectedRow {
-  background-color: var(--propel-accent);
+  &.horizontalLines {
+    border-right: none;
+  }
+
+  &.verticalLines {
+    border-bottom: none;
+  }
+
+  &.selectedRow {
+    background-color: var(--propel-background-brand-solid);
+    color: var(--propel-text-white);
+
+    &:hover {
+      background-color: var(--propel-background-brand-solid-hover);
+      color: var(--propel-text-white);
+    }
+  }
 }
 
 .tableCellHead {
+  @extend .textXsSemibold;
+  padding: var(--propel-spacing-md) var(--propel-spacing-lg);
+
   text-align: left;
-  border: 1px solid var(--propel-color-secondary);
+  border: 1px solid var(--propel-border-primary);
   border-left: none;
 
   position: relative;
 
-  padding-top: 3px;
-}
-.tableCellHead.horizontalLines {
-  border-right: none;
-}
-.tableCellHead.verticalLines {
-  border-bottom: none;
-  border-top: none;
+  &.horizontalLines {
+    border-right: none;
+  }
+  &.verticalLines {
+    border-bottom: none;
+    border-top: none;
+  }
 }
 
 .tableIndexHeader {
   text-align: center;
-  width: 32px;
-  max-width: 32px;
+  width: var(--propel-spacing-4xl);
+  max-width: var(--propel-spacing-4xl);
   position: sticky;
   left: 0;
   top: 0;
   background-color: var(--propel-bg-primary);
   z-index: 2;
-  border-left: 1px solid var(--propel-color-secondary);
-}
-.tableIndexHeader.horizontalLines {
-  border-left: none;
+  border-left: 1px solid var(--propel-border-primary);
+
+  &.horizontalLines {
+    border-left: none;
+  }
 }
 
 .tableIndexCell {
   text-align: center;
-  width: 32px;
-  max-width: 32px;
-  min-width: 32px;
+  width: var(--propel-spacing-4xl);
+  max-width: var(--propel-spacing-4xl);
+  min-width: var(--propel-spacing-4xl);
   left: 0;
 
   background-color: var(--propel-bg-primary);
@@ -121,33 +138,36 @@
   position: sticky;
   box-sizing: border-box;
 
-  border: 1px solid var(--propel-color-secondary);
+  border: 1px solid var(--propel-border-primary);
   border-top: none;
-}
-.tableIndexCell.horizontalLines {
-  border-left: none;
-}
-.tableIndexCell.verticalLines {
-  border-bottom: none;
-}
 
-.tableIndexCell > div {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  &.horizontalLines {
+    border-left: none;
+  }
+  &.verticalLines {
+    border-bottom: none;
+  }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  & > div {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
 
-.tableIndexCell.selectedRow {
-  background-color: var(--propel-bg-primary);
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.tableIndexCell.selectedRow > div {
-  background-color: var(--propel-accent);
+  &.selectedRow {
+    background-color: var(--propel-bg-primary);
+  }
+
+  &.selectedRow {
+    & > div {
+      background-color: var(--propel-accent);
+    }
+  }
 }
 
 .resizer {
@@ -170,13 +190,17 @@
 }
 
 .footer {
-  width: 100%;
+  padding-top: var(--propel-spacing-lg);
 
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: var(--propel-spacing-xs);
 }
+
 .footerRows {
+  @extend .textXsRegular;
+
   display: flex;
   margin: 0 10px;
   gap: 4px;
@@ -184,13 +208,13 @@
 }
 
 .paginationButton {
-  width: 32px;
-  height: 32px;
+  width: var(--propel-spacing-4xl);
+  height: var(--propel-spacing-4xl);
   padding: 0 !important;
 }
 
 .paginationSelect {
-  height: 32px;
+  height: var(--propel-spacing-4xl);
   padding: 0;
 }
 
@@ -199,12 +223,18 @@
 
   > div {
     width: 100%;
+    height: 18px;
+    display: block;
   }
 }
 
 .selectSkeleton {
   @extend .skeleton;
 
-  height: 32px;
-  border-radius: 10px;
+  > div {
+    height: var(--propel-spacing-4xl);
+    display: block;
+  }
+
+  border-radius: var(--propel-border-radius-sm);
 }
