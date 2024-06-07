@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import React, { Fragment, useRef } from 'react'
+import { CloseIcon, ArrowDownIcon, CopyIcon } from '../Icons'
 import { Typography } from '../Typography'
 
 import componentStyles from './Drawer.module.scss'
 import { DrawerProps } from './Drawer.types'
-import { ArrowDownIcon, CloseIcon, CopyIcon } from './icons'
 import { getDisplayValue } from './utils'
 
 // TODO: abstract Drawer to a generic component?
