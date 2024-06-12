@@ -6,7 +6,7 @@ import { Typography } from '../../Typography'
 import componentStyles from './Drawer.module.scss'
 import { DrawerProps } from './Drawer.types'
 import { getDisplayValue } from '../utils'
-import { useCombinedRefsCallback } from 'src/helpers'
+import { useCombinedRefsCallback } from '../../../helpers'
 
 // TODO: abstract Drawer to a generic component?
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
