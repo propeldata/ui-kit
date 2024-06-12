@@ -1,0 +1,240 @@
+@use '../../themes/generated/tokens';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--propel-background-primary);
+
+  max-height: inherit;
+  min-height: inherit;
+  height: inherit;
+}
+
+.container {
+  width: inherit;
+  display: flex;
+  position: relative;
+
+  overflow: auto;
+
+  max-height: inherit;
+  min-height: inherit;
+  height: inherit;
+
+  flex: 1;
+}
+
+.tableContainer {
+  position: relative;
+
+  flex: 1;
+
+  width: inherit;
+
+  height: inherit;
+  max-height: inherit;
+  min-height: var(--propel-component-height);
+}
+
+.table {
+  background-color: var(--propel-background-primary);
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  color: var(--propel-text-primary);
+}
+
+.tableHead {
+  background-color: var(--propel-background-primary);
+
+  position: sticky;
+  top: 0px;
+
+  z-index: 2;
+}
+
+.tableCell {
+  @extend .textXsRegular;
+  padding: var(--propel-spacing-md) var(--propel-spacing-lg);
+  cursor: pointer;
+
+  border-bottom: 1px solid var(--propel-border-primary);
+  border-right: 1px solid var(--propel-border-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  max-width: 800px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  &.horizontalLines {
+    border-right: none;
+  }
+
+  &.verticalLines {
+    border-bottom: none;
+  }
+
+  &.selectedRow {
+    background-color: var(--propel-background-brand-solid);
+    color: var(--propel-text-white);
+
+    &:hover {
+      background-color: var(--propel-background-brand-solid-hover);
+      color: var(--propel-text-white);
+    }
+  }
+}
+
+.tableCellHead {
+  @extend .textXsSemibold;
+  padding: var(--propel-spacing-md) var(--propel-spacing-lg);
+
+  text-align: left;
+  border: 1px solid var(--propel-border-primary);
+  border-left: none;
+
+  position: relative;
+
+  &.horizontalLines {
+    border-right: none;
+  }
+  &.verticalLines {
+    border-bottom: none;
+    border-top: none;
+  }
+}
+
+.tableIndexHeader {
+  text-align: center;
+  width: var(--propel-spacing-4xl);
+  max-width: var(--propel-spacing-4xl);
+  position: sticky;
+  left: 0;
+  top: 0;
+  background-color: var(--propel-background-primary);
+  z-index: 2;
+  border-left: 1px solid var(--propel-border-primary);
+
+  &.horizontalLines {
+    border-left: none;
+  }
+}
+
+.tableIndexCell {
+  text-align: center;
+  width: var(--propel-spacing-4xl);
+  max-width: var(--propel-spacing-4xl);
+  min-width: var(--propel-spacing-4xl);
+  left: 0;
+
+  background-color: var(--propel-background-primary);
+  z-index: 1;
+  user-select: none;
+  padding: 0;
+
+  position: sticky;
+  box-sizing: border-box;
+
+  border: 1px solid var(--propel-border-primary);
+  border-top: none;
+
+  &.horizontalLines {
+    border-left: none;
+  }
+  &.verticalLines {
+    border-bottom: none;
+  }
+
+  & > div {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.selectedRow {
+    background-color: var(--propel-background-primary);
+  }
+
+  &.selectedRow {
+    & > div {
+      background-color: var(--propel-background-brand-secondary);
+    }
+  }
+}
+
+.resizer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: var(--propel-spacing-xs);
+  background: var(--propel-background-brand-secondary);
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  right: 0px;
+}
+
+.tableCellHead:hover > .resizer {
+  opacity: 1;
+}
+
+.footer {
+  padding-top: var(--propel-spacing-lg);
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--propel-spacing-xs);
+}
+
+.footerRows {
+  @extend .textXsRegular;
+
+  display: flex;
+  margin: 0 var(--propel-spacing-md);
+  gap: var(--propel-spacing-xs);
+  align-items: center;
+}
+
+.paginationButton {
+  width: var(--propel-spacing-4xl);
+  height: var(--propel-spacing-4xl);
+  padding: 0 !important;
+}
+
+.paginationSelect {
+  height: var(--propel-spacing-4xl);
+  padding: 0;
+}
+
+.skeleton {
+  width: 100%;
+
+  > div {
+    width: 100%;
+    height: var(--propel-text-xs-regular-line-height);
+    display: block;
+  }
+}
+
+.selectSkeleton {
+  @extend .skeleton;
+
+  > div {
+    height: var(--propel-spacing-4xl);
+    display: block;
+  }
+
+  border-radius: var(--propel-radius-sm);
+}
