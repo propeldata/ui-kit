@@ -59,8 +59,8 @@ Or you can customize the fallbacks on a per-component basis.
           errorFallback={({ theme }) => (
             <div
               style={{
-                border: \`1px solid \${theme?.borderError}\`,
-                color: theme?.textErrorPrimary,
+                border: \`1px solid \${theme?.getVar('--accent-a7')}\`,
+                color: theme?.getVar('--accent-a11'),
                 padding: '1rem'
               }}
             >

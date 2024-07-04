@@ -186,7 +186,7 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
     y: {
       display: scales?.y?.display ?? true,
       grid: {
-        color: theme?.borderPrimary,
+        color: theme?.getVar('--gray-a8'),
         drawOnChartArea: true
       },
       ticks: {

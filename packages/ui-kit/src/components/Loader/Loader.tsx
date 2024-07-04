@@ -1,18 +1,19 @@
 import classnames from 'classnames'
 import React from 'react'
+import { ThemeAppearances } from 'src/themes'
 import { useForwardedRefCallback } from '../../helpers'
-import { DefaultThemes, useSetupTheme } from '../ThemeProvider'
+import { useSetupTheme } from '../ThemeProvider'
 import componentStyles from './Loader.module.scss'
 
 export interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
   isText?: boolean
-  baseTheme?: DefaultThemes
+  appearance?: ThemeAppearances
 }
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ children, className, isText, baseTheme, ...rest }, forwardedRef) => {
+  ({ children, className, isText, appearance, ...rest }, forwardedRef) => {
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    useSetupTheme({ componentContainer, baseTheme })
+    useSetupTheme({ componentContainer, appearance })
 
     return (
       <div

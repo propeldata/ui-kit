@@ -8793,6 +8793,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:6dd0ee4544359587d64ff328fe311b923a3c1ee8914df11782918738abbc6520285dc1ca059877f86375600584583e7d6592895c5c96572203f7b48dc4661862#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -8861,6 +8862,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:a84eb495e555084f80c201f07630d1efc544260e49e6a723e5d25c3ed5c3b4ea77b8628678069a7b15d87cb9e6086898e971564f07f3bf23d436e7ee19347a66#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -8929,6 +8931,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -8995,6 +8998,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:40f8e5d9470dadd0060c7b0d5ccbc7394cb2631c4c32ded046c14477c91f332b2a7e811fb9423edb388a602730fec4c2d722550b1609515756ea1cf3021c1e93#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -9061,6 +9065,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@graphql-codegen/typescript-react-query", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40graphql-codegen%2Ftypescript-react-query%2F-%2Ftypescript-react-query-6.0.0.tgz"],\
             ["@juggle/resize-observer", "npm:3.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40juggle%2Fresize-observer%2F-%2Fresize-observer-3.4.0.tgz"],\
             ["@mui/base", "virtual:a84eb495e555084f80c201f07630d1efc544260e49e6a723e5d25c3ed5c3b4ea77b8628678069a7b15d87cb9e6086898e971564f07f3bf23d436e7ee19347a66#npm:5.0.0-beta.31::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40mui%2Fbase%2F-%2Fbase-5.0.0-beta.31.tgz"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"],\
             ["@rollup/plugin-commonjs", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:25.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-commonjs%2F-%2Fplugin-commonjs-25.0.7.tgz"],\
             ["@rollup/plugin-node-resolve", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:15.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-node-resolve%2F-%2Fplugin-node-resolve-15.2.3.tgz"],\
             ["@rollup/plugin-terser", "virtual:6040707e6c7fb3cdae07cc6dc6126c752898b1e11c5b881f764686126da5522333967850c2fd07e811f6e05e1db73260de6d251bcb29bf6a1b6c2ad372b2d3d7#npm:0.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40rollup%2Fplugin-terser%2F-%2Fplugin-terser-0.4.4.tgz"],\
@@ -9142,6 +9147,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@radix-ui/colors", [\
+        ["npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz", {\
+          "packageLocation": "./.yarn/cache/@radix-ui-colors-npm-3.0.0-9f82aaefb4-5ac1b69df7.zip/node_modules/@radix-ui/colors/",\
+          "packageDependencies": [\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@radix-ui/number", [\

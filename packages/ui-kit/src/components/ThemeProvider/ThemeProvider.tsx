@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState } from 'react'
 import { getPixelFontSizeAsNumber, initChartJs } from '../../helpers'
 import { clearContainerStyle, parseComputedStyle, setContainerStyle } from '../../helpers/themeUtils'
 import themes from '../../themes/themes.module.scss'
+import { AccentColors, ThemeAppearances } from '../../themes'
 import type {
   ChartVariant,
   ThemeContextProps,
@@ -12,6 +13,7 @@ import type {
   UseSetupThemeProps,
   UseSetupThemeResult
 } from './ThemeProvider.types'
+import * as radixColors from '@radix-ui/colors'
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined)
 
@@ -26,10 +28,23 @@ export const useTheme = (): ThemeStateProps | undefined => {
   return context.theme
 }
 
+const getAccentColors = (accentColor: AccentColors, appearance: ThemeAppearances) => {
+  const appearanceSuffix = appearance === 'dark' ? 'Dark' : ''
+  return {
+    ...radixColors.whiteA,
+    ...radixColors.blackA,
+    ...radixColors[`slate${appearanceSuffix}`], // @TODO: fix this
+    ...radixColors[`slate${appearanceSuffix}A`], // @TODO: fix this
+    ...(radixColors[`${accentColor}${appearanceSuffix}`] as Record<string, string>),
+    ...(radixColors[`${accentColor}${appearanceSuffix}A`] as Record<string, string>)
+  }
+}
+
 /** A hook that sets up the theme. */
 export const useSetupTheme = <T extends ChartVariant>({
   componentContainer,
-  baseTheme = 'lightTheme',
+  appearance = 'light',
+  accentColor = 'blue',
   renderLoader: renderLoaderProp,
   renderEmpty: renderEmptyProp,
   errorFallback: errorFallbackProp
@@ -37,6 +52,10 @@ export const useSetupTheme = <T extends ChartVariant>({
   const [theme, setTheme] = useState<ThemeStateProps>()
   const [chartConfig, setChartConfig] = useState<ChartConfiguration<T>>()
   const context = useContext(ThemeContext)
+  const colors: Record<string, string> = React.useMemo(
+    () => getAccentColors(accentColor, appearance),
+    [accentColor, appearance]
+  )
 
   React.useEffect(() => {
     if (!theme) {
@@ -48,9 +67,9 @@ export const useSetupTheme = <T extends ChartVariant>({
     }
 
     config.options = {
-      color: theme.textSecondary ?? '',
-      backgroundColor: theme.backgroundBrandSolid ?? '',
-      borderColor: theme.borderPrimary ?? '',
+      color: theme.getVar('--gray-11'),
+      backgroundColor: theme.getVar('--accent-8'),
+      borderColor: theme.getVar('--gray-7'),
       elements: {
         point: {
           pointStyle: 'circle',
@@ -58,13 +77,13 @@ export const useSetupTheme = <T extends ChartVariant>({
           radius: 0,
           borderWidth: 2,
           hoverRadius: 6,
-          hoverBorderColor: theme.backgroundPrimary ?? '',
-          backgroundColor: theme.backgroundBrandSolidHover ?? '',
-          hoverBackgroundColor: theme.backgroundBrandSolidHover ?? ''
+          hoverBorderColor: theme.getVar('--accent-contrast'),
+          backgroundColor: theme?.getVar('--accent-10'),
+          hoverBackgroundColor: theme?.getVar('--accent-10')
         },
         bar: {
           borderWidth: 0,
-          hoverBackgroundColor: theme.backgroundBrandSolidHover ?? ''
+          hoverBackgroundColor: theme.getVar('--accent-10') ?? ''
         },
         line: {
           borderWidth: 3
@@ -72,18 +91,18 @@ export const useSetupTheme = <T extends ChartVariant>({
       },
       plugins: {
         tooltip: {
-          padding: parseInt(theme.spacingMd ?? '') ?? 8,
-          backgroundColor: theme.backgroundPrimary ?? '',
-          bodyColor: theme.textSecondary ?? '',
-          titleColor: theme.textSecondary ?? '',
-          borderColor: theme.borderPrimary ?? '',
+          padding: getPixelFontSizeAsNumber(theme.getVar('--space-2')) ?? 8,
+          backgroundColor: theme.getVar('--accent-1'),
+          bodyColor: theme.getVar('--gray-9'),
+          titleColor: theme.getVar('--gray-9'),
+          borderColor: theme.getVar('--gray-7'),
           borderWidth: 1,
           cornerRadius: 4,
           titleFont: {
-            size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize),
+            size: getPixelFontSizeAsNumber(theme.getVar('--font-size-1')),
             weight: 'bold',
-            lineHeight: theme.textXxsRegularLineHeight,
-            family: theme.textXxsRegularFontFamily
+            lineHeight: theme.getVar('--line-height-1'),
+            family: theme.getVar('--default-font-family')
           }
         }
       }
@@ -109,18 +128,33 @@ export const useSetupTheme = <T extends ChartVariant>({
 
     if (context) {
       // Merge the theme from the context with the component scope styles
-      setTheme({ ...context.theme, ...parseComputedStyle(componentContainer) })
+      // setThemeOld({ ...context.theme, ...parseComputedStyle(componentContainer) })
+      setTheme({
+        appearance,
+        ...context.theme,
+        ...parseComputedStyle(componentContainer),
+        tokens: { ...colors },
+        componentContainer,
+        getVar: (key: string) => (componentContainer ? getComputedStyle(componentContainer).getPropertyValue(key) : '')
+      })
       return
     }
 
     // Set the theme from the component scope styles if there is no ThemeProvider context.
     // Use light theme as a fallback.
-    if (!componentContainer.classList.contains(themes[baseTheme])) {
-      componentContainer.classList.add(themes[baseTheme])
+    if (!componentContainer.classList.contains(themes[appearance])) {
+      componentContainer.classList.add(themes[appearance])
     }
 
-    setTheme(parseComputedStyle(componentContainer))
-  }, [context, componentContainer, baseTheme])
+    // setThemeOld({ ...parseComputedStyle(componentContainer) })
+    setTheme({
+      appearance,
+      ...parseComputedStyle(componentContainer),
+      tokens: { ...colors },
+      componentContainer,
+      getVar: (key: string) => (componentContainer ? getComputedStyle(componentContainer).getPropertyValue(key) : '')
+    })
+  }, [appearance, context, colors, componentContainer])
 
   const { renderEmpty, errorFallback, renderLoader, components } = context ?? {}
 
@@ -137,15 +171,19 @@ export const useSetupTheme = <T extends ChartVariant>({
 export const ThemeProvider = ({
   children,
   baseTheme = 'lightTheme',
-  theme: themeProp,
+  appearance = 'light',
+  accentColor = 'blue',
+  className,
   globalChartConfigProps,
   renderEmpty,
   errorFallback,
   renderLoader,
-  components
+  components,
+  ...other
 }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<ThemeStateProps>()
   const ref = React.useRef(null)
+  const colors = React.useMemo(() => getAccentColors(accentColor, appearance), [accentColor, appearance])
 
   React.useEffect(() => {
     if (!ref.current) {
@@ -156,21 +194,40 @@ export const ThemeProvider = ({
 
     const baseThemeStyleProps = parseComputedStyle(ref.current)
 
-    if (typeof themeProp === 'string') {
-      setTheme({ ...baseThemeStyleProps, baseTheme })
-      return
-    }
+    // if (typeof className === 'string') {
+    //   setTheme({
+    //     appearance,
+    //     ...baseThemeStyleProps,
+    //     tokens: { ...colors },
+    //     componentContainer: ref?.current,
+    //     getVar: (key: string) => (ref?.current ? getComputedStyle(ref?.current).getPropertyValue(key) : '')
+    //   })
+    //   return
+    // }
 
-    const combinedWithBaseProps = { ...baseThemeStyleProps, ...themeProp }
+    const combinedWithBaseProps = { ...baseThemeStyleProps, ...colors }
+
     setContainerStyle(ref.current, combinedWithBaseProps)
-    setTheme(combinedWithBaseProps)
-  }, [ref, themeProp, baseTheme])
+    setTheme({
+      appearance,
+      ...combinedWithBaseProps,
+      tokens: { ...colors },
+      componentContainer: ref?.current,
+      getVar: (key: string) => (ref?.current ? getComputedStyle(ref?.current).getPropertyValue(key) : '')
+    })
+  }, [appearance, ref, colors, className, baseTheme])
 
   return (
     <div
       ref={ref}
-      className={classnames(themes[baseTheme], typeof themeProp === 'string' ? themeProp : undefined)}
+      // className={classnames(themes['propel-themes'], themes[appearance], className)}
+      className={classnames(themes['propel-themes'], themes[appearance], className)}
       data-testid="theme-provider"
+      data-accent-color={accentColor}
+      data-scaling="100%" // @TODO: fix this
+      data-radius="medium" // @TODO: fix this
+      data-gray-color="slate" // @TODO: fix this
+      {...other}
     >
       <ThemeContext.Provider
         value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader, components }}

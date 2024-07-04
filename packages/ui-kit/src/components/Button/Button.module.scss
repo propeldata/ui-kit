@@ -1,88 +1,93 @@
-@use '../../themes/generated/tokens';
-
 .rootButton {
-  @extend .textMdRegular;
+  font-family: var(--default-font-family);
+  font-style: normal;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-2);
+  letter-spacing: var(--letter-spacing-2);
 
-  padding: var(--propel-spacing-lg) var(--propel-spacing-4xl);
-  gap: var(--propel-spacing-lg);
-  background-color: var(--propel-background-primary);
-  border-radius: var(--propel-radius-sm);
+  padding: var(--space-2) var(--space-5);
+  gap: var(--space-3);
+  background-color: var(--accent-contrast);
+  border-radius: var(--radius-1);
   border-width: 1px;
-  border-color: var(--propel-border-primary);
+  border-color: var(--accent-9);
   border-style: solid;
-  color: var(--propel-text-quarterary);
-  cursor: pointer;
+  color: var(--accent-11);
+  cursor: var(--cursor-button);
   white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  transition: background-color var(--propel-transition-ease-time) ease,
-    border-color var(--propel-transition-ease-time) ease, color var(--propel-transition-ease-time) ease;
+  transition: background-color var(--transition-ease-time) ease, border-color var(--transition-ease-time) ease,
+    color var(--transition-ease-time) ease;
 
   &:hover,
   &:focus-visible,
   &.focus {
     outline: none;
-    color: var(--propel-text-secondary);
-    border-color: var(--propel-border-brand-solid);
+    background-color: var(--accent-a2);
+    border-color: var(--accent-10);
   }
 
   &.disabled {
-    color: var(--propel-text-disabled);
+    color: var(--gray-10);
+    border-color: var(--gray-3);
     &:hover {
-      color: var(--propel-text-disabled);
-      border-color: var(--propel-border-primary);
-      cursor: default;
+      background-color: inherit;
+      cursor: inherit;
     }
     & svg {
-      color: var(--propel-text-disabled);
+      color: var(--gray-10);
     }
   }
 
   &.startAdornment {
     justify-content: flex-start;
-    padding-left: var(--propel-spacing-xl);
+    padding-left: var(--space-2);
   }
 
   &.endAdornment,
   &.startAdornment.endAdornment {
     justify-content: space-between;
-    padding-right: var(--propel-spacing-xl);
-    padding-left: var(--propel-spacing-xl);
+    padding-right: var(--space-2);
+    padding-left: var(--space-2);
   }
 
   &.primary {
-    background-color: var(--propel-background-brand-solid);
-    border-color: var(--propel-background-brand-solid);
+    background-color: var(--accent-9);
+    border-color: var(--accent-9);
     color: #ffffff;
 
     &:hover,
     &.focus {
-      background-color: var(--propel-background-brand-solid-hover);
-      border-color: var(--propel-background-brand-solid-hover);
+      background-color: var(--accent-10);
+      border-color: var(--accent-10);
     }
 
     &.disabled {
-      color: var(--propel-text-disabled);
-      background-color: var(--propel-background-disabled-subtle);
-      border-color: var(--propel-border-primary);
+      color: var(--gray-a8);
+      background-color: var(--gray-2);
+      border-color: var(--gray-a3);
     }
   }
 
   &.small {
-    @extend .textSmSemibold;
+    font-size: var(--font-size-1);
+    line-height: var(--line-height-1);
+    letter-spacing: var(--letter-spacing-1);
 
-    padding: var(--propel-spacing-md) var(--propel-spacing-4xl);
+    padding: var(--space-1) var(--space-3);
 
     &.startAdornment {
-      padding-left: var(--propel-spacing-lg);
+      padding-left: var(--space-1);
     }
 
     &.endAdornment,
     &.startAdornment.endAdornment {
-      padding-right: var(--propel-spacing-lg);
-      padding-left: var(--propel-spacing-lg);
+      padding-right: var(--space-1);
+      padding-left: var(--space-1);
     }
   }
 }

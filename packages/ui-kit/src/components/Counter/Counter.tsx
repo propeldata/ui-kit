@@ -20,7 +20,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       loading: isLoadingStatic = false,
       localize,
       className,
-      baseTheme,
+      appearance,
       loaderProps: loaderPropsInitial,
       renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
@@ -42,7 +42,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
       renderEmpty: renderEmptyComponent
-    } = useSetupTheme({ componentContainer, baseTheme, renderLoader, errorFallback, renderEmpty })
+    } = useSetupTheme({ componentContainer, appearance, renderLoader, errorFallback, renderEmpty })
 
     /**
      * If the user passes `value` attribute, it

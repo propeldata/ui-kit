@@ -63,7 +63,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       role,
       timeZone: timeZoneInitial,
       className,
-      baseTheme,
+      appearance,
       chartConfigProps,
       loaderProps: loaderPropsInitial,
       renderLoader,
@@ -88,7 +88,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<typeof type>({
       componentContainer,
-      baseTheme,
+      appearance,
       renderLoader,
       errorFallback,
       renderEmpty
@@ -160,7 +160,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? theme?.getVar('--color-background') : 'transparent'
           },
           legend: {
             display: false
@@ -172,7 +172,9 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        let backgroundColor: Color | CanvasGradient = theme?.backgroundBrandSolid ?? ''
+        // --color-surface
+        let backgroundColor: Color | CanvasGradient = theme?.getVar('--accent-8') ?? ''
+        // let backgroundColor: Color | CanvasGradient = '#ff0000'
 
         const fill = fillArea && variant === 'line'
         if (fill) {
@@ -180,8 +182,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           if (ctx) {
             backgroundColor = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight)
             // @TODO: need to refactor this logic due to the possible different types of the color value, e.g. hex, rgb, rgba, etc.
-            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.backgroundBrandSolidHover, 0.35))
-            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.backgroundBrandSolidHover, 0.05))
+            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.getVar('--accent-10'), 0.35))
+            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.getVar('--accent-10'), 0.05))
           }
         }
 
@@ -191,12 +193,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
             {
               data: values,
               backgroundColor: backgroundColor,
-              hoverBackgroundColor: theme?.backgroundBrandSolidHover,
-              borderColor: theme?.backgroundBrandSolid,
-              pointBackgroundColor: theme?.backgroundBrandSolidHover,
-              pointHoverBackgroundColor: theme?.backgroundBrandSolidHover,
+              borderColor: theme?.getVar('--accent-8'),
+              hoverBackgroundColor: theme?.getVar('--accent-10'),
+              pointBackgroundColor: theme?.getVar('--accent-10'),
+              pointHoverBackgroundColor: theme?.getVar('--accent-10'),
               pointHoverBorderWidth: 2,
-              pointHoverBorderColor: theme?.backgroundPrimary,
+              pointHoverBorderColor: theme?.getVar('--accent-contrast'),
               fill
             } as ChartDataset<TimeSeriesChartVariant>
           ]
@@ -218,7 +220,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           maintainAspectRatio: false,
           plugins: customPlugins,
           layout: {
-            padding: parseInt(theme?.spacingXs ?? '') ?? 4
+            padding: parseInt(theme?.getVar('--space-4') ?? '') ?? 4
           },
           scales
         }
@@ -371,7 +373,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         <canvas
           id={id}
           ref={canvasRef}
-          height={theme?.componentHeight}
+          height={theme?.getVar('--component-height')}
           role={role || 'img'}
           aria-label={ariaLabel || ''}
           style={{

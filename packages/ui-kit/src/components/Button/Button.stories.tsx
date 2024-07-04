@@ -10,7 +10,7 @@ const meta: Meta<typeof ButtonSource> = {
   component: ButtonSource,
   tags: ['devOnly'],
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }

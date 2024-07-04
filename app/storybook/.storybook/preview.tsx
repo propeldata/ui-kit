@@ -2,8 +2,9 @@ import { Source } from '@storybook/blocks'
 import type { Preview, StoryContext } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
-import { ThemeProvider, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
+import { ThemeProvider, ThemeProviderProps, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
 import { QueryClient, QueryClientProvider } from '../../../packages/ui-kit/src/graphql'
+import { accentColors } from '../../../packages/ui-kit/src/themes'
 import axiosInstance from '../src/axios'
 import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
@@ -11,7 +12,7 @@ import './global.css'
 const GlobalStyles = () => {
   const theme = useTheme()
   if (document && theme) {
-    document.body.style.setProperty('--bg-color', theme.backgroundSecondary as string)
+    document.body.style.setProperty('--bg-color', theme.getVar('--accent-1'))
   }
   return null
 }
@@ -25,7 +26,9 @@ const withThemeProvider = (Story: React.FC, context: StoryContext) => {
 
   return (
     <ThemeProvider
-      baseTheme={context.globals.theme}
+      accentColor={context.globals.accentColor}
+      appearance={context.globals.appearance}
+      // className="themeProvider"
       // components={{
       //   Button: (props) => <MyCustomButton {...props} />
       // }}
@@ -95,16 +98,26 @@ const preview: Preview = {
     }
   },
   globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'lightTheme',
+    appearance: {
+      name: 'Appearance',
+      description: 'Global theme appearance',
+      defaultValue: 'light',
       toolbar: {
-        icon: 'circlehollow',
+        icon: 'mirror',
         items: [
-          { value: 'lightTheme', icon: 'circlehollow', title: 'light' },
-          { value: 'darkTheme', icon: 'circle', title: 'dark' }
+          { value: 'light', title: 'Light appearance' },
+          { value: 'dark', title: 'Dark appearance' }
         ],
+        showName: true
+      }
+    },
+    accentColor: {
+      name: 'Accent color',
+      description: 'Global theme accent color',
+      defaultValue: 'blue',
+      toolbar: {
+        icon: 'circle',
+        items: accentColors.map((color) => ({ value: color, title: color })),
         showName: true
       }
     }

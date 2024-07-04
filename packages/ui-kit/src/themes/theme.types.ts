@@ -2,7 +2,49 @@ import { CSSProperties } from 'react'
 import type { DefaultThemes } from '../components/ThemeProvider/ThemeProvider.types'
 import { ThemeTokenGeneratedProps, ThemeCSSTokenGeneratedProps } from './generated/theme.types'
 
-export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
+export const accentColors = [
+  'amber',
+  'blue',
+  'bronze',
+  'brown',
+  'crimson',
+  'cyan',
+  'gold',
+  'grass',
+  'gray',
+  'green',
+  'indigo',
+  'iris',
+  'jade',
+  'lime',
+  'mint',
+  'orange',
+  'pink',
+  'plum',
+  'purple',
+  'red',
+  'ruby',
+  'sky',
+  'teal',
+  'tomato',
+  'violet',
+  'yellow'
+] as const
+
+export type AccentColors = (typeof accentColors)[number]
+
+export type ThemeAppearances = 'light' | 'dark'
+
+export type ThemeTokenProps = {
+  appearance?: ThemeAppearances
+  componentContainer?: HTMLElement | null
+  getVar: (varName: string) => string
+  tokens: {
+    [key: string]: string
+  }
+}
+
+export interface ThemeOldTokenProps extends ThemeTokenGeneratedProps {
   baseTheme?: DefaultThemes
   componentHeight?: CSSProperties['height']
   transitionEaseTime?: CSSProperties['transitionDuration']
@@ -239,5 +281,7 @@ export type ThemeComponentProps = {
   className?: string
 
   /** Base theme to be used */
-  baseTheme?: DefaultThemes
+  // baseTheme?: DefaultThemes
+
+  appearance?: ThemeAppearances
 }

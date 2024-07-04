@@ -4483,6 +4483,7 @@ __metadata:
     "@graphql-codegen/typescript-react-query": ^6.0.0
     "@juggle/resize-observer": ^3.4.0
     "@mui/base": ^5.0.0-beta.31
+    "@radix-ui/colors": ^3.0.0
     "@rollup/plugin-commonjs": ^25.0.7
     "@rollup/plugin-node-resolve": ^15.2.3
     "@rollup/plugin-terser": ^0.4.4
@@ -4534,6 +4535,13 @@ __metadata:
     react-dom: ^16.8 || ^17 || ^18
   languageName: unknown
   linkType: soft
+
+"@radix-ui/colors@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@radix-ui/colors@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"
+  checksum: 5ac1b69df7a77525e2031c2d2948d6ef8d81c6b163809ee8e17a2138c4977678e3a9f67342595d2c88f0300f51fd2c64e24355008cda6c9db8dfd4ed3eaf9e8f
+  languageName: node
+  linkType: hard
 
 "@radix-ui/number@npm:1.0.1":
   version: 1.0.1

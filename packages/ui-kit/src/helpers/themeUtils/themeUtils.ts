@@ -18,6 +18,7 @@
 
 import type { ThemeTokenProps } from '../../themes/theme.types'
 import { themeDict } from '../../themes/themeDict'
+import { camelCaseToKebabCase } from '../camelCaseToKebabCase'
 
 /**
  * Parses the computed style of a given HTML element and extracts theme-related properties.
@@ -29,7 +30,10 @@ import { themeDict } from '../../themes/themeDict'
  */
 export const parseComputedStyle = (themeContainer: HTMLElement) => {
   const computedStyle = getComputedStyle(themeContainer)
-  const theme: Partial<ThemeTokenProps> = {}
+  // const theme: Partial<ThemeTokenProps> = {}
+  const theme: {
+    [key: string]: string
+  } = {}
 
   themeDict.forEach((item) => {
     const cssVarValue = computedStyle.getPropertyValue(item.cssVarName)
@@ -62,11 +66,9 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
  * @param {HTMLElement} themeContainer - The HTML element to which the theme is to be applied.
  * @param {ThemeTokenProps} theme - An object containing the theme properties and their values to be applied.
  */
-export const setContainerStyle = (themeContainer: HTMLElement, theme: ThemeTokenProps) => {
-  themeDict.forEach((item) => {
-    const themePropValue = theme[item.name as keyof ThemeTokenProps]?.toString()
-    if (themePropValue) {
-      themeContainer.style.setProperty(item.cssVarName, themePropValue)
-    }
+// export const setContainerStyle = (themeContainer: HTMLElement, theme: { [key: string]: string | number }) => {
+export const setContainerStyle = (themeContainer: HTMLElement, tokens: { [key: string]: string }) => {
+  Object.keys(tokens).forEach((key) => {
+    themeContainer.style.setProperty(`--${camelCaseToKebabCase(key)}`, tokens[key])
   })
 }
