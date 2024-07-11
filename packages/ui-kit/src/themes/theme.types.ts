@@ -1,6 +1,5 @@
 import { CSSProperties } from 'react'
 import type { DefaultThemes } from '../components/ThemeProvider/ThemeProvider.types'
-import { ThemeTokenGeneratedProps, ThemeCSSTokenGeneratedProps } from './generated/theme.types'
 
 export const accentColors = [
   'amber',
@@ -44,7 +43,7 @@ export type ThemeTokenProps = {
   }
 }
 
-export interface ThemeOldTokenProps extends ThemeTokenGeneratedProps {
+export type ThemeOldTokenProps = {
   baseTheme?: DefaultThemes
   componentHeight?: CSSProperties['height']
   transitionEaseTime?: CSSProperties['transitionDuration']
@@ -164,7 +163,7 @@ export interface ThemeOldTokenProps extends ThemeTokenGeneratedProps {
   colorBlue25?: CSSProperties['color']
 }
 
-export interface ThemeCSSTokenProps extends ThemeCSSTokenGeneratedProps {
+export type ThemeCSSTokenProps = {
   '--propel-component-height'?: CSSProperties['height']
   '--propel-transition-ease-time'?: CSSProperties['height']
 
@@ -280,8 +279,6 @@ export type ThemeComponentProps = {
   /** Provides a className for the ErrorFallback container */
   className?: string
 
-  /** Base theme to be used */
-  // baseTheme?: DefaultThemes
-
+  /** The theme appearance */
   appearance?: ThemeAppearances
 }

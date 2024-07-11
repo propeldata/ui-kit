@@ -16,7 +16,7 @@
  *   dynamically applying theme properties, ensuring that components reflect the chosen theme consistently.
  */
 
-import type { ThemeTokenProps } from '../../themes/theme.types'
+// import type { ThemeTokenProps } from '../../themes/theme.types'
 import { themeDict } from '../../themes/themeDict'
 import { camelCaseToKebabCase } from '../camelCaseToKebabCase'
 

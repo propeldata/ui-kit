@@ -9,7 +9,7 @@ const meta: Meta<typeof InputSource> = {
   component: InputSource,
   tags: ['devOnly'],
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }
@@ -89,7 +89,6 @@ export const SmallEndAdornmentsStory: Story = {
     style: { width: 183 },
     value: 'Input value',
     size: 'small',
-    disabled: true,
     endAdornment: () => <ChevronDownIcon />
   },
   render: (args) => <Input {...args} />

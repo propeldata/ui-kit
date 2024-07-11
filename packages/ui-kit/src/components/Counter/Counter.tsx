@@ -20,7 +20,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       loading: isLoadingStatic = false,
       localize,
       className,
-      appearance,
+      appearance = 'light',
       loaderProps: loaderPropsInitial,
       renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,

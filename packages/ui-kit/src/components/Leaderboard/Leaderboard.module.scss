@@ -1,8 +1,8 @@
-@use '../../themes/common';
+@use '../../themes/tokens/typography';
 
 .rootLeaderboard {
-  @extend .textXxsRegular;
-  color: var(--propel-text-secondary);
+  @extend %fontSize1;
+
   overflow: auto;
   padding: 0;
 
@@ -19,14 +19,14 @@
 
     .stickyColumn {
       position: sticky;
-      background-color: var(--propel-background-primary);
+      background-color: var(--color-background);
       right: 0;
     }
 
     [data-role='table-value'] {
       right: 0;
       text-align: right;
-      padding-left: var(--propel-spacing-md);
+      padding-left: var(--space-3);
       white-space: nowrap;
       width: 1%;
     }
@@ -49,8 +49,8 @@
           content: '';
           left: 0;
           top: 0;
-          background-color: var(--propel-border-primary);
-          box-shadow: var(--propel-shadows-shadow-xs);
+          background-color: var(--gray-a8);
+          box-shadow: 0px 1px 2px 0px var(--gray-a8);
           width: 1px;
           height: 100%;
           z-index: 9999;
@@ -66,20 +66,17 @@
     th,
     td {
       text-align: left;
-      padding: var(--propel-spacing-md) var(--propel-spacing-md) var(--propel-spacing-md) 0;
-      color: var(--propel-text-secondary);
-      @extend .textXsRegular;
+      padding: var(--space-2) var(--space-2) var(--space-2) 0;
+      @extend %fontSize1;
     }
 
     td {
-      @extend .textXsRegular;
-      color: var(--propel-text-secondary);
-      border-bottom: 1px solid var(--propel-border-primary);
+      @extend %fontSize1;
+      border-bottom: 1px solid var(--gray-a6);
     }
 
     th {
       font-weight: 600;
-      color: var(--propel-text-secondary);
     }
 
     tr {
@@ -95,7 +92,7 @@
 .stickyHeader {
   tr {
     th {
-      background-color: var(--propel-background-primary);
+      background-color: var(--color-background);
       position: sticky;
       top: 0;
       z-index: 9999;

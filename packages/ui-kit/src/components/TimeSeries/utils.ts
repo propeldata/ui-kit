@@ -179,7 +179,8 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
         drawTicks: variant === 'line'
       },
       ticks: {
-        padding
+        padding,
+        color: theme?.getVar('--gray-11')
       },
       beginAtZero
     },
@@ -190,7 +191,8 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
         drawOnChartArea: true
       },
       ticks: {
-        padding
+        padding,
+        color: theme?.getVar('--gray-11')
       },
       border: {
         display: false

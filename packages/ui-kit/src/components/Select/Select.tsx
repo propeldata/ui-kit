@@ -106,6 +106,8 @@ const SelectComponent = <T extends OptionValue>(
           size,
           value: value?.label ?? undefined,
           className: classNames(componentStyles.button, componentStyles.rootButton, {
+            [componentStyles.startAdornment]: startAdornment,
+            [componentStyles.endAdornment]: endAdornment,
             [componentStyles[size]]: size && size !== 'default'
           })
         }),

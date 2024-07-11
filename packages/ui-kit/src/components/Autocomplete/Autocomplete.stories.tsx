@@ -165,24 +165,3 @@ export const FreeSoloStory: Story = {
   },
   render: (args) => <Autocomplete {...args} />
 }
-
-export const ConsoleImplementation: Story = {
-  name: 'Console SimpleFilter',
-  args: {
-    options: top100Films,
-    placeholder: 'Search or type',
-    freeSolo: true,
-    containerStyle: {
-      background: 'transparent',
-      boxShadow: 'none',
-      border: 'none',
-      borderBottom: '1px solid #9c9c9e',
-      borderRadius: 0
-    }
-  },
-  render: (args) => (
-    <ThemeProvider baseTheme="lightTheme" theme={{ colorBlue25: '#f6f6f6', accent: '#f5f2fd', accentHover: '#f0ebfc' }}>
-      <Autocomplete {...args} listStyle={{ padding: 0 }} optionStyle={{ borderRadius: 0 }} />
-    </ThemeProvider>
-  )
-}

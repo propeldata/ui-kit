@@ -12,14 +12,18 @@ import {
 } from 'date-fns'
 import React, { Dispatch, SetStateAction } from 'react'
 import { DateRange } from 'react-day-picker'
-import { useCombinedRefsCallback, getDateTimeFormatPattern } from '../../../helpers'
+import { ThemeAppearances } from 'src/themes'
+import { getDateTimeFormatPattern, useCombinedRefsCallback } from '../../../helpers'
+import { ButtonProps } from '../../Button'
 import { FormField } from '../../FormField'
 import { Input } from '../../Input'
-import { DefaultThemes, useSetupTheme } from '../../ThemeProvider'
+import { useSetupTheme } from '../../ThemeProvider'
 import componentStyles from './DateTimeField.module.scss'
 
-export interface DateTimeFieldProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'onChange'> {
-  baseTheme?: DefaultThemes
+export interface DateTimeFieldProps
+  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'onChange' | 'size'>,
+    Pick<ButtonProps, 'size'> {
+  appearance?: ThemeAppearances
   dateRange?: DateRange | null
   rangeRole: 'from' | 'to'
   onChange?: Dispatch<SetStateAction<DateRange | null>>
@@ -33,10 +37,13 @@ const validateDateRange = (dateRange: DateRange | null | undefined, rangeRole: '
     : isBefore(dateRange?.from ?? subDays(parsedValue, 1), parsedValue))
 
 export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps>(
-  ({ baseTheme, className, dateRange, locale = 'en-US', rangeRole, onChange, ...rest }, forwardedRef) => {
+  (
+    { appearance, className, size = 'default', dateRange, locale = 'en-US', rangeRole, onChange, ...rest },
+    forwardedRef
+  ) => {
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ forwardedRef, innerRef })
-    useSetupTheme({ componentContainer, baseTheme })
+    useSetupTheme({ componentContainer, appearance })
 
     const dateFormatPattern = getDateTimeFormatPattern({
       locale,
@@ -210,7 +217,7 @@ export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps
             data-testid="date-input"
             type="text"
             placeholder={dateFormatPattern}
-            size="small"
+            size={size}
             ref={dateRef}
             error={dateError}
             onKeyDown={onKeyDown}
@@ -222,7 +229,7 @@ export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps
             data-testid="time-input"
             type="text"
             placeholder={timeFormatPattern}
-            size="small"
+            size={size}
             ref={timeRef}
             error={timeError}
             onKeyDown={onKeyDown}

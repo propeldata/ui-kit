@@ -37,8 +37,6 @@
   /* default values */
 
   --default-font-family: 'Inter', sans-serif;
-  // --default-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue',
-  //   'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --default-font-size: var(--font-size-3); /* Same size used for `<Text size="3">` */
   --default-font-style: normal;
   --default-font-weight: var(--font-weight-regular);
@@ -46,72 +44,6 @@
   --default-letter-spacing: 0em;
   --default-leading-trim-start: 0.42em;
   --default-leading-trim-end: 0.36em;
-
-  /* Heading */
-
-  --heading-font-family: var(--default-font-family);
-  --heading-font-size-adjust: 1;
-  --heading-font-style: normal;
-  --heading-leading-trim-start: var(--default-leading-trim-start);
-  --heading-leading-trim-end: var(--default-leading-trim-end);
-  --heading-letter-spacing: 0em;
-
-  --heading-line-height-1: calc(16px * var(--scaling));
-  --heading-line-height-2: calc(18px * var(--scaling));
-  --heading-line-height-3: calc(22px * var(--scaling));
-  --heading-line-height-4: calc(24px * var(--scaling));
-  --heading-line-height-5: calc(26px * var(--scaling));
-  --heading-line-height-6: calc(30px * var(--scaling));
-  --heading-line-height-7: calc(36px * var(--scaling));
-  --heading-line-height-8: calc(40px * var(--scaling));
-  --heading-line-height-9: calc(60px * var(--scaling));
-
-  /* Code */
-
-  --code-font-family: 'Inter', sans-serif;
-  // --code-font-family: 'Menlo', 'Consolas (Custom)', 'Bitstream Vera Sans Mono', monospace, 'Apple Color Emoji',
-  //   'Segoe UI Emoji';
-  --code-font-size-adjust: 0.95;
-  --code-font-style: normal;
-  --code-font-weight: inherit;
-  --code-letter-spacing: -0.007em;
-  --code-padding-top: 0.1em;
-  --code-padding-bottom: 0.1em;
-  --code-padding-left: 0.25em;
-  --code-padding-right: 0.25em;
-
-  /* Strong */
-
-  --strong-font-family: var(--default-font-family);
-  --strong-font-size-adjust: 1;
-  --strong-font-style: inherit;
-  --strong-font-weight: var(--font-weight-bold);
-  --strong-letter-spacing: 0em;
-
-  /* Em */
-
-  // --em-font-family: 'Times New Roman', 'Times', serif;
-  --em-font-family: 'Inter', sans-serif;
-  --em-font-size-adjust: 1.18;
-  --em-font-style: italic;
-  --em-font-weight: inherit;
-  --em-letter-spacing: -0.025em;
-
-  /* Quote */
-
-  // --quote-font-family: 'Times New Roman', 'Times', serif;
-  --quote-font-family: 'Inter', sans-serif;
-  --quote-font-size-adjust: 1.18;
-  --quote-font-style: italic;
-  --quote-font-weight: inherit;
-  --quote-letter-spacing: -0.025em;
-
-  /* Tabs */
-
-  --tab-active-letter-spacing: -0.01em;
-  --tab-active-word-spacing: 0em;
-  --tab-inactive-letter-spacing: 0em;
-  --tab-inactive-word-spacing: 0em;
 }
 
 .propel-themes {
@@ -125,4 +57,16 @@
   text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@for $i from 1 through 9 {
+  %fontSize#{$i} {
+    font-family: var(--default-font-family);
+    font-weight: var(--default-font-weight);
+    font-style: var(--default-font-style);
+    font-size: var(--font-size-#{$i});
+    line-height: var(--line-height-#{$i});
+    letter-spacing: var(--letter-spacing-#{$i});
+    color: var(--gray-11);
+  }
 }

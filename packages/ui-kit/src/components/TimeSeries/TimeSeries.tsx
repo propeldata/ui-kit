@@ -172,9 +172,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        // --color-surface
         let backgroundColor: Color | CanvasGradient = theme?.getVar('--accent-8') ?? ''
-        // let backgroundColor: Color | CanvasGradient = '#ff0000'
 
         const fill = fillArea && variant === 'line'
         if (fill) {

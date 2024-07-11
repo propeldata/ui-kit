@@ -1,16 +1,15 @@
-@use '../../themes/generated/tokens';
+@use '../../themes/tokens/typography';
 
 .rootInput {
-  @extend .textMdRegular;
+  @extend %fontSize2;
 
-  padding: var(--propel-spacing-lg) var(--propel-spacing-xl);
-  gap: var(--propel-spacing-lg);
-  background-color: var(--propel-background-primary);
-  border-radius: var(--propel-radius-sm);
+  padding: var(--space-2) var(--space-4);
+  gap: var(--space-2);
+  background-color: var(--color-background);
+  border-radius: var(--radius-2);
   border-width: 1px;
-  border-color: var(--propel-border-primary);
+  border-color: var(--gray-6);
   border-style: solid;
-  color: var(--propel-text-primary);
   cursor: text;
   white-space: nowrap;
   display: flex;
@@ -18,14 +17,15 @@
   align-items: center;
   width: fit-content;
   box-sizing: border-box;
-  transition: border-color var(--propel-transition-ease-time) ease, box-shadow var(--propel-transition-ease-time) ease;
+  transition: border-color var(--transition-ease-time) ease, box-shadow var(--transition-ease-time) ease;
 
   & input {
-    @extend .textMdRegular;
+    @extend %fontSize2;
 
     border: none;
     padding: 0;
     width: 100%;
+    background-color: transparent;
 
     &:focus {
       outline: none;
@@ -36,43 +36,45 @@
   }
 
   &:hover {
-    color: var(--propel-text-primary);
-    border-color: var(--propel-border-brand);
+    border-color: var(--accent-8);
   }
 
   &.focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(46, 144, 250, 0.2);
-    border-color: var(--propel-border-brand);
+    box-shadow: 0 0 0 3px var(--accent-a4);
+    border-color: var(--accent-8);
   }
 
   &.error {
-    border-color: var(--propel-border-error);
+    border-color: var(--color-error-border);
+
+    & input {
+      color: var(--color-error-text);
+    }
   }
 
   &.disabled {
-    color: var(--propel-text-disabled);
-    border-color: var(--propel-border-disabled);
+    color: var(--gray-a8);
+    background-color: var(--gray-2);
+    border-color: var(--gray-a3);
 
     &:hover {
-      color: var(--propel-text-disabled);
-      border-color: var(--propel-border-disabled);
       cursor: default;
     }
 
     & svg {
-      color: var(--propel-text-disabled);
+      color: var(--gray-a8);
     }
   }
-}
 
-.small {
-  @extend .textSmRegular;
+  &.small {
+    @extend %fontSize1;
 
-  padding: var(--propel-spacing-md) var(--propel-spacing-lg);
-  gap: var(--propel-spacing-md);
+    padding: var(--space-1) var(--space-3);
+    gap: var(--space-1);
 
-  & input {
-    @extend .textSmRegular;
+    & input {
+      @extend %fontSize1;
+    }
   }
 }

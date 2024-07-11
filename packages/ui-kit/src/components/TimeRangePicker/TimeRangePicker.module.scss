@@ -1,4 +1,4 @@
-@use '../../themes/generated/tokens';
+@use '../../themes/tokens/typography';
 
 .timeRangePickerPopper {
   min-width: 300px;
@@ -9,38 +9,38 @@
 }
 
 .timeRangePicker {
-  box-shadow: var(--propel-shadows-shadow-xs);
-  border-radius: var(--propel-radius-sm);
-  color: var(--propel-text-primary);
-  background-color: var(--propel-background-primary);
-  border: 1px solid var(--propel-border-primary);
-  margin-top: var(--propel-spacing-xxs);
+  box-shadow: var(--shadow-5);
+  border-radius: var(--radius-2);
+  color: var(--gray-12);
+  background-color: var(--color-background);
+  border: 1px solid var(--gray-6);
+  margin-top: var(--space-1);
 }
 
 .timeRangePickerHeader {
-  margin: var(--propel-spacing-2xl) var(--propel-spacing-4xl);
+  margin: var(--space-4) var(--space-6);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .timeRangePickerInputs {
-  margin: 0 var(--propel-spacing-3xl) var(--propel-spacing-2xl) var(--propel-spacing-3xl);
+  margin: 0 0 var(--space-4) var(--space-5);
   display: flex;
-  gap: var(--propel-spacing-5xl);
+  gap: var(--space-6);
 }
 
 .timeRangePickerActions {
   display: flex;
   justify-content: space-between;
-  gap: var(--propel-spacing-lg);
-  margin: var(--propel-spacing-lg);
+  gap: var(--space-3);
+  margin: var(--space-3);
 }
 
 .formField {
   display: flex;
   flex-direction: column;
-  gap: var(--propel-spacing-xs);
+  gap: var(--space-1);
 }
 
 .lastN {
@@ -53,24 +53,24 @@
     align-items: center;
     top: 0;
     bottom: 0;
-    right: var(--propel-spacing-xl);
+    right: var(--space-3);
     cursor: default;
-    gap: var(--propel-spacing-md);
+    gap: var(--space-4);
   }
 }
 
 .from-date-until-now {
   display: flex;
   flex-direction: column;
-  gap: var(--propel-spacing-xs);
-  margin: var(--propel-spacing-lg) var(--propel-spacing-3xl);
+  gap: var(--space-1);
+  margin: var(--space-3) var(--space-5);
 }
 
 .custom-date-range {
   display: flex;
   flex-direction: row;
-  margin: var(--propel-spacing-lg) var(--propel-spacing-3xl);
-  gap: var(--propel-spacing-lg);
+  margin: var(--space-3) var(--space-5);
+  gap: var(--space-3);
 }
 
 .caption {
@@ -79,7 +79,7 @@
 }
 
 .caption_label {
-  @extend .textSmRegular;
+  @extend %fontSize2;
 
   position: absolute;
   left: 0;
@@ -92,11 +92,11 @@
 }
 
 .head_cell {
-  @extend .textSmRegular;
+  @extend %fontSize2;
 }
 
 .cell {
-  @extend .textSmRegular;
+  @extend %fontSize2;
 }
 
 .nav {
@@ -107,10 +107,10 @@
 }
 
 .root {
-  --rdp-accent-color: var(--propel-accent-hover);
-  --rdp-accent-color-dark: var(--propel-accent-hover);
-  --rdp-caption-font-size: var(--propel-text-sm-regular-font-size);
-  margin: var(--propel-spacing-2xl) var(--propel-spacing-3xl) var(--propel-spacing-lg) var(--propel-spacing-3xl);
+  --rdp-accent-color: var(--accent-10);
+  --rdp-accent-color-dark: var(--accent-10);
+  --rdp-caption-font-size: var(--font-size-2);
+  margin: var(--space-4) var(--space-5) var(--space-3) var(--space-5);
 }
 
 .multiple_months .caption_end .nav {
@@ -118,52 +118,52 @@
 }
 
 .button {
-  @extend .textSmRegular;
+  @extend %fontSize1;
 
-  padding: 10px var(--propel-spacing-md);
+  padding: 10px var(--space-4);
   border-width: 1px;
-  margin: var(--propel-spacing-xxs) 0;
-  border-radius: var(--propel-radius-sm);
+  margin: 2px 0;
+  border-radius: var(--radius-2);
 
   &:hover {
-    border-radius: var(--propel-radius-sm);
+    border-radius: var(--radius-2);
 
     &:not([disabled]):not(.day_selected) {
-      background-color: var(--propel-background-secondary-hover);
+      background-color: var(--gray-a3);
     }
   }
 
   &:focus-visible {
-    border-radius: var(--propel-radius-sm);
+    border-radius: var(--radius-2);
   }
 }
 
 .nav_button {
-  padding: var(--propel-spacing-md);
+  padding: var(--space-3);
 
   & svg {
-    color: var(--propel-text-secondary);
+    color: var(--gray-11);
   }
 
   &:hover:not([disabled]):not(.day_selected) {
     border: none;
     background-color: transparent;
     & svg {
-      color: var(--propel-text-primary);
+      color: var(--gray-12);
     }
   }
 }
 
 .day_selected,
 .day_selected:focus-visible {
-  color: var(--propel-text-primary);
+  color: var(--gray-11);
   outline: none;
 
   &:hover,
   &:focus-visible {
     border: 1px solid transparent;
-    background-color: var(--propel-background-brand-solid-hover);
-    color: var(--propel-text-white);
+    background-color: var(--accent-11);
+    color: var(--gray-1);
   }
 }
 
@@ -173,45 +173,45 @@
   &::after {
     content: '';
     position: absolute;
-    bottom: var(--propel-spacing-xxs);
+    bottom: 0;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background-color: var(--propel-foreground-brand-primary);
+    background-color: var(--gray-a3);
   }
 }
 
 .day_range_start {
   color: #ffffff;
-  border-top-left-radius: var(--propel-radius-sm);
-  border-bottom-left-radius: var(--propel-radius-sm);
-  background-color: var(--propel-background-brand-solid);
+  border-top-left-radius: var(--radius-2);
+  border-bottom-left-radius: var(--radius-2);
+  background-color: var(--accent-9);
 }
 
 .day_range_middle {
-  background-color: var(--propel-background-active);
+  background-color: var(--gray-a2);
   border-radius: 0;
 
   &:hover {
-    background-color: var(--propel-background-secondary-hover);
+    background-color: var(--gray-a3);
     border-radius: 0;
-    color: var(--propel-text-primary);
+    color: var(--gray-11);
   }
 }
 
 .day_range_end {
   color: #ffffff;
-  border-top-right-radius: var(--propel-radius-sm);
-  border-bottom-right-radius: var(--propel-radius-sm);
-  background-color: var(--propel-background-brand-solid);
+  border-top-right-radius: var(--radius-2);
+  border-bottom-right-radius: var(--radius-2);
+  background-color: var(--accent-9);
 
   &:not(.day_outside):after {
-    background-color: var(--propel-background-primary);
+    background-color: var(--gray-1);
   }
 }
 
 .day_range_start.day_range_end {
-  border-radius: var(--propel-radius-sm);
+  border-radius: var(--radius-2);
 }

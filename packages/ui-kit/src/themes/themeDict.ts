@@ -1,9 +1,6 @@
 // import type { ThemeTokenProps } from './theme.types'
-import { themeDict as themeDictGenerated } from './generated/themeDict'
 
 export const themeDict = [
-  ...themeDictGenerated,
-
   // Utils
   { name: 'componentHeight', cssVarName: '--propel-component-height' },
   { name: 'transitionEaseTime', cssVarName: '--propel-transition-ease-time' },

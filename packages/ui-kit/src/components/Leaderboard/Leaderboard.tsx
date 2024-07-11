@@ -37,7 +37,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       loading: isLoadingStatic = false,
       tableProps,
       chartProps,
-      baseTheme = 'lightTheme',
+      appearance = 'light',
       labelFormatter,
       timeZone,
       loaderProps: loaderPropsInitial,
@@ -63,7 +63,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<'bar'>({
       componentContainer,
-      baseTheme,
+      appearance,
       renderLoader,
       errorFallback,
       renderEmpty
@@ -122,7 +122,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? theme?.getVar('--color-background') : 'transparent'
           },
           legend: {
             display: false
@@ -138,9 +138,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             datasets: [
               {
                 data: values,
-                backgroundColor: theme?.backgroundBrandSolid,
+                backgroundColor: theme?.getVar('--accent-8'),
                 barThickness: labelPosition === 'top' ? 8 : 17,
-                borderRadius: parseInt(theme.radiusXs as string) ?? 4,
+                borderRadius: getPixelFontSizeAsNumber(theme?.getVar('--radius-2')),
                 borderWidth: 0
               }
             ]
@@ -162,14 +162,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 display: true,
                 grid: {
                   drawOnChartArea: false,
-                  color: theme.borderPrimary
+                  color: theme?.getVar('--gray-a8')
                 },
                 border: {
-                  color: theme.borderPrimary
+                  color: theme?.getVar('--gray-a8')
                 },
                 ticks: {
+                  color: theme?.getVar('--gray-9'),
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
+                    size: getPixelFontSizeAsNumber(theme?.getVar('--font-size-1'))
                   }
                 },
                 beginAtZero: true
@@ -179,15 +180,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 grid: {
                   drawOnChartArea: true,
                   drawTicks: false,
-                  color: theme.borderPrimary
+                  color: theme?.getVar('--gray-a8')
                 },
                 border: {
                   display: false
                 },
                 ticks: {
                   padding: 17,
+                  color: theme?.getVar('--gray-9'),
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
+                    size: getPixelFontSizeAsNumber(theme?.getVar('--font-size-1'))
                   }
                 }
               }

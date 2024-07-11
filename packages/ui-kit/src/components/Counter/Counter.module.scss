@@ -1,11 +1,9 @@
+@use '../../themes/tokens/typography';
+
 %textSettings {
+  @extend %fontSize8;
   color: var(--gray-12);
-  font-family: var(--default-font-family);
-  font-style: normal;
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-8);
-  line-height: var(--line-height-8);
-  letter-spacing: var(--letter-spacing-8);
 }
 
 .rootCounter {

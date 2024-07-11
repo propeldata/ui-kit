@@ -1,29 +1,30 @@
 import {
-  Chart,
+  ArcElement,
   BarController,
   BarElement,
   CategoryScale,
+  Chart,
+  ChartConfiguration,
+  ChartDataset,
   Colors,
+  DoughnutController,
+  Filler,
+  Legend,
   LinearScale,
   LineController,
   LineElement,
-  PieController,
-  ArcElement,
-  DoughnutController,
   LogarithmicScale,
-  PointElement,
-  TimeSeriesScale,
-  Tooltip,
-  Filler,
-  ChartDataset,
+  PieController,
   Plugin,
-  ChartConfiguration,
-  Title,
+  PointElement,
   SubTitle,
-  Legend
+  TimeSeriesScale,
+  Title,
+  Tooltip
 } from 'chart.js'
-import type { ThemeTokenProps } from '../../themes'
 import { ChartVariant } from '../../components'
+import type { ThemeTokenProps } from '../../themes'
+import { getPixelFontSizeAsNumber } from './../getPixelFontSizeAsNumber/getPixelFontSizeAsNumber'
 
 export type ChartJSDefaultStyleProps = {
   theme?: ThemeTokenProps
@@ -96,17 +97,22 @@ export const getCustomChartLabelsPlugin = ({
         scales: { y }
       } = chart
 
+      const fontFamily = theme?.getVar('--default-font-family')
+
       ctx.save()
       ctx.textAlign = 'left'
       ctx.textBaseline = 'middle'
-      ctx.font = `${theme?.textXxsRegularFontWeight} ${theme?.textXxsRegularFontSize} ${theme?.textXxsRegularFontFamily}`
-      ctx.fillStyle = theme?.textPrimary ?? '#ffffff'
+      ctx.font = `${theme?.getVar('--font-weight-regular')} ${getPixelFontSizeAsNumber(
+        theme?.getVar('--font-size-1')
+      )} ${fontFamily}`
+      ctx.fillStyle = theme?.getVar('--gray-11') ?? ''
 
       const datasetIndex = args.index
       const datasetMeta = chart.getDatasetMeta(datasetIndex)
       const dataset = data.datasets[datasetIndex] as ChartDataset<ChartVariant, number[]>
 
       if (showBarValues) {
+        ctx.fillStyle = theme?.getVar('--gray-2') ?? ''
         dataset.data.forEach((value, index) => {
           const barElement = datasetMeta.data[index]
 
@@ -115,7 +121,11 @@ export const getCustomChartLabelsPlugin = ({
       }
 
       if (labelPosition === 'top') {
-        ctx.fillStyle = theme?.textSecondary ?? ''
+        ctx.fillStyle = theme?.getVar('--gray-11') ?? ''
+      }
+
+      if (labelPosition === 'inside') {
+        ctx.fillStyle = theme?.getVar('--gray-2') ?? ''
       }
 
       if (['inside', 'top'].includes(labelPosition)) {
@@ -140,10 +150,10 @@ export const getCustomChartLabelsPlugin = ({
 
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
-        ctx.font = `12px ${theme?.textXxsRegularFontFamily}`
+        ctx.font = `12px ${fontFamily}`
         ctx.fillText('Total', xCoor, yCoor - 12)
 
-        ctx.font = `700 24px ${theme?.textXxsRegularFontFamily}`
+        ctx.font = `700 24px ${fontFamily}`
         ctx.fillText(totalValue, xCoor, yCoor + 12)
       }
     }

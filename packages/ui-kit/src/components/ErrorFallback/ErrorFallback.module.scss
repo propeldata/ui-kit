@@ -1,10 +1,7 @@
-@use '../../themes/common';
-
 .rootErrorFallback {
-  @extend .textMdRegular;
-  color: var(--propel-text-secondary);
+  color: var(--gray-12);
   max-width: 263px;
-  height: var(--propel-component-height);
+  height: var(--component-height);
   margin: auto;
   display: flex;
   flex-direction: column;

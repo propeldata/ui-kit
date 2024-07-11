@@ -1,13 +1,22 @@
-import { TimeSeries, TimeSeriesChartVariant, TimeSeriesGranularity } from '@propeldata/ui-kit'
+import { TimeSeries, TimeSeriesChartVariant, TimeSeriesGranularity, Button, Select, Option } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
+
+type chartTypeOption = {
+  value: TimeSeriesChartVariant
+  label: string
+}
+
+const chartTypeOptions: chartTypeOption[] = [
+  { value: 'bar', label: 'Bar' },
+  { value: 'line', label: 'Line' }
+]
 
 export const TimeSeriesConnected = ({
   envs: { REACT_APP_METRIC_UNIQUE_NAME_1 },
   timeRange: timeRangeProp
 }: ConnectedComponentProps) => {
-  const [chartColor, setChartColor] = React.useState('#75BFFF')
-  const [chartType, setChartType] = React.useState<TimeSeriesChartVariant>('bar')
+  const [chartType, setChartType] = React.useState(chartTypeOptions[0])
   const [pointStyle, setPointStyle] = React.useState('cross')
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
   const [timeRange, setTimeRange] = React.useState(timeRangeProp)
@@ -23,7 +32,7 @@ export const TimeSeriesConnected = ({
   return (
     <div className="m-6">
       <h2 className="text-2xl">TimeSeries Connected</h2>
-      <div className="my-5">
+      <div className="my-4">
         <TimeSeries
           card
           query={{
@@ -33,51 +42,36 @@ export const TimeSeriesConnected = ({
             refetchInterval,
             retry: false
           }}
-          variant={chartType}
-          // Should be removed when the `chartConfigProps` is fixed
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          chartConfigProps={(config: any) => {
-            // Custom bar color
-            config.data.datasets[0].backgroundColor = chartColor
-
-            // Custom point settings
-            config.data.datasets[0].pointStyle = pointStyle
-            config.data.datasets[0].borderColor = chartColor
-            config.options.scales.y.beginAtZero = false
-            config.options.scales.y.scale = 'logarithmic'
-            return config
-          }}
+          variant={chartType.value}
         />
       </div>
-      <div className="flex items-center gap-2 mt-1">
-        <input
-          className="border-2 p-1 h-9"
-          type="color"
-          value={chartColor}
-          onChange={(event) => setChartColor(event.target.value)}
-        />
-        <select
-          className="border-2 p-1 h-9 cursor-pointer"
-          onChange={(event) => setChartType(event.target.value as TimeSeriesChartVariant)}
-          value={chartType}
-        >
-          <option value="bar">Bar</option>
-          <option value="line">Line</option>
-        </select>
-        {chartType === 'line' && (
-          <button
-            className="border-2 p-1 h-9"
-            onClick={() => setPointStyle(pointStyle === 'cross' ? 'triangle' : 'cross')}
+      <div className="flex items-center gap-2 mt-1 justify-between">
+        <div className="flex-1 flex gap-2">
+          {chartType.value === 'line' && (
+            <Button size="small" onClick={() => setPointStyle(pointStyle === 'cross' ? 'triangle' : 'cross')}>
+              Switch point style
+            </Button>
+          )}
+          <Button size="small" onClick={handleSwitchRefetchInterval}>
+            Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
+          </Button>
+          <Button size="small" onClick={() => setTimeRange({ n: 0 })}>
+            No data: {timeRange?.n === 0 ? 'On' : 'Off'}
+          </Button>
+        </div>
+        <div className="flex-none">
+          <Select
+            size="small"
+            onChange={(_, val) => setChartType(val as (typeof chartTypeOptions)[0])}
+            value={chartType}
           >
-            Switch point style
-          </button>
-        )}
-        <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
-          Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
-        </button>
-        <button className="border-2 p-1 h-9" onClick={() => setTimeRange({ n: 0 })}>
-          No data: {timeRange?.n === 0 ? 'On' : 'Off'}
-        </button>
+            {chartTypeOptions.map((option) => (
+              <Option key={option.value} value={option}>
+                {option.label}
+              </Option>
+            ))}
+          </Select>
+        </div>
       </div>
     </div>
   )

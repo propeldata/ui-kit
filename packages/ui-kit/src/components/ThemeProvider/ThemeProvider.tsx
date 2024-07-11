@@ -33,6 +33,8 @@ const getAccentColors = (accentColor: AccentColors, appearance: ThemeAppearances
   return {
     ...radixColors.whiteA,
     ...radixColors.blackA,
+    ...radixColors[`red${appearanceSuffix}`],
+    ...radixColors[`red${appearanceSuffix}A`],
     ...radixColors[`slate${appearanceSuffix}`], // @TODO: fix this
     ...radixColors[`slate${appearanceSuffix}A`], // @TODO: fix this
     ...(radixColors[`${accentColor}${appearanceSuffix}`] as Record<string, string>),

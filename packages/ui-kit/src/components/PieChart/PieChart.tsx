@@ -38,7 +38,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       card = false,
       className,
       style,
-      baseTheme = 'lightTheme',
+      appearance = 'light',
       loading: isLoadingStatic = false,
       chartProps,
       labelListClassName,
@@ -59,7 +59,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<PieChartVariant>({
       componentContainer,
-      baseTheme,
+      appearance,
       renderLoader,
       errorFallback,
       renderEmpty
@@ -113,16 +113,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const defaultChartColorPalette = React.useMemo(
       () => [
-        theme?.brand900,
-        theme?.brand700,
-        theme?.brand600,
-        theme?.brand500,
-        theme?.brand400,
-        theme?.brand300,
-        theme?.brand200,
-        theme?.brand100,
-        theme?.brand50,
-        theme?.brand25
+        theme?.getVar('--accent-3'),
+        theme?.getVar('--accent-4'),
+        theme?.getVar('--accent-5'),
+        theme?.getVar('--accent-6'),
+        theme?.getVar('--accent-7'),
+        theme?.getVar('--accent-8'),
+        theme?.getVar('--accent-9'),
+        theme?.getVar('--accent-10'),
+        theme?.getVar('--accent-11'),
+        theme?.getVar('--accent-12')
       ],
       [theme]
     )
@@ -165,7 +165,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? theme?.getVar('--color-background') : 'transparent'
           },
           title: {
             display: isPie && !hideTotal,
@@ -183,7 +183,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             }
           },
           emptyDoughnut: {
-            color: theme?.backgroundBrandPrimary,
+            color: theme?.getVar('--accent-11'),
             width: 2,
             radiusDecrease: 20
           },

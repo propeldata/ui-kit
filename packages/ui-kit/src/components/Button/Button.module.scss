@@ -1,19 +1,17 @@
+@use '../../themes/tokens/typography';
+
 .rootButton {
-  font-family: var(--default-font-family);
-  font-style: normal;
+  @extend %fontSize2;
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-2);
-  line-height: var(--line-height-2);
-  letter-spacing: var(--letter-spacing-2);
 
   padding: var(--space-2) var(--space-5);
   gap: var(--space-3);
-  background-color: var(--accent-contrast);
+  background-color: var(--color-background);
   border-radius: var(--radius-1);
   border-width: 1px;
-  border-color: var(--accent-9);
+  border-color: var(--gray-6);
   border-style: solid;
-  color: var(--accent-11);
+  color: var(--gray-11);
   cursor: var(--cursor-button);
   white-space: nowrap;
   display: flex;
@@ -27,8 +25,9 @@
   &:focus-visible,
   &.focus {
     outline: none;
-    background-color: var(--accent-a2);
-    border-color: var(--accent-10);
+    background-color: var(--gray-a2);
+    box-shadow: 0 0 0 3px var(--accent-a4);
+    border-color: var(--accent-8);
   }
 
   &.disabled {
@@ -74,9 +73,7 @@
   }
 
   &.small {
-    font-size: var(--font-size-1);
-    line-height: var(--line-height-1);
-    letter-spacing: var(--letter-spacing-1);
+    @extend %fontSize1;
 
     padding: var(--space-1) var(--space-3);
 

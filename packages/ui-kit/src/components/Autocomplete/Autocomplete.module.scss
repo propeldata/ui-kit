@@ -1,32 +1,40 @@
+@use '../../themes/tokens/typography';
+
 .rootAutocomplete {
-  box-shadow: var(--propel-shadows-shadow-xs);
-  border-radius: var(--propel-radius-xs);
-  color: var(--propel-text-primary);
-  background-color: var(--propel-background-primary);
-  border: 1px solid var(--propel-border-primary);
+  @extend %fontSize2;
+
+  border-radius: var(--radius-2);
+  background-color: var(--color-background);
+  border: 1px solid var(--gray-6);
   display: flex;
-  gap: var(--propel-spacing-xs);
-  padding: var(--propel-spacing-xs);
+  gap: var(--space-1);
+  padding: var(--space-1);
   overflow: hidden;
   transition: all 100ms;
   box-sizing: border-box;
 
+  transition: background-color var(--transition-ease-time) ease, border-color var(--transition-ease-time) ease,
+    color var(--transition-ease-time) ease;
+
   &:hover {
-    border: 1px solid var(--propel-border-brand);
+    background-color: var(--gray-a2);
+    border-color: var(--gray-10);
   }
 }
 
 .rootAutocomplete__focused {
-  border: 1px solid var(--propel-border-brand);
-  box-shadow: 0 0 0 3px #c7def7;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-a4);
+  border-color: var(--accent-8);
 }
 
 .autocompleteInput {
-  color: var(--propel-text-primary);
+  @extend %fontSize2;
+
   background: inherit;
   border: none;
   border-radius: inherit;
-  padding: var(--propel-spacing-xs);
+  padding: var(--space-1);
   outline: 0;
   flex: 1 0 auto;
   width: 100%;
@@ -43,32 +51,28 @@
   margin-right: 4px;
   display: flex;
   align-items: center;
-
-  &:hover {
-    background-color: var(--propel-background-secondary);
-    cursor: pointer;
-  }
 }
 
 .autocompleteList {
+  @extend %fontSize2;
+
   box-sizing: border-box;
-  padding: var(--propel-spacing-xs);
-  margin: var(--propel-spacing-xs) 0;
+  padding: var(--space-1);
+  margin: var(--space-1) 0;
   width: 100%;
-  border-radius: var(--propel-radius-xs);
+  border-radius: var(--radius-2);
   overflow: auto;
   outline: 0px;
   max-height: 300px;
   z-index: 9999;
-  background-color: var(--propel-background-primary);
-  border: 1px solid var(--propel-border-primary);
-  color: var(--propel-text-primary);
-  box-shadow: var(--propel-shadows-shadow-xs);
+  background-color: var(--color-background);
+  border: 1px solid var(--gray-6);
+  box-shadow: var(--shadow-5);
 
   li {
     list-style: none;
-    padding: var(--propel-spacing-md);
-    border-radius: var(--propel-radius-xs);
+    padding: var(--space-2);
+    border-radius: var(--radius-2);
     cursor: default;
 
     &:last-of-type {
@@ -76,22 +80,16 @@
     }
 
     &:hover {
-      background-color: var(--propel-background-primary-hover);
+      background-color: var(--gray-2);
       cursor: pointer;
     }
 
     &[class^='Mui-focused'] {
-      background-color: var(--propel-brand-25);
+      background-color: var(--accent-11);
     }
 
     &[aria-selected='true'] {
-      background-color: var(--propel-background-brand-solid);
-      color: var(--propel-text-white);
-    }
-
-    &[aria-selected='true']:hover {
-      background-color: var(--propel-background-brand-solid-hover);
-      color: var(--propel-text-white);
+      background-color: var(--gray-3);
     }
   }
 }

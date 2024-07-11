@@ -1,26 +1,50 @@
-@use '../../themes/generated/tokens';
+@use '../../themes/tokens/typography';
 
 .rootButton {
-  @extend .textMdRegular;
+  border-color: var(--gray-6);
+  color: var(--gray-11);
+
+  &.startAdornment {
+    padding-left: var(--space-3);
+  }
+
+  &.endAdornment,
+  &.startAdornment.endAdornment {
+    padding-right: var(--space-3);
+    padding-left: var(--space-3);
+  }
 
   &.small {
-    @extend .textSmRegular;
+    font-size: var(--font-size-1);
+    letter-spacing: var(--letter-spacing-1);
+
+    padding: var(--space-1) var(--space-3);
+
+    &.startAdornment {
+      padding-left: var(--space-2);
+    }
+
+    &.endAdornment,
+    &.startAdornment.endAdornment {
+      padding-right: var(--space-2);
+      padding-left: var(--space-2);
+    }
   }
 }
 
 .popper {
   z-index: 9999;
-  padding: var(--propel-spacing-lg);
-  background-color: var(--propel-background-primary);
-  border-radius: var(--propel-radius-sm);
+  padding: var(--space-3);
+  background-color: var(--color-background);
+  border-radius: var(--radius-2);
   border-width: 1px;
-  border-color: var(--propel-border-secondary);
+  border-color: var(--gray-6);
   border-style: solid;
-  color: var(--propel-text-secondary);
+  color: var(--gray-11);
   display: flex;
   min-width: fit-content;
-  box-shadow: var(--propel-shadows-shadow-xs);
-  margin-top: var(--propel-spacing-xxs) !important;
+  box-shadow: var(--shadow-5);
+  margin-top: var(--space-1) !important;
 
   ul {
     width: 100%;
@@ -35,10 +59,10 @@
 .small {
   ul {
     li {
-      @extend .textSmRegular;
+      @extend %fontSize1;
 
-      padding: var(--propel-spacing-md) var(--propel-spacing-xl);
-      gap: var(--propel-spacing-xxs);
+      padding: var(--space-2) var(--space-3);
+      gap: var(--space-1);
     }
   }
 }

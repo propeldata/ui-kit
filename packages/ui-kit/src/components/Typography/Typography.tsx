@@ -4,8 +4,8 @@ import componentStyles from './Typography.module.scss'
 
 export type TypographyProps<T extends React.ElementType = 'span'> = React.ComponentPropsWithoutRef<T> & {
   as?: T
-  // Add new variant when needed. themes/generated/_tokens.scss for available variants.
-  variant?: 'textMdRegular' | 'textMdSemibold' | 'textXsRegular' | 'textXxsRegular' | 'textSmRegular'
+  size?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+  weight?: 'light' | 'regular' | 'medium' | 'bold'
   block?: boolean
 }
 
@@ -13,7 +13,8 @@ export const Typography = <T extends React.ElementType = 'span'>({
   as,
   children,
   className,
-  variant = 'textMdRegular',
+  size = 2,
+  weight = 'regular',
   block,
   ...rest
 }: TypographyProps<T>) => {
@@ -23,7 +24,8 @@ export const Typography = <T extends React.ElementType = 'span'>({
       {...rest}
       className={classnames(
         componentStyles.rootTypography,
-        componentStyles[variant],
+        componentStyles[`weight-${weight}`],
+        componentStyles[`size-${size}`],
         block && componentStyles.block,
         className
       )}

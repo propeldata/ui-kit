@@ -1,29 +1,32 @@
-@use '../../themes/generated/tokens';
-
 .rootCard {
   padding: 0;
   margin: 0;
+
+  font-family: var(--font-family);
 }
 
-// Add new variant when needed. Check themes/generated/_tokens.scss for available variants.
-.textMdRegular {
-  @extend .textMdRegular;
+.weight-light {
+  font-weight: var(--font-weight-light);
 }
 
-.textMdSemibold {
-  @extend .textMdSemibold;
+.weight-regular {
+  font-weight: var(--font-weight-regular);
 }
 
-.textXsRegular {
-  @extend .textXsRegular;
+.weight-medium {
+  font-weight: var(--font-weight-medium);
 }
 
-.textXxsRegular {
-  @extend .textXxsRegular;
+.weight-bold {
+  font-weight: var(--font-weight-bold);
 }
 
-.textSmRegular {
-  @extend .textSmRegular;
+@for $i from 1 through 9 {
+  .size-#{$i} {
+    font-size: var(--font-size-#{$i});
+    line-height: var(--line-height-#{$i});
+    letter-spacing: var(--letter-spacing-#{$i});
+  }
 }
 
 .block {
