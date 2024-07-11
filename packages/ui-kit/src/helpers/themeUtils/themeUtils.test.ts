@@ -1,4 +1,5 @@
-import { clearContainerStyle, setContainerStyle } from './themeUtils'
+// import { clearContainerStyle, setContainerStyle } from './themeUtils'
+import { setContainerStyle } from './themeUtils'
 
 describe('Theme Style Utilities', () => {
   let mockElement: HTMLElement
