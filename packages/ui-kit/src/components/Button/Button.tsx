@@ -2,13 +2,12 @@ import { useButton } from '@mui/base/useButton'
 import classnames from 'classnames'
 import * as React from 'react'
 import { useForwardedRefCallback } from '../../helpers'
-import { ThemeAppearances } from '../../themes'
+import { ThemeSettingProps, useParsedComponentProps } from '../../themes'
 import { ThemeStateProps, useSetupTheme } from '../ThemeProvider'
 import componentStyles from './Button.module.scss'
 
-export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+export interface ButtonProps extends ThemeSettingProps, React.ComponentPropsWithoutRef<'button'> {
   overridable?: boolean
-  appearance?: ThemeAppearances
   variant?: 'outline' | 'primary'
   size?: 'default' | 'small'
   startAdornment?: ({ theme }: { theme: ThemeStateProps }) => React.ReactElement
@@ -17,7 +16,6 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, forwardedRef) => {
   const {
-    appearance,
     children,
     className,
     disabled,
@@ -30,8 +28,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
     value,
     ...rest
   } = props
+  const { themeSettings, parsedProps } = useParsedComponentProps(rest)
   const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-  const { theme, components } = useSetupTheme({ componentContainer, appearance })
+  const { theme, components } = useSetupTheme({ componentContainer, ...themeSettings })
   const { active, focusVisible, getRootProps } = useButton({
     ...props,
     rootRef: setRef
@@ -44,7 +43,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, f
   return (
     <button
       {...getRootProps()}
-      {...rest}
+      {...parsedProps}
       role={role}
       className={classnames(
         componentStyles.rootButton,

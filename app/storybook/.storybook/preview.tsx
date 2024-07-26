@@ -2,9 +2,9 @@ import { Source } from '@storybook/blocks'
 import type { Preview, StoryContext } from '@storybook/react'
 import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
-import { ThemeProvider, ThemeProviderProps, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
+import { ThemeProvider, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
 import { QueryClient, QueryClientProvider } from '../../../packages/ui-kit/src/graphql'
-import { accentColors } from '../../../packages/ui-kit/src/themes'
+import { accentColors, grayColors, getMatchingGrayColor, radii, scalings } from '../../../packages/ui-kit/src/themes'
 import axiosInstance from '../src/axios'
 import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
@@ -12,7 +12,7 @@ import './global.css'
 const GlobalStyles = () => {
   const theme = useTheme()
   if (document && theme) {
-    document.body.style.setProperty('--bg-color', theme.getVar('--accent-1'))
+    document.body.style.setProperty('--bg-color', theme.getVar('--propel-accent-1'))
   }
   return null
 }
@@ -25,17 +25,22 @@ const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   }
 
   return (
-    <ThemeProvider
-      accentColor={context.globals.accentColor}
-      appearance={context.globals.appearance}
-      // className="themeProvider"
-      // components={{
-      //   Button: (props) => <MyCustomButton {...props} />
-      // }}
-    >
-      <GlobalStyles />
-      <Story />
-    </ThemeProvider>
+    <>
+      <ThemeProvider
+        appearance={context.globals.appearance}
+        accentColor={context.globals.accentColor}
+        grayColor={context.globals.grayColor}
+        radius={context.globals.radius}
+        scaling={context.globals.scaling}
+        // className="themeProvider"
+        // components={{
+        //   Button: (props) => <MyCustomButton {...props} />
+        // }}
+      >
+        <GlobalStyles />
+        <Story />
+      </ThemeProvider>
+    </>
   )
 }
 
@@ -118,6 +123,36 @@ const preview: Preview = {
       toolbar: {
         icon: 'circle',
         items: accentColors.map((color) => ({ value: color, title: color })),
+        showName: true
+      }
+    },
+    grayColor: {
+      name: 'Gray color',
+      description: 'Global theme gray color',
+      defaultValue: getMatchingGrayColor('blue'),
+      toolbar: {
+        icon: 'mirror',
+        items: grayColors.filter((color) => color !== 'auto').map((color) => ({ value: color, title: color })),
+        showName: true
+      }
+    },
+    radius: {
+      name: 'Radius color',
+      description: 'Global theme radius color',
+      defaultValue: 'medium',
+      toolbar: {
+        icon: 'button',
+        items: radii.map((value) => ({ value: value, title: value })),
+        showName: true
+      }
+    },
+    scaling: {
+      name: 'Scaling',
+      description: 'Global theme scaling',
+      defaultValue: '100%',
+      toolbar: {
+        icon: 'category',
+        items: scalings.map((value) => ({ value: value, title: value })),
         showName: true
       }
     }

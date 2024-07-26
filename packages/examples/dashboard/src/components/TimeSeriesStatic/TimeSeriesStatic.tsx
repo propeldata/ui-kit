@@ -1,4 +1,4 @@
-import { TimeSeries, TimeSeriesChartVariant, Button, Select, Option } from '@propeldata/ui-kit'
+import { TimeSeries, TimeSeriesChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { useFakeData } from '../../hooks/useFakeData'
 
@@ -72,7 +72,7 @@ export const TimeSeriesStatic = () => {
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">TimeSeries Static</h2>
+      <Typography size={6}>TimeSeries Static</Typography>
       <div className="my-4">
         <TimeSeries card variant={chartType.value} labels={data?.labels} values={data?.values} loading={isLoading} />
       </div>

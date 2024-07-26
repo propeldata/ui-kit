@@ -1,4 +1,4 @@
-import { Leaderboard, LeaderboardChartVariant, Button, Select, Option } from '@propeldata/ui-kit'
+import { Leaderboard, LeaderboardChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { useFakeData } from '../../hooks/useFakeData'
 
@@ -47,7 +47,7 @@ export const LeaderboardStatic = () => {
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">Leaderboard Static</h2>
+      <Typography size={6}>Leaderboard Static</Typography>
       <div className="my-4">
         <Leaderboard
           card

@@ -1,4 +1,4 @@
-import { PieChart, PieChartVariant, Button, Select, Option } from '@propeldata/ui-kit'
+import { PieChart, PieChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
 
@@ -30,7 +30,7 @@ export const PieChartConnected = ({
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">PieChart Connected</h2>
+      <Typography size={6}>PieChart Connected</Typography>
       <div className="my-4">
         <PieChart
           card

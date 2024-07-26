@@ -1,5 +1,4 @@
-// import { clearContainerStyle, setContainerStyle } from './themeUtils'
-import { setContainerStyle } from './themeUtils'
+import { clearContainerStyle, setContainerStyle } from './themeUtils'
 
 describe('Theme Style Utilities', () => {
   let mockElement: HTMLElement
@@ -13,15 +12,14 @@ describe('Theme Style Utilities', () => {
     document.body.removeChild(mockElement)
   })
 
-  // @TODO: Fix this test
-  // it('clears container style', () => {
-  //   // Apply a style
-  //   mockElement.style.setProperty('--brand-primary', 'blue')
-  //   clearContainerStyle(mockElement)
+  it('clears container style', () => {
+    // Apply a style
+    mockElement.style.setProperty('--propel-brand-primary', 'blue')
+    clearContainerStyle(mockElement)
 
-  //   const computedStyle = getComputedStyle(mockElement)
-  //   expect(computedStyle.getPropertyValue('--brand-primary')).toBe('')
-  // })
+    const computedStyle = getComputedStyle(mockElement)
+    expect(computedStyle.getPropertyValue('--propel-brand-primary')).toBe('')
+  })
 
   it('sets container style', () => {
     const theme = {
@@ -33,7 +31,7 @@ describe('Theme Style Utilities', () => {
     setContainerStyle(mockElement, theme)
 
     const computedStyle = getComputedStyle(mockElement)
-    expect(computedStyle.getPropertyValue('--brand-primary')).toBe('red')
-    expect(computedStyle.getPropertyValue('--font-size')).toBe('12px')
+    expect(computedStyle.getPropertyValue('--propel-brand-primary')).toBe('red')
+    expect(computedStyle.getPropertyValue('--propel-font-size')).toBe('12px')
   })
 })

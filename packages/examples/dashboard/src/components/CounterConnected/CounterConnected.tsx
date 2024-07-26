@@ -1,4 +1,4 @@
-import { Button, Counter } from '@propeldata/ui-kit'
+import { Button, Counter, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
 
@@ -11,7 +11,7 @@ export const CounterConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 }, tim
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">Counter Connected</h2>
+      <Typography size={6}>Counter Connected</Typography>
       <div className="my-4">
         <Counter
           card
@@ -21,7 +21,7 @@ export const CounterConnected = ({ envs: { REACT_APP_METRIC_UNIQUE_NAME_1 }, tim
             refetchInterval,
             retry: false
           }}
-          style={{ color: 'var(--accent-11)' }}
+          style={{ color: 'var(--propel-accent-11)' }}
         />
       </div>
       <div className="flex items-center gap-2 mt-1">

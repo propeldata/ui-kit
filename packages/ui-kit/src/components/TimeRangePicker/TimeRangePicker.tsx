@@ -6,6 +6,7 @@ import React from 'react'
 import { ClassNames, DateRange, DayPicker } from 'react-day-picker'
 import styles from 'react-day-picker/dist/style.module.css'
 import { getDateTimeFormatPattern, getLocale, useForwardedRefCallback } from '../../helpers'
+import { useParsedComponentProps } from '../../themes'
 import { Button } from '../Button'
 import { Divider } from '../Divider'
 import { CalendarIcon } from '../Icons/Calendar'
@@ -43,7 +44,6 @@ const formatDateTime = (value: Date | undefined, locale: string, valueFormat?: I
 export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerProps>(
   (
     {
-      appearance = 'light',
       disableDateUntilNow = false,
       disableCustomRange = false,
       disableCustomRelative = false,
@@ -54,15 +54,17 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       defaultValue = null,
       size = 'default',
       value,
-      onChange
+      onChange,
+      ...rest
     },
     forwardedRef
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const selectRef = React.useRef<HTMLButtonElement | null>(null)
     const { theme } = useSetupTheme({
-      appearance,
-      componentContainer
+      componentContainer,
+      ...themeSettings
     })
 
     const locale = localeProp || getLocale()
@@ -79,7 +81,10 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const lastNRef = React.useRef(lastN)
     const lastNOptionRef = React.useRef(lastNOption)
 
-    const [selectedOption, setSelectedOption] = React.useState<DateRangeOptionsProps | null>(defaultValue)
+    const [selectedOption, setSelectedOption] = React.useState<DateRangeOptionsProps | null>(
+      options?.find((option) => option.value === defaultValue?.value) ?? null
+    )
+
     const [datepickerRange, setDatepickerRange] = React.useState<DateRange | null>(null)
     const [selectedRange, setSelectedRange] = React.useState<DateRange | null>(null)
 
@@ -115,9 +120,14 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
 
     React.useEffect(() => {
       if (value) {
-        setSelectedOption({ ...value })
+        const option = options?.find((option) => option.value === value?.value)
+        setSelectedOption(option ?? null)
+
+        if (!value.params && option && onChange) {
+          onChange(option)
+        }
       }
-    }, [value])
+    }, [options, onChange, value])
 
     React.useEffect(() => {
       lastNRef.current = lastN
@@ -302,14 +312,18 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     }
 
     return (
-      <div ref={setRef}>
+      <div ref={setRef} {...parsedProps}>
         <Select<DateRangeOptionsProps>
           ref={selectRef}
           disabled={disabled || (disableOptions && disableCustomRelative && disableCustomRange && disableDateUntilNow)}
           startAdornment={() => <CalendarIcon size={16} />}
           value={selectedOption}
           placeholder="Date Range"
-          onListboxOpenChange={(listboxOpen) => setSelectOpen(listboxOpen)}
+          onListboxOpenChange={(listboxOpen) => {
+            if (!popupOpen) {
+              setSelectOpen(listboxOpen)
+            }
+          }}
           listboxOpen={selectOpen}
           size={size}
           slotProps={{
@@ -352,13 +366,16 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                   size={size}
                   role="spinbutton"
                   onChange={onLastNChange}
-                  style={{ width: 56, padding: `${theme?.getVar('--space-1')} ${theme?.getVar('--space-2')}` }}
+                  style={{
+                    width: 56,
+                    padding: `${theme?.getVar('--propel-space-1')} ${theme?.getVar('--propel-space-2')}`
+                  }}
                 />{' '}
                 <Select
                   value={lastNOption}
                   size={size}
                   onChange={(_, value) => onLastNOption(value)}
-                  style={{ padding: `${theme?.getVar('--space-1')} ${theme?.getVar('--space-2')}` }}
+                  style={{ padding: `${theme?.getVar('--propel-space-1')} ${theme?.getVar('--propel-space-2')}` }}
                 >
                   {lastNOptions.map((option) => (
                     <Option key={option.label} value={option}>
@@ -464,11 +481,11 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
                 <Divider as="div" />
                 <div className={componentStyles[datepickerMode]}>
                   <Typography size={1}>
-                    <span style={{ color: theme?.getVar('--gray-10') }}>Start:</span>{' '}
+                    <span style={{ color: theme?.getVar('--propel-gray-10') }}>Start:</span>{' '}
                     {formatDateTime(datepickerRange?.from, locale, CUSTOM_RANGE_FORMAT_OPTIONS)}
                   </Typography>
                   <Typography size={1}>
-                    <span style={{ color: theme?.getVar('--gray-10') }}>End:</span>{' '}
+                    <span style={{ color: theme?.getVar('--propel-gray-10') }}>End:</span>{' '}
                     {datepickerMode === FROM_DATE_UNTIL_NOW
                       ? `Now ${formatDateTime(datepickerRange?.to, locale, {
                           year: 'numeric',

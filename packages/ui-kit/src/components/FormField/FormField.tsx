@@ -9,7 +9,7 @@ export interface FormFieldProps extends React.ComponentPropsWithoutRef<'fieldset
 }
 
 export const FormField = ({ label, children, ...rest }: FormFieldProps) => (
-  <fieldset {...rest} className={classNames(componentStyles.rootFormField, rest.className)} data-testid="form-field">
+  <fieldset data-testid="form-field" {...rest} className={classNames(componentStyles.rootFormField, rest.className)}>
     <Typography size={1} as="label">
       {label}
     </Typography>

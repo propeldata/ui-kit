@@ -1,5 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
+import { ThemeSettingProps } from '../../themes'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'
@@ -58,7 +59,7 @@ export interface PieChartQueryProps extends QueryProps {
   dimension?: DimensionInput
 }
 
-export interface PieChartProps extends DataComponentProps<'div'> {
+export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string

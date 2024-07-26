@@ -1,4 +1,4 @@
-import { Leaderboard, LeaderboardChartVariant, Button, Select, Option } from '@propeldata/ui-kit'
+import { Leaderboard, LeaderboardChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
 
@@ -35,7 +35,7 @@ export const LeaderboardConnected = ({
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">Leaderboard Connected</h2>
+      <Typography size={6}>Leaderboard Connected</Typography>
       <div className="my-4">
         <Leaderboard
           card

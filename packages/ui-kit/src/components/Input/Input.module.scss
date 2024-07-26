@@ -3,12 +3,12 @@
 .rootInput {
   @extend %fontSize2;
 
-  padding: var(--space-2) var(--space-4);
-  gap: var(--space-2);
-  background-color: var(--color-background);
-  border-radius: var(--radius-2);
+  padding: var(--propel-space-2) var(--propel-space-4);
+  gap: var(--propel-space-2);
+  background-color: var(--propel-color-background);
+  border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
   border-width: 1px;
-  border-color: var(--gray-6);
+  border-color: var(--propel-gray-6);
   border-style: solid;
   cursor: text;
   white-space: nowrap;
@@ -17,7 +17,7 @@
   align-items: center;
   width: fit-content;
   box-sizing: border-box;
-  transition: border-color var(--transition-ease-time) ease, box-shadow var(--transition-ease-time) ease;
+  transition: border-color var(--propel-transition-ease-time) ease, box-shadow var(--propel-transition-ease-time) ease;
 
   & input {
     @extend %fontSize2;
@@ -36,42 +36,42 @@
   }
 
   &:hover {
-    border-color: var(--accent-8);
+    border-color: var(--propel-accent-8);
   }
 
   &.focus {
     outline: none;
-    box-shadow: 0 0 0 3px var(--accent-a4);
-    border-color: var(--accent-8);
+    box-shadow: 0 0 0 3px var(--propel-accent-a4);
+    border-color: var(--propel-accent-8);
   }
 
   &.error {
-    border-color: var(--color-error-border);
+    border-color: var(--propel-color-error-border);
 
     & input {
-      color: var(--color-error-text);
+      color: var(--propel-color-error-text);
     }
   }
 
   &.disabled {
-    color: var(--gray-a8);
-    background-color: var(--gray-2);
-    border-color: var(--gray-a3);
+    color: var(--propel-gray-a8);
+    background-color: var(--propel-gray-2);
+    border-color: var(--propel-gray-a3);
 
     &:hover {
       cursor: default;
     }
 
     & svg {
-      color: var(--gray-a8);
+      color: var(--propel-gray-a8);
     }
   }
 
   &.small {
     @extend %fontSize1;
 
-    padding: var(--space-1) var(--space-3);
-    gap: var(--space-1);
+    padding: var(--propel-space-1) var(--propel-space-3);
+    gap: var(--propel-space-1);
 
     & input {
       @extend %fontSize1;

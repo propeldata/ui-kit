@@ -1,5 +1,5 @@
-import { ThemeAppearances } from 'src/themes'
 import type { TimeRangeInput } from '../../graphql'
+import { ThemeSettingProps } from '../../themes'
 import type { ButtonProps } from '../Button'
 
 export type DateRangeOptionsProps = {
@@ -14,14 +14,9 @@ export type DateRangeOptionsProps = {
 }
 
 export interface TimeRangePickerProps
-  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'size'>,
+  extends ThemeSettingProps,
+    Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'size'>,
     Pick<ButtonProps, 'size'> {
-  /**
-   * The initial theme used as a base. It provides a default set of styling
-   * from which customizations can be applied.
-   */
-  appearance?: ThemeAppearances
-
   /** If set to true, disables the option within the picker that allows users to select a range extending to the current date. */
   disableDateUntilNow?: boolean
 

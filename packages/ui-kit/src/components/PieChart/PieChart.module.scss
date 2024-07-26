@@ -2,19 +2,19 @@
 
 .rootPieChart {
   @extend %fontSize1;
-  color: var(--gray-12);
+  color: var(--propel-gray-12);
   overflow: auto;
   padding: 0;
 
-  canvas {
-    height: var(--component-height);
+  > div {
+    height: var(--propel-component-height);
   }
 }
 
 .pieChartList {
   @extend %fontSize2;
-  color: var(--gray-12);
-  margin-top: var(--space-4);
+  color: var(--propel-gray-12);
+  margin-top: var(--propel-space-4);
 
   ul {
     max-width: 18rem;
@@ -24,7 +24,7 @@
 
     li {
       display: flex;
-      padding: var(--space-1) 0;
+      padding: var(--propel-space-1) 0;
       justify-content: space-between;
 
       & > span {
@@ -38,7 +38,7 @@
           display: inline-block;
           width: 0.75rem;
           height: 0.75rem;
-          margin-right: var(--space-2);
+          margin-right: var(--propel-space-2);
           border-radius: 50%;
         }
       }
@@ -53,7 +53,7 @@
       li:nth-child(#{9 - $i}) {
         & > span:first-child {
           &:before {
-            background-color: var(--accent-#{$i});
+            background-color: var(--propel-accent-#{$i});
           }
         }
       }
@@ -62,7 +62,7 @@
     li:nth-child(9) {
       & > span:first-child {
         &:before {
-          background-color: var(--accent-4);
+          background-color: var(--propel-accent-4);
         }
       }
     }
@@ -70,7 +70,7 @@
     li:nth-child(10) {
       & > span:first-child {
         &:before {
-          background-color: var(--accent-3);
+          background-color: var(--propel-accent-3);
         }
       }
     }

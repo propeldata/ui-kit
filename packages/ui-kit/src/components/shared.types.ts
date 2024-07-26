@@ -4,6 +4,7 @@ import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
 import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
 import { ButtonProps } from './Button'
+import { CardProps } from './Card'
 
 /** Shared props for the data components. */
 
@@ -69,7 +70,7 @@ export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeCom
     card?: boolean
 
     /** Props for the Card component */
-    cardProps?: React.ComponentPropsWithoutRef<'div'>
+    cardProps?: CardProps
   }
 
 export interface QueryProps {

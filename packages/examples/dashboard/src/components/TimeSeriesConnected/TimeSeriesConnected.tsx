@@ -1,4 +1,12 @@
-import { TimeSeries, TimeSeriesChartVariant, TimeSeriesGranularity, Button, Select, Option } from '@propeldata/ui-kit'
+import {
+  TimeSeries,
+  TimeSeriesChartVariant,
+  TimeSeriesGranularity,
+  Button,
+  Select,
+  Option,
+  Typography
+} from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
 
@@ -31,7 +39,7 @@ export const TimeSeriesConnected = ({
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">TimeSeries Connected</h2>
+      <Typography size={6}>TimeSeries Connected</Typography>
       <div className="my-4">
         <TimeSeries
           card

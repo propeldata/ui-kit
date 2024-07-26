@@ -2,30 +2,30 @@
   padding: 0;
   margin: 0;
 
-  font-family: var(--font-family);
+  font-family: var(--propel-font-family);
 }
 
 .weight-light {
-  font-weight: var(--font-weight-light);
+  font-weight: var(--propel-font-weight-light);
 }
 
 .weight-regular {
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--propel-font-weight-regular);
 }
 
 .weight-medium {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--propel-font-weight-medium);
 }
 
 .weight-bold {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--propel-font-weight-bold);
 }
 
 @for $i from 1 through 9 {
   .size-#{$i} {
-    font-size: var(--font-size-#{$i});
-    line-height: var(--line-height-#{$i});
-    letter-spacing: var(--letter-spacing-#{$i});
+    font-size: var(--propel-font-size-#{$i});
+    line-height: var(--propel-line-height-#{$i});
+    letter-spacing: var(--propel-letter-spacing-#{$i});
   }
 }
 

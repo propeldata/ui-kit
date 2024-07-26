@@ -2,89 +2,89 @@
 
 .rootButton {
   @extend %fontSize2;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--propel-font-weight-medium);
 
-  padding: var(--space-2) var(--space-5);
-  gap: var(--space-3);
-  background-color: var(--color-background);
-  border-radius: var(--radius-1);
+  padding: var(--propel-space-2) var(--propel-space-5);
+  gap: var(--propel-space-3);
+  background-color: var(--propel-color-background);
+  border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
   border-width: 1px;
-  border-color: var(--gray-6);
+  border-color: var(--propel-gray-6);
   border-style: solid;
-  color: var(--gray-11);
-  cursor: var(--cursor-button);
+  color: var(--propel-gray-11);
+  cursor: var(--propel-cursor-button);
   white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  transition: background-color var(--transition-ease-time) ease, border-color var(--transition-ease-time) ease,
-    color var(--transition-ease-time) ease;
+  transition: background-color var(--propel-transition-ease-time) ease,
+    border-color var(--propel-transition-ease-time) ease, color var(--propel-transition-ease-time) ease;
 
   &:hover,
   &:focus-visible,
   &.focus {
     outline: none;
-    background-color: var(--gray-a2);
-    box-shadow: 0 0 0 3px var(--accent-a4);
-    border-color: var(--accent-8);
+    background-color: var(--propel-gray-a2);
+    box-shadow: 0 0 0 3px var(--propel-accent-a4);
+    border-color: var(--propel-accent-8);
   }
 
   &.disabled {
-    color: var(--gray-10);
-    border-color: var(--gray-3);
+    color: var(--propel-gray-10);
+    border-color: var(--propel-gray-3);
     &:hover {
       background-color: inherit;
       cursor: inherit;
     }
     & svg {
-      color: var(--gray-10);
+      color: var(--propel-gray-10);
     }
   }
 
   &.startAdornment {
     justify-content: flex-start;
-    padding-left: var(--space-2);
+    padding-left: var(--propel-space-2);
   }
 
   &.endAdornment,
   &.startAdornment.endAdornment {
     justify-content: space-between;
-    padding-right: var(--space-2);
-    padding-left: var(--space-2);
+    padding-right: var(--propel-space-2);
+    padding-left: var(--propel-space-2);
   }
 
   &.primary {
-    background-color: var(--accent-9);
-    border-color: var(--accent-9);
+    background-color: var(--propel-accent-9);
+    border-color: var(--propel-accent-9);
     color: #ffffff;
 
     &:hover,
     &.focus {
-      background-color: var(--accent-10);
-      border-color: var(--accent-10);
+      background-color: var(--propel-accent-10);
+      border-color: var(--propel-accent-10);
     }
 
     &.disabled {
-      color: var(--gray-a8);
-      background-color: var(--gray-2);
-      border-color: var(--gray-a3);
+      color: var(--propel-gray-a8);
+      background-color: var(--propel-gray-2);
+      border-color: var(--propel-gray-a3);
     }
   }
 
   &.small {
     @extend %fontSize1;
 
-    padding: var(--space-1) var(--space-3);
+    padding: var(--propel-space-1) var(--propel-space-3);
 
     &.startAdornment {
-      padding-left: var(--space-1);
+      padding-left: var(--propel-space-1);
     }
 
     &.endAdornment,
     &.startAdornment.endAdornment {
-      padding-right: var(--space-1);
-      padding-left: var(--space-1);
+      padding-right: var(--propel-space-1);
+      padding-left: var(--propel-space-1);
     }
   }
 }

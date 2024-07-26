@@ -2,21 +2,21 @@
 
 .rootOption {
   @extend %fontSize2;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--propel-font-weight-medium);
 
-  padding: var(--space-2) var(--space-4);
+  padding: var(--propel-space-2) var(--propel-space-4);
   margin: 0;
   cursor: pointer;
 
   &:hover {
-    background-color: var(--gray-2);
-    border-radius: var(--radius-2);
+    background-color: var(--propel-gray-2);
+    border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
   }
 
   &:focus,
   &:focus-visible {
-    background-color: var(--gray-3);
-    border-radius: var(--radius-2);
+    background-color: var(--propel-gray-3);
+    border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
     outline: none;
   }
 }

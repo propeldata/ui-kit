@@ -1,19 +1,19 @@
 import classnames from 'classnames'
 import React from 'react'
-import { ThemeAppearances } from 'src/themes'
 import { useForwardedRefCallback } from '../../helpers'
+import { ThemeSettingProps, useParsedComponentProps } from '../../themes'
 import { useSetupTheme } from '../ThemeProvider'
 import componentStyles from './Loader.module.scss'
 
-export interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
+export interface LoaderProps extends ThemeSettingProps, React.ComponentPropsWithoutRef<'div'> {
   isText?: boolean
-  appearance?: ThemeAppearances
 }
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ children, className, isText, appearance, ...rest }, forwardedRef) => {
+  ({ children, className, isText, ...rest }, forwardedRef) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    useSetupTheme({ componentContainer, appearance })
+    useSetupTheme({ componentContainer, ...themeSettings })
 
     return (
       <div
@@ -21,7 +21,7 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
         className={classnames(componentStyles.rootLoader, className)}
         role="alert"
         aria-live="polite"
-        {...rest}
+        {...parsedProps}
       >
         <p hidden>Loading&hellip;</p>
         <div

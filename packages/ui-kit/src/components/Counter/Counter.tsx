@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import React from 'react'
 import { getTimeZone, useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
 import { useCounter } from '../../hooks/useCounter'
+import { useParsedComponentProps } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
@@ -20,7 +21,6 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       loading: isLoadingStatic = false,
       localize,
       className,
-      appearance = 'light',
       loaderProps: loaderPropsInitial,
       renderLoader,
       errorFallbackProps: errorFallbackPropsInitial,
@@ -33,6 +33,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     },
     forwardedRef
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const innerRef = React.useRef<HTMLSpanElement>(null)
     const { componentContainer, setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
     const themeWrapper = withThemeWrapper(setRef)
@@ -42,7 +43,13 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       renderLoader: renderLoaderComponent,
       errorFallback: errorFallbackComponent,
       renderEmpty: renderEmptyComponent
-    } = useSetupTheme({ componentContainer, appearance, renderLoader, errorFallback, renderEmpty })
+    } = useSetupTheme({
+      componentContainer,
+      renderLoader,
+      errorFallback,
+      renderEmpty,
+      ...themeSettings
+    })
 
     /**
      * If the user passes `value` attribute, it
@@ -118,7 +125,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
           (isLoading || isLoadingStatic) && componentStyles.loading,
           className
         )}
-        {...rest}
+        {...parsedProps}
         data-container
       >
         {getValueWithPrefixAndSufix({

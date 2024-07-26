@@ -1,6 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
 import React from 'react'
-import type { ThemeTokenProps, AccentColors, ThemeAppearances } from '../../themes/theme.types'
+import type { ThemeSettingProps, ThemeTokenProps } from '../../themes/theme.types'
 import { FallbackComponents } from '../shared.types'
 
 export interface ThemeContextProps extends FallbackComponents {
@@ -18,29 +18,12 @@ export interface ThemeContextProps extends FallbackComponents {
 
 export type DefaultThemes = 'lightTheme' | 'darkTheme'
 
-export interface ThemeProviderProps extends React.ComponentPropsWithoutRef<'div'>, Omit<ThemeContextProps, 'theme'> {
-  accentColor?: AccentColors
-  appearance?: ThemeAppearances
-
+export interface ThemeProps
+  extends React.ComponentPropsWithoutRef<'div'>,
+    ThemeSettingProps,
+    Omit<ThemeContextProps, 'theme'> {
   /** Children components that the theme will be applied to. */
   children?: React.ReactNode
-
-  /**
-   * The initial theme used as a base. It provides a default set of styling
-   * from which customizations can be applied.
-   */
-  baseTheme?: DefaultThemes
-
-  /**
-   * This property specifies the theme to be applied to the UI components. The `theme` prop can be used in two ways:
-   * 1. As a CSS class name.
-   * 2. As a JavaScript object, which should follow the structure of `ThemeOldTokenProps`. This approach is ideal for detailed, in-line customizations and can be particularly useful when integrating design tokens from CSS-in-JS libraries, such as Material UI.
-   *
-   * The use of this prop is optional. In its absence, UI Kit components will default to a standard pre-set theme.
-   */
-  // className?: string
-
-  // style?: React.CSSProperties
 }
 
 // export type ThemeOldStateProps = ThemeOldTokenProps | undefined
@@ -48,9 +31,14 @@ export type ThemeStateProps = ThemeTokenProps | undefined
 
 export type ChartVariant = 'bar' | 'line' | 'pie' | 'doughnut'
 
-export interface UseSetupThemeProps extends Pick<ThemeProviderProps, 'appearance' | 'accentColor'>, FallbackComponents {
+export interface UseSetupThemeProps
+  extends Pick<ThemeProps, 'appearance' | 'accentColor' | 'grayColor' | 'radius' | 'scaling' | 'panelBackground'>,
+    FallbackComponents {
   /** The component root element to which the theme will be applied. */
   componentContainer?: HTMLElement | null
+
+  /** The component root element to which the theme will be applied. */
+  themeProviderContainer?: HTMLElement | null
 }
 
 export interface UseSetupThemeResult<T extends ChartVariant> extends FallbackComponents {

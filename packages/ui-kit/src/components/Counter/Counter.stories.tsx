@@ -197,8 +197,8 @@ export const CustomErrorFallbackStory: Story = {
     errorFallback: ({ theme }) => (
       <div
         style={{
-          border: `1px solid ${theme?.getVar('--accent-a7')}`,
-          color: theme?.getVar('--accent-a11'),
+          border: `1px solid ${theme?.getVar('--propel-accent-a7')}`,
+          color: theme?.getVar('--propel-accent-a11'),
           padding: '1rem'
         }}
       >

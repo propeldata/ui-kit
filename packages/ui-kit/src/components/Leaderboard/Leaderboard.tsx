@@ -13,6 +13,7 @@ import {
   withThemeWrapper
 } from '../../helpers'
 import { useLeaderboard } from '../../hooks/useLeaderboard'
+import { useParsedComponentProps } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
@@ -37,7 +38,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       loading: isLoadingStatic = false,
       tableProps,
       chartProps,
-      appearance = 'light',
       labelFormatter,
       timeZone,
       loaderProps: loaderPropsInitial,
@@ -51,6 +51,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     },
     forwardedRef
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
@@ -63,10 +64,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<'bar'>({
       componentContainer,
-      appearance,
       renderLoader,
       errorFallback,
-      renderEmpty
+      renderEmpty,
+      ...themeSettings
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -122,13 +123,18 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.getVar('--color-background') : 'transparent'
+            color: card ? 'transparent' : theme?.getVar('--propel-color-background')
           },
           legend: {
             display: false
           },
           customChartLabelsPlugin
         }
+
+        const borderRadius = Math.max(
+          getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
+          getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
+        )
 
         let config: ChartConfiguration<'bar'> = {
           ...chartConfig,
@@ -138,9 +144,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             datasets: [
               {
                 data: values,
-                backgroundColor: theme?.getVar('--accent-8'),
+                backgroundColor: theme?.getVar('--propel-accent-8'),
                 barThickness: labelPosition === 'top' ? 8 : 17,
-                borderRadius: getPixelFontSizeAsNumber(theme?.getVar('--radius-2')),
+                borderRadius,
                 borderWidth: 0
               }
             ]
@@ -162,15 +168,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 display: true,
                 grid: {
                   drawOnChartArea: false,
-                  color: theme?.getVar('--gray-a8')
+                  color: theme?.getVar('--propel-gray-a8')
                 },
                 border: {
-                  color: theme?.getVar('--gray-a8')
+                  color: theme?.getVar('--propel-gray-a8')
                 },
                 ticks: {
-                  color: theme?.getVar('--gray-9'),
+                  color: theme?.getVar('--propel-gray-9'),
                   font: {
-                    size: getPixelFontSizeAsNumber(theme?.getVar('--font-size-1'))
+                    size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
                   }
                 },
                 beginAtZero: true
@@ -180,16 +186,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 grid: {
                   drawOnChartArea: true,
                   drawTicks: false,
-                  color: theme?.getVar('--gray-a8')
+                  color: theme?.getVar('--propel-gray-a8')
                 },
                 border: {
                   display: false
                 },
                 ticks: {
                   padding: 17,
-                  color: theme?.getVar('--gray-9'),
+                  color: theme?.getVar('--propel-gray-9'),
                   font: {
-                    size: getPixelFontSizeAsNumber(theme?.getVar('--font-size-1'))
+                    size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
                   }
                 }
               }
@@ -211,6 +217,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             chart.data = { ...config.data }
           }
 
+          chart.resize()
           chart.update('none')
           return
         }
@@ -355,7 +362,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           ref={setRef}
           className={classnames(componentStyles.rootLeaderboard, className)}
           style={style}
-          {...rest}
+          {...parsedProps}
           data-container
         >
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />

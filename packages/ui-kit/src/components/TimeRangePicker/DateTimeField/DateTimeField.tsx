@@ -12,8 +12,8 @@ import {
 } from 'date-fns'
 import React, { Dispatch, SetStateAction } from 'react'
 import { DateRange } from 'react-day-picker'
-import { ThemeAppearances } from 'src/themes'
 import { getDateTimeFormatPattern, useCombinedRefsCallback } from '../../../helpers'
+import { ThemeSettingProps, useParsedComponentProps } from '../../../themes'
 import { ButtonProps } from '../../Button'
 import { FormField } from '../../FormField'
 import { Input } from '../../Input'
@@ -21,9 +21,9 @@ import { useSetupTheme } from '../../ThemeProvider'
 import componentStyles from './DateTimeField.module.scss'
 
 export interface DateTimeFieldProps
-  extends Omit<React.ComponentPropsWithoutRef<'input'>, 'onChange' | 'size'>,
+  extends ThemeSettingProps,
+    Omit<React.ComponentPropsWithoutRef<'input'>, 'onChange' | 'size'>,
     Pick<ButtonProps, 'size'> {
-  appearance?: ThemeAppearances
   dateRange?: DateRange | null
   rangeRole: 'from' | 'to'
   onChange?: Dispatch<SetStateAction<DateRange | null>>
@@ -37,13 +37,11 @@ const validateDateRange = (dateRange: DateRange | null | undefined, rangeRole: '
     : isBefore(dateRange?.from ?? subDays(parsedValue, 1), parsedValue))
 
 export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps>(
-  (
-    { appearance, className, size = 'default', dateRange, locale = 'en-US', rangeRole, onChange, ...rest },
-    forwardedRef
-  ) => {
+  ({ className, size = 'default', dateRange, locale = 'en-US', rangeRole, onChange, ...rest }, forwardedRef) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ forwardedRef, innerRef })
-    useSetupTheme({ componentContainer, appearance })
+    useSetupTheme({ componentContainer, ...themeSettings })
 
     const dateFormatPattern = getDateTimeFormatPattern({
       locale,
@@ -211,10 +209,9 @@ export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps
     const labelPrefix = rangeRole === 'from' ? 'Start' : 'End'
 
     return (
-      <div ref={setRef} {...rest} className={classnames(componentStyles.rootDateTimeField, className)}>
-        <FormField label={`${labelPrefix} Date`} className={componentStyles.formField}>
+      <div ref={setRef} {...parsedProps} className={classnames(componentStyles.rootDateTimeField, className)}>
+        <FormField data-testid="date-input" label={`${labelPrefix} Date`} className={componentStyles.formField}>
           <Input
-            data-testid="date-input"
             type="text"
             placeholder={dateFormatPattern}
             size={size}
@@ -224,9 +221,8 @@ export const DateTimeField = React.forwardRef<HTMLDivElement, DateTimeFieldProps
             onBlur={onBlur}
           />
         </FormField>
-        <FormField label={`${labelPrefix} Time`} className={componentStyles.formField}>
+        <FormField data-testid="time-input" label={`${labelPrefix} Time`} className={componentStyles.formField}>
           <Input
-            data-testid="time-input"
             type="text"
             placeholder={timeFormatPattern}
             size={size}

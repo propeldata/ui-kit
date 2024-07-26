@@ -1,4 +1,4 @@
-import { Button, Counter } from '@propeldata/ui-kit'
+import { Button, Counter, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { useFakeData } from '../../hooks/useFakeData'
 
@@ -24,14 +24,14 @@ export const CounterStatic = () => {
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">Counter Static</h2>
+      <Typography size={6}>Counter Static</Typography>
       <div className="my-4">
         <Counter
           renderEmpty={() => <div style={{ display: 'flex', flex: 1, alignItems: 'center', height: 67 }}>No Data</div>}
           card
           value={data?.value}
           loading={isLoading}
-          style={{ color: 'var(--accent-11)' }}
+          style={{ color: 'var(--propel-accent-11)' }}
         />
       </div>
       <div className="flex items-center gap-2 mt-1">

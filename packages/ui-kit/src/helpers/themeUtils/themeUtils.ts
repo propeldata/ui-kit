@@ -53,9 +53,13 @@ export const parseComputedStyle = (themeContainer: HTMLElement) => {
  * @param {HTMLElement} themeContainer - The HTML element whose style is to be cleared.
  */
 export const clearContainerStyle = (themeContainer: HTMLElement) => {
-  themeDict.forEach((item) => {
-    themeContainer.style.setProperty(item.cssVarName, '')
-  })
+  for (let i = themeContainer.style.length - 1; i >= 0; i--) {
+    const property = themeContainer.style.item(i)
+    themeContainer.style.removeProperty(property)
+  }
+  // themeDict.forEach((item) => {
+  //   themeContainer.style.setProperty(item.cssVarName, '')
+  // })
 }
 
 /**
@@ -69,6 +73,6 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
 // export const setContainerStyle = (themeContainer: HTMLElement, theme: { [key: string]: string | number }) => {
 export const setContainerStyle = (themeContainer: HTMLElement, tokens: { [key: string]: string }) => {
   Object.keys(tokens).forEach((key) => {
-    themeContainer.style.setProperty(`--${camelCaseToKebabCase(key)}`, tokens[key])
+    themeContainer.style.setProperty(`--propel-${camelCaseToKebabCase(key)}`, tokens[key])
   })
 }

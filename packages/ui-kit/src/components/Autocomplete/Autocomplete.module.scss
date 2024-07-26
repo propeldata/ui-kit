@@ -3,29 +3,29 @@
 .rootAutocomplete {
   @extend %fontSize2;
 
-  border-radius: var(--radius-2);
-  background-color: var(--color-background);
-  border: 1px solid var(--gray-6);
+  border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
+  background-color: var(--propel-color-background);
+  border: 1px solid var(--propel-gray-6);
   display: flex;
-  gap: var(--space-1);
-  padding: var(--space-1);
+  gap: var(--propel-space-1);
+  padding: var(--propel-space-1);
   overflow: hidden;
   transition: all 100ms;
   box-sizing: border-box;
 
-  transition: background-color var(--transition-ease-time) ease, border-color var(--transition-ease-time) ease,
-    color var(--transition-ease-time) ease;
+  transition: background-color var(--propel-transition-ease-time) ease,
+    border-color var(--propel-transition-ease-time) ease, color var(--propel-transition-ease-time) ease;
 
   &:hover {
-    background-color: var(--gray-a2);
-    border-color: var(--gray-10);
+    background-color: var(--propel-gray-a2);
+    border-color: var(--propel-gray-10);
   }
 }
 
 .rootAutocomplete__focused {
   outline: none;
-  box-shadow: 0 0 0 3px var(--accent-a4);
-  border-color: var(--accent-8);
+  box-shadow: 0 0 0 3px var(--propel-accent-a4);
+  border-color: var(--propel-accent-8);
 }
 
 .autocompleteInput {
@@ -34,7 +34,7 @@
   background: inherit;
   border: none;
   border-radius: inherit;
-  padding: var(--space-1);
+  padding: var(--propel-space-1);
   outline: 0;
   flex: 1 0 auto;
   width: 100%;
@@ -57,22 +57,22 @@
   @extend %fontSize2;
 
   box-sizing: border-box;
-  padding: var(--space-1);
-  margin: var(--space-1) 0;
+  padding: var(--propel-space-1);
+  margin: var(--propel-space-1) 0;
   width: 100%;
-  border-radius: var(--radius-2);
+  border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
   overflow: auto;
   outline: 0px;
-  max-height: 300px;
+  max-height: var(--propel-component-height);
   z-index: 9999;
-  background-color: var(--color-background);
-  border: 1px solid var(--gray-6);
-  box-shadow: var(--shadow-5);
+  background-color: var(--propel-color-background);
+  border: 1px solid var(--propel-gray-6);
+  box-shadow: var(--propel-shadow-5);
 
   li {
     list-style: none;
-    padding: var(--space-2);
-    border-radius: var(--radius-2);
+    padding: var(--propel-space-2);
+    border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
     cursor: default;
 
     &:last-of-type {
@@ -80,16 +80,16 @@
     }
 
     &:hover {
-      background-color: var(--gray-2);
+      background-color: var(--propel-gray-2);
       cursor: pointer;
     }
 
     &[class^='Mui-focused'] {
-      background-color: var(--accent-11);
+      background-color: var(--propel-accent-11);
     }
 
     &[aria-selected='true'] {
-      background-color: var(--gray-3);
+      background-color: var(--propel-gray-3);
     }
   }
 }

@@ -1,4 +1,5 @@
 import { DataPoolInput } from '../../graphql'
+import { ThemeSettingProps } from '../../themes'
 import { AutocompleteOption, AutocompleteProps } from '../Autocomplete/Autocomplete.types'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
@@ -13,7 +14,9 @@ export interface SimpleFilterQueryProps extends Omit<QueryProps, 'metric' | 'fil
   maxValues?: number
 }
 
-export interface SimpleFilterProps extends Omit<DataComponentProps<'span'>, 'card' | 'errorFallback' | 'renderEmpty'> {
+export interface SimpleFilterProps
+  extends ThemeSettingProps,
+    Omit<DataComponentProps<'span'>, 'card' | 'errorFallback' | 'renderEmpty'> {
   /** Props that the autocomplete input will receive */
   autocompleteProps?: Omit<AutocompleteProps, 'options'>
 

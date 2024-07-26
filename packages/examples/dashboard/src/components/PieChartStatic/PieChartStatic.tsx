@@ -1,4 +1,4 @@
-import { PieChart, PieChartVariant, Button, Select, Option } from '@propeldata/ui-kit'
+import { PieChart, PieChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { useFakeData } from '../../hooks/useFakeData'
 
@@ -48,7 +48,7 @@ export const PieChartStatic = () => {
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">PieChart Static</h2>
+      <Typography size={6}>PieChart Static</Typography>
       <div className="my-4">
         <PieChart card headers={data?.headers} rows={data?.rows} variant={chartType.value} loading={isLoading} />
       </div>

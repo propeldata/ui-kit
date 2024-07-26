@@ -1,25 +1,22 @@
 import classnames from 'classnames'
 import React from 'react'
-import { ThemeAppearances } from 'src/themes'
 import { useForwardedRefCallback } from '../../helpers'
+import { ThemeSettingProps, useParsedComponentProps } from '../../themes'
 import { useSetupTheme } from '../ThemeProvider'
 import componentStyles from './Card.module.scss'
 
-export interface CardProps extends React.ComponentPropsWithoutRef<'div'> {
-  appearance?: ThemeAppearances
-}
+export interface CardProps extends ThemeSettingProps, React.ComponentPropsWithoutRef<'div'> {}
 
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, className, appearance, ...rest }, forwardedRef) => {
-    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    useSetupTheme({ componentContainer, appearance })
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(({ children, className, ...rest }, forwardedRef) => {
+  const { themeSettings, parsedProps } = useParsedComponentProps(rest)
+  const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
+  useSetupTheme({ componentContainer, ...themeSettings })
 
-    return (
-      <div ref={setRef} className={classnames(componentStyles.rootCard, className)} data-testid="card" {...rest}>
-        {children}
-      </div>
-    )
-  }
-)
+  return (
+    <div ref={setRef} className={classnames(componentStyles.rootCard, className)} {...parsedProps} data-testid="card">
+      {children}
+    </div>
+  )
+})
 
 Card.displayName = 'Card'

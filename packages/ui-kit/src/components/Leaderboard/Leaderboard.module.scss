@@ -5,36 +5,33 @@
 
   overflow: auto;
   padding: 0;
-
-  canvas {
-    height: var(--component-height);
-  }
+  height: var(--propel-component-height);
 
   table {
     width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
-    --value-bar-min-width: 100px;
-    --value-bar-padding-right: 6px;
+    --propel-value-bar-min-width: 100px;
+    --propel-value-bar-padding-right: 6px;
 
     .stickyColumn {
       position: sticky;
-      background-color: var(--color-background);
+      background-color: var(--propel-color-background);
       right: 0;
     }
 
     [data-role='table-value'] {
       right: 0;
       text-align: right;
-      padding-left: var(--space-3);
+      padding-left: var(--propel-space-3);
       white-space: nowrap;
       width: 1%;
     }
 
     [data-role='table-value-bar'] {
       width: 20%;
-      min-width: var(--value-bar-min-width);
-      padding-right: var(--value-bar-padding-right);
+      min-width: var(--propel-value-bar-min-width);
+      padding-right: var(--propel-value-bar-padding-right);
     }
 
     &.stickyValues {
@@ -42,15 +39,15 @@
         @extend .stickyColumn;
 
         &.valueWithValueBar {
-          right: calc(var(--value-bar-min-width) + var(--value-bar-padding-right));
+          right: calc(var(--propel-value-bar-min-width) + var(--propel-value-bar-padding-right));
         }
 
         &::after {
           content: '';
           left: 0;
           top: 0;
-          background-color: var(--gray-a8);
-          box-shadow: 0px 1px 2px 0px var(--gray-a8);
+          background-color: var(--propel-gray-a8);
+          box-shadow: 0px 1px 2px 0px var(--propel-gray-a8);
           width: 1px;
           height: 100%;
           z-index: 9999;
@@ -66,13 +63,13 @@
     th,
     td {
       text-align: left;
-      padding: var(--space-2) var(--space-2) var(--space-2) 0;
+      padding: var(--propel-space-2) var(--propel-space-2) var(--propel-space-2) 0;
       @extend %fontSize1;
     }
 
     td {
       @extend %fontSize1;
-      border-bottom: 1px solid var(--gray-a6);
+      border-bottom: 1px solid var(--propel-gray-a6);
     }
 
     th {
@@ -92,7 +89,7 @@
 .stickyHeader {
   tr {
     th {
-      background-color: var(--color-background);
+      background-color: var(--propel-color-background);
       position: sticky;
       top: 0;
       z-index: 9999;
