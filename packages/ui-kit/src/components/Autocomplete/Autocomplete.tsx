@@ -34,7 +34,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     ...rest
   } = props
 
-  const { themeSettings, parsedProps } = useParsedComponentProps(props)
+  const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(props)
 
   const {
     getRootProps,
@@ -75,7 +75,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   })
 
   return (
-    <div {...parsedProps} className={className}>
+    <div {...parsedPropsWithoutRest} className={className}>
       <div
         {...getRootProps(rest)}
         ref={setRef}

@@ -11,7 +11,8 @@ import type {
   PanelBackgrounds,
   Radii,
   Scalings,
-  ThemeAppearances
+  ThemeAppearances,
+  ThemeTokenProps
 } from '../../themes/theme.types'
 import themes from '../../themes/themes.module.scss'
 import type {
@@ -72,19 +73,21 @@ export const useSetupTheme = <T extends ChartVariant>({
   const context = useContext(ThemeContext)
 
   const getDefault = React.useCallback(
-    (defaultValue: string) => {
-      return !context ? defaultValue : undefined
+    (key: keyof ThemeTokenProps, defaultValue: string) => {
+      return !context?.theme ? defaultValue : context.theme[key]
     },
     [context]
   )
 
-  const accentColor = accentColorProp ? accentColorProp : (getDefault('blue') as AccentColors)
-  const grayColorVal = grayColorProp ? grayColorProp : (getDefault('auto') as GrayColors)
+  const accentColor = accentColorProp ? accentColorProp : (getDefault('accentColor', 'blue') as AccentColors)
+  const grayColorVal = grayColorProp ? grayColorProp : (getDefault('grayColor', 'auto') as GrayColors)
   const grayColor = grayColorVal === 'auto' ? getMatchingGrayColor(accentColor ?? 'blue') : grayColorVal
-  const appearance = appearanceProp ? appearanceProp : (getDefault('light') as ThemeAppearances)
-  const radius = radiusProp ? radiusProp : (getDefault('medium') as Radii)
-  const scaling = scalingProp ? scalingProp : (getDefault('100%') as Scalings)
-  const panelBackground = panelBackgroundProp ? panelBackgroundProp : (getDefault('translucent') as PanelBackgrounds)
+  const appearance = appearanceProp ? appearanceProp : (getDefault('appearance', 'light') as ThemeAppearances)
+  const radius = radiusProp ? radiusProp : (getDefault('radius', 'medium') as Radii)
+  const scaling = scalingProp ? scalingProp : (getDefault('scaling', '100%') as Scalings)
+  const panelBackground = panelBackgroundProp
+    ? panelBackgroundProp
+    : (getDefault('panelBackground', 'translucent') as PanelBackgrounds)
 
   const colors: Record<string, string> = React.useMemo(
     () => getAccentColors(accentColor ?? 'blue', appearance ?? 'light', grayColor ?? 'gray'),
@@ -160,8 +163,6 @@ export const useSetupTheme = <T extends ChartVariant>({
       return
     }
 
-    clearContainerStyle(componentContainer)
-
     if (context?.theme) {
       let componentColors = colors
 
@@ -191,8 +192,11 @@ export const useSetupTheme = <T extends ChartVariant>({
       return
     }
 
-    const componentColors = getAccentColors(accentColor, appearance, grayColor)
     const baseThemeStyleProps = parseComputedStyle(componentContainer)
+
+    clearContainerStyle(componentContainer)
+
+    const componentColors = getAccentColors(accentColor, appearance, grayColor)
     const combinedWithBaseProps = { ...baseThemeStyleProps, ...componentColors }
     setContainerStyle(componentContainer, combinedWithBaseProps)
 
@@ -272,18 +276,6 @@ export const ThemeProvider = ({
     clearContainerStyle(ref.current)
 
     const baseThemeStyleProps = parseComputedStyle(ref.current)
-
-    // if (typeof className === 'string') {
-    //   setTheme({
-    //     appearance,
-    //     ...baseThemeStyleProps,
-    //     tokens: { ...colors },
-    //     componentContainer: ref?.current,
-    //     getVar: (key: string) => (ref?.current ? getComputedStyle(ref?.current).getPropertyValue(key) : '')
-    //   })
-    //   return
-    // }
-
     const combinedWithBaseProps = { ...baseThemeStyleProps, ...colors }
 
     setContainerStyle(ref.current, combinedWithBaseProps)

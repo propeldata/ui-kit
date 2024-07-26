@@ -11,37 +11,35 @@
  *   to their default state. Within the ThemeProvider, it's used to clear any previously set theme-specific styles,
  *   ensuring a clean slate before applying a new theme or reverting to default styles.
  *
- * - setContainerStyle(themeContainer: HTMLElement, theme: ThemeTokenProps): This method applies a specified theme to an
+ * - setContainerStyle(themeContainer: HTMLElement, tokens: { [key: string]: string })): This method applies a specified theme to an
  *   HTML element by setting the appropriate CSS variables. It's a crucial part of the ThemeProvider's mechanism for
  *   dynamically applying theme properties, ensuring that components reflect the chosen theme consistently.
  */
 
-// import type { ThemeTokenProps } from '../../themes/theme.types'
-import { themeDict } from '../../themes/themeDict'
 import { camelCaseToKebabCase } from '../camelCaseToKebabCase'
+import { kebabCaseToCamelCase } from '../kebabCaseToCamelCase'
 
 /**
- * Parses the computed style of a given HTML element and extracts theme-related properties.
- * It maps CSS variable names to their corresponding theme token names and retrieves their values.
+ * Parses the style of a given HTML element and extracts theme-related properties.
  * This is useful for dynamically reading the current theme values from an element.
  *
  * @param {HTMLElement} themeContainer - The HTML element from which to parse the theme.
- * @returns {Partial<ThemeTokenProps>} An object containing the theme properties and their values.
+ * @returns An object containing the theme properties and their values.
  */
 export const parseComputedStyle = (themeContainer: HTMLElement) => {
-  const computedStyle = getComputedStyle(themeContainer)
-  // const theme: Partial<ThemeTokenProps> = {}
+  const { style } = themeContainer
   const theme: {
     [key: string]: string
   } = {}
 
-  themeDict.forEach((item) => {
-    const cssVarValue = computedStyle.getPropertyValue(item.cssVarName)
-
-    if (cssVarValue) {
-      Object.assign(theme, { [item.name]: cssVarValue.replace(/"/g, '') })
+  for (let i = 0; i < style.length; i++) {
+    const propertyName = style[i]
+    if (propertyName.startsWith('--propel')) {
+      const cssVarValue = style.getPropertyValue(propertyName).trim()
+      theme[kebabCaseToCamelCase(propertyName.replace('--propel-', ''))] = cssVarValue
     }
-  })
+  }
+
   return theme
 }
 
@@ -57,9 +55,6 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
     const property = themeContainer.style.item(i)
     themeContainer.style.removeProperty(property)
   }
-  // themeDict.forEach((item) => {
-  //   themeContainer.style.setProperty(item.cssVarName, '')
-  // })
 }
 
 /**
@@ -68,9 +63,8 @@ export const clearContainerStyle = (themeContainer: HTMLElement) => {
  * This function is used to dynamically apply a theme to an element.
  *
  * @param {HTMLElement} themeContainer - The HTML element to which the theme is to be applied.
- * @param {ThemeTokenProps} theme - An object containing the theme properties and their values to be applied.
+ * @param theme - An object containing the theme properties and their values to be applied.
  */
-// export const setContainerStyle = (themeContainer: HTMLElement, theme: { [key: string]: string | number }) => {
 export const setContainerStyle = (themeContainer: HTMLElement, tokens: { [key: string]: string }) => {
   Object.keys(tokens).forEach((key) => {
     themeContainer.style.setProperty(`--propel-${camelCaseToKebabCase(key)}`, tokens[key])

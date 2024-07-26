@@ -38,7 +38,7 @@ const SelectComponent = <T extends OptionValue>(
 ) => {
   const innerRef = React.useRef<HTMLButtonElement>(null)
   const { setRef, ref, componentContainer } = useCombinedRefsCallback({ forwardedRef, innerRef })
-  const { themeSettings, parsedProps } = useParsedComponentProps(rest)
+  const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(rest)
   useSetupTheme({ componentContainer: componentContainer?.parentElement, ...themeSettings })
   const popperRef = React.useRef<HTMLDivElement>(null)
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
@@ -47,7 +47,7 @@ const SelectComponent = <T extends OptionValue>(
     onOpenChange: setListboxVisible,
     open: listboxVisible,
     value: valueProp,
-    ...parsedProps
+    ...rest
   })
 
   const onKeyDown = React.useCallback(() => {
@@ -98,7 +98,7 @@ const SelectComponent = <T extends OptionValue>(
   )
 
   return (
-    <div {...parsedProps}>
+    <div {...parsedPropsWithoutRest}>
       <MUISelect<T, false>
         ref={setRef}
         value={value}

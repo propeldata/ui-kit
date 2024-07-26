@@ -368,8 +368,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
-      // return <Loader ref={setRef} {...loaderProps} />
-      return null
+      return <Loader ref={setRef} {...loaderProps} />
     }
 
     if (isEmptyState && renderEmptyComponent) {

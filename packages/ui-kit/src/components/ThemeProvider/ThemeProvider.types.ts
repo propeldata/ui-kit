@@ -26,7 +26,6 @@ export interface ThemeProps
   children?: React.ReactNode
 }
 
-// export type ThemeOldStateProps = ThemeOldTokenProps | undefined
 export type ThemeStateProps = ThemeTokenProps | undefined
 
 export type ChartVariant = 'bar' | 'line' | 'pie' | 'doughnut'

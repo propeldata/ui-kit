@@ -59,7 +59,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     },
     forwardedRef
   ) => {
-    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
+    const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(rest)
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const selectRef = React.useRef<HTMLButtonElement | null>(null)
     const { theme } = useSetupTheme({
@@ -312,7 +312,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     }
 
     return (
-      <div ref={setRef} {...parsedProps}>
+      <div ref={setRef} {...parsedPropsWithoutRest}>
         <Select<DateRangeOptionsProps>
           ref={selectRef}
           disabled={disabled || (disableOptions && disableCustomRelative && disableCustomRange && disableDateUntilNow)}

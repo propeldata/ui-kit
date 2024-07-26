@@ -403,7 +403,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         ref={setRef}
         className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
-        {...rest}
+        {...parsedProps}
         data-container
       >
         <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>
