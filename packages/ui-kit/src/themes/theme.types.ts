@@ -1,6 +1,3 @@
-import { CSSProperties } from 'react'
-import type { DefaultThemes } from '../components/ThemeProvider/ThemeProvider.types'
-
 // prettier-ignore
 export const accentColors = ['amber', 'blue', 'bronze', 'brown', 'crimson', 'cyan', 'gold', 'grass', 'gray', 'green', 'indigo', 'iris', 'jade', 'lime', 'mint', 'orange', 'pink', 'plum', 'purple', 'red', 'ruby', 'sky', 'teal', 'tomato', 'violet', 'yellow'] as const
 export type AccentColors = (typeof accentColors)[number]
