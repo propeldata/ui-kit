@@ -163,12 +163,10 @@ export const useSetupTheme = <T extends ChartVariant>({
       return
     }
 
-    if (context?.theme) {
+    if (context) {
       let componentColors = colors
 
-      if (accentColor && accentColor !== context?.theme.accentColor) {
-        // console.log(accentColor, context?.theme.accentColor)
-        // const grayColor = grayColorProp === 'auto' ? getMatchingGrayColor(accentColor) : grayColorProp
+      if (accentColor && context?.theme && accentColor !== context?.theme.accentColor) {
         componentColors = getAccentColors(accentColor, appearance, grayColor)
 
         const baseThemeStyleProps = parseComputedStyle(componentContainer)
@@ -189,6 +187,7 @@ export const useSetupTheme = <T extends ChartVariant>({
           return value
         }
       })
+
       return
     }
 
