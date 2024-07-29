@@ -1,0 +1,21 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as CardStories from '../../../../../packages/ui-kit/src/components/Card/Card.stories'
+
+<Meta title="Components/Card/Overview" of={CardStories} />
+
+# Card overview
+
+Cards contain content and actions about a single subject.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={CardStories.DefaultStory} shown />
+
+## Props API
+
+The following table describes the props available for the Card component:
+
+<ArgTypes of={CardStories.DefaultStory} sort="alpha" />

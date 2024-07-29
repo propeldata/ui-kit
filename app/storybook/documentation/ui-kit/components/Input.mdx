@@ -1,0 +1,35 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as InputStories from '../../../../../packages/ui-kit/src/components/Input/Input.stories'
+
+<Meta title="Components/Input/Overview" of={InputStories} />
+
+# Input overview
+
+Inputs allow users to capture user input with an optional prop for icons.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={InputStories.DefaultStory} shown />
+
+## Examples
+
+### Size
+
+Use the `size` prop to control the size of the input.
+
+<SourceCode of={InputStories.SmallStory} shown />
+
+### With icons
+
+You can nest icons directly inside the input. An appropriate gap is provided automatically.
+
+<SourceCode of={InputStories.EndAdornmentsStory} shown />
+
+## Props API
+
+The following table describes the props available for the Input component:
+
+<ArgTypes of={InputStories.DefaultStory} sort="alpha" />

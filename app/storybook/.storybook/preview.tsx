@@ -87,8 +87,8 @@ const preview: Preview = {
           'Customization',
           ['Theming', 'Components'],
           'Components',
-          ['Counter', 'TimeSeries', 'Leaderboard'],
-          'React'
+          'API',
+          'Hooks'
         ],
         method: 'alphabetical'
       }

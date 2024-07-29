@@ -1,0 +1,29 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as TypographyStories from '../../../../../packages/ui-kit/src/components/Typography/Typography.stories'
+
+<Meta title="Components/Typography/Overview" of={TypographyStories} />
+
+# Typography overview
+
+Use typography to present your design and content as clearly and efficiently as possible.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={TypographyStories.DefaultStory} shown />
+
+## Examples
+
+### Size
+
+Use the `size` prop to control the size of the typography.
+
+<SourceCode of={TypographyStories.BigStory} shown />
+
+## Props API
+
+The following table describes the props available for the Typography component:
+
+<ArgTypes of={TypographyStories.DefaultStory} sort="alpha" />

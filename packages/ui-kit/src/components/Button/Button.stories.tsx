@@ -8,14 +8,7 @@ import { Button as ButtonSource } from './Button'
 const meta: Meta<typeof ButtonSource> = {
   title: 'Components/Button',
   component: ButtonSource,
-  tags: ['devOnly'],
-  argTypes: {
-    appearance: {
-      table: {
-        disable: true
-      }
-    }
-  },
+  tags: ['tag'],
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Button',
@@ -37,7 +30,7 @@ const Button = (args: Story['args']) => {
 
 export const DefaultStory: Story = {
   name: 'Default',
-  render: (args) => <Button {...args}>Button Tex</Button>
+  render: (args) => <Button {...args}>Button Text</Button>
 }
 
 export const PrimaryStory: Story = {
@@ -45,7 +38,7 @@ export const PrimaryStory: Story = {
   args: {
     variant: 'primary'
   },
-  render: (args) => <Button {...args}>Button Tex</Button>
+  render: (args) => <Button {...args}>Button Text</Button>
 }
 
 export const DisabledStory: Story = {
@@ -53,7 +46,7 @@ export const DisabledStory: Story = {
   args: {
     disabled: true
   },
-  render: (args) => <Button {...args}>Button Tex</Button>
+  render: (args) => <Button {...args}>Button Text</Button>
 }
 
 export const AdornmentsStory: Story = {
@@ -63,7 +56,7 @@ export const AdornmentsStory: Story = {
     startAdornment: () => <ChevronUpIcon />,
     endAdornment: () => <ChevronDownIcon />
   },
-  render: (args) => <Button {...args}>Button Tex</Button>
+  render: (args) => <Button {...args}>Button Text</Button>
 }
 
 export const SmallStory: Story = {
@@ -81,5 +74,5 @@ export const SmallAdornmentsStory: Story = {
     startAdornment: () => <ChevronUpIcon />,
     endAdornment: () => <ChevronDownIcon />
   },
-  render: (args) => <Button {...args}>Button Tex</Button>
+  render: (args) => <Button {...args}>Button Text</Button>
 }

@@ -7,10 +7,10 @@ import { Input } from '../Input'
 const meta: Meta<typeof FormField> = {
   title: 'Components/FormField',
   component: FormField,
-  tags: ['devOnly'],
+  tags: ['tag'],
   parameters: {
     controls: { sort: 'alpha' },
-    imports: 'FormField',
+    imports: 'FormField, Input',
     codeTemplate: storybookCodeTemplate
   }
 }

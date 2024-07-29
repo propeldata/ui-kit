@@ -7,7 +7,7 @@ import { Option } from './Option'
 const meta: Meta<typeof SelectSource> = {
   title: 'Components/Select',
   component: SelectSource,
-  tags: ['devOnly'],
+  tags: ['tag'],
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Select',
@@ -37,26 +37,32 @@ const Select = (args: Story['args']) => {
 export const DefaultStory: Story = {
   name: 'Default',
   args: {
-    children: options.map((option) => (
-      <Option key={option.value} value={option}>
-        {option.label}
-      </Option>
-    )),
     placeholder: 'Select an option'
   },
-  render: (args) => <Select {...args} />
+  render: (args) => (
+    <Select {...args}>
+      {options.map((option) => (
+        <Option key={option.value} value={option}>
+          {option.label}
+        </Option>
+      ))}
+    </Select>
+  )
 }
 
 export const SmallStory: Story = {
   name: 'Small',
   args: {
-    children: options.map((option) => (
-      <Option key={option.value} value={option}>
-        {option.label}
-      </Option>
-    )),
     size: 'small',
     placeholder: 'Select an option'
   },
-  render: (args) => <Select {...args} />
+  render: (args) => (
+    <Select {...args}>
+      {options.map((option) => (
+        <Option key={option.value} value={option}>
+          {option.label}
+        </Option>
+      ))}
+    </Select>
+  )
 }

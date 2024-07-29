@@ -163,6 +163,10 @@ export const useSetupTheme = <T extends ChartVariant>({
       return
     }
 
+    if (!componentContainer.classList.contains(themes['propel-themes'])) {
+      componentContainer.classList.add(themes['propel-themes'])
+    }
+
     if (context) {
       let componentColors = colors
 
@@ -199,10 +203,7 @@ export const useSetupTheme = <T extends ChartVariant>({
     const combinedWithBaseProps = { ...baseThemeStyleProps, ...componentColors }
     setContainerStyle(componentContainer, combinedWithBaseProps)
 
-    // Set the theme from the component scope styles if there is no ThemeProvider context.
-    // Use light theme as a fallback.
     if (!componentContainer.classList.contains(themes[appearance])) {
-      componentContainer.classList.add(themes['propel-themes'])
       componentContainer.classList.add(themes[appearance])
     }
 
