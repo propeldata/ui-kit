@@ -1,5 +1,18 @@
 # @propeldata/ui-kit
 
+## 0.6.0
+
+### Minor Changes
+
+- 6c2cac3: Migrate to radix colors/theme
+- d91d97f: [Button, Divider, FormField, Input, Select, TimeRangePicker, Typography]: added new components
+
+### Patch Changes
+
+- 153289d: Provides a fix for missing Inter font
+- aa54d0f: Added Design Tokens synchronization automation from Figma to UI Kit
+- d91d97f: Sync all the UI components with new design tokens
+
 ## 0.5.5
 
 ### Patch Changes
