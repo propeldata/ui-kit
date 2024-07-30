@@ -1,5 +1,18 @@
 # react-16
 
+## 0.1.10
+
+### Patch Changes
+
+- 153289d: Provides a fix for missing Inter font
+- Updated dependencies [153289d]
+- Updated dependencies [6c2cac3]
+- Updated dependencies [d91d97f]
+- Updated dependencies [aa54d0f]
+- Updated dependencies [d91d97f]
+  - dashboard-example@1.0.0
+  - @propeldata/ui-kit@0.6.0
+
 ## 0.1.9
 
 ### Patch Changes
