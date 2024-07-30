@@ -30,6 +30,23 @@ const Counter = (args: any) => <CounterSource {...args} />
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Leaderboard = (args: any) => <LeaderboardSource {...args} />
 
+export const ThemeProviderDefaultStory: Story = {
+  name: 'ThemeProvider default',
+  tags: ['hidden'],
+  args: {
+    accentColor: 'mint',
+    grayColor: 'gray',
+    panelBackground: 'solid',
+    scaling: '100%',
+    radius: 'full'
+  },
+  render: (args) => (
+    <ThemeProvider {...args}>
+      <Counter value="10000" card localize />
+    </ThemeProvider>
+  )
+}
+
 export const ThemeProviderCustomizeViaCssClassNameStory: Story = {
   name: 'ThemeProvider customize via css class name',
   tags: ['hidden'],
@@ -53,23 +70,10 @@ export const ThemeProviderCustomizeViaCssClassNameStory: Story = {
     `
   },
   args: {
-    theme: 'customTheme'
-  },
-  render: (args) => (
-    <ThemeProvider {...args}>
-      <Counter value="10000" card localize />
-    </ThemeProvider>
-  )
-}
-
-export const ThemeProviderCustomizeViaJSPropsStory: Story = {
-  name: 'ThemeProvider customize via js props',
-  tags: ['hidden'],
-  args: {
-    theme: {
-      textPrimary: '#532ab4',
-      radiusSm: '20px'
-    }
+    className: 'customTheme',
+    style: {
+      '--propel-radius-2': '20px'
+    } as React.CSSProperties
   },
   render: (args) => (
     <ThemeProvider {...args}>
