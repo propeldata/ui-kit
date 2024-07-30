@@ -4,6 +4,7 @@ import React from 'react'
 import withAxiosDecorator from 'storybook-axios'
 import { ThemeProvider, useTheme } from '../../../packages/ui-kit/src/components/ThemeProvider'
 import { QueryClient, QueryClientProvider } from '../../../packages/ui-kit/src/graphql'
+import { accentColors, grayColors, getMatchingGrayColor, radii, scalings } from '../../../packages/ui-kit/src/themes'
 import axiosInstance from '../src/axios'
 import { parseStorySourceCode } from './blocks/SourceCode'
 import './global.css'
@@ -11,7 +12,7 @@ import './global.css'
 const GlobalStyles = () => {
   const theme = useTheme()
   if (document && theme) {
-    document.body.style.setProperty('--bg-color', theme.backgroundSecondary as string)
+    document.body.style.setProperty('--bg-color', theme.getVar('--propel-accent-1'))
   }
   return null
 }
@@ -24,15 +25,22 @@ const withThemeProvider = (Story: React.FC, context: StoryContext) => {
   }
 
   return (
-    <ThemeProvider
-      baseTheme={context.globals.theme}
-      // components={{
-      //   Button: (props) => <MyCustomButton {...props} />
-      // }}
-    >
-      <GlobalStyles />
-      <Story />
-    </ThemeProvider>
+    <>
+      <ThemeProvider
+        appearance={context.globals.appearance}
+        accentColor={context.globals.accentColor}
+        grayColor={context.globals.grayColor}
+        radius={context.globals.radius}
+        scaling={context.globals.scaling}
+        // className="themeProvider"
+        // components={{
+        //   Button: (props) => <MyCustomButton {...props} />
+        // }}
+      >
+        <GlobalStyles />
+        <Story />
+      </ThemeProvider>
+    </>
   )
 }
 
@@ -79,8 +87,8 @@ const preview: Preview = {
           'Customization',
           ['Theming', 'Components'],
           'Components',
-          ['Counter', 'TimeSeries', 'Leaderboard'],
-          'React'
+          'API',
+          'Hooks'
         ],
         method: 'alphabetical'
       }
@@ -95,16 +103,56 @@ const preview: Preview = {
     }
   },
   globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'lightTheme',
+    appearance: {
+      name: 'Appearance',
+      description: 'Global theme appearance',
+      defaultValue: 'light',
       toolbar: {
-        icon: 'circlehollow',
+        icon: 'mirror',
         items: [
-          { value: 'lightTheme', icon: 'circlehollow', title: 'light' },
-          { value: 'darkTheme', icon: 'circle', title: 'dark' }
+          { value: 'light', title: 'Light appearance' },
+          { value: 'dark', title: 'Dark appearance' }
         ],
+        showName: true
+      }
+    },
+    accentColor: {
+      name: 'Accent color',
+      description: 'Global theme accent color',
+      defaultValue: 'blue',
+      toolbar: {
+        icon: 'circle',
+        items: accentColors.map((color) => ({ value: color, title: color })),
+        showName: true
+      }
+    },
+    grayColor: {
+      name: 'Gray color',
+      description: 'Global theme gray color',
+      defaultValue: getMatchingGrayColor('blue'),
+      toolbar: {
+        icon: 'mirror',
+        items: grayColors.filter((color) => color !== 'auto').map((color) => ({ value: color, title: color })),
+        showName: true
+      }
+    },
+    radius: {
+      name: 'Radius color',
+      description: 'Global theme radius color',
+      defaultValue: 'medium',
+      toolbar: {
+        icon: 'button',
+        items: radii.map((value) => ({ value: value, title: value })),
+        showName: true
+      }
+    },
+    scaling: {
+      name: 'Scaling',
+      description: 'Global theme scaling',
+      defaultValue: '100%',
+      toolbar: {
+        icon: 'category',
+        items: scalings.map((value) => ({ value: value, title: value })),
         showName: true
       }
     }

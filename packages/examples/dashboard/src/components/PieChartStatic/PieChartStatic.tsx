@@ -1,4 +1,4 @@
-import { PieChart, PieChartVariant } from '@propeldata/ui-kit'
+import { PieChart, PieChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { useFakeData } from '../../hooks/useFakeData'
 
@@ -22,9 +22,19 @@ const mockData2 = {
   ]
 }
 
+type chartTypeOption = {
+  value: PieChartVariant
+  label: string
+}
+
+const chartTypeOptions: chartTypeOption[] = [
+  { value: 'pie', label: 'Pie' },
+  { value: 'doughnut', label: 'Doughnut' }
+]
+
 export const PieChartStatic = () => {
+  const [chartType, setChartType] = React.useState(chartTypeOptions[0])
   const [mockData, setMockData] = React.useState(mockData1)
-  const [chartType, setChartType] = React.useState<PieChartVariant>('pie')
 
   const { data, isLoading, setIsLoading } = useFakeData(mockData)
 
@@ -38,28 +48,32 @@ export const PieChartStatic = () => {
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">PieChart Static</h2>
-      <div className="my-5">
-        <PieChart card headers={data?.headers} rows={data?.rows} variant={chartType} loading={isLoading} />
+      <Typography size={6}>PieChart Static</Typography>
+      <div className="my-4">
+        <PieChart card headers={data?.headers} rows={data?.rows} variant={chartType.value} loading={isLoading} />
       </div>
-      <div className="flex items-center gap-2 mt-1">
-        <button
-          className="border-2 p-1 h-9"
-          onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}
-        >
-          Switch mock data
-        </button>
-        <select
-          className="border-2 p-1 h-9"
-          value={chartType}
-          onChange={(event) => setChartType(event.target.value as PieChartVariant)}
-        >
-          <option value="pie">Pie</option>
-          <option value="doughnut">Doughnut</option>
-        </select>
-        <button className="border-2 p-1 h-9" onClick={handleReFetchMock}>
-          Refetch Mock
-        </button>
+      <div className="flex items-center gap-2 mt-1 justify-between">
+        <div className="flex-1 flex gap-2">
+          <Button size="small" onClick={() => setMockData(mockData === mockData1 ? mockData2 : mockData1)}>
+            Switch mock data
+          </Button>
+          <Button size="small" onClick={handleReFetchMock}>
+            Refetch Mock
+          </Button>
+        </div>
+        <div className="flex-none">
+          <Select
+            size="small"
+            onChange={(_, val) => setChartType(val as (typeof chartTypeOptions)[0])}
+            value={chartType}
+          >
+            {chartTypeOptions.map((option) => (
+              <Option key={option.value} value={option}>
+                {option.label}
+              </Option>
+            ))}
+          </Select>
+        </div>
       </div>
     </div>
   )

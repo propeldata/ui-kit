@@ -1,0 +1,38 @@
+[data-radius] {
+  --propel-radius-1: calc(3px * var(--propel-scaling) * var(--propel-radius-factor));
+  --propel-radius-2: calc(4px * var(--propel-scaling) * var(--propel-radius-factor));
+  --propel-radius-3: calc(6px * var(--propel-scaling) * var(--propel-radius-factor));
+  --propel-radius-4: calc(8px * var(--propel-scaling) * var(--propel-radius-factor));
+  --propel-radius-5: calc(12px * var(--propel-scaling) * var(--propel-radius-factor));
+  --propel-radius-6: calc(16px * var(--propel-scaling) * var(--propel-radius-factor));
+}
+
+[data-radius='none'] {
+  --propel-radius-factor: 0;
+  --propel-radius-full: 0px;
+  --propel-radius-thumb: 0.5px;
+}
+
+[data-radius='small'] {
+  --propel-radius-factor: 0.75;
+  --propel-radius-full: 0px;
+  --propel-radius-thumb: 0.5px;
+}
+
+[data-radius='medium'] {
+  --propel-radius-factor: 1;
+  --propel-radius-full: 0px;
+  --propel-radius-thumb: 9999px;
+}
+
+[data-radius='large'] {
+  --propel-radius-factor: 1.5;
+  --propel-radius-full: 0px;
+  --propel-radius-thumb: 9999px;
+}
+
+[data-radius='full'] {
+  --propel-radius-factor: 1.5;
+  --propel-radius-full: 9999px;
+  --propel-radius-thumb: 9999px;
+}

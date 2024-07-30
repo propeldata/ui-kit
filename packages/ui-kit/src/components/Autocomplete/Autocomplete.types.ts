@@ -1,5 +1,6 @@
-import { CSSProperties } from 'react'
 import { UseAutocompleteProps } from '@mui/base/useAutocomplete'
+import { CSSProperties } from 'react'
+import { ThemeSettingProps } from '../../themes'
 
 export interface AutocompleteOption {
   /** The display label */
@@ -9,7 +10,10 @@ export interface AutocompleteOption {
   [x: string | number | symbol]: unknown
 }
 
-export interface AutocompleteProps extends UseAutocompleteProps<string | AutocompleteOption, false, false, boolean> {
+export interface AutocompleteProps
+  extends ThemeSettingProps,
+    UseAutocompleteProps<string | AutocompleteOption, false, false, boolean> {
+  className?: string
   placeholder?: string
 
   /** Styles to be applied to the container element */

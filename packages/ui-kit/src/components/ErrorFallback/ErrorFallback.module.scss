@@ -1,8 +1,5 @@
-@use '../../themes/common';
-
 .rootErrorFallback {
-  @extend .textMdRegular;
-  color: var(--propel-text-secondary);
+  color: var(--propel-gray-12);
   max-width: 263px;
   height: var(--propel-component-height);
   margin: auto;

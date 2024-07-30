@@ -90,14 +90,16 @@ describe('TimeSeries', () => {
       />
     )
 
-    const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
-    const chartInstance = Chart.getChart(chartElement)
+    await waitFor(async () => {
+      const chartElement = (await dom.findByRole('img')) as HTMLCanvasElement
+      const chartInstance = Chart.getChart(chartElement)
 
-    const chartData = chartInstance?.data.datasets[0].data
-    const chartLabels = chartInstance?.data.labels
+      const chartData = chartInstance?.data.datasets[0].data
+      const chartLabels = chartInstance?.data.labels
 
-    expect(chartLabels).toEqual(mockData.labels)
-    expect(chartData).toEqual(mockData.values.map((value) => Number(value)))
+      expect(chartLabels).toEqual(mockData.labels)
+      expect(chartData).toEqual(mockData.values.map((value) => Number(value)))
+    })
   })
 
   it('should show error fallback when query fails', async () => {

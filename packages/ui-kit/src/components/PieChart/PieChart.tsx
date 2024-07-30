@@ -4,6 +4,7 @@ import React from 'react'
 import {
   customCanvasBackgroundColor,
   getCustomChartLabelsPlugin,
+  getPixelFontSizeAsNumber,
   getTimeZone,
   useCombinedRefsCallback,
   useEmptyableData,
@@ -17,6 +18,7 @@ import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './PieChart.module.scss'
 import { PieChartData, PieChartProps, PieChartVariant } from './PieChart.types'
+import { useParsedComponentProps } from '../../themes'
 import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
@@ -38,7 +40,6 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       card = false,
       className,
       style,
-      baseTheme = 'lightTheme',
       loading: isLoadingStatic = false,
       chartProps,
       labelListClassName,
@@ -47,6 +48,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     }: PieChartProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
@@ -59,10 +61,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<PieChartVariant>({
       componentContainer,
-      baseTheme,
       renderLoader,
       errorFallback,
-      renderEmpty
+      renderEmpty,
+      ...themeSettings
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -113,16 +115,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const defaultChartColorPalette = React.useMemo(
       () => [
-        theme?.brand900,
-        theme?.brand700,
-        theme?.brand600,
-        theme?.brand500,
-        theme?.brand400,
-        theme?.brand300,
-        theme?.brand200,
-        theme?.brand100,
-        theme?.brand50,
-        theme?.brand25
+        theme?.getVar('--propel-accent-3'),
+        theme?.getVar('--propel-accent-4'),
+        theme?.getVar('--propel-accent-5'),
+        theme?.getVar('--propel-accent-6'),
+        theme?.getVar('--propel-accent-7'),
+        theme?.getVar('--propel-accent-8'),
+        theme?.getVar('--propel-accent-9'),
+        theme?.getVar('--propel-accent-10'),
+        theme?.getVar('--propel-accent-11'),
+        theme?.getVar('--propel-accent-12')
       ],
       [theme]
     )
@@ -165,12 +167,15 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? 'transparent' : theme?.getVar('--propel-color-background')
           },
           title: {
             display: isPie && !hideTotal,
             text: `Total: ${totalValue.toLocaleString()}`,
-            position: totalPosition
+            position: totalPosition,
+            font: {
+              size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-2')) ?? 12
+            }
           },
           legend: {
             display: showValues ? false : !hideLegend,
@@ -179,11 +184,14 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               usePointStyle: true,
               pointStyle: '*',
               pointStyleWidth: 8,
-              boxHeight: 6
+              boxHeight: 6,
+              font: {
+                size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1')) ?? 12
+              }
             }
           },
           emptyDoughnut: {
-            color: theme?.backgroundBrandPrimary,
+            color: theme?.getVar('--propel-accent-11'),
             width: 2,
             radiusDecrease: 20
           },
@@ -250,6 +258,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             chart.data = { ...config.data }
           }
 
+          chart.resize()
           chart.update('none')
           return
         }
@@ -422,7 +431,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         ref={setRef}
         className={classnames(componentStyles.rootPieChart, className)}
         style={style}
-        {...rest}
+        {...parsedProps}
         data-container
       >
         <div>

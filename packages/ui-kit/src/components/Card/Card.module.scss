@@ -1,6 +1,24 @@
 .rootCard {
-  padding: var(--propel-spacing-3xl);
-  background-color: var(--propel-background-primary);
-  border-radius: var(--propel-radius-xs);
-  box-shadow: var(--propel-shadows-shadow-xs);
+  display: block;
+  padding: var(--propel-space-5);
+  overflow: hidden;
+  border-radius: var(--propel-radius-5);
+  box-shadow: var(--propel-shadow-2);
+  position: relative;
+  box-sizing: border-box;
+  contain: paint;
+
+  &::before {
+    box-sizing: border-box;
+    background-color: var(--propel-color-panel);
+    filter: var(--propel-backdrop-filter-panel);
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    transition: inherit;
+    z-index: -1;
+    border-radius: var(--propel-radius-5);
+    contain: paint;
+    inset: 0px;
+  }
 }

@@ -10,7 +10,7 @@ const meta: Meta<typeof TimeRangePickerSource> = {
   component: TimeRangePickerSource,
   tags: ['tag'],
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }

@@ -1,14 +1,16 @@
 import { Button } from '@mui/base/Button'
-import { Popper } from '@mui/base/Popper'
 import { Input } from '@mui/base/Input'
+import { Popper } from '@mui/base/Popper'
 import { useAutocomplete } from '@mui/base/useAutocomplete'
-import * as React from 'react'
 import classnames from 'classnames'
-import componentStyles from './Autocomplete.module.scss'
-import { useCombinedRefs } from '../../helpers'
-import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
-import { ChevronUpIcon } from '../Icons/ChevronUp'
+import * as React from 'react'
+import { useForwardedRefCallback } from '../../helpers'
+import { useParsedComponentProps } from '../../themes'
 import { ChevronDownIcon } from '../Icons/ChevronDown'
+import { ChevronUpIcon } from '../Icons/ChevronUp'
+import { useSetupTheme } from '../ThemeProvider'
+import componentStyles from './Autocomplete.module.scss'
+import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
 
 // See full Autocomplete example here: https://mui.com/base-ui/react-autocomplete/#introduction
 export const Autocomplete = React.forwardRef(function Autocomplete(
@@ -21,6 +23,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     placeholder = '',
     containerStyle,
     containerClassname,
+    className,
     inputStyle,
     inputClassname,
     freeSolo = false,
@@ -28,8 +31,10 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     listClassname,
     optionStyle,
     optionClassname,
-    ...other
+    ...rest
   } = props
+
+  const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(props)
 
   const {
     getRootProps,
@@ -62,19 +67,24 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     }
   })
 
-  const rootRef = useCombinedRefs(ref, setAnchorEl)
+  const { componentContainer, setRef } = useForwardedRefCallback(ref)
+
+  useSetupTheme({
+    componentContainer: componentContainer?.parentElement,
+    ...themeSettings
+  })
 
   return (
-    <React.Fragment>
+    <div {...parsedPropsWithoutRest} className={className}>
       <div
-        {...getRootProps(other)}
-        ref={rootRef}
+        {...getRootProps(rest)}
+        ref={setRef}
         className={classnames(
           componentStyles.rootAutocomplete,
           focused && componentStyles.rootAutocomplete__focused,
           containerClassname
         )}
-        style={{ ...getRootProps(other).style, ...containerStyle }}
+        style={{ ...getRootProps(rest).style, ...containerStyle }}
       >
         <Input
           id={id}
@@ -153,6 +163,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           </ul>
         </Popper>
       ) : null}
-    </React.Fragment>
+    </div>
   )
 })

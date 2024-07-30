@@ -1,21 +1,22 @@
-@use '../../../themes/generated/tokens';
+@use '../../../themes/tokens/typography';
 
 .rootOption {
-  @extend .textMdRegular;
+  @extend %fontSize2;
+  font-weight: var(--propel-font-weight-medium);
 
-  padding: var(--propel-spacing-xl) var(--propel-spacing-4xl);
+  padding: var(--propel-space-2) var(--propel-space-4);
   margin: 0;
   cursor: pointer;
 
   &:hover {
-    background-color: var(--propel-background-active);
-    border-radius: var(--propel-radius-sm);
+    background-color: var(--propel-gray-2);
+    border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
   }
 
   &:focus,
   &:focus-visible {
-    background-color: var(--propel-background-secondary-hover);
-    border-radius: var(--propel-radius-sm);
+    background-color: var(--propel-gray-3);
+    border-radius: max(var(--propel-radius-2), var(--propel-radius-full));
     outline: none;
   }
 }

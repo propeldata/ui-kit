@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import React from 'react'
 import { useForwardedRefCallback } from '../../helpers'
-import { ThemeComponentProps } from '../../themes'
+import { ThemeSettingProps, useParsedComponentProps } from '../../themes'
 import { useSetupTheme } from '../ThemeProvider'
 import componentStyles from './ErrorFallback.module.scss'
 
@@ -10,9 +10,7 @@ export const serverErrorMessage = {
   body: 'Sorry we are not able to connect at this time due to a technical error.'
 }
 
-export interface ErrorFallbackProps
-  extends ThemeComponentProps,
-    Omit<React.ComponentPropsWithoutRef<'div'>, 'style' | 'className'> {
+export interface ErrorFallbackProps extends ThemeSettingProps, React.ComponentPropsWithoutRef<'div'> {
   error?: {
     title: string
     body: string
@@ -29,15 +27,16 @@ const Icon = ({ color }: { color?: string }) => (
 )
 
 export const ErrorFallback = React.forwardRef<HTMLDivElement, ErrorFallbackProps>(
-  ({ error = serverErrorMessage, baseTheme, className, color, ...rest }, forwardedRef) => {
+  ({ error = serverErrorMessage, className, color, ...rest }, forwardedRef) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    useSetupTheme({ componentContainer, baseTheme })
+    useSetupTheme({ componentContainer, ...themeSettings })
 
     return (
       <div
         ref={setRef}
         className={classnames(componentStyles.rootErrorFallback, className)}
-        {...rest}
+        {...parsedProps}
         data-testid="error-fallback-container"
       >
         <Icon color={color} />

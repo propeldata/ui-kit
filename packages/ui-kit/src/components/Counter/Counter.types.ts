@@ -1,8 +1,9 @@
+import { ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type CounterQueryProps = QueryProps
 
-export interface CounterProps extends DataComponentProps<'span'> {
+export interface CounterProps extends ThemeSettingProps, DataComponentProps<'span'> {
   /** If passed, the component will ignore the built-in GraphQL operations */
   value?: string
 

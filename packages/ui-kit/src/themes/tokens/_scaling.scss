@@ -1,0 +1,17 @@
+.propel-themes {
+  &:where([data-scaling='90%']) {
+    --propel-scaling: 0.9;
+  }
+  &:where([data-scaling='95%']) {
+    --propel-scaling: 0.95;
+  }
+  &:where([data-scaling='100%']) {
+    --propel-scaling: 1;
+  }
+  &:where([data-scaling='105%']) {
+    --propel-scaling: 1.05;
+  }
+  &:where([data-scaling='110%']) {
+    --propel-scaling: 1.1;
+  }
+}

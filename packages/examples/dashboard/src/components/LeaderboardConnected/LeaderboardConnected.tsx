@@ -1,6 +1,16 @@
-import { Leaderboard, LeaderboardChartVariant } from '@propeldata/ui-kit'
+import { Leaderboard, LeaderboardChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
+
+type chartTypeOption = {
+  value: LeaderboardChartVariant
+  label: string
+}
+
+const chartTypeOptions: chartTypeOption[] = [
+  { value: 'bar', label: 'Bar' },
+  { value: 'table', label: 'Table' }
+]
 
 export const LeaderboardConnected = ({
   envs: {
@@ -11,8 +21,7 @@ export const LeaderboardConnected = ({
   },
   timeRange: timeRangeProp
 }: ConnectedComponentProps) => {
-  const [barsColor, setBarsColor] = React.useState('#75BFFF')
-  const [chartType, setChartType] = React.useState<LeaderboardChartVariant>('bar')
+  const [chartType, setChartType] = React.useState(chartTypeOptions[0])
   const [refetchInterval, setRefetchInterval] = React.useState<number | undefined>(undefined)
   const [timeRange, setTimeRange] = React.useState(timeRangeProp)
 
@@ -26,8 +35,8 @@ export const LeaderboardConnected = ({
 
   return (
     <div className="m-6">
-      <h2 className="text-2xl">Leaderboard Connected</h2>
-      <div className="my-5">
+      <Typography size={6}>Leaderboard Connected</Typography>
+      <div className="my-4">
         <Leaderboard
           card
           query={{
@@ -48,39 +57,33 @@ export const LeaderboardConnected = ({
             refetchInterval,
             retry: false
           }}
-          variant={chartType}
+          variant={chartType.value}
           // Custom styles
           className="custom-leaderboard"
-          chartConfigProps={(config) => {
-            // Custom bar color
-            config.data.datasets[0].backgroundColor = barsColor
-            return config
-          }}
         />
       </div>
-      <div className="flex items-center gap-2 mt-1">
-        {chartType === 'bar' && (
-          <input
-            className="border-2 p-1 h-9"
-            type="color"
-            onChange={(event) => setBarsColor(event.target.value)}
-            value={barsColor}
-          />
-        )}
-        <select
-          className="border-2 p-1 h-9 cursor-pointer"
-          value={chartType}
-          onChange={(event) => setChartType(event.target.value as LeaderboardChartVariant)}
-        >
-          <option value="bar">Bar</option>
-          <option value="table">Table</option>
-        </select>
-        <button className="border-2 p-1 h-9" onClick={handleSwitchRefetchInterval}>
-          Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
-        </button>
-        <button className="border-2 p-1 h-9" onClick={() => setTimeRange({ n: 0 })}>
-          No data: {timeRange?.n ? 'On' : 'Off'}
-        </button>
+      <div className="flex items-center gap-2 mt-1 justify-between">
+        <div className="flex-1 flex gap-2">
+          <Button size="small" onClick={handleSwitchRefetchInterval}>
+            Refetch Interval: {refetchInterval ? 'On 1000ms' : 'Off'}
+          </Button>
+          <Button size="small" onClick={() => setTimeRange({ n: 0 })}>
+            No data: {timeRange?.n ? 'On' : 'Off'}
+          </Button>
+        </div>
+        <div className="flex-none">
+          <Select
+            size="small"
+            onChange={(_, val) => setChartType(val as (typeof chartTypeOptions)[0])}
+            value={chartType}
+          >
+            {chartTypeOptions.map((option) => (
+              <Option key={option.value} value={option}>
+                {option.label}
+              </Option>
+            ))}
+          </Select>
+        </div>
       </div>
     </div>
   )

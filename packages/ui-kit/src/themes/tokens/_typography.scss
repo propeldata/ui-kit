@@ -1,0 +1,72 @@
+.propel-themes {
+  --propel-font-size-1: calc(12px * var(--propel-scaling));
+  --propel-font-size-2: calc(14px * var(--propel-scaling));
+  --propel-font-size-3: calc(16px * var(--propel-scaling));
+  --propel-font-size-4: calc(18px * var(--propel-scaling));
+  --propel-font-size-5: calc(20px * var(--propel-scaling));
+  --propel-font-size-6: calc(24px * var(--propel-scaling));
+  --propel-font-size-7: calc(28px * var(--propel-scaling));
+  --propel-font-size-8: calc(35px * var(--propel-scaling));
+  --propel-font-size-9: calc(60px * var(--propel-scaling));
+
+  --propel-font-weight-light: 300;
+  --propel-font-weight-regular: 400;
+  --propel-font-weight-medium: 500;
+  --propel-font-weight-bold: 700;
+
+  --propel-line-height-1: calc(16px * var(--propel-scaling));
+  --propel-line-height-2: calc(20px * var(--propel-scaling));
+  --propel-line-height-3: calc(24px * var(--propel-scaling));
+  --propel-line-height-4: calc(26px * var(--propel-scaling));
+  --propel-line-height-5: calc(28px * var(--propel-scaling));
+  --propel-line-height-6: calc(30px * var(--propel-scaling));
+  --propel-line-height-7: calc(36px * var(--propel-scaling));
+  --propel-line-height-8: calc(40px * var(--propel-scaling));
+  --propel-line-height-9: calc(60px * var(--propel-scaling));
+
+  --propel-letter-spacing-1: 0.0025em;
+  --propel-letter-spacing-2: 0em;
+  --propel-letter-spacing-3: 0em;
+  --propel-letter-spacing-4: -0.0025em;
+  --propel-letter-spacing-5: -0.005em;
+  --propel-letter-spacing-6: -0.00625em;
+  --propel-letter-spacing-7: -0.0075em;
+  --propel-letter-spacing-8: -0.01em;
+  --propel-letter-spacing-9: -0.025em;
+
+  /* default values */
+
+  --propel-default-font-family: 'Inter', sans-serif;
+  --propel-default-font-size: var(--propel-font-size-3); /* Same size used for `<Text size="3">` */
+  --propel-default-font-style: normal;
+  --propel-default-font-weight: var(--propel-font-weight-regular);
+  --propel-default-line-height: 1.5; /* Equivalent to the line-height used for `<Text size="3">` 16px * 1.5 = 24px */
+  --propel-default-letter-spacing: 0em;
+  --propel-default-leading-trim-start: 0.42em;
+  --propel-default-leading-trim-end: 0.36em;
+}
+
+.propel-themes {
+  overflow-wrap: break-word;
+  font-family: var(--propel-default-font-family);
+  font-size: var(--propel-default-font-size);
+  font-weight: var(--propel-default-font-weight);
+  font-style: var(--propel-default-font-style);
+  line-height: var(--propel-default-line-height);
+  letter-spacing: var(--propel-default-letter-spacing);
+  text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@for $i from 1 through 9 {
+  %fontSize#{$i} {
+    font-family: var(--propel-default-font-family);
+    font-weight: var(--propel-default-font-weight);
+    font-style: var(--propel-default-font-style);
+    font-size: var(--propel-font-size-#{$i});
+    line-height: var(--propel-line-height-#{$i});
+    letter-spacing: var(--propel-letter-spacing-#{$i});
+    color: var(--propel-gray-11);
+  }
+}

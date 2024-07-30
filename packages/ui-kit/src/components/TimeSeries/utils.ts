@@ -2,7 +2,7 @@ import { Chart, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
-import { getDisplayValue } from '../../helpers'
+import { getDisplayValue, getPixelFontSizeAsNumber } from '../../helpers'
 import { Log } from '../Log'
 import { ThemeStateProps } from '../ThemeProvider'
 import { TimeSeriesChartVariant } from './TimeSeries.types'
@@ -179,18 +179,26 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
         drawTicks: variant === 'line'
       },
       ticks: {
-        padding
+        padding,
+        color: theme?.getVar('--propel-gray-11'),
+        font: {
+          size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
+        }
       },
       beginAtZero
     },
     y: {
       display: scales?.y?.display ?? true,
       grid: {
-        color: theme?.borderPrimary,
+        color: theme?.getVar('--propel-gray-a8'),
         drawOnChartArea: true
       },
       ticks: {
-        padding
+        padding,
+        color: theme?.getVar('--propel-gray-11'),
+        font: {
+          size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
+        }
       },
       border: {
         display: false

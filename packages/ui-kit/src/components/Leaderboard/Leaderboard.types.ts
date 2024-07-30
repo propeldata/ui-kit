@@ -1,6 +1,7 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
 import { LeaderboardLabels } from '../../helpers'
+import { ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
@@ -49,7 +50,7 @@ export type LeaderboardChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export interface LeaderboardProps extends DataComponentProps<'div'> {
+export interface LeaderboardProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string

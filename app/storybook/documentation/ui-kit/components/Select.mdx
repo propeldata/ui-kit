@@ -1,0 +1,29 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as SelectStories from '../../../../../packages/ui-kit/src/components/Select/Select.stories'
+
+<Meta title="Components/Select/Overview" of={SelectStories} />
+
+# Select overview
+
+Select components are used for collecting user provided information from a list of options.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={SelectStories.DefaultStory} shown />
+
+## Examples
+
+### Size
+
+Use the `size` prop to control the size of the button.
+
+<SourceCode of={SelectStories.SmallStory} shown />
+
+## Props API
+
+The following table describes the props available for the Select component:
+
+<ArgTypes of={SelectStories.DefaultStory} sort="alpha" />

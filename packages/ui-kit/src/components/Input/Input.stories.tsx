@@ -7,14 +7,7 @@ import { Input as InputSource } from './Input'
 const meta: Meta<typeof InputSource> = {
   title: 'Components/Input',
   component: InputSource,
-  tags: ['devOnly'],
-  argTypes: {
-    baseTheme: {
-      table: {
-        disable: true
-      }
-    }
-  },
+  tags: ['tag'],
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'Input',
@@ -89,7 +82,6 @@ export const SmallEndAdornmentsStory: Story = {
     style: { width: 183 },
     value: 'Input value',
     size: 'small',
-    disabled: true,
     endAdornment: () => <ChevronDownIcon />
   },
   render: (args) => <Input {...args} />

@@ -1,43 +1,20 @@
-@use '../../themes/common';
+@use '../../themes/tokens/typography';
 
 .rootPieChart {
-  @extend .textXxsRegular;
-  color: var(--propel-text-primary);
+  @extend %fontSize1;
+  color: var(--propel-gray-12);
   overflow: auto;
   padding: 0;
 
-  canvas {
+  > div {
     height: var(--propel-component-height);
   }
 }
 
-.pieChartTotalValue {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: var(--propel-spacing-md);
-  font-family: var(--propel-text-md-regular-font-family);
-  font-size: var(--propel-text-xs-regular-font-size);
-
-  span {
-    margin: 0;
-    line-height: var(--propel-text-xxs-regular-line-height);
-    color: var(--propel-text-secondary);
-  }
-
-  span:first-child {
-    padding-right: var(--propel-spacing-xs);
-  }
-
-  span:last-child {
-    font-weight: 700;
-  }
-}
-
 .pieChartList {
-  @extend .textXsRegular;
-  color: var(--propel-text-secondary);
-  margin-top: var(--propel-spacing-xl);
+  @extend %fontSize2;
+  color: var(--propel-gray-12);
+  margin-top: var(--propel-space-4);
 
   ul {
     max-width: 18rem;
@@ -47,7 +24,7 @@
 
     li {
       display: flex;
-      padding: var(--propel-spacing-xs) 0;
+      padding: var(--propel-space-1) 0;
       justify-content: space-between;
 
       & > span {
@@ -61,9 +38,8 @@
           display: inline-block;
           width: 0.75rem;
           height: 0.75rem;
-          margin-right: var(--propel-spacing-md);
+          margin-right: var(--propel-space-2);
           border-radius: 50%;
-          background-color: var(--color-blue-800);
         }
       }
 
@@ -77,7 +53,7 @@
       li:nth-child(#{9 - $i}) {
         & > span:first-child {
           &:before {
-            background-color: var(--propel-color-blue#{$i}00);
+            background-color: var(--propel-accent-#{$i});
           }
         }
       }
@@ -86,7 +62,7 @@
     li:nth-child(9) {
       & > span:first-child {
         &:before {
-          background-color: var(--propel-brand-50);
+          background-color: var(--propel-accent-4);
         }
       }
     }
@@ -94,7 +70,7 @@
     li:nth-child(10) {
       & > span:first-child {
         &:before {
-          background-color: var(--propel-brand-25);
+          background-color: var(--propel-accent-3);
         }
       }
     }

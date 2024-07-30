@@ -87,10 +87,10 @@ describe('TimeRangePicker', () => {
     const allDateInputs = await screen.getAllByTestId('date-input')
     const allTimeInputs = await screen.getAllByTestId('time-input')
 
-    const startInput = allDateInputs[0]
-    const endInput = allDateInputs[1]
-    const startTimeInput = allTimeInputs[0]
-    const endTimeInput = allTimeInputs[1]
+    const startInput = allDateInputs[0].querySelector('input') as Element
+    const endInput = allDateInputs[1].querySelector('input') as Element
+    const startTimeInput = allTimeInputs[0].querySelector('input') as Element
+    const endTimeInput = allTimeInputs[1].querySelector('input') as Element
 
     fireEvent.change(startInput, { target: { value: '04/01/2022' } })
     fireEvent.blur(startInput)
@@ -124,8 +124,8 @@ describe('TimeRangePicker', () => {
 
     fireEvent.click(await screen.findByText('From date until now'))
 
-    const dateInput = await screen.getByTestId('date-input')
-    const timeInput = await screen.getByTestId('time-input')
+    const dateInput = (await screen.getByTestId('date-input').querySelector('input')) as Element
+    const timeInput = (await screen.getByTestId('time-input').querySelector('input')) as Element
 
     fireEvent.change(dateInput, { target: { value: '01/04/2022' } })
     fireEvent.blur(dateInput)
@@ -154,8 +154,8 @@ describe('TimeRangePicker', () => {
     const allDateInputs = await screen.getAllByTestId('date-input')
     const allTimeInputs = await screen.getAllByTestId('time-input')
 
-    const startInput = allDateInputs[0]
-    const startTimeInput = allTimeInputs[0]
+    const startInput = allDateInputs[0].querySelector('input') as Element
+    const startTimeInput = allTimeInputs[0].querySelector('input') as Element
 
     fireEvent.change(startInput, { target: { value: 'invalid date' } })
     fireEvent.blur(startInput)
