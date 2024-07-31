@@ -5,6 +5,7 @@ import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
 import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
+import { ThemeProvider } from '../ThemeProvider'
 import { TimeSeriesQueryProps } from './TimeSeries.types'
 
 const meta: Meta<typeof TimeSeriesComponent> = {
@@ -319,4 +320,86 @@ export const ErrorStory: Story = {
     }
   },
   render: (args) => <TimeSeries {...args} />
+}
+
+export const WithThemeProviderStory: Story = {
+  name: 'With ThemeProvider',
+  tags: ['hidden'],
+  args: {
+    query: connectedParams
+  },
+  parameters: {
+    imports: 'ThemeProvider, TimeSeries, RelativeTimeRange'
+  },
+  render: (args) => (
+    <ThemeProvider accentColor="mint" grayColor="gray" panelBackground="solid" scaling="100%" radius="full">
+      <TimeSeries {...args} />
+    </ThemeProvider>
+  )
+}
+
+export const LightThemeStory: Story = {
+  name: 'With Light theme',
+  tags: ['hidden'],
+  args: {
+    query: connectedParams,
+    card: true
+  },
+  parameters: {
+    imports: 'ThemeProvider, TimeSeries, RelativeTimeRange'
+  },
+  render: (args) => (
+    <ThemeProvider panelBackground="solid">
+      <TimeSeries {...args} />
+    </ThemeProvider>
+  )
+}
+
+export const DrakThemeStory: Story = {
+  name: 'With Drak theme',
+  tags: ['hidden'],
+  args: {
+    query: connectedParams,
+    card: true
+  },
+  parameters: {
+    imports: 'ThemeProvider, TimeSeries, RelativeTimeRange'
+  },
+  render: (args) => (
+    <ThemeProvider appearance="dark" panelBackground="solid">
+      <TimeSeries {...args} />
+    </ThemeProvider>
+  )
+}
+
+export const ScalingStory: Story = {
+  name: 'Scaling',
+  tags: ['hidden'],
+  args: {
+    query: connectedParams
+  },
+  parameters: {
+    imports: 'ThemeProvider, TimeSeries, RelativeTimeRange'
+  },
+  render: (args) => (
+    <ThemeProvider scaling="110%">
+      <TimeSeries {...args} />
+    </ThemeProvider>
+  )
+}
+
+export const RadiusStory: Story = {
+  name: 'Radius',
+  tags: ['hidden'],
+  args: {
+    query: connectedParams
+  },
+  parameters: {
+    imports: 'ThemeProvider, TimeSeries, RelativeTimeRange'
+  },
+  render: (args) => (
+    <ThemeProvider radius="none">
+      <TimeSeries {...args} />
+    </ThemeProvider>
+  )
 }

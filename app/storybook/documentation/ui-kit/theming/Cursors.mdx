@@ -1,0 +1,62 @@
+import { Meta, Source } from '@storybook/blocks'
+
+<Meta title="Theming/Cursors" />
+
+# Cursors
+
+Customizing cursors used for interactive elements.
+
+## Default cursors
+
+By default, interactive elements that don't link to another page use the regular arrow cursor. This also matches the
+browser defaults. However, disabled elements use an explicit disabled cursor.
+
+## Cursor tokens
+
+Cursor settings can be accessed using CSS variables. You can use these tokens to style your custom components, ensuring
+they are accessible and consistent with the rest of your theme.
+
+<Source
+  language="css"
+  format="dedent"
+  dark
+  code={`
+    /* Available cursor tokens */
+    var(--propel-cursor-button);
+    var(--propel-cursor-checkbox);
+    var(--propel-cursor-disabled);
+    var(--propel-cursor-link);
+    var(--propel-cursor-menu-item);
+    var(--propel-cursor-radio);
+    var(--propel-cursor-slider-thumb);
+    var(--propel-cursor-slider-thumb-active);
+    var(--propel-cursor-switch);
+
+`} />
+
+## Customization
+
+It's common to use a pointer cursor for interactive elements. Propel Themes cursors can be customized by overriding the
+corresponding CSS variables of the token system.
+
+Here's an example of how you can customize the cursor tokens to set `cursor: pointer` for most interactive elements in
+the theme:
+
+<Source
+  language="css"
+  format="dedent"
+  dark
+  code={`
+    .propel-themes {
+      --propel-cursor-button: pointer;
+      --propel-cursor-checkbox: pointer;
+      --propel-cursor-disabled: default;
+      --propel-cursor-link: pointer;
+      --propel-cursor-menu-item: pointer;
+      --propel-cursor-radio: pointer;
+      --propel-cursor-slider-thumb: grab;
+      --propel-cursor-slider-thumb-active: grabbing;
+      --propel-cursor-switch: pointer;
+    }
+
+`} />

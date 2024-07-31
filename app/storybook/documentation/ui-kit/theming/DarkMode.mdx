@@ -1,0 +1,24 @@
+import { Meta, Story } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
+
+<Meta title="Theming/Dark mode" />
+
+# Dark mode
+
+Using appearance to manage and integrate dark mode.
+
+## Overview
+
+Light and dark modes are supported out of the box, allowing you to easily switch appearance without additional design or
+styling.
+
+### Basic usage
+
+By default, the root `ThemeProvider` appearance is `light`.
+
+<SourceCode of={TimeSeriesStories.LightThemeStory} shown />
+
+To set a different appearance pass it via the `appearance` prop. This will force the theme to use the specified setting.
+
+<SourceCode of={TimeSeriesStories.DrakThemeStory} shown />

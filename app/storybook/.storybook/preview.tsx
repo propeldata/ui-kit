@@ -84,6 +84,8 @@ const preview: Preview = {
         order: [
           'Getting started',
           ['Overview', 'Installation', 'Authentication', 'Usage', 'Querying Metrics', 'FAQ', 'Migration guide'],
+          'Theming',
+          ['Overview', 'Color', 'Dark mode', 'Typography', 'Spacing', 'Radius', 'Shadows', 'Cursors'],
           'Customization',
           ['Theming', 'Components'],
           'Components',

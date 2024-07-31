@@ -1,0 +1,37 @@
+import { Meta, Source } from '@storybook/blocks'
+
+<Meta title="Theming/Shadows" />
+
+# Shadows
+
+Understanding the shadow styles used in your theme.
+
+Shadows used in the components are derived from a 6-step scale. Refer to the
+[source code](https://github.com/propeldata/ui-kit/blob/main/packages/ui-kit/src/themes/tokens/_shadow.scss) for the
+actual values used to achieve these shadows.
+
+### Shadow tokens
+
+Shadow tokens can be accessed using CSS variables. You can use these tokens to style your custom components, ensuring
+they are consistent with the rest of your theme.
+
+<Source
+  language="css"
+  format="dedent"
+  dark
+  code={`
+    /* Inset shadow */
+    var(--propel-shadow-1);
+
+    /* Shadows for variant="classic" panels, like Card */
+    var(--propel-shadow-2);
+    var(--propel-shadow-3);
+
+    /* Shadows for smaller overlay panels, like Hover Card and Popover */
+    var(--propel-shadow-4);
+    var(--propel-shadow-5);
+
+    /* Shadows for larger overlay panels, like Dialog */
+    var(--propel-shadow-6);
+
+`} />

@@ -1,0 +1,244 @@
+import { Meta, Source, Story } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import { accentColors, grayColors, colors } from '../../../../../packages/ui-kit/src/themes'
+import * as ThemeProviderStories from '../../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
+
+export const ColorsPallete = ({ colorsGroup }) => (
+  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    {colorsGroup.map((color) => (
+      <div key={color} style={{ margin: '5px' }}>
+        <div
+          style={{ width: '80px', height: '50px', borderRadius: '4px', backgroundColor: colors[color][`${color}11`] }}
+          key={color}
+        />
+        <p style={{ margin: '2px 0', fontSize: '12px', color: '#707070' }}>
+          {color.charAt(0).toUpperCase() + color.slice(1)}
+        </p>
+      </div>
+    ))}
+  </div>
+)
+
+export const ColorAnatomy = ({ color }) => (
+  <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+    {Object.keys(colors[color]).map((key, index) => (
+      <div key={key}>
+        <div
+          style={{
+            width: '60px',
+            height: '35px',
+            borderRadius: '4px',
+            backgroundColor: colors[color][key],
+            margin: '5px'
+          }}
+        />
+        <div
+          style={{
+            backgroundSize: '16px 16px',
+            backgroundPosition: '0px 0px, 8px 0px, 8px -8px, 0px 8px',
+            backgroundImage: `linear-gradient(45deg, ${colors.gray.gray2} 25%, transparent 25%), linear-gradient(135deg, ${colors.gray.gray2} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, ${colors.gray.gray2} 75%), linear-gradient(135deg, transparent 75%, ${colors.gray.gray2} 75%)`
+          }}
+        >
+          <div
+            style={{
+              width: '60px',
+              height: '35px',
+              borderRadius: '4px',
+              backgroundColor: colors[`${color}A`][`${color}A${index}`],
+              margin: '5px'
+            }}
+          />
+        </div>
+        <div style={{ margin: '2px 0', fontSize: '12px', color: '#707070', textAlign: 'center' }}>{index + 1}</div>
+      </div>
+    ))}
+  </div>
+)
+
+<Meta title="Theming/Color" />
+
+# Color
+
+Understanding the color system and its application in your theme.
+
+Propel Themes come with a number of color scales, each with its own light, dark, and alpha variants. Under the hood, the
+color system is powered by [Radix Colors](https://www.radix-ui.com/colors).
+
+## Accents
+
+Accent color is the most dominant color in your theme. It is used for primary buttons, links and other interactive
+elements. `accentColor` is specified directly on the`ThemeProvider` component:
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { ThemeProvider, TimeSeries, RelativeTimeRange } from "@propeldata/ui-kit";
+
+    function App() {
+      return (
+        <ThemeProvider accentColor="indigo">
+          <TimeSeries
+            variant="bar"
+            query={{
+              accessToken: "<PROPEL_ACCESS_TOKEN>",
+              metric: {
+                count: {
+                  dataPool: { name: "TacoSoft Demo Data" }
+                },
+              }
+              timeRange: { relative: RelativeTimeRange.LastNDays, n: 90 },
+              granularity: "DAY",
+            }}
+          />
+        </ThemeProvider>
+      );
+    }
+
+`} />
+
+### Available accent colors
+
+There is a range of accent colors to choose from:
+
+<ColorsPallete colorsGroup={accentColors} />
+
+### Accent scale anatomy
+
+Each accent is a 12-step scale that includes a solid and a transparent variant of each color.
+
+For example, here's the `indigo` color scale:
+
+<ColorAnatomy color="indigo" />
+
+### Accent scale tokens
+
+Accent color tokens can be accessed using CSS variables. You can use these tokens to style your custom components,
+ensuring they are accessible and consistent with the rest of your theme.
+
+<Source
+  language="css"
+  format="dedent"
+  dark
+  code={`
+    /* Backgrounds */
+    var(--propel-accent-1);
+    var(--propel-accent-2);
+
+    /* Interactive components */
+    var(--propel-accent-3);
+    var(--propel-accent-4);
+    var(--propel-accent-5);
+
+    /* Borders and separators */
+    var(--propel-accent-6);
+    var(--propel-accent-7);
+    var(--propel-accent-8);
+
+    /* Solid colors */
+    var(--propel-accent-9);
+    var(--propel-accent-10);
+
+    /* Accessible text */
+    var(--propel-accent-11);
+    var(--propel-accent-12);
+
+    /* Functional colors */
+    var(--propel-accent-surface);
+    var(--propel-accent-indicator);
+    var(--propel-accent-track);
+    var(--propel-accent-contrast);
+
+`} />
+
+## Grays
+
+You can also choose between a pure gray or a number of tinted grays. Your accent color will be automatically paired with
+a gray shade that compliments it. However, you can also specify a custom `grayColor` directly on the `ThemeProvider`
+component:
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { ThemeProvider, TimeSeries, RelativeTimeRange } from "@propeldata/ui-kit";
+
+    function App() {
+      return (
+        <ThemeProvider  grayColor="mauve">
+          <TimeSeries
+            variant="bar"
+            query={{
+              accessToken: "<PROPEL_ACCESS_TOKEN>",
+              metric: {
+                count: {
+                  dataPool: { name: "TacoSoft Demo Data" }
+                },
+              }
+              timeRange: { relative: RelativeTimeRange.LastNDays, n: 90 },
+              granularity: "DAY",
+            }}
+          />
+        </ThemeProvider>
+      );
+    }
+
+`} />
+
+### Available gray colors
+
+There is 6 grays to choose from. The difference may seem subtle, but it is impactful especially on pages with a lot of
+text or in dense UIs.
+
+<ColorsPallete colorsGroup={grayColors.filter((color) => color !== 'auto')} />
+
+### Gray scale anatomy
+
+Grays are based on the same 12-step color scale that includes a solid and a transparent variant of each color. For
+example, here's the `slate` color scale:
+
+<ColorAnatomy color="slate" />
+
+### Gray scale tokens
+
+Gray color tokens can be accessed using CSS variables. You can use these tokens to style your custom components,
+ensuring they are accessible and consistent with the rest of your theme.
+
+<Source
+  language="css"
+  format="dedent"
+  dark
+  code={`
+    /* Backgrounds */
+    var(--propel-gray-1);
+    var(--propel-gray-2);
+
+    /* Interactive components */
+    var(--propel-gray-3);
+    var(--propel-gray-4);
+    var(--propel-gray-5);
+
+    /* Borders and separators */
+    var(--propel-gray-6);
+    var(--propel-gray-7);
+    var(--propel-gray-8);
+
+    /* Solid colors */
+    var(--propel-gray-9);
+    var(--propel-gray-10);
+
+    /* Accessible text */
+    var(--propel-gray-11);
+    var(--propel-gray-12);
+
+    /* Functional colors */
+    var(--propel-gray-surface);
+    var(--propel-gray-indicator);
+    var(--propel-gray-track);
+    var(--propel-gray-contrast);
+
+`} />

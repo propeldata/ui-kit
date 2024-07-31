@@ -1,0 +1,60 @@
+import { Meta, Source, Story } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { prettier } from '../../../src/utils'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as ThemeProviderStories from '../../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
+import * as TimeSeriesStories from '../../../../../packages/ui-kit/src/components/TimeSeries/TimeSeries.stories'
+
+<Meta title="Theming/Overview" />
+
+# Anatomy
+
+The <LinkTo kind="API/ThemeProvider" story="overview">ThemeProvider</LinkTo> component defines the overall visual look
+of your application. It can be customized by passing a minimal set of configuration options.
+
+<SourceCode of={TimeSeriesStories.WithThemeProviderStory} shown />
+
+A well-tuned set of defaults is provided to get you started, but don't be afraid to play with all of the available
+options to find the right visual style for your application.
+
+## Tokens
+
+Tokens provide direct access to theme values and give you the flexibility to build and customize your own themed
+components.
+
+For all available theme tokens see the
+[source code](https://github.com/propeldata/ui-kit/tree/main/packages/ui-kit/src/themes/tokens), or read more about each
+type of token in the relevant theme pages.
+
+## Start now
+
+Get started with UI Kit today through some of these useful resources:
+
+- <LinkTo kind="Theming/Color" story="overview">
+    Color
+  </LinkTo>
+  -&#160;understand the color system and its application in your theme.
+- <LinkTo kind="Theming/Drak mode" story="overview">
+    Drak mode
+  </LinkTo>
+  -&#160; learn how to switch between light and dark mode.
+- <LinkTo kind="Theming/Typography" story="overview">
+    Typography
+  </LinkTo>
+  -&#160;learn how to use and customize the typographic elements of your theme.
+- <LinkTo kind="Theming/Spacing" story="overview">
+    Spacing
+  </LinkTo>
+  -&#160;explore the spacing scale and the available scaling options.
+- <LinkTo kind="Theming/Radius" story="overview">
+    Radius
+  </LinkTo>
+  -&#160;choose the radius setting in your theme that fits your style.
+- <LinkTo kind="Theming/Shadows" story="overview">
+    Shadows
+  </LinkTo>
+  -&#160;use elevation, depth and shadows effectively and customize their properties.
+- <LinkTo kind="Theming/Cursors" story="overview">
+    Cursors
+  </LinkTo>
+  -&#160;customizing cursors used for interactive elements.
