@@ -3784,13 +3784,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:^9.9.0":
-  version: 9.9.0
-  resolution: "@eslint/js@npm:9.9.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40eslint%2Fjs%2F-%2Fjs-9.9.0.tgz"
-  checksum: 33f0c8988e4e6f6c1499d05e2e91ef3df1c0b221a46c41ed1d27cf1265809451fba5b7a9452ece70e98bfd2f745c0f0df3c9cc1fdcfdcaacbcae45ddc415b5d6
-  languageName: node
-  linkType: hard
-
 "@fal-works/esbuild-plugin-global-externals@npm:^2.1.2":
   version: 2.1.2
   resolution: "@fal-works/esbuild-plugin-global-externals@npm:2.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40fal-works%2Fesbuild-plugin-global-externals%2F-%2Fesbuild-plugin-global-externals-2.1.2.tgz"
@@ -5665,7 +5658,6 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.5
     "@changesets/cli": ^2.27.1
-    "@eslint/js": ^9.9.0
     "@types/css-modules": ^1.0.2
     "@types/eslint": ^7.28.0
     "@types/node": ^20.10.0
