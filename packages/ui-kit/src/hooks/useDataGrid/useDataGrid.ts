@@ -1,3 +1,4 @@
+import { useFilters } from '../../components/FilterProvider/useFilters'
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
 import { DataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput, useDataGridQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
@@ -14,10 +15,10 @@ import { useLog } from './../../components/Log/useLog'
 export const useDataGrid = ({
   accessToken: accessTokenFromProp,
   propelApiUrl,
-  timeRange,
+  timeRange: timeRangeProp,
   timeZone,
   columns,
-  filters,
+  filters: filtersProp,
   dataPool,
   orderByColumn,
   sort = Sort.Desc,
@@ -37,6 +38,11 @@ export const useDataGrid = ({
     isLoading: isLoadingAccessToken,
     error: accessTokenError
   } = useAccessToken()
+
+  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
+
+  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
+  const filters = filtersProp ?? filtersFromProvider
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider

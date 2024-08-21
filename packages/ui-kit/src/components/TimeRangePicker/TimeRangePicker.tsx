@@ -9,6 +9,7 @@ import { getDateTimeFormatPattern, getLocale, useForwardedRefCallback } from '..
 import { useParsedComponentProps } from '../../themes'
 import { Button } from '../Button'
 import { Divider } from '../Divider'
+import { useFilters } from '../FilterProvider'
 import { CalendarIcon } from '../Icons/Calendar'
 import { Input } from '../Input'
 import { Select } from '../Select'
@@ -93,6 +94,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     )
     const popupOpen = Boolean(anchorEl)
 
+    const { setTimeRange } = useFilters()
+
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
     const getLastNOption = React.useCallback(() => {
@@ -124,10 +127,11 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         setSelectedOption(option ?? null)
 
         if (!value.params && option && onChange) {
+          setTimeRange?.(option)
           onChange(option)
         }
       }
-    }, [options, onChange, value])
+    }, [options, onChange, value, setTimeRange])
 
     React.useEffect(() => {
       lastNRef.current = lastN
@@ -166,8 +170,9 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
 
       if (selectedOption && onChange) {
         onChange({ ...selectedOption })
+        setTimeRange?.({ ...selectedOption })
       }
-    }, [selectedOption, value, onChange])
+    }, [selectedOption, value, onChange, setTimeRange])
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {

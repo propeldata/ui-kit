@@ -18,7 +18,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     accessToken: accessTokenFromProp,
     propelApiUrl,
     metric,
-    timeRange,
+    timeRange: timeRangeProp,
     filters: filtersFromProp,
     refetchInterval,
     retry,
@@ -38,9 +38,11 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilters()
+  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
+
+  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
 
   const enabled = accessToken != null && enabledProp
 

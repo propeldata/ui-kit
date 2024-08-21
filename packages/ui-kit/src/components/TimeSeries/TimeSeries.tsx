@@ -300,7 +300,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           return
         }
 
-        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric)) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
           // ) we will set logs as a feature later

@@ -1,3 +1,4 @@
+import { useFilters } from '../../components/FilterProvider'
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 import { PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, TopValuesQuery, useTopValuesQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
@@ -15,7 +16,7 @@ export const useTopValues = ({
   accessToken: accessTokenFromProp,
   propelApiUrl,
   metric,
-  timeRange,
+  timeRange: timeRangeProp,
   columnName,
   dataPool,
   maxValues,
@@ -32,6 +33,10 @@ export const useTopValues = ({
     isLoading: isLoadingAccessToken,
     error: accessTokenError
   } = useAccessToken()
+
+  const { timeRange: timeRangeFromProvider } = useFilters()
+
+  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
