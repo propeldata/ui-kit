@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@mui/base/Button'
 import { Input } from '@mui/base/Input'
 import { Popper } from '@mui/base/Popper'

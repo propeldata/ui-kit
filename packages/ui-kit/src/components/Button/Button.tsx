@@ -1,3 +1,5 @@
+'use client'
+
 import { useButton } from '@mui/base/useButton'
 import classnames from 'classnames'
 import * as React from 'react'

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { SyntheticEvent, useEffect, useRef } from 'react'
 import { FilterInput, FilterOperator } from '../../graphql'
 import { getTimeZone, useForwardedRefCallback, withThemeWrapper } from '../../helpers'

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { QueryClient, QueryClientProvider } from '../../graphql'
 import { Card } from '../Card'

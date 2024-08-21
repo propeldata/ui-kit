@@ -1,3 +1,5 @@
+'use client'
+
 import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'

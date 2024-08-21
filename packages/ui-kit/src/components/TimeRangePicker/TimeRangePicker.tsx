@@ -1,3 +1,5 @@
+'use client'
+
 import { ClickAwayListener } from '@mui/base/ClickAwayListener'
 import { Popper } from '@mui/base/Popper'
 import classNames from 'classnames'
@@ -126,9 +128,9 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         const option = options?.find((option) => option.value === value?.value)
         setSelectedOption(option ?? null)
 
-        if (!value.params && option && onChange) {
+        if (!value.params && option && (onChange || setTimeRange)) {
           setTimeRange?.(option)
-          onChange(option)
+          onChange?.(option)
         }
       }
     }, [options, onChange, value, setTimeRange])
@@ -168,8 +170,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         return
       }
 
-      if (selectedOption && onChange) {
-        onChange({ ...selectedOption })
+      if (selectedOption && (onChange || setTimeRange)) {
+        onChange?.({ ...selectedOption })
         setTimeRange?.({ ...selectedOption })
       }
     }, [selectedOption, value, onChange, setTimeRange])

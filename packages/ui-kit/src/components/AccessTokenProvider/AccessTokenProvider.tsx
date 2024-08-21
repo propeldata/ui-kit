@@ -1,3 +1,5 @@
+'use client'
+
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
 import { AccessTokenError } from './utils'
 import { sleep } from '../../helpers'

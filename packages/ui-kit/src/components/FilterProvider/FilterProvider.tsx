@@ -1,3 +1,5 @@
+'use client'
+
 import React, { createContext, useState } from 'react'
 
 import { FilterInput } from '../../graphql'

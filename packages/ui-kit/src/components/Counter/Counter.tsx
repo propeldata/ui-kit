@@ -1,3 +1,5 @@
+'use client'
+
 import classnames from 'classnames'
 import React from 'react'
 import { getTimeZone, useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
@@ -73,7 +75,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
           return
         }
 
-        if (!isStatic && (error?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
+        if (!isStatic && (error?.name === 'AccessTokenError' || !query?.metric)) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
           // ) we will set logs as a feature later

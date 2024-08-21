@@ -1,3 +1,5 @@
+'use client'
+
 import * as radixColors from '@radix-ui/colors'
 import { ChartConfiguration, ChartOptions } from 'chart.js'
 import classnames from 'classnames'

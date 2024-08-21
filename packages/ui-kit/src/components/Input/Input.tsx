@@ -1,3 +1,5 @@
+'use client'
+
 import { useInput } from '@mui/base/useInput'
 import classnames from 'classnames'
 import * as React from 'react'
