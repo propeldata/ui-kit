@@ -3,9 +3,11 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const postcss = require('rollup-plugin-postcss')
 const typescript = require('rollup-plugin-typescript2')
 const preserveDirectives = require('rollup-plugin-preserve-directives').preserveDirectives
-const pkg = require('./package.json')
+// const pkg = require('./package.json')
 
-const externalPackages = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})]
+// const externalPackages = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {}), 'react-is', 'prop-types', 'react/jsx-runtime', 'react-day-picker/dist/style.module.css']
+
+// console.log(externalPackages)
 
 module.exports = {
   input: 'src/index.ts',
@@ -25,7 +27,19 @@ module.exports = {
       preserveModulesRoot: 'src'
     }
   ],
-  external: externalPackages,
+  external: (id) => {
+    if (
+      id.startsWith('src') ||
+      id.startsWith('../') ||
+      id.startsWith('./') ||
+      id.endsWith('.ts') ||
+      id.endsWith('.tsx') ||
+      id.endsWith('.scss')
+    ) {
+      return false
+    }
+    return true
+  },
   onwarn: (warning, warn) => {
     if (
       warning.message.includes('Module level directives cause errors when bundled, "use client" in') ||
@@ -36,8 +50,15 @@ module.exports = {
     warn(warning)
   },
   plugins: [
-    nodeResolve(),
-    commonjs(),
+    nodeResolve({
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      preferBuiltins: true,
+      modulesOnly: true
+    }),
+    commonjs({
+      include: /node_modules/,
+      requireReturnsDefault: 'auto'
+    }),
     typescript({
       clean: true,
       tsconfig: 'tsconfig.build.json',

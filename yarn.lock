@@ -5722,11 +5722,13 @@ __metadata:
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
     rollup: ^4.1.4
+    rollup-plugin-node-externals: ^7.1.3
     rollup-plugin-postcss: ^4.0.2
     rollup-plugin-preserve-directives: ^0.4.0
     rollup-plugin-typescript2: ^0.36.0
     sass: ^1.69.5
     slugify: ^1.6.6
+    style-inject: 0.3.0
     ts-node: ^10.9.2
     typescript: ^4.9.3
   peerDependencies:
@@ -23807,6 +23809,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-node-externals@npm:^7.1.3":
+  version: 7.1.3
+  resolution: "rollup-plugin-node-externals@npm:7.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-node-externals%2F-%2Frollup-plugin-node-externals-7.1.3.tgz"
+  peerDependencies:
+    rollup: ^3.0.0 || ^4.0.0
+  checksum: 734bd0cc555cda07c153087fd3a5c0aa871caae0d45ea0d4255aefcb8600aaa80cf2e30088ad221dfd13e2f1b8fa5d685c7c8304821466a94a36abb9e21af882
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-postcss@npm:^4.0.2":
   version: 4.0.2
   resolution: "rollup-plugin-postcss@npm:4.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-postcss%2F-%2Frollup-plugin-postcss-4.0.2.tgz"
@@ -25294,7 +25305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-inject@npm:^0.3.0":
+"style-inject@npm:0.3.0, style-inject@npm:^0.3.0":
   version: 0.3.0
   resolution: "style-inject@npm:0.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstyle-inject%2F-%2Fstyle-inject-0.3.0.tgz"
   checksum: fa5f5f6730c3eb4ccc5735347935703c7c02759d4ddb5983d037ed0efda3c50a80640c2fed4f4d4c5ea600c97cdfdb45f79f734630324fa21a3a86723c0472da
