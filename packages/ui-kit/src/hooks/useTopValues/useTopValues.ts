@@ -36,7 +36,7 @@ export const useTopValues = ({
 
   const { timeRange: timeRangeFromProvider } = useFilters()
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider

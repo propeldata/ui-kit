@@ -15,7 +15,7 @@ export interface FilterContextValue {
   /** Setter function for the Filters */
   setFilters: React.Dispatch<React.SetStateAction<FilterInputWithId[]>>
   /** Timerange that will be provided to the child components */
-  timeRange: DateRangeOptionsProps
+  timeRange: DateRangeOptionsProps | null
   /** Setter function for the Time Range */
   setTimeRange: React.Dispatch<React.SetStateAction<DateRangeOptionsProps>>
 }
@@ -23,7 +23,7 @@ export interface FilterContextValue {
 export const FilterContext = createContext<FilterContextValue>({
   filters: [],
   setFilters: () => {},
-  timeRange: { value: '' },
+  timeRange: null,
   setTimeRange: () => {}
 })
 

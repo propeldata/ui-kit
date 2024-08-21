@@ -43,7 +43,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
 
   const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
 
   const filters = filtersFromProp ?? filtersFromProvider
 

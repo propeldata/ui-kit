@@ -41,7 +41,7 @@ export const useDataGrid = ({
 
   const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
   const filters = filtersProp ?? filtersFromProvider
 
   // Get access token first from props, then if it is not provided via prop get it from provider

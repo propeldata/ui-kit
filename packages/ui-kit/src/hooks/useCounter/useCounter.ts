@@ -42,7 +42,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
 
   const filters = filtersFromProp ?? filtersFromProvider
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
 
   const enabled = accessToken != null && enabledProp
 

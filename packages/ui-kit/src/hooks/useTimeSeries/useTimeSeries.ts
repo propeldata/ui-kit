@@ -48,7 +48,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
 
   const filters = filtersFromProp ?? filtersFromProvider
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider.params
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
 
   const enabled = accessToken != null && enabledProp
 
