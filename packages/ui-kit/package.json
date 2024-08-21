@@ -22,19 +22,19 @@
     "/dist"
   ],
   "dependencies": {
-    "@mui/base": "^5.0.0-beta.31",
+    "@mui/base": "5.0.0-beta.31",
     "@radix-ui/colors": "^3.0.0",
     "@tanstack/react-query": "^4.29.17",
     "chart.js": "^4.1.2",
     "chartjs-adapter-luxon": "1.2.1",
-    "classnames": "^2.3.2",
+    "classnames": "^2.5.1",
     "date-fns": "^3.3.1",
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "luxon": "^3.4.1",
     "react-day-picker": "^8.10.0",
     "sass": "^1.69.5",
-    "style-inject": "0.3.0"
+    "style-inject": "^0.3.0"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^4.0.0",

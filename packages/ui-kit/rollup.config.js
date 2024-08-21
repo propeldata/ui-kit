@@ -3,11 +3,6 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const postcss = require('rollup-plugin-postcss')
 const typescript = require('rollup-plugin-typescript2')
 const preserveDirectives = require('rollup-plugin-preserve-directives').preserveDirectives
-// const pkg = require('./package.json')
-
-// const externalPackages = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {}), 'react-is', 'prop-types', 'react/jsx-runtime', 'react-day-picker/dist/style.module.css']
-
-// console.log(externalPackages)
 
 module.exports = {
   input: 'src/index.ts',
@@ -43,7 +38,8 @@ module.exports = {
   onwarn: (warning, warn) => {
     if (
       warning.message.includes('Module level directives cause errors when bundled, "use client" in') ||
-      warning.code === 'MODULE_LEVEL_DIRECTIVE'
+      warning.code === 'MODULE_LEVEL_DIRECTIVE' ||
+      warning.code === 'SOURCEMAP_ERROR'
     ) {
       return
     }
@@ -66,8 +62,22 @@ module.exports = {
     }),
     postcss({
       extensions: ['.scss', '.sass', '.css'],
-      modules: true
+      modules: {
+        generateScopedName: '[name]__[local]___[hash:base64:5]'
+      },
+      autoModules: true,
+      use: ['sass']
     }),
-    preserveDirectives()
+    preserveDirectives(),
+    {
+      name: 'Custom Rollup Plugin',
+      generateBundle: (options, bundle) => {
+        Object.entries(bundle).forEach(([fileName, file]) => {
+          if (fileName.endsWith('.css.js') || fileName.endsWith('.scss.js')) {
+            file.code = file.code.replace(/import styleInject from '.*'/, `import styleInject from 'style-inject'`)
+          }
+        })
+      }
+    }
   ]
 }
