@@ -1,0 +1,5 @@
+.idea
+.turbo
+node_modules
+dist
+generated
