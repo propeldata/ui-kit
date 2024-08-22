@@ -23,7 +23,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     accessToken: accessTokenFromProp,
     propelApiUrl,
     metric,
-    timeRange,
+    timeRange: timeRangeProp,
     granularity,
     filters: filtersFromProp,
     refetchInterval,
@@ -44,9 +44,11 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilters()
+  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
+
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
 
   const enabled = accessToken != null && enabledProp
 

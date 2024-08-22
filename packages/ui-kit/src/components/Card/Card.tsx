@@ -1,3 +1,5 @@
+'use client'
+
 import classnames from 'classnames'
 import React from 'react'
 import { useForwardedRefCallback } from '../../helpers'

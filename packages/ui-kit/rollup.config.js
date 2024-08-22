@@ -1,40 +1,60 @@
 const commonjs = require('@rollup/plugin-commonjs')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
-const terser = require('@rollup/plugin-terser')
 const postcss = require('rollup-plugin-postcss')
 const typescript = require('rollup-plugin-typescript2')
-const pkg = require('./package.json')
-
-const externalPackages = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})]
+const preserveDirectives = require('rollup-plugin-preserve-directives').preserveDirectives
 
 module.exports = {
   input: 'src/index.ts',
   output: [
     {
-      file: 'dist/cjs/index.js',
+      dir: 'dist/cjs',
       format: 'cjs',
-      sourcemap: true,
       exports: 'named',
-      banner: `'use client';`
+      preserveModules: true,
+      preserveModulesRoot: 'src'
     },
     {
-      file: 'dist/esm/index.js',
+      dir: 'dist/esm',
       format: 'esm',
-      sourcemap: true,
       exports: 'named',
-      banner: `'use client';`
+      preserveModules: true,
+      preserveModulesRoot: 'src'
     }
   ],
-  external: externalPackages,
+  external: (id) => {
+    if (
+      id.startsWith('src') ||
+      id.startsWith('../') ||
+      id.startsWith('./') ||
+      id.endsWith('.ts') ||
+      id.endsWith('.tsx') ||
+      id.endsWith('.scss')
+    ) {
+      return false
+    }
+    return true
+  },
   onwarn: (warning, warn) => {
-    if (warning.message.includes('Module level directives cause errors when bundled, "use client" in')) {
+    if (
+      warning.message.includes('Module level directives cause errors when bundled, "use client" in') ||
+      warning.code === 'MODULE_LEVEL_DIRECTIVE' ||
+      warning.code === 'SOURCEMAP_ERROR'
+    ) {
       return
     }
     warn(warning)
   },
   plugins: [
-    nodeResolve(),
-    commonjs(),
+    nodeResolve({
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      preferBuiltins: true,
+      modulesOnly: true
+    }),
+    commonjs({
+      include: /node_modules/,
+      requireReturnsDefault: 'auto'
+    }),
     typescript({
       clean: true,
       tsconfig: 'tsconfig.build.json',
@@ -42,10 +62,22 @@ module.exports = {
     }),
     postcss({
       extensions: ['.scss', '.sass', '.css'],
-      modules: true
+      modules: {
+        generateScopedName: '[name]__[local]___[hash:base64:5]'
+      },
+      autoModules: true,
+      use: ['sass']
     }),
-    terser({
-      compress: { directives: false }
-    })
+    preserveDirectives(),
+    {
+      name: 'Custom Rollup Plugin',
+      generateBundle: (options, bundle) => {
+        Object.entries(bundle).forEach(([fileName, file]) => {
+          if (fileName.endsWith('.css.js') || fileName.endsWith('.scss.js')) {
+            file.code = file.code.replace(/import styleInject from '.*'/, `import styleInject from 'style-inject'`)
+          }
+        })
+      }
+    }
   ]
 }

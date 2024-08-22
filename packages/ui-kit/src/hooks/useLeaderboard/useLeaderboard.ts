@@ -21,7 +21,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     sort,
     rowLimit,
     dimensions,
-    timeRange,
+    timeRange: timeRangeProp,
     filters: filtersFromProp,
     refetchInterval,
     retry,
@@ -41,7 +41,9 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilters()
+  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
+
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
 
   const filters = filtersFromProp ?? filtersFromProvider
 

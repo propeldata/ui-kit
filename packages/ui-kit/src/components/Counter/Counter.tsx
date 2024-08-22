@@ -1,3 +1,5 @@
+'use client'
+
 import classnames from 'classnames'
 import React from 'react'
 import { getTimeZone, useCombinedRefsCallback, withThemeWrapper } from '../../helpers'
@@ -5,6 +7,7 @@ import { useCounter } from '../../hooks/useCounter'
 import { useParsedComponentProps } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
+import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Counter.module.scss'
@@ -51,6 +54,8 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       ...themeSettings
     })
 
+    const log = useLog()
+
     /**
      * If the user passes `value` attribute, it
      * should behave as a static component without any GraphQL operation performed
@@ -68,15 +73,15 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && value === undefined) {
-          // console.error('InvalidPropsError: You must pass either `value` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `value` or `query` props')
           setPropsMismatch(true)
           return
         }
 
-        if (!isStatic && (error?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (error?.name === 'AccessTokenError' || !query?.metric)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
@@ -87,7 +92,7 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, value, query, isLoadingStatic, error?.name])
+    }, [isStatic, value, query, isLoadingStatic, error?.name, log])
 
     if (error || propsMismatch) {
       const errorFallbackProps: ErrorFallbackProps = {

@@ -1,3 +1,5 @@
+'use client'
+
 import { Chart as ChartJS, ChartConfiguration, ChartDataset, ChartOptions, Color, LineController } from 'chart.js'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -289,21 +291,21 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !labels && !values) {
-          // console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
           setPropsMismatch(true)
           return
         }
 
         if (isStatic && (!labels || !values)) {
-          // console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`') we will set logs as a feature later
+          log.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`')
           setPropsMismatch(true)
           return
         }
 
-        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
@@ -314,7 +316,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, labels, values, query, isLoadingStatic, hasError?.name])
+    }, [isStatic, labels, values, query, isLoadingStatic, hasError?.name, log])
 
     React.useEffect(() => {
       destroyChart()

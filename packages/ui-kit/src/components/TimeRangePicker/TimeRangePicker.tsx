@@ -1,3 +1,5 @@
+'use client'
+
 import { ClickAwayListener } from '@mui/base/ClickAwayListener'
 import { Popper } from '@mui/base/Popper'
 import classNames from 'classnames'
@@ -9,6 +11,7 @@ import { getDateTimeFormatPattern, getLocale, useForwardedRefCallback } from '..
 import { useParsedComponentProps } from '../../themes'
 import { Button } from '../Button'
 import { Divider } from '../Divider'
+import { useFilters } from '../FilterProvider'
 import { CalendarIcon } from '../Icons/Calendar'
 import { Input } from '../Input'
 import { Select } from '../Select'
@@ -93,6 +96,8 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     )
     const popupOpen = Boolean(anchorEl)
 
+    const { setTimeRange } = useFilters()
+
     const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
     const getLastNOption = React.useCallback(() => {
@@ -123,11 +128,12 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         const option = options?.find((option) => option.value === value?.value)
         setSelectedOption(option ?? null)
 
-        if (!value.params && option && onChange) {
-          onChange(option)
+        if (!value.params && option && (onChange || setTimeRange)) {
+          setTimeRange?.(option)
+          onChange?.(option)
         }
       }
-    }, [options, onChange, value])
+    }, [options, onChange, value, setTimeRange])
 
     React.useEffect(() => {
       lastNRef.current = lastN
@@ -164,10 +170,11 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         return
       }
 
-      if (selectedOption && onChange) {
-        onChange({ ...selectedOption })
+      if (selectedOption && (onChange || setTimeRange)) {
+        onChange?.({ ...selectedOption })
+        setTimeRange?.({ ...selectedOption })
       }
-    }, [selectedOption, value, onChange])
+    }, [selectedOption, value, onChange, setTimeRange])
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {

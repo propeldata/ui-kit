@@ -1,3 +1,5 @@
+'use client'
+
 import { Select as MUISelect, SelectProps as MUISelectProps } from '@mui/base/Select'
 import { SelectOptionDefinition, SelectProvider, useSelect } from '@mui/base/useSelect'
 import { prepareForSlot } from '@mui/base/utils'
