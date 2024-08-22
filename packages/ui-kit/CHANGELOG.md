@@ -1,5 +1,13 @@
 # @propeldata/ui-kit
 
+## 0.7.0
+
+### Minor Changes
+
+- 9eb30cb: - TimeRangePicker will work along with FilterProvider
+  - Components will be compatible with RSC and will be exported as client
+  - Components will log props mismatch errors
+
 ## 0.6.0
 
 ### Minor Changes
