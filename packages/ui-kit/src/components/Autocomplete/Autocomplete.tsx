@@ -10,6 +10,7 @@ import { useForwardedRefCallback } from '../../helpers'
 import { useParsedComponentProps } from '../../themes'
 import { ChevronDownIcon } from '../Icons/ChevronDown'
 import { ChevronUpIcon } from '../Icons/ChevronUp'
+import { CloseIcon } from '../Icons/Close'
 import { useSetupTheme } from '../ThemeProvider'
 import componentStyles from './Autocomplete.module.scss'
 import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
@@ -33,6 +34,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     listClassname,
     optionStyle,
     optionClassname,
+    disableClearable = false,
     ...rest
   } = props
 
@@ -45,11 +47,13 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     getListboxProps,
     getOptionProps,
     id,
+    dirty,
     popupOpen,
     focused,
     anchorEl,
     setAnchorEl,
-    groupedOptions
+    groupedOptions,
+    getClearProps
   } = useAutocomplete({
     ...props,
     componentName: 'Autocomplete',
@@ -75,6 +79,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     componentContainer: componentContainer?.parentElement,
     ...themeSettings
   })
+
+  const hasClearIcon = !disableClearable && !disabled && dirty && !readOnly
 
   return (
     <div {...parsedPropsWithoutRest} className={className}>
@@ -110,6 +116,11 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           }}
           style={{ width: '100%' }}
         />
+        {hasClearIcon && (
+          <button {...getClearProps()} className={componentStyles.clearButton}>
+            <CloseIcon />
+          </button>
+        )}
         {props.options.length > 0 && (
           <Button
             {...getPopupIndicatorProps()}
@@ -128,6 +139,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           slots={{
             root: 'div'
           }}
+          className={componentStyles.popper}
           modifiers={[
             { name: 'flip', enabled: false },
             { name: 'preventOverflow', enabled: false }
@@ -140,7 +152,11 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
         >
           <ul
             {...getListboxProps()}
-            className={classnames(componentStyles.autocompleteList, listClassname)}
+            className={classnames(
+              componentStyles.autocompleteList,
+              ...(getListboxProps().className ?? ''),
+              listClassname
+            )}
             style={{ ...getListboxProps().style, ...listStyle }}
           >
             {groupedOptions.map((option, index) => {

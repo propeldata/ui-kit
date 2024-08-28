@@ -12,7 +12,7 @@ export interface AutocompleteOption {
 
 export interface AutocompleteProps
   extends ThemeSettingProps,
-    UseAutocompleteProps<string | AutocompleteOption, false, false, boolean> {
+    UseAutocompleteProps<string | AutocompleteOption, false, boolean, boolean> {
   className?: string
   placeholder?: string
 
