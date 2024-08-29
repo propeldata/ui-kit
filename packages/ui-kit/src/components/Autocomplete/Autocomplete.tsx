@@ -70,7 +70,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
         return option.value
       }
       return ''
-    }
+    },
+    blurOnSelect: true
   })
 
   const { componentContainer, setRef } = useForwardedRefCallback(ref)
