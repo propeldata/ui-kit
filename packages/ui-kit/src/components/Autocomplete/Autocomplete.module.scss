@@ -98,18 +98,21 @@
       border-bottom: none;
     }
 
-    &:hover {
-      background-color: var(--propel-gray-2);
-      cursor: pointer;
-    }
-
     &[class*='Mui-focused'] {
       background-color: var(--propel-gray-3);
     }
 
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover:not([class*='Mui-focused']) {
+      background-color: var(--propel-gray-2);
+    }
+
     &[aria-selected='true'] {
       &[class*='Mui-focused'] {
-        background-color: var(--propel-gray-3);
+        background-color: var(--propel-gray-3)
       }
     }
   }

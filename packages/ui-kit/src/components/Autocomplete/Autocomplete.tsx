@@ -171,6 +171,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
                 <li
                   key={index}
                   {...optionProps}
+                  onMouseMove={() => {}} // we need to override `onMouseMove` from `optionProps` to prevent elements being focused by hover
                   className={classnames(componentStyles.autoCompleteOption, optionProps.className, optionClassname)}
                   style={{ ...optionProps.style, ...optionStyle }}
                 >
