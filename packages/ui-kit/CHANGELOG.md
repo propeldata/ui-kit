@@ -1,5 +1,13 @@
 # @propeldata/ui-kit
 
+## 0.8.0
+
+### Minor Changes
+
+- f871bb0: Expose radix components
+- 1356f97: - Autocomplete component styles will be consistent with Select component
+  - Autocomplete will be clearable and expose a `disableClearable` prop to disable the feature
+
 ## 0.7.0
 
 ### Minor Changes
