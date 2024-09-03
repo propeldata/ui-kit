@@ -19,6 +19,7 @@ import {
 import { useTimeSeries } from '../../hooks'
 import { useParsedComponentProps } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { useFilters } from '../FilterProvider'
 import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
@@ -101,16 +102,20 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const log = useLog()
     const isLoadingStatic = loading
 
+    const { granularity: granularityFromProvider } = useFilters()
+
     React.useEffect(() => {
       chartJsAdapterLuxon
     }, [])
 
     const granularity =
       query?.granularity ??
+      granularityFromProvider ??
       getDefaultGranularity({
         timeRange: query?.timeRange,
         labels
       })
+
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
