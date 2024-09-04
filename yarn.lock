@@ -12947,22 +12947,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colors-2c749e@workspace:packages/ui-kit/dist/esm/colors":
-  version: 0.0.0-use.local
-  resolution: "colors-2c749e@workspace:packages/ui-kit/dist/esm/colors"
-  dependencies:
-    "@radix-ui/colors": ^3.0.0
-  languageName: unknown
-  linkType: soft
-
-"colors-7bb702@workspace:packages/ui-kit/dist/cjs/colors":
-  version: 0.0.0-use.local
-  resolution: "colors-7bb702@workspace:packages/ui-kit/dist/cjs/colors"
-  dependencies:
-    "@radix-ui/colors": ^3.0.0
-  languageName: unknown
-  linkType: soft
-
 "combined-stream@npm:^1.0.8":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcombined-stream%2F-%2Fcombined-stream-1.0.8.tgz"

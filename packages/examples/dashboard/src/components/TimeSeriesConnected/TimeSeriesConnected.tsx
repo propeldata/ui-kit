@@ -1,12 +1,4 @@
-import {
-  TimeSeries,
-  TimeSeriesChartVariant,
-  TimeSeriesGranularity,
-  Button,
-  Select,
-  Option,
-  Typography
-} from '@propeldata/ui-kit'
+import { TimeSeries, TimeSeriesChartVariant, Button, Select, Option, Typography } from '@propeldata/ui-kit'
 import React from 'react'
 import { ConnectedComponentProps } from '../../shared.types'
 
@@ -46,7 +38,6 @@ export const TimeSeriesConnected = ({
           query={{
             metric: REACT_APP_METRIC_UNIQUE_NAME_1,
             timeRange,
-            granularity: TimeSeriesGranularity.Day,
             refetchInterval,
             retry: false
           }}
