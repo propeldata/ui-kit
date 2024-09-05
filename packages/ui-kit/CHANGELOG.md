@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.8.1
+
+### Patch Changes
+
+- 3aad817: Fix Container not being exported
+
 ## 0.8.0
 
 ### Minor Changes
