@@ -1,6 +1,7 @@
 'use client'
 
 import * as radixColors from '@radix-ui/colors'
+import { Theme } from '@radix-ui/themes'
 import { ChartConfiguration, ChartOptions } from 'chart.js'
 import classnames from 'classnames'
 import React, { createContext, useContext, useState } from 'react'
@@ -297,22 +298,24 @@ export const ThemeProvider = ({
   }, [appearance, accentColor, grayColor, radius, scaling, panelBackground, ref, colors, className])
 
   return (
-    <div
-      ref={ref}
-      className={classnames(themes['propel-themes'], themes[appearance], className)}
-      data-testid="theme-provider"
-      data-accent-color={accentColor}
-      data-gray-color={grayColor}
-      data-radius={radius}
-      data-scaling={scaling}
-      data-panel-background={panelBackground}
-      {...other}
-    >
-      <ThemeContext.Provider
-        value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader, components }}
+    <Theme>
+      <div
+        ref={ref}
+        className={classnames(themes['propel-themes'], themes[appearance], className)}
+        data-testid="theme-provider"
+        data-accent-color={accentColor}
+        data-gray-color={grayColor}
+        data-radius={radius}
+        data-scaling={scaling}
+        data-panel-background={panelBackground}
+        {...other}
       >
-        {children}
-      </ThemeContext.Provider>
-    </div>
+        <ThemeContext.Provider
+          value={{ theme, globalChartConfigProps, renderEmpty, errorFallback, renderLoader, components }}
+        >
+          {children}
+        </ThemeContext.Provider>
+      </div>
+    </Theme>
   )
 }
