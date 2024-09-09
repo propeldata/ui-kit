@@ -3,14 +3,14 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
-import { TimeGrainPicker as TimeGrainPickerSource } from './TimeGrainPicker'
+import { TimeGrainPicker } from './TimeGrainPicker'
 import { TimeSeries as TimeSeriesSource, TimeSeriesProps } from '../TimeSeries'
 import { FilterProvider } from '../FilterProvider'
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
 
-const meta: Meta<typeof TimeGrainPickerSource> = {
+const meta: Meta<typeof TimeGrainPicker> = {
   title: 'Components/TimeGrainPicker',
-  component: TimeGrainPickerSource,
+  component: TimeGrainPicker,
   tags: ['tag'],
   parameters: {
     controls: { sort: 'alpha' },
@@ -22,24 +22,7 @@ const meta: Meta<typeof TimeGrainPickerSource> = {
 
 export default meta
 
-type Story = StoryObj<typeof TimeGrainPickerSource>
-
-const TimeGrainPicker = (args: Story['args']) => {
-  const { accessToken } = useStorybookAccessToken(axiosInstance)
-
-  if (!accessToken) {
-    return null
-  }
-
-  return (
-    <TimeGrainPickerSource
-      autocompleteProps={{
-        ...args?.autocompleteProps,
-        containerStyle: { ...args?.autocompleteProps?.containerStyle, width: '250px' }
-      }}
-    />
-  )
-}
+type Story = StoryObj<typeof TimeGrainPicker>
 
 const TimeSeries = (args: TimeSeriesProps) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
@@ -66,7 +49,7 @@ const TimeSeries = (args: TimeSeriesProps) => {
 export const SingleStory: Story = {
   name: 'Simple',
   args: {
-    autocompleteProps: {
+    selectProps: {
       placeholder: 'Granularity'
     }
   },
@@ -88,7 +71,7 @@ export const SingleStory: Story = {
 export const CustomOptionsStory: Story = {
   name: 'Custom Options',
   args: {
-    autocompleteProps: {
+    selectProps: {
       placeholder: 'Granularity'
     },
     options: [TimeSeriesGranularity.Day, TimeSeriesGranularity.Week, TimeSeriesGranularity.Month]

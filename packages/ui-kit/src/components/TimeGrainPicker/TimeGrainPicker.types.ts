@@ -1,13 +1,13 @@
 import { TimeSeriesGranularity } from '../../graphql'
 import { ThemeSettingProps } from '../../themes'
-import { AutocompleteProps } from '../Autocomplete/Autocomplete.types'
+import { SelectProps } from '../Select'
 import { DataComponentProps } from '../shared.types'
 
 export interface TimeGrainPickerProps
   extends ThemeSettingProps,
     Omit<DataComponentProps<'span'>, 'card' | 'errorFallback' | 'renderEmpty' | 'renderLoader' | 'loaderProps'> {
-  /** Props that the autocomplete input will receive */
-  autocompleteProps?: Omit<AutocompleteProps, 'options' | 'disableClearable'>
+  /** Props that the select input will receive */
+  selectProps?: Omit<SelectProps<{ label: string; value: TimeSeriesGranularity }>, 'options' | 'disableClearable'>
 
   /** The possible values for the selected column, will be ignored if `query` is passed */
   options?: TimeSeriesGranularity[]
