@@ -15,3 +15,14 @@ export interface TimeGrainPickerProps
   /** Whether there was an error or not, setting to `true` will enable freeSolo mode */
   error?: boolean
 }
+
+export const OrderedTimeSeriesGranularity = [
+  TimeSeriesGranularity.Minute,
+  TimeSeriesGranularity.FiveMinutes,
+  TimeSeriesGranularity.FifteenMinutes,
+  TimeSeriesGranularity.Hour,
+  TimeSeriesGranularity.Day,
+  TimeSeriesGranularity.Week,
+  TimeSeriesGranularity.Month,
+  TimeSeriesGranularity.Year
+]
