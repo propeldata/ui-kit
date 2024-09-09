@@ -38,6 +38,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     ...rest
   } = props
 
+  const inputContainerRef = React.useRef<HTMLDivElement>(null)
+
   const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(props)
 
   const {
@@ -84,10 +86,10 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   const hasClearIcon = !disableClearable && !disabled && dirty && !readOnly
 
   return (
-    <div {...parsedPropsWithoutRest} className={className}>
+    <div {...parsedPropsWithoutRest} ref={setRef} className={className}>
       <div
         {...getRootProps(rest)}
-        ref={setRef}
+        ref={inputContainerRef}
         className={classnames(
           componentStyles.rootAutocomplete,
           focused && componentStyles.rootAutocomplete__focused,
@@ -146,7 +148,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
             { name: 'preventOverflow', enabled: false }
           ]}
           style={{
-            width: anchorEl.clientWidth,
+            width: 'fit-content',
             zIndex: 9999
           }}
           disablePortal

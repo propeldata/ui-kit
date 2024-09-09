@@ -35,7 +35,7 @@ const TimeGrainPicker = (args: Story['args']) => {
     <TimeGrainPickerSource
       autocompleteProps={{
         ...args?.autocompleteProps,
-        containerStyle: { ...args?.autocompleteProps?.containerStyle, width: '350px' }
+        containerStyle: { ...args?.autocompleteProps?.containerStyle, width: '250px' }
       }}
     />
   )
