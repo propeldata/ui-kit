@@ -1,41 +1,43 @@
 'use client'
 
-import React from 'react'
-import { TimeSeriesGranularity } from 'src/graphql'
-import { ErrorFallback } from '../ErrorFallback'
+import React, { useState } from 'react'
+import { TimeSeriesGranularity } from '../../graphql'
 import { useFilters } from '../FilterProvider/useFilters'
-import { Option, Select } from '../Select'
-import { withContainer } from '../withContainer'
+import { Select } from '../Select'
 import { OrderedTimeSeriesGranularity, TimeGrainPickerProps } from './TimeGrainPicker.types'
 import { granularityLabel } from './utils'
 
-const TimeGrainPickerComponent = React.forwardRef<HTMLButtonElement, TimeGrainPickerProps>(
+interface TimeGrainPickerOption {
+  label: string
+  value: TimeSeriesGranularity
+}
+
+export const TimeGrainPicker = React.forwardRef<HTMLButtonElement, TimeGrainPickerProps>(
   ({ selectProps, options = OrderedTimeSeriesGranularity }, ref) => {
     const { granularity, setGranularity } = useFilters()
 
+    const [selectedOption, setSelectedOption] = useState<TimeGrainPickerOption | null>(
+      granularity != null ? { label: granularityLabel[granularity], value: granularity } : null
+    )
+
     return (
-      <Select
+      <Select<TimeGrainPickerOption>
         {...selectProps}
+        ref={ref}
         onChange={(_, optionValue) => {
           if (optionValue != null) {
-            setGranularity(optionValue.value as TimeSeriesGranularity)
+            setGranularity(optionValue.value)
+            setSelectedOption(optionValue)
           }
         }}
-        value={
-          typeof granularity === 'string' ? { label: granularityLabel[granularity], value: granularity } : granularity
-        }
-        ref={ref}
-      >
-        {options.map((option) => (
-          <Option key={option} value={{ value: option, label: granularityLabel[option] }}>
-            {granularityLabel[option]}
-          </Option>
-        ))}
-      </Select>
+        value={selectedOption}
+        options={options.map((option) => ({
+          label: granularityLabel[option],
+          value: { label: granularityLabel[option], value: option }
+        }))}
+      />
     )
   }
 )
 
-TimeGrainPickerComponent.displayName = 'TimeGrainPicker'
-
-export const TimeGrainPicker = withContainer(TimeGrainPickerComponent, ErrorFallback)
+TimeGrainPicker.displayName = 'TimeGrainPicker'

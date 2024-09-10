@@ -108,17 +108,26 @@ const SelectComponent = <T extends OptionValue>(
         {...rest}
         slots={{ root: ButtonSlot }}
         slotProps={{
-          root: getButtonProps({
-            startAdornment,
-            endAdornment,
-            size,
-            value: value?.label ?? undefined,
-            className: classNames(componentStyles.button, componentStyles.rootButton, {
-              [componentStyles.startAdornment]: startAdornment,
-              [componentStyles.endAdornment]: endAdornment,
-              [componentStyles[size]]: size && size !== 'default'
-            })
-          }),
+          root: {
+            ...getButtonProps({
+              startAdornment,
+              endAdornment,
+              size,
+              value: value?.label ?? undefined,
+              className: classNames(componentStyles.button, componentStyles.rootButton, {
+                [componentStyles.startAdornment]: startAdornment,
+                [componentStyles.endAdornment]: endAdornment,
+                [componentStyles[size]]: size && size !== 'default'
+              })
+            }),
+            onBlur: (event) => {
+              if (!popperRef.current?.contains(event.relatedTarget)) {
+                setTimeout(() => {
+                  setListboxVisible(false)
+                }, 100)
+              }
+            }
+          },
           listbox,
           popper: {
             ref: popperRef,
