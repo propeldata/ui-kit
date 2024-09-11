@@ -1,11 +1,12 @@
-import { Chart, ScaleOptionsByType, TimeUnit } from 'chart.js'
+import { Chart, ChartDataset, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
+import { ThemeTokenProps } from '../../themes'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
 import { getDisplayValue, getPixelFontSizeAsNumber } from '../../helpers'
 import { Log } from '../Log'
 import { ThemeStateProps } from '../ThemeProvider'
-import { TimeSeriesChartVariant } from './TimeSeries.types'
+import { TimeSeriesChartVariant, TimeSeriesData } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -292,4 +293,61 @@ export function getNumericValues(values: Array<string | number | null>, log: Log
   }
 
   return newValues
+}
+
+interface BuildDatasetsOptions {
+  fill?: boolean
+}
+
+export function buildDatasets(
+  data: TimeSeriesData,
+  theme: ThemeTokenProps,
+  options: BuildDatasetsOptions,
+  log: Log
+): ChartDataset<TimeSeriesChartVariant>[] {
+  const { values, groups } = data
+
+  const { fill = false } = options ?? {}
+
+  const borderRadius = Math.max(
+    getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
+    getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
+  )
+
+  if (groups == null) {
+    return [
+      {
+        data: getNumericValues(values ?? [], log),
+        backgroundColor: theme?.getVar('--propel-accent-8'),
+        borderColor: theme?.getVar('--propel-accent-8'),
+        borderRadius,
+        hoverBackgroundColor: theme?.getVar('--propel-accent-10'),
+        pointBackgroundColor: theme?.getVar('--propel-accent-10'),
+        pointHoverBackgroundColor: theme?.getVar('--propel-accent-10'),
+        pointHoverBorderWidth: 2,
+        pointHoverBorderColor: theme?.getVar('--propel-accent-contrast'),
+        fill
+      } as ChartDataset<TimeSeriesChartVariant>
+    ]
+  }
+
+  const colors = ['lime', 'mauve', 'mint', 'orange', 'pink', 'plum', 'purple', 'red', 'sky', 'teal', 'tomato', 'violet']
+
+  return groups.map((group, idx) => {
+    const color = colors[idx]
+
+    return {
+      data: getNumericValues(group.values ?? [], log),
+      backgroundColor: theme?.getVar(`--propel-${color}-8`),
+      borderColor: theme?.getVar(`--propel-${color}-8`),
+      borderRadius,
+      hoverBackgroundColor: theme?.getVar(`--propel-${color}-10`),
+      pointBackgroundColor: '#fff',
+      pointHoverBackgroundColor: theme?.getVar(`--propel-${color}-10`),
+      pointHoverBorderWidth: 2,
+      pointHoverBorderColor: theme?.getVar(`--propel-${color}-contrast`),
+      fill,
+      label: group.group?.toString().replace(',', ', ')
+    } as ChartDataset<TimeSeriesChartVariant>
+  })
 }

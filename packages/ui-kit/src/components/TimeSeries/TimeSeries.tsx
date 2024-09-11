@@ -1,6 +1,6 @@
 'use client'
 
-import { Chart as ChartJS, ChartConfiguration, ChartDataset, ChartOptions, Color, LineController } from 'chart.js'
+import { Chart as ChartJS, ChartConfiguration, ChartOptions, Color, LineController } from 'chart.js'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
@@ -10,7 +10,6 @@ import {
   convertHexToRGBA,
   customCanvasBackgroundColor,
   formatLabels,
-  getPixelFontSizeAsNumber,
   getTimeZone,
   useEmptyableData,
   useForwardedRefCallback,
@@ -25,7 +24,7 @@ import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
 import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
-import { getDefaultGranularity, getNumericValues, getScales, tooltipTitleCallback } from './utils'
+import { buildDatasets, getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
 
@@ -158,7 +157,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const { grid = false, fillArea = false } = chartProps ?? {}
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
-        const values = getNumericValues(data.values ?? [], log)
 
         const plugins = [customCanvasBackgroundColor]
 
@@ -189,27 +187,11 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        const borderRadius = Math.max(
-          getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
-          getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
-        )
+        const datasets = buildDatasets(data, theme, { fill }, log)
 
         const dataset = {
           labels,
-          datasets: [
-            {
-              data: values,
-              backgroundColor: backgroundColor,
-              borderColor: theme?.getVar('--propel-accent-8'),
-              borderRadius,
-              hoverBackgroundColor: theme?.getVar('--propel-accent-10'),
-              pointBackgroundColor: theme?.getVar('--propel-accent-10'),
-              pointHoverBackgroundColor: theme?.getVar('--propel-accent-10'),
-              pointHoverBorderWidth: 2,
-              pointHoverBorderColor: theme?.getVar('--propel-accent-contrast'),
-              fill
-            } as ChartDataset<TimeSeriesChartVariant>
-          ]
+          datasets
         }
 
         // @TODO: need to refactor this logic
@@ -333,7 +315,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const labels = serverData.timeSeries?.labels ?? []
         const values = (serverData.timeSeries?.values ?? []).map((value) => (value == null ? null : Number(value)))
 
-        setData({ labels, values })
+        const groups = serverData.timeSeries?.groups?.map((group) => ({
+          ...group,
+          values: group.values.map((value) => (value == null ? null : Number(value)))
+        }))
+
+        setData({ labels, values, groups })
       }
     }, [serverData, variant, isStatic, setData])
 

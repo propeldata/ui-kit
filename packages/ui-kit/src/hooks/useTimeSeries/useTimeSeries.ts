@@ -29,7 +29,8 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     refetchInterval,
     enabled: enabledProp = true,
     retry,
-    timeZone
+    timeZone,
+    groupBy
   } = props
 
   const log = useLog()
@@ -61,6 +62,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withGroupBy: Partial<{ groupBy: string[] }> = groupBy != null ? { groupBy } : {}
 
   /**
    * @hook react-query wrapper
@@ -83,7 +85,8 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
         timeZone,
         ...withTimeRange,
         granularity: granularity as TimeSeriesGranularity,
-        filters
+        filters,
+        ...withGroupBy
       }
     },
     {

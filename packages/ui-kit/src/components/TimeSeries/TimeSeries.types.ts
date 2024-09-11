@@ -10,8 +10,13 @@ export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linea
 export type TimeSeriesChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
-  values?: Array<number | string | null>
+  values?: (number | string | null)[]
   labels?: string[]
+  groups?: {
+    values?: (number | string | null)[]
+    labels?: string[]
+    group?: (string | null)[]
+  }[]
 }
 
 export interface TimeSeriesQueryProps extends QueryProps {
@@ -20,6 +25,9 @@ export interface TimeSeriesQueryProps extends QueryProps {
 
   /** Timestamp format that the chart will respond to */
   timestampFormat?: string
+
+  /** Query groups based on columns for multi-dimensional time series */
+  groupBy?: string[]
 }
 
 export interface TimeSeriesChartProps {
