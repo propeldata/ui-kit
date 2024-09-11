@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { quotedStringRegex, storybookCodeTemplate } from '../../helpers'
-import { ThemeProvider } from '../ThemeProvider'
 import { Autocomplete } from './Autocomplete'
 
 const meta: Meta<typeof Autocomplete> = {
