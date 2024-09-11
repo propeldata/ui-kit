@@ -22,7 +22,8 @@ import {
   Scalings,
   panelBackgrounds,
   PanelBackgrounds,
-  useTheme
+  useTheme,
+  TimeGrainPicker
 } from '@propeldata/ui-kit'
 import React from 'react'
 import { DashboardCommonProps } from '../../shared.types'
@@ -103,15 +104,18 @@ export const Dashboard = ({ fetchToken, envs }: DashboardProps) => {
             <h1 className="px-6 py-3 text-3xl">React {React.version} Testing App</h1>
             <hr />
             <div className="px-6 py-3 w-full flex justify-between">
-              <SimpleFilter
-                query={{
-                  columnName: envs.REACT_APP_DIMENSION_1,
-                  dataPool: { name: envs.REACT_APP_DATA_POOL_UNIQUE_NAME_1 ?? '' },
-                  maxValues: 1000,
-                  timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
-                }}
-                autocompleteProps={{ containerStyle: { width: '500px' }, placeholder: 'Filter by taco name' }}
-              />
+              <div className="flex gap-8">
+                <SimpleFilter
+                  query={{
+                    columnName: envs.REACT_APP_DIMENSION_1,
+                    dataPool: { name: envs.REACT_APP_DATA_POOL_UNIQUE_NAME_1 ?? '' },
+                    maxValues: 1000,
+                    timeRange: { relative: RelativeTimeRange.LastNDays, n: 30 }
+                  }}
+                  autocompleteProps={{ containerStyle: { width: '500px' }, placeholder: 'Filter by taco name' }}
+                />
+                <TimeGrainPicker />
+              </div>
               <TimeRangePicker value={timeRange} onChange={setTimeRange} />
             </div>
             <div className="flex relative">

@@ -5,7 +5,8 @@
   "license": "MIT",
   "workspaces": [
     "packages/**",
-    "app/**"
+    "app/**",
+    "!**/dist/**"
   ],
   "nmHoistingLimits": "workspaces",
   "scripts": {
@@ -57,11 +58,11 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "!(dist)/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "**/*.{css,md,json,graphql}": [
+    "!(dist)/**/*.{css,md,json,graphql}": [
       "prettier --write"
     ]
   },

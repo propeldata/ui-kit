@@ -1,5 +1,21 @@
 # @propeldata/ui-kit
 
+## 0.10.0
+
+### Minor Changes
+
+- 276602c: Added new TimeGrainPicker component
+
+## 0.9.0
+
+### Minor Changes
+
+- 2a75332: Export colors
+
+### Patch Changes
+
+- fde5d2f: Wrap ThemeProvider for components
+
 ## 0.8.1
 
 ### Patch Changes

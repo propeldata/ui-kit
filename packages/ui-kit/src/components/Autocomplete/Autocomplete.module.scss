@@ -8,7 +8,7 @@
   border: 1px solid var(--propel-gray-6);
   display: flex;
   gap: var(--propel-space-1);
-  padding: var(--propel-space-1);
+  padding: var(--propel-space-1) 0;
   overflow: hidden;
   transition: all 100ms;
   box-sizing: border-box;
@@ -40,10 +40,10 @@
   background: inherit;
   border: none;
   border-radius: inherit;
-  padding: var(--propel-space-1);
+  padding: var(--propel-space-1) var(--propel-space-2);
   outline: 0;
   flex: 1 0 auto;
-  width: 100%;
+  width: fit-content;
 }
 
 .autocompleteIndicator {
@@ -72,6 +72,8 @@
   min-width: fit-content;
   box-shadow: var(--propel-shadow-5);
   margin-top: var(--propel-space-3) !important;
+
+  box-sizing: border-box;
 
   ul {
     width: 100%;
