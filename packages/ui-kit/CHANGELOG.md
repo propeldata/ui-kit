@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.10.0
+
+### Minor Changes
+
+- 276602c: Added new TimeGrainPicker component
+
 ## 0.9.0
 
 ### Minor Changes
