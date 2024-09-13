@@ -2,7 +2,7 @@ import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { TimeSeriesGranularity } from '../../graphql'
 import { TimeSeriesLabels } from '../../helpers'
-import { ThemeSettingProps } from '../../themes'
+import { AccentColors, ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
@@ -71,6 +71,18 @@ export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentPro
 
   /** @deprecated Format function for labels, must return an array with the new labels. This type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: TimeSeriesLabels) => TimeSeriesLabels
+
+  /** Maximum number of columns to group by, default is 5 */
+  maxGroupBy?: number
+
+  /** If true, an `other` dataset will be shown */
+  showGroupByOther?: boolean
+
+  /** A list of accent colors the TimeSeries component will use to show groups, those will be picked in order */
+  accentColors?: AccentColors[]
+
+  /** If true, chart's lines or bars will be stacked */
+  stacked?: boolean
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {

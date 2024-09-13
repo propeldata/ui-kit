@@ -75,6 +75,10 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       renderEmpty,
       card = false,
       chartProps,
+      maxGroupBy = 5,
+      showGroupByOther = true,
+      accentColors = [],
+      stacked = false,
       ...rest
     },
     forwardedRef
@@ -192,7 +196,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        const datasets = buildDatasets(data, theme, { fill }, log)
+        const datasets = buildDatasets(data, theme, { fill, maxGroupBy, showGroupByOther, accentColors }, log)
 
         const dataset = {
           labels,
@@ -207,7 +211,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           chart: chartRef.current,
           variant,
           grid,
-          theme
+          theme,
+          stacked
         })
 
         const options: ChartOptions<TimeSeriesChartVariant> = {
@@ -252,19 +257,23 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         chartRef.current = new ChartJS(canvasRef.current, config)
       },
       [
-        granularity,
         hasError,
-        isFormatted,
-        variant,
-        timeZone,
         theme,
-        card,
         chartProps,
-        log,
         labelFormatter,
-        chartConfigProps,
+        card,
+        variant,
+        maxGroupBy,
+        showGroupByOther,
+        accentColors,
+        log,
+        granularity,
+        isFormatted,
+        timeZone,
+        stacked,
+        chartConfig,
         type,
-        chartConfig
+        chartConfigProps
       ]
     )
 

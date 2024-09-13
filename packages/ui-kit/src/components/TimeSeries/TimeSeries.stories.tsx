@@ -301,9 +301,13 @@ export const GroupedStory: Story = {
     variant: 'bar',
     query: {
       ...connectedParams,
-      groupBy: ['restaurant_name'],
-      granularity: TimeSeriesGranularity.Month
-    }
+      groupBy: ['restaurant_name']
+    },
+    showGroupByOther: false,
+    maxGroupBy: 100,
+    stacked: true,
+    accentColors: ['red', 'blue'],
+    card: true
   },
   render: (args) => <TimeSeries {...args} />
 }
