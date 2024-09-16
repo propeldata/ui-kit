@@ -94,7 +94,13 @@ export const LineStory: Story = {
   name: 'Line',
   args: {
     variant: 'line',
-    query: connectedParams,
+    query: {
+      ...connectedParams,
+      groupBy: ['taco_name'],
+      timeRange: {
+        relative: RelativeTimeRange.Today
+      }
+    },
     card: true
   },
   render: (args) => <TimeSeries {...args} />

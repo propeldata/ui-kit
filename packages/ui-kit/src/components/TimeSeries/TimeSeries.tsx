@@ -5,6 +5,7 @@ import { Chart as ChartJS, ChartConfiguration, ChartOptions, Color, LineControll
 // @ts-ignore
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import classnames from 'classnames'
+import { startOfDay } from 'date-fns'
 import React from 'react'
 import {
   convertHexToRGBA,
@@ -199,7 +200,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const datasets = buildDatasets(data, theme, { fill, maxGroupBy, showGroupByOther, accentColors }, log)
 
         const dataset = {
-          labels,
+          labels: labels.length > 0 ? labels : [startOfDay(new Date().toISOString()).toISOString()], // workaround for groupBy not returning labels
           datasets
         }
 
@@ -374,8 +375,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       return <Loader ref={setRef} {...loaderProps} />
     }
 
-    if (isEmptyState && renderEmptyComponent) {
-      return themeWrapper(renderEmptyComponent({ theme }))
+    if (isEmptyState) {
+      if (renderEmptyComponent != null) {
+        return themeWrapper(renderEmptyComponent({ theme }))
+      } else {
+        data != null && renderChart(data) // render chart with empty data in case no empty state component is provided
+      }
     }
 
     return (

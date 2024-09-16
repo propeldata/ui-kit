@@ -1,3 +1,5 @@
+'use client'
+
 import { Chart, ChartDataset, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
@@ -337,7 +339,7 @@ export function buildDatasets(
     getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
   )
 
-  if (groups == null) {
+  if (groups == null || groups.length === 0) {
     return [
       {
         data: getNumericValues(values ?? [], log),
@@ -437,7 +439,7 @@ export function buildDatasets(
   }
 
   return groupsToDisplay.map((group, idx) => {
-    if (colorPos > colorsDict.length) colorPos = 0
+    if (colorPos >= colorsDict.length) colorPos = 0
 
     const extractedColor = customColors.shift()
 
