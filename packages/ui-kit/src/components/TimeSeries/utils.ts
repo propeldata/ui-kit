@@ -360,30 +360,30 @@ export function buildDatasets(
 
   const colorsDict: DataSetColor[] = [
     { name: 'blue', line: radixColors.blue.blue8, point: radixColors.blue.blue10 },
-    { name: 'teal', line: radixColors.teal.teal8, point: radixColors.teal.teal10 },
-    { name: 'green', line: radixColors.green.green8, point: radixColors.green.green10 },
-    { name: 'bronze', line: radixColors.bronze.bronze8, point: radixColors.bronze.bronze10 },
-    { name: 'brown', line: radixColors.brown.brown8, point: radixColors.brown.brown10 },
-    { name: 'amber', line: radixColors.amber.amber8, point: radixColors.amber.amber10 },
-    { name: 'lime', line: radixColors.lime.lime8, point: radixColors.lime.lime10 },
-    { name: 'sky', line: radixColors.sky.sky8, point: radixColors.sky.sky10 },
-    { name: 'tomato', line: radixColors.tomato.tomato8, point: radixColors.tomato.tomato10 },
-    { name: 'ruby', line: radixColors.ruby.ruby8, point: radixColors.ruby.ruby10 },
-    { name: 'pink', line: radixColors.pink.pink8, point: radixColors.pink.pink10 },
-    { name: 'purple', line: radixColors.purple.purple8, point: radixColors.purple.purple10 },
     { name: 'iris', line: radixColors.iris.iris8, point: radixColors.iris.iris10 },
-    { name: 'cyan', line: radixColors.cyan.cyan8, point: radixColors.cyan.cyan10 },
-    { name: 'jade', line: radixColors.jade.jade8, point: radixColors.jade.jade10 },
-    { name: 'grass', line: radixColors.grass.grass8, point: radixColors.grass.grass10 },
-    { name: 'gold', line: radixColors.gold.gold8, point: radixColors.gold.gold10 },
-    { name: 'orange', line: radixColors.orange.orange8, point: radixColors.orange.orange10 },
-    { name: 'yellow', line: radixColors.yellow.yellow8, point: radixColors.yellow.yellow10 },
-    { name: 'mint', line: radixColors.mint.mint8, point: radixColors.mint.mint10 },
-    { name: 'red', line: radixColors.red.red8, point: radixColors.red.red10 },
     { name: 'crimson', line: radixColors.crimson.crimson8, point: radixColors.crimson.crimson10 },
-    { name: 'plum', line: radixColors.plum.plum8, point: radixColors.plum.plum10 },
+    { name: 'jade', line: radixColors.jade.jade8, point: radixColors.jade.jade10 },
+    { name: 'purple', line: radixColors.purple.purple8, point: radixColors.purple.purple10 },
+    { name: 'orange', line: radixColors.orange.orange8, point: radixColors.orange.orange10 },
+    { name: 'brown', line: radixColors.brown.brown8, point: radixColors.brown.brown10 },
+    { name: 'yellow', line: radixColors.yellow.yellow8, point: radixColors.yellow.yellow10 },
+    { name: 'indigo', line: radixColors.indigo.indigo8, point: radixColors.indigo.indigo10 },
+    { name: 'red', line: radixColors.red.red8, point: radixColors.red.red10 },
+    { name: 'cyan', line: radixColors.cyan.cyan8, point: radixColors.cyan.cyan10 },
+    { name: 'amber', line: radixColors.amber.amber8, point: radixColors.amber.amber10 },
     { name: 'violet', line: radixColors.violet.violet8, point: radixColors.violet.violet10 },
-    { name: 'indigo', line: radixColors.indigo.indigo8, point: radixColors.indigo.indigo10 }
+    { name: 'lime', line: radixColors.lime.lime8, point: radixColors.lime.lime10 },
+    { name: 'plum', line: radixColors.plum.plum8, point: radixColors.plum.plum10 },
+    { name: 'mint', line: radixColors.mint.mint8, point: radixColors.mint.mint10 },
+    { name: 'ruby', line: radixColors.ruby.ruby8, point: radixColors.ruby.ruby10 },
+    { name: 'sky', line: radixColors.sky.sky8, point: radixColors.sky.sky10 },
+    { name: 'teal', line: radixColors.teal.teal8, point: radixColors.teal.teal10 },
+    { name: 'gold', line: radixColors.gold.gold8, point: radixColors.gold.gold10 },
+    { name: 'grass', line: radixColors.grass.grass8, point: radixColors.grass.grass10 },
+    { name: 'pink', line: radixColors.pink.pink8, point: radixColors.pink.pink10 },
+    { name: 'bronze', line: radixColors.bronze.bronze8, point: radixColors.bronze.bronze10 },
+    { name: 'tomato', line: radixColors.tomato.tomato8, point: radixColors.tomato.tomato10 },
+    { name: 'green', line: radixColors.green.green8, point: radixColors.green.green10 }
   ]
 
   const grayColor: DataSetColor = {
@@ -438,7 +438,7 @@ export function buildDatasets(
     groupsToDisplay.push(other)
   }
 
-  return groupsToDisplay.map((group, idx) => {
+  const datasets = groupsToDisplay.map((group, idx) => {
     if (colorPos >= colorsDict.length) colorPos = 0
 
     const extractedColor = customColors.shift()
@@ -464,4 +464,13 @@ export function buildDatasets(
 
     return dataset
   })
+
+  if (datasets[datasets.length - 1].label === 'Other') {
+    const otherDataset = datasets.pop()
+    if (otherDataset) {
+      datasets.unshift(otherDataset)
+    }
+  }
+
+  return datasets
 }

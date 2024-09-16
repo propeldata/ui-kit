@@ -94,13 +94,7 @@ export const LineStory: Story = {
   name: 'Line',
   args: {
     variant: 'line',
-    query: {
-      ...connectedParams,
-      groupBy: ['taco_name'],
-      timeRange: {
-        relative: RelativeTimeRange.Today
-      }
-    },
+    query: connectedParams,
     card: true
   },
   render: (args) => <TimeSeries {...args} />
@@ -309,7 +303,7 @@ export const GroupedStory: Story = {
       ...connectedParams,
       groupBy: ['restaurant_name']
     },
-    showGroupByOther: false,
+    showGroupByOther: true,
     maxGroupBy: 5,
     stacked: true,
     accentColors: ['red', 'blue'],
