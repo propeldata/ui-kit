@@ -384,15 +384,22 @@ export function buildDatasets(
     { name: 'indigo', line: radixColors.indigo.indigo8, point: radixColors.indigo.indigo10 }
   ]
 
-  const grayColor: DataSetColor = { name: 'gray', line: radixColors.gray.gray8, point: radixColors.gray.gray10 }
+  const grayColor: DataSetColor = {
+    name: 'gray',
+    line: theme.tokens[`${theme.grayColor}8`] ?? radixColors.gray.gray8,
+    point: theme.tokens[`${theme.grayColor}10`] ?? radixColors.gray.gray10
+  }
 
-  const colors =
-    accentColors.length > 0 ? accentColors.map((color) => colorsDict.find(({ name }) => name === color)) : colorsDict
+  const isCustomColors = accentColors.length > 0
 
-  let colorPos = colors.findIndex((value) => value?.name === accentColor)
+  let customColors: (DataSetColor | undefined)[] = []
 
-  if (accentColors.length > 0) {
-    const lastColorName = colors[colors.length - 1]?.name
+  let colorPos = colorsDict.findIndex((value) => value?.name === accentColor)
+
+  if (isCustomColors) {
+    customColors = accentColors.map((color) => colorsDict.find(({ name }) => name === color))
+
+    const lastColorName = customColors[customColors.length - 1]?.name
     const lastColorIndex = colorsDict.findIndex((color) => color.name === lastColorName)
 
     colorPos = lastColorIndex + 1
@@ -432,7 +439,7 @@ export function buildDatasets(
   return groupsToDisplay.map((group, idx) => {
     if (colorPos > colorsDict.length) colorPos = 0
 
-    const extractedColor = colors.shift()
+    const extractedColor = customColors.shift()
 
     const color =
       extractedColor ??

@@ -303,8 +303,8 @@ export const GroupedStory: Story = {
       ...connectedParams,
       groupBy: ['restaurant_name']
     },
-    showGroupByOther: false,
-    maxGroupBy: 100,
+    showGroupByOther: true,
+    maxGroupBy: 2,
     stacked: true,
     accentColors: ['red', 'blue'],
     card: true
