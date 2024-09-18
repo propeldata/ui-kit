@@ -330,11 +330,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         if (
           !isStatic &&
-          (hasError?.name === 'AccessTokenError' ||
-            !query.metric ||
-            !query.timeRange ||
-            !query.dimension ||
-            !query.rowLimit)
+          (hasError?.name === 'AccessTokenError' || !query.metric || !query.dimension || !query.rowLimit)
         ) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
