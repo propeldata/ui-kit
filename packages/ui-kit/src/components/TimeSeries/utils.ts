@@ -432,12 +432,7 @@ export function buildDatasets(
     return dataset
   })
 
-  if (datasets[datasets.length - 1].label === 'Other') {
-    const otherDataset = datasets.pop()
-    if (otherDataset) {
-      datasets.unshift(otherDataset)
-    }
-  }
+  const orderedDatasets = datasets.reverse()
 
-  return datasets
+  return orderedDatasets
 }
