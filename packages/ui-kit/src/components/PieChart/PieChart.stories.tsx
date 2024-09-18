@@ -79,7 +79,7 @@ const connectedParams: PieChartQueryProps = {
 export const SingleDimensionPieStory: Story = {
   name: 'Pie',
   args: {
-    query: {},
+    query: connectedParams,
     card: true
   },
   render: (args) => <PieChart {...args} />
@@ -260,7 +260,7 @@ export const EmptyPieStory: Story = {
       ...connectedParams,
       filters: [
         {
-          column: process.env.STORYBOOK_DIMENSION_4 ?? '',
+          column: process.env.STORYBOOK_DIMENSION_3 ?? '',
           operator: FilterOperator.IsNull
         }
       ]
