@@ -181,9 +181,9 @@ export function getScales({
   theme,
   stacked = false
 }: GetScalesOptions) {
-  const scales = chart?.options?.scales
+  const scales = chart?.options?.scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>
   const scale = scales?.y?.type ?? 'linear'
-  const beginAtZero = (scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>)?.y?.beginAtZero ?? false
+  const beginAtZero = scales?.y?.beginAtZero ?? false
   const padding = variant === 'line' ? 5 : 9
 
   const scalesBase = {
@@ -232,7 +232,7 @@ export function getScales({
     ...scalesBase,
     x: {
       ...scalesBase.x,
-      type: 'timeseries',
+      type: 'time',
       time: {
         isoWeekday: true,
         unit: getGranularityBasedUnit(granularity)
