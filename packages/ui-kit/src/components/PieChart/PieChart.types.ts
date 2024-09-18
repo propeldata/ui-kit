@@ -1,6 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
-import { ThemeSettingProps } from '../../themes'
+import { AccentColors, ThemeSettingProps } from '../../themes'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'
@@ -29,7 +29,10 @@ export type ChartProps = {
    */
   showValues?: boolean
 
-  /** Sets the chart color palette */
+  /**
+   * Sets the chart color palette
+   * @deprecated This property is deprecated and will be removed in a future version. Use `accentColors` instead.
+   */
   chartColorPalette?: string[]
 
   /** Hides the total value on chart if it is set the true
@@ -89,6 +92,9 @@ export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'di
 
   /** Provides className to style label list of chart. */
   labelListClassName?: string
+
+  /** A list of accent colors the PieChart component will use, those will be picked in order */
+  accentColors?: AccentColors[]
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'pie' | 'doughnut'>) => ChartConfiguration<'pie' | 'doughnut'>

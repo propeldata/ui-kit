@@ -67,3 +67,9 @@ export type ThemeComponentProps = {
   /** Provides a className for the ErrorFallback container */
   className?: string
 }
+
+export interface PaletteColor {
+  name: AccentColors
+  primary: string
+  secondary: string
+}

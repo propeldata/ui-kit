@@ -20,7 +20,7 @@ import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './PieChart.module.scss'
 import { PieChartData, PieChartProps, PieChartVariant } from './PieChart.types'
-import { useParsedComponentProps } from '../../themes'
+import { palette, PaletteColor, useParsedComponentProps } from '../../themes'
 import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
@@ -46,6 +46,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       chartProps,
       labelListClassName,
       chartConfigProps,
+      accentColors,
       ...rest
     }: PieChartProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
@@ -115,21 +116,30 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const showValues = chartProps?.showValues ?? false
 
-    const defaultChartColorPalette = React.useMemo(
-      () => [
-        theme?.getVar('--propel-accent-3'),
-        theme?.getVar('--propel-accent-4'),
-        theme?.getVar('--propel-accent-5'),
-        theme?.getVar('--propel-accent-6'),
-        theme?.getVar('--propel-accent-7'),
-        theme?.getVar('--propel-accent-8'),
-        theme?.getVar('--propel-accent-9'),
-        theme?.getVar('--propel-accent-10'),
-        theme?.getVar('--propel-accent-11'),
-        theme?.getVar('--propel-accent-12')
-      ],
-      [theme]
-    )
+    const defaultChartColorPalette = React.useMemo(() => {
+      let customColors: PaletteColor[] = []
+
+      const accentColor = accentColors?.[0] ?? theme?.accentColor
+
+      let colorPos = palette.findIndex((value) => value?.name === accentColor)
+
+      if (accentColors != null) {
+        const isCustomColors = (accentColors?.length ?? 0) > 0
+
+        if (isCustomColors) {
+          customColors = accentColors.map((color) => palette.find(({ name }) => name === color)) as PaletteColor[]
+
+          const lastColorName = customColors[customColors.length - 1]?.name
+          const lastColorIndex = palette.findIndex((color) => color.name === lastColorName)
+
+          colorPos = lastColorIndex + 1
+        }
+      }
+
+      const additionalColors = palette.slice(colorPos)
+
+      return [...customColors, ...additionalColors, ...palette].map(({ primary }) => primary)
+    }, [accentColors, theme?.accentColor])
 
     const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
 
