@@ -2,7 +2,7 @@ import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { TimeSeriesGranularity } from '../../graphql'
 import { TimeSeriesLabels } from '../../helpers'
-import { AccentColors, ThemeSettingProps } from '../../themes'
+import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
@@ -83,6 +83,9 @@ export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentPro
 
   /** If true, chart's lines or bars will be stacked */
   stacked?: boolean
+
+  /** Color that will be used for the `other` dataset when using groupBy */
+  otherColor?: GrayColors
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {

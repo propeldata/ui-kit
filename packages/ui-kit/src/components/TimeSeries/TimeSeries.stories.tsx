@@ -307,7 +307,8 @@ export const GroupedStory: Story = {
     maxGroupBy: 5,
     stacked: true,
     accentColors: ['red', 'blue'],
-    card: true
+    card: true,
+    otherColor: 'gray'
   },
   render: (args) => <TimeSeries {...args} />
 }

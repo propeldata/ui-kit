@@ -5,7 +5,7 @@ import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
 import * as radixColors from '@radix-ui/colors'
 
-import { AccentColors, ThemeTokenProps } from '../../themes'
+import { AccentColors, GrayColors, ThemeTokenProps } from '../../themes'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
 import { getDisplayValue, getPixelFontSizeAsNumber } from '../../helpers'
 import { Log } from '../Log'
@@ -322,6 +322,7 @@ interface BuildDatasetsOptions {
   maxGroupBy: number
   showGroupByOther: boolean
   accentColors: AccentColors[]
+  otherColor?: GrayColors
 }
 
 export function buildDatasets(
@@ -332,7 +333,7 @@ export function buildDatasets(
 ): ChartDataset<TimeSeriesChartVariant>[] {
   const { values, groups } = data
 
-  const { fill = false, maxGroupBy, showGroupByOther, accentColors } = options ?? {}
+  const { fill = false, maxGroupBy, showGroupByOther, accentColors, otherColor } = options ?? {}
 
   const borderRadius = Math.max(
     getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
@@ -360,36 +361,86 @@ export function buildDatasets(
 
   const colorsDict: DataSetColor[] = [
     { name: 'blue', line: radixColors.blue.blue8, point: radixColors.blue.blue10 },
-    { name: 'iris', line: radixColors.iris.iris8, point: radixColors.iris.iris10 },
-    { name: 'crimson', line: radixColors.crimson.crimson8, point: radixColors.crimson.crimson10 },
-    { name: 'jade', line: radixColors.jade.jade8, point: radixColors.jade.jade10 },
-    { name: 'purple', line: radixColors.purple.purple8, point: radixColors.purple.purple10 },
-    { name: 'orange', line: radixColors.orange.orange8, point: radixColors.orange.orange10 },
-    { name: 'brown', line: radixColors.brown.brown8, point: radixColors.brown.brown10 },
-    { name: 'yellow', line: radixColors.yellow.yellow8, point: radixColors.yellow.yellow10 },
-    { name: 'indigo', line: radixColors.indigo.indigo8, point: radixColors.indigo.indigo10 },
-    { name: 'red', line: radixColors.red.red8, point: radixColors.red.red10 },
+    { name: 'blue', line: radixColors.blue.blue11, point: radixColors.blue.blue10 },
+    { name: 'blue', line: radixColors.blue.blue5, point: radixColors.blue.blue10 },
     { name: 'cyan', line: radixColors.cyan.cyan8, point: radixColors.cyan.cyan10 },
-    { name: 'amber', line: radixColors.amber.amber8, point: radixColors.amber.amber10 },
-    { name: 'violet', line: radixColors.violet.violet8, point: radixColors.violet.violet10 },
-    { name: 'lime', line: radixColors.lime.lime8, point: radixColors.lime.lime10 },
-    { name: 'plum', line: radixColors.plum.plum8, point: radixColors.plum.plum10 },
-    { name: 'mint', line: radixColors.mint.mint8, point: radixColors.mint.mint10 },
-    { name: 'ruby', line: radixColors.ruby.ruby8, point: radixColors.ruby.ruby10 },
-    { name: 'sky', line: radixColors.sky.sky8, point: radixColors.sky.sky10 },
+    { name: 'cyan', line: radixColors.cyan.cyan11, point: radixColors.cyan.cyan10 },
+    { name: 'cyan', line: radixColors.cyan.cyan5, point: radixColors.cyan.cyan10 },
     { name: 'teal', line: radixColors.teal.teal8, point: radixColors.teal.teal10 },
-    { name: 'gold', line: radixColors.gold.gold8, point: radixColors.gold.gold10 },
+    { name: 'teal', line: radixColors.teal.teal11, point: radixColors.teal.teal10 },
+    { name: 'teal', line: radixColors.teal.teal5, point: radixColors.teal.teal10 },
+    { name: 'jade', line: radixColors.jade.jade8, point: radixColors.jade.jade10 },
+    { name: 'jade', line: radixColors.jade.jade11, point: radixColors.jade.jade10 },
+    { name: 'jade', line: radixColors.jade.jade5, point: radixColors.jade.jade10 },
+    { name: 'green', line: radixColors.green.green8, point: radixColors.green.green10 },
+    { name: 'green', line: radixColors.green.green11, point: radixColors.green.green10 },
+    { name: 'green', line: radixColors.green.green5, point: radixColors.green.green10 },
     { name: 'grass', line: radixColors.grass.grass8, point: radixColors.grass.grass10 },
-    { name: 'pink', line: radixColors.pink.pink8, point: radixColors.pink.pink10 },
+    { name: 'grass', line: radixColors.grass.grass11, point: radixColors.grass.grass10 },
+    { name: 'grass', line: radixColors.grass.grass5, point: radixColors.grass.grass10 },
     { name: 'bronze', line: radixColors.bronze.bronze8, point: radixColors.bronze.bronze10 },
+    { name: 'bronze', line: radixColors.bronze.bronze11, point: radixColors.bronze.bronze10 },
+    { name: 'bronze', line: radixColors.bronze.bronze5, point: radixColors.bronze.bronze10 },
+    { name: 'gold', line: radixColors.gold.gold8, point: radixColors.gold.gold10 },
+    { name: 'gold', line: radixColors.gold.gold11, point: radixColors.gold.gold10 },
+    { name: 'gold', line: radixColors.gold.gold5, point: radixColors.gold.gold10 },
+    { name: 'brown', line: radixColors.brown.brown8, point: radixColors.brown.brown10 },
+    { name: 'brown', line: radixColors.brown.brown11, point: radixColors.brown.brown10 },
+    { name: 'brown', line: radixColors.brown.brown5, point: radixColors.brown.brown10 },
+    { name: 'orange', line: radixColors.orange.orange8, point: radixColors.orange.orange10 },
+    { name: 'orange', line: radixColors.orange.orange11, point: radixColors.orange.orange10 },
+    { name: 'orange', line: radixColors.orange.orange5, point: radixColors.orange.orange10 },
+    { name: 'amber', line: radixColors.amber.amber8, point: radixColors.amber.amber10 },
+    { name: 'amber', line: radixColors.amber.amber11, point: radixColors.amber.amber10 },
+    { name: 'amber', line: radixColors.amber.amber5, point: radixColors.amber.amber10 },
+    { name: 'yellow', line: radixColors.yellow.yellow8, point: radixColors.yellow.yellow10 },
+    { name: 'yellow', line: radixColors.yellow.yellow11, point: radixColors.yellow.yellow10 },
+    { name: 'yellow', line: radixColors.yellow.yellow5, point: radixColors.yellow.yellow10 },
+    { name: 'lime', line: radixColors.lime.lime8, point: radixColors.lime.lime10 },
+    { name: 'lime', line: radixColors.lime.lime11, point: radixColors.lime.lime10 },
+    { name: 'lime', line: radixColors.lime.lime5, point: radixColors.lime.lime10 },
+    { name: 'mint', line: radixColors.mint.mint8, point: radixColors.mint.mint10 },
+    { name: 'mint', line: radixColors.mint.mint11, point: radixColors.mint.mint10 },
+    { name: 'mint', line: radixColors.mint.mint5, point: radixColors.mint.mint10 },
+    { name: 'sky', line: radixColors.sky.sky8, point: radixColors.sky.sky10 },
+    { name: 'sky', line: radixColors.sky.sky11, point: radixColors.sky.sky10 },
+    { name: 'sky', line: radixColors.sky.sky5, point: radixColors.sky.sky10 },
     { name: 'tomato', line: radixColors.tomato.tomato8, point: radixColors.tomato.tomato10 },
-    { name: 'green', line: radixColors.green.green8, point: radixColors.green.green10 }
+    { name: 'tomato', line: radixColors.tomato.tomato11, point: radixColors.tomato.tomato10 },
+    { name: 'tomato', line: radixColors.tomato.tomato5, point: radixColors.tomato.tomato10 },
+    { name: 'red', line: radixColors.red.red8, point: radixColors.red.red10 },
+    { name: 'red', line: radixColors.red.red11, point: radixColors.red.red10 },
+    { name: 'red', line: radixColors.red.red5, point: radixColors.red.red10 },
+    { name: 'ruby', line: radixColors.ruby.ruby8, point: radixColors.ruby.ruby10 },
+    { name: 'ruby', line: radixColors.ruby.ruby11, point: radixColors.ruby.ruby10 },
+    { name: 'ruby', line: radixColors.ruby.ruby5, point: radixColors.ruby.ruby10 },
+    { name: 'crimson', line: radixColors.crimson.crimson8, point: radixColors.crimson.crimson10 },
+    { name: 'crimson', line: radixColors.crimson.crimson11, point: radixColors.crimson.crimson10 },
+    { name: 'crimson', line: radixColors.crimson.crimson5, point: radixColors.crimson.crimson10 },
+    { name: 'pink', line: radixColors.pink.pink8, point: radixColors.pink.pink10 },
+    { name: 'pink', line: radixColors.pink.pink11, point: radixColors.pink.pink10 },
+    { name: 'pink', line: radixColors.pink.pink5, point: radixColors.pink.pink10 },
+    { name: 'plum', line: radixColors.plum.plum8, point: radixColors.plum.plum10 },
+    { name: 'plum', line: radixColors.plum.plum11, point: radixColors.plum.plum10 },
+    { name: 'plum', line: radixColors.plum.plum5, point: radixColors.plum.plum10 },
+    { name: 'purple', line: radixColors.purple.purple8, point: radixColors.purple.purple10 },
+    { name: 'purple', line: radixColors.purple.purple11, point: radixColors.purple.purple10 },
+    { name: 'purple', line: radixColors.purple.purple5, point: radixColors.purple.purple10 },
+    { name: 'violet', line: radixColors.violet.violet8, point: radixColors.violet.violet10 },
+    { name: 'violet', line: radixColors.violet.violet11, point: radixColors.violet.violet10 },
+    { name: 'violet', line: radixColors.violet.violet5, point: radixColors.violet.violet10 },
+    { name: 'iris', line: radixColors.iris.iris8, point: radixColors.iris.iris10 },
+    { name: 'iris', line: radixColors.iris.iris11, point: radixColors.iris.iris10 },
+    { name: 'iris', line: radixColors.iris.iris5, point: radixColors.iris.iris10 },
+    { name: 'indigo', line: radixColors.indigo.indigo8, point: radixColors.indigo.indigo10 },
+    { name: 'indigo', line: radixColors.indigo.indigo11, point: radixColors.indigo.indigo10 },
+    { name: 'indigo', line: radixColors.indigo.indigo5, point: radixColors.indigo.indigo10 }
   ]
 
   const grayColor: DataSetColor = {
     name: 'gray',
-    line: theme.tokens[`${theme.grayColor}8`] ?? radixColors.gray.gray8,
-    point: theme.tokens[`${theme.grayColor}10`] ?? radixColors.gray.gray10
+    line: theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
+    point: theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
   }
 
   const isCustomColors = accentColors.length > 0

@@ -80,6 +80,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       showGroupByOther = true,
       accentColors = [],
       stacked = false,
+      otherColor,
       ...rest
     },
     forwardedRef
@@ -197,7 +198,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        const datasets = buildDatasets(data, theme, { fill, maxGroupBy, showGroupByOther, accentColors }, log)
+        const datasets = buildDatasets(
+          data,
+          theme,
+          { fill, maxGroupBy, showGroupByOther, accentColors, otherColor },
+          log
+        )
 
         const dataset = {
           labels: labels.length > 0 ? labels : [startOfDay(new Date().toISOString()).toISOString()], // workaround for groupBy not returning labels
@@ -267,6 +273,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         maxGroupBy,
         showGroupByOther,
         accentColors,
+        otherColor,
         log,
         granularity,
         isFormatted,
