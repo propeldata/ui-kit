@@ -3,6 +3,7 @@
 import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js/auto'
 import classnames from 'classnames'
 import React from 'react'
+import * as radixColors from '@radix-ui/colors'
 import {
   customCanvasBackgroundColor,
   getCustomChartLabelsPlugin,
@@ -47,6 +48,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       labelListClassName,
       chartConfigProps,
       accentColors,
+      otherColor,
       ...rest
     }: PieChartProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
@@ -212,6 +214,18 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const datasets = isDoughnut ? { cutout: '75%' } : { cutout: '0' }
 
+        const otherIndex = labels.findIndex((label) => label === 'Other')
+
+        if (otherIndex !== -1 && otherColor != null) {
+          const grayColor: PaletteColor = {
+            name: 'gray',
+            primary: theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
+            secondary: theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
+          }
+
+          chartColorPalette[otherIndex] = grayColor.primary
+        }
+
         let config: ChartConfiguration<PieChartVariant> = {
           ...chartConfig,
           type: variant,
@@ -279,16 +293,17 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         canvasRef.current.style.borderRadius = '0px'
       },
       [
-        variant,
         theme,
-        card,
-        chartProps,
         chartConfig,
-        isDoughnut,
-        showValues,
+        defaultChartColorPalette,
+        chartProps,
+        card,
         isPie,
         totalValue,
-        defaultChartColorPalette,
+        showValues,
+        isDoughnut,
+        otherColor,
+        variant,
         chartConfigProps
       ]
     )

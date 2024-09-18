@@ -1,6 +1,6 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
-import { AccentColors, ThemeSettingProps } from '../../themes'
+import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
 import { DataComponentProps, QueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'
@@ -95,6 +95,9 @@ export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'di
 
   /** A list of accent colors the PieChart component will use, those will be picked in order */
   accentColors?: AccentColors[]
+
+  /** Color that will be used for `other` */
+  otherColor?: GrayColors
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'pie' | 'doughnut'>) => ChartConfiguration<'pie' | 'doughnut'>
