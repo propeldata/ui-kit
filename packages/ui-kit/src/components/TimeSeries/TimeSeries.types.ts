@@ -2,7 +2,7 @@ import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { TimeSeriesGranularity } from '../../graphql'
 import { TimeSeriesLabels } from '../../helpers'
-import { ThemeSettingProps } from '../../themes'
+import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
@@ -10,8 +10,13 @@ export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linea
 export type TimeSeriesChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
-  values?: Array<number | string | null>
+  values?: (number | string | null)[]
   labels?: string[]
+  groups?: {
+    values?: (number | string | null)[]
+    labels?: string[]
+    group?: (string | null)[]
+  }[]
 }
 
 export interface TimeSeriesQueryProps extends QueryProps {
@@ -20,6 +25,9 @@ export interface TimeSeriesQueryProps extends QueryProps {
 
   /** Timestamp format that the chart will respond to */
   timestampFormat?: string
+
+  /** Query groups based on columns for multi-dimensional time series */
+  groupBy?: string[]
 }
 
 export interface TimeSeriesChartProps {
@@ -63,6 +71,21 @@ export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentPro
 
   /** @deprecated Format function for labels, must return an array with the new labels. This type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: TimeSeriesLabels) => TimeSeriesLabels
+
+  /** Maximum number of columns to group by, default is 5 */
+  maxGroupBy?: number
+
+  /** If true, an `other` dataset will be shown */
+  showGroupByOther?: boolean
+
+  /** A list of accent colors the TimeSeries component will use to show groups, those will be picked in order */
+  accentColors?: (AccentColors | string)[]
+
+  /** If true, chart's lines or bars will be stacked */
+  stacked?: boolean
+
+  /** Color that will be used for the `other` dataset when using groupBy */
+  otherColor?: GrayColors | string
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {

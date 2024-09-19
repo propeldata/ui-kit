@@ -295,6 +295,24 @@ export const ChartFormatXLabelsStory: Story = {
   render: (args) => <TimeSeries {...args} />
 }
 
+export const GroupedStory: Story = {
+  name: 'Grouped',
+  args: {
+    variant: 'bar',
+    query: {
+      ...connectedParams,
+      groupBy: ['restaurant_name']
+    },
+    showGroupByOther: true,
+    maxGroupBy: 5,
+    stacked: true,
+    accentColors: ['red', 'blue'],
+    card: true,
+    otherColor: 'gray'
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
 export const StaticStory: Story = {
   name: 'Static',
   parameters: { imports: 'TimeSeries' },

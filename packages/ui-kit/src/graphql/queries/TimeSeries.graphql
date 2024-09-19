@@ -2,5 +2,10 @@ query TimeSeries($timeSeriesInput: TimeSeriesInput!) {
   timeSeries(input: $timeSeriesInput) {
     labels
     values
+    groups {
+      group
+      labels
+      values
+    }
   }
 }
