@@ -5,7 +5,15 @@ import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
 import * as radixColors from '@radix-ui/colors'
 
-import { AccentColors, GrayColors, ThemeTokenProps, palette, PaletteColor } from '../../themes'
+import {
+  AccentColors,
+  GrayColors,
+  ThemeTokenProps,
+  palette,
+  PaletteColor,
+  grayColors,
+  handleArbitraryColor
+} from '../../themes'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
 import { getDisplayValue, getPixelFontSizeAsNumber } from '../../helpers'
 import { Log } from '../Log'
@@ -315,8 +323,8 @@ interface BuildDatasetsOptions {
   fill?: boolean
   maxGroupBy: number
   showGroupByOther: boolean
-  accentColors: AccentColors[]
-  otherColor?: GrayColors
+  accentColors: (AccentColors | string)[]
+  otherColor?: GrayColors | string
 }
 
 export function buildDatasets(
@@ -353,10 +361,15 @@ export function buildDatasets(
 
   const accentColor = accentColors[0] ?? theme.accentColor
 
+  const isArbitraryGray = otherColor != null && !grayColors.includes(otherColor as GrayColors)
   const grayColor: PaletteColor = {
     name: 'gray',
-    primary: theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
-    secondary: theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
+    primary: isArbitraryGray
+      ? handleArbitraryColor(otherColor ?? '')
+      : theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
+    secondary: isArbitraryGray
+      ? handleArbitraryColor(otherColor ?? '')
+      : theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
   }
 
   const isCustomColors = accentColors.length > 0
@@ -366,7 +379,14 @@ export function buildDatasets(
   let colorPos = palette.findIndex((value) => value?.name === accentColor)
 
   if (isCustomColors) {
-    customColors = accentColors.map((color) => palette.find(({ name }) => name === color))
+    customColors = accentColors.map(
+      (color) =>
+        palette.find(({ name }) => name === color) ?? {
+          primary: handleArbitraryColor(color),
+          secondary: handleArbitraryColor(color),
+          name: color as AccentColors
+        }
+    )
 
     const lastColorName = customColors[customColors.length - 1]?.name
     const lastColorIndex = palette.findIndex((color) => color.name === lastColorName)

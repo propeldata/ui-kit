@@ -94,10 +94,10 @@ export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'di
   labelListClassName?: string
 
   /** A list of accent colors the PieChart component will use, those will be picked in order */
-  accentColors?: AccentColors[]
+  accentColors?: (AccentColors | string)[]
 
   /** Color that will be used for `other` */
-  otherColor?: GrayColors
+  otherColor?: GrayColors | string
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'pie' | 'doughnut'>) => ChartConfiguration<'pie' | 'doughnut'>

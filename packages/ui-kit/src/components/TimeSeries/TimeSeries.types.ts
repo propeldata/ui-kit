@@ -79,13 +79,13 @@ export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentPro
   showGroupByOther?: boolean
 
   /** A list of accent colors the TimeSeries component will use to show groups, those will be picked in order */
-  accentColors?: AccentColors[]
+  accentColors?: (AccentColors | string)[]
 
   /** If true, chart's lines or bars will be stacked */
   stacked?: boolean
 
   /** Color that will be used for the `other` dataset when using groupBy */
-  otherColor?: GrayColors
+  otherColor?: GrayColors | string
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {

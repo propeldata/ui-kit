@@ -21,7 +21,15 @@ import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './PieChart.module.scss'
 import { PieChartData, PieChartProps, PieChartVariant } from './PieChart.types'
-import { palette, PaletteColor, useParsedComponentProps } from '../../themes'
+import {
+  AccentColors,
+  grayColors,
+  GrayColors,
+  handleArbitraryColor,
+  palette,
+  PaletteColor,
+  useParsedComponentProps
+} from '../../themes'
 import { emptyStatePlugin } from './plugins/empty'
 
 let idCounter = 0
@@ -129,7 +137,14 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         const isCustomColors = (accentColors?.length ?? 0) > 0
 
         if (isCustomColors) {
-          customColors = accentColors.map((color) => palette.find(({ name }) => name === color)) as PaletteColor[]
+          customColors = accentColors.map(
+            (color) =>
+              palette.find(({ name }) => name === color) ?? {
+                primary: handleArbitraryColor(color),
+                secondary: handleArbitraryColor(color),
+                name: color as AccentColors
+              }
+          )
 
           const lastColorName = customColors[customColors.length - 1]?.name
           const lastColorIndex = palette.findIndex((color) => color.name === lastColorName)
@@ -217,10 +232,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         const otherIndex = labels.findIndex((label) => label === 'Other')
 
         if (otherIndex !== -1 && otherColor != null) {
+          const isArbitraryGray = otherColor != null && !grayColors.includes(otherColor as GrayColors)
+
           const grayColor: PaletteColor = {
             name: 'gray',
-            primary: theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
-            secondary: theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
+            primary: isArbitraryGray
+              ? handleArbitraryColor(otherColor ?? '')
+              : theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
+            secondary: isArbitraryGray
+              ? handleArbitraryColor(otherColor ?? '')
+              : theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
           }
 
           chartColorPalette[otherIndex] = grayColor.primary
