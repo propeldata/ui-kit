@@ -17,7 +17,7 @@ import {
   withThemeWrapper
 } from '../../helpers'
 import { useTimeSeries } from '../../hooks'
-import { useParsedComponentProps } from '../../themes'
+import { AccentColors, useParsedComponentProps } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { useFilters } from '../FilterProvider'
 import { Loader, LoaderProps } from '../Loader'
@@ -85,7 +85,10 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     },
     forwardedRef
   ) => {
-    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor: (accentColors[0] as AccentColors) ?? rest.accentColor
+    })
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const themeWrapper = withThemeWrapper(setRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'

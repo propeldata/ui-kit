@@ -61,7 +61,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     }: PieChartProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
   ) => {
-    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor: (accentColors?.[0] as AccentColors) ?? rest.accentColor
+    })
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)

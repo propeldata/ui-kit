@@ -38,7 +38,7 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentProps<'div'> {
+export interface TimeSeriesBaseProps extends Omit<ThemeSettingProps, 'accentColor'>, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -86,6 +86,13 @@ export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentPro
 
   /** Color that will be used for the `other` dataset when using groupBy */
   otherColor?: GrayColors | string
+
+  /**
+   * The global theme accent color. This color is used to highlight elements
+   *
+   * @deprecated - This prop is deprecated and will be removed in a future release. Use `accentColors` prop instead.
+   */
+  accentColor?: AccentColors
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {
