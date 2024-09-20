@@ -12,7 +12,8 @@ import {
   palette,
   PaletteColor,
   grayColors,
-  handleArbitraryColor
+  handleArbitraryColor,
+  accentColors as accentColorsDict
 } from '../../themes'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
 import { getDisplayValue, getPixelFontSizeAsNumber } from '../../helpers'
@@ -342,24 +343,34 @@ export function buildDatasets(
     getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
   )
 
+  const accentColor = accentColors[0] ?? theme.accentColor
+
+  const mainColor = {
+    name: accentColor,
+    primary: accentColorsDict.includes(accentColor as AccentColors)
+      ? theme?.getVar('--propel-accent-8')
+      : handleArbitraryColor(accentColor),
+    secondary: accentColorsDict.includes(accentColor as AccentColors)
+      ? theme?.getVar('--propel-accent-10')
+      : handleArbitraryColor(accentColor)
+  }
+
   if (groups == null || groups.length === 0) {
     return [
       {
         data: getNumericValues(values ?? [], log),
-        backgroundColor: theme?.getVar('--propel-accent-8'),
-        borderColor: theme?.getVar('--propel-accent-8'),
+        backgroundColor: mainColor.primary,
+        borderColor: mainColor.primary,
         borderRadius,
-        hoverBackgroundColor: theme?.getVar('--propel-accent-10'),
-        pointBackgroundColor: theme?.getVar('--propel-accent-10'),
-        pointHoverBackgroundColor: theme?.getVar('--propel-accent-10'),
+        hoverBackgroundColor: mainColor.secondary,
+        pointBackgroundColor: mainColor.secondary,
+        pointHoverBackgroundColor: mainColor.secondary,
         pointHoverBorderWidth: 2,
         pointHoverBorderColor: theme?.getVar('--propel-accent-contrast'),
         fill
       } as ChartDataset<TimeSeriesChartVariant>
     ]
   }
-
-  const accentColor = accentColors[0] ?? theme.accentColor
 
   const isArbitraryGray = otherColor != null && !grayColors.includes(otherColor as GrayColors)
   const grayColor: PaletteColor = {

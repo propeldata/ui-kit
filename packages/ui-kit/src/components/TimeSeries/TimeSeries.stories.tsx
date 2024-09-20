@@ -95,7 +95,8 @@ export const LineStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams,
-    card: true
+    card: true,
+    accentColors: ['#ff0000']
   },
   render: (args) => <TimeSeries {...args} />
 }
