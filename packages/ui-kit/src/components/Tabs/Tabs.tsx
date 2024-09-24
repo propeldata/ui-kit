@@ -2,7 +2,7 @@ import React from 'react'
 import { Tabs as TabsBase } from '@radix-ui/themes'
 import { Card as CardBase } from '../Card'
 import '@radix-ui/themes/styles.css'
-import './styles.scss'
+import './styles.css'
 
 type TabsBase = typeof TabsBase
 
