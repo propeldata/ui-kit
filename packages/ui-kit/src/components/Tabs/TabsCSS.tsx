@@ -18,6 +18,10 @@ export const TabsCSS = () => {
   inline-size: 100% !important;
 }
 
+.rt-BaseTabList:has(.propel-Card) .rt-TabsTrigger::before {
+  display: none !important;
+}
+
 .rt-BaseTabList:has(.propel-Card) .rt-TabsTrigger > .rt-TabsTriggerInner {
   all: unset !important;
   display: block !important;
