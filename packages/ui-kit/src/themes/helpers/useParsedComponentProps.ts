@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 import { ThemeContext } from '../../components/ThemeProvider'
-import { AccentColors, GrayColors, ThemeSettingProps } from '../theme.types'
+import { accentColors, AccentColors, GrayColors, ThemeSettingProps } from '../theme.types'
 import { getMatchingGrayColor } from './getMatchingGrayColor'
 
 export const useParsedComponentProps = ({
@@ -21,7 +21,8 @@ export const useParsedComponentProps = ({
     [context]
   )
 
-  const accentColor = accentColorProp ? accentColorProp : (getDefault('blue') as AccentColors)
+  const accentColor =
+    accentColorProp && accentColors.includes(accentColorProp) ? accentColorProp : (getDefault('blue') as AccentColors)
   const grayColorVal = grayColorProp ? grayColorProp : (getDefault('auto') as GrayColors)
   const grayColor = grayColorVal === 'auto' ? getMatchingGrayColor(accentColor ?? 'blue') : grayColorVal
 

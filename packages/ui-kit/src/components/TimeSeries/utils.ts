@@ -1,11 +1,25 @@
-import { Chart, ScaleOptionsByType, TimeUnit } from 'chart.js'
+'use client'
+
+import { Chart, ChartDataset, ScaleOptionsByType, TimeUnit } from 'chart.js'
 import type { DeepPartial } from 'chart.js/dist/types/utils'
 import { DateTime } from 'luxon'
+import * as radixColors from '@radix-ui/colors'
+
+import {
+  AccentColors,
+  GrayColors,
+  ThemeTokenProps,
+  palette,
+  PaletteColor,
+  grayColors,
+  handleArbitraryColor,
+  accentColors as accentColorsDict
+} from '../../themes'
 import { Maybe, RelativeTimeRange, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
 import { getDisplayValue, getPixelFontSizeAsNumber } from '../../helpers'
 import { Log } from '../Log'
 import { ThemeStateProps } from '../ThemeProvider'
-import { TimeSeriesChartVariant } from './TimeSeries.types'
+import { TimeSeriesChartVariant, TimeSeriesData } from './TimeSeries.types'
 
 export function getGranularityBasedUnit(granularity?: Maybe<TimeSeriesGranularity>): false | TimeUnit {
   const unitByGranularity = {
@@ -163,12 +177,22 @@ interface GetScalesOptions {
   variant: TimeSeriesChartVariant
   grid?: boolean
   theme?: ThemeStateProps
+  stacked?: boolean
 }
 
-export function getScales({ granularity, isFormatted, zone, chart, variant, grid, theme }: GetScalesOptions) {
-  const scales = chart?.options?.scales
+export function getScales({
+  granularity,
+  isFormatted,
+  zone,
+  chart,
+  variant,
+  grid,
+  theme,
+  stacked = false
+}: GetScalesOptions) {
+  const scales = chart?.options?.scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>
   const scale = scales?.y?.type ?? 'linear'
-  const beginAtZero = (scales as DeepPartial<{ [key: string]: ScaleOptionsByType<'linear'> }>)?.y?.beginAtZero ?? false
+  const beginAtZero = scales?.y?.beginAtZero ?? false
   const padding = variant === 'line' ? 5 : 9
 
   const scalesBase = {
@@ -185,7 +209,8 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
           size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
         }
       },
-      beginAtZero
+      beginAtZero,
+      stacked
     },
     y: {
       display: scales?.y?.display ?? true,
@@ -203,7 +228,8 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
       border: {
         display: false
       },
-      beginAtZero
+      beginAtZero,
+      stacked
     }
   }
 
@@ -215,7 +241,7 @@ export function getScales({ granularity, isFormatted, zone, chart, variant, grid
     ...scalesBase,
     x: {
       ...scalesBase.x,
-      type: 'timeseries',
+      type: 'time',
       time: {
         isoWeekday: true,
         unit: getGranularityBasedUnit(granularity)
@@ -292,4 +318,152 @@ export function getNumericValues(values: Array<string | number | null>, log: Log
   }
 
   return newValues
+}
+
+interface BuildDatasetsOptions {
+  fill?: boolean
+  maxGroupBy: number
+  showGroupByOther: boolean
+  accentColors: (AccentColors | string)[]
+  otherColor?: GrayColors | string
+}
+
+export function buildDatasets(
+  data: TimeSeriesData,
+  theme: ThemeTokenProps,
+  options: BuildDatasetsOptions,
+  log: Log
+): ChartDataset<TimeSeriesChartVariant>[] {
+  const { values, groups } = data
+
+  const { fill = false, maxGroupBy, showGroupByOther, accentColors, otherColor } = options ?? {}
+
+  const borderRadius = Math.max(
+    getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
+    getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
+  )
+
+  const accentColor = accentColors[0] ?? theme.accentColor
+
+  const mainColor = {
+    name: accentColor,
+    primary: accentColorsDict.includes(accentColor as AccentColors)
+      ? theme?.getVar('--propel-accent-8')
+      : handleArbitraryColor(accentColor),
+    secondary: accentColorsDict.includes(accentColor as AccentColors)
+      ? theme?.getVar('--propel-accent-10')
+      : handleArbitraryColor(accentColor)
+  }
+
+  if (groups == null || groups.length === 0) {
+    return [
+      {
+        data: getNumericValues(values ?? [], log),
+        backgroundColor: mainColor.primary,
+        borderColor: mainColor.primary,
+        borderRadius,
+        hoverBackgroundColor: mainColor.secondary,
+        pointBackgroundColor: mainColor.secondary,
+        pointHoverBackgroundColor: mainColor.secondary,
+        pointHoverBorderWidth: 2,
+        pointHoverBorderColor: theme?.getVar('--propel-accent-contrast'),
+        fill
+      } as ChartDataset<TimeSeriesChartVariant>
+    ]
+  }
+
+  const isArbitraryGray = otherColor != null && !grayColors.includes(otherColor as GrayColors)
+  const grayColor: PaletteColor = {
+    name: 'gray',
+    primary: isArbitraryGray
+      ? handleArbitraryColor(otherColor ?? '')
+      : theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
+    secondary: isArbitraryGray
+      ? handleArbitraryColor(otherColor ?? '')
+      : theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
+  }
+
+  const isCustomColors = accentColors.length > 0
+
+  let customColors: (PaletteColor | undefined)[] = []
+
+  let colorPos = palette.findIndex((value) => value?.name === accentColor)
+
+  if (isCustomColors) {
+    customColors = accentColors.map(
+      (color) =>
+        palette.find(({ name }) => name === color) ?? {
+          primary: handleArbitraryColor(color),
+          secondary: handleArbitraryColor(color),
+          name: color as AccentColors
+        }
+    )
+
+    const lastColorName = customColors[customColors.length - 1]?.name
+    const lastColorIndex = palette.findIndex((color) => color.name === lastColorName)
+
+    colorPos = lastColorIndex + 1
+  }
+
+  const orderedGroups = groups.sort((a, b) => {
+    const sumA = a?.values?.reduce((sum, value) => Number(sum) + (Number(value) ?? 0), 0) ?? 0
+    const sumB = b?.values?.reduce((sum, value) => Number(sum) + (Number(value) ?? 0), 0) ?? 0
+    return Number(sumB) - Number(sumA)
+  })
+
+  const groupsToDisplay = orderedGroups.slice(0, maxGroupBy)
+
+  const otherGroups = orderedGroups.slice(maxGroupBy)
+
+  const otherValues: number[] = []
+  otherGroups[0]?.values?.forEach((value, idx) => {
+    let numberValue = Number(value)
+
+    otherGroups.forEach((group) => {
+      numberValue += Number(group?.values?.[idx])
+    })
+
+    otherValues.push(numberValue)
+  })
+
+  const other = {
+    group: ['Other'],
+    labels: groupsToDisplay[0].labels,
+    values: otherValues
+  }
+
+  if (showGroupByOther === true) {
+    groupsToDisplay.push(other)
+  }
+
+  const datasets = groupsToDisplay.map((group, idx) => {
+    if (colorPos >= palette.length) colorPos = 0
+
+    const extractedColor = customColors.shift()
+
+    const color =
+      extractedColor ??
+      (group.group?.[0] === 'Other' && idx === groupsToDisplay.length - 1 ? grayColor : palette[colorPos])
+
+    extractedColor == null && colorPos++
+
+    const dataset = {
+      data: getNumericValues(group?.values ?? [], log),
+      backgroundColor: color.primary,
+      borderColor: color.primary,
+      borderRadius,
+      pointHoverBorderWidth: 2,
+      hoverBackgroundColor: color.secondary,
+      pointBackgroundColor: color.secondary,
+      pointHoverBackgroundColor: color.secondary,
+      fill,
+      label: group.group?.toString().replace(',', ', ')
+    } as ChartDataset<TimeSeriesChartVariant>
+
+    return dataset
+  })
+
+  const orderedDatasets = datasets.reverse()
+
+  return orderedDatasets
 }

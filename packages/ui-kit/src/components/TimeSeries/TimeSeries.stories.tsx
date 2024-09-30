@@ -95,7 +95,8 @@ export const LineStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams,
-    card: true
+    card: true,
+    accentColors: ['#ff0000']
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -291,6 +292,24 @@ export const ChartFormatXLabelsStory: Story = {
         }
       }
     })
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
+export const GroupedStory: Story = {
+  name: 'Grouped',
+  args: {
+    variant: 'bar',
+    query: {
+      ...connectedParams,
+      groupBy: ['restaurant_name']
+    },
+    showGroupByOther: true,
+    maxGroupBy: 5,
+    stacked: true,
+    accentColors: ['red', 'blue'],
+    card: true,
+    otherColor: 'gray'
   },
   render: (args) => <TimeSeries {...args} />
 }
