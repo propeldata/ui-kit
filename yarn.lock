@@ -5703,7 +5703,6 @@ __metadata:
     "@types/ora": ^3.2.0
     "@types/react": latest
     "@types/react-dom": latest
-    "@types/style-inject": ^0.3.5
     "@types/testing-library__jest-dom": ^5.14.7
     axios: ^1.6.2
     chart.js: ^4.1.2
@@ -10286,13 +10285,6 @@ __metadata:
   version: 2.0.3
   resolution: "@types/stack-utils@npm:2.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fstack-utils%2F-%2Fstack-utils-2.0.3.tgz"
   checksum: 72576cc1522090fe497337c2b99d9838e320659ac57fa5560fcbdcbafcf5d0216c6b3a0a8a4ee4fdb3b1f5e3420aa4f6223ab57b82fef3578bec3206425c6cf5
-  languageName: node
-  linkType: hard
-
-"@types/style-inject@npm:^0.3.5":
-  version: 0.3.5
-  resolution: "@types/style-inject@npm:0.3.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fstyle-inject%2F-%2Fstyle-inject-0.3.5.tgz"
-  checksum: 615b3e58f8f91a53b4fcf7fab813f72c00181b205b8ac048e259010b5f55e70a41755b9491e0d0971fddea6bd7bef3aba0f16e9d1dfceb454d247a0555345cab
   languageName: node
   linkType: hard
 
