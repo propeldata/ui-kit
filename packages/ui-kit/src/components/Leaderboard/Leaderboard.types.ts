@@ -1,7 +1,7 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
 import { LeaderboardLabels } from '../../helpers'
-import { ThemeSettingProps } from '../../themes'
+import { AccentColors, ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
@@ -80,6 +80,9 @@ export interface LeaderboardProps extends ThemeSettingProps, DataComponentProps<
 
   /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
   chartProps?: LeaderboardChartProps
+
+  /** A list of accent colors the Leaderboard component will use, those will be picked in order */
+  accentColors?: (AccentColors | string)[]
 
   /** @deprecated Format function for labels, must return an array with the new labels the type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: LeaderboardLabels) => LeaderboardLabels
