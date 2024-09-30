@@ -15,7 +15,12 @@ import {
   withThemeWrapper
 } from '../../helpers'
 import { useLeaderboard } from '../../hooks/useLeaderboard'
-import { useParsedComponentProps } from '../../themes'
+import {
+  useParsedComponentProps,
+  accentColors as accentColorsDict,
+  AccentColors,
+  handleArbitraryColor
+} from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { Loader, LoaderProps } from '../Loader'
 import { useSetupTheme } from '../ThemeProvider'
@@ -48,12 +53,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       errorFallback,
       renderEmpty,
       style,
+      accentColors = [],
       card = false,
       ...rest
     },
     forwardedRef
   ) => {
-    const { themeSettings, parsedProps } = useParsedComponentProps(rest)
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor: (accentColors[0] as AccentColors) ?? rest.accentColor
+    })
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
@@ -71,6 +80,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       renderEmpty,
       ...themeSettings
     })
+
+    console.log(chartConfig)
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
@@ -138,6 +149,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
         )
 
+        const accentColor = accentColors[0] ?? theme.accentColor
+
         let config: ChartConfiguration<'bar'> = {
           ...chartConfig,
           type: 'bar',
@@ -146,7 +159,12 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             datasets: [
               {
                 data: values,
-                backgroundColor: theme?.getVar('--propel-accent-8'),
+                backgroundColor: accentColorsDict.includes(accentColor as AccentColors)
+                  ? theme?.getVar('--propel-accent-8')
+                  : handleArbitraryColor(accentColor),
+                hoverBackgroundColor: accentColorsDict.includes(accentColor as AccentColors)
+                  ? theme?.getVar('--propel-accent-10')
+                  : handleArbitraryColor(accentColor),
                 barThickness: labelPosition === 'top' ? 8 : 17,
                 borderRadius,
                 borderWidth: 0
@@ -227,7 +245,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter]
+      [variant, theme, chartConfig, chartProps, labelFormatter, card, accentColors, chartConfigProps]
     )
 
     React.useEffect(() => {
@@ -265,11 +283,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         if (
           !isStatic &&
-          (hasError?.name === 'AccessTokenError' ||
-            !query.metric ||
-            !query.timeRange ||
-            !query.dimensions ||
-            !query.rowLimit)
+          (hasError?.name === 'AccessTokenError' || !query.metric || !query.dimensions || !query.rowLimit)
         ) {
           // console.error(
           //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'

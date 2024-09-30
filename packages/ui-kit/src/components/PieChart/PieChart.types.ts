@@ -22,7 +22,7 @@ export type ChartProps = {
   /** Sets the position of the legend
    * @default top
    */
-  legendPosition?: 'top' | 'bottom'
+  legendPosition?: 'top' | 'bottom' | 'left' | 'right'
 
   /** Shows the values on chart if it is set the true
    * @default false
