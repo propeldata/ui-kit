@@ -1,4 +1,12 @@
-.rt-BaseTabList:has(.propel-Card) {
+'use client'
+
+import React, { useEffect } from 'react'
+import styleInject from 'style-inject'
+
+export const TabsCSS = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      styleInject(`.rt-BaseTabList:has(.propel-Card) {
   all: unset;
   width: 100%;
 }
@@ -17,4 +25,10 @@
 
 .rt-BaseTabList:has(.propel-Card) .rt-TabsTrigger > .rt-TabsTriggerInnerHidden {
   display: none;
+}
+      `)
+    }
+  }, [])
+
+  return <></>
 }
