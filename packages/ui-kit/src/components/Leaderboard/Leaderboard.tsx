@@ -81,8 +81,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       ...themeSettings
     })
 
-    console.log(chartConfig)
-
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
