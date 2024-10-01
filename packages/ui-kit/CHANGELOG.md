@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.11.1
+
+### Patch Changes
+
+- 6bee8d0: Remove unnecessary log
+
 ## 0.11.0
 
 ### Minor Changes
