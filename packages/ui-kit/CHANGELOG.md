@@ -1,5 +1,20 @@
 # @propeldata/ui-kit
 
+## 0.11.0
+
+### Minor Changes
+
+- 8de412c: added support for groupBy on TimeSeries component
+
+### Patch Changes
+
+- e6c6f43: Deprecated `accentColor` in favor of `accentColors`
+- 8eda16a: Fix border radius inconsistent
+- 1f90bfd: Added Card component to Tabs
+- 9df643a: - Leaderboard not working with FilterProvider timeRange
+  - PieChart legendPosition wrong type
+  - Leaderboard `accentColors` prop
+
 ## 0.10.0
 
 ### Minor Changes
