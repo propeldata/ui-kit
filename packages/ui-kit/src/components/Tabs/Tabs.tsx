@@ -1,3 +1,5 @@
+// This component is set as a server component
+
 import React from 'react'
 import { Tabs as TabsBase } from '@radix-ui/themes'
 import { Card as CardBase } from '../Card'

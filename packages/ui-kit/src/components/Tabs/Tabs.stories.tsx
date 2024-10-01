@@ -4,10 +4,7 @@ import { Tabs } from './Tabs'
 
 const meta: Meta<typeof Tabs> = {
   title: 'Components/Tabs',
-  tags: ['devOnly'],
-  argTypes: {
-    // Define any argTypes here if needed
-  }
+  tags: ['devOnly']
 }
 
 export default meta

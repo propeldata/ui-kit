@@ -16,10 +16,16 @@ export const TabsCSS = () => {
   display: block !important;
   box-sizing: border-box;
   inline-size: 100% !important;
+  position: relative !important;
+  border-radius: var(--propel-radius-5);
 }
 
 .rt-BaseTabList:has(.propel-Card) .rt-TabsTrigger::before {
-  display: none !important;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  border-radius: var(--propel-radius-5);
+  z-index: 1;
 }
 
 .rt-BaseTabList:has(.propel-Card) .rt-TabsTrigger > .rt-TabsTriggerInner {
