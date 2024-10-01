@@ -15,7 +15,12 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(({ children, cla
   useSetupTheme({ componentContainer, ...themeSettings })
 
   return (
-    <div ref={setRef} className={classnames(componentStyles.rootCard, className)} {...parsedProps} data-testid="card">
+    <div
+      ref={setRef}
+      className={classnames(componentStyles.rootCard, className, 'propel-Card')}
+      {...parsedProps}
+      data-testid="card"
+    >
       {children}
     </div>
   )
