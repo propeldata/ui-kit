@@ -25,7 +25,7 @@ import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
-import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
+import { DEFAULT_VARIANT, TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
 import { buildDatasets, getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
@@ -57,7 +57,7 @@ ChartJS.register(CustomLineController)
 export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesProps>(
   (
     {
-      variant = 'bar',
+      variant = DEFAULT_VARIANT,
       labels,
       values,
       query,

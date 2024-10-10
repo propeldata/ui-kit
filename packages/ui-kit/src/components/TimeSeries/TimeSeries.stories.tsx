@@ -71,17 +71,18 @@ const connectedParams: TimeSeriesQueryProps = {
 const TimeSeries = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
 
-  if (!accessToken && args?.query) {
+  if (args == null || (!accessToken && args?.query)) {
     return null
   }
 
   return (
+    // @ts-expect-error storybook types are not correct
     <TimeSeriesSource
       {...{
         ...args,
-        query: args?.query
+        query: args.query
           ? {
-              ...args?.query,
+              ...args.query,
               accessToken
             }
           : undefined
