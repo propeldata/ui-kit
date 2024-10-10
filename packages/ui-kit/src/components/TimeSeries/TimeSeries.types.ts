@@ -5,6 +5,8 @@ import { TimeSeriesLabels } from '../../helpers'
 import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
 import type { DataComponentProps, QueryProps } from '../shared.types'
 
+export const DEFAULT_VARIANT = 'bar'
+
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
 export type TimeSeriesChartVariant = 'bar' | 'line'
@@ -94,15 +96,22 @@ export interface TimeSeriesBaseProps extends Omit<ThemeSettingProps, 'accentColo
    */
   accentColor?: AccentColors
 }
+export interface TimeSeriesDefaultVariantProps extends TimeSeriesBaseProps {
+  variant?: undefined
+  chartConfigProps?: (config: ChartConfiguration<typeof DEFAULT_VARIANT>) => ChartConfiguration<typeof DEFAULT_VARIANT>
+}
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {
-  variant?: 'line'
+  variant: 'line'
   chartConfigProps?: (config: ChartConfiguration<'line'>) => ChartConfiguration<'line'>
 }
 
 export interface TimeSeriesBarProps extends TimeSeriesBaseProps {
-  variant?: 'bar'
+  variant: 'bar'
   chartConfigProps?: (config: ChartConfiguration<'bar'>) => ChartConfiguration<'bar'>
 }
 
-export type TimeSeriesProps = TimeSeriesLineProps | TimeSeriesBarProps
+export type TimeSeriesProps =
+  | (TimeSeriesDefaultVariantProps & { variant?: undefined })
+  | TimeSeriesLineProps
+  | TimeSeriesBarProps
