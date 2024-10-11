@@ -22,16 +22,13 @@ export interface FilterContextValue {
   granularity: TimeSeriesGranularity | null
   /** Setter function for the Time Granularity */
   setGranularity: React.Dispatch<React.SetStateAction<TimeSeriesGranularity>>
+  /** Columns to group by */
+  groupBy: string[]
+  /** Setter function for the Group By */
+  setGroupBy: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-export const FilterContext = createContext<FilterContextValue>({
-  filters: [],
-  setFilters: () => {},
-  timeRange: null,
-  setTimeRange: () => {},
-  granularity: null,
-  setGranularity: () => {}
-})
+export const FilterContext = createContext<FilterContextValue | undefined>(undefined)
 
 export interface FilterContextProps {
   children?: React.ReactNode
@@ -51,9 +48,12 @@ export const FilterProvider: React.FC<FilterContextProps> = ({
   )
   const [timeRange, setTimeRange] = useState<DateRangeOptionsProps>({ value: '' })
   const [granularity, setGranularity] = useState<TimeSeriesGranularity>(defaultGranularity)
+  const [groupBy, setGroupBy] = useState<string[]>([])
 
   return (
-    <FilterContext.Provider value={{ filters, setFilters, timeRange, setTimeRange, granularity, setGranularity }}>
+    <FilterContext.Provider
+      value={{ filters, setFilters, timeRange, setTimeRange, granularity, setGranularity, groupBy, setGroupBy }}
+    >
       {children}
     </FilterContext.Provider>
   )

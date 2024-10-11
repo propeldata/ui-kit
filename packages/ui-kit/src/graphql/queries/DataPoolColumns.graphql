@@ -1,0 +1,9 @@
+query DataPoolColumns($dataPoolId: ID!) {
+  dataPool(id: $dataPoolId) {
+    columns {
+      nodes {
+        columnName
+      }
+    }
+  }
+}

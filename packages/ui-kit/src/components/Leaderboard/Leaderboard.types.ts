@@ -2,7 +2,7 @@ import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
 import { LeaderboardLabels } from '../../helpers'
 import { AccentColors, ThemeSettingProps } from '../../themes'
-import type { DataComponentProps, QueryProps } from '../shared.types'
+import type { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 
@@ -11,7 +11,7 @@ export type LeaderboardData = {
   rows?: Array<Array<string | null>>
 }
 
-export interface LeaderboardQueryProps extends QueryProps {
+export interface LeaderboardQueryProps extends ChartQueryProps {
   /** The number of rows to be returned. It can be a number between 1 and 1,000 */
   rowLimit?: number
 

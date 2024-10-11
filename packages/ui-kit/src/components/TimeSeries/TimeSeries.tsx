@@ -110,7 +110,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const log = useLog()
     const isLoadingStatic = loading
 
-    const { granularity: granularityFromProvider } = useFilters()
+    const { granularity: granularityFromProvider, groupBy } = useFilters()
 
     React.useEffect(() => {
       chartJsAdapterLuxon
@@ -147,7 +147,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       data: serverData,
       isLoading,
       error: hasError
-    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic })
+    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic, groupBy: query?.groupBy ?? groupBy })
 
     const destroyChart = React.useCallback(() => {
       if (!chartRef.current) {

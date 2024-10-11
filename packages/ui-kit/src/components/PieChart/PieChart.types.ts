@@ -1,7 +1,7 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
 import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
-import { DataComponentProps, QueryProps } from '../shared.types'
+import { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'
 
@@ -51,7 +51,7 @@ export type PieChartData = {
   rows?: Array<Array<string | null>>
 }
 
-export interface PieChartQueryProps extends QueryProps {
+export interface PieChartQueryProps extends ChartQueryProps {
   /** The number of rows to be returned. It can be a number between 1 and 1,000 */
   rowLimit?: number
 

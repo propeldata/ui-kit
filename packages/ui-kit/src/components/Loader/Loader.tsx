@@ -9,13 +9,18 @@ import componentStyles from './Loader.module.scss'
 
 export interface LoaderProps extends ThemeSettingProps, React.ComponentPropsWithoutRef<'div'> {
   isText?: boolean
+  isLoading?: boolean
 }
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ children, className, isText, ...rest }, forwardedRef) => {
+  ({ children, className, isLoading = true, isText, ...rest }, forwardedRef) => {
     const { themeSettings, parsedProps } = useParsedComponentProps(rest)
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     useSetupTheme({ componentContainer, ...themeSettings })
+
+    if (!isLoading) {
+      return <>{children}</>
+    }
 
     return (
       <div
