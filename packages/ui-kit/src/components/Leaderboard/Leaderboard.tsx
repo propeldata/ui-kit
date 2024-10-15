@@ -22,7 +22,9 @@ import {
   handleArbitraryColor
 } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { useFilters } from '../FilterProvider'
 import { Loader, LoaderProps } from '../Loader'
+import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
@@ -66,6 +68,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
+
+    const { groupBy, emptyGroupBy } = useFilters()
+
+    const log = useLog()
 
     const {
       theme,
@@ -256,7 +262,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       data: fetchedData,
       isLoading,
       error: hasError
-    } = useLeaderboard({ ...query, timeZone: getTimeZone(query?.timeZone ?? timeZone), enabled: !isStatic })
+    } = useLeaderboard({
+      ...query,
+      dimensions:
+        query?.dimensions ?? groupBy.length > 0
+          ? groupBy.map((columnName) => ({ columnName }))
+          : emptyGroupBy.map((columnName) => ({ columnName })),
+      timeZone: getTimeZone(query?.timeZone ?? timeZone),
+      enabled: !isStatic
+    })
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',
@@ -267,31 +281,28 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !headers && !rows) {
-          // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
           setPropsMismatch(true)
           return
         }
 
         if (isStatic && (!headers || !rows)) {
-          // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
+          log.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
           setPropsMismatch(true)
 
           return
         }
 
-        if (
-          !isStatic &&
-          (hasError?.name === 'AccessTokenError' || !query.metric || !query.dimensions || !query.rowLimit)
-        ) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric || !query.rowLimit)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `rowLimit` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
 
         if (variant !== 'bar' && variant !== 'table') {
-          // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
+          log.error('InvalidPropsError: `variant` prop must be either `bar` or `table`')
           setPropsMismatch(false)
         }
 
@@ -301,7 +312,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name])
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name, log])
 
     React.useEffect(() => {
       if (isStatic) {

@@ -26,6 +26,8 @@ export interface FilterContextValue {
   groupBy: string[]
   /** Setter function for the Group By */
   setGroupBy: React.Dispatch<React.SetStateAction<string[]>>
+  /** GroupBy to be used when the groupBy is empty */
+  emptyGroupBy: string[]
 }
 
 export const FilterContext = createContext<FilterContextValue | undefined>(undefined)
@@ -36,23 +38,39 @@ export interface FilterContextProps {
   baseFilters?: FilterInput[]
   /** Default time granularity */
   defaultGranularity?: TimeSeriesGranularity
+  /** Default group by */
+  defaultGroupBy?: string[]
+  /** GroupBy to be used when the groupBy is empty */
+  emptyGroupBy?: string[]
 }
 
 export const FilterProvider: React.FC<FilterContextProps> = ({
   children,
   baseFilters,
-  defaultGranularity = TimeSeriesGranularity.Day
+  defaultGranularity = TimeSeriesGranularity.Day,
+  defaultGroupBy = [],
+  emptyGroupBy = []
 }) => {
   const [filters, setFilters] = useState<FilterInputWithId[]>(
     baseFilters?.map((filter) => ({ ...filter, id: Symbol() })) ?? []
   )
   const [timeRange, setTimeRange] = useState<DateRangeOptionsProps>({ value: '' })
   const [granularity, setGranularity] = useState<TimeSeriesGranularity>(defaultGranularity)
-  const [groupBy, setGroupBy] = useState<string[]>([])
+  const [groupBy, setGroupBy] = useState<string[]>(defaultGroupBy)
 
   return (
     <FilterContext.Provider
-      value={{ filters, setFilters, timeRange, setTimeRange, granularity, setGranularity, groupBy, setGroupBy }}
+      value={{
+        filters,
+        setFilters,
+        timeRange,
+        setTimeRange,
+        granularity,
+        setGranularity,
+        groupBy,
+        setGroupBy,
+        emptyGroupBy
+      }}
     >
       {children}
     </FilterContext.Provider>
