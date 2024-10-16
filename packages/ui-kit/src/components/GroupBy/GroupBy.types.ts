@@ -27,4 +27,10 @@ export interface GroupByProps
 
   /** GroupBy query props */
   query?: GroupByQueryProps
+
+  /** If true, it will format camelCase and snake_case column names to a readable format */
+  prettifyColumnNames?: boolean
+
+  /** Function to format the group by label */
+  nameFormatter?: (name: string) => string
 }

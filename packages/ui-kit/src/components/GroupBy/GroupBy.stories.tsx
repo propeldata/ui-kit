@@ -156,3 +156,20 @@ export const PieAndLeaderboard: Story = {
     </FilterProvider>
   )
 }
+
+export const Prettified: Story = {
+  args: {
+    query: {
+      dataPool: {
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
+      }
+    },
+    prettifyColumnNames: true
+  },
+  render: (args) => (
+    <FilterProvider>
+      <GroupBy {...args} />
+      <TimeSeries />
+    </FilterProvider>
+  )
+}

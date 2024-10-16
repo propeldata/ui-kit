@@ -6,7 +6,7 @@ import { Checkbox } from '@radix-ui/themes'
 import { Option, OptionValue, Select } from '../Select'
 
 import componentStyles from './GroupBy.module.scss'
-import { getGroupByLabel } from './utils'
+import { buildFormatter, getGroupByLabel, prettifyName } from './utils'
 import { Divider } from '../Divider'
 import { Loader } from '../Loader'
 import { GroupByProps } from './GroupBy.types'
@@ -22,7 +22,10 @@ import { ErrorFallback } from '../ErrorFallback'
 const UNGROUPED_VALUE = 'Ungrouped'
 
 const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
-  ({ selectProps, query, columns: columnsProp, loading = false, ...rest }, forwardedRef) => {
+  (
+    { selectProps, query, columns: columnsProp, loading = false, prettifyColumnNames = false, nameFormatter, ...rest },
+    forwardedRef
+  ) => {
     const { groupBy, setGroupBy } = useFilters()
 
     const log = useLog()
@@ -80,6 +83,8 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
       log.warn(error)
     }
 
+    const formatter = buildFormatter(prettifyColumnNames ? prettifyName : nameFormatter)
+
     return (
       <Loader isLoading={isLoadingQuery || loading}>
         <Select
@@ -88,7 +93,7 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
           ref={setRef}
           slotProps={{
             root: {
-              value: (<GroupByDisplayValue selectedColumns={groupBy} />) as unknown as string // Button value to be display actually enables jsx
+              value: (<GroupByDisplayValue selectedColumns={groupBy} formatter={formatter} />) as unknown as string // Button value to be display actually enables jsx
             }
           }}
           style={{ visibility: isLoading ? 'hidden' : 'visible' }}
@@ -98,6 +103,7 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
             column={UNGROUPED_VALUE}
             selectedColumns={groupBy}
             onOptionClick={handleOptionClick}
+            formatter={formatter}
             isUngroupedOption
           />
           <Divider />
@@ -109,6 +115,7 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
               selectedColumns={groupBy}
               onOptionClick={handleOptionClick}
               onOnlyClick={handleOnlyClick}
+              formatter={formatter}
             />
           ))}
         </Select>
@@ -121,9 +128,10 @@ GroupByComponent.displayName = 'GroupBy'
 
 interface GroupByDisplayValueProps {
   selectedColumns: string[]
+  formatter: (name: string | number) => string
 }
 
-const GroupByDisplayValue = ({ selectedColumns }: GroupByDisplayValueProps) => {
+const GroupByDisplayValue = ({ selectedColumns, formatter }: GroupByDisplayValueProps) => {
   const label = getGroupByLabel(selectedColumns)
 
   return (
@@ -132,7 +140,7 @@ const GroupByDisplayValue = ({ selectedColumns }: GroupByDisplayValueProps) => {
       <div className={componentStyles.verticalDivider}>
         <span>.</span>
       </div>
-      <span className={componentStyles.displayValueLabel}>{label}</span>
+      <span className={componentStyles.displayValueLabel}>{formatter(label)}</span>
     </div>
   )
 }
@@ -143,6 +151,7 @@ interface GroupByOptionProps {
   onOptionClick: (column: string) => void
   onOnlyClick?: (column: string) => void
   isUngroupedOption?: boolean
+  formatter: (name: string) => string
 }
 
 const GroupByOption = ({
@@ -150,7 +159,8 @@ const GroupByOption = ({
   selectedColumns,
   onOptionClick,
   onOnlyClick,
-  isUngroupedOption = false
+  isUngroupedOption = false,
+  formatter
 }: GroupByOptionProps) => {
   return (
     <Option className={componentStyles.option} value={{ value: column, label: column }}>
@@ -166,7 +176,7 @@ const GroupByOption = ({
               : selectedColumns.some((selectedColumn) => selectedColumn === column)
           }
         />
-        {column}
+        {formatter(column)}
       </div>
       {!isUngroupedOption && (
         <button
