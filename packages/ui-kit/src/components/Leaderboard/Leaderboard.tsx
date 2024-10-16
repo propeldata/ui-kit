@@ -265,9 +265,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     } = useLeaderboard({
       ...query,
       dimensions:
-        query?.dimensions ?? groupBy.length > 0
+        query?.dimensions ??
+        (groupBy.length > 0
           ? groupBy.map((columnName) => ({ columnName }))
-          : emptyGroupBy.map((columnName) => ({ columnName })),
+          : emptyGroupBy.map((columnName) => ({ columnName }))),
       timeZone: getTimeZone(query?.timeZone ?? timeZone),
       enabled: !isStatic
     })
