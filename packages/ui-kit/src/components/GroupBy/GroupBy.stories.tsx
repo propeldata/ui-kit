@@ -113,7 +113,7 @@ export const Default: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HGV9XN1E13EYY4NJQM12RJ9E'
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
       }
     }
   },
@@ -128,7 +128,7 @@ export const Example: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HGV9XN1E13EYY4NJQM12RJ9E'
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
       }
     }
   },
@@ -144,7 +144,7 @@ export const PieAndLeaderboard: Story = {
   args: {
     query: {
       dataPool: {
-        id: 'DPO01HGV9XN1E13EYY4NJQM12RJ9E'
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
       }
     }
   },
