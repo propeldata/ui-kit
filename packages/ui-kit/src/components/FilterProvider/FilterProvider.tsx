@@ -28,6 +28,8 @@ export interface FilterContextValue {
   setGroupBy: React.Dispatch<React.SetStateAction<string[]>>
   /** GroupBy to be used when the groupBy is empty */
   emptyGroupBy: string[]
+  /** Maximum number of group by columns */
+  maxGroupBy: number | undefined
 }
 
 export const FilterContext = createContext<FilterContextValue>({
@@ -39,7 +41,8 @@ export const FilterContext = createContext<FilterContextValue>({
   setGranularity: () => {},
   groupBy: [],
   setGroupBy: () => {},
-  emptyGroupBy: []
+  emptyGroupBy: [],
+  maxGroupBy: undefined
 })
 
 export interface FilterContextProps {
@@ -52,6 +55,8 @@ export interface FilterContextProps {
   defaultGroupBy?: string[]
   /** GroupBy to be used when the groupBy is empty */
   emptyGroupBy?: string[]
+  /** Maximum number of group by columns */
+  maxGroupBy?: number
 }
 
 export const FilterProvider: React.FC<FilterContextProps> = ({
@@ -59,7 +64,8 @@ export const FilterProvider: React.FC<FilterContextProps> = ({
   baseFilters,
   defaultGranularity = TimeSeriesGranularity.Day,
   defaultGroupBy = [],
-  emptyGroupBy = []
+  emptyGroupBy = [],
+  maxGroupBy
 }) => {
   const [filters, setFilters] = useState<FilterInputWithId[]>(
     baseFilters?.map((filter) => ({ ...filter, id: Symbol() })) ?? []
@@ -79,7 +85,8 @@ export const FilterProvider: React.FC<FilterContextProps> = ({
         setGranularity,
         groupBy,
         setGroupBy,
-        emptyGroupBy
+        emptyGroupBy,
+        maxGroupBy
       }}
     >
       {children}

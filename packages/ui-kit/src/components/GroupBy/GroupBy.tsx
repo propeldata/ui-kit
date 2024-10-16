@@ -18,6 +18,7 @@ import { useLog } from '../Log'
 import { useFilters } from '../FilterProvider'
 import { withContainer } from '../withContainer'
 import { ErrorFallback } from '../ErrorFallback'
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 
 const UNGROUPED_VALUE = 'Ungrouped'
 
@@ -26,7 +27,7 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
     { selectProps, query, columns: columnsProp, loading = false, prettifyColumnNames = false, nameFormatter, ...rest },
     forwardedRef
   ) => {
-    const { groupBy, setGroupBy } = useFilters()
+    const { groupBy, setGroupBy, maxGroupBy = DEFAULT_MAX_GROUP_BY } = useFilters()
 
     const log = useLog()
 
@@ -52,6 +53,10 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
         columns.delete(column)
       } else {
         columns.add(column)
+      }
+
+      if (groupBy.length >= maxGroupBy && columns.size >= maxGroupBy) {
+        return
       }
 
       setGroupBy([...columns])
