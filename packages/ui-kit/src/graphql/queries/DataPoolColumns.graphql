@@ -3,6 +3,7 @@ query DataPoolColumns($dataPoolId: ID!) {
     columns {
       nodes {
         columnName
+        type
       }
     }
   }
