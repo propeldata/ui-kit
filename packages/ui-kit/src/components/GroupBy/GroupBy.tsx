@@ -32,11 +32,13 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
       prettifyColumnNames = false,
       nameFormatter,
       includeColumns = ['*'],
+      maxGroupBy: maxGroupByProp,
       ...rest
     },
     forwardedRef
   ) => {
-    const { groupBy, setGroupBy, maxGroupBy = DEFAULT_MAX_GROUP_BY } = useFilters()
+    const { groupBy, setGroupBy, maxGroupBy: maxGroupByFromProvider } = useFilters()
+    const maxGroupBy = maxGroupByProp ?? maxGroupByFromProvider ?? DEFAULT_MAX_GROUP_BY
 
     const log = useLog()
 

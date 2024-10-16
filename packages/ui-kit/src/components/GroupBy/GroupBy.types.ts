@@ -36,4 +36,7 @@ export interface GroupByProps
 
   /** Columns to include, if not passed, all columns will be included, pass ["*"] to include all columns */
   includeColumns?: string[]
+
+  /** Maximum number of group by columns */
+  maxGroupBy?: number
 }
