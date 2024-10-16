@@ -33,4 +33,7 @@ export interface GroupByProps
 
   /** Function to format the group by label */
   nameFormatter?: (name: string) => string
+
+  /** Columns to include, if not passed, all columns will be included, pass ["*"] to include all columns */
+  includeColumns?: string[]
 }

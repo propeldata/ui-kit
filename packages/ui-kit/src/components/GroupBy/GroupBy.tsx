@@ -24,7 +24,16 @@ const UNGROUPED_VALUE = 'Ungrouped'
 
 const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
   (
-    { selectProps, query, columns: columnsProp, loading = false, prettifyColumnNames = false, nameFormatter, ...rest },
+    {
+      selectProps,
+      query,
+      columns: columnsProp,
+      loading = false,
+      prettifyColumnNames = false,
+      nameFormatter,
+      includeColumns = ['*'],
+      ...rest
+    },
     forwardedRef
   ) => {
     const { groupBy, setGroupBy, maxGroupBy = DEFAULT_MAX_GROUP_BY } = useFilters()
@@ -34,12 +43,17 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
     const { setRef } = useForwardedRefCallback(forwardedRef)
 
     const isStatic = query?.dataPool == null
+    const isIncludeAllColumns = includeColumns.includes('*') && includeColumns.length === 1
 
     const { columns: data, isLoading, error } = useDataPoolColumns({ ...query, enabled: !isStatic })
 
     const isLoadingQuery = isStatic ? false : isLoading
 
-    const columns = isStatic ? columnsProp ?? [] : data?.map(({ columnName }) => columnName) ?? []
+    const columns = isStatic
+      ? columnsProp ?? []
+      : data
+          ?.map(({ columnName }) => columnName)
+          .filter((column) => isIncludeAllColumns || includeColumns.includes(column)) ?? []
 
     const handleOptionClick = (column: string) => {
       const columns = new Set([...groupBy])

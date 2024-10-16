@@ -164,7 +164,26 @@ export const Prettified: Story = {
         name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
       }
     },
-    prettifyColumnNames: true
+    prettifyColumnNames: true,
+    includeColumns: ['taco_name']
+  },
+  render: (args) => (
+    <FilterProvider>
+      <GroupBy {...args} />
+      <TimeSeries />
+    </FilterProvider>
+  )
+}
+
+export const IncludeColumns: Story = {
+  args: {
+    query: {
+      dataPool: {
+        name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
+      }
+    },
+    prettifyColumnNames: true,
+    includeColumns: ['taco_name', 'restaurant_name']
   },
   render: (args) => (
     <FilterProvider>
