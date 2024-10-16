@@ -30,7 +30,17 @@ export interface FilterContextValue {
   emptyGroupBy: string[]
 }
 
-export const FilterContext = createContext<FilterContextValue | undefined>(undefined)
+export const FilterContext = createContext<FilterContextValue>({
+  filters: [],
+  setFilters: () => {},
+  timeRange: null,
+  setTimeRange: () => {},
+  granularity: null,
+  setGranularity: () => {},
+  groupBy: [],
+  setGroupBy: () => {},
+  emptyGroupBy: []
+})
 
 export interface FilterContextProps {
   children?: React.ReactNode
