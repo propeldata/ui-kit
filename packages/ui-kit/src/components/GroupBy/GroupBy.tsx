@@ -16,10 +16,12 @@ import { useDataPoolColumns } from '../../hooks/useDataPoolColumns'
 import '@radix-ui/themes/styles.css'
 import { useLog } from '../Log'
 import { useFilters } from '../FilterProvider'
+import { withContainer } from '../withContainer'
+import { ErrorFallback } from '../ErrorFallback'
 
 const UNGROUPED_VALUE = 'Ungrouped'
 
-export const GroupBy = React.forwardRef<HTMLButtonElement, GroupByProps>(
+const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
   ({ selectProps, query, columns: columnsProp, loading = false, ...rest }, forwardedRef) => {
     const { groupBy, setGroupBy } = useFilters()
 
@@ -115,7 +117,7 @@ export const GroupBy = React.forwardRef<HTMLButtonElement, GroupByProps>(
   }
 )
 
-GroupBy.displayName = 'GroupBy'
+GroupByComponent.displayName = 'GroupBy'
 
 interface GroupByDisplayValueProps {
   selectedColumns: string[]
@@ -181,3 +183,5 @@ const GroupByOption = ({
     </Option>
   )
 }
+
+export const GroupBy = withContainer(GroupByComponent, ErrorFallback) as typeof GroupByComponent
