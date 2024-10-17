@@ -118,7 +118,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     } = useLeaderboard({
       ...query,
       timeZone,
-      dimensions: [query?.dimension ?? { columnName: groupBy[0] ?? emptyGroupBy[0] ?? '' }],
+      dimensions:
+        query?.dimension != null || groupBy[0] || emptyGroupBy[0]
+          ? [query?.dimension ?? { columnName: groupBy[0] ?? emptyGroupBy[0] ?? '' }]
+          : undefined,
       enabled: !isStatic,
       rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
     })
