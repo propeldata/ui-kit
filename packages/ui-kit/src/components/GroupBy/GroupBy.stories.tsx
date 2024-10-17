@@ -83,8 +83,7 @@ const leaderboardConnectedParams: LeaderboardQueryProps = {
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
     n: 90
-  },
-  rowLimit: 10
+  }
 }
 
 const Leaderboard = () => {
@@ -149,7 +148,7 @@ export const PieAndLeaderboard: Story = {
     }
   },
   render: (args) => (
-    <FilterProvider emptyGroupBy={['taco_name']}>
+    <FilterProvider emptyGroupBy={['taco_name']} maxGroupBy={5}>
       <GroupBy {...args} />
       <PieChart />
       <Leaderboard />

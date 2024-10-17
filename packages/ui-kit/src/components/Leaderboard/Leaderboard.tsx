@@ -31,7 +31,7 @@ import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
-
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 let idCounter = 0
 
 export const LeaderboardComponent = React.forwardRef<HTMLDivElement, LeaderboardProps>(
@@ -69,7 +69,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
 
-    const { groupBy, emptyGroupBy } = useFilters()
+    const { groupBy, emptyGroupBy, maxGroupBy } = useFilters()
 
     const log = useLog()
 
@@ -270,7 +270,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           ? groupBy.map((columnName) => ({ columnName }))
           : emptyGroupBy.map((columnName) => ({ columnName }))),
       timeZone: getTimeZone(query?.timeZone ?? timeZone),
-      enabled: !isStatic
+      enabled: !isStatic,
+      rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
     })
 
     const loadingStyles = {
@@ -294,9 +295,9 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           return
         }
 
-        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric || !query.rowLimit)) {
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric)) {
           log.error(
-            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `rowLimit` in the `query` prop'
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
           )
           setPropsMismatch(true)
           return

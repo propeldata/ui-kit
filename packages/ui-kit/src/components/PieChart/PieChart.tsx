@@ -33,6 +33,7 @@ import {
 import { emptyStatePlugin } from './plugins/empty'
 import { useFilters } from '../FilterProvider'
 import { useLog } from '../Log'
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 
 let idCounter = 0
 
@@ -90,7 +91,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const idRef = React.useRef(idCounter++)
     const id = `piechart-${idRef.current}`
 
-    const { groupBy, emptyGroupBy } = useFilters()
+    const { groupBy, emptyGroupBy, maxGroupBy } = useFilters()
 
     const log = useLog()
 
@@ -118,7 +119,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       ...query,
       timeZone,
       dimensions: [query?.dimension ?? { columnName: groupBy[0] ?? emptyGroupBy[0] ?? '' }],
-      enabled: !isStatic
+      enabled: !isStatic,
+      rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
     })
 
     /**
@@ -388,9 +390,9 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           return
         }
 
-        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric || !query.rowLimit)) {
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric)) {
           log.error(
-            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `rowLimit` in the `query` prop'
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
           )
           setPropsMismatch(true)
           return
