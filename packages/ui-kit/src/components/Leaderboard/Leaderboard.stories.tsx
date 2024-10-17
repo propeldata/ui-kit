@@ -320,7 +320,8 @@ export const PrettifyHeadersStory: Story = {
   args: {
     query: connectedParams,
     card: true,
-    prettifyHeaders: true
+    prettifyHeaders: true,
+    variant: 'table'
   },
   render: (args) => <Leaderboard {...args} />
 }

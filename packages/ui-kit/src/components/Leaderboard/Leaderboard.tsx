@@ -128,7 +128,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const labels =
           formatLabels({
             labels: data.rows?.map((row) => row.slice(0, row.length - 1)) as LeaderboardLabels,
-            formatter: prettifyHeaders ? labelFormatter : (label) => label.map((label) => label.map(prettifyName))
+            formatter: labelFormatter
           }) || []
 
         const values =
@@ -251,7 +251,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, chartConfig, chartProps, prettifyHeaders, labelFormatter, card, accentColors, chartConfigProps]
+      [variant, theme, chartConfig, chartProps, labelFormatter, card, accentColors, chartConfigProps]
     )
 
     React.useEffect(() => {
@@ -402,7 +402,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       )
     }
 
-    const tableHeaders = (headers?.length ? headers : fetchedData?.leaderboard?.headers)?.map(prettifyName)
+    const headersBase = headers?.length ? headers : fetchedData?.leaderboard?.headers
+    const tableHeaders = prettifyHeaders ? headersBase?.map(prettifyName) : headersBase
     const tableRows = isStatic ? rows : fetchedData?.leaderboard?.rows
 
     const {
