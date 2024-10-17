@@ -314,3 +314,13 @@ export const NoDimensionsStory: Story = {
   },
   render: (args) => <Leaderboard {...args} />
 }
+
+export const PrettifyHeadersStory: Story = {
+  name: 'Prettify headers',
+  args: {
+    query: connectedParams,
+    card: true,
+    prettifyHeaders: true
+  },
+  render: (args) => <Leaderboard {...args} />
+}

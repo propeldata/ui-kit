@@ -71,7 +71,8 @@ const TimeSeries = () => {
         ...timeSeriesConnectedParams,
         accessToken
       }}
-      variant="line"
+      variant="bar"
+      stacked
       card
     />
   )
@@ -132,7 +133,7 @@ export const Example: Story = {
     }
   },
   render: (args) => (
-    <FilterProvider>
+    <FilterProvider maxGroupBy={100}>
       <GroupBy {...args} />
       <TimeSeries />
     </FilterProvider>

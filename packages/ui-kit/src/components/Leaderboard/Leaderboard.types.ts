@@ -89,4 +89,7 @@ export interface LeaderboardProps extends ThemeSettingProps, DataComponentProps<
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'bar'>) => ChartConfiguration<'bar'>
+
+  /** Whether the headers should be prettified */
+  prettifyHeaders?: boolean
 }

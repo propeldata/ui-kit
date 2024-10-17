@@ -32,6 +32,7 @@ import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
 import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
+import { prettifyName } from '../shared.utils'
 let idCounter = 0
 
 export const LeaderboardComponent = React.forwardRef<HTMLDivElement, LeaderboardProps>(
@@ -57,6 +58,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       style,
       accentColors = [],
       card = false,
+      prettifyHeaders = false,
       ...rest
     },
     forwardedRef
@@ -126,7 +128,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         const labels =
           formatLabels({
             labels: data.rows?.map((row) => row.slice(0, row.length - 1)) as LeaderboardLabels,
-            formatter: labelFormatter
+            formatter: prettifyHeaders ? labelFormatter : (label) => label.map((label) => label.map(prettifyName))
           }) || []
 
         const values =
@@ -159,7 +161,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           ...chartConfig,
           type: 'bar',
           data: {
-            labels: labels,
+            labels,
             datasets: [
               {
                 data: values,
@@ -249,7 +251,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, chartConfig, chartProps, labelFormatter, card, accentColors, chartConfigProps]
+      [variant, theme, chartConfig, chartProps, prettifyHeaders, labelFormatter, card, accentColors, chartConfigProps]
     )
 
     React.useEffect(() => {
@@ -400,7 +402,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       )
     }
 
-    const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard?.headers
+    const tableHeaders = (headers?.length ? headers : fetchedData?.leaderboard?.headers)?.map(prettifyName)
     const tableRows = isStatic ? rows : fetchedData?.leaderboard?.rows
 
     const {
