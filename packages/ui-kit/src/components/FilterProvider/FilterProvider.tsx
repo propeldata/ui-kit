@@ -22,6 +22,14 @@ export interface FilterContextValue {
   granularity: TimeSeriesGranularity | null
   /** Setter function for the Time Granularity */
   setGranularity: React.Dispatch<React.SetStateAction<TimeSeriesGranularity>>
+  /** Columns to group by */
+  groupBy: string[]
+  /** Setter function for the Group By */
+  setGroupBy: React.Dispatch<React.SetStateAction<string[]>>
+  /** GroupBy to be used when the groupBy is empty */
+  emptyGroupBy: string[]
+  /** Maximum number of group by columns */
+  maxGroupBy: number | undefined
 }
 
 export const FilterContext = createContext<FilterContextValue>({
@@ -30,7 +38,11 @@ export const FilterContext = createContext<FilterContextValue>({
   timeRange: null,
   setTimeRange: () => {},
   granularity: null,
-  setGranularity: () => {}
+  setGranularity: () => {},
+  groupBy: [],
+  setGroupBy: () => {},
+  emptyGroupBy: [],
+  maxGroupBy: undefined
 })
 
 export interface FilterContextProps {
@@ -39,21 +51,44 @@ export interface FilterContextProps {
   baseFilters?: FilterInput[]
   /** Default time granularity */
   defaultGranularity?: TimeSeriesGranularity
+  /** Default group by */
+  defaultGroupBy?: string[]
+  /** GroupBy to be used when the groupBy is empty */
+  emptyGroupBy?: string[]
+  /** Maximum number of group by columns */
+  maxGroupBy?: number
 }
 
 export const FilterProvider: React.FC<FilterContextProps> = ({
   children,
   baseFilters,
-  defaultGranularity = TimeSeriesGranularity.Day
+  defaultGranularity = TimeSeriesGranularity.Day,
+  defaultGroupBy = [],
+  emptyGroupBy = [],
+  maxGroupBy
 }) => {
   const [filters, setFilters] = useState<FilterInputWithId[]>(
     baseFilters?.map((filter) => ({ ...filter, id: Symbol() })) ?? []
   )
   const [timeRange, setTimeRange] = useState<DateRangeOptionsProps>({ value: '' })
   const [granularity, setGranularity] = useState<TimeSeriesGranularity>(defaultGranularity)
+  const [groupBy, setGroupBy] = useState<string[]>(defaultGroupBy)
 
   return (
-    <FilterContext.Provider value={{ filters, setFilters, timeRange, setTimeRange, granularity, setGranularity }}>
+    <FilterContext.Provider
+      value={{
+        filters,
+        setFilters,
+        timeRange,
+        setTimeRange,
+        granularity,
+        setGranularity,
+        groupBy,
+        setGroupBy,
+        emptyGroupBy,
+        maxGroupBy
+      }}
+    >
       {children}
     </FilterContext.Provider>
   )

@@ -22,6 +22,7 @@ import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { useFilters } from '../FilterProvider'
 import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
@@ -76,7 +77,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       renderEmpty,
       card = false,
       chartProps,
-      maxGroupBy = 5,
+      maxGroupBy: maxGroupByProp,
       showGroupByOther = true,
       accentColors = [],
       stacked = false,
@@ -110,7 +111,9 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     const log = useLog()
     const isLoadingStatic = loading
 
-    const { granularity: granularityFromProvider } = useFilters()
+    const { granularity: granularityFromProvider, groupBy, maxGroupBy: maxGroupByFromProvider } = useFilters()
+
+    const maxGroupBy = maxGroupByProp ?? maxGroupByFromProvider ?? DEFAULT_MAX_GROUP_BY
 
     React.useEffect(() => {
       chartJsAdapterLuxon
@@ -147,7 +150,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       data: serverData,
       isLoading,
       error: hasError
-    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic })
+    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic, groupBy: query?.groupBy ?? groupBy })
 
     const destroyChart = React.useCallback(() => {
       if (!chartRef.current) {

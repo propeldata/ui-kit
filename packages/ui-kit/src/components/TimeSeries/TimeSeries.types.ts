@@ -3,7 +3,7 @@ import { DeepPartial } from 'chart.js/dist/types/utils'
 import { TimeSeriesGranularity } from '../../graphql'
 import { TimeSeriesLabels } from '../../helpers'
 import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
-import type { DataComponentProps, QueryProps } from '../shared.types'
+import type { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export const DEFAULT_VARIANT = 'bar'
 
@@ -21,7 +21,7 @@ export type TimeSeriesData = {
   }[]
 }
 
-export interface TimeSeriesQueryProps extends QueryProps {
+export interface TimeSeriesQueryProps extends ChartQueryProps {
   /** Granularity that the chart will respond to */
   granularity?: TimeSeriesGranularity
 

@@ -74,15 +74,6 @@ export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeCom
   }
 
 export interface QueryProps {
-  /** Indicates specific time zone region */
-  timeZone?: string
-
-  /**
-   * Specify the time range for a time series, counter, or leaderboard Metric query
-   * @type TimeRangeInput
-   */
-  timeRange?: TimeRangeInput
-
   /**
    * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
    * @example
@@ -96,17 +87,6 @@ export interface QueryProps {
    * */
   accessToken?: string
 
-  /**
-   * The `metric` prop allows you to specify which metric to query.
-   * You can query predefined metrics by passing their name or ID as a string, or
-   * you can query metrics on-the-fly by passing an inline metric definition to the prop.
-   * @type string | MetricInput
-   * */
-  metric?: string | MetricInput
-
-  /** Filters that the chart will respond to */
-  filters?: FilterInput[]
-
   /** Interval in milliseconds for refetching the data */
   refetchInterval?: number
 
@@ -118,4 +98,26 @@ export interface QueryProps {
 
   /** When false, the component will not make any GraphQL requests, default is true. */
   enabled?: boolean
+}
+
+export interface ChartQueryProps extends QueryProps {
+  /** Indicates specific time zone region */
+  timeZone?: string
+
+  /**
+   * Specify the time range for a time series, counter, or leaderboard Metric query
+   * @type TimeRangeInput
+   */
+  timeRange?: TimeRangeInput
+
+  /**
+   * The `metric` prop allows you to specify which metric to query.
+   * You can query predefined metrics by passing their name or ID as a string, or
+   * you can query metrics on-the-fly by passing an inline metric definition to the prop.
+   * @type string | MetricInput
+   * */
+  metric?: string | MetricInput
+
+  /** Filters that the chart will respond to */
+  filters?: FilterInput[]
 }

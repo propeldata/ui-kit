@@ -31,6 +31,9 @@ import {
   useParsedComponentProps
 } from '../../themes'
 import { emptyStatePlugin } from './plugins/empty'
+import { useFilters } from '../FilterProvider'
+import { useLog } from '../Log'
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 
 let idCounter = 0
 
@@ -88,6 +91,10 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     const idRef = React.useRef(idCounter++)
     const id = `piechart-${idRef.current}`
 
+    const { groupBy, emptyGroupBy, maxGroupBy } = useFilters()
+
+    const log = useLog()
+
     /**
      * The html node where the chart will render
      */
@@ -108,7 +115,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: leaderboardData,
       isLoading: leaderboardIsLoading,
       error: leaderboardHasError
-    } = useLeaderboard({ ...query, timeZone, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
+    } = useLeaderboard({
+      ...query,
+      timeZone,
+      dimensions:
+        query?.dimension != null || groupBy[0] || emptyGroupBy[0]
+          ? [query?.dimension ?? { columnName: groupBy[0] ?? emptyGroupBy[0] ?? '' }]
+          : undefined,
+      enabled: !isStatic,
+      rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
+    })
 
     /**
      * Fetches the counter data from the API
@@ -365,31 +381,28 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !headers && !rows) {
-          // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
           setPropsMismatch(true)
           return
         }
 
         if (isStatic && (!headers || !rows)) {
-          // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
+          log.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
           setPropsMismatch(true)
 
           return
         }
 
-        if (
-          !isStatic &&
-          (hasError?.name === 'AccessTokenError' || !query.metric || !query.dimension || !query.rowLimit)
-        ) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
 
         if (variant !== 'pie' && variant !== 'doughnut') {
-          // console.error('InvalidPropsError: `variant` prop must be either `pie` or `doughnut`') we will set logs as a feature later
+          log.error('InvalidPropsError: `variant` prop must be either `pie` or `doughnut`')
           setPropsMismatch(false)
         }
 
@@ -399,7 +412,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name])
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name, log])
 
     React.useEffect(() => {
       if (isStatic) {

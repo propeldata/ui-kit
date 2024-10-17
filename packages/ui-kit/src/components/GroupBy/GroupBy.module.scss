@@ -1,0 +1,64 @@
+.groupByDisplayValue {
+  display: flex;
+  justify-content: space-between;
+
+  position: relative;
+  height: 100%;
+}
+
+.verticalDivider {
+  content: '';
+  border-right: 1px solid var(--propel-gray-8);
+  height: 100%;
+  margin: 0 8px;
+  width: 1px;
+}
+
+.verticalDivider * {
+  opacity: 0;
+}
+
+.displayValueLabel {
+  color: var(--propel-accent-8)
+}
+
+.onlyButton {
+  background-color: transparent;
+  border: none;
+  color: var(--propel-accent-8);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--propel-accent-10);
+  }
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+
+  &:hover {
+    .onlyButton {
+      opacity: 1;
+    }
+  }
+
+  .onlyButton {
+    opacity: 0;
+    transition: opacity 50ms ease-in-out;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: var(--propel-space-1);
+  }
+}
+
+.groupByLabel {
+  color: var(--propel-gray-10);
+  font-size: var(--propel-font-size-1);
+  margin: 0;
+  padding: 0 12px;
+  font-weight: var(--propel-font-weight-medium);
+}

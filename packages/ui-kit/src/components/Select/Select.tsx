@@ -106,7 +106,7 @@ const SelectComponent = <T extends OptionValue>(
         value={value}
         className={classNames(componentStyles.rootSelect, className)}
         {...rest}
-        slots={{ root: ButtonSlot }}
+        slots={{ root: ButtonSlot, ...rest.slots }}
         slotProps={{
           root: {
             ...getButtonProps({
@@ -118,7 +118,8 @@ const SelectComponent = <T extends OptionValue>(
                 [componentStyles.startAdornment]: startAdornment,
                 [componentStyles.endAdornment]: endAdornment,
                 [componentStyles[size]]: size && size !== 'default'
-              })
+              }),
+              ...slotProps?.root
             }),
             onBlur: (event) => {
               if (!popperRef.current?.contains(event.relatedTarget)) {

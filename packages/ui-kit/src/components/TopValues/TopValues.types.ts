@@ -1,7 +1,7 @@
-import type { QueryProps } from '../../components/shared.types'
+import type { ChartQueryProps } from '../../components/shared.types'
 import type { DataPoolInput } from '../../graphql'
 
-export interface TopValuesQueryProps extends Omit<QueryProps, 'filters'> {
+export interface TopValuesQueryProps extends Omit<ChartQueryProps, 'filters'> {
   /** The column to fetch the unique values from */
   columnName?: string
 
