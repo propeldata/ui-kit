@@ -258,17 +258,20 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }, [isEmptyState, data, renderChart])
 
+    const dimensions =
+      query?.dimensions ??
+      (groupBy.length > 0
+        ? groupBy.map((columnName) => ({ columnName }))
+        : emptyGroupBy.map((columnName) => ({ columnName }))) ??
+      []
+
     const {
       data: fetchedData,
       isLoading,
       error: hasError
     } = useLeaderboard({
       ...query,
-      dimensions:
-        query?.dimensions ??
-        (groupBy.length > 0
-          ? groupBy.map((columnName) => ({ columnName }))
-          : emptyGroupBy.map((columnName) => ({ columnName }))),
+      dimensions,
       timeZone: getTimeZone(query?.timeZone ?? timeZone),
       enabled: !isStatic,
       rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY

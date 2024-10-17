@@ -302,3 +302,15 @@ export const CustomStyleStory: Story = {
   },
   render: (args) => <Leaderboard {...args} />
 }
+
+export const NoDimensionsStory: Story = {
+  name: 'No dimensions',
+  args: {
+    query: {
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1
+    },
+    card: true,
+    variant: 'table'
+  },
+  render: (args) => <Leaderboard {...args} />
+}
