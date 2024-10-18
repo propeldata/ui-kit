@@ -33,7 +33,8 @@ const mockQuery = {
   timeRange: {
     relative: RelativeTimeRange.LastNDays,
     n: 30
-  }
+  },
+  dimensions: [{ columnName: 'some column' }]
 }
 
 describe('useLeaderboard', () => {
@@ -87,7 +88,7 @@ describe('useLeaderboard', () => {
   it('should not send timeRange when not provided', async () => {
     dom = render(<QueryClientProviderComponent accessToken="token" metric="not-receive-timerange" />)
 
-    await dom.findByText(mockData.headers[0])
-    await dom.findByText(mockData.rows[0][1])
+    // Passing no dimensions should trigger counter and show "All"
+    await dom.findByText('All')
   })
 })
