@@ -1,5 +1,12 @@
 # @propeldata/ui-kit
 
+## 0.11.2
+
+### Patch Changes
+
+- c8e6a75: Fix readme image URL
+- bd82174: Fix chartConfigProps type definition for TimeSeries
+
 ## 0.11.1
 
 ### Patch Changes
