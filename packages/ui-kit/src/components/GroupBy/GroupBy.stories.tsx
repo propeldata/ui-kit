@@ -30,17 +30,19 @@ const GroupBy = (args: Story['args']) => {
   }
 
   return (
-    <GroupBySource
-      {...{
-        ...args,
-        query: args.query
-          ? {
-              ...args.query,
-              accessToken
-            }
-          : undefined
-      }}
-    />
+    <div style={{ marginBottom: '8px' }}>
+      <GroupBySource
+        {...{
+          ...args,
+          query: args.query
+            ? {
+                ...args.query,
+                accessToken
+              }
+            : undefined
+        }}
+      />
+    </div>
   )
 }
 
