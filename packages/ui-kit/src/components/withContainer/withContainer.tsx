@@ -14,9 +14,10 @@ export const withContainer = <P extends object, C extends object>(
   const WithContainer = React.forwardRef<HTMLDivElement, P & C>((props, ref) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { errorFallbackProps, card, cardProps, ...componentProps } = props as any
-    const wrappedComponent = (
-      <WrappedComponent ref={ref} errorFallbackProps={errorFallbackProps} card={card} {...componentProps} />
-    )
+
+    const withFallbackProps = { errorFallbackProps } ?? {}
+
+    const wrappedComponent = <WrappedComponent ref={ref} {...withFallbackProps} card={card} {...componentProps} />
 
     return (
       <QueryClientProvider client={queryClient}>

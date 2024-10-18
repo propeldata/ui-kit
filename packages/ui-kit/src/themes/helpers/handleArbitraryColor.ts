@@ -7,6 +7,10 @@ import * as radixColors from '@radix-ui/colors'
 export function handleArbitraryColor(color: string) {
   let result: string = color
 
+  if (color == null) {
+    return result
+  }
+
   const colorRoute = color.split('.')
   if (colorRoute.length === 2) {
     const colorFamily = colorRoute[0] as keyof typeof radixColors

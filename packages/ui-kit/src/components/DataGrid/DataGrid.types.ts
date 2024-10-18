@@ -1,7 +1,7 @@
-import type { QueryProps } from '../../components/shared.types'
+import type { ChartQueryProps } from '../../components/shared.types'
 import type { DataPoolInput, Sort } from '../../graphql'
 
-export interface DataGridQueryProps extends Omit<QueryProps, 'metric'> {
+export interface DataGridQueryProps extends Omit<ChartQueryProps, 'metric'> {
   /** The columns to retrieve. */
   columns?: string[]
 

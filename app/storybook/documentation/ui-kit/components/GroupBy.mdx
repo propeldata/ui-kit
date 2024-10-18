@@ -1,0 +1,50 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import LinkTo from '@storybook/addon-links/react'
+import * as GroupByStories from '../../../../../packages/ui-kit/src/components/GroupBy/GroupBy.stories'
+import * as GroupByQueryPropsStories from '../../../../../packages/ui-kit/src/components/GroupBy/GroupByQueryProps.stories'
+
+<Meta title="Components/GroupBy" of={GroupByStories} />
+
+# GroupBy overview
+
+The GroupBy component enables you to dynamically group Time Series data by specific columns from a provided data pool.
+
+It also enabled you to dynamically set Leaderboard and Pie Chart's dimensions.
+
+## Basic usage
+
+The GroupBy component requires to be wrapped within a FilterProvider.
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={GroupByStories.Example} shown />
+
+## Leaderboard and Pie Chart
+
+The GroupBy component can be used to set the dimensions of a Leaderboard or Pie Chart.
+
+<SourceCode of={GroupByStories.PieAndLeaderboard} shown />
+
+## Props API
+
+The following table describes the props available for the GroupBy component:
+
+<ArgTypes of={GroupByStories.Default} sort="alpha" style={{ color: 'initial' }} />
+
+### `GroupByQueryProps`
+
+<ArgTypes of={GroupByQueryPropsStories} sort="alpha" />
+
+See the documentation below for a complete reference to all of the props and classes available to the components
+mentioned here.
+
+- <LinkTo kind="Components/TimeSeries" story="overview">
+    TimeSeries
+  </LinkTo>
+- <LinkTo kind="Components/Leaderboard" story="overview">
+    Leaderboard
+  </LinkTo>
+- <LinkTo kind="Components/PieChart" story="overview">
+    PieChart
+  </LinkTo>

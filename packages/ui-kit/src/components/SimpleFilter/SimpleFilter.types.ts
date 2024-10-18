@@ -1,9 +1,9 @@
 import { DataPoolInput } from '../../graphql'
 import { ThemeSettingProps } from '../../themes'
 import { AutocompleteOption, AutocompleteProps } from '../Autocomplete/Autocomplete.types'
-import { DataComponentProps, QueryProps } from '../shared.types'
+import { DataComponentProps, ChartQueryProps } from '../shared.types'
 
-export interface SimpleFilterQueryProps extends Omit<QueryProps, 'metric' | 'filters'> {
+export interface SimpleFilterQueryProps extends Omit<ChartQueryProps, 'metric' | 'filters'> {
   /** The column to fetch the unique values from */
   columnName?: string
 
