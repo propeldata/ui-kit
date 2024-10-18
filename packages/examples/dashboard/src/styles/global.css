@@ -6,11 +6,11 @@ body {
 
   height: 100vh;
 
-  background-color: var(--bg-color);
+  background-color: var(--propel-color-background);
 }
 
 .border-2 {
-  border-color: var(--propel-border-primary);
+  border-color: var(--propel-gray-6);
   background-color: transparent;
 }
 

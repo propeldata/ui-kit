@@ -1,0 +1,2021 @@
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*           Semantic colors           */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+:where(.propel-themes) {
+  --propel-color-background: white;
+  --propel-color-overlay: var(--propel-black-a6);
+  --propel-color-panel-solid: white;
+  --propel-color-panel-translucent: rgba(255, 255, 255, 0.8);
+  --propel-color-surface: rgba(255, 255, 255, 0.85);
+
+  --propel-color-error-border: var(--propel-red-10);
+  --propel-color-error-text: var(--propel-red-11);
+
+  --propel-error-1: var(--propel-red-1);
+  --propel-error-2: var(--propel-red-2);
+  --propel-error-3: var(--propel-red-3);
+  --propel-error-4: var(--propel-red-4);
+  --propel-error-5: var(--propel-red-5);
+  --propel-error-6: var(--propel-red-6);
+  --propel-error-7: var(--propel-red-7);
+  --propel-error-8: var(--propel-red-8);
+  --propel-error-9: var(--propel-red-9);
+  --propel-error-10: var(--propel-red-10);
+  --propel-error-11: var(--propel-red-11);
+  --propel-error-12: var(--propel-red-12);
+
+  --propel-error-a1: var(--propel-red-a1);
+  --propel-error-a2: var(--propel-red-a2);
+  --propel-error-a3: var(--propel-red-a3);
+  --propel-error-a4: var(--propel-red-a4);
+  --propel-error-a5: var(--propel-red-a5);
+  --propel-error-a6: var(--propel-red-a6);
+  --propel-error-a7: var(--propel-red-a7);
+  --propel-error-a8: var(--propel-red-a8);
+  --propel-error-a9: var(--propel-red-a9);
+  --propel-error-a10: var(--propel-red-a10);
+  --propel-error-a11: var(--propel-red-a11);
+  --propel-error-a12: var(--propel-red-a12);
+}
+
+:is(.dark, .dark-theme),
+:is(.dark, .dark-theme) :where(.propel-themes:not(.light, .light-theme)) {
+  --propel-color-background: var(--propel-gray-1);
+  --propel-color-overlay: var(--propel-black-a8);
+  --propel-color-panel-solid: var(--propel-gray-2);
+  // --propel-color-panel-translucent: var(--propel-gray-a2);
+  --propel-color-panel-translucent: rgba(0, 0, 0, 0.4);
+  --propel-color-surface: rgba(0, 0, 0, 0.25);
+
+  --propel-color-error-border: var(--propel-red-10);
+  --propel-color-error-text: var(--propel-red-11);
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*            Transparency             */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+/* Because Chrome is buggy with box-shadow transitions from "transparent" keyword and/or RGB color into P3 colors. */
+/* Note: using `:where` here to guarantee that the P3 color will take over regardless of the output rule order. */
+:where(.propel-themes) {
+  --propel-color-transparent: rgb(0 0 0 / 0);
+}
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    .propel-themes {
+      --propel-color-transparent: color(display-p3 0 0 0 / 0);
+    }
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*            Color scheme             */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+/*
+ * Make sure that forced light/dark appearance also sets corresponding browser colors,
+ * like input autofill color and body scrollbar
+ */
+.propel-themes:where(.light, .light-theme) {
+  color-scheme: light;
+}
+.propel-themes:where(.dark, .dark-theme) {
+  color-scheme: dark;
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*   Focus, selection, and autofill    */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+.propel-themes,
+// [data-accent-color]:where(:not([data-accent-color=''], [data-accent-color='gray'])) {
+[data-accent-color]:where(:not([data-accent-color=''])) {
+  --propel-focus-1: var(--propel-accent-1);
+  --propel-focus-2: var(--propel-accent-2);
+  --propel-focus-3: var(--propel-accent-3);
+  --propel-focus-4: var(--propel-accent-4);
+  --propel-focus-5: var(--propel-accent-5);
+  --propel-focus-6: var(--propel-accent-6);
+  --propel-focus-7: var(--propel-accent-7);
+  --propel-focus-8: var(--propel-accent-8);
+  --propel-focus-9: var(--propel-accent-9);
+  --propel-focus-10: var(--propel-accent-10);
+  --propel-focus-11: var(--propel-accent-11);
+  --propel-focus-12: var(--propel-accent-12);
+
+  --propel-focus-a1: var(--propel-accent-a1);
+  --propel-focus-a2: var(--propel-accent-a2);
+  --propel-focus-a3: var(--propel-accent-a3);
+  --propel-focus-a4: var(--propel-accent-a4);
+  --propel-focus-a5: var(--propel-accent-a5);
+  --propel-focus-a6: var(--propel-accent-a6);
+  --propel-focus-a7: var(--propel-accent-a7);
+  --propel-focus-a8: var(--propel-accent-a8);
+  --propel-focus-a9: var(--propel-accent-a9);
+  --propel-focus-a10: var(--propel-accent-a10);
+  --propel-focus-a11: var(--propel-accent-a11);
+  --propel-focus-a12: var(--propel-accent-a12);
+}
+
+.propel-themes ::selection {
+  background-color: var(--propel-focus-a5);
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*         Background and text         */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+.propel-themes {
+  color: var(--propel-gray-12);
+  &:where([data-has-background='true']) {
+    background-color: var(--propel-color-background);
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*          Panel background           */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+.propel-themes {
+  &:where([data-panel-background='solid']) {
+    --propel-color-panel: var(--propel-color-panel-solid);
+    --propel-backdrop-filter-panel: none;
+  }
+  &:where([data-panel-background='translucent']) {
+    --propel-color-panel: var(--propel-color-panel-translucent);
+    --propel-backdrop-filter-panel: blur(10px);
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*            Accent color             */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+[data-accent-color='amber'] {
+  --propel-accent-1: var(--propel-amber-1);
+  --propel-accent-2: var(--propel-amber-2);
+  --propel-accent-3: var(--propel-amber-3);
+  --propel-accent-4: var(--propel-amber-4);
+  --propel-accent-5: var(--propel-amber-5);
+  --propel-accent-6: var(--propel-amber-6);
+  --propel-accent-7: var(--propel-amber-7);
+  --propel-accent-8: var(--propel-amber-8);
+  --propel-accent-9: var(--propel-amber-9);
+  --propel-accent-10: var(--propel-amber-10);
+  --propel-accent-11: var(--propel-amber-11);
+  --propel-accent-12: var(--propel-amber-12);
+
+  --propel-accent-a1: var(--propel-amber-a1);
+  --propel-accent-a2: var(--propel-amber-a2);
+  --propel-accent-a3: var(--propel-amber-a3);
+  --propel-accent-a4: var(--propel-amber-a4);
+  --propel-accent-a5: var(--propel-amber-a5);
+  --propel-accent-a6: var(--propel-amber-a6);
+  --propel-accent-a7: var(--propel-amber-a7);
+  --propel-accent-a8: var(--propel-amber-a8);
+  --propel-accent-a9: var(--propel-amber-a9);
+  --propel-accent-a10: var(--propel-amber-a10);
+  --propel-accent-a11: var(--propel-amber-a11);
+  --propel-accent-a12: var(--propel-amber-a12);
+
+  --propel-accent-contrast: var(--propel-amber-contrast);
+  --propel-accent-surface: var(--propel-amber-surface);
+  --propel-accent-indicator: var(--propel-amber-indicator);
+  --propel-accent-track: var(--propel-amber-track);
+
+  --propel-amber-contrast: #21201c; /* light mode sand 12 */
+
+  &.light,
+  &.light-theme {
+    --propel-amber-surface: #fefae4cc;
+    --propel-amber-indicator: var(--propel-amber-9);
+    --propel-amber-track: var(--propel-amber-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-amber-surface: color(display-p3 0.9922 0.9843 0.902 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-amber-surface: #271f1380;
+    --propel-amber-indicator: var(--propel-amber-9);
+    --propel-amber-track: var(--propel-amber-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-amber-surface: color(display-p3 0.1412 0.1176 0.0784 / 0.5);
+      }
+    }
+    @supports (color: color-mix(in oklab, white, black)) {
+      --propel-amber-track: color-mix(in oklab, var(--propel-amber-8), var(--propel-amber-9) 75%);
+    }
+  }
+}
+
+[data-accent-color='blue'] {
+  --propel-accent-1: var(--propel-blue-1);
+  --propel-accent-2: var(--propel-blue-2);
+  --propel-accent-3: var(--propel-blue-3);
+  --propel-accent-4: var(--propel-blue-4);
+  --propel-accent-5: var(--propel-blue-5);
+  --propel-accent-6: var(--propel-blue-6);
+  --propel-accent-7: var(--propel-blue-7);
+  --propel-accent-8: var(--propel-blue-8);
+  --propel-accent-9: var(--propel-blue-9);
+  --propel-accent-10: var(--propel-blue-10);
+  --propel-accent-11: var(--propel-blue-11);
+  --propel-accent-12: var(--propel-blue-12);
+
+  --propel-accent-a1: var(--propel-blue-a1);
+  --propel-accent-a2: var(--propel-blue-a2);
+  --propel-accent-a3: var(--propel-blue-a3);
+  --propel-accent-a4: var(--propel-blue-a4);
+  --propel-accent-a5: var(--propel-blue-a5);
+  --propel-accent-a6: var(--propel-blue-a6);
+  --propel-accent-a7: var(--propel-blue-a7);
+  --propel-accent-a8: var(--propel-blue-a8);
+  --propel-accent-a9: var(--propel-blue-a9);
+  --propel-accent-a10: var(--propel-blue-a10);
+  --propel-accent-a11: var(--propel-blue-a11);
+  --propel-accent-a12: var(--propel-blue-a12);
+
+  --propel-accent-contrast: var(--propel-blue-contrast);
+  --propel-accent-surface: var(--propel-blue-surface);
+  --propel-accent-indicator: var(--propel-blue-indicator);
+  --propel-accent-track: var(--propel-blue-track);
+
+  --propel-blue-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-blue-surface: #f1f9ffcc;
+    --propel-blue-indicator: var(--propel-blue-9);
+    --propel-blue-track: var(--propel-blue-9);
+
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-blue-surface: color(display-p3 0.9529 0.9765 0.9961 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-blue-surface: #11213d80;
+    --propel-blue-indicator: var(--propel-blue-9);
+    --propel-blue-track: var(--propel-blue-9);
+
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-blue-surface: color(display-p3 0.0706 0.1255 0.2196 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='bronze'] {
+  --propel-accent-1: var(--propel-bronze-1);
+  --propel-accent-2: var(--propel-bronze-2);
+  --propel-accent-3: var(--propel-bronze-3);
+  --propel-accent-4: var(--propel-bronze-4);
+  --propel-accent-5: var(--propel-bronze-5);
+  --propel-accent-6: var(--propel-bronze-6);
+  --propel-accent-7: var(--propel-bronze-7);
+  --propel-accent-8: var(--propel-bronze-8);
+  --propel-accent-9: var(--propel-bronze-9);
+  --propel-accent-10: var(--propel-bronze-10);
+  --propel-accent-11: var(--propel-bronze-11);
+  --propel-accent-12: var(--propel-bronze-12);
+
+  --propel-accent-a1: var(--propel-bronze-a1);
+  --propel-accent-a2: var(--propel-bronze-a2);
+  --propel-accent-a3: var(--propel-bronze-a3);
+  --propel-accent-a4: var(--propel-bronze-a4);
+  --propel-accent-a5: var(--propel-bronze-a5);
+  --propel-accent-a6: var(--propel-bronze-a6);
+  --propel-accent-a7: var(--propel-bronze-a7);
+  --propel-accent-a8: var(--propel-bronze-a8);
+  --propel-accent-a9: var(--propel-bronze-a9);
+  --propel-accent-a10: var(--propel-bronze-a10);
+  --propel-accent-a11: var(--propel-bronze-a11);
+  --propel-accent-a12: var(--propel-bronze-a12);
+
+  --propel-accent-contrast: var(--propel-bronze-contrast);
+  --propel-accent-surface: var(--propel-bronze-surface);
+  --propel-accent-indicator: var(--propel-bronze-indicator);
+  --propel-accent-track: var(--propel-bronze-track);
+
+  --propel-bronze-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-bronze-surface: #fdf5f3cc;
+    --propel-bronze-indicator: var(--propel-bronze-9);
+    --propel-bronze-track: var(--propel-bronze-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-bronze-surface: color(display-p3 0.9843 0.9608 0.9529 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-bronze-surface: #27211d80;
+    --propel-bronze-indicator: var(--propel-bronze-9);
+    --propel-bronze-track: var(--propel-bronze-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-bronze-surface: color(display-p3 0.1412 0.1255 0.1176 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='brown'] {
+  --propel-accent-1: var(--propel-brown-1);
+  --propel-accent-2: var(--propel-brown-2);
+  --propel-accent-3: var(--propel-brown-3);
+  --propel-accent-4: var(--propel-brown-4);
+  --propel-accent-5: var(--propel-brown-5);
+  --propel-accent-6: var(--propel-brown-6);
+  --propel-accent-7: var(--propel-brown-7);
+  --propel-accent-8: var(--propel-brown-8);
+  --propel-accent-9: var(--propel-brown-9);
+  --propel-accent-10: var(--propel-brown-10);
+  --propel-accent-11: var(--propel-brown-11);
+  --propel-accent-12: var(--propel-brown-12);
+
+  --propel-accent-a1: var(--propel-brown-a1);
+  --propel-accent-a2: var(--propel-brown-a2);
+  --propel-accent-a3: var(--propel-brown-a3);
+  --propel-accent-a4: var(--propel-brown-a4);
+  --propel-accent-a5: var(--propel-brown-a5);
+  --propel-accent-a6: var(--propel-brown-a6);
+  --propel-accent-a7: var(--propel-brown-a7);
+  --propel-accent-a8: var(--propel-brown-a8);
+  --propel-accent-a9: var(--propel-brown-a9);
+  --propel-accent-a10: var(--propel-brown-a10);
+  --propel-accent-a11: var(--propel-brown-a11);
+  --propel-accent-a12: var(--propel-brown-a12);
+
+  --propel-accent-contrast: var(--propel-brown-contrast);
+  --propel-accent-surface: var(--propel-brown-surface);
+  --propel-accent-indicator: var(--propel-brown-indicator);
+  --propel-accent-track: var(--propel-brown-track);
+
+  --propel-brown-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-brown-surface: #fbf8f4cc;
+    --propel-brown-indicator: var(--propel-brown-9);
+    --propel-brown-track: var(--propel-brown-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-brown-surface: color(display-p3 0.9843 0.9725 0.9569 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-brown-surface: #271f1b80;
+    --propel-brown-indicator: var(--propel-brown-9);
+    --propel-brown-track: var(--propel-brown-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-brown-surface: color(display-p3 0.1412 0.1176 0.102 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='crimson'] {
+  --propel-accent-1: var(--propel-crimson-1);
+  --propel-accent-2: var(--propel-crimson-2);
+  --propel-accent-3: var(--propel-crimson-3);
+  --propel-accent-4: var(--propel-crimson-4);
+  --propel-accent-5: var(--propel-crimson-5);
+  --propel-accent-6: var(--propel-crimson-6);
+  --propel-accent-7: var(--propel-crimson-7);
+  --propel-accent-8: var(--propel-crimson-8);
+  --propel-accent-9: var(--propel-crimson-9);
+  --propel-accent-10: var(--propel-crimson-10);
+  --propel-accent-11: var(--propel-crimson-11);
+  --propel-accent-12: var(--propel-crimson-12);
+
+  --propel-accent-a1: var(--propel-crimson-a1);
+  --propel-accent-a2: var(--propel-crimson-a2);
+  --propel-accent-a3: var(--propel-crimson-a3);
+  --propel-accent-a4: var(--propel-crimson-a4);
+  --propel-accent-a5: var(--propel-crimson-a5);
+  --propel-accent-a6: var(--propel-crimson-a6);
+  --propel-accent-a7: var(--propel-crimson-a7);
+  --propel-accent-a8: var(--propel-crimson-a8);
+  --propel-accent-a9: var(--propel-crimson-a9);
+  --propel-accent-a10: var(--propel-crimson-a10);
+  --propel-accent-a11: var(--propel-crimson-a11);
+  --propel-accent-a12: var(--propel-crimson-a12);
+
+  --propel-accent-contrast: var(--propel-crimson-contrast);
+  --propel-accent-surface: var(--propel-crimson-surface);
+  --propel-accent-indicator: var(--propel-crimson-indicator);
+  --propel-accent-track: var(--propel-crimson-track);
+
+  --propel-crimson-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-crimson-surface: #fef5f8cc;
+    --propel-crimson-indicator: var(--propel-crimson-9);
+    --propel-crimson-track: var(--propel-crimson-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-crimson-surface: color(display-p3 0.9922 0.9608 0.9725 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-crimson-surface: #2f151f80;
+    --propel-crimson-indicator: var(--propel-crimson-9);
+    --propel-crimson-track: var(--propel-crimson-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-crimson-surface: color(display-p3 0.1647 0.0863 0.1176 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='cyan'] {
+  --propel-accent-1: var(--propel-cyan-1);
+  --propel-accent-2: var(--propel-cyan-2);
+  --propel-accent-3: var(--propel-cyan-3);
+  --propel-accent-4: var(--propel-cyan-4);
+  --propel-accent-5: var(--propel-cyan-5);
+  --propel-accent-6: var(--propel-cyan-6);
+  --propel-accent-7: var(--propel-cyan-7);
+  --propel-accent-8: var(--propel-cyan-8);
+  --propel-accent-9: var(--propel-cyan-9);
+  --propel-accent-10: var(--propel-cyan-10);
+  --propel-accent-11: var(--propel-cyan-11);
+  --propel-accent-12: var(--propel-cyan-12);
+
+  --propel-accent-a1: var(--propel-cyan-a1);
+  --propel-accent-a2: var(--propel-cyan-a2);
+  --propel-accent-a3: var(--propel-cyan-a3);
+  --propel-accent-a4: var(--propel-cyan-a4);
+  --propel-accent-a5: var(--propel-cyan-a5);
+  --propel-accent-a6: var(--propel-cyan-a6);
+  --propel-accent-a7: var(--propel-cyan-a7);
+  --propel-accent-a8: var(--propel-cyan-a8);
+  --propel-accent-a9: var(--propel-cyan-a9);
+  --propel-accent-a10: var(--propel-cyan-a10);
+  --propel-accent-a11: var(--propel-cyan-a11);
+  --propel-accent-a12: var(--propel-cyan-a12);
+
+  --propel-accent-contrast: var(--propel-cyan-contrast);
+  --propel-accent-surface: var(--propel-cyan-surface);
+  --propel-accent-indicator: var(--propel-cyan-indicator);
+  --propel-accent-track: var(--propel-cyan-track);
+
+  --propel-cyan-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-cyan-surface: #eff9facc;
+    --propel-cyan-indicator: var(--propel-cyan-9);
+    --propel-cyan-track: var(--propel-cyan-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-cyan-surface: color(display-p3 0.9412 0.9765 0.9804 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-cyan-surface: #11252d80;
+    --propel-cyan-indicator: var(--propel-cyan-9);
+    --propel-cyan-track: var(--propel-cyan-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-cyan-surface: color(display-p3 0.0784 0.1412 0.1725 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='gold'] {
+  --propel-accent-1: var(--propel-gold-1);
+  --propel-accent-2: var(--propel-gold-2);
+  --propel-accent-3: var(--propel-gold-3);
+  --propel-accent-4: var(--propel-gold-4);
+  --propel-accent-5: var(--propel-gold-5);
+  --propel-accent-6: var(--propel-gold-6);
+  --propel-accent-7: var(--propel-gold-7);
+  --propel-accent-8: var(--propel-gold-8);
+  --propel-accent-9: var(--propel-gold-9);
+  --propel-accent-10: var(--propel-gold-10);
+  --propel-accent-11: var(--propel-gold-11);
+  --propel-accent-12: var(--propel-gold-12);
+
+  --propel-accent-a1: var(--propel-gold-a1);
+  --propel-accent-a2: var(--propel-gold-a2);
+  --propel-accent-a3: var(--propel-gold-a3);
+  --propel-accent-a4: var(--propel-gold-a4);
+  --propel-accent-a5: var(--propel-gold-a5);
+  --propel-accent-a6: var(--propel-gold-a6);
+  --propel-accent-a7: var(--propel-gold-a7);
+  --propel-accent-a8: var(--propel-gold-a8);
+  --propel-accent-a9: var(--propel-gold-a9);
+  --propel-accent-a10: var(--propel-gold-a10);
+  --propel-accent-a11: var(--propel-gold-a11);
+  --propel-accent-a12: var(--propel-gold-a12);
+
+  --propel-accent-contrast: var(--propel-gold-contrast);
+  --propel-accent-surface: var(--propel-gold-surface);
+  --propel-accent-indicator: var(--propel-gold-indicator);
+  --propel-accent-track: var(--propel-gold-track);
+
+  --propel-gold-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-gold-surface: #f9f8efcc;
+    --propel-gold-indicator: var(--propel-gold-9);
+    --propel-gold-track: var(--propel-gold-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-gold-surface: color(display-p3 0.9765 0.9725 0.9412 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-gold-surface: #25231d80;
+    --propel-gold-indicator: var(--propel-gold-9);
+    --propel-gold-track: var(--propel-gold-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-gold-surface: color(display-p3 0.1412 0.1333 0.1098 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='grass'] {
+  --propel-accent-1: var(--propel-grass-1);
+  --propel-accent-2: var(--propel-grass-2);
+  --propel-accent-3: var(--propel-grass-3);
+  --propel-accent-4: var(--propel-grass-4);
+  --propel-accent-5: var(--propel-grass-5);
+  --propel-accent-6: var(--propel-grass-6);
+  --propel-accent-7: var(--propel-grass-7);
+  --propel-accent-8: var(--propel-grass-8);
+  --propel-accent-9: var(--propel-grass-9);
+  --propel-accent-10: var(--propel-grass-10);
+  --propel-accent-11: var(--propel-grass-11);
+  --propel-accent-12: var(--propel-grass-12);
+
+  --propel-accent-a1: var(--propel-grass-a1);
+  --propel-accent-a2: var(--propel-grass-a2);
+  --propel-accent-a3: var(--propel-grass-a3);
+  --propel-accent-a4: var(--propel-grass-a4);
+  --propel-accent-a5: var(--propel-grass-a5);
+  --propel-accent-a6: var(--propel-grass-a6);
+  --propel-accent-a7: var(--propel-grass-a7);
+  --propel-accent-a8: var(--propel-grass-a8);
+  --propel-accent-a9: var(--propel-grass-a9);
+  --propel-accent-a10: var(--propel-grass-a10);
+  --propel-accent-a11: var(--propel-grass-a11);
+  --propel-accent-a12: var(--propel-grass-a12);
+
+  --propel-accent-contrast: var(--propel-grass-contrast);
+  --propel-accent-surface: var(--propel-grass-surface);
+  --propel-accent-indicator: var(--propel-grass-indicator);
+  --propel-accent-track: var(--propel-grass-track);
+
+  --propel-grass-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-grass-surface: #f3faf3cc;
+    --propel-grass-indicator: var(--propel-grass-9);
+    --propel-grass-track: var(--propel-grass-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-grass-surface: color(display-p3 0.9569 0.9804 0.9569 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-grass-surface: #19231b80;
+    --propel-grass-indicator: var(--propel-grass-9);
+    --propel-grass-track: var(--propel-grass-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-grass-surface: color(display-p3 0.102 0.1333 0.102 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='gray'] {
+  --propel-accent-1: var(--propel-gray-1);
+  --propel-accent-2: var(--propel-gray-2);
+  --propel-accent-3: var(--propel-gray-3);
+  --propel-accent-4: var(--propel-gray-4);
+  --propel-accent-5: var(--propel-gray-5);
+  --propel-accent-6: var(--propel-gray-6);
+  --propel-accent-7: var(--propel-gray-7);
+  --propel-accent-8: var(--propel-gray-8);
+  --propel-accent-9: var(--propel-gray-9);
+  --propel-accent-10: var(--propel-gray-10);
+  --propel-accent-11: var(--propel-gray-11);
+  --propel-accent-12: var(--propel-gray-12);
+
+  --propel-accent-a1: var(--propel-gray-a1);
+  --propel-accent-a2: var(--propel-gray-a2);
+  --propel-accent-a3: var(--propel-gray-a3);
+  --propel-accent-a4: var(--propel-gray-a4);
+  --propel-accent-a5: var(--propel-gray-a5);
+  --propel-accent-a6: var(--propel-gray-a6);
+  --propel-accent-a7: var(--propel-gray-a7);
+  --propel-accent-a8: var(--propel-gray-a8);
+  --propel-accent-a9: var(--propel-gray-a9);
+  --propel-accent-a10: var(--propel-gray-a10);
+  --propel-accent-a11: var(--propel-gray-a11);
+  --propel-accent-a12: var(--propel-gray-a12);
+
+  --propel-accent-contrast: var(--propel-gray-contrast);
+  --propel-accent-surface: var(--propel-gray-surface);
+  --propel-accent-indicator: var(--propel-gray-indicator);
+  --propel-accent-track: var(--propel-gray-track);
+
+  --propel-gray-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-gray-surface: #ffffffcc;
+    --propel-gray-indicator: var(--propel-gray-9);
+    --propel-gray-track: var(--propel-gray-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-gray-surface: color(display-p3 1 1 1 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-gray-surface: #21212180;
+    --propel-gray-indicator: var(--propel-gray-9);
+    --propel-gray-track: var(--propel-gray-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-gray-surface: color(display-p3 0.1255 0.1255 0.1255 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='green'] {
+  --propel-accent-1: var(--propel-green-1);
+  --propel-accent-2: var(--propel-green-2);
+  --propel-accent-3: var(--propel-green-3);
+  --propel-accent-4: var(--propel-green-4);
+  --propel-accent-5: var(--propel-green-5);
+  --propel-accent-6: var(--propel-green-6);
+  --propel-accent-7: var(--propel-green-7);
+  --propel-accent-8: var(--propel-green-8);
+  --propel-accent-9: var(--propel-green-9);
+  --propel-accent-10: var(--propel-green-10);
+  --propel-accent-11: var(--propel-green-11);
+  --propel-accent-12: var(--propel-green-12);
+
+  --propel-accent-a1: var(--propel-green-a1);
+  --propel-accent-a2: var(--propel-green-a2);
+  --propel-accent-a3: var(--propel-green-a3);
+  --propel-accent-a4: var(--propel-green-a4);
+  --propel-accent-a5: var(--propel-green-a5);
+  --propel-accent-a6: var(--propel-green-a6);
+  --propel-accent-a7: var(--propel-green-a7);
+  --propel-accent-a8: var(--propel-green-a8);
+  --propel-accent-a9: var(--propel-green-a9);
+  --propel-accent-a10: var(--propel-green-a10);
+  --propel-accent-a11: var(--propel-green-a11);
+  --propel-accent-a12: var(--propel-green-a12);
+
+  --propel-accent-contrast: var(--propel-green-contrast);
+  --propel-accent-surface: var(--propel-green-surface);
+  --propel-accent-indicator: var(--propel-green-indicator);
+  --propel-accent-track: var(--propel-green-track);
+
+  --propel-green-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-green-surface: #f1faf4cc;
+    --propel-green-indicator: var(--propel-green-9);
+    --propel-green-track: var(--propel-green-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-green-surface: color(display-p3 0.9569 0.9804 0.9608 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-green-surface: #15251d80;
+    --propel-green-indicator: var(--propel-green-9);
+    --propel-green-track: var(--propel-green-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-green-surface: color(display-p3 0.0941 0.1412 0.1098 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='indigo'] {
+  --propel-accent-1: var(--propel-indigo-1);
+  --propel-accent-2: var(--propel-indigo-2);
+  --propel-accent-3: var(--propel-indigo-3);
+  --propel-accent-4: var(--propel-indigo-4);
+  --propel-accent-5: var(--propel-indigo-5);
+  --propel-accent-6: var(--propel-indigo-6);
+  --propel-accent-7: var(--propel-indigo-7);
+  --propel-accent-8: var(--propel-indigo-8);
+  --propel-accent-9: var(--propel-indigo-9);
+  --propel-accent-10: var(--propel-indigo-10);
+  --propel-accent-11: var(--propel-indigo-11);
+  --propel-accent-12: var(--propel-indigo-12);
+
+  --propel-accent-a1: var(--propel-indigo-a1);
+  --propel-accent-a2: var(--propel-indigo-a2);
+  --propel-accent-a3: var(--propel-indigo-a3);
+  --propel-accent-a4: var(--propel-indigo-a4);
+  --propel-accent-a5: var(--propel-indigo-a5);
+  --propel-accent-a6: var(--propel-indigo-a6);
+  --propel-accent-a7: var(--propel-indigo-a7);
+  --propel-accent-a8: var(--propel-indigo-a8);
+  --propel-accent-a9: var(--propel-indigo-a9);
+  --propel-accent-a10: var(--propel-indigo-a10);
+  --propel-accent-a11: var(--propel-indigo-a11);
+  --propel-accent-a12: var(--propel-indigo-a12);
+
+  --propel-accent-contrast: var(--propel-indigo-contrast);
+  --propel-accent-surface: var(--propel-indigo-surface);
+  --propel-accent-indicator: var(--propel-indigo-indicator);
+  --propel-accent-track: var(--propel-indigo-track);
+
+  --propel-indigo-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-indigo-surface: #f5f8ffcc;
+    --propel-indigo-indicator: var(--propel-indigo-9);
+    --propel-indigo-track: var(--propel-indigo-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-indigo-surface: color(display-p3 0.9647 0.9725 0.9961 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-indigo-surface: #171d3b80;
+    --propel-indigo-indicator: var(--propel-indigo-9);
+    --propel-indigo-track: var(--propel-indigo-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-indigo-surface: color(display-p3 0.0941 0.1098 0.2196 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='iris'] {
+  --propel-accent-1: var(--propel-iris-1);
+  --propel-accent-2: var(--propel-iris-2);
+  --propel-accent-3: var(--propel-iris-3);
+  --propel-accent-4: var(--propel-iris-4);
+  --propel-accent-5: var(--propel-iris-5);
+  --propel-accent-6: var(--propel-iris-6);
+  --propel-accent-7: var(--propel-iris-7);
+  --propel-accent-8: var(--propel-iris-8);
+  --propel-accent-9: var(--propel-iris-9);
+  --propel-accent-10: var(--propel-iris-10);
+  --propel-accent-11: var(--propel-iris-11);
+  --propel-accent-12: var(--propel-iris-12);
+
+  --propel-accent-a1: var(--propel-iris-a1);
+  --propel-accent-a2: var(--propel-iris-a2);
+  --propel-accent-a3: var(--propel-iris-a3);
+  --propel-accent-a4: var(--propel-iris-a4);
+  --propel-accent-a5: var(--propel-iris-a5);
+  --propel-accent-a6: var(--propel-iris-a6);
+  --propel-accent-a7: var(--propel-iris-a7);
+  --propel-accent-a8: var(--propel-iris-a8);
+  --propel-accent-a9: var(--propel-iris-a9);
+  --propel-accent-a10: var(--propel-iris-a10);
+  --propel-accent-a11: var(--propel-iris-a11);
+  --propel-accent-a12: var(--propel-iris-a12);
+
+  --propel-accent-contrast: var(--propel-iris-contrast);
+  --propel-accent-surface: var(--propel-iris-surface);
+  --propel-accent-indicator: var(--propel-iris-indicator);
+  --propel-accent-track: var(--propel-iris-track);
+
+  --propel-iris-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-iris-surface: #f6f6ffcc;
+    --propel-iris-indicator: var(--propel-iris-9);
+    --propel-iris-track: var(--propel-iris-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-iris-surface: color(display-p3 0.9647 0.9647 0.9961 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-iris-surface: #1d1b3980;
+    --propel-iris-indicator: var(--propel-iris-9);
+    --propel-iris-track: var(--propel-iris-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-iris-surface: color(display-p3 0.1098 0.102 0.2118 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='jade'] {
+  --propel-accent-1: var(--propel-jade-1);
+  --propel-accent-2: var(--propel-jade-2);
+  --propel-accent-3: var(--propel-jade-3);
+  --propel-accent-4: var(--propel-jade-4);
+  --propel-accent-5: var(--propel-jade-5);
+  --propel-accent-6: var(--propel-jade-6);
+  --propel-accent-7: var(--propel-jade-7);
+  --propel-accent-8: var(--propel-jade-8);
+  --propel-accent-9: var(--propel-jade-9);
+  --propel-accent-10: var(--propel-jade-10);
+  --propel-accent-11: var(--propel-jade-11);
+  --propel-accent-12: var(--propel-jade-12);
+
+  --propel-accent-a1: var(--propel-jade-a1);
+  --propel-accent-a2: var(--propel-jade-a2);
+  --propel-accent-a3: var(--propel-jade-a3);
+  --propel-accent-a4: var(--propel-jade-a4);
+  --propel-accent-a5: var(--propel-jade-a5);
+  --propel-accent-a6: var(--propel-jade-a6);
+  --propel-accent-a7: var(--propel-jade-a7);
+  --propel-accent-a8: var(--propel-jade-a8);
+  --propel-accent-a9: var(--propel-jade-a9);
+  --propel-accent-a10: var(--propel-jade-a10);
+  --propel-accent-a11: var(--propel-jade-a11);
+  --propel-accent-a12: var(--propel-jade-a12);
+
+  --propel-accent-contrast: var(--propel-jade-contrast);
+  --propel-accent-surface: var(--propel-jade-surface);
+  --propel-accent-indicator: var(--propel-jade-indicator);
+  --propel-accent-track: var(--propel-jade-track);
+
+  --propel-jade-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-jade-surface: #f1faf5cc;
+    --propel-jade-indicator: var(--propel-jade-9);
+    --propel-jade-track: var(--propel-jade-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-jade-surface: color(display-p3 0.9529 0.9804 0.9608 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-jade-surface: #13271f80;
+    --propel-jade-indicator: var(--propel-jade-9);
+    --propel-jade-track: var(--propel-jade-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-jade-surface: color(display-p3 0.0863 0.149 0.1176 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='lime'] {
+  --propel-accent-1: var(--propel-lime-1);
+  --propel-accent-2: var(--propel-lime-2);
+  --propel-accent-3: var(--propel-lime-3);
+  --propel-accent-4: var(--propel-lime-4);
+  --propel-accent-5: var(--propel-lime-5);
+  --propel-accent-6: var(--propel-lime-6);
+  --propel-accent-7: var(--propel-lime-7);
+  --propel-accent-8: var(--propel-lime-8);
+  --propel-accent-9: var(--propel-lime-9);
+  --propel-accent-10: var(--propel-lime-10);
+  --propel-accent-11: var(--propel-lime-11);
+  --propel-accent-12: var(--propel-lime-12);
+
+  --propel-accent-a1: var(--propel-lime-a1);
+  --propel-accent-a2: var(--propel-lime-a2);
+  --propel-accent-a3: var(--propel-lime-a3);
+  --propel-accent-a4: var(--propel-lime-a4);
+  --propel-accent-a5: var(--propel-lime-a5);
+  --propel-accent-a6: var(--propel-lime-a6);
+  --propel-accent-a7: var(--propel-lime-a7);
+  --propel-accent-a8: var(--propel-lime-a8);
+  --propel-accent-a9: var(--propel-lime-a9);
+  --propel-accent-a10: var(--propel-lime-a10);
+  --propel-accent-a11: var(--propel-lime-a11);
+  --propel-accent-a12: var(--propel-lime-a12);
+
+  --propel-accent-contrast: var(--propel-lime-contrast);
+  --propel-accent-surface: var(--propel-lime-surface);
+  --propel-accent-indicator: var(--propel-lime-indicator);
+  --propel-accent-track: var(--propel-lime-track);
+
+  --propel-lime-contrast: #1d211c; /* light mode olive 12 */
+
+  &.light,
+  &.light-theme {
+    --propel-lime-surface: #f6f9f0cc;
+    --propel-lime-indicator: var(--propel-lime-9);
+    --propel-lime-track: var(--propel-lime-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-lime-surface: color(display-p3 0.9725 0.9765 0.9412 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-lime-surface: #1b211580;
+    --propel-lime-indicator: var(--propel-lime-9);
+    --propel-lime-track: var(--propel-lime-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-lime-surface: color(display-p3 0.1098 0.1255 0.0784 / 0.5);
+      }
+    }
+    @supports (color: color-mix(in oklab, white, black)) {
+      --propel-lime-track: color-mix(in oklab, var(--propel-lime-8), var(--propel-lime-9) 65%);
+    }
+  }
+}
+
+[data-accent-color='mint'] {
+  --propel-accent-1: var(--propel-mint-1);
+  --propel-accent-2: var(--propel-mint-2);
+  --propel-accent-3: var(--propel-mint-3);
+  --propel-accent-4: var(--propel-mint-4);
+  --propel-accent-5: var(--propel-mint-5);
+  --propel-accent-6: var(--propel-mint-6);
+  --propel-accent-7: var(--propel-mint-7);
+  --propel-accent-8: var(--propel-mint-8);
+  --propel-accent-9: var(--propel-mint-9);
+  --propel-accent-10: var(--propel-mint-10);
+  --propel-accent-11: var(--propel-mint-11);
+  --propel-accent-12: var(--propel-mint-12);
+
+  --propel-accent-a1: var(--propel-mint-a1);
+  --propel-accent-a2: var(--propel-mint-a2);
+  --propel-accent-a3: var(--propel-mint-a3);
+  --propel-accent-a4: var(--propel-mint-a4);
+  --propel-accent-a5: var(--propel-mint-a5);
+  --propel-accent-a6: var(--propel-mint-a6);
+  --propel-accent-a7: var(--propel-mint-a7);
+  --propel-accent-a8: var(--propel-mint-a8);
+  --propel-accent-a9: var(--propel-mint-a9);
+  --propel-accent-a10: var(--propel-mint-a10);
+  --propel-accent-a11: var(--propel-mint-a11);
+  --propel-accent-a12: var(--propel-mint-a12);
+
+  --propel-accent-contrast: var(--propel-mint-contrast);
+  --propel-accent-surface: var(--propel-mint-surface);
+  --propel-accent-indicator: var(--propel-mint-indicator);
+  --propel-accent-track: var(--propel-mint-track);
+
+  --propel-mint-contrast: #1a211e; /* light mode sage 12 */
+
+  &.light,
+  &.light-theme {
+    --propel-mint-surface: #effaf8cc;
+    --propel-mint-indicator: var(--propel-mint-9);
+    --propel-mint-track: var(--propel-mint-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-mint-surface: color(display-p3 0.9451 0.9804 0.9725 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-mint-surface: #15272780;
+    --propel-mint-indicator: var(--propel-mint-9);
+    --propel-mint-track: var(--propel-mint-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-mint-surface: color(display-p3 0.0941 0.149 0.1412 / 0.5);
+      }
+    }
+    @supports (color: color-mix(in oklab, white, black)) {
+      --propel-mint-track: color-mix(in oklab, var(--propel-mint-8), var(--propel-mint-9) 65%);
+    }
+  }
+}
+
+[data-accent-color='orange'] {
+  --propel-accent-1: var(--propel-orange-1);
+  --propel-accent-2: var(--propel-orange-2);
+  --propel-accent-3: var(--propel-orange-3);
+  --propel-accent-4: var(--propel-orange-4);
+  --propel-accent-5: var(--propel-orange-5);
+  --propel-accent-6: var(--propel-orange-6);
+  --propel-accent-7: var(--propel-orange-7);
+  --propel-accent-8: var(--propel-orange-8);
+  --propel-accent-9: var(--propel-orange-9);
+  --propel-accent-10: var(--propel-orange-10);
+  --propel-accent-11: var(--propel-orange-11);
+  --propel-accent-12: var(--propel-orange-12);
+
+  --propel-accent-a1: var(--propel-orange-a1);
+  --propel-accent-a2: var(--propel-orange-a2);
+  --propel-accent-a3: var(--propel-orange-a3);
+  --propel-accent-a4: var(--propel-orange-a4);
+  --propel-accent-a5: var(--propel-orange-a5);
+  --propel-accent-a6: var(--propel-orange-a6);
+  --propel-accent-a7: var(--propel-orange-a7);
+  --propel-accent-a8: var(--propel-orange-a8);
+  --propel-accent-a9: var(--propel-orange-a9);
+  --propel-accent-a10: var(--propel-orange-a10);
+  --propel-accent-a11: var(--propel-orange-a11);
+  --propel-accent-a12: var(--propel-orange-a12);
+
+  --propel-accent-contrast: var(--propel-orange-contrast);
+  --propel-accent-surface: var(--propel-orange-surface);
+  --propel-accent-indicator: var(--propel-orange-indicator);
+  --propel-accent-track: var(--propel-orange-track);
+
+  --propel-orange-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-orange-surface: #fff5e9cc;
+    --propel-orange-indicator: var(--propel-orange-9);
+    --propel-orange-track: var(--propel-orange-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-orange-surface: color(display-p3 0.9961 0.9608 0.9176 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-orange-surface: #271d1380;
+    --propel-orange-indicator: var(--propel-orange-9);
+    --propel-orange-track: var(--propel-orange-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-orange-surface: color(display-p3 0.1412 0.1098 0.0706 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='pink'] {
+  --propel-accent-1: var(--propel-pink-1);
+  --propel-accent-2: var(--propel-pink-2);
+  --propel-accent-3: var(--propel-pink-3);
+  --propel-accent-4: var(--propel-pink-4);
+  --propel-accent-5: var(--propel-pink-5);
+  --propel-accent-6: var(--propel-pink-6);
+  --propel-accent-7: var(--propel-pink-7);
+  --propel-accent-8: var(--propel-pink-8);
+  --propel-accent-9: var(--propel-pink-9);
+  --propel-accent-10: var(--propel-pink-10);
+  --propel-accent-11: var(--propel-pink-11);
+  --propel-accent-12: var(--propel-pink-12);
+
+  --propel-accent-a1: var(--propel-pink-a1);
+  --propel-accent-a2: var(--propel-pink-a2);
+  --propel-accent-a3: var(--propel-pink-a3);
+  --propel-accent-a4: var(--propel-pink-a4);
+  --propel-accent-a5: var(--propel-pink-a5);
+  --propel-accent-a6: var(--propel-pink-a6);
+  --propel-accent-a7: var(--propel-pink-a7);
+  --propel-accent-a8: var(--propel-pink-a8);
+  --propel-accent-a9: var(--propel-pink-a9);
+  --propel-accent-a10: var(--propel-pink-a10);
+  --propel-accent-a11: var(--propel-pink-a11);
+  --propel-accent-a12: var(--propel-pink-a12);
+
+  --propel-accent-contrast: var(--propel-pink-contrast);
+  --propel-accent-surface: var(--propel-pink-surface);
+  --propel-accent-indicator: var(--propel-pink-indicator);
+  --propel-accent-track: var(--propel-pink-track);
+
+  --propel-pink-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-pink-surface: #fef5facc;
+    --propel-pink-indicator: var(--propel-pink-9);
+    --propel-pink-track: var(--propel-pink-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-pink-surface: color(display-p3 0.9922 0.9608 0.9804 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-pink-surface: #31132980;
+    --propel-pink-indicator: var(--propel-pink-9);
+    --propel-pink-track: var(--propel-pink-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-pink-surface: color(display-p3 0.1725 0.0784 0.149 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='plum'] {
+  --propel-accent-1: var(--propel-plum-1);
+  --propel-accent-2: var(--propel-plum-2);
+  --propel-accent-3: var(--propel-plum-3);
+  --propel-accent-4: var(--propel-plum-4);
+  --propel-accent-5: var(--propel-plum-5);
+  --propel-accent-6: var(--propel-plum-6);
+  --propel-accent-7: var(--propel-plum-7);
+  --propel-accent-8: var(--propel-plum-8);
+  --propel-accent-9: var(--propel-plum-9);
+  --propel-accent-10: var(--propel-plum-10);
+  --propel-accent-11: var(--propel-plum-11);
+  --propel-accent-12: var(--propel-plum-12);
+
+  --propel-accent-a1: var(--propel-plum-a1);
+  --propel-accent-a2: var(--propel-plum-a2);
+  --propel-accent-a3: var(--propel-plum-a3);
+  --propel-accent-a4: var(--propel-plum-a4);
+  --propel-accent-a5: var(--propel-plum-a5);
+  --propel-accent-a6: var(--propel-plum-a6);
+  --propel-accent-a7: var(--propel-plum-a7);
+  --propel-accent-a8: var(--propel-plum-a8);
+  --propel-accent-a9: var(--propel-plum-a9);
+  --propel-accent-a10: var(--propel-plum-a10);
+  --propel-accent-a11: var(--propel-plum-a11);
+  --propel-accent-a12: var(--propel-plum-a12);
+
+  --propel-accent-contrast: var(--propel-plum-contrast);
+  --propel-accent-surface: var(--propel-plum-surface);
+  --propel-accent-indicator: var(--propel-plum-indicator);
+  --propel-accent-track: var(--propel-plum-track);
+
+  --propel-plum-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-plum-surface: #fdf5fdcc;
+    --propel-plum-indicator: var(--propel-plum-9);
+    --propel-plum-track: var(--propel-plum-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-plum-surface: color(display-p3 0.9843 0.9647 0.9843 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-plum-surface: #2f152f80;
+    --propel-plum-indicator: var(--propel-plum-9);
+    --propel-plum-track: var(--propel-plum-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-plum-surface: color(display-p3 0.1647 0.0863 0.1725 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='purple'] {
+  --propel-accent-1: var(--propel-purple-1);
+  --propel-accent-2: var(--propel-purple-2);
+  --propel-accent-3: var(--propel-purple-3);
+  --propel-accent-4: var(--propel-purple-4);
+  --propel-accent-5: var(--propel-purple-5);
+  --propel-accent-6: var(--propel-purple-6);
+  --propel-accent-7: var(--propel-purple-7);
+  --propel-accent-8: var(--propel-purple-8);
+  --propel-accent-9: var(--propel-purple-9);
+  --propel-accent-10: var(--propel-purple-10);
+  --propel-accent-11: var(--propel-purple-11);
+  --propel-accent-12: var(--propel-purple-12);
+
+  --propel-accent-a1: var(--propel-purple-a1);
+  --propel-accent-a2: var(--propel-purple-a2);
+  --propel-accent-a3: var(--propel-purple-a3);
+  --propel-accent-a4: var(--propel-purple-a4);
+  --propel-accent-a5: var(--propel-purple-a5);
+  --propel-accent-a6: var(--propel-purple-a6);
+  --propel-accent-a7: var(--propel-purple-a7);
+  --propel-accent-a8: var(--propel-purple-a8);
+  --propel-accent-a9: var(--propel-purple-a9);
+  --propel-accent-a10: var(--propel-purple-a10);
+  --propel-accent-a11: var(--propel-purple-a11);
+  --propel-accent-a12: var(--propel-purple-a12);
+
+  --propel-accent-contrast: var(--propel-purple-contrast);
+  --propel-accent-surface: var(--propel-purple-surface);
+  --propel-accent-indicator: var(--propel-purple-indicator);
+  --propel-accent-track: var(--propel-purple-track);
+
+  --propel-purple-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-purple-surface: #faf5fecc;
+    --propel-purple-indicator: var(--propel-purple-9);
+    --propel-purple-track: var(--propel-purple-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-purple-surface: color(display-p3 0.9804 0.9647 0.9922 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-purple-surface: #2b173580;
+    --propel-purple-indicator: var(--propel-purple-9);
+    --propel-purple-track: var(--propel-purple-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-purple-surface: color(display-p3 0.149 0.0941 0.1961 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='red'] {
+  --propel-accent-1: var(--propel-red-1);
+  --propel-accent-2: var(--propel-red-2);
+  --propel-accent-3: var(--propel-red-3);
+  --propel-accent-4: var(--propel-red-4);
+  --propel-accent-5: var(--propel-red-5);
+  --propel-accent-6: var(--propel-red-6);
+  --propel-accent-7: var(--propel-red-7);
+  --propel-accent-8: var(--propel-red-8);
+  --propel-accent-9: var(--propel-red-9);
+  --propel-accent-10: var(--propel-red-10);
+  --propel-accent-11: var(--propel-red-11);
+  --propel-accent-12: var(--propel-red-12);
+
+  --propel-accent-a1: var(--propel-red-a1);
+  --propel-accent-a2: var(--propel-red-a2);
+  --propel-accent-a3: var(--propel-red-a3);
+  --propel-accent-a4: var(--propel-red-a4);
+  --propel-accent-a5: var(--propel-red-a5);
+  --propel-accent-a6: var(--propel-red-a6);
+  --propel-accent-a7: var(--propel-red-a7);
+  --propel-accent-a8: var(--propel-red-a8);
+  --propel-accent-a9: var(--propel-red-a9);
+  --propel-accent-a10: var(--propel-red-a10);
+  --propel-accent-a11: var(--propel-red-a11);
+  --propel-accent-a12: var(--propel-red-a12);
+
+  --propel-accent-contrast: var(--propel-red-contrast);
+  --propel-accent-surface: var(--propel-red-surface);
+  --propel-accent-indicator: var(--propel-red-indicator);
+  --propel-accent-track: var(--propel-red-track);
+
+  --propel-red-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-red-surface: #fff5f5cc;
+    --propel-red-indicator: var(--propel-red-9);
+    --propel-red-track: var(--propel-red-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-red-surface: color(display-p3 0.9961 0.9647 0.9647 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-red-surface: #2f151780;
+    --propel-red-indicator: var(--propel-red-9);
+    --propel-red-track: var(--propel-red-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-red-surface: color(display-p3 0.1647 0.0863 0.0863 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='ruby'] {
+  --propel-accent-1: var(--propel-ruby-1);
+  --propel-accent-2: var(--propel-ruby-2);
+  --propel-accent-3: var(--propel-ruby-3);
+  --propel-accent-4: var(--propel-ruby-4);
+  --propel-accent-5: var(--propel-ruby-5);
+  --propel-accent-6: var(--propel-ruby-6);
+  --propel-accent-7: var(--propel-ruby-7);
+  --propel-accent-8: var(--propel-ruby-8);
+  --propel-accent-9: var(--propel-ruby-9);
+  --propel-accent-10: var(--propel-ruby-10);
+  --propel-accent-11: var(--propel-ruby-11);
+  --propel-accent-12: var(--propel-ruby-12);
+
+  --propel-accent-a1: var(--propel-ruby-a1);
+  --propel-accent-a2: var(--propel-ruby-a2);
+  --propel-accent-a3: var(--propel-ruby-a3);
+  --propel-accent-a4: var(--propel-ruby-a4);
+  --propel-accent-a5: var(--propel-ruby-a5);
+  --propel-accent-a6: var(--propel-ruby-a6);
+  --propel-accent-a7: var(--propel-ruby-a7);
+  --propel-accent-a8: var(--propel-ruby-a8);
+  --propel-accent-a9: var(--propel-ruby-a9);
+  --propel-accent-a10: var(--propel-ruby-a10);
+  --propel-accent-a11: var(--propel-ruby-a11);
+  --propel-accent-a12: var(--propel-ruby-a12);
+
+  --propel-accent-contrast: var(--propel-ruby-contrast);
+  --propel-accent-surface: var(--propel-ruby-surface);
+  --propel-accent-indicator: var(--propel-ruby-indicator);
+  --propel-accent-track: var(--propel-ruby-track);
+
+  --propel-ruby-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-ruby-surface: #fff5f6cc;
+    --propel-ruby-indicator: var(--propel-ruby-9);
+    --propel-ruby-track: var(--propel-ruby-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-ruby-surface: color(display-p3 0.9961 0.9647 0.9647 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-ruby-surface: #2b191d80;
+    --propel-ruby-indicator: var(--propel-ruby-9);
+    --propel-ruby-track: var(--propel-ruby-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-ruby-surface: color(display-p3 0.1569 0.0941 0.1098 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='sky'] {
+  --propel-accent-1: var(--propel-sky-1);
+  --propel-accent-2: var(--propel-sky-2);
+  --propel-accent-3: var(--propel-sky-3);
+  --propel-accent-4: var(--propel-sky-4);
+  --propel-accent-5: var(--propel-sky-5);
+  --propel-accent-6: var(--propel-sky-6);
+  --propel-accent-7: var(--propel-sky-7);
+  --propel-accent-8: var(--propel-sky-8);
+  --propel-accent-9: var(--propel-sky-9);
+  --propel-accent-10: var(--propel-sky-10);
+  --propel-accent-11: var(--propel-sky-11);
+  --propel-accent-12: var(--propel-sky-12);
+
+  --propel-accent-a1: var(--propel-sky-a1);
+  --propel-accent-a2: var(--propel-sky-a2);
+  --propel-accent-a3: var(--propel-sky-a3);
+  --propel-accent-a4: var(--propel-sky-a4);
+  --propel-accent-a5: var(--propel-sky-a5);
+  --propel-accent-a6: var(--propel-sky-a6);
+  --propel-accent-a7: var(--propel-sky-a7);
+  --propel-accent-a8: var(--propel-sky-a8);
+  --propel-accent-a9: var(--propel-sky-a9);
+  --propel-accent-a10: var(--propel-sky-a10);
+  --propel-accent-a11: var(--propel-sky-a11);
+  --propel-accent-a12: var(--propel-sky-a12);
+
+  --propel-accent-contrast: var(--propel-sky-contrast);
+  --propel-accent-surface: var(--propel-sky-surface);
+  --propel-accent-indicator: var(--propel-sky-indicator);
+  --propel-accent-track: var(--propel-sky-track);
+
+  --propel-sky-contrast: #1c2024; /* light mode slate 12 */
+
+  &.light,
+  &.light-theme {
+    --propel-sky-surface: #eef9fdcc;
+    --propel-sky-indicator: var(--propel-sky-9);
+    --propel-sky-track: var(--propel-sky-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-sky-surface: color(display-p3 0.9412 0.9765 0.9843 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-sky-surface: #13233b80;
+    --propel-sky-indicator: var(--propel-sky-9);
+    --propel-sky-track: var(--propel-sky-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-sky-surface: color(display-p3 0.0863 0.1333 0.2196 / 0.5);
+      }
+    }
+    @supports (color: color-mix(in oklab, white, black)) {
+      --propel-sky-track: color-mix(in oklab, var(--propel-sky-8), var(--propel-sky-9) 65%);
+    }
+  }
+}
+
+[data-accent-color='teal'] {
+  --propel-accent-1: var(--propel-teal-1);
+  --propel-accent-2: var(--propel-teal-2);
+  --propel-accent-3: var(--propel-teal-3);
+  --propel-accent-4: var(--propel-teal-4);
+  --propel-accent-5: var(--propel-teal-5);
+  --propel-accent-6: var(--propel-teal-6);
+  --propel-accent-7: var(--propel-teal-7);
+  --propel-accent-8: var(--propel-teal-8);
+  --propel-accent-9: var(--propel-teal-9);
+  --propel-accent-10: var(--propel-teal-10);
+  --propel-accent-11: var(--propel-teal-11);
+  --propel-accent-12: var(--propel-teal-12);
+
+  --propel-accent-a1: var(--propel-teal-a1);
+  --propel-accent-a2: var(--propel-teal-a2);
+  --propel-accent-a3: var(--propel-teal-a3);
+  --propel-accent-a4: var(--propel-teal-a4);
+  --propel-accent-a5: var(--propel-teal-a5);
+  --propel-accent-a6: var(--propel-teal-a6);
+  --propel-accent-a7: var(--propel-teal-a7);
+  --propel-accent-a8: var(--propel-teal-a8);
+  --propel-accent-a9: var(--propel-teal-a9);
+  --propel-accent-a10: var(--propel-teal-a10);
+  --propel-accent-a11: var(--propel-teal-a11);
+  --propel-accent-a12: var(--propel-teal-a12);
+
+  --propel-accent-contrast: var(--propel-teal-contrast);
+  --propel-accent-surface: var(--propel-teal-surface);
+  --propel-accent-indicator: var(--propel-teal-indicator);
+  --propel-accent-track: var(--propel-teal-track);
+
+  --propel-teal-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-teal-surface: #f0faf8cc;
+    --propel-teal-indicator: var(--propel-teal-9);
+    --propel-teal-track: var(--propel-teal-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-teal-surface: color(display-p3 0.9451 0.9804 0.9725 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-teal-surface: #13272580;
+    --propel-teal-indicator: var(--propel-teal-9);
+    --propel-teal-track: var(--propel-teal-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-teal-surface: color(display-p3 0.0863 0.149 0.1412 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='tomato'] {
+  --propel-accent-1: var(--propel-tomato-1);
+  --propel-accent-2: var(--propel-tomato-2);
+  --propel-accent-3: var(--propel-tomato-3);
+  --propel-accent-4: var(--propel-tomato-4);
+  --propel-accent-5: var(--propel-tomato-5);
+  --propel-accent-6: var(--propel-tomato-6);
+  --propel-accent-7: var(--propel-tomato-7);
+  --propel-accent-8: var(--propel-tomato-8);
+  --propel-accent-9: var(--propel-tomato-9);
+  --propel-accent-10: var(--propel-tomato-10);
+  --propel-accent-11: var(--propel-tomato-11);
+  --propel-accent-12: var(--propel-tomato-12);
+
+  --propel-accent-a1: var(--propel-tomato-a1);
+  --propel-accent-a2: var(--propel-tomato-a2);
+  --propel-accent-a3: var(--propel-tomato-a3);
+  --propel-accent-a4: var(--propel-tomato-a4);
+  --propel-accent-a5: var(--propel-tomato-a5);
+  --propel-accent-a6: var(--propel-tomato-a6);
+  --propel-accent-a7: var(--propel-tomato-a7);
+  --propel-accent-a8: var(--propel-tomato-a8);
+  --propel-accent-a9: var(--propel-tomato-a9);
+  --propel-accent-a10: var(--propel-tomato-a10);
+  --propel-accent-a11: var(--propel-tomato-a11);
+  --propel-accent-a12: var(--propel-tomato-a12);
+
+  --propel-accent-contrast: var(--propel-tomato-contrast);
+  --propel-accent-surface: var(--propel-tomato-surface);
+  --propel-accent-indicator: var(--propel-tomato-indicator);
+  --propel-accent-track: var(--propel-tomato-track);
+
+  --propel-tomato-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-tomato-surface: #fff6f5cc;
+    --propel-tomato-indicator: var(--propel-tomato-9);
+    --propel-tomato-track: var(--propel-tomato-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-tomato-surface: color(display-p3 0.9922 0.9647 0.9608 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-tomato-surface: #2d191580;
+    --propel-tomato-indicator: var(--propel-tomato-9);
+    --propel-tomato-track: var(--propel-tomato-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-tomato-surface: color(display-p3 0.1569 0.0941 0.0784 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='violet'] {
+  --propel-accent-1: var(--propel-violet-1);
+  --propel-accent-2: var(--propel-violet-2);
+  --propel-accent-3: var(--propel-violet-3);
+  --propel-accent-4: var(--propel-violet-4);
+  --propel-accent-5: var(--propel-violet-5);
+  --propel-accent-6: var(--propel-violet-6);
+  --propel-accent-7: var(--propel-violet-7);
+  --propel-accent-8: var(--propel-violet-8);
+  --propel-accent-9: var(--propel-violet-9);
+  --propel-accent-10: var(--propel-violet-10);
+  --propel-accent-11: var(--propel-violet-11);
+  --propel-accent-12: var(--propel-violet-12);
+
+  --propel-accent-a1: var(--propel-violet-a1);
+  --propel-accent-a2: var(--propel-violet-a2);
+  --propel-accent-a3: var(--propel-violet-a3);
+  --propel-accent-a4: var(--propel-violet-a4);
+  --propel-accent-a5: var(--propel-violet-a5);
+  --propel-accent-a6: var(--propel-violet-a6);
+  --propel-accent-a7: var(--propel-violet-a7);
+  --propel-accent-a8: var(--propel-violet-a8);
+  --propel-accent-a9: var(--propel-violet-a9);
+  --propel-accent-a10: var(--propel-violet-a10);
+  --propel-accent-a11: var(--propel-violet-a11);
+  --propel-accent-a12: var(--propel-violet-a12);
+
+  --propel-accent-contrast: var(--propel-violet-contrast);
+  --propel-accent-surface: var(--propel-violet-surface);
+  --propel-accent-indicator: var(--propel-violet-indicator);
+  --propel-accent-track: var(--propel-violet-track);
+
+  --propel-violet-contrast: white;
+
+  &.light,
+  &.light-theme {
+    --propel-violet-surface: #f9f6ffcc;
+    --propel-violet-indicator: var(--propel-violet-9);
+    --propel-violet-track: var(--propel-violet-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-violet-surface: color(display-p3 0.9725 0.9647 0.9961 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-violet-surface: #25193980;
+    --propel-violet-indicator: var(--propel-violet-9);
+    --propel-violet-track: var(--propel-violet-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-violet-surface: color(display-p3 0.1333 0.102 0.2118 / 0.5);
+      }
+    }
+  }
+}
+
+[data-accent-color='yellow'] {
+  --propel-accent-1: var(--propel-yellow-1);
+  --propel-accent-2: var(--propel-yellow-2);
+  --propel-accent-3: var(--propel-yellow-3);
+  --propel-accent-4: var(--propel-yellow-4);
+  --propel-accent-5: var(--propel-yellow-5);
+  --propel-accent-6: var(--propel-yellow-6);
+  --propel-accent-7: var(--propel-yellow-7);
+  --propel-accent-8: var(--propel-yellow-8);
+  --propel-accent-9: var(--propel-yellow-9);
+  --propel-accent-10: var(--propel-yellow-10);
+  --propel-accent-11: var(--propel-yellow-11);
+  --propel-accent-12: var(--propel-yellow-12);
+
+  --propel-accent-a1: var(--propel-yellow-a1);
+  --propel-accent-a2: var(--propel-yellow-a2);
+  --propel-accent-a3: var(--propel-yellow-a3);
+  --propel-accent-a4: var(--propel-yellow-a4);
+  --propel-accent-a5: var(--propel-yellow-a5);
+  --propel-accent-a6: var(--propel-yellow-a6);
+  --propel-accent-a7: var(--propel-yellow-a7);
+  --propel-accent-a8: var(--propel-yellow-a8);
+  --propel-accent-a9: var(--propel-yellow-a9);
+  --propel-accent-a10: var(--propel-yellow-a10);
+  --propel-accent-a11: var(--propel-yellow-a11);
+  --propel-accent-a12: var(--propel-yellow-a12);
+
+  --propel-accent-contrast: var(--propel-yellow-contrast);
+  --propel-accent-surface: var(--propel-yellow-surface);
+  --propel-accent-indicator: var(--propel-yellow-indicator);
+  --propel-accent-track: var(--propel-yellow-track);
+
+  --propel-yellow-contrast: #21201c; /* light mode sand 12 */
+
+  &.light,
+  &.light-theme {
+    --propel-yellow-surface: #fefbe4cc;
+    --propel-yellow-indicator: var(--propel-yellow-10);
+    --propel-yellow-track: var(--propel-yellow-10);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-yellow-surface: color(display-p3 0.9961 0.9922 0.902 / 0.8);
+      }
+    }
+  }
+
+  &.dark,
+  &.dark-theme {
+    --propel-yellow-surface: #231f1380;
+    --propel-yellow-indicator: var(--propel-yellow-9);
+    --propel-yellow-track: var(--propel-yellow-9);
+    @supports (color: color(display-p3 1 1 1)) {
+      @media (color-gamut: p3) {
+        --propel-yellow-surface: color(display-p3 0.1333 0.1176 0.0706 / 0.5);
+      }
+    }
+    @supports (color: color-mix(in oklab, white, black)) {
+      --propel-yellow-track: color-mix(in oklab, var(--propel-yellow-8), var(--propel-yellow-9) 65%);
+    }
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*             Gray color              */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+.propel-themes {
+  &:where([data-gray-color='mauve']) {
+    --propel-gray-1: var(--propel-mauve-1);
+    --propel-gray-2: var(--propel-mauve-2);
+    --propel-gray-3: var(--propel-mauve-3);
+    --propel-gray-4: var(--propel-mauve-4);
+    --propel-gray-5: var(--propel-mauve-5);
+    --propel-gray-6: var(--propel-mauve-6);
+    --propel-gray-7: var(--propel-mauve-7);
+    --propel-gray-8: var(--propel-mauve-8);
+    --propel-gray-9: var(--propel-mauve-9);
+    --propel-gray-10: var(--propel-mauve-10);
+    --propel-gray-11: var(--propel-mauve-11);
+    --propel-gray-12: var(--propel-mauve-12);
+
+    --propel-gray-a1: var(--propel-mauve-a1);
+    --propel-gray-a2: var(--propel-mauve-a2);
+    --propel-gray-a3: var(--propel-mauve-a3);
+    --propel-gray-a4: var(--propel-mauve-a4);
+    --propel-gray-a5: var(--propel-mauve-a5);
+    --propel-gray-a6: var(--propel-mauve-a6);
+    --propel-gray-a7: var(--propel-mauve-a7);
+    --propel-gray-a8: var(--propel-mauve-a8);
+    --propel-gray-a9: var(--propel-mauve-a9);
+    --propel-gray-a10: var(--propel-mauve-a10);
+    --propel-gray-a11: var(--propel-mauve-a11);
+    --propel-gray-a12: var(--propel-mauve-a12);
+
+    --propel-gray-contrast: var(--propel-mauve-contrast);
+    --propel-gray-surface: var(--propel-mauve-surface);
+    --propel-gray-indicator: var(--propel-mauve-indicator);
+    --propel-gray-track: var(--propel-mauve-track);
+
+    --propel-mauve-contrast: white;
+
+    .light,
+    .light-theme {
+      --propel-mauve-surface: #ffffffcc;
+      --propel-mauve-indicator: var(--propel-mauve-9);
+      --propel-mauve-track: var(--propel-mauve-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-mauve-surface: color(display-p3 1 1 1 / 0.8);
+        }
+      }
+    }
+
+    .dark,
+    .dark-theme {
+      --propel-mauve-surface: #22212380;
+      --propel-mauve-indicator: var(--propel-mauve-9);
+      --propel-mauve-track: var(--propel-mauve-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-mauve-surface: color(display-p3 0.1333 0.1255 0.1333 / 0.5);
+        }
+      }
+    }
+  }
+
+  &:where([data-gray-color='olive']) {
+    --propel-gray-1: var(--propel-olive-1);
+    --propel-gray-2: var(--propel-olive-2);
+    --propel-gray-3: var(--propel-olive-3);
+    --propel-gray-4: var(--propel-olive-4);
+    --propel-gray-5: var(--propel-olive-5);
+    --propel-gray-6: var(--propel-olive-6);
+    --propel-gray-7: var(--propel-olive-7);
+    --propel-gray-8: var(--propel-olive-8);
+    --propel-gray-9: var(--propel-olive-9);
+    --propel-gray-10: var(--propel-olive-10);
+    --propel-gray-11: var(--propel-olive-11);
+    --propel-gray-12: var(--propel-olive-12);
+
+    --propel-gray-a1: var(--propel-olive-a1);
+    --propel-gray-a2: var(--propel-olive-a2);
+    --propel-gray-a3: var(--propel-olive-a3);
+    --propel-gray-a4: var(--propel-olive-a4);
+    --propel-gray-a5: var(--propel-olive-a5);
+    --propel-gray-a6: var(--propel-olive-a6);
+    --propel-gray-a7: var(--propel-olive-a7);
+    --propel-gray-a8: var(--propel-olive-a8);
+    --propel-gray-a9: var(--propel-olive-a9);
+    --propel-gray-a10: var(--propel-olive-a10);
+    --propel-gray-a11: var(--propel-olive-a11);
+    --propel-gray-a12: var(--propel-olive-a12);
+
+    --propel-gray-contrast: var(--propel-olive-contrast);
+    --propel-gray-surface: var(--propel-olive-surface);
+    --propel-gray-indicator: var(--propel-olive-indicator);
+    --propel-gray-track: var(--propel-olive-track);
+
+    --propel-olive-contrast: white;
+
+    .light,
+    .light-theme {
+      --propel-olive-surface: #ffffffcc;
+      --propel-olive-indicator: var(--propel-olive-9);
+      --propel-olive-track: var(--propel-olive-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-olive-surface: color(display-p3 1 1 1 / 0.8);
+        }
+      }
+    }
+
+    .dark,
+    .dark-theme {
+      --propel-olive-surface: #1f201e80;
+      --propel-olive-indicator: var(--propel-olive-9);
+      --propel-olive-track: var(--propel-olive-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-olive-surface: color(display-p3 0.1176 0.1255 0.1176 / 0.5);
+        }
+      }
+    }
+  }
+
+  &:where([data-gray-color='sage']) {
+    --propel-gray-1: var(--propel-sage-1);
+    --propel-gray-2: var(--propel-sage-2);
+    --propel-gray-3: var(--propel-sage-3);
+    --propel-gray-4: var(--propel-sage-4);
+    --propel-gray-5: var(--propel-sage-5);
+    --propel-gray-6: var(--propel-sage-6);
+    --propel-gray-7: var(--propel-sage-7);
+    --propel-gray-8: var(--propel-sage-8);
+    --propel-gray-9: var(--propel-sage-9);
+    --propel-gray-10: var(--propel-sage-10);
+    --propel-gray-11: var(--propel-sage-11);
+    --propel-gray-12: var(--propel-sage-12);
+
+    --propel-gray-a1: var(--propel-sage-a1);
+    --propel-gray-a2: var(--propel-sage-a2);
+    --propel-gray-a3: var(--propel-sage-a3);
+    --propel-gray-a4: var(--propel-sage-a4);
+    --propel-gray-a5: var(--propel-sage-a5);
+    --propel-gray-a6: var(--propel-sage-a6);
+    --propel-gray-a7: var(--propel-sage-a7);
+    --propel-gray-a8: var(--propel-sage-a8);
+    --propel-gray-a9: var(--propel-sage-a9);
+    --propel-gray-a10: var(--propel-sage-a10);
+    --propel-gray-a11: var(--propel-sage-a11);
+    --propel-gray-a12: var(--propel-sage-a12);
+
+    --propel-gray-contrast: var(--propel-sage-contrast);
+    --propel-gray-surface: var(--propel-sage-surface);
+    --propel-gray-indicator: var(--propel-sage-indicator);
+    --propel-gray-track: var(--propel-sage-track);
+
+    --propel-sage-contrast: white;
+
+    .light,
+    .light-theme {
+      --propel-sage-surface: #ffffffcc;
+      --propel-sage-indicator: var(--propel-sage-9);
+      --propel-sage-track: var(--propel-sage-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-sage-surface: color(display-p3 1 1 1 / 0.8);
+        }
+      }
+    }
+
+    .dark,
+    .dark-theme {
+      --propel-sage-surface: #1e201f80;
+      --propel-sage-indicator: var(--propel-sage-9);
+      --propel-sage-track: var(--propel-sage-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-sage-surface: color(display-p3 0.1176 0.1255 0.1176 / 0.5);
+        }
+      }
+    }
+  }
+
+  &:where([data-gray-color='sand']) {
+    --propel-gray-1: var(--propel-sand-1);
+    --propel-gray-2: var(--propel-sand-2);
+    --propel-gray-3: var(--propel-sand-3);
+    --propel-gray-4: var(--propel-sand-4);
+    --propel-gray-5: var(--propel-sand-5);
+    --propel-gray-6: var(--propel-sand-6);
+    --propel-gray-7: var(--propel-sand-7);
+    --propel-gray-8: var(--propel-sand-8);
+    --propel-gray-9: var(--propel-sand-9);
+    --propel-gray-10: var(--propel-sand-10);
+    --propel-gray-11: var(--propel-sand-11);
+    --propel-gray-12: var(--propel-sand-12);
+
+    --propel-gray-a1: var(--propel-sand-a1);
+    --propel-gray-a2: var(--propel-sand-a2);
+    --propel-gray-a3: var(--propel-sand-a3);
+    --propel-gray-a4: var(--propel-sand-a4);
+    --propel-gray-a5: var(--propel-sand-a5);
+    --propel-gray-a6: var(--propel-sand-a6);
+    --propel-gray-a7: var(--propel-sand-a7);
+    --propel-gray-a8: var(--propel-sand-a8);
+    --propel-gray-a9: var(--propel-sand-a9);
+    --propel-gray-a10: var(--propel-sand-a10);
+    --propel-gray-a11: var(--propel-sand-a11);
+    --propel-gray-a12: var(--propel-sand-a12);
+
+    --propel-gray-contrast: var(--propel-sand-contrast);
+    --propel-gray-surface: var(--propel-sand-surface);
+    --propel-gray-indicator: var(--propel-sand-indicator);
+    --propel-gray-track: var(--propel-sand-track);
+
+    --propel-sand-contrast: white;
+
+    .light,
+    .light-theme {
+      --propel-sand-surface: #ffffffcc;
+      --propel-sand-indicator: var(--propel-sand-9);
+      --propel-sand-track: var(--propel-sand-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-sand-surface: color(display-p3 1 1 1 / 0.8);
+        }
+      }
+    }
+
+    .dark,
+    .dark-theme {
+      --propel-sand-surface: #21212080;
+      --propel-sand-indicator: var(--propel-sand-9);
+      --propel-sand-track: var(--propel-sand-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-sand-surface: color(display-p3 0.1255 0.1255 0.1255 / 0.5);
+        }
+      }
+    }
+  }
+
+  &:where([data-gray-color='slate']) {
+    --propel-gray-1: var(--propel-slate-1);
+    --propel-gray-2: var(--propel-slate-2);
+    --propel-gray-3: var(--propel-slate-3);
+    --propel-gray-4: var(--propel-slate-4);
+    --propel-gray-5: var(--propel-slate-5);
+    --propel-gray-6: var(--propel-slate-6);
+    --propel-gray-7: var(--propel-slate-7);
+    --propel-gray-8: var(--propel-slate-8);
+    --propel-gray-9: var(--propel-slate-9);
+    --propel-gray-10: var(--propel-slate-10);
+    --propel-gray-11: var(--propel-slate-11);
+    --propel-gray-12: var(--propel-slate-12);
+
+    --propel-gray-a1: var(--propel-slate-a1);
+    --propel-gray-a2: var(--propel-slate-a2);
+    --propel-gray-a3: var(--propel-slate-a3);
+    --propel-gray-a4: var(--propel-slate-a4);
+    --propel-gray-a5: var(--propel-slate-a5);
+    --propel-gray-a6: var(--propel-slate-a6);
+    --propel-gray-a7: var(--propel-slate-a7);
+    --propel-gray-a8: var(--propel-slate-a8);
+    --propel-gray-a9: var(--propel-slate-a9);
+    --propel-gray-a10: var(--propel-slate-a10);
+    --propel-gray-a11: var(--propel-slate-a11);
+    --propel-gray-a12: var(--propel-slate-a12);
+
+    --propel-gray-contrast: var(--propel-slate-contrast);
+    --propel-gray-surface: var(--propel-slate-surface);
+    --propel-gray-indicator: var(--propel-slate-indicator);
+    --propel-gray-track: var(--propel-slate-track);
+
+    --propel-slate-contrast: white;
+
+    &.light,
+    &.light-theme {
+      --propel-slate-surface: #ffffffcc;
+      --propel-slate-indicator: var(--propel-slate-9);
+      --propel-slate-track: var(--propel-slate-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-slate-surface: color(display-p3 1 1 1 / 0.8);
+        }
+      }
+    }
+
+    &.dark,
+    &.dark-theme {
+      --propel-slate-surface: #1f212380;
+      --propel-slate-indicator: var(--propel-slate-9);
+      --propel-slate-track: var(--propel-slate-9);
+      @supports (color: color(display-p3 1 1 1)) {
+        @media (color-gamut: p3) {
+          --propel-slate-surface: color(display-p3 0.1176 0.1255 0.1333 / 0.5);
+        }
+      }
+    }
+  }
+}

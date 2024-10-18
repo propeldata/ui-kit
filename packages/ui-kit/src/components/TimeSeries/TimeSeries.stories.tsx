@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Chart } from 'chart.js'
-import React, { useState } from 'react'
+import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
 import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
-import { ThemeTokenProps } from '../../themes'
-import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { TimeSeries as TimeSeriesSource, TimeSeriesComponent } from './TimeSeries'
 import { TimeSeriesQueryProps } from './TimeSeries.types'
 
@@ -13,7 +11,7 @@ const meta: Meta<typeof TimeSeriesComponent> = {
   title: 'Components/TimeSeries',
   component: TimeSeriesComponent,
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }
@@ -73,17 +71,18 @@ const connectedParams: TimeSeriesQueryProps = {
 const TimeSeries = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
 
-  if (!accessToken && args?.query) {
+  if (args == null || (!accessToken && args?.query)) {
     return null
   }
 
   return (
+    // @ts-expect-error storybook types are not correct
     <TimeSeriesSource
       {...{
         ...args,
-        query: args?.query
+        query: args.query
           ? {
-              ...args?.query,
+              ...args.query,
               accessToken
             }
           : undefined
@@ -97,7 +96,8 @@ export const LineStory: Story = {
   args: {
     variant: 'line',
     query: connectedParams,
-    card: true
+    card: true,
+    accentColors: ['#ff0000']
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -297,6 +297,24 @@ export const ChartFormatXLabelsStory: Story = {
   render: (args) => <TimeSeries {...args} />
 }
 
+export const GroupedStory: Story = {
+  name: 'Grouped',
+  args: {
+    variant: 'bar',
+    query: {
+      ...connectedParams,
+      groupBy: ['restaurant_name']
+    },
+    showGroupByOther: true,
+    maxGroupBy: 5,
+    stacked: true,
+    accentColors: ['red', 'blue'],
+    card: true,
+    otherColor: 'gray'
+  },
+  render: (args) => <TimeSeries {...args} />
+}
+
 export const StaticStory: Story = {
   name: 'Static',
   parameters: { imports: 'TimeSeries' },
@@ -320,50 +338,5 @@ export const ErrorStory: Story = {
       }
     }
   },
-  render: (args) => <TimeSeries {...args} />
-}
-
-export const ThemeStory: Story = {
-  name: 'Theme',
-  args: {
-    variant: 'bar',
-    card: true,
-    query: {
-      ...connectedParams,
-      timeRange: {
-        ...connectedParams.timeRange,
-        n: 90
-      }
-    }
-  },
-  decorators: [
-    (Story) => {
-      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
-
-      const lightColors: ThemeTokenProps = {
-        accent: '#3d3d3d',
-        accentHover: '#3d3d3dc6'
-      }
-
-      const darkColors: ThemeTokenProps = {
-        accent: '#adadad',
-        accentHover: '#ffffffc6'
-      }
-
-      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
-
-      return (
-        <ThemeProvider baseTheme={baseTheme} theme={theme}>
-          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
-            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
-              Switch theme
-            </button>
-            <span>{baseTheme}</span>
-          </div>
-          <Story />
-        </ThemeProvider>
-      )
-    }
-  ],
   render: (args) => <TimeSeries {...args} />
 }

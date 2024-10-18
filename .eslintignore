@@ -2,4 +2,5 @@
 .turbo
 node_modules
 dist
+dist/**
 generated

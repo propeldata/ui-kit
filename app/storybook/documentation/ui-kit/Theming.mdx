@@ -1,12 +1,9 @@
-import { Meta, Source } from '@storybook/blocks'
+import { Meta, Source, Story } from '@storybook/blocks'
 import LinkTo from '@storybook/addon-links/react'
 import { prettier } from '../../src/utils'
 import { SourceCode } from '../../.storybook/blocks/SourceCode'
+import { accentColors, grayColors, colors } from '../../../../packages/ui-kit/src/themes'
 import * as ThemeProviderStories from '../../../../packages/ui-kit/src/components/ThemeProvider/ThemeProvider.stories'
-import rawThemesScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/themes.module.scss'
-import rawCommonScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_tokens.scss'
-import rawLightThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_lightTheme.scss'
-import rawDarkThemeScss from '!!raw-loader!../../../../packages/ui-kit/src/themes/generated/_darkTheme.scss'
 
 <Meta title="Customization/Theming" />
 
@@ -33,38 +30,37 @@ unique needs.
 
 ### Tokens
 
-Each token in the theme object is represented as both a
-[CSS Custom Property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and a corresponding
-JavaScript property, e.g. `--propel-text-md-regular-font-family` and `textMdRegularFontFamily`. The CSS Custom
-Properties are prefixed with `--propel-` which helps to prevent any potential naming collisions with other stylesheets.
-Further details are available in the <LinkTo kind="API/ThemeTokenProps" story="overview">API section</LinkTo>.
+Each theme token is represented as a
+[CSS Custom Property](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).These tokens can
+also be accessed from JavaScript using the `theme.getVar` method. For example, you can use `--propel-accent-11` in CSS
+and the following approach in JavaScript:
 
-### Default values
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { useTheme } from "@propeldata/ui-kit";
 
-The content in `themes.module.scss` serves as the foundational entry point for theming within the UI Kit.
+    function YourComponent() {
+      const theme = useTheme();
 
-<Source language="css" format="dedent" dark code={rawThemesScss} />
+      return (
+        <div style={{ color: theme.getVar('--propel-accent-11') }}>
+          Hello world!
+        </div>
+      );
+    }
 
-The `common.scss` file contains the **common** theme configuration, defining a series of CSS custom properties that are
-shared by both the light and dark themes.
+`} />
 
-<Source language="css" format="dedent" dark code={rawCommonScss} />
-
-The `lightTheme.scss` file sets up the **light theme** for the UI Kit, defining a series of CSS custom properties
-specific to this theme.
-
-<Source language="css" format="dedent" dark code={rawLightThemeScss} />
-
-The `darkTheme.scss` file sets up the **dark theme** for the UI Kit, defining a series of CSS custom properties specific
-to this theme.
-
-<Source language="css" format="dedent" dark code={rawDarkThemeScss} />
+The CSS Custom Properties are prefixed with `--propel-` which helps to prevent any potential naming collisions with
+other stylesheets. Further details are available in the <LinkTo kind="API/ThemeTokenProps" story="overview"> API
+section</LinkTo>.
 
 ### Customizing the Theme
 
-The `ThemeProvider` component allows theme customization through its `theme` prop.
-
-#### Customization via CSS Class:
+The `ThemeProvider` component allows theme customization through its `className` or `style` props.
 
 <SourceCode
   of={ThemeProviderStories.ThemeProviderCustomizeViaCssClassNameStory}
@@ -75,10 +71,3 @@ The `ThemeProvider` component allows theme customization through its `theme` pro
   }
   shown
 />
-
-#### Customization via JavaScript properties:
-
-<SourceCode of={ThemeProviderStories.ThemeProviderCustomizeViaJSPropsStory} shown />
-
-This method enables the seamless integration of design tokens from a CSS-in-JS library, like
-[Material UI](https://mui.com/material-ui/customization/theming/).

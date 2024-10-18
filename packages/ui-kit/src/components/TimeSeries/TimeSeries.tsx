@@ -1,8 +1,11 @@
-import { Chart as ChartJS, ChartConfiguration, ChartDataset, ChartOptions, Color, LineController } from 'chart.js'
+'use client'
+
+import { Chart as ChartJS, ChartConfiguration, ChartOptions, Color, LineController } from 'chart.js'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import * as chartJsAdapterLuxon from 'chartjs-adapter-luxon'
 import classnames from 'classnames'
+import { startOfDay } from 'date-fns'
 import React from 'react'
 import {
   convertHexToRGBA,
@@ -14,14 +17,17 @@ import {
   withThemeWrapper
 } from '../../helpers'
 import { useTimeSeries } from '../../hooks'
+import { AccentColors, useParsedComponentProps } from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { useFilters } from '../FilterProvider'
 import { Loader, LoaderProps } from '../Loader'
 import { useLog } from '../Log'
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './TimeSeries.module.scss'
-import type { TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
-import { getDefaultGranularity, getNumericValues, getScales, tooltipTitleCallback } from './utils'
+import { DEFAULT_VARIANT, TimeSeriesChartVariant, TimeSeriesData, TimeSeriesProps } from './TimeSeries.types'
+import { buildDatasets, getDefaultGranularity, getScales, tooltipTitleCallback } from './utils'
 
 let idCounter = 0
 
@@ -52,7 +58,7 @@ ChartJS.register(CustomLineController)
 export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesProps>(
   (
     {
-      variant = 'bar',
+      variant = DEFAULT_VARIANT,
       labels,
       values,
       query,
@@ -63,7 +69,6 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       role,
       timeZone: timeZoneInitial,
       className,
-      baseTheme,
       chartConfigProps,
       loaderProps: loaderPropsInitial,
       renderLoader,
@@ -72,10 +77,19 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       renderEmpty,
       card = false,
       chartProps,
+      maxGroupBy: maxGroupByProp,
+      showGroupByOther = true,
+      accentColors = [],
+      stacked = false,
+      otherColor,
       ...rest
     },
     forwardedRef
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor: (accentColors[0] as AccentColors) ?? rest.accentColor
+    })
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const themeWrapper = withThemeWrapper(setRef)
     const type = variant === 'line' ? ('shadowLine' as TimeSeriesChartVariant) : 'bar'
@@ -88,14 +102,18 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<typeof type>({
       componentContainer,
-      baseTheme,
       renderLoader,
       errorFallback,
-      renderEmpty
+      renderEmpty,
+      ...themeSettings
     })
 
     const log = useLog()
     const isLoadingStatic = loading
+
+    const { granularity: granularityFromProvider, groupBy, maxGroupBy: maxGroupByFromProvider } = useFilters()
+
+    const maxGroupBy = maxGroupByProp ?? maxGroupByFromProvider ?? DEFAULT_MAX_GROUP_BY
 
     React.useEffect(() => {
       chartJsAdapterLuxon
@@ -103,10 +121,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
     const granularity =
       query?.granularity ??
+      granularityFromProvider ??
       getDefaultGranularity({
         timeRange: query?.timeRange,
         labels
       })
+
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
@@ -130,7 +150,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       data: serverData,
       isLoading,
       error: hasError
-    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic })
+    } = useTimeSeries({ ...query, timeZone, granularity, enabled: !isStatic, groupBy: query?.groupBy ?? groupBy })
 
     const destroyChart = React.useCallback(() => {
       if (!chartRef.current) {
@@ -154,13 +174,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
 
         const { grid = false, fillArea = false } = chartProps ?? {}
         const labels = formatLabels({ labels: data.labels, formatter: labelFormatter }) ?? []
-        const values = getNumericValues(data.values ?? [], log)
 
         const plugins = [customCanvasBackgroundColor]
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? 'transparent' : theme?.getVar('--propel-color-background')
           },
           legend: {
             display: false
@@ -172,7 +191,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           }
         }
 
-        let backgroundColor: Color | CanvasGradient = theme?.backgroundBrandSolid ?? ''
+        let backgroundColor: Color | CanvasGradient = theme?.getVar('--propel-accent-8') ?? ''
 
         const fill = fillArea && variant === 'line'
         if (fill) {
@@ -180,26 +199,21 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           if (ctx) {
             backgroundColor = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight)
             // @TODO: need to refactor this logic due to the possible different types of the color value, e.g. hex, rgb, rgba, etc.
-            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.backgroundBrandSolidHover, 0.35))
-            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.backgroundBrandSolidHover, 0.05))
+            backgroundColor.addColorStop(0, convertHexToRGBA(theme?.getVar('--propel-accent-10'), 0.35))
+            backgroundColor.addColorStop(1, convertHexToRGBA(theme?.getVar('--propel-accent-10'), 0.05))
           }
         }
 
+        const datasets = buildDatasets(
+          data,
+          theme,
+          { fill, maxGroupBy, showGroupByOther, accentColors, otherColor },
+          log
+        )
+
         const dataset = {
-          labels,
-          datasets: [
-            {
-              data: values,
-              backgroundColor: backgroundColor,
-              hoverBackgroundColor: theme?.backgroundBrandSolidHover,
-              borderColor: theme?.backgroundBrandSolid,
-              pointBackgroundColor: theme?.backgroundBrandSolidHover,
-              pointHoverBackgroundColor: theme?.backgroundBrandSolidHover,
-              pointHoverBorderWidth: 2,
-              pointHoverBorderColor: theme?.backgroundPrimary,
-              fill
-            } as ChartDataset<TimeSeriesChartVariant>
-          ]
+          labels: labels.length > 0 ? labels : [startOfDay(new Date().toISOString()).toISOString()], // workaround for groupBy not returning labels
+          datasets
         }
 
         // @TODO: need to refactor this logic
@@ -210,7 +224,8 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           chart: chartRef.current,
           variant,
           grid,
-          theme
+          theme,
+          stacked
         })
 
         const options: ChartOptions<TimeSeriesChartVariant> = {
@@ -218,7 +233,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
           maintainAspectRatio: false,
           plugins: customPlugins,
           layout: {
-            padding: parseInt(theme?.spacingXs ?? '') ?? 4
+            padding: parseInt(theme?.getVar('--propel-space-4') ?? '') ?? 4
           },
           scales
         }
@@ -247,6 +262,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
             chart.data = { ...config.data }
           }
 
+          chart.resize()
           chart.update('none')
           return
         }
@@ -254,19 +270,24 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         chartRef.current = new ChartJS(canvasRef.current, config)
       },
       [
-        granularity,
         hasError,
-        isFormatted,
-        variant,
-        timeZone,
         theme,
-        card,
         chartProps,
-        log,
         labelFormatter,
-        chartConfigProps,
+        card,
+        variant,
+        maxGroupBy,
+        showGroupByOther,
+        accentColors,
+        otherColor,
+        log,
+        granularity,
+        isFormatted,
+        timeZone,
+        stacked,
+        chartConfig,
         type,
-        chartConfig
+        chartConfigProps
       ]
     )
 
@@ -280,21 +301,21 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !labels && !values) {
-          // console.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `labels` and `values` or `query` props')
           setPropsMismatch(true)
           return
         }
 
         if (isStatic && (!labels || !values)) {
-          // console.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`') we will set logs as a feature later
+          log.error('InvalidPropsError: When passing the data via props you must pass both `labels` and `values`')
           setPropsMismatch(true)
           return
         }
 
-        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric || !query?.timeRange)) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query?.metric)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
@@ -305,7 +326,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, labels, values, query, isLoadingStatic, hasError?.name])
+    }, [isStatic, labels, values, query, isLoadingStatic, hasError?.name, log])
 
     React.useEffect(() => {
       destroyChart()
@@ -322,7 +343,12 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const labels = serverData.timeSeries?.labels ?? []
         const values = (serverData.timeSeries?.values ?? []).map((value) => (value == null ? null : Number(value)))
 
-        setData({ labels, values })
+        const groups = serverData.timeSeries?.groups?.map((group) => ({
+          ...group,
+          values: group.values.map((value) => (value == null ? null : Number(value)))
+        }))
+
+        setData({ labels, values, groups })
       }
     }, [serverData, variant, isStatic, setData])
 
@@ -362,16 +388,25 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       return <Loader ref={setRef} {...loaderProps} />
     }
 
-    if (isEmptyState && renderEmptyComponent) {
-      return themeWrapper(renderEmptyComponent({ theme }))
+    if (isEmptyState) {
+      if (renderEmptyComponent != null) {
+        return themeWrapper(renderEmptyComponent({ theme }))
+      } else {
+        data != null && renderChart(data) // render chart with empty data in case no empty state component is provided
+      }
     }
 
     return (
-      <div ref={setRef} className={classnames(componentStyles.rootTimeSeries, className)} {...rest} data-container>
+      <div
+        ref={setRef}
+        className={classnames(componentStyles.rootTimeSeries, className)}
+        {...parsedProps}
+        data-container
+      >
         <canvas
           id={id}
           ref={canvasRef}
-          height={theme?.componentHeight}
+          height={theme?.getVar('--propel-component-height')}
           role={role || 'img'}
           aria-label={ariaLabel || ''}
           style={{

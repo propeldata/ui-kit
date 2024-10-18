@@ -1,9 +1,13 @@
+'use client'
+
 import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js/auto'
 import classnames from 'classnames'
 import React from 'react'
+import * as radixColors from '@radix-ui/colors'
 import {
   customCanvasBackgroundColor,
   getCustomChartLabelsPlugin,
+  getPixelFontSizeAsNumber,
   getTimeZone,
   useCombinedRefsCallback,
   useEmptyableData,
@@ -17,7 +21,19 @@ import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './PieChart.module.scss'
 import { PieChartData, PieChartProps, PieChartVariant } from './PieChart.types'
+import {
+  AccentColors,
+  grayColors,
+  GrayColors,
+  handleArbitraryColor,
+  palette,
+  PaletteColor,
+  useParsedComponentProps
+} from '../../themes'
 import { emptyStatePlugin } from './plugins/empty'
+import { useFilters } from '../FilterProvider'
+import { useLog } from '../Log'
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
 
 let idCounter = 0
 
@@ -38,15 +54,20 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       card = false,
       className,
       style,
-      baseTheme = 'lightTheme',
       loading: isLoadingStatic = false,
       chartProps,
       labelListClassName,
       chartConfigProps,
+      accentColors,
+      otherColor,
       ...rest
     }: PieChartProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor: (accentColors?.[0] as AccentColors) ?? rest.accentColor
+    })
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
@@ -59,16 +80,20 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<PieChartVariant>({
       componentContainer,
-      baseTheme,
       renderLoader,
       errorFallback,
-      renderEmpty
+      renderEmpty,
+      ...themeSettings
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
 
     const idRef = React.useRef(idCounter++)
     const id = `piechart-${idRef.current}`
+
+    const { groupBy, emptyGroupBy, maxGroupBy } = useFilters()
+
+    const log = useLog()
 
     /**
      * The html node where the chart will render
@@ -90,7 +115,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       data: leaderboardData,
       isLoading: leaderboardIsLoading,
       error: leaderboardHasError
-    } = useLeaderboard({ ...query, timeZone, dimensions: [query?.dimension ?? { columnName: '' }], enabled: !isStatic })
+    } = useLeaderboard({
+      ...query,
+      timeZone,
+      dimensions:
+        query?.dimension != null || groupBy[0] || emptyGroupBy[0]
+          ? [query?.dimension ?? { columnName: groupBy[0] ?? emptyGroupBy[0] ?? '' }]
+          : undefined,
+      enabled: !isStatic,
+      rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
+    })
 
     /**
      * Fetches the counter data from the API
@@ -111,21 +145,37 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
     const showValues = chartProps?.showValues ?? false
 
-    const defaultChartColorPalette = React.useMemo(
-      () => [
-        theme?.brand900,
-        theme?.brand700,
-        theme?.brand600,
-        theme?.brand500,
-        theme?.brand400,
-        theme?.brand300,
-        theme?.brand200,
-        theme?.brand100,
-        theme?.brand50,
-        theme?.brand25
-      ],
-      [theme]
-    )
+    const defaultChartColorPalette = React.useMemo(() => {
+      let customColors: PaletteColor[] = []
+
+      const accentColor = accentColors?.[0] ?? theme?.accentColor
+
+      let colorPos = palette.findIndex((value) => value?.name === accentColor)
+
+      if (accentColors != null) {
+        const isCustomColors = (accentColors?.length ?? 0) > 0
+
+        if (isCustomColors) {
+          customColors = accentColors.map(
+            (color) =>
+              palette.find(({ name }) => name === color) ?? {
+                primary: handleArbitraryColor(color),
+                secondary: handleArbitraryColor(color),
+                name: color as AccentColors
+              }
+          )
+
+          const lastColorName = customColors[customColors.length - 1]?.name
+          const lastColorIndex = palette.findIndex((color) => color.name === lastColorName)
+
+          colorPos = lastColorIndex + 1
+        }
+      }
+
+      const additionalColors = palette.slice(colorPos)
+
+      return [...customColors, ...additionalColors, ...palette].map(({ primary }) => primary)
+    }, [accentColors, theme?.accentColor])
 
     const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
 
@@ -165,12 +215,15 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? 'transparent' : theme?.getVar('--propel-color-background')
           },
           title: {
             display: isPie && !hideTotal,
             text: `Total: ${totalValue.toLocaleString()}`,
-            position: totalPosition
+            position: totalPosition,
+            font: {
+              size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-2')) ?? 12
+            }
           },
           legend: {
             display: showValues ? false : !hideLegend,
@@ -179,11 +232,14 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
               usePointStyle: true,
               pointStyle: '*',
               pointStyleWidth: 8,
-              boxHeight: 6
+              boxHeight: 6,
+              font: {
+                size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1')) ?? 12
+              }
             }
           },
           emptyDoughnut: {
-            color: theme?.backgroundBrandPrimary,
+            color: theme?.getVar('--propel-accent-11'),
             width: 2,
             radiusDecrease: 20
           },
@@ -191,6 +247,24 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         }
 
         const datasets = isDoughnut ? { cutout: '75%' } : { cutout: '0' }
+
+        const otherIndex = labels.findIndex((label) => label === 'Other')
+
+        if (otherIndex !== -1 && otherColor != null) {
+          const isArbitraryGray = otherColor != null && !grayColors.includes(otherColor as GrayColors)
+
+          const grayColor: PaletteColor = {
+            name: 'gray',
+            primary: isArbitraryGray
+              ? handleArbitraryColor(otherColor ?? '')
+              : theme.tokens[`${otherColor ?? theme.grayColor}8`] ?? radixColors.gray.gray8,
+            secondary: isArbitraryGray
+              ? handleArbitraryColor(otherColor ?? '')
+              : theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
+          }
+
+          chartColorPalette[otherIndex] = grayColor.primary
+        }
 
         let config: ChartConfiguration<PieChartVariant> = {
           ...chartConfig,
@@ -250,6 +324,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
             chart.data = { ...config.data }
           }
 
+          chart.resize()
           chart.update('none')
           return
         }
@@ -258,16 +333,17 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         canvasRef.current.style.borderRadius = '0px'
       },
       [
-        variant,
         theme,
-        card,
-        chartProps,
         chartConfig,
-        isDoughnut,
-        showValues,
+        defaultChartColorPalette,
+        chartProps,
+        card,
         isPie,
         totalValue,
-        defaultChartColorPalette,
+        showValues,
+        isDoughnut,
+        otherColor,
+        variant,
         chartConfigProps
       ]
     )
@@ -305,35 +381,28 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !headers && !rows) {
-          // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
           setPropsMismatch(true)
           return
         }
 
         if (isStatic && (!headers || !rows)) {
-          // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
+          log.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
           setPropsMismatch(true)
 
           return
         }
 
-        if (
-          !isStatic &&
-          (hasError?.name === 'AccessTokenError' ||
-            !query.metric ||
-            !query.timeRange ||
-            !query.dimension ||
-            !query.rowLimit)
-        ) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
 
         if (variant !== 'pie' && variant !== 'doughnut') {
-          // console.error('InvalidPropsError: `variant` prop must be either `pie` or `doughnut`') we will set logs as a feature later
+          log.error('InvalidPropsError: `variant` prop must be either `pie` or `doughnut`')
           setPropsMismatch(false)
         }
 
@@ -343,7 +412,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name])
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name, log])
 
     React.useEffect(() => {
       if (isStatic) {
@@ -422,7 +491,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         ref={setRef}
         className={classnames(componentStyles.rootPieChart, className)}
         style={style}
-        {...rest}
+        {...parsedProps}
         data-container
       >
         <div>

@@ -1,7 +1,7 @@
-import type { QueryProps } from '../../components/shared.types'
+import type { ChartQueryProps } from '../../components/shared.types'
 import { DataPoolInput } from '../../graphql'
 
-export interface RecordsByIdQueryProps extends Omit<QueryProps, 'timeZone' | 'timeRange' | 'metric' | 'filters'> {
+export interface RecordsByIdQueryProps extends Omit<ChartQueryProps, 'timeZone' | 'timeRange' | 'metric' | 'filters'> {
   /** The Data Pool to be queried. A Data Pool ID or unique name can be provided. */
   dataPool: DataPoolInput
 

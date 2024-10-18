@@ -1,7 +1,8 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
 import { LeaderboardLabels } from '../../helpers'
-import type { DataComponentProps, QueryProps } from '../shared.types'
+import { AccentColors, ThemeSettingProps } from '../../themes'
+import type { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 
@@ -10,7 +11,7 @@ export type LeaderboardData = {
   rows?: Array<Array<string | null>>
 }
 
-export interface LeaderboardQueryProps extends QueryProps {
+export interface LeaderboardQueryProps extends ChartQueryProps {
   /** The number of rows to be returned. It can be a number between 1 and 1,000 */
   rowLimit?: number
 
@@ -49,7 +50,7 @@ export type LeaderboardChartProps = {
   labelPosition?: 'axis' | 'inside' | 'top'
 }
 
-export interface LeaderboardProps extends DataComponentProps<'div'> {
+export interface LeaderboardProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -80,9 +81,15 @@ export interface LeaderboardProps extends DataComponentProps<'div'> {
   /** Optional props that are used to configure the chart component. Only used when `variant` is "bar". */
   chartProps?: LeaderboardChartProps
 
+  /** A list of accent colors the Leaderboard component will use, those will be picked in order */
+  accentColors?: (AccentColors | string)[]
+
   /** @deprecated Format function for labels, must return an array with the new labels the type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: LeaderboardLabels) => LeaderboardLabels
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'bar'>) => ChartConfiguration<'bar'>
+
+  /** Whether the headers should be prettified */
+  prettifyHeaders?: boolean
 }

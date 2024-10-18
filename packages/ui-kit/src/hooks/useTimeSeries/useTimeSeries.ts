@@ -23,13 +23,14 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     accessToken: accessTokenFromProp,
     propelApiUrl,
     metric,
-    timeRange,
-    granularity,
+    timeRange: timeRangeProp,
+    granularity: granularityProp,
     filters: filtersFromProp,
     refetchInterval,
     enabled: enabledProp = true,
     retry,
-    timeZone
+    timeZone,
+    groupBy
   } = props
 
   const log = useLog()
@@ -44,9 +45,17 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider } = useFilters()
+  const {
+    filters: filtersFromProvider,
+    timeRange: timeRangeFromProvider,
+    granularity: granularityFromProvider
+  } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
+
+  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
+
+  const granularity = granularityProp ?? granularityFromProvider
 
   const enabled = accessToken != null && enabledProp
 
@@ -59,6 +68,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withGroupBy: Partial<{ groupBy: string[] }> = groupBy != null ? { groupBy } : {}
 
   /**
    * @hook react-query wrapper
@@ -81,7 +91,8 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
         timeZone,
         ...withTimeRange,
         granularity: granularity as TimeSeriesGranularity,
-        filters
+        filters,
+        ...withGroupBy
       }
     },
     {

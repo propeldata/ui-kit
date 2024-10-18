@@ -1,0 +1,10 @@
+query DataPoolColumnsByName($dataPoolName: String!) {
+  dataPoolByName(uniqueName: $dataPoolName) {
+    columns {
+      nodes {
+        columnName
+        type
+      }
+    }
+  }
+}

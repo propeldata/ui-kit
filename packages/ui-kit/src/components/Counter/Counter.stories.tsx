@@ -12,7 +12,7 @@ const meta: Meta<typeof CounterComponent> = {
   component: CounterComponent,
   tags: ['tag'],
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }
@@ -197,8 +197,8 @@ export const CustomErrorFallbackStory: Story = {
     errorFallback: ({ theme }) => (
       <div
         style={{
-          border: `1px solid ${theme?.borderError}`,
-          color: theme?.textErrorPrimary,
+          border: `1px solid ${theme?.getVar('--propel-error-8')}`,
+          color: theme?.getVar('--propel-error-11'),
           padding: '1rem'
         }}
       >

@@ -1,14 +1,19 @@
+'use client'
+
 import { Button } from '@mui/base/Button'
-import { Popper } from '@mui/base/Popper'
 import { Input } from '@mui/base/Input'
+import { Popper } from '@mui/base/Popper'
 import { useAutocomplete } from '@mui/base/useAutocomplete'
-import * as React from 'react'
 import classnames from 'classnames'
-import componentStyles from './Autocomplete.module.scss'
-import { useCombinedRefs } from '../../helpers'
-import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
-import { ChevronUpIcon } from '../Icons/ChevronUp'
+import * as React from 'react'
+import { useForwardedRefCallback } from '../../helpers'
+import { useParsedComponentProps } from '../../themes'
 import { ChevronDownIcon } from '../Icons/ChevronDown'
+import { ChevronUpIcon } from '../Icons/ChevronUp'
+import { CloseIcon } from '../Icons/Close'
+import { useSetupTheme } from '../ThemeProvider'
+import componentStyles from './Autocomplete.module.scss'
+import { AutocompleteOption, AutocompleteProps } from './Autocomplete.types'
 
 // See full Autocomplete example here: https://mui.com/base-ui/react-autocomplete/#introduction
 export const Autocomplete = React.forwardRef(function Autocomplete(
@@ -21,6 +26,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     placeholder = '',
     containerStyle,
     containerClassname,
+    className,
     inputStyle,
     inputClassname,
     freeSolo = false,
@@ -28,8 +34,13 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     listClassname,
     optionStyle,
     optionClassname,
-    ...other
+    disableClearable = false,
+    ...rest
   } = props
+
+  const inputContainerRef = React.useRef<HTMLDivElement>(null)
+
+  const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(props)
 
   const {
     getRootProps,
@@ -38,11 +49,13 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     getListboxProps,
     getOptionProps,
     id,
+    dirty,
     popupOpen,
     focused,
     anchorEl,
     setAnchorEl,
-    groupedOptions
+    groupedOptions,
+    getClearProps
   } = useAutocomplete({
     ...props,
     componentName: 'Autocomplete',
@@ -59,22 +72,30 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
         return option.value
       }
       return ''
-    }
+    },
+    blurOnSelect: true
   })
 
-  const rootRef = useCombinedRefs(ref, setAnchorEl)
+  const { componentContainer, setRef } = useForwardedRefCallback(ref)
+
+  useSetupTheme({
+    componentContainer: componentContainer?.parentElement,
+    ...themeSettings
+  })
+
+  const hasClearIcon = !disableClearable && !disabled && dirty && !readOnly
 
   return (
-    <React.Fragment>
+    <div {...parsedPropsWithoutRest} ref={setRef} className={className}>
       <div
-        {...getRootProps(other)}
-        ref={rootRef}
+        {...getRootProps(rest)}
+        ref={inputContainerRef}
         className={classnames(
           componentStyles.rootAutocomplete,
           focused && componentStyles.rootAutocomplete__focused,
           containerClassname
         )}
-        style={{ ...getRootProps(other).style, ...containerStyle }}
+        style={{ ...getRootProps(rest).style, ...containerStyle }}
       >
         <Input
           id={id}
@@ -98,6 +119,11 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           }}
           style={{ width: '100%' }}
         />
+        {hasClearIcon && (
+          <button {...getClearProps()} className={componentStyles.clearButton}>
+            <CloseIcon />
+          </button>
+        )}
         {props.options.length > 0 && (
           <Button
             {...getPopupIndicatorProps()}
@@ -116,19 +142,24 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           slots={{
             root: 'div'
           }}
+          className={componentStyles.popper}
           modifiers={[
             { name: 'flip', enabled: false },
             { name: 'preventOverflow', enabled: false }
           ]}
           style={{
-            width: anchorEl.clientWidth,
+            width: 'fit-content',
             zIndex: 9999
           }}
           disablePortal
         >
           <ul
             {...getListboxProps()}
-            className={classnames(componentStyles.autocompleteList, listClassname)}
+            className={classnames(
+              componentStyles.autocompleteList,
+              ...(getListboxProps().className ?? ''),
+              listClassname
+            )}
             style={{ ...getListboxProps().style, ...listStyle }}
           >
             {groupedOptions.map((option, index) => {
@@ -142,6 +173,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
                 <li
                   key={index}
                   {...optionProps}
+                  onMouseMove={() => {}} // we need to override `onMouseMove` from `optionProps` to prevent elements being focused by hover
                   className={classnames(componentStyles.autoCompleteOption, optionProps.className, optionClassname)}
                   style={{ ...optionProps.style, ...optionStyle }}
                 >
@@ -153,6 +185,6 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           </ul>
         </Popper>
       ) : null}
-    </React.Fragment>
+    </div>
   )
 })

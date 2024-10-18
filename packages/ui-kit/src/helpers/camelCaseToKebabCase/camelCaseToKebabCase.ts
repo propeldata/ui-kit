@@ -8,6 +8,6 @@
  */
 export const camelCaseToKebabCase = (str: string) =>
   str
-    .replace(/([a-z])([A-Z])/g, '$1-$2') // Insert dash between lower and upper case letters
+    .replace(/([a-z])([A-Z0-9])/g, '$1-$2') // Insert dash between lower case letters and upper case letters or digits
     .replace(/^-/, '') // Remove leading dash if present
     .toLowerCase() // Convert to lower case

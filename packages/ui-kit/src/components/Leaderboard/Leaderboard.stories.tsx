@@ -1,11 +1,9 @@
 import rawLeaderboardCss from '!!raw-loader!./Leaderboard.stories.css'
 import type { Meta, StoryContext, StoryObj } from '@storybook/react'
-import React, { useState } from 'react'
+import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, Sort } from '../../graphql'
 import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
-import { ThemeTokenProps } from '../../themes'
-import { DefaultThemes, ThemeProvider } from '../ThemeProvider'
 import { Leaderboard as LeaderboardSource, LeaderboardComponent } from './Leaderboard'
 import './Leaderboard.stories.css'
 import { LeaderboardQueryProps } from './Leaderboard.types'
@@ -14,7 +12,7 @@ const meta: Meta<typeof LeaderboardComponent> = {
   title: 'Components/Leaderboard',
   component: LeaderboardComponent,
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }
@@ -305,41 +303,25 @@ export const CustomStyleStory: Story = {
   render: (args) => <Leaderboard {...args} />
 }
 
-export const ThemeStory: Story = {
-  name: 'Theme',
+export const NoDimensionsStory: Story = {
+  name: 'No dimensions',
   args: {
-    headers: barHeaders,
-    rows: barRows,
-    card: true
+    query: {
+      metric: process.env.STORYBOOK_METRIC_UNIQUE_NAME_1
+    },
+    card: true,
+    variant: 'table'
   },
-  decorators: [
-    (Story) => {
-      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
+  render: (args) => <Leaderboard {...args} />
+}
 
-      const lightColors: ThemeTokenProps = {
-        accent: '#3d3d3d',
-        accentHover: '#3d3d3dc6'
-      }
-
-      const darkColors: ThemeTokenProps = {
-        accent: '#adadad',
-        accentHover: '#ffffffc6'
-      }
-
-      const theme = baseTheme === 'darkTheme' ? darkColors : lightColors
-
-      return (
-        <ThemeProvider baseTheme={baseTheme} theme={theme}>
-          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
-            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
-              Switch theme
-            </button>
-            <span>{baseTheme}</span>
-          </div>
-          <Story />
-        </ThemeProvider>
-      )
-    }
-  ],
+export const PrettifyHeadersStory: Story = {
+  name: 'Prettify headers',
+  args: {
+    query: connectedParams,
+    card: true,
+    prettifyHeaders: true,
+    variant: 'table'
+  },
   render: (args) => <Leaderboard {...args} />
 }

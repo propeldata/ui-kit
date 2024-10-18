@@ -732,6 +732,10 @@ enum DataSourceType {
   Indicates a Snowflake Data Source.
   """
   Snowflake
+  """
+  Indicates an internal Data Source.
+  """
+  INTERNAL
 }
 
 """
@@ -760,9 +764,16 @@ enum DataSourceStatus {
   DELETING
 }
 
+type InternalConnectionSettings {
+  _: Boolean
+}
+
 union ConnectionSettings =
     SnowflakeConnectionSettings
+  | InternalConnectionSettings
+  | ClickHouseConnectionSettings
   | HttpConnectionSettings
+  | KafkaConnectionSettings
   | S3ConnectionSettings
   | WebhookConnectionSettings
 
@@ -966,6 +977,10 @@ enum ColumnType {
   A JavaScript Object Notation (JSON) document.
   """
   JSON
+  """
+  A ClickHouse-specific type.
+  """
+  CLICKHOUSE
 }
 
 """
@@ -1027,6 +1042,10 @@ type HttpDataSourceColumn {
   """
   type: ColumnType!
   """
+  The ClickHouse type to use when `type` is set to `CLICKHOUSE`.
+  """
+  clickHouseType: String
+  """
   Whether the column's type is nullable or not.
   """
   nullable: Boolean!
@@ -1044,6 +1063,10 @@ input HttpDataSourceColumnInput {
   The column type.
   """
   type: ColumnType!
+  """
+  The ClickHouse type to use when `type` is set to `CLICKHOUSE`.
+  """
+  clickHouseType: String
   """
   Whether the column's type is nullable or not.
   """
@@ -1221,12 +1244,12 @@ type DataPool implements Node & Common {
   dataRetentionInDays: Int!
   "The name of the Data Pool's table."
   table: String!
-  "The Data Pool's primary timestamp column."
-  timestamp: Timestamp!
+  "The Data Pool's primary timestamp column, if any."
+  timestamp: Timestamp
   "The Data Pool's tenant ID, if configured."
   tenant: Tenant @deprecated(reason: "Will be removed; use Data Pool Access Policies instead")
   "The Data Pool's unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated within the Data Pool."
-  uniqueId: UniqueId
+  uniqueId: UniqueId @deprecated(reason: "Will be removed; use Table Settings to define the primary key.")
   "The number of records in the Data Pool."
   recordCount: String
   "The amount of storage in terabytes used by the Data Pool."
@@ -1240,7 +1263,13 @@ type DataPool implements Node & Common {
   "Settings related to Data Pool syncing."
   syncing: DataPoolSyncing!
   "The list of Syncs of the Data Pool."
-  syncs(filter: SyncsFilter, first: Int, after: String, last: Int, before: String): SyncConnection
+  syncs(
+    filter: SyncsFilter @deprecated(reason: "No longer supported")
+    first: Int
+    after: String
+    last: Int
+    before: String
+  ): SyncConnection
   "The list of Metrics powered by the Data Pool."
   metrics(first: Int, after: String, last: Int, before: String): MetricConnection
   "The Deletion Jobs that were historically issued to this Data Pool, sorted by creation time, in descending order."
@@ -1260,6 +1289,187 @@ type DataPool implements Node & Common {
   dataPoolAccessPolicies(first: Int, after: String, last: Int, before: String): DataPoolAccessPolicyConnection!
   "Validates a custom expression against the Data Pool's available columns. If the provided expression is invalid, the ValidateExpressionResult response will contain a reason explaining why."
   validateExpression(expression: String!): ValidateExpressionResult!
+  "The Data Pool's table settings."
+  tableSettings: TableSettings!
+  "The Data Pool's columns that participate in its PARTITION BY clause."
+  partitionByColumns: [DataPoolColumn!]
+  "The Data Pool's columns that participate in its PRIMARY KEY clause."
+  primaryKeyColumns: [DataPoolColumn!]
+  "The Data Pool's columns that participate in its ORDER BY clause."
+  orderByColumns: [DataPoolColumn!]
+}
+
+"""
+A Data Pool's table settings.
+
+These describe how the Data Pool's table is created in ClickHouse.
+"""
+type TableSettings {
+  "The ClickHouse table engine for the Data Pool's table."
+  engine: TableEngine
+  "The PARTITION BY clause for the Data Pool's table."
+  partitionBy: [String!]
+  "The PRIMARY KEY clause for the Data Pool's table."
+  primaryKey: [String!]
+  "The ORDER BY clause for the Data Pool's table."
+  orderBy: [String!]
+}
+
+"""
+A Data Pool's table settings.
+
+These describe how the Data Pool's table is created in ClickHouse.
+"""
+input TableSettingsInput {
+  """
+  The ClickHouse table engine for the Data Pool's table.
+
+  This field is optional. A default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if specified.
+  """
+  engine: TableEngineInput
+  """
+  The PARTITION BY clause for the Data Pool's table.
+
+  This field is optional. A default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if specified.
+  """
+  partitionBy: [String!]
+  """
+  The PRIMARY KEY clause for the Data Pool's table.
+
+  This field is optional. A default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if specified.
+  """
+  primaryKey: [String!]
+  """
+  The ORDER BY clause for the Data Pool's table.
+
+  This field is optional. A default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if specified.
+  """
+  orderBy: [String!]
+}
+
+"""
+ClickHouse table engine types.
+"""
+enum TableEngineType {
+  "The MergeTree table engine."
+  MERGE_TREE
+  "The ReplacingMergeTree table engine."
+  REPLACING_MERGE_TREE
+  "The SummingMergeTree table engine."
+  SUMMING_MERGE_TREE
+  "The AggregatingMergeTree table engine."
+  AGGREGATING_MERGE_TREE
+}
+
+"""
+An interface for accessing a table engine's type.
+"""
+interface HasTableEngineType {
+  "The type of the table engine."
+  type: TableEngineType!
+}
+
+"""
+A Data Pool's table engine.
+"""
+union TableEngine =
+    MergeTreeTableEngine
+  | ReplacingMergeTreeTableEngine
+  | SummingMergeTreeTableEngine
+  | AggregatingMergeTreeTableEngine
+
+"""
+A Data Pool's table engine.
+"""
+input TableEngineInput @oneOf {
+  """
+  Field for specifying the MergeTree table engine.
+  """
+  mergeTree: MergeTreeTableEngineInput
+  """
+  Field for specifying the ReplacingMergeTree table engine.
+  """
+  replacingMergeTree: ReplacingMergeTreeTableEngineInput
+  """
+  Field for specifying the SummingMergeTree table engine.
+  """
+  summingMergeTree: SummingMergeTreeTableEngineInput
+  """
+  Field for specifying the AggregatingMergeTree table engine.
+  """
+  aggregatingMergeTree: AggregatingMergeTreeTableEngineInput
+}
+
+"""
+Parameters for the MergeTree table engine.
+"""
+type MergeTreeTableEngine implements HasTableEngineType {
+  "The type is always `MERGE_TREE`."
+  type: TableEngineType!
+}
+
+"""
+Parameters for the MergeTree table engine.
+"""
+input MergeTreeTableEngineInput {
+  "The type is always `MERGE_TREE`."
+  type: TableEngineType
+}
+
+"""
+Parameters for the ReplacingMergeTree table engine.
+"""
+type ReplacingMergeTreeTableEngine implements HasTableEngineType {
+  "The type is always `REPLACING_MERGE_TREE`."
+  type: TableEngineType!
+  "The `ver` parameter to the ReplacingMergeTree engine."
+  ver: String
+}
+
+"""
+Parameters for the ReplacingMergeTree table engine.
+"""
+input ReplacingMergeTreeTableEngineInput {
+  "The type is always `REPLACING_MERGE_TREE`."
+  type: TableEngineType
+  "The `ver` parameter to the ReplacingMergeTree engine."
+  ver: String
+}
+
+"""
+Parameters for the SummingMergeTree table engine.
+"""
+type SummingMergeTreeTableEngine implements HasTableEngineType {
+  "The type is always `SUMMING_MERGE_TREE`."
+  type: TableEngineType!
+  "The columns argument for the SummingMergeTree table engine"
+  columns: [String!]
+}
+
+"""
+Parameters for the SummingMergeTree table engine.
+"""
+input SummingMergeTreeTableEngineInput {
+  "The type is always `SUMMING_MERGE_TREE`."
+  type: TableEngineType
+  "The columns argument for the SummingMergeTree table engine"
+  columns: [String!]
+}
+
+"""
+Parameters for the AggregatingMergeTree table engine.
+"""
+type AggregatingMergeTreeTableEngine implements HasTableEngineType {
+  "The type is always `AGGREGATING_MERGE_TREE`."
+  type: TableEngineType!
+}
+
+"""
+Parameters for the AggregatingMergeTree table engine.
+"""
+input AggregatingMergeTreeTableEngineInput {
+  "The type is always `AGGREGATING_MERGE_TREE`."
+  type: TableEngineType
 }
 
 """
@@ -1333,7 +1543,7 @@ type Dimension {
   """
   The statistics for the dimension values. Fetching statistics incurs query costs.
   """
-  stats: DimensionStatistics
+  stats: DimensionStatistics @deprecated(reason: "Issue normal queries for calculating stats")
 }
 
 """
@@ -1362,8 +1572,145 @@ type DimensionStatistics {
   query: QueryInfo!
 }
 
+type MaterializedView implements Node & Common {
+  "The Materialized View's unique identifier."
+  id: ID!
+  "The Materialized View's unique name."
+  uniqueName: String!
+  "The Materialized View's description."
+  description: String!
+  "The Materialized View's Account."
+  account: Account!
+  "The Materialized View's Environment."
+  environment: Environment!
+  "The Materialized View's creation date and time in UTC."
+  createdAt: DateTime!
+  "The Materialized View's last modification date and time in UTC."
+  modifiedAt: DateTime!
+  """
+  The Materialized View's creator. It can be either a User ID, an Application ID, or "system" if it was created by Propel.
+  """
+  createdBy: String!
+  """
+  The Materialized View's last modifier. It can be either a User ID, an Application ID, or "system" if it was modified by Propel.
+  """
+  modifiedBy: String!
+  "The SQL that the Materialized View executes."
+  sql: String!
+  """
+  The Materialized View's destination (AKA "target") Data Pool.
+  """
+  destination: DataPool!
+  "The Materialized View's source Data Pool."
+  source: DataPool
+  "Other Data Pools queried by the Materialized View."
+  others: [DataPool!]!
+}
+
+input BackfillOptionsInput {
+  "Whether historical data should be backfilled or not"
+  backfill: Boolean
+}
+
+"""
+The fields for creating a Materialized View.
+"""
+input CreateMaterializedViewInput {
+  "The Materialized View's unique name. If not specified, Propel will set the ID as the unique name."
+  uniqueName: String
+  "The Materialized View's description."
+  description: String
+  "The SQL that the Materialized View will execute."
+  sql: String!
+  """
+  By default, a destination Data Pool with default settings will be created for the Materialized View;
+  however, you can customize the destination Data Pool (or point to an existing Data Pool), by setting
+  this field. Use this to target an existing Data Pool or the engine settings of a new Data Pool.
+  """
+  destination: CreateMaterializedViewDestinationInput!
+  """
+  By default, a Materialized View only applies to records added after its creation. This option allows
+  to backfill all the data that was present before the Materialized View creation.
+  """
+  backfillOptions: BackfillOptionsInput
+}
+
+"""
+The fields for modifying a Materialized View.
+"""
+input ModifyMaterializedViewInput {
+  "The ID of the Materialized View to modify."
+  id: ID!
+  "The Materialized View's new unique name."
+  uniqueName: String
+  "The Materialized View's new description."
+  description: String
+}
+
+"""
+The fields for targeting an existing Data Pool or a new Data Pool.
+"""
+input CreateMaterializedViewDestinationInput @oneOf {
+  """
+  If specified, the Materialized View will target an existing Data Pool.
+  Ensure the Data Pool's schema is compatible with your Materialized View's SQL statement.
+  """
+  existingDataPool: DataPoolInput
+  """
+  If specified, the Materialized View will create and target a new Data Pool.
+  You can further customize the new Data Pool's engine settings.
+  """
+  newDataPool: CreateMaterializedViewDestinationNewDataPoolInput
+}
+
+"""
+The fields for customizing a new Data Pool that a Materialized View will target.
+"""
+input CreateMaterializedViewDestinationNewDataPoolInput {
+  """
+  The Data Pool's unique name.
+  """
+  uniqueName: String
+  """
+  The Data Pool's description.
+  """
+  description: String
+  """
+  Optionally specify the Data Pool's primary timestamp. This will influence the Data Pool's engine settings.
+  """
+  timestamp: TimestampInput
+  """
+  Optionally specify the Data Pool's unique ID. This will influence the Data Pool's engine settings.
+  """
+  uniqueId: UniqueIdInput @deprecated(reason: "Will be removed; use Table Settings to define the primary key.")
+  """
+  Enables or disables access control for the Data Pool.
+
+  If the Data Pool has access control enabled, Applications must be assigned Data Pool Access
+  Policies in order to query the Data Pool and its Metrics.
+  """
+  accessControlEnabled: Boolean
+  """
+  Override the Data Pool's table settings. These describe how the Data Pool's table is created in ClickHouse, and a
+  default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if any. You can override these
+  defaults in order to specify a custom table engine, custom ORDER BY, etc.
+  """
+  tableSettings: TableSettingsInput
+}
+
+"""
+The result of a mutation which creates or modifies a Materialized View.
+"""
+type MaterializedViewResponse {
+  """
+  The Materialized View which was created or modified.
+  """
+  materializedView: MaterializedView!
+}
+
 """
 The fields of a filter.
+
 
 You can construct more complex filters using `and` and `or`. For example, to construct a filter equivalent to
 
@@ -1570,6 +1917,10 @@ type DataPoolColumn {
   """
   type: ColumnType!
   """
+  The ClickHouse type. This is the exact representation of the type in ClickHouse.
+  """
+  clickHouseType: String!
+  """
   Whether the column is nullable, meaning whether it accepts a null value.
   """
   isNullable: Boolean!
@@ -1585,6 +1936,10 @@ input DataPoolColumnInput {
   """
   type: ColumnType!
   """
+  The ClickHouse type to use when `type` is set to `CLICKHOUSE`.
+  """
+  clickHouseType: String
+  """
   Whether the column is nullable, meaning whether it accepts a null value.
   """
   isNullable: Boolean!
@@ -1595,23 +1950,31 @@ The fields for creating a Data Pool.
 """
 input CreateDataPoolInputV2 {
   "The Data Source that will be used to create the Data Pool."
-  dataSource: ID!
+  dataSource: ID
   "The table that the Data Pool will sync from."
-  table: String!
-  "The table's primary timestamp column. Propel uses the primary timestamp to order and partition your data in Data Pools. It will serve as the time dimension for your Metrics."
-  timestamp: TimestampInput!
+  table: String
+  """
+  The table's primary timestamp column.
+
+  Propel uses the primary timestamp to order and partition your data in Data Pools. It's part of what makes Propel
+  fast for larger data sets. It will also serve as the time dimension for your Metrics.
+
+  If you do not provide a primary timestamp column, you will need to supply an alternate timestamp when querying your
+  Data Pool or its Metrics using the TimeRangeInput.
+  """
+  timestamp: TimestampInput
   "The Data Pool's unique name. If not specified, Propel will set the ID as the unique name."
   uniqueName: String
   "The Data Pool's description."
   description: String
   "The list of columns."
-  columns: [DataPoolColumnInput!]!
+  columns: [DataPoolColumnInput!]
   "The Data Pool's optional tenant ID column. The tenant ID column is used to control access to your data with access policies."
   tenant: TenantInput @deprecated(reason: "Will be removed; use Data Pool Access Policies instead")
   """
   The Data Pool's unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated within the Data Pool.
   """
-  uniqueId: UniqueIdInput
+  uniqueId: UniqueIdInput @deprecated(reason: "Will be removed; use Table Settings to define the primary key.")
   """
   The Data Pool's syncing settings.
   """
@@ -1623,6 +1986,12 @@ input CreateDataPoolInputV2 {
   Policies in order to query the Data Pool and its Metrics.
   """
   accessControlEnabled: Boolean
+  """
+  Override the Data Pool's table settings. These describe how the Data Pool's table is created in ClickHouse, and a
+  default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if any. You can override these
+  defaults in order to specify a custom table engine, custom ORDER BY, etc.
+  """
+  tableSettings: TableSettingsInput
 }
 
 """
@@ -1649,6 +2018,16 @@ input modifyDataPoolInput {
   The Data Pool's new syncing settings.
   """
   syncing: DataPoolSyncingInput
+  """
+  The table's primary timestamp column.
+
+  Propel uses the primary timestamp to order and partition your data in Data Pools. It's part of what makes Propel
+  fast for larger data sets. It will also serve as the time dimension for your Metrics.
+
+  If you do not provide a primary timestamp column, you will need to supply an alternate timestamp when querying your
+  Data Pool or its Metrics using the TimeRangeInput.
+  """
+  timestamp: TimestampInput
   """
   Enables or disables access control for the Data Pool.
 
@@ -1773,19 +2152,22 @@ type Sync implements Node {
   """
   The number of new records contained within the Sync, if known. This excludes filtered records.
   """
-  newRecords: String
+  newRecords: String @deprecated(reason: "All records are considered to be processed; see `processedRecords` instead")
   """
   The number of updated records contained within the Sync, if known. This excludes filtered records.
   """
   updatedRecords: String
+    @deprecated(reason: "All records are considered to be processed; see `processedRecords` instead")
   """
   The number of deleted records contained within the Sync, if known. This excludes filtered records.
   """
   deletedRecords: String
+    @deprecated(reason: "All records are considered to be processed; see `processedRecords` instead")
   """
   The number of filtered records contained within the Sync, due to issues such as a missing timestamp Dimension, if any are known to be invalid.
   """
   invalidRecords: String
+    @deprecated(reason: "All records are considered to be processed; see `processedRecords` instead")
   """
   The (compressed) size of the Sync, in bytes, if known.
   """
@@ -1885,7 +2267,11 @@ input DataGridInput {
   """
   The filters to apply to the records. You may only filter on columns included in the `columns` array input.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The filters to apply to the records, in the form of SQL. You may only filter on columns included in the `columns` array input.
+  """
+  filterSql: String
   """
   The number of rows to be returned when paging forward. It can be a number between 1 and 1,000.
   """
@@ -1931,7 +2317,11 @@ input MetricReportInput {
   """
   The Query Filters to apply when building the Metric Report. These can be used to filter out rows.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Query Filters to apply when building the Metric Report, in the form of SQL. These can be used to filter out rows.
+  """
+  filterSql: String
   """
   The index of the column to order the Metric Report by. The index is 1-based and defaults to the first Metric column. In other words, by default, reports are ordered by the first Metric; however, you can order by the second Metric, third Metric, etc., by overriding the `orderByColumn` input. You can also order by dimensions this way.
   """
@@ -1995,7 +2385,11 @@ input MetricReportMetricInput {
   """
   The Query Filters to apply when calculating the Metric.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Query Filters to apply when calculating the Metric, in the form of SQL.
+  """
+  filterSql: String
   """
   The sort order for the Metric. It can be ascending (`ASC`) or descending (`DESC`) order. Defaults to descending (`DESC`) order when not provided.
   """
@@ -2124,9 +2518,9 @@ type Metric implements Node & Common {
   """
   dimensions: [Dimension!]!
   """
-  The Metric's timestamp. This is the same as its Data Pool's timestamp.
+  The Metric's timestamp, if any. This is the same as its Data Pool's timestamp, if any.
   """
-  timestamp: Dimension!
+  timestamp: Dimension
   """
   The Metric's measure. Access this from the Metric's `settings` object instead.
   """
@@ -2144,17 +2538,19 @@ type Metric implements Node & Common {
   """
   settings: MetricSettings!
   """
-  The Metric data in counter format. A single metric value for the given time range and filters.
+  Query the Metric in counter format. Returns the Metric's value for the given time range and filters.
   """
-  counter(input: CounterInput!): CounterResponse
+  counter(input: CounterInput!): CounterResponse @deprecated(reason: "Use the top-level `counter` query instead")
   """
-  The Metric data in time series format. Arrays of timestamps and Metric values for the given time range and filters.
+  Query the Metric in time series format. Returns arrays of timestamps and the Metric's values for the given time range and filters.
   """
   timeSeries(input: TimeSeriesInput!): TimeSeriesResponse
+    @deprecated(reason: "Use the top-level `timeSeries` query instead")
   """
-  The Metric data in leaderboard format. A table (array of rows) with the selected dimensions and corresponding Metric values for the given time range and filters.
+  Query the Metric in leaderboard format. Returns a table (array of rows) with the selected dimensions and the Metric's corresponding values for the given time range and filters.
   """
   leaderboard(input: LeaderboardInput!): LeaderboardResponse
+    @deprecated(reason: "Use the top-level `leaderboard` query instead")
   """
   List the Policies associated to the Metric.
   """
@@ -2217,7 +2613,13 @@ type CountMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
 }
 
 """
@@ -2227,7 +2629,13 @@ type SumMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
   """
   The Dimension to be summed.
   """
@@ -2241,7 +2649,13 @@ type CountDistinctMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
   """
   The Dimension where the count distinct operation is going to be performed.
   """
@@ -2255,7 +2669,13 @@ type AverageMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
   """
   The Dimension to be averaged.
   """
@@ -2269,7 +2689,13 @@ type MinMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
   """
   The Dimension to select the minimum from.
   """
@@ -2283,7 +2709,13 @@ type MaxMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
   """
   The Dimension to select the maximum from.
   """
@@ -2297,7 +2729,13 @@ type CustomMetricSettings {
   """
   Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
   """
-  filters: [Filter!]
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Metric Filters are present, all records will be included. To filter at query time, add Dimensions and use the `filters` property on the `timeSeriesInput`, `counterInput`, or `leaderboardInput` objects. There is no need to add `filters` to be able to filter at query time.
+
+  You can provide the filters in the form of SQL.
+  """
+  filterSql: String
   """
   The expression that defines the aggregation function for this Metric.
   """
@@ -2333,7 +2771,11 @@ input CreateCountMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2359,7 +2801,11 @@ input CreateSumMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2389,7 +2835,11 @@ input CreateAverageMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2419,7 +2869,11 @@ input CreateMinMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2446,7 +2900,11 @@ input CreateMaxMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2476,7 +2934,11 @@ input CreateCountDistinctMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2506,7 +2968,11 @@ input CreateCustomMetricInput {
   """
   The Metric's Filters. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's Filters, in the form of SQL. Metric Filters allow defining a Metric with a subset of records from the given Data Pool. If no Filters are present, all records will be included.
+  """
+  filterSql: String
   """
   The Metric's Dimensions. Dimensions define the columns that will be available to filter the Metric at query time.
   """
@@ -2552,7 +3018,11 @@ input ModifyMetricInput {
   """
   The Metric's new Filters. Used to add or remove Metric Filters.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Metric's new Filters, in the form of SQL. Used to add or remove Metric Filters.
+  """
+  filterSql: String
   """
   Enables or disables access control for the Metric.
   """
@@ -2693,7 +3163,11 @@ input CounterInput {
   """
   The Query Filters to apply before retrieving the counter data. If no Query Filters are provided, all data is included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Query Filters to apply before retrieving the counter data, in the form of SQL. If no Query Filters are provided, all data is included.
+  """
+  filterSql: String
 }
 
 """
@@ -2735,7 +3209,15 @@ input TimeSeriesInput {
   """
   The Query Filters to apply before retrieving the time series data. If no Query Filters are provided, all data is included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Query Filters to apply before retrieving the time series data, in the form of SQL. If no Query Filters are provided, all data is included.
+  """
+  filterSql: String
+  """
+  Columns to group by.
+  """
+  groupBy: [String!]
 }
 
 """
@@ -2783,9 +3265,13 @@ input LeaderboardInput {
   """
   rowLimit: Int!
   """
-  The list of filters to apply before retrieving the leaderboard data. If no Query Filters are provided, all data is included.
+  The Query Filters to apply before retrieving the leaderboard data. If no Query Filters are provided, all data is included.
   """
-  filters: [FilterInput!]
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  The Query Filters to apply before retrieving the leaderboard data, in the form of SQL. If no Query Filters are provided, all data is included.
+  """
+  filterSql: String
 }
 
 """
@@ -2798,6 +3284,11 @@ If both relative and absolute time ranges are provided, the relative time range 
 If a `LAST_N` relative time period is selected, an `n` ≥ 1 must be provided. If no `n` is provided or `n` < 1, a `BAD_REQUEST` error will be returned.
 """
 input TimeRangeInput {
+  """
+  The timestamp field to use when querying. Defaults to the timestamp configured on the Data Pool or Metric, if any.
+  Set this to filter on an alternative timestamp field.
+  """
+  timestamp: String
   """
   The relative time period.
   """
@@ -3155,9 +3646,31 @@ type TimeSeriesResponse {
   """
   values: [String]!
   """
+  The time series values for each group in `groupBy`, if specified.
+  """
+  groups: [TimeSeriesResponseGroup!]
+  """
   The Query statistics and metadata.
   """
   query: QueryInfo!
+}
+
+"""
+The time series response object for a group specified in `groupBy`. It contains an array of time series labels and an array of Metric values for a particular group.
+"""
+type TimeSeriesResponseGroup {
+  """
+  The time series group's columns.
+  """
+  group: [String]!
+  """
+  The time series group's labels.
+  """
+  labels: [String!]!
+  """
+  The time series group's values.
+  """
+  values: [String]!
 }
 
 """
@@ -3637,7 +4150,9 @@ type DeletionJob implements Node & Job {
   "The current Deletion Job's status."
   status: JobStatus!
   "The list of filters that will be used for deleting data. Data matching the filters will be deleted."
-  filters: [Filter!]!
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  "The filters that will be used for deleting data, in the form of SQL. Data matching the filters will be deleted."
+  filterSql: String
   "The error that occurred while deleting data, if any."
   error: Error
   "The current progress of the Deletion Job, from 0.0 to 1.0."
@@ -3673,7 +4188,9 @@ input DeletionRequestInput {
   "The Data Pool that is going to get the data deleted"
   dataPool: ID!
   "The list of filters that will be used for deleting data. Data matching these filters will be deleted."
-  filters: [FilterInput!]!
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  "The filters that will be used for deleting data, in the form of SQL. Data matching these filters will be deleted."
+  filterSql: String
 }
 
 """
@@ -3683,7 +4200,9 @@ input CreateDeletionJobInput {
   "The Data Pool that is going to get the data deleted"
   dataPool: ID!
   "The list of filters that will be used for deleting data. Data matching these filters will be deleted."
-  filters: [FilterInput!]!
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  "The filters that will be used for deleting data, in the form of SQL. Data matching these filters will be deleted."
+  filterSql: String
 }
 
 """
@@ -3778,7 +4297,9 @@ type UpdateDataPoolRecordsJob implements Node & Job {
   "The current UpdateDataPoolRecords Job's status"
   status: JobStatus!
   "The list of filters that will be used for updating data. Data matching the filters will be updated."
-  filters: [Filter!]!
+  filters: [Filter!] @deprecated(reason: "Use `filterSql` instead")
+  "The filters that will be used for updating data, in the form of SQL. Data matching the filters will be updated."
+  filterSql: String
   "Describes how the job will update the records."
   set: [UpdateDataPoolRecordsJobSetColumn!]!
   "The error that occurred while updating data, if any."
@@ -3800,7 +4321,9 @@ input CreateUpdateDataPoolRecordsJobInput {
   "The Data Pool that is going to get its records updated."
   dataPool: ID!
   "The list of filters that will be used for updating records. Records matching these filters will be updated."
-  filters: [FilterInput!]!
+  filters: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  "The filters that will be used for updating records, in the form of SQL. Records matching these filters will be updated."
+  filterSql: String
   "Describes how the job will update the records."
   set: [UpdateDataPoolRecordsJobSetColumnInput!]!
 }
@@ -3861,7 +4384,11 @@ type DataPoolAccessPolicy implements Node & Common {
   """
   Row-level filters that the Access Policy applies before executing queries.
   """
-  rows: [Filter!]!
+  rows: [Filter!] @deprecated(reason: "Use `filtersSql` instead")
+  """
+  Row-level filters that the Access Policy applies before executing queries, in the form of SQL.
+  """
+  filterSql: String
   """
   Applications that are assigned to this Data Pool Access Policy.
   """
@@ -3890,7 +4417,11 @@ input CreateDataPoolAccessPolicyInput {
   """
   Row-level filters that the Access Policy applies before executing queries.
   """
-  rows: [FilterInput!]
+  rows: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Row-level filters that the Access Policy applies before executing queries, in the form of SQL.
+  """
+  filterSql: String
 }
 
 type DataPoolAccessPolicyResponse {
@@ -3917,7 +4448,11 @@ input ModifyDataPoolAccessPolicyInput {
   """
   Row-level filters that the Access Policy applies before executing queries. If not provided this property will not be modified.
   """
-  rows: [FilterInput!]
+  rows: [FilterInput!] @deprecated(reason: "Use `filterSql` instead")
+  """
+  Row-level filters that the Access Policy applies before executing queries, in the form of SQL. If not provided this property will not be modified.
+  """
+  filterSql: String
 }
 
 type Mutation {
@@ -4174,6 +4709,33 @@ type Mutation {
   """
   resyncDataPool(dataPoolId: ID!): Sync
   """
+  Creates a new Materialized View.
+  Returns the newly created Materialized View (or an error message if creating the Materialized View fails).
+  """
+  createMaterializedView(input: CreateMaterializedViewInput!): MaterializedViewResponse!
+  """
+  Modifies a Materialized View. If any of the optional arguments are omitted, those properties will be unchanged on the Materialized View.
+  """
+  modifyMaterializedView(input: ModifyMaterializedViewInput!): MaterializedViewResponse!
+  """
+  Deletes a Materialized View and returns its ID if the Materialized View was deleted successfully.
+  Note that deleting a Materialized View does not delete its target Data Pool. If you want to delete its target
+  Data Pool, you must use the `deleteDataPool` mutation.
+  """
+  deleteMaterializedView(id: ID!): ID
+  """
+  This mutation creates a new ClickHouse Data Source.
+
+  The mutation returns the newly created Data Source (or an error message if creating the Data Source fails).
+  """
+  createClickHouseDataSource(input: CreateClickHouseDataSourceInput!): DataSourceResponse!
+  """
+  This mutation selects a Data Source by its ID or unique name and modifies it to have the given unique name, description, and connection settings.
+
+  If any of the optional arguments are omitted, those properties will be unchanged on the Data Source.
+  """
+  modifyClickHouseDataSource(input: ModifyClickHouseDataSourceInput!): DataSourceResponse!
+  """
   Creates a new HTTP Data Source from the given settings.
 
   Returns the newly created Data Source (or an error message if creating the Data Source fails).
@@ -4185,6 +4747,18 @@ type Mutation {
   If any of the optional arguments are omitted, those properties will be unchanged on the Data Source.
   """
   modifyHttpDataSource(input: ModifyHttpDataSourceInput!): DataSourceResponse!
+  """
+  This mutation creates a new Kafka Data Source.
+
+  The mutation returns the newly created Data Source (or an error message if creating the Data Source fails).
+  """
+  createKafkaDataSource(input: CreateKafkaDataSourceInput!): DataSourceResponse!
+  """
+  This mutation selects a Data Source by its ID or unique name and modifies it to have the given unique name, description, and connection settings.
+
+  If any of the optional arguments are omitted, those properties will be unchanged on the Data Source.
+  """
+  modifyKafkaDataSource(input: ModifyKafkaDataSourceInput!): DataSourceResponse!
   """
   Creates a new Amazon S3 Data Source pointed at the specified S3 bucket.
 
@@ -4215,6 +4789,16 @@ type Mutation {
 Input to the SqlV1 api.
 """
 input SqlV1Input {
+  """
+  The SQL query.
+  """
+  query: String!
+}
+
+"""
+Input for describing SqlV1 inputs.
+"""
+input DescribeSqlV1Input {
   """
   The SQL query.
   """
@@ -4254,6 +4838,16 @@ type SqlResponse {
   The Query statistics and metadata.
   """
   info: QueryInfo!
+}
+
+"""
+Response from the describe SQL API.
+"""
+type DescribeSqlResponse {
+  """
+  The columns that the query would return.
+  """
+  columns: [SqlColumnResponse!]!
 }
 
 """
@@ -4467,6 +5061,16 @@ type Query {
   """
   dataPools(first: Int, after: String, last: Int, before: String): DataPoolConnection
   """
+  This query returns the Materialized Views within the Environment.
+
+  The `materializedViews` query uses [cursor-based pagination](/docs/api/pagination) typical of GraphQL APIs. You can use the pairs of parameters `first` and `after` or `last` and `before` to page forward or backward through the results, respectively.
+
+  For forward pagination, the `first` parameter defines the number of results to return, and the `after` parameter defines the cursor to continue from. You should pass the cursor for the _last_ result of the current page to `after`.
+
+  For backward pagination, the `last` parameter defines the number of results to return, and the `before` parameter defines the cursor to continue from. You should pass the cursor for the _first_ result of the current page to `before`.
+  """
+  materializedViews(first: Int, after: String, last: Int, before: String): MaterializedViewConnection
+  """
   This query returns the Data Pool Access Policy specified by the given ID.
 
   A Data Pool Access Policy limits the data that Applications can access within a Data Pool.
@@ -4530,6 +5134,10 @@ type Query {
   """
   sqlV1(input: SqlV1Input!): SqlResponse!
   """
+  Describe SQL statements Data Pools.
+  """
+  describeSqlV1(input: DescribeSqlV1Input!): DescribeSqlResponse!
+  """
   This query returns the individual records of a Data Pool with the convenience of built-in pagination, filtering, and sorting.
   """
   dataGrid(input: DataGridInput!): DataGridConnection!
@@ -4542,15 +5150,19 @@ type Query {
   """
   topValues(input: TopValuesInput!): TopValuesResponse!
   """
-  Query a Metric in counter format. A single Metric value for the given time range and filters.
+  Query a metric in counter format. Returns a single metric value for the given time range and filters.
   """
   counter(input: CounterInput!): CounterResponse
   """
-  Query a Metric in time series format. Arrays of timestamps and Metric values for the given time range and filters.
+  Query metrics in counter format. Returns a metric value for each input in the array of inputs.
+  """
+  counters(input: [CounterInput!]!): [CounterResponse]!
+  """
+  Query a metric in time series format. Returns arrays of timestamps and metric values for the given time range and filters.
   """
   timeSeries(input: TimeSeriesInput!): TimeSeriesResponse
   """
-  Query a Metric in leaderboard format. A table (array of rows) with the selected dimensions and corresponding Metric values for the given time range and filters.
+  Query a metric in leaderboard format. Returns a table (array of rows) with the selected dimensions and the metric's corresponding values for the given time range and filters.
   """
   leaderboard(input: LeaderboardInput!): LeaderboardResponse
   """
@@ -4594,6 +5206,14 @@ type Query {
     last: Int
     before: String
   ): UpdateDataPoolRecordsJobConnection!
+  """
+  This query returns the Materialized View specified by the given ID.
+  """
+  materializedView(id: ID!): MaterializedView
+  """
+  This query returns the Materialized View specified by its unique name.
+  """
+  materializedViewByName(uniqueName: String!): MaterializedView
 }
 
 """
@@ -4925,6 +5545,42 @@ type DeletionJobEdge {
 }
 
 """
+The Materialized View connection object.
+
+Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+"""
+type MaterializedViewConnection {
+  """
+  The Materialized View connection's edges.
+  """
+  edges: [MaterializedViewEdge!]!
+  """
+  The Materialized View connection's nodes.
+  """
+  nodes: [MaterializedView!]!
+  """
+  The Materialized View connection's page info.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+The Materialized View edge object.
+
+Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
+"""
+type MaterializedViewEdge {
+  """
+  The edge's cursor.
+  """
+  cursor: String!
+  """
+  The edge's node.
+  """
+  node: MaterializedView!
+}
+
+"""
 The Metric connection object.
 
 Learn more about [pagination in GraphQL](https://www.propeldata.com/docs/api/pagination).
@@ -5144,6 +5800,110 @@ type UpdateDataPoolRecordsJobEdge {
   node: UpdateDataPoolRecordsJob!
 }
 
+"""
+The ClickHouse Data Source connection settings.
+"""
+type ClickHouseConnectionSettings {
+  """
+  Which database to connect to
+  """
+  database: String!
+  """
+  The password for the provided user
+  """
+  password: String!
+  """
+  Whether the user has readonly permissions or not for querying ClickHouse
+  """
+  readonly: Boolean
+  """
+  The URL where the ClickHouse host is listening to HTTP[S] connections
+  """
+  url: String!
+  """
+  The user for authenticating against the ClickHouse host
+  """
+  user: String!
+}
+
+"""
+The ClickHouse Data Source connection settings.
+"""
+input ClickHouseConnectionSettingsInput {
+  """
+  Which database to connect to
+  """
+  database: String!
+  """
+  The password for the provided user
+  """
+  password: String!
+  """
+  The URL where the ClickHouse host is listening to HTTP[S] connections
+  """
+  url: String!
+  """
+  The user for authenticating against the ClickHouse host
+  """
+  user: String!
+}
+
+input CreateClickHouseDataSourceInput {
+  """
+  The ClickHouse Data Source's connection settings
+  """
+  connectionSettings: ClickHouseConnectionSettingsInput!
+  """
+  The ClickHouse Data Source's description.
+  """
+  description: String
+  """
+  The ClickHouse Data Source's unique name. If not specified, Propel will set the ID as unique name.
+  """
+  uniqueName: String
+}
+
+input ModifyClickHouseDataSourceInput {
+  """
+  The ClickHouse Data Source's new connection settings. If not provided this property will not be modified.
+  """
+  connectionSettings: PartialClickHouseConnectionSettingsInput
+  """
+  The ClickHouse Data Source's new description. If not provided this property will not be modified.
+  """
+  description: String
+  """
+  The ID or unique name of the ClickHouse Data Source to modify.
+  """
+  idOrUniqueName: idOrUniqueName!
+  """
+  The ClickHouse Data Source's new unique name. If not provided this property will not be modified.
+  """
+  uniqueName: String
+}
+
+"""
+The ClickHouse Data Source connection settings.
+"""
+input PartialClickHouseConnectionSettingsInput {
+  """
+  Which database to connect to If not provided this property will not be modified.
+  """
+  database: String
+  """
+  The password for the provided user If not provided this property will not be modified.
+  """
+  password: String
+  """
+  The URL where the ClickHouse host is listening to HTTP[S] connections If not provided this property will not be modified.
+  """
+  url: String
+  """
+  The user for authenticating against the ClickHouse host If not provided this property will not be modified.
+  """
+  user: String
+}
+
 input CreateHttpDataSourceInput {
   """
   The HTTP Data Source's connection settings
@@ -5228,6 +5988,118 @@ input PartialHttpConnectionSettingsInput {
   The HTTP Data Source's tables. If not provided this property will not be modified.
   """
   tables: [HttpDataSourceTableInput!]
+}
+
+input CreateKafkaDataSourceInput {
+  """
+  The Kafka Data Source's connection settings
+  """
+  connectionSettings: KafkaConnectionSettingsInput!
+  """
+  The Kafka Data Source's description.
+  """
+  description: String
+  """
+  The Kafka Data Source's unique name. If not specified, Propel will set the ID as unique name.
+  """
+  uniqueName: String
+}
+
+"""
+The Kafka Data Source connection settings.
+"""
+type KafkaConnectionSettings {
+  """
+  The type of authentication to use. Can be SCRAM-SHA-256, SCRAM-SHA-512, PLAIN or NONE
+  """
+  auth: String!
+  """
+  The bootstrap server(s) to connect to
+  """
+  bootstrapServers: [String!]!
+  """
+  The password for the provided user
+  """
+  password: String!
+  """
+  Whether the the connection to the Kafka servers is encrypted or not
+  """
+  tls: Boolean
+  """
+  The user for authenticating against the Kafka servers
+  """
+  user: String!
+}
+
+"""
+The Kafka Data Source connection settings.
+"""
+input KafkaConnectionSettingsInput {
+  """
+  The type of authentication to use. Can be SCRAM-SHA-256, SCRAM-SHA-512, PLAIN or NONE
+  """
+  auth: String!
+  """
+  The bootstrap server(s) to connect to
+  """
+  bootstrapServers: [String!]!
+  """
+  The password for the provided user
+  """
+  password: String!
+  """
+  Whether the the connection to the Kafka servers is encrypted or not
+  """
+  tls: Boolean
+  """
+  The user for authenticating against the Kafka servers
+  """
+  user: String!
+}
+
+input ModifyKafkaDataSourceInput {
+  """
+  The Kafka Data Source's new connection settings. If not provided this property will not be modified.
+  """
+  connectionSettings: PartialKafkaConnectionSettingsInput
+  """
+  The Kafka Data Source's new description. If not provided this property will not be modified.
+  """
+  description: String
+  """
+  The ID or unique name of the Kafka Data Source to modify.
+  """
+  idOrUniqueName: idOrUniqueName!
+  """
+  The Kafka Data Source's new unique name. If not provided this property will not be modified.
+  """
+  uniqueName: String
+}
+
+"""
+The Kafka Data Source connection settings.
+"""
+input PartialKafkaConnectionSettingsInput {
+  """
+  The type of authentication to use. Can be SCRAM-SHA-256, SCRAM-SHA-512, PLAIN or NONE If not provided this property will not be modified.
+  """
+  auth: String
+  """
+  The bootstrap server(s) to connect to If not provided this property will not be modified.
+  """
+  bootstrapServers: [String!]!
+  """
+  The password for the provided user If not provided this property will not be modified.
+  """
+  password: String
+  """
+  Whether the the connection to the Kafka servers is encrypted or not If not provided this property will not be modified.
+  """
+  tls: Boolean
+  """
+  The user for authenticating against the Kafka servers If not provided this property will not be modified.
+  """
+  user: String
 }
 
 input CreateS3DataSourceInput {
@@ -5379,6 +6251,11 @@ The Webhook Data Source connection settings.
 """
 type WebhookConnectionSettings {
   """
+  Enables or disables access control for the Data Pool.
+  If the Data Pool has access control enabled, Applications must be assigned Data Pool Access Policies in order to query the Data Pool and its Metrics.
+  """
+  accessControlEnabled: Boolean
+  """
   The HTTP basic authentication settings for the Webhook Data Source URL. If this parameter is not provided, anyone with the webhook URL will be able to send events. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
   """
   basicAuth: HttpBasicAuthSettings
@@ -5387,17 +6264,23 @@ type WebhookConnectionSettings {
   """
   columns: [WebhookDataSourceColumn!]
   """
-  The tenant ID column, if configured.
+  Override the Data Pool's table settings. These describe how the Data Pool's table is created in ClickHouse, and a
+  default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if any. You can override these
+  defaults in order to specify a custom table engine, custom ORDER BY, etc.
   """
-  tenant: String
+  tableSettings: TableSettings
   """
-  The primary timestamp column.
+  The tenant ID column, if any.
   """
-  timestamp: String!
+  tenant: String @deprecated(reason: "Will be removed; use Data Pool Access Policies instead.")
   """
-  The unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
+  The primary timestamp column, if any.
   """
-  uniqueId: String
+  timestamp: String
+  """
+  The unique ID column, if any. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
+  """
+  uniqueId: String @deprecated(reason: "Will be removed; use Table Settings to define the primary key.")
   """
   The Webhook URL for posting JSON events
   """
@@ -5409,6 +6292,11 @@ The Webhook Data Source connection settings.
 """
 input WebhookConnectionSettingsInput {
   """
+  Enables or disables access control for the Data Pool.
+  If the Data Pool has access control enabled, Applications must be assigned Data Pool Access Policies in order to query the Data Pool and its Metrics.
+  """
+  accessControlEnabled: Boolean
+  """
   The HTTP basic authentication settings for the Webhook Data Source URL. If this parameter is not provided, anyone with the webhook URL will be able to send events. While it's OK to test without HTTP Basic authentication, we recommend enabling it.
   """
   basicAuth: HttpBasicAuthInput
@@ -5417,15 +6305,21 @@ input WebhookConnectionSettingsInput {
   """
   columns: [WebhookDataSourceColumnInput!]
   """
-  The tenant ID column, if configured.
+  Override the Data Pool's table settings. These describe how the Data Pool's table is created in ClickHouse, and a
+  default will be chosen based on the Data Pool's `timestamp` and `uniqueId` values, if any. You can override these
+  defaults in order to specify a custom table engine, custom ORDER BY, etc.
+  """
+  tableSettings: TableSettingsInput
+  """
+  The tenant ID column, if any.
   """
   tenant: String
   """
-  The primary timestamp column.
+  The primary timestamp column, if any.
   """
-  timestamp: String!
+  timestamp: String
   """
-  The unique ID column. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
+  The unique ID column, if any. Propel uses the primary timestamp and a unique ID to compose a primary key for determining whether records should be inserted, deleted, or updated.
   """
   uniqueId: String
 }

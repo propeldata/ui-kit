@@ -1,0 +1,41 @@
+import { ArgTypes, Meta } from '@storybook/blocks'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as ButtonStories from '../../../../../packages/ui-kit/src/components/Button/Button.stories'
+
+<Meta title="Components/Button/Overview" of={ButtonStories} />
+
+# Button overview
+
+Buttons allow users to take actions, and make choices, with a single tap.
+
+## Basic usage
+
+You can import the component in your React file and use it as shown in the following example:
+
+<SourceCode of={ButtonStories.DefaultStory} shown />
+
+## Examples
+
+### Variant
+
+Use the `variant` prop to control the visual style of the button.
+
+<SourceCode of={ButtonStories.PrimaryStory} shown />
+
+### Size
+
+Use the `size` prop to control the size of the button.
+
+<SourceCode of={ButtonStories.SmallStory} shown />
+
+### With icons
+
+You can nest icons directly inside the button. An appropriate gap is provided automatically.
+
+<SourceCode of={ButtonStories.AdornmentsStory} shown />
+
+## Props API
+
+The following table describes the props available for the Button component:
+
+<ArgTypes of={ButtonStories.DefaultStory} sort="alpha" />

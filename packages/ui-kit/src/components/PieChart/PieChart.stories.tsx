@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import React, { useState } from 'react'
+import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { FilterOperator, RelativeTimeRange, Sort } from '../../graphql'
 import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
-import { DefaultThemes, ThemeProvider, useSetupTheme } from '../ThemeProvider'
 import { PieChart as PieChartSource, PieChartComponent } from './PieChart'
 import { PieChartQueryProps } from './PieChart.types'
 
@@ -11,7 +10,7 @@ const meta: Meta<typeof PieChartComponent> = {
   title: 'Components/PieChart',
   component: PieChartComponent,
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }
@@ -80,7 +79,7 @@ const connectedParams: PieChartQueryProps = {
 export const SingleDimensionPieStory: Story = {
   name: 'Pie',
   args: {
-    query: {},
+    query: connectedParams,
     card: true
   },
   render: (args) => <PieChart {...args} />
@@ -254,35 +253,6 @@ export const ShowValuesDoughnutStory: Story = {
   render: (args) => <PieChart {...args} />
 }
 
-export const ThemeStory: Story = {
-  name: 'Theme',
-  args: {
-    variant: 'pie',
-    headers: pieHeaders,
-    rows: pieRows,
-    card: true
-  },
-  decorators: [
-    (Story) => {
-      const [baseTheme, setBaseTheme] = useState<DefaultThemes>('lightTheme')
-      const { theme } = useSetupTheme({ baseTheme })
-
-      return (
-        <ThemeProvider baseTheme={baseTheme} theme={theme}>
-          <div style={{ margin: '10px', display: 'flex', gap: '8px' }}>
-            <button type="button" onClick={() => setBaseTheme(baseTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme')}>
-              Switch theme
-            </button>
-            <span>{baseTheme}</span>
-          </div>
-          <Story />
-        </ThemeProvider>
-      )
-    }
-  ],
-  render: (args) => <PieChart {...args} />
-}
-
 export const EmptyPieStory: Story = {
   name: 'Empty State',
   args: {
@@ -290,7 +260,7 @@ export const EmptyPieStory: Story = {
       ...connectedParams,
       filters: [
         {
-          column: process.env.STORYBOOK_DIMENSION_4 ?? '',
+          column: process.env.STORYBOOK_DIMENSION_3 ?? '',
           operator: FilterOperator.IsNull
         }
       ]

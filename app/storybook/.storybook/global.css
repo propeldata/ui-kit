@@ -28,3 +28,7 @@ a.showCodeLink {
   font-size: 0.9em;
   color: #2e90fa;
 }
+
+.themeProvider {
+  --propel-color-panel: #00ff00;
+}

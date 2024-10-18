@@ -1,6 +1,7 @@
 import type { ChartConfiguration } from 'chart.js'
 import { DimensionInput, Sort } from '../../graphql'
-import { DataComponentProps, QueryProps } from '../shared.types'
+import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
+import { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'
 
@@ -21,14 +22,17 @@ export type ChartProps = {
   /** Sets the position of the legend
    * @default top
    */
-  legendPosition?: 'top' | 'bottom'
+  legendPosition?: 'top' | 'bottom' | 'left' | 'right'
 
   /** Shows the values on chart if it is set the true
    * @default false
    */
   showValues?: boolean
 
-  /** Sets the chart color palette */
+  /**
+   * Sets the chart color palette
+   * @deprecated This property is deprecated and will be removed in a future version. Use `accentColors` instead.
+   */
   chartColorPalette?: string[]
 
   /** Hides the total value on chart if it is set the true
@@ -47,7 +51,7 @@ export type PieChartData = {
   rows?: Array<Array<string | null>>
 }
 
-export interface PieChartQueryProps extends QueryProps {
+export interface PieChartQueryProps extends ChartQueryProps {
   /** The number of rows to be returned. It can be a number between 1 and 1,000 */
   rowLimit?: number
 
@@ -58,7 +62,7 @@ export interface PieChartQueryProps extends QueryProps {
   dimension?: DimensionInput
 }
 
-export interface PieChartProps extends DataComponentProps<'div'> {
+export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -88,6 +92,12 @@ export interface PieChartProps extends DataComponentProps<'div'> {
 
   /** Provides className to style label list of chart. */
   labelListClassName?: string
+
+  /** A list of accent colors the PieChart component will use, those will be picked in order */
+  accentColors?: (AccentColors | string)[]
+
+  /** Color that will be used for `other` */
+  otherColor?: GrayColors | string
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'pie' | 'doughnut'>) => ChartConfiguration<'pie' | 'doughnut'>

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { createContext, useCallback, useEffect, useRef, useState } from 'react'
 import { AccessTokenError } from './utils'
 import { sleep } from '../../helpers'
@@ -71,13 +73,15 @@ export const AccessTokenProvider: React.FC<AccessTokenProviderProps> = ({ childr
         setFetchedToken(token)
 
         break
-      } catch (error: any) {
+      } catch (error) {
+        const clientError = error as Error
+
         if (!mounted.current) break
         log.warn('Failed to fetch access token', error)
 
         if (retries === ACCESS_TOKEN_MAX_RETRIES) {
           setIsLoading(false)
-          setError(new AccessTokenError('Failed to fetch access token: ' + error.message))
+          setError(new AccessTokenError('Failed to fetch access token: ' + clientError.message))
         }
 
         retries++

@@ -1,5 +1,89 @@
 # react-16
 
+## 0.1.18
+
+### Patch Changes
+
+- Updated dependencies [c8e6a75]
+- Updated dependencies [bd82174]
+  - @propeldata/ui-kit@0.11.2
+  - dashboard-example@6.0.2
+
+## 0.1.17
+
+### Patch Changes
+
+- Updated dependencies [6bee8d0]
+  - @propeldata/ui-kit@0.11.1
+  - dashboard-example@6.0.1
+
+## 0.1.16
+
+### Patch Changes
+
+- Updated dependencies [8de412c]
+- Updated dependencies [e6c6f43]
+- Updated dependencies [8eda16a]
+- Updated dependencies [1f90bfd]
+- Updated dependencies [9df643a]
+  - @propeldata/ui-kit@0.11.0
+  - dashboard-example@6.0.0
+
+## 0.1.15
+
+### Patch Changes
+
+- Updated dependencies [276602c]
+  - @propeldata/ui-kit@0.10.0
+  - dashboard-example@5.0.0
+
+## 0.1.14
+
+### Patch Changes
+
+- Updated dependencies [2a75332]
+- Updated dependencies [fde5d2f]
+  - @propeldata/ui-kit@0.9.0
+  - dashboard-example@4.0.0
+
+## 0.1.13
+
+### Patch Changes
+
+- Updated dependencies [3aad817]
+  - @propeldata/ui-kit@0.8.1
+  - dashboard-example@3.0.1
+
+## 0.1.12
+
+### Patch Changes
+
+- Updated dependencies [f871bb0]
+- Updated dependencies [1356f97]
+  - @propeldata/ui-kit@0.8.0
+  - dashboard-example@3.0.0
+
+## 0.1.11
+
+### Patch Changes
+
+- Updated dependencies [9eb30cb]
+  - @propeldata/ui-kit@0.7.0
+  - dashboard-example@2.0.0
+
+## 0.1.10
+
+### Patch Changes
+
+- 153289d: Provides a fix for missing Inter font
+- Updated dependencies [153289d]
+- Updated dependencies [6c2cac3]
+- Updated dependencies [d91d97f]
+- Updated dependencies [aa54d0f]
+- Updated dependencies [d91d97f]
+  - dashboard-example@1.0.0
+  - @propeldata/ui-kit@0.6.0
+
 ## 0.1.9
 
 ### Patch Changes

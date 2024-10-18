@@ -1,3 +1,5 @@
+'use client'
+
 import { Chart as ChartJS, ChartConfiguration, Plugin } from 'chart.js'
 import classnames from 'classnames'
 import React from 'react'
@@ -13,15 +15,24 @@ import {
   withThemeWrapper
 } from '../../helpers'
 import { useLeaderboard } from '../../hooks/useLeaderboard'
+import {
+  useParsedComponentProps,
+  accentColors as accentColorsDict,
+  AccentColors,
+  handleArbitraryColor
+} from '../../themes'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
+import { useFilters } from '../FilterProvider'
 import { Loader, LoaderProps } from '../Loader'
+import { useLog } from '../Log'
 import { useSetupTheme } from '../ThemeProvider'
 import { withContainer } from '../withContainer'
 import componentStyles from './Leaderboard.module.scss'
 import type { LeaderboardData, LeaderboardProps } from './Leaderboard.types'
 import { getTableSettings, getValueWithPrefixAndSufix } from './utils'
 import { ValueBar } from './ValueBar'
-
+import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
+import { prettifyName } from '../shared.utils'
 let idCounter = 0
 
 export const LeaderboardComponent = React.forwardRef<HTMLDivElement, LeaderboardProps>(
@@ -37,7 +48,6 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       loading: isLoadingStatic = false,
       tableProps,
       chartProps,
-      baseTheme = 'lightTheme',
       labelFormatter,
       timeZone,
       loaderProps: loaderPropsInitial,
@@ -46,14 +56,24 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       errorFallback,
       renderEmpty,
       style,
+      accentColors = [],
       card = false,
+      prettifyHeaders = false,
       ...rest
     },
     forwardedRef
   ) => {
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor: (accentColors[0] as AccentColors) ?? rest.accentColor
+    })
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
+
+    const { groupBy, emptyGroupBy, maxGroupBy } = useFilters()
+
+    const log = useLog()
 
     const {
       theme,
@@ -63,10 +83,10 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       renderEmpty: renderEmptyComponent
     } = useSetupTheme<'bar'>({
       componentContainer,
-      baseTheme,
       renderLoader,
       errorFallback,
-      renderEmpty
+      renderEmpty,
+      ...themeSettings
     })
 
     const [propsMismatch, setPropsMismatch] = React.useState(false)
@@ -122,7 +142,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
 
         const customPlugins = {
           customCanvasBackgroundColor: {
-            color: card ? theme?.backgroundPrimary : 'transparent'
+            color: card ? 'transparent' : theme?.getVar('--propel-color-background')
           },
           legend: {
             display: false
@@ -130,17 +150,29 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           customChartLabelsPlugin
         }
 
+        const borderRadius = Math.max(
+          getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
+          getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
+        )
+
+        const accentColor = accentColors[0] ?? theme.accentColor
+
         let config: ChartConfiguration<'bar'> = {
           ...chartConfig,
           type: 'bar',
           data: {
-            labels: labels,
+            labels,
             datasets: [
               {
                 data: values,
-                backgroundColor: theme?.backgroundBrandSolid,
+                backgroundColor: accentColorsDict.includes(accentColor as AccentColors)
+                  ? theme?.getVar('--propel-accent-8')
+                  : handleArbitraryColor(accentColor),
+                hoverBackgroundColor: accentColorsDict.includes(accentColor as AccentColors)
+                  ? theme?.getVar('--propel-accent-10')
+                  : handleArbitraryColor(accentColor),
                 barThickness: labelPosition === 'top' ? 8 : 17,
-                borderRadius: parseInt(theme.radiusXs as string) ?? 4,
+                borderRadius,
                 borderWidth: 0
               }
             ]
@@ -162,14 +194,15 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 display: true,
                 grid: {
                   drawOnChartArea: false,
-                  color: theme.borderPrimary
+                  color: theme?.getVar('--propel-gray-a8')
                 },
                 border: {
-                  color: theme.borderPrimary
+                  color: theme?.getVar('--propel-gray-a8')
                 },
                 ticks: {
+                  color: theme?.getVar('--propel-gray-9'),
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
+                    size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
                   }
                 },
                 beginAtZero: true
@@ -179,15 +212,16 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
                 grid: {
                   drawOnChartArea: true,
                   drawTicks: false,
-                  color: theme.borderPrimary
+                  color: theme?.getVar('--propel-gray-a8')
                 },
                 border: {
                   display: false
                 },
                 ticks: {
                   padding: 17,
+                  color: theme?.getVar('--propel-gray-9'),
                   font: {
-                    size: getPixelFontSizeAsNumber(theme.textXxsRegularFontSize)
+                    size: getPixelFontSizeAsNumber(theme?.getVar('--propel-font-size-1'))
                   }
                 }
               }
@@ -209,6 +243,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
             chart.data = { ...config.data }
           }
 
+          chart.resize()
           chart.update('none')
           return
         }
@@ -216,7 +251,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         chartRef.current = new ChartJS(canvasRef.current, config)
         canvasRef.current.style.borderRadius = '0px'
       },
-      [variant, theme, card, chartProps, chartConfig, chartConfigProps, labelFormatter]
+      [variant, theme, chartConfig, chartProps, labelFormatter, card, accentColors, chartConfigProps]
     )
 
     React.useEffect(() => {
@@ -225,11 +260,24 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       }
     }, [isEmptyState, data, renderChart])
 
+    const dimensions =
+      query?.dimensions ??
+      (groupBy.length > 0
+        ? groupBy.map((columnName) => ({ columnName }))
+        : emptyGroupBy.map((columnName) => ({ columnName }))) ??
+      []
+
     const {
       data: fetchedData,
       isLoading,
       error: hasError
-    } = useLeaderboard({ ...query, timeZone: getTimeZone(query?.timeZone ?? timeZone), enabled: !isStatic })
+    } = useLeaderboard({
+      ...query,
+      dimensions,
+      timeZone: getTimeZone(query?.timeZone ?? timeZone),
+      enabled: !isStatic,
+      rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
+    })
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',
@@ -240,35 +288,28 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
     React.useEffect(() => {
       function handlePropsMismatch() {
         if (isStatic && !headers && !rows) {
-          // console.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props') we will set logs as a feature later
+          log.error('InvalidPropsError: You must pass either `headers` and `rows` or `query` props')
           setPropsMismatch(true)
           return
         }
 
         if (isStatic && (!headers || !rows)) {
-          // console.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`') we will set logs as a feature later
+          log.error('InvalidPropsError: When passing the data via props you must pass both `headers` and `rows`')
           setPropsMismatch(true)
 
           return
         }
 
-        if (
-          !isStatic &&
-          (hasError?.name === 'AccessTokenError' ||
-            !query.metric ||
-            !query.timeRange ||
-            !query.dimensions ||
-            !query.rowLimit)
-        ) {
-          // console.error(
-          //   'InvalidPropsError: When opting for fetching data you must pass at least `accessToken`, `metric`, `dimensions`, `rowLimit` and `timeRange` in the `query` prop'
-          // ) we will set logs as a feature later
+        if (!isStatic && (hasError?.name === 'AccessTokenError' || !query.metric)) {
+          log.error(
+            'InvalidPropsError: When opting for fetching data you must pass at least `accessToken` and `metric` in the `query` prop'
+          )
           setPropsMismatch(true)
           return
         }
 
         if (variant !== 'bar' && variant !== 'table') {
-          // console.error('InvalidPropsError: `variant` prop must be either `bar` or `table`') we will set logs as a feature later
+          log.error('InvalidPropsError: `variant` prop must be either `bar` or `table`')
           setPropsMismatch(false)
         }
 
@@ -278,7 +319,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       if (!isLoadingStatic) {
         handlePropsMismatch()
       }
-    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name])
+    }, [isStatic, headers, rows, query, isLoadingStatic, variant, hasError?.name, log])
 
     React.useEffect(() => {
       if (isStatic) {
@@ -353,7 +394,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
           ref={setRef}
           className={classnames(componentStyles.rootLeaderboard, className)}
           style={style}
-          {...rest}
+          {...parsedProps}
           data-container
         >
           <canvas id={id} ref={canvasRef} role="img" style={loadingStyles} />
@@ -361,7 +402,8 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
       )
     }
 
-    const tableHeaders = headers?.length ? headers : fetchedData?.leaderboard?.headers
+    const headersBase = headers?.length ? headers : fetchedData?.leaderboard?.headers
+    const tableHeaders = prettifyHeaders ? headersBase?.map(prettifyName) : headersBase
     const tableRows = isStatic ? rows : fetchedData?.leaderboard?.rows
 
     const {
@@ -394,7 +436,7 @@ export const LeaderboardComponent = React.forwardRef<HTMLDivElement, Leaderboard
         ref={setRef}
         className={classnames(componentStyles.rootLeaderboard, className)}
         style={{ ...style, ...loadingStyles }}
-        {...rest}
+        {...parsedProps}
         data-container
       >
         <table cellSpacing={0} className={classnames(stickyValues && componentStyles.stickyValues)}>

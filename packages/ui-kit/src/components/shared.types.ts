@@ -4,6 +4,7 @@ import type { ErrorFallback as ErrorFallbackComponent, ErrorFallbackProps } from
 import type { Loader as LoaderComponent, LoaderProps } from './Loader'
 import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
 import { ButtonProps } from './Button'
+import { CardProps } from './Card'
 
 /** Shared props for the data components. */
 
@@ -69,19 +70,10 @@ export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeCom
     card?: boolean
 
     /** Props for the Card component */
-    cardProps?: React.ComponentPropsWithoutRef<'div'>
+    cardProps?: CardProps
   }
 
 export interface QueryProps {
-  /** Indicates specific time zone region */
-  timeZone?: string
-
-  /**
-   * Specify the time range for a time series, counter, or leaderboard Metric query
-   * @type TimeRangeInput
-   */
-  timeRange?: TimeRangeInput
-
   /**
    * Access token used for the query. While you can pass this one to each component, we recommend wrapping components in the `AccessTokenProvider` instead:
    * @example
@@ -94,17 +86,6 @@ export interface QueryProps {
    * ```
    * */
   accessToken?: string
-
-  /**
-   * The `metric` prop allows you to specify which metric to query.
-   * You can query predefined metrics by passing their name or ID as a string, or
-   * you can query metrics on-the-fly by passing an inline metric definition to the prop.
-   * @type string | MetricInput
-   * */
-  metric?: string | MetricInput
-
-  /** Filters that the chart will respond to */
-  filters?: FilterInput[]
 
   /** Interval in milliseconds for refetching the data */
   refetchInterval?: number
@@ -137,4 +118,26 @@ export interface PaginationProps {
 
   /** The cursor to use when paging backward. */
   before?: string
+}
+
+export interface ChartQueryProps extends QueryProps {
+  /** Indicates specific time zone region */
+  timeZone?: string
+
+  /**
+   * Specify the time range for a time series, counter, or leaderboard Metric query
+   * @type TimeRangeInput
+   */
+  timeRange?: TimeRangeInput
+
+  /**
+   * The `metric` prop allows you to specify which metric to query.
+   * You can query predefined metrics by passing their name or ID as a string, or
+   * you can query metrics on-the-fly by passing an inline metric definition to the prop.
+   * @type string | MetricInput
+   * */
+  metric?: string | MetricInput
+
+  /** Filters that the chart will respond to */
+  filters?: FilterInput[]
 }

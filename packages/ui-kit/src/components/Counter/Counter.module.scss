@@ -1,8 +1,14 @@
-@use '../../themes/common';
+@use '../../themes/tokens/typography';
+
+%textSettings {
+  @extend %fontSize8;
+  color: var(--propel-gray-12);
+  font-weight: var(--propel-font-weight-bold);
+}
 
 .rootCounter {
-  @extend .displayLgBold;
-  color: var(--propel-text-primary);
+  @extend %textSettings;
+
   white-space: nowrap;
   transition: opacity 0.2s ease-in-out;
   opacity: 1;
@@ -13,6 +19,5 @@
 }
 
 .loader {
-  @extend .displayLgBold;
-  color: var(--propel-text-secondary);
+  @extend %textSettings;
 }

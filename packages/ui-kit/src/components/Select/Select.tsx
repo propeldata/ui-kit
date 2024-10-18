@@ -1,16 +1,21 @@
+'use client'
+
 import { Select as MUISelect, SelectProps as MUISelectProps } from '@mui/base/Select'
 import { SelectOptionDefinition, SelectProvider, useSelect } from '@mui/base/useSelect'
 import { prepareForSlot } from '@mui/base/utils'
 import classNames from 'classnames'
 import * as React from 'react'
 import { useCombinedRefsCallback } from '../../helpers'
+import { ThemeSettingProps, useParsedComponentProps } from '../../themes'
 import { Button, ButtonProps } from '../Button'
 import { ChevronDownIcon } from '../Icons/ChevronDown'
+import { useSetupTheme } from '../ThemeProvider'
 import { Option, OptionValue } from './Option'
 import componentStyles from './Select.module.scss'
 
 export interface SelectProps<T extends OptionValue>
-  extends Pick<ButtonProps, 'startAdornment' | 'endAdornment' | 'size'>,
+  extends ThemeSettingProps,
+    Pick<ButtonProps, 'startAdornment' | 'endAdornment' | 'size'>,
     MUISelectProps<T, false> {
   options?: SelectOptionDefinition<T>[]
 }
@@ -34,7 +39,9 @@ const SelectComponent = <T extends OptionValue>(
   forwardedRef: React.ForwardedRef<HTMLButtonElement>
 ) => {
   const innerRef = React.useRef<HTMLButtonElement>(null)
-  const { setRef, ref } = useCombinedRefsCallback({ forwardedRef, innerRef })
+  const { setRef, ref, componentContainer } = useCombinedRefsCallback({ forwardedRef, innerRef })
+  const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(rest)
+  useSetupTheme({ componentContainer: componentContainer?.parentElement, ...themeSettings })
   const popperRef = React.useRef<HTMLDivElement>(null)
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
   const [listboxVisible, setListboxVisible] = React.useState(listboxOpen)
@@ -93,45 +100,59 @@ const SelectComponent = <T extends OptionValue>(
   )
 
   return (
-    <MUISelect<T, false>
-      ref={setRef}
-      value={value}
-      className={classNames(componentStyles.rootSelect, className)}
-      {...rest}
-      slots={{ root: ButtonSlot }}
-      slotProps={{
-        root: getButtonProps({
-          startAdornment,
-          endAdornment,
-          size,
-          value: value?.label ?? undefined,
-          className: classNames(componentStyles.button, componentStyles.rootButton, {
-            [componentStyles[size]]: size && size !== 'default'
-          })
-        }),
-        listbox,
-        popper: {
-          ref: popperRef,
-          className: classNames(
-            componentStyles.popper,
-            { [componentStyles[size]]: size && size !== 'default' },
-            slotProps?.popper != null && 'className' in slotProps.popper && slotProps?.popper?.className
-          ),
-          onKeyDown,
-          disablePortal: true,
-          open
-        }
-      }}
-    >
-      <SelectProvider value={contextValue}>
-        {children && !options && children}
-        {options?.map((option, idx) => (
-          <Option key={idx} {...option}>
-            {option.label}
-          </Option>
-        ))}
-      </SelectProvider>
-    </MUISelect>
+    <div {...parsedPropsWithoutRest}>
+      <MUISelect<T, false>
+        ref={setRef}
+        value={value}
+        className={classNames(componentStyles.rootSelect, className)}
+        {...rest}
+        slots={{ root: ButtonSlot, ...rest.slots }}
+        slotProps={{
+          root: {
+            ...getButtonProps({
+              startAdornment,
+              endAdornment,
+              size,
+              value: value?.label ?? undefined,
+              className: classNames(componentStyles.button, componentStyles.rootButton, {
+                [componentStyles.startAdornment]: startAdornment,
+                [componentStyles.endAdornment]: endAdornment,
+                [componentStyles[size]]: size && size !== 'default'
+              }),
+              ...slotProps?.root
+            }),
+            onBlur: (event) => {
+              if (!popperRef.current?.contains(event.relatedTarget)) {
+                setTimeout(() => {
+                  setListboxVisible(false)
+                }, 100)
+              }
+            }
+          },
+          listbox,
+          popper: {
+            ref: popperRef,
+            className: classNames(
+              componentStyles.popper,
+              { [componentStyles[size]]: size && size !== 'default' },
+              slotProps?.popper != null && 'className' in slotProps.popper && slotProps?.popper?.className
+            ),
+            onKeyDown,
+            disablePortal: true,
+            open
+          }
+        }}
+      >
+        <SelectProvider value={contextValue}>
+          {children && !options && children}
+          {options?.map((option, idx) => (
+            <Option key={idx} {...option}>
+              {option.label}
+            </Option>
+          ))}
+        </SelectProvider>
+      </MUISelect>
+    </div>
   )
 }
 

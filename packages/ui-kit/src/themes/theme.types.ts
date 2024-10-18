@@ -1,243 +1,75 @@
-import { CSSProperties } from 'react'
-import type { DefaultThemes } from '../components/ThemeProvider/ThemeProvider.types'
-import { ThemeTokenGeneratedProps, ThemeCSSTokenGeneratedProps } from './generated/theme.types'
+// prettier-ignore
+export const accentColors = ['amber', 'blue', 'bronze', 'brown', 'crimson', 'cyan', 'gold', 'grass', 'gray', 'green', 'indigo', 'iris', 'jade', 'lime', 'mint', 'orange', 'pink', 'plum', 'purple', 'red', 'ruby', 'sky', 'teal', 'tomato', 'violet', 'yellow'] as const
+export type AccentColors = (typeof accentColors)[number]
 
-export interface ThemeTokenProps extends ThemeTokenGeneratedProps {
-  baseTheme?: DefaultThemes
-  componentHeight?: CSSProperties['height']
-  transitionEaseTime?: CSSProperties['transitionDuration']
+export const grayColors = ['auto', 'gray', 'mauve', 'slate', 'sage', 'olive', 'sand'] as const
+export type GrayColors = (typeof grayColors)[number]
 
-  /** @deprecated This property is deprecated, use `textMdRegularFontFamily` instead */
-  fontFamily?: CSSProperties['fontFamily']
-  /** @deprecated This property is deprecated, use `textMdRegularFontSize` instead */
-  fontSize?: CSSProperties['fontSize']
-  /** @deprecated This property is deprecated, use `textMdRegularFontWeight` instead */
-  fontWeight?: CSSProperties['fontWeight']
-  /** @deprecated This property is deprecated, use `textMdRegularLineHeight` instead */
-  lineHeight?: CSSProperties['lineHeight']
+export const radii = ['none', 'small', 'medium', 'large', 'full'] as const
+export type Radii = (typeof radii)[number]
 
-  /** @deprecated This property is deprecated, use `textXxsRegularFontFamily` instead */
-  tinyFontFamily?: CSSProperties['fontFamily']
-  /** @deprecated This property is deprecated, use `textXxsRegularFontSize` instead */
-  tinyFontSize?: CSSProperties['fontSize']
-  /** @deprecated This property is deprecated, use `textXxsRegularFontWeight` instead */
-  tinyFontWeight?: CSSProperties['fontWeight']
-  /** @deprecated This property is deprecated, use `textXxsRegularLineHeight` instead */
-  tinyLineHeight?: CSSProperties['lineHeight']
+export const scalings = ['90%', '95%', '100%', '105%', '110%'] as const
+export type Scalings = (typeof scalings)[number]
 
-  /** @deprecated This property is deprecated, use `textXsRegularFontFamily` instead */
-  smallFontFamily?: CSSProperties['fontFamily']
-  /** @deprecated This property is deprecated, use `textXsRegularFontSize` instead */
-  smallFontSize?: CSSProperties['fontSize']
-  /** @deprecated This property is deprecated, use `textXsRegularFontWeight` instead */
-  smallFontWeight?: CSSProperties['fontWeight']
-  /** @deprecated This property is deprecated, use `textXsRegularLineHeight` instead */
-  smallLineHeight?: CSSProperties['lineHeight']
+export const panelBackgrounds = ['solid', 'translucent'] as const
+export type PanelBackgrounds = (typeof panelBackgrounds)[number]
 
-  /** @deprecated This property will be deprecated soon */
-  h1FontFamily?: CSSProperties['fontFamily']
-  /** @deprecated This property will be deprecated soon */
-  h1FontSize?: CSSProperties['fontSize']
-  /** @deprecated This property will be deprecated soon */
-  h1FontWeight?: CSSProperties['fontWeight']
-  /** @deprecated This property will be deprecated soon */
-  h1LineHeight?: CSSProperties['lineHeight']
+export type ThemeAppearances = 'light' | 'dark'
 
-  /** @deprecated This property is deprecated, use `spacingXxs` instead */
-  spaceXxs?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `spacingXs` instead */
-  spaceXs?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `spacingSm` instead */
-  spaceSm?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `spacingMd` instead */
-  spaceMd?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `spacingLg` instead */
-  spaceLg?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `spacingXl` instead */
-  spaceXl?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `spacing2xl` instead */
-  spaceXxl?: CSSProperties['margin']
-
-  /** @deprecated This property is deprecated, use `radiusXs` instead */
-  borderRadiusXs?: CSSProperties['borderRadius']
-  /** @deprecated This property is deprecated, use `radiusSm` instead */
-  borderRadiusSm?: CSSProperties['borderRadius']
-  /** @deprecated This property is deprecated, use `shadowsShadowXs` instead */
-  shadowSm?: CSSProperties['boxShadow']
-
-  /** @deprecated This property will be deprecated soon */
-  successPrimary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  successSecondary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  errorPrimary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  errorSecondary?: CSSProperties['color']
-
-  /** @deprecated This property will be deprecated soon */
-  colorPrimary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorSecondary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  bgPrimary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  bgSecondary?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  accent?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  accentHover?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorGradient?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorLoader?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorLoaderAnimation?: CSSProperties['color']
-
+export type ThemeSettingProps = {
   /**
-   * Color Blue
+   * The initial theme used as a base. It provides a default set of styling
+   * from which customizations can be applied.
    */
-  /** @deprecated This property will be deprecated soon */
-  colorBlue950?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue900?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue800?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue700?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue600?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue500?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue400?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue300?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue200?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue100?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue50?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  colorBlue25?: CSSProperties['color']
+  appearance?: ThemeAppearances
+  /**
+   * The global theme accent color. This color is used to highlight elements
+   */
+  accentColor?: AccentColors
+  /**
+   * The global theme gray color. This color is used for text and background colors
+   */
+  grayColor?: GrayColors
+  /**
+   * The global theme radius color. This color is used for border radius
+   */
+  radius?: Radii
+  /**
+   * The global theme scaling. This value is used to scale components
+   */
+  scaling?: Scalings
+  /**
+   * The global theme panel background. This value is used to set the panel background
+   */
+  panelBackground?: PanelBackgrounds
 }
 
-export interface ThemeCSSTokenProps extends ThemeCSSTokenGeneratedProps {
-  '--propel-component-height'?: CSSProperties['height']
-  '--propel-transition-ease-time'?: CSSProperties['height']
-
-  /** @deprecated This property is deprecated, use `--propel-text-md-regular-font-family` instead */
-  '--propel-font-family'?: CSSProperties['fontFamily']
-  /** @deprecated This property is deprecated, use `--propel-text-md-regular-font-size` instead */
-  '--propel-font-size'?: CSSProperties['fontSize']
-  /** @deprecated This property is deprecated, use `--propel-text-md-regular-font-weight` instead */
-  '--propel-font-weight'?: CSSProperties['fontWeight']
-  /** @deprecated This property is deprecated, use `--propel-text-md-regular-line-height` instead */
-  '--propel-line-height'?: CSSProperties['lineHeight']
-
-  /** @deprecated This property is deprecated, use `--propel-text-xxs-regular-font-family` instead */
-  '--propel-tiny-font-family'?: CSSProperties['fontFamily']
-  /** @deprecated This property is deprecated, use `--propel-text-xxs-regular-font-size` instead */
-  '--propel-tiny-font-size'?: CSSProperties['fontSize']
-  /** @deprecated This property is deprecated, use `--propel-text-xxs-regular-font-weight` instead */
-  '--propel-tiny-font-weight'?: CSSProperties['fontWeight']
-  /** @deprecated This property is deprecated, use `--propel-text-xxs-regular-line-height` instead */
-  '--propel-tiny-line-height'?: CSSProperties['lineHeight']
-
-  /** @deprecated This property is deprecated, use `--propel-text-xs-regular-font-family` instead */
-  '--propel-small-font-family'?: CSSProperties['fontFamily']
-  /** @deprecated This property is deprecated, use `--propel-text-xs-regular-font-size` instead */
-  '--propel-small-font-size'?: CSSProperties['fontSize']
-  /** @deprecated This property is deprecated, use `--propel-text-xs-regular-font-weight` instead */
-  '--propel-small-font-weight'?: CSSProperties['fontWeight']
-  /** @deprecated This property is deprecated, use `--propel-text-xs-regular-line-height` instead */
-  '--propel-small-line-height'?: CSSProperties['lineHeight']
-
-  /** @deprecated This property will be deprecated soon */
-  '--propel-h1-font-family'?: CSSProperties['fontFamily']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-h1-font-size'?: CSSProperties['fontSize']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-h1-font-weight'?: CSSProperties['fontWeight']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-h1-line-height'?: CSSProperties['lineHeight']
-
-  /** @deprecated This property is deprecated, use `--propel-spacing-xxs` instead */
-  '--propel-space-xxs'?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `--propel-spacing-xs` instead */
-  '--propel-space-xs'?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `--propel-spacing-sm` instead */
-  '--propel-space-sm'?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `--propel-spacing-md` instead */
-  '--propel-space-md'?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `--propel-spacing-lg` instead */
-  '--propel-space-lg'?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `--propel-spacing-xl` instead */
-  '--propel-space-xl'?: CSSProperties['margin']
-  /** @deprecated This property is deprecated, use `--propel-spacing-2xl` instead */
-  '--propel-space-xxl'?: CSSProperties['margin']
-
-  /** @deprecated This property is deprecated, use `radiusXs` instead */
-  '--propel-border-radius-xs'?: CSSProperties['borderRadius']
-  /** @deprecated This property is deprecated, use `radiusSm` instead */
-  '--propel-border-radius-sm'?: CSSProperties['borderRadius']
-  /** @deprecated This property is deprecated, use `shadowsShadowXs` instead */
-  '--propel-shadow-sm'?: CSSProperties['boxShadow']
-
-  /** @deprecated This property is deprecated */
-  '--propel-success-primary'?: CSSProperties['color']
-  /** @deprecated This property is deprecated */
-  '--propel-success-secondary'?: CSSProperties['color']
-  /** @deprecated This property is deprecated */
-  '--propel-error-primary'?: CSSProperties['color']
-  /** @deprecated This property is deprecated */
-  '--propel-error-secondary'?: CSSProperties['color']
-
-  /** @deprecated This property will be deprecated soon */
-  '--propel-color-primary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-color-secondary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-bg-primary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-bg-secondary'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-accent'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-accent-hover'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-color-gradient'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-color-loader'?: CSSProperties['color']
-  /** @deprecated This property will be deprecated soon */
-  '--propel-color-loader-animation'?: CSSProperties['color']
-
-  '--propel-color-blue950'?: CSSProperties['color']
-  '--propel-color-blue900'?: CSSProperties['color']
-  '--propel-color-blue800'?: CSSProperties['color']
-  '--propel-color-blue700'?: CSSProperties['color']
-  '--propel-color-blue600'?: CSSProperties['color']
-  '--propel-color-blue500'?: CSSProperties['color']
-  '--propel-color-blue400'?: CSSProperties['color']
-  '--propel-color-blue300'?: CSSProperties['color']
-  '--propel-color-blue200'?: CSSProperties['color']
-  '--propel-color-blue100'?: CSSProperties['color']
-  '--propel-color-blue50'?: CSSProperties['color']
-  '--propel-color-blue25'?: CSSProperties['color']
+export interface ThemeTokenProps extends ThemeSettingProps {
+  /**
+   * The root theme container element
+   */
+  componentContainer?: HTMLElement | null
+  /** The component root element to which the theme will be applied. */
+  themeProviderContainer?: HTMLElement | null
+  /**
+   * Method that returns the value of a CSS variable from the theme.
+   */
+  getVar: (varName: string) => string
+  tokens: {
+    [key: string]: string
+  }
 }
-
-/**
- * This type is used to extend the React.CSSProperties type with the CSS variables defined in the theme.
- */
-export interface ThemeCSSProperties extends React.CSSProperties, ThemeCSSTokenProps {}
 
 export type ThemeComponentProps = {
   /** Supports all standard CSS properties along with custom theme-based CSS variables */
-  style?: ThemeCSSProperties
+  style?: React.CSSProperties
 
   /** Provides a className for the ErrorFallback container */
   className?: string
+}
 
-  /** Base theme to be used */
-  baseTheme?: DefaultThemes
+export interface PaletteColor {
+  name: AccentColors
+  primary: string
+  secondary: string
 }

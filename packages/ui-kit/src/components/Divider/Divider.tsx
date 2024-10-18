@@ -1,3 +1,5 @@
+'use client'
+
 import classNames from 'classnames'
 import React from 'react'
 import componentStyles from './Divider.module.scss'

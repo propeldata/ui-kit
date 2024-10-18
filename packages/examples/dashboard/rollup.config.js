@@ -4,6 +4,7 @@ const terser = require('@rollup/plugin-terser')
 const postcss = require('rollup-plugin-postcss')
 const typescript = require('rollup-plugin-typescript2')
 const tailwindcss = require('tailwindcss')
+const svgr = require('@svgr/rollup')
 const pkg = require('./package.json')
 
 const tailwindConfig = require('./tailwind.config.js')
@@ -37,6 +38,7 @@ module.exports = {
     }),
     nodeResolve(),
     commonjs(),
+    svgr(),
     typescript({
       clean: true,
       tsconfig: 'tsconfig.build.json',

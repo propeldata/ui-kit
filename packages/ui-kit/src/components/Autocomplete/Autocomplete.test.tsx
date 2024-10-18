@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 
-import { Dom } from 'src/testing'
+import { Dom } from '../../testing'
 import { Autocomplete } from './Autocomplete'
 import { AutocompleteOption } from './Autocomplete.types'
 

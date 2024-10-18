@@ -6,6 +6,53 @@ import * as TimeSeriesStories from '../../../../packages/ui-kit/src/components/T
 
 # Migration guide
 
+## Migration to UI Kit v0.6.0
+
+This version has some breaking changes. Please follow the steps below to migrate your code.
+
+### Access to Theme Tokens from JavaScript
+
+Previously you could access theme tokens from JavaScript directly using token JS-name. Now, you can access theme tokens
+using the theme's getVar function and CSS token name.
+
+#### Before (using token JS-name)
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { Counter, useTheme } from "@propeldata/ui-kit";
+
+    function MyCounter() {
+      const theme = useTheme();
+
+      return (
+        <Counter value="10000" style={{ color: theme.textPrimary }} />
+      );
+    }
+
+`} />
+
+#### After (using getVar function)
+
+<Source
+  language="tsx"
+  format="dedent"
+  dark
+  code={`
+    import { Counter, useTheme } from "@propeldata/ui-kit";
+
+    function MyCounter() {
+      const theme = useTheme();
+
+      return (
+        <Counter value="10000" style={{ color: theme.getVar('--propel-accent-11') }} />
+      );
+    }
+
+`} />
+
 ## Migration to UI Kit v0.4.0
 
 This version has some breaking changes. Please follow the steps below to migrate your code.

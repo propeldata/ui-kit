@@ -2,15 +2,19 @@ import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 import { endOfYesterday, startOfYesterday } from 'date-fns'
 import React from 'react'
-import { storybookCodeTemplate } from '../../helpers'
+import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 import { TimeRangePicker as TimeRangePickerSource } from './TimeRangePicker'
+import { FilterProvider } from '../FilterProvider'
+import axiosInstance from '../../../../../app/storybook/src/axios'
+import { TimeSeries as TimeSeriesSource, TimeSeriesProps } from '../TimeSeries'
+import { TimeSeriesGranularity } from '../../graphql'
 
 const meta: Meta<typeof TimeRangePickerSource> = {
   title: 'Components/TimeRangePicker',
   component: TimeRangePickerSource,
   tags: ['tag'],
   argTypes: {
-    baseTheme: {
+    appearance: {
       table: {
         disable: true
       }
@@ -30,6 +34,28 @@ type Story = StoryObj<typeof TimeRangePickerSource>
 
 const TimeRangePicker = (args: Story['args']) => {
   return <TimeRangePickerSource {...args} />
+}
+
+const TimeSeries = (args: TimeSeriesProps) => {
+  const { accessToken } = useStorybookAccessToken(axiosInstance)
+
+  if (!accessToken && args?.query) {
+    return null
+  }
+
+  return (
+    <TimeSeriesSource
+      {...{
+        ...args,
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
+      }}
+    />
+  )
 }
 
 const value365 = {
@@ -99,4 +125,26 @@ export const CustomOptionsStory: Story = {
     disableCustomRelative: true
   },
   render: (args) => <TimeRangePicker {...args} />
+}
+
+export const FiltersProviderStory: Story = {
+  name: 'Filters Provider',
+  args: {
+    defaultValue: {
+      value: 'last-365-days'
+    }
+  },
+  render: (args) => (
+    <FilterProvider>
+      <TimeRangePicker {...args} />
+      <TimeSeries
+        card
+        query={{
+          metric: 'Revenue',
+          granularity: TimeSeriesGranularity.Day
+        }}
+        style={{ marginTop: '12px' }}
+      />
+    </FilterProvider>
+  )
 }

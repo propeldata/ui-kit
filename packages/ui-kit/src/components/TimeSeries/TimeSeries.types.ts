@@ -2,23 +2,34 @@ import type { ChartConfiguration, ScaleOptionsByType } from 'chart.js'
 import { DeepPartial } from 'chart.js/dist/types/utils'
 import { TimeSeriesGranularity } from '../../graphql'
 import { TimeSeriesLabels } from '../../helpers'
-import type { DataComponentProps, QueryProps } from '../shared.types'
+import { AccentColors, GrayColors, ThemeSettingProps } from '../../themes'
+import type { DataComponentProps, ChartQueryProps } from '../shared.types'
+
+export const DEFAULT_VARIANT = 'bar'
 
 export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linear' | 'logarithmic'> }>
 
 export type TimeSeriesChartVariant = 'bar' | 'line'
 
 export type TimeSeriesData = {
-  values?: Array<number | string | null>
+  values?: (number | string | null)[]
   labels?: string[]
+  groups?: {
+    values?: (number | string | null)[]
+    labels?: string[]
+    group?: (string | null)[]
+  }[]
 }
 
-export interface TimeSeriesQueryProps extends QueryProps {
+export interface TimeSeriesQueryProps extends ChartQueryProps {
   /** Granularity that the chart will respond to */
   granularity?: TimeSeriesGranularity
 
   /** Timestamp format that the chart will respond to */
   timestampFormat?: string
+
+  /** Query groups based on columns for multi-dimensional time series */
+  groupBy?: string[]
 }
 
 export interface TimeSeriesChartProps {
@@ -29,7 +40,7 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
+export interface TimeSeriesBaseProps extends Omit<ThemeSettingProps, 'accentColor'>, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -62,16 +73,45 @@ export interface TimeSeriesBaseProps extends DataComponentProps<'div'> {
 
   /** @deprecated Format function for labels, must return an array with the new labels. This type is deprecated, use `chartConfigProps` instead. */
   labelFormatter?: (labels: TimeSeriesLabels) => TimeSeriesLabels
+
+  /** Maximum number of columns to group by, default is 5 */
+  maxGroupBy?: number
+
+  /** If true, an `other` dataset will be shown */
+  showGroupByOther?: boolean
+
+  /** A list of accent colors the TimeSeries component will use to show groups, those will be picked in order */
+  accentColors?: (AccentColors | string)[]
+
+  /** If true, chart's lines or bars will be stacked */
+  stacked?: boolean
+
+  /** Color that will be used for the `other` dataset when using groupBy */
+  otherColor?: GrayColors | string
+
+  /**
+   * The global theme accent color. This color is used to highlight elements
+   *
+   * @deprecated - This prop is deprecated and will be removed in a future release. Use `accentColors` prop instead.
+   */
+  accentColor?: AccentColors
+}
+export interface TimeSeriesDefaultVariantProps extends TimeSeriesBaseProps {
+  variant?: undefined
+  chartConfigProps?: (config: ChartConfiguration<typeof DEFAULT_VARIANT>) => ChartConfiguration<typeof DEFAULT_VARIANT>
 }
 
 export interface TimeSeriesLineProps extends TimeSeriesBaseProps {
-  variant?: 'line'
+  variant: 'line'
   chartConfigProps?: (config: ChartConfiguration<'line'>) => ChartConfiguration<'line'>
 }
 
 export interface TimeSeriesBarProps extends TimeSeriesBaseProps {
-  variant?: 'bar'
+  variant: 'bar'
   chartConfigProps?: (config: ChartConfiguration<'bar'>) => ChartConfiguration<'bar'>
 }
 
-export type TimeSeriesProps = TimeSeriesLineProps | TimeSeriesBarProps
+export type TimeSeriesProps =
+  | (TimeSeriesDefaultVariantProps & { variant?: undefined })
+  | TimeSeriesLineProps
+  | TimeSeriesBarProps

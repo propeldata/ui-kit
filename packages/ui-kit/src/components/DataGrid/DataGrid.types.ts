@@ -1,6 +1,6 @@
 import React from 'react'
 
-import type { DataComponentProps, PaginationProps, QueryProps } from '../../components/shared.types'
+import type { ChartQueryProps, DataComponentProps, PaginationProps } from '../../components/shared.types'
 import type { DataPoolInput, Sort } from '../../graphql'
 
 export type DataGridData = {
@@ -8,7 +8,7 @@ export type DataGridData = {
   rows?: (string | null)[][]
 }
 
-export interface DataGridQueryProps extends Omit<QueryProps, 'metric'>, PaginationProps {
+export interface DataGridQueryProps extends Omit<ChartQueryProps, 'metric'>, PaginationProps {
   /** The columns to retrieve. */
   columns?: string[]
 

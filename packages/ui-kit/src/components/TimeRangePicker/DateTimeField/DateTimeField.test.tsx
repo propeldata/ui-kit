@@ -19,8 +19,8 @@ describe('DateTimeField', () => {
     const dateRange = { from: new Date(2022, 3, 15, 10, 30), to: new Date(2022, 3, 20, 15, 45) }
     render(<DateTimeField dateRange={dateRange} rangeRole="from" onChange={mockOnChange} />)
 
-    const dateInput = screen.getByTestId('date-input') as HTMLInputElement
-    const timeInput = screen.getByTestId('time-input') as HTMLInputElement
+    const dateInput = screen.getByTestId('date-input').querySelector('input') as HTMLInputElement
+    const timeInput = screen.getByTestId('time-input').querySelector('input') as HTMLInputElement
 
     expect(dateInput.value).toBe('04/15/2022')
     expect(timeInput.value).toBe('10:30:00 AM')
@@ -31,7 +31,7 @@ describe('DateTimeField', () => {
 
     render(<DateTimeField dateRange={dateRange} rangeRole="from" onChange={mockOnChange} />)
 
-    const dateInput = screen.getByTestId('date-input') as HTMLInputElement
+    const dateInput = screen.getByTestId('date-input').querySelector('input') as HTMLInputElement
 
     fireEvent.keyDown(dateInput, { key: 'ArrowUp' })
     expect(dateInput.value).toBe('04/16/2022')
@@ -39,7 +39,7 @@ describe('DateTimeField', () => {
     fireEvent.keyDown(dateInput, { key: 'ArrowDown' })
     expect(dateInput.value).toBe('04/15/2022')
 
-    const timeInput = screen.getByTestId('time-input') as HTMLInputElement
+    const timeInput = screen.getByTestId('time-input').querySelector('input') as HTMLInputElement
 
     fireEvent.keyDown(timeInput, { key: 'ArrowUp' })
     expect(timeInput.value).toBe('10:31:00 AM')
@@ -56,7 +56,7 @@ describe('DateTimeField', () => {
 
     render(<DateTimeField rangeRole="from" onChange={mockOnChange} />)
 
-    const dateInput = screen.getByTestId('date-input') as HTMLInputElement
+    const dateInput = screen.getByTestId('date-input').querySelector('input') as HTMLInputElement
 
     fireEvent.change(dateInput, { target: { value: 'invalid date' } })
     fireEvent.blur(dateInput)
@@ -69,7 +69,7 @@ describe('DateTimeField', () => {
 
     render(<DateTimeField rangeRole="from" onChange={mockOnChange} />)
 
-    const dateInput = screen.getByTestId('date-input') as HTMLInputElement
+    const dateInput = screen.getByTestId('date-input').querySelector('input') as HTMLInputElement
 
     fireEvent.change(dateInput, { target: { value: 'invalid date' } })
     fireEvent.blur(dateInput)
@@ -89,7 +89,7 @@ describe('DateTimeField', () => {
       <DateTimeField dateRange={{ from: new Date(2022, 3, 15, 10, 30) }} rangeRole="from" onChange={mockOnChange} />
     )
 
-    const timeInput = screen.getByTestId('time-input') as HTMLInputElement
+    const timeInput = screen.getByTestId('time-input').querySelector('input') as HTMLInputElement
 
     fireEvent.change(timeInput, { target: { value: '11:00:00 AM' } })
     fireEvent.blur(timeInput)
@@ -100,8 +100,8 @@ describe('DateTimeField', () => {
   it('handles date and time errors separately', async () => {
     render(<DateTimeField rangeRole="from" onChange={() => {}} />)
 
-    const dateInput = screen.getByTestId('date-input') as HTMLInputElement
-    const timeInput = screen.getByTestId('time-input') as HTMLInputElement
+    const dateInput = screen.getByTestId('date-input').querySelector('input') as HTMLInputElement
+    const timeInput = screen.getByTestId('time-input').querySelector('input') as HTMLInputElement
 
     fireEvent.change(dateInput, { target: { value: 'invalid date' } })
     fireEvent.change(timeInput, { target: { value: 'invalid time' } })

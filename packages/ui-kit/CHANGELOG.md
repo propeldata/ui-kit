@@ -1,5 +1,84 @@
 # @propeldata/ui-kit
 
+## 0.11.2
+
+### Patch Changes
+
+- c8e6a75: Fix readme image URL
+- bd82174: Fix chartConfigProps type definition for TimeSeries
+
+## 0.11.1
+
+### Patch Changes
+
+- 6bee8d0: Remove unnecessary log
+
+## 0.11.0
+
+### Minor Changes
+
+- 8de412c: added support for groupBy on TimeSeries component
+
+### Patch Changes
+
+- e6c6f43: Deprecated `accentColor` in favor of `accentColors`
+- 8eda16a: Fix border radius inconsistent
+- 1f90bfd: Added Card component to Tabs
+- 9df643a: - Leaderboard not working with FilterProvider timeRange
+  - PieChart legendPosition wrong type
+  - Leaderboard `accentColors` prop
+
+## 0.10.0
+
+### Minor Changes
+
+- 276602c: Added new TimeGrainPicker component
+
+## 0.9.0
+
+### Minor Changes
+
+- 2a75332: Export colors
+
+### Patch Changes
+
+- fde5d2f: Wrap ThemeProvider for components
+
+## 0.8.1
+
+### Patch Changes
+
+- 3aad817: Fix Container not being exported
+
+## 0.8.0
+
+### Minor Changes
+
+- f871bb0: Expose radix components
+- 1356f97: - Autocomplete component styles will be consistent with Select component
+  - Autocomplete will be clearable and expose a `disableClearable` prop to disable the feature
+
+## 0.7.0
+
+### Minor Changes
+
+- 9eb30cb: - TimeRangePicker will work along with FilterProvider
+  - Components will be compatible with RSC and will be exported as client
+  - Components will log props mismatch errors
+
+## 0.6.0
+
+### Minor Changes
+
+- 6c2cac3: Migrate to radix colors/theme
+- d91d97f: [Button, Divider, FormField, Input, Select, TimeRangePicker, Typography]: added new components
+
+### Patch Changes
+
+- 153289d: Provides a fix for missing Inter font
+- aa54d0f: Added Design Tokens synchronization automation from Figma to UI Kit
+- d91d97f: Sync all the UI components with new design tokens
+
 ## 0.5.5
 
 ### Patch Changes
