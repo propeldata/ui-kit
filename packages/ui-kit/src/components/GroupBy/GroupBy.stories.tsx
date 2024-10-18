@@ -13,10 +13,6 @@ import { PieChart as PieChartSource } from '../PieChart'
 const meta: Meta<typeof GroupBySource> = {
   title: 'Components/GroupBy',
   component: GroupBySource,
-  tags: ['autodocs'],
-  argTypes: {
-    // Add any specific argTypes here if needed
-  },
   parameters: {
     controls: { sort: 'alpha' },
     imports: 'GroupBy',
@@ -164,8 +160,7 @@ export const Prettified: Story = {
         name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1
       }
     },
-    prettifyColumnNames: true,
-    includeColumns: ['taco_name']
+    prettifyColumnNames: true
   },
   render: (args) => (
     <FilterProvider>

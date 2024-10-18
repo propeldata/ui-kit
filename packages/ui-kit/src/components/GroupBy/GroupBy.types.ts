@@ -31,10 +31,10 @@ export interface GroupByProps
   /** If true, it will format camelCase and snake_case column names to a readable format */
   prettifyColumnNames?: boolean
 
-  /** Function to format the group by label */
+  /** Function to format column names */
   nameFormatter?: (name: string) => string
 
-  /** Columns to include, if not passed, all columns will be included, pass ["*"] to include all columns */
+  /** Columns to include, if not passed, all columns will be included, pass `["*"]` to include all columns */
   includeColumns?: string[]
 
   /** Maximum number of group by columns */
