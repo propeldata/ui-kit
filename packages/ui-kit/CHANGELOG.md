@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.12.0
+
+### Minor Changes
+
+- 00be816: Added GroupBy component
+
 ## 0.11.2
 
 ### Patch Changes
