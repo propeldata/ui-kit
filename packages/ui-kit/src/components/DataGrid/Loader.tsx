@@ -3,7 +3,7 @@ import React from 'react'
 import { useForwardedRefCallback } from '../../helpers'
 import { Button } from '../Button'
 import { Loader as SkeletonLoader } from '../Loader'
-import { DefaultThemes, useSetupTheme } from '../ThemeProvider'
+import { DefaultThemes } from '../ThemeProvider'
 import componentStyles from './DataGrid.module.scss'
 
 interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
@@ -12,9 +12,8 @@ interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
 }
 
 export const LoaderComponent = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ disablePagination = false, baseTheme, className, ...rest }, forwardedRef) => {
-    const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
-    const { theme } = useSetupTheme({ componentContainer, baseTheme })
+  ({ disablePagination = false, className, ...rest }, forwardedRef) => {
+    const { setRef } = useForwardedRefCallback(forwardedRef)
 
     const dummyArrayRows = [...new Array(25)]
     const dummyArrayColumns = [...new Array(5)]
@@ -38,7 +37,7 @@ export const LoaderComponent = React.forwardRef<HTMLDivElement, LoaderProps>(
                 {dummyArrayRows.map((_, index) => (
                   <tr className={componentStyles.tableRow} key={index}>
                     <td
-                      style={{ maxWidth: theme?.spacing4xl }}
+                      style={{ maxWidth: 'var(--propel-space-4)' }}
                       className={classNames(componentStyles.tableCell, componentStyles.tableIndexCell)}
                     >
                       <div>{index + 1}</div>

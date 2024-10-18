@@ -1,5 +1,3 @@
-@use '../../../themes/generated/tokens';
-
 .container {
   background-color: var(--propel-background-primary);
   position: sticky;
@@ -41,8 +39,6 @@
 }
 
 .value {
-  @extend .textMdRegular;
-
   margin-top: var(--propel-spacing-lg);
   padding-left: var(--propel-spacing-lg);
   color: var(--propel-text-primary);

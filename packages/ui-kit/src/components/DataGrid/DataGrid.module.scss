@@ -1,5 +1,3 @@
-@use '../../themes/generated/tokens';
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -55,7 +53,6 @@
 }
 
 .tableCell {
-  @extend .textXsRegular;
   padding: var(--propel-spacing-md) var(--propel-spacing-lg);
   cursor: pointer;
 
@@ -89,7 +86,6 @@
 }
 
 .tableCellHead {
-  @extend .textXsSemibold;
   padding: var(--propel-spacing-md) var(--propel-spacing-lg);
 
   text-align: left;
@@ -199,8 +195,6 @@
 }
 
 .footerRows {
-  @extend .textXsRegular;
-
   display: flex;
   margin: 0 var(--propel-spacing-md);
   gap: var(--propel-spacing-xs);

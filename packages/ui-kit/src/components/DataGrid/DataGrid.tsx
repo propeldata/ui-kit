@@ -34,7 +34,6 @@ const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>(
   (
     {
-      baseTheme,
       query,
       renderLoader,
       errorFallback,
@@ -66,7 +65,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       renderEmpty: renderEmptyComponent
     } = useSetupTheme({
       componentContainer,
-      baseTheme,
       renderLoader,
       errorFallback,
       renderEmpty
@@ -334,9 +332,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               <tbody className={componentStyles.tableBody}>
                 {table.getRowModel().rows.map((row, index) => (
                   <tr className={componentStyles.tableRow} key={row.id}>
+                    {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
                     <td
                       {...cellProps}
-                      style={{ maxWidth: theme?.spacing4xl, width: theme?.spacing4xl, ...cellProps?.style }}
+                      style={{ maxWidth: 'var(--propel-space-4)', width: 'var(--propel-space-4)', ...cellProps?.style }}
                       onClick={() => handleRowIndexClick(row)}
                       className={classNames(
                         componentStyles.tableCell,
@@ -350,6 +349,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                       <div>{index + 1}</div>
                     </td>
                     {row.getVisibleCells().map((cell, index) => (
+                      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
                       <td
                         {...cellProps}
                         onClick={() => handleRowCellClick(cell)}

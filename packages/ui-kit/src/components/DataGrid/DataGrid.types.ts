@@ -29,12 +29,10 @@ export interface DataGridQueryProps extends Omit<ChartQueryProps, 'metric'>, Pag
   sort?: Sort
 }
 
-export interface RowProps {
-  styles: CSSStyleSheet
-}
-
 export interface DataGridProps extends DataComponentProps<'div'> {
+  /** DataGrid query props */
   query?: DataGridQueryProps
+  /** If true, the table columns will be resizable */
   resizable?: boolean
   /** Props to be applied to the `table` element */
   tableProps?: React.HTMLAttributes<HTMLTableElement>
