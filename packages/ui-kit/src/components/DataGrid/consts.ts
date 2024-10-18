@@ -1,0 +1,2 @@
+export const MINIMUM_TABLE_HEIGHT = 300
+export const DEFAULT_PAGE_SIZE_OPTIONS = [10, 50, 100]

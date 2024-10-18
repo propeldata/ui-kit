@@ -1,0 +1,85 @@
+@use '../../../themes/generated/tokens';
+
+.container {
+  background-color: var(--propel-background-primary);
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  max-width: 400px;
+  min-width: 450px;
+  width: 70%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 250ms ease-in-out;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.main {
+  position: relative;
+  overflow-y: auto;
+  padding: 0 var(--propel-spacing-xl);
+}
+
+.hidden {
+  width: 0 !important;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden * {
+  display: none;
+}
+
+.valueContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--propel-spacing-lg);
+}
+
+.value {
+  @extend .textMdRegular;
+
+  margin-top: var(--propel-spacing-lg);
+  padding-left: var(--propel-spacing-lg);
+  color: var(--propel-text-primary);
+
+  resize: none;
+  max-height: 560px;
+  display: block;
+
+  border: none;
+  outline: none;
+
+  white-space: pre-wrap;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--propel-border-primary);
+  margin: var(--propel-spacing-lg) 0;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton {
+  @extend .button;
+}
+
+.downloadButton {
+  @extend .button;
+}
