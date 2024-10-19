@@ -50,6 +50,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       tableLinesLayout = 'both',
       paginationProps: paginationPropsProp,
       className,
+      // unused to avoid passing in rest
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      card,
       ...rest
     },
     forwardedRef

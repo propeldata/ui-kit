@@ -39,7 +39,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(function Drawer(
               <div>
                 <Typography variant="textSmRegular">{cell.header}</Typography>
                 <button
-                  className={componentStyles.closeButton}
+                  className={componentStyles.copyButton}
                   onClick={() => navigator.clipboard.writeText(cell.value)}
                 >
                   <CopyIcon />
