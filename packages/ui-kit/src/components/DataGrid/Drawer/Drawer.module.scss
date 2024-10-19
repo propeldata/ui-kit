@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--propel-background-primary);
+  background-color: var(--propel-color-background);
   position: sticky;
   top: 0;
   bottom: 0;
@@ -18,7 +18,7 @@
 .main {
   position: relative;
   overflow-y: auto;
-  padding: 0 var(--propel-spacing-xl);
+  padding: 0 var(--propel-space-4);
 }
 
 .hidden {
@@ -35,13 +35,13 @@
 .valueContainer {
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--propel-spacing-lg);
+  margin-bottom: var(--propel-space-4);
 }
 
 .value {
-  margin-top: var(--propel-spacing-lg);
-  padding-left: var(--propel-spacing-lg);
-  color: var(--propel-text-primary);
+  margin-top: var(--propel-space-4);
+  padding-left: var(--propel-space-4);
+  color: var(--propel-gray-10);
 
   resize: none;
   max-height: 560px;
@@ -55,8 +55,8 @@
 
 .divider {
   height: 1px;
-  background-color: var(--propel-border-primary);
-  margin: var(--propel-spacing-lg) 0;
+  background-color: var(--propel-gray-12);
+  margin: var(--propel-space-4) 0;
 }
 
 .header {

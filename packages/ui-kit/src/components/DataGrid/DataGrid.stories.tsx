@@ -33,13 +33,7 @@ const DataGrid = (args: Story['args']) => {
 const meta: Meta<typeof DataGridComponent> = {
   title: 'Components/DataGrid',
   component: DataGridComponent,
-  argTypes: {
-    baseTheme: {
-      table: {
-        disable: true
-      }
-    }
-  },
+  argTypes: {},
   parameters: {
     controls: { sort: 'alpha' },
     codeTemplate: storybookCodeTemplate
@@ -216,6 +210,30 @@ export const Static: Story = {
       defaultPageSize: 5,
       pageSizeOptions: [5]
     }
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
+export const JSON: Story = {
+  args: {
+    headers: ['tacosoft'],
+    rows: [
+      [
+        `{
+          "taco_name": "Shrimp",
+          "restaurant_name": "Los Compadres",
+          "tortilla_name": "Corn",
+          "restaurant_id": "605cf627-794e-47f6-9f23-19c8dda7c24a",
+          "sauce_id": "25cdef0f-c358-4788-9645-f9625b9a219f"
+        }`
+      ]
+    ],
+    paginationProps: {
+      defaultPageSize: 5,
+      pageSizeOptions: [5]
+    },
+    disablePagination: true,
+    resizable: true
   },
   render: (args) => <DataGrid {...args} />
 }

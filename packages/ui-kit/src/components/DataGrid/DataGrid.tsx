@@ -277,39 +277,34 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       <div {...rest} className={classNames(componentStyles.wrapper, className)}>
         <div className={componentStyles.container}>
           <div className={componentStyles.tableContainer}>
-            <table
+            <div
               ref={tableRef}
               className={componentStyles.table}
               style={{ width: isResizable ? table.getCenterTotalSize() : '100%' }}
               {...tableProps}
             >
-              <thead
+              <div
                 className={componentStyles.tableHead}
-                {...{
-                  style: {
-                    width: isResizable ? table.getCenterTotalSize() : 'initial'
-                  }
+                style={{
+                  width: table.getCenterTotalSize()
                 }}
               >
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <tr className={componentStyles.tableRow} key={headerGroup.id}>
-                    <th
+                  <div className={componentStyles.tableRow} key={headerGroup.id}>
+                    <div
                       className={classNames(
                         componentStyles.tableCellHead,
                         componentStyles.tableIndexHeader,
                         linesStyle
                       )}
-                    ></th>
+                    ></div>
                     {headerGroup.headers.map((header) => (
-                      <th
+                      <div
                         {...cellProps}
                         className={classNames(componentStyles.tableCellHead, linesStyle, cellProps?.className)}
-                        {...{
-                          colSpan: header.colSpan,
-                          style: {
-                            ...cellProps?.style,
-                            width: isResizable ? header.getSize() : 'initial'
-                          }
+                        style={{
+                          ...cellProps?.style,
+                          width: header.getSize()
                         }}
                         key={header.id}
                       >
@@ -324,18 +319,18 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                             className={classNames(componentStyles.resizer)}
                           />
                         )}
-                      </th>
+                      </div>
                     ))}
-                  </tr>
+                  </div>
                 ))}
-              </thead>
-              <tbody className={componentStyles.tableBody}>
+              </div>
+              <div className={componentStyles.tableBody}>
                 {table.getRowModel().rows.map((row, index) => (
-                  <tr className={componentStyles.tableRow} key={row.id}>
+                  <div className={componentStyles.tableRow} key={row.id}>
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
-                    <td
+                    <div
                       {...cellProps}
-                      style={{ maxWidth: 'var(--propel-space-4)', width: 'var(--propel-space-4)', ...cellProps?.style }}
+                      role="cell"
                       onClick={() => handleRowIndexClick(row)}
                       className={classNames(
                         componentStyles.tableCell,
@@ -347,13 +342,14 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                       )}
                     >
                       <div>{index + 1}</div>
-                    </td>
+                    </div>
                     {row.getVisibleCells().map((cell, index) => (
                       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
-                      <td
+                      <div
                         {...cellProps}
+                        role="cell"
                         onClick={() => handleRowCellClick(cell)}
-                        style={{ ...cellProps?.style }}
+                        style={{ ...cellProps?.style, width: cell.column.getSize() }}
                         className={classNames(
                           componentStyles.tableCell,
                           {
@@ -366,12 +362,12 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         key={cell.id}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
+                      </div>
                     ))}
-                  </tr>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           </div>
           <Drawer
             style={{
