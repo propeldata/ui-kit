@@ -36,6 +36,9 @@ const plugins = [
       Object.entries(bundle).forEach(([fileName, file]) => {
         if (fileName.endsWith('.css.js') || fileName.endsWith('.scss.js')) {
           file.code = file.code.replace(/import styleInject from '.*'/, `import styleInject from 'style-inject'`)
+
+
+          file.code = file.code.replace(/var styleInject = require\(['"].*['"]\);/, `var styleInject = require('style-inject');`)
         }
       })
     }
