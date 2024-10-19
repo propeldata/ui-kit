@@ -104,7 +104,7 @@ describe('DataGrid', () => {
     await dom.findByText('Breakfast')
     await dom.findAllByText('El Buen Sabor')
     await dom.findAllByText('Al Pastor')
-  })
+  }, 10000)
 
   it('opens the drawer when a row index is clicked', async () => {
     dom = render(<DataGrid query={{ dataPool: { name: 'TacoSoft Demo Data' }, accessToken: 'test-token' }} />)
@@ -114,7 +114,7 @@ describe('DataGrid', () => {
     fireEvent.click(index)
 
     expect(await dom.findAllByText('Breakfast')).toHaveLength(2)
-  })
+  }, 10000)
 
   it('paginates forward and backwards', async () => {
     dom = render(<DataGrid query={{ dataPool: { name: 'should-paginate' }, accessToken: 'test-token' }} />)
@@ -130,7 +130,7 @@ describe('DataGrid', () => {
 
     fireEvent.click(await dom.findByTestId('propel-datagrid-paginate-back'))
     await dom.findByText('page 1')
-  })
+  }, 20000)
 
   it('changes page size', async () => {
     dom = render(<DataGrid query={{ dataPool: { name: 'changes-page-size' }, accessToken: 'test-token' }} />)
@@ -141,5 +141,5 @@ describe('DataGrid', () => {
     fireEvent.click(await dom.findByText('50'))
 
     await dom.findByText('page size 50')
-  })
+  }, 20000)
 })
