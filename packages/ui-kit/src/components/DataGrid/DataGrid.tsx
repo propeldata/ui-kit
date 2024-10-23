@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-table'
 
 import { withContainer } from '../withContainer'
-import { ErrorFallback } from '../ErrorFallback'
+import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { useCombinedRefsCallback, useEmptyableData, withThemeWrapper } from '../../helpers'
 import { DataGridConnection } from '../../graphql'
 import { useSetupTheme } from '../ThemeProvider'
@@ -38,6 +38,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     {
       query,
       renderLoader,
+      error,
       errorFallback,
       renderEmpty,
       headers: headersProp,
@@ -47,7 +48,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       cellProps,
       loading,
       loaderProps,
-      errorFallbackProps,
+      errorFallbackProps: errorFallbackPropsInitial,
       disablePagination = false,
       tableLinesLayout = 'both',
       paginationProps: paginationPropsProp,
@@ -261,6 +262,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     }
 
     if (queryError != null) {
+      const errorFallbackProps: ErrorFallbackProps = {
+        error,
+        ...errorFallbackPropsInitial
+      }
       if (errorFallbackComponent) {
         return themeWrapper(errorFallbackComponent({ errorFallbackProps, ErrorFallback, theme }))
       }

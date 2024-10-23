@@ -50,6 +50,11 @@ export interface DataGridProps extends DataComponentProps<'div'> {
   disablePagination?: boolean
   /** Determines how the table lines are shown, defaults to "both" */
   tableLinesLayout?: 'vertical' | 'horizontal' | 'both'
+  /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
+  error?: {
+    title: string
+    body: string
+  } | null
 }
 
 interface DataGridPaginationProps {
