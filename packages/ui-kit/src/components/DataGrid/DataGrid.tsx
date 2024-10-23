@@ -32,6 +32,7 @@ import { Loader } from './Loader'
 import { DEFAULT_PAGE_SIZE_OPTIONS, MINIMUM_TABLE_HEIGHT } from './consts'
 import { getLinesStyle } from './utils'
 import { handleArbitraryColor, useParsedComponentProps } from '../../themes'
+import { prettifyName } from '../shared.utils'
 
 const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 
@@ -56,6 +57,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       borderColor,
       className,
       gridLineColor,
+      prettifyHeaders = false,
       // unused to avoid passing in rest
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       card,
@@ -89,9 +91,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const tokenStyles = {
       '--propel-datagrid-border-color':
-        borderColor != null ? handleArbitraryColor(borderColor) : 'var(--propel-gray-8)',
+        borderColor != null ? handleArbitraryColor(borderColor) : 'var(--propel-gray-4)',
       '--propel-datagrid-grid-line-color':
-        gridLineColor != null ? handleArbitraryColor(gridLineColor) : 'var(--propel-gray-8)'
+        gridLineColor != null ? handleArbitraryColor(gridLineColor) : 'var(--propel-gray-3)'
     }
 
     const paginationProps = paginationPropsProp ?? {}
@@ -132,14 +134,28 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     useEffect(() => {
       if (dataGridData) {
-        setData({ headers: dataGridData.dataGrid.headers, rows: dataGridData.dataGrid.rows })
-      }
-    }, [dataGridData, setData])
+        const headers = dataGridData.dataGrid.headers
+        const rows = dataGridData.dataGrid.rows
 
-    const headers = useMemo(
-      () => (isStatic ? headersProp : dataGridData?.dataGrid.headers),
-      [dataGridData, isStatic, headersProp]
-    )
+        setData({ headers, rows })
+      }
+    }, [dataGridData, prettifyHeaders, setData])
+
+    const headers = useMemo(() => {
+      let headers: string[] | undefined
+
+      if (isStatic) {
+        headers = headersProp
+      } else {
+        headers = dataGridData?.dataGrid.headers
+      }
+
+      if (prettifyHeaders === true) {
+        return headers?.map((header) => prettifyName(header))
+      }
+
+      return headers
+    }, [dataGridData, isStatic, headersProp, prettifyHeaders])
     const rows = useMemo(() => (isStatic ? rowsProp : dataGridData?.dataGrid.rows), [dataGridData, isStatic, rowsProp])
 
     const pageInfo = dataGridData?.dataGrid.pageInfo

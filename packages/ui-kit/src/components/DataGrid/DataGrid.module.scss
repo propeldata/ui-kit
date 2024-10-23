@@ -6,10 +6,12 @@
   max-height: inherit;
   min-height: inherit;
   height: inherit;
+  width: 100%;
+  border-radius: 20px;
 }
 
 .container {
-  width: inherit;
+  width: initial;
   display: flex;
   position: relative;
 
@@ -98,9 +100,15 @@
 
   height: var(--propel-space-7);
 
+  display: flex;
+  align-items: center;
+
   max-width: 800px;
   text-overflow: ellipsis;
   overflow: hidden;
+
+  font-size: var(--propel-font-size-1);
+  font-size: var(--propel-font-weight-light);
 
   &.horizontalLines {
     border-right: none;
@@ -136,7 +144,11 @@
 
   background-color: var(--propel-color-background);
 
+  font-size: var(--propel-font-size-2);
   font-weight: var(--propel-font-weight-bold);
+
+  background-color: var(--propel-gray-3);
+  color: var(--propel-gray-11);
 
   white-space: nowrap;
   overflow: hidden;
@@ -148,6 +160,8 @@
   border-left: none;
 
   position: relative;
+
+  font-size: var(--font-size-2);
 
   &.horizontalLines {
     border-right: none;

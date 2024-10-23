@@ -80,6 +80,8 @@ export interface DataGridProps extends DataComponentProps<'div'>, ThemeSettingPr
    * The global theme accent color. This color is used to highlight elements
    */
   accentColor?: AccentColors
+  /** If true, the headers will be prettified */
+  prettifyHeaders?: boolean
 }
 
 interface DataGridPaginationProps {

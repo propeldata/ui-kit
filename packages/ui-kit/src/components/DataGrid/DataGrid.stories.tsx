@@ -53,7 +53,16 @@ export const Basic: Story = {
       dataPool: {
         name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1 ?? ''
       },
-      columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
+      columns: [
+        'quantity',
+        'taco_name',
+        'tortilla_name',
+        'sauce_name',
+        'restaurant_name',
+        'order_id',
+        'timestamp',
+        'restaurant_id'
+      ]
     },
     paginationProps: {
       defaultPageSize: 50
