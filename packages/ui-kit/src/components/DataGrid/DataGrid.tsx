@@ -443,7 +443,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         )}
                         key={cell.id}
                       >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        <span>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
                       </div>
                     ))}
                   </div>

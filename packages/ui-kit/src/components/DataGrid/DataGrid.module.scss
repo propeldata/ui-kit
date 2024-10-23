@@ -94,8 +94,6 @@
 
   border-bottom: 1px solid var(--propel-datagrid-grid-line-color);
   border-right: 1px solid var(--propel-datagrid-grid-line-color);
-  text-overflow: ellipsis;
-  white-space: nowrap;
   box-sizing: border-box;
 
   height: var(--propel-space-7);
@@ -104,11 +102,16 @@
   align-items: center;
 
   max-width: 800px;
-  text-overflow: ellipsis;
   overflow: hidden;
 
   font-size: var(--propel-font-size-1);
   font-size: var(--propel-font-weight-light);
+
+  & > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
   &.horizontalLines {
     border-right: none;
@@ -192,7 +195,7 @@
   position: sticky;
   left: 0;
   top: 0;
-  background-color: var(--propel-color-background);
+  background-color: var(--propel-gray-3);
   z-index: 2;
   border-left: 1px solid var(--propel-datagrid-border-color);
 
