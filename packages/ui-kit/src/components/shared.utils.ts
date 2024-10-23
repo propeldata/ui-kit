@@ -1,3 +1,6 @@
+import { AccentColors, accentColors as accentColorsDict, handleArbitraryColor, ThemeTokenProps } from '../themes'
+import { ThemeStateProps } from './ThemeProvider'
+
 /**
  * It receives a camelCase or snake_case name and returns a readable format
  * @example

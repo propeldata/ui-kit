@@ -66,7 +66,7 @@
 
   &:last-child {
     & > .tableCell {
-      border-bottom: 1px solid var(--propel-gray-8);
+      border-bottom: 1px solid var(--propel-datagrid-border-color);
     }
 
     & > .hideBorder {
@@ -90,8 +90,8 @@
   padding: var(--propel-space-2) var(--propel-space-2);
   cursor: pointer;
 
-  border-bottom: 1px solid var(--propel-gray-8);
-  border-right: 1px solid var(--propel-gray-8);
+  border-bottom: 1px solid var(--propel-datagrid-grid-line-color);
+  border-right: 1px solid var(--propel-datagrid-grid-line-color);
   text-overflow: ellipsis;
   white-space: nowrap;
   box-sizing: border-box;
@@ -115,11 +115,11 @@
   }
 
   &.selectedRow {
-    background-color: var(--propel-accent-8);
+    background-color: var(--propel-accent-8) !important;
   }
 
   &:last-child {
-    border-right: 1px solid var(--propel-gray-8);
+    border-right: 1px solid var(--propel-datagrid-border-color);
 
     &.hideBorder {
       border-right: none;
@@ -143,7 +143,8 @@
   text-overflow: ellipsis;
 
   text-align: left;
-  border: 1px solid var(--propel-gray-8);
+  border: 1px solid var(--propel-datagrid-grid-line-color);
+  border-top: 1px solid var(--propel-datagrid-border-color);
   border-left: none;
 
   position: relative;
@@ -160,7 +161,7 @@
   }
 
   &:last-child {
-    border-right: 1px solid var(--propel-gray-8);
+    border-right: 1px solid var(--propel-datagrid-border-color);
 
     &.hideBorder {
       border-right: none;
@@ -179,7 +180,7 @@
   top: 0;
   background-color: var(--propel-color-background);
   z-index: 2;
-  border-left: 1px solid var(--propel-gray-8);
+  border-left: 1px solid var(--propel-datagrid-border-color);
 
   height: var(--propel-space-7);
 
@@ -208,7 +209,8 @@
   position: sticky;
   box-sizing: border-box;
 
-  border: 1px solid var(--propel-gray-8);
+  border: 1px solid var(--propel-datagrid-grid-line-color);
+  border-left: 1px solid var(--propel-datagrid-border-color);
   border-top: none;
 
 
@@ -216,7 +218,7 @@
     border-bottom: none;
   }
   &.noLines {
-    border-left: 1px solid var(--propel-gray-8);
+    border-left: 1px solid var(--propel-datagrid-border-color);
     border-right: none;
     border-bottom: none;
   }
@@ -236,12 +238,12 @@
   }
 
   &.selectedRow {
-    background-color: var(--propel-color-background);
+    background-color: var(--propel-color-background) !important;
   }
 
   &.selectedRow {
     & > div {
-      background-color: var(--propel-accent-8);
+      background-color: var(--propel-accent-8) !important;
     }
   }
 }

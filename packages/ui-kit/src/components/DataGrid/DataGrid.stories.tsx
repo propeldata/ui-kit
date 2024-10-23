@@ -5,6 +5,7 @@ import axiosInstance from '../../../../../app/storybook/src/axios'
 import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 
 import { DataGridComponent, DataGrid as DataGridSource } from './DataGrid'
+import { ThemeProvider } from '../ThemeProvider'
 
 const DataGrid = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
@@ -15,18 +16,20 @@ const DataGrid = (args: Story['args']) => {
   }
 
   return (
-    <DataGridSource
-      ref={ref}
-      {...{
-        ...args,
-        query: args?.query
-          ? {
-              ...args?.query,
-              accessToken
-            }
-          : undefined
-      }}
-    />
+    <ThemeProvider>
+      <DataGridSource
+        ref={ref}
+        {...{
+          ...args,
+          query: args?.query
+            ? {
+                ...args?.query,
+                accessToken
+              }
+            : undefined
+        }}
+      />
+    </ThemeProvider>
   )
 }
 
@@ -57,7 +60,8 @@ export const Basic: Story = {
     },
     card: true,
     style: { maxHeight: 400 },
-    resizable: false
+    resizable: false,
+    slotProps: {}
   },
   render: (args) => <DataGrid {...args} />
 }
@@ -251,6 +255,25 @@ export const JSON: Story = {
     },
     disablePagination: true,
     resizable: true
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
+export const Custom: Story = {
+  args: {
+    ...Static.args,
+    slotProps: {
+      header: {
+        style: {
+          backgroundColor: 'var(--propel-gray-3)'
+        }
+      },
+      cell: {
+        style: {
+          backgroundColor: 'var(--propel-gray-1)'
+        }
+      }
+    }
   },
   render: (args) => <DataGrid {...args} />
 }

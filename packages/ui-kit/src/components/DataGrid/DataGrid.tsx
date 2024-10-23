@@ -31,6 +31,7 @@ import { Option } from '../Select/Option'
 import { Loader } from './Loader'
 import { DEFAULT_PAGE_SIZE_OPTIONS, MINIMUM_TABLE_HEIGHT } from './consts'
 import { getLinesStyle } from './utils'
+import { handleArbitraryColor, useParsedComponentProps } from '../../themes'
 
 const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 
@@ -52,11 +53,14 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       disablePagination = false,
       tableLinesLayout = 'both',
       paginationProps: paginationPropsProp,
+      borderColor,
       className,
+      gridLineColor,
       // unused to avoid passing in rest
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       card,
       hideBorder,
+      accentColor,
       ...rest
     },
     forwardedRef
@@ -64,6 +68,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
+
+    const { themeSettings, parsedProps } = useParsedComponentProps({
+      ...rest,
+      accentColor
+    })
 
     const {
       theme,
@@ -74,8 +83,16 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       componentContainer,
       renderLoader,
       errorFallback,
-      renderEmpty
+      renderEmpty,
+      ...themeSettings
     })
+
+    const tokenStyles = {
+      '--propel-datagrid-border-color':
+        borderColor != null ? handleArbitraryColor(borderColor) : 'var(--propel-gray-8)',
+      '--propel-datagrid-grid-line-color':
+        gridLineColor != null ? handleArbitraryColor(gridLineColor) : 'var(--propel-gray-8)'
+    }
 
     const paginationProps = paginationPropsProp ?? {}
     const { defaultPageSize: defaultPageSizeProp, pageSizeOptions: pageSizeOptionsProp } = paginationProps
@@ -268,6 +285,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           hideBorder={hideBorder}
           slotProps={slotProps}
           {...rest}
+          style={{ ...rest.style, ...tokenStyles }}
         />
       )
     }
@@ -291,7 +309,12 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const linesStyle = getLinesStyle(tableLinesLayout)
 
     return (
-      <div {...rest} className={classNames(componentStyles.wrapper, className)}>
+      <div
+        ref={setRef}
+        {...parsedProps}
+        className={classNames(componentStyles.wrapper, className)}
+        style={{ ...rest.style, ...tokenStyles }}
+      >
         <div className={componentStyles.container}>
           <div className={componentStyles.tableContainer}>
             <div
@@ -301,18 +324,23 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               {...slotProps?.table}
             >
               <div
-                className={componentStyles.tableHead}
+                className={classNames(componentStyles.tableHead)}
                 style={{
                   width: table.getCenterTotalSize()
                 }}
               >
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <div className={componentStyles.tableRowHead} key={headerGroup.id}>
+                  <div className={classNames(componentStyles.tableRowHead)} key={headerGroup.id}>
                     <div
+                      role="cell"
+                      {...slotProps?.cell}
+                      {...slotProps?.header}
                       className={classNames(
                         componentStyles.tableCellHead,
                         componentStyles.tableIndexHeader,
                         linesStyle,
+                        slotProps?.cell?.className,
+                        slotProps?.header?.className,
                         {
                           [componentStyles.hideBorder]: hideBorder
                         }
@@ -322,11 +350,19 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                       <div
                         role="cell"
                         {...slotProps?.cell}
-                        className={classNames(componentStyles.tableCellHead, linesStyle, slotProps?.cell?.className, {
-                          [componentStyles.hideBorder]: hideBorder
-                        })}
+                        {...slotProps?.header}
+                        className={classNames(
+                          componentStyles.tableCellHead,
+                          linesStyle,
+                          slotProps?.cell?.className,
+                          slotProps?.header?.className,
+                          {
+                            [componentStyles.hideBorder]: hideBorder
+                          }
+                        )}
                         style={{
                           ...slotProps?.cell?.style,
+                          ...slotProps?.header?.style,
                           width: header.getSize()
                         }}
                         key={header.id}

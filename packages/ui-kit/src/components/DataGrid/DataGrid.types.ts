@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
+import { AccentColors, ThemeSettingProps } from '../../themes'
 import type { ChartQueryProps, DataComponentProps, PaginationProps } from '../../components/shared.types'
 import type { DataPoolInput, Sort } from '../../graphql'
 import { ButtonProps } from '../Button'
@@ -42,9 +43,11 @@ interface SlotProps {
   button?: ButtonProps
   /** Props to be applied to the `select` element */
   select?: SelectProps<OptionValue>
+  /** Props to be applied to the `header` element */
+  header?: ComponentPropsWithoutRef<'div'>
 }
 
-export interface DataGridProps extends DataComponentProps<'div'> {
+export interface DataGridProps extends DataComponentProps<'div'>, ThemeSettingProps {
   /** DataGrid query props */
   query?: DataGridQueryProps
   /** If true, the table columns will be resizable */
@@ -69,6 +72,14 @@ export interface DataGridProps extends DataComponentProps<'div'> {
   slotProps?: SlotProps
   /** If true, the table border will be hidden */
   hideBorder?: boolean
+  /** The color of the table border */
+  borderColor?: AccentColors | string
+  /** The color of the grid lines */
+  gridLineColor?: AccentColors | string
+  /**
+   * The global theme accent color. This color is used to highlight elements
+   */
+  accentColor?: AccentColors
 }
 
 interface DataGridPaginationProps {
