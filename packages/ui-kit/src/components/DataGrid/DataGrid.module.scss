@@ -63,14 +63,35 @@
 
   display: flex;
   width: fit-content;
+
+  &:last-child {
+    & > .tableCell {
+      border-bottom: 1px solid var(--propel-gray-8);
+    }
+
+    & > .hideBorder {
+      border-bottom: none;
+    }
+  }
+}
+
+.tableRowHead {
+  position: relative;
+
+  display: flex;
+  width: fit-content;
+
+  .hideBorder {
+    border-top: none;
+  }
 }
 
 .tableCell {
   padding: var(--propel-space-2) var(--propel-space-2);
   cursor: pointer;
 
-  border-bottom: 1px solid var(--propel-gray-12);
-  border-right: 1px solid var(--propel-gray-12);
+  border-bottom: 1px solid var(--propel-gray-8);
+  border-right: 1px solid var(--propel-gray-8);
   text-overflow: ellipsis;
   white-space: nowrap;
   box-sizing: border-box;
@@ -89,8 +110,20 @@
     border-bottom: none;
   }
 
+  &.noLines {
+    border: none;
+  }
+
   &.selectedRow {
     background-color: var(--propel-accent-8);
+  }
+
+  &:last-child {
+    border-right: 1px solid var(--propel-gray-8);
+
+    &.hideBorder {
+      border-right: none;
+    }
   }
 }
 
@@ -110,7 +143,7 @@
   text-overflow: ellipsis;
 
   text-align: left;
-  border: 1px solid var(--propel-gray-12);
+  border: 1px solid var(--propel-gray-8);
   border-left: none;
 
   position: relative;
@@ -120,7 +153,18 @@
   }
   &.verticalLines {
     border-bottom: none;
-    border-top: none;
+  }
+  &.noLines {
+    border-right: none;
+    border-bottom: none;
+  }
+
+  &:last-child {
+    border-right: 1px solid var(--propel-gray-8);
+
+    &.hideBorder {
+      border-right: none;
+    }
   }
 }
 
@@ -135,11 +179,11 @@
   top: 0;
   background-color: var(--propel-color-background);
   z-index: 2;
-  border-left: 1px solid var(--propel-gray-12);
+  border-left: 1px solid var(--propel-gray-8);
 
   height: var(--propel-space-7);
 
-  &.horizontalLines {
+  &.hideBorder {
     border-left: none;
   }
 }
@@ -164,14 +208,20 @@
   position: sticky;
   box-sizing: border-box;
 
-  border: 1px solid var(--propel-gray-12);
+  border: 1px solid var(--propel-gray-8);
   border-top: none;
 
-  &.horizontalLines {
-    border-left: none;
-  }
+
   &.verticalLines {
     border-bottom: none;
+  }
+  &.noLines {
+    border-left: 1px solid var(--propel-gray-8);
+    border-right: none;
+    border-bottom: none;
+  }
+  &.hideBorder {
+    border-left: none;
   }
 
   & > div {

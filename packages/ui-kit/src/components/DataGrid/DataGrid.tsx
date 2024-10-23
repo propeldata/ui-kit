@@ -30,6 +30,7 @@ import { Select } from '../Select'
 import { Option } from '../Select/Option'
 import { Loader } from './Loader'
 import { DEFAULT_PAGE_SIZE_OPTIONS, MINIMUM_TABLE_HEIGHT } from './consts'
+import { getLinesStyle } from './utils'
 
 const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 
@@ -44,8 +45,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       headers: headersProp,
       rows: rowsProp,
       resizable: isResizable = false,
-      tableProps,
-      cellProps,
+      slotProps: slotPropsProp,
       loading,
       loaderProps,
       errorFallbackProps: errorFallbackPropsInitial,
@@ -56,6 +56,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       // unused to avoid passing in rest
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       card,
+      hideBorder,
       ...rest
     },
     forwardedRef
@@ -80,6 +81,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const { defaultPageSize: defaultPageSizeProp, pageSizeOptions: pageSizeOptionsProp } = paginationProps
 
     const pageSizeOptions = pageSizeOptionsProp ?? DEFAULT_PAGE_SIZE_OPTIONS
+
+    const slotProps = useRef(slotPropsProp).current
 
     const [pageSize, setPageSize] = useState(defaultPageSizeProp ?? query?.first ?? 10)
 
@@ -258,7 +261,15 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         return themeWrapper(renderLoaderComponent({ loaderProps, Loader, theme }))
       }
 
-      return <Loader disablePagination={disablePagination} {...rest} />
+      return (
+        <Loader
+          disablePagination={disablePagination}
+          tableLinesLayout={tableLinesLayout}
+          hideBorder={hideBorder}
+          slotProps={slotProps}
+          {...rest}
+        />
+      )
     }
 
     if (queryError != null) {
@@ -277,11 +288,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       return themeWrapper(renderEmptyComponent({ theme }))
     }
 
-    const linesStyle = {
-      vertical: componentStyles.verticalLines,
-      horizontal: componentStyles.horizontalLines,
-      both: componentStyles.bothLines
-    }[tableLinesLayout]
+    const linesStyle = getLinesStyle(tableLinesLayout)
 
     return (
       <div {...rest} className={classNames(componentStyles.wrapper, className)}>
@@ -291,7 +298,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               ref={tableRef}
               className={componentStyles.table}
               style={{ width: isResizable ? table.getCenterTotalSize() : '100%' }}
-              {...tableProps}
+              {...slotProps?.table}
             >
               <div
                 className={componentStyles.tableHead}
@@ -300,20 +307,26 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                 }}
               >
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <div className={componentStyles.tableRow} key={headerGroup.id}>
+                  <div className={componentStyles.tableRowHead} key={headerGroup.id}>
                     <div
                       className={classNames(
                         componentStyles.tableCellHead,
                         componentStyles.tableIndexHeader,
-                        linesStyle
+                        linesStyle,
+                        {
+                          [componentStyles.hideBorder]: hideBorder
+                        }
                       )}
                     ></div>
                     {headerGroup.headers.map((header) => (
                       <div
-                        {...cellProps}
-                        className={classNames(componentStyles.tableCellHead, linesStyle, cellProps?.className)}
+                        role="cell"
+                        {...slotProps?.cell}
+                        className={classNames(componentStyles.tableCellHead, linesStyle, slotProps?.cell?.className, {
+                          [componentStyles.hideBorder]: hideBorder
+                        })}
                         style={{
-                          ...cellProps?.style,
+                          ...slotProps?.cell?.style,
                           width: header.getSize()
                         }}
                         key={header.id}
@@ -339,7 +352,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   <div className={componentStyles.tableRow} key={row.id}>
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
                     <div
-                      {...cellProps}
+                      {...slotProps?.cell}
                       role="cell"
                       onClick={() => handleRowIndexClick(row)}
                       className={classNames(
@@ -348,7 +361,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         {
                           [componentStyles.selectedRow]: row.id === selectedRow?.id
                         },
-                        linesStyle
+                        linesStyle,
+                        {
+                          [componentStyles.hideBorder]: hideBorder
+                        },
+                        slotProps?.cell?.className
                       )}
                     >
                       <div>{index + 1}</div>
@@ -356,10 +373,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                     {row.getVisibleCells().map((cell, index) => (
                       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
                       <div
-                        {...cellProps}
+                        {...slotProps?.cell}
                         role="cell"
                         onClick={() => handleRowCellClick(cell)}
-                        style={{ ...cellProps?.style, width: cell.column.getSize() }}
+                        style={{ ...slotProps?.cell?.style, width: cell.column.getSize() }}
                         className={classNames(
                           componentStyles.tableCell,
                           {
@@ -367,7 +384,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                               cell.id === selectedRow?.cells[index].id || cell.id === selectedCell?.id
                           },
                           linesStyle,
-                          cellProps?.className
+                          slotProps?.cell?.className,
+                          {
+                            [componentStyles.hideBorder]: hideBorder
+                          }
                         )}
                         key={cell.id}
                       >
@@ -394,11 +414,12 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           />
         </div>
         {!disablePagination && (
-          <div className={componentStyles.footer}>
+          <div {...slotProps?.footer} className={classNames(componentStyles.footer, slotProps?.footer?.className)}>
             <div className={componentStyles.footerRows}>
               <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
               <Select
-                className={componentStyles.paginationSelect}
+                {...slotProps?.select}
+                className={classNames(componentStyles.paginationSelect, slotProps?.select?.className)}
                 id="data-grid-rows-per-page"
                 size="small"
                 value={pageSizeOptionValues.find((option) => option.value === pageSize)}
@@ -422,7 +443,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               </Select>
             </div>
             <Button
-              className={componentStyles.paginationButton}
+              {...slotProps?.button}
+              className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
               disabled={isStatic ? !table.getCanPreviousPage() : !hasPreviousPage}
               onClick={handlePaginateBack}
               type="button"
@@ -431,7 +453,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               &lt;
             </Button>
             <Button
-              className={componentStyles.paginationButton}
+              {...slotProps?.button}
+              className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
               disabled={isStatic ? !table.getCanNextPage() : !hasNextPage}
               onClick={handlePaginateNext}
               type="button"

@@ -100,6 +100,23 @@ export const Horizontal: Story = {
   render: (args) => <DataGrid {...args} />
 }
 
+export const NoLines: Story = {
+  args: {
+    ...Vertical.args,
+    tableLinesLayout: 'none'
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
+export const HideBorder: Story = {
+  args: {
+    ...Vertical.args,
+    tableLinesLayout: 'both',
+    hideBorder: true
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
 export const Resizable: Story = {
   args: {
     query: {

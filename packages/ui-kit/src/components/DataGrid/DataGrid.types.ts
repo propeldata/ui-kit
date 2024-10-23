@@ -1,7 +1,9 @@
-import React from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 import type { ChartQueryProps, DataComponentProps, PaginationProps } from '../../components/shared.types'
 import type { DataPoolInput, Sort } from '../../graphql'
+import { ButtonProps } from '../Button'
+import { OptionValue, SelectProps } from '../Select'
 
 export type DataGridData = {
   headers?: string[] | null
@@ -29,15 +31,24 @@ export interface DataGridQueryProps extends Omit<ChartQueryProps, 'metric'>, Pag
   sort?: Sort
 }
 
+interface SlotProps {
+  /** Props to be applied to the `footer` element */
+  footer?: ComponentPropsWithoutRef<'div'>
+  /** Props to be applied to the `table` element */
+  table?: ComponentPropsWithoutRef<'div'>
+  /** Props to be applied to the `cell` element */
+  cell?: ComponentPropsWithoutRef<'div'>
+  /** Props to be applied to the `button` element */
+  button?: ButtonProps
+  /** Props to be applied to the `select` element */
+  select?: SelectProps<OptionValue>
+}
+
 export interface DataGridProps extends DataComponentProps<'div'> {
   /** DataGrid query props */
   query?: DataGridQueryProps
   /** If true, the table columns will be resizable */
   resizable?: boolean
-  /** Props to be applied to the `table` element */
-  tableProps?: React.HTMLAttributes<HTMLTableElement>
-  /** Props to be applied to the `td` elements */
-  cellProps?: React.HTMLAttributes<HTMLTableCellElement>
   /** If passed along with `rows` the component will ignore the built-in GraphQL operations */
   headers?: string[]
   /** If passed along with `headers` the component will ignore the built-in GraphQL operations */
@@ -49,12 +60,15 @@ export interface DataGridProps extends DataComponentProps<'div'> {
   /** If true, the pagination footer will be hidden */
   disablePagination?: boolean
   /** Determines how the table lines are shown, defaults to "both" */
-  tableLinesLayout?: 'vertical' | 'horizontal' | 'both'
+  tableLinesLayout?: 'vertical' | 'horizontal' | 'both' | 'none'
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
     body: string
   } | null
+  slotProps?: SlotProps
+  /** If true, the table border will be hidden */
+  hideBorder?: boolean
 }
 
 interface DataGridPaginationProps {

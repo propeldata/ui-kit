@@ -1,79 +1,111 @@
-import classNames from 'classnames'
 import React from 'react'
-import { useForwardedRefCallback } from '../../helpers'
+import classNames from 'classnames'
 import { Button } from '../Button'
 import { Loader as SkeletonLoader } from '../Loader'
-import { DefaultThemes } from '../ThemeProvider'
 import componentStyles from './DataGrid.module.scss'
+import { getLinesStyle } from './utils'
+import { DataGridProps } from './DataGrid.types'
 
-interface LoaderProps extends React.ComponentPropsWithoutRef<'div'> {
-  disablePagination?: boolean
-  baseTheme?: DefaultThemes
+interface LoaderProps extends Omit<DataGridProps, 'query' | 'headers' | 'rows'> {
+  dummyArrayColumns?: number[]
+  dummyArrayRows?: number[]
 }
 
-export const LoaderComponent = React.forwardRef<HTMLDivElement, LoaderProps>(
-  ({ disablePagination = false, className, ...rest }, forwardedRef) => {
-    const { setRef } = useForwardedRefCallback(forwardedRef)
+export const Loader: React.FC<LoaderProps> = ({
+  className,
+  dummyArrayColumns = Array(5).fill(0),
+  dummyArrayRows = Array(10).fill(0),
+  disablePagination = false,
+  tableLinesLayout = 'both',
+  hideBorder,
+  slotProps,
+  ...rest
+}) => {
+  const linesStyle = getLinesStyle(tableLinesLayout)
 
-    const dummyArrayRows = [...new Array(25)]
-    const dummyArrayColumns = [...new Array(5)]
-
-    return (
-      <div {...rest} className={classNames(className, componentStyles.wrapper)} ref={setRef}>
-        <div className={componentStyles.container}>
-          <div className={componentStyles.tableContainer}>
-            <table className={componentStyles.table} style={{ width: '100%' }}>
-              <thead className={componentStyles.tableHead}>
-                <tr className={componentStyles.tableRow}>
-                  <th className={classNames(componentStyles.tableCellHead, componentStyles.tableIndexHeader)}></th>
-                  {dummyArrayColumns.map((_, index) => (
-                    <th key={index} className={componentStyles.tableCellHead}>
-                      <SkeletonLoader className={componentStyles.skeleton}>loading...</SkeletonLoader>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className={componentStyles.tableBody}>
-                {dummyArrayRows.map((_, index) => (
-                  <tr className={componentStyles.tableRow} key={index}>
-                    <td
-                      style={{ maxWidth: 'var(--propel-space-4)' }}
-                      className={classNames(componentStyles.tableCell, componentStyles.tableIndexCell)}
-                    >
-                      <div>{index + 1}</div>
-                    </td>
-                    {dummyArrayColumns.map((_, index) => (
-                      <td className={componentStyles.tableCell} key={index}>
-                        <SkeletonLoader className={componentStyles.skeleton}>loading...</SkeletonLoader>
-                      </td>
-                    ))}
-                  </tr>
+  return (
+    <div {...rest} className={classNames(className, componentStyles.wrapper)}>
+      <div className={componentStyles.container}>
+        <div className={componentStyles.tableContainer}>
+          <div className={componentStyles.table} style={{ width: '100%' }}>
+            <div className={componentStyles.tableHead}>
+              <div className={componentStyles.tableRowHead}>
+                <div
+                  className={classNames(componentStyles.tableCellHead, componentStyles.tableIndexHeader, linesStyle, {
+                    [componentStyles.hideBorder]: hideBorder
+                  })}
+                ></div>
+                {dummyArrayColumns.map((_, index) => (
+                  <div
+                    key={index}
+                    className={classNames(componentStyles.tableCellHead, linesStyle, {
+                      [componentStyles.hideBorder]: hideBorder
+                    })}
+                    {...slotProps?.cell}
+                  >
+                    <SkeletonLoader className={componentStyles.skeleton}>
+                      #################################
+                    </SkeletonLoader>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        {!disablePagination && (
-          <div className={componentStyles.footer}>
-            <div className={componentStyles.footerRows}>
-              <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-              <div style={{ width: '64px' }}>
-                <SkeletonLoader className={componentStyles.selectSkeleton}>Select</SkeletonLoader>
               </div>
             </div>
-            <Button className={componentStyles.paginationButton} disabled type="button">
-              &lt;
-            </Button>
-            <Button className={componentStyles.paginationButton} disabled type="button">
-              &gt;
-            </Button>
+            <div className={componentStyles.tableBody}>
+              {dummyArrayRows.map((_, rowIndex) => (
+                <div className={componentStyles.tableRow} key={rowIndex}>
+                  <div
+                    className={classNames(componentStyles.tableCell, componentStyles.tableIndexCell, linesStyle, {
+                      [componentStyles.hideBorder]: hideBorder
+                    })}
+                    {...slotProps?.cell}
+                  >
+                    <div>{rowIndex + 1}</div>
+                  </div>
+                  {dummyArrayColumns.map((_, colIndex) => (
+                    <div
+                      className={classNames(componentStyles.tableCell, linesStyle, {
+                        [componentStyles.hideBorder]: hideBorder
+                      })}
+                      key={colIndex}
+                      {...slotProps?.cell}
+                    >
+                      <SkeletonLoader className={componentStyles.skeleton}>
+                        #################################
+                      </SkeletonLoader>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
-        )}
+        </div>
       </div>
-    )
-  }
-)
-
-LoaderComponent.displayName = 'Loader'
-
-export const Loader = React.memo(LoaderComponent)
+      {!disablePagination && (
+        <div {...slotProps?.footer} className={classNames(componentStyles.footer, slotProps?.footer?.className)}>
+          <div className={componentStyles.footerRows}>
+            <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
+            <div style={{ width: '64px' }}>
+              <SkeletonLoader className={componentStyles.selectSkeleton}>Select</SkeletonLoader>
+            </div>
+          </div>
+          <Button
+            {...slotProps?.button}
+            className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
+            disabled
+            type="button"
+          >
+            &lt;
+          </Button>
+          <Button
+            {...slotProps?.button}
+            className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
+            disabled
+            type="button"
+          >
+            &gt;
+          </Button>
+        </div>
+      )}
+    </div>
+  )
+}
