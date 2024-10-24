@@ -105,7 +105,7 @@
   overflow: hidden;
 
   font-size: var(--propel-font-size-1);
-  font-size: var(--propel-font-weight-light);
+  font-weight: var(--propel-font-weight-light);
 
   & > span {
     white-space: nowrap;
@@ -145,8 +145,6 @@
 
   height: var(--propel-space-7);
 
-  background-color: var(--propel-color-background);
-
   font-size: var(--propel-font-size-2);
   font-weight: var(--propel-font-weight-bold);
 
@@ -164,7 +162,8 @@
 
   position: relative;
 
-  font-size: var(--font-size-2);
+  display: flex;
+  align-items: center;
 
   &.horizontalLines {
     border-right: none;
@@ -183,6 +182,12 @@
     &.hideBorder {
       border-right: none;
     }
+  }
+
+  & > span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
@@ -291,6 +296,10 @@
   justify-content: flex-end;
   align-items: center;
   gap: var(--propel-spacing-xs);
+
+  font-size: var(--propel-font-size-1);
+  font-weight: var(--propel-font-weight-regular);
+  color: var(--propel-gray-12);
 }
 
 .footerRows {

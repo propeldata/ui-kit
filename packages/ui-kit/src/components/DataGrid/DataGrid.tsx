@@ -383,7 +383,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         }}
                         key={header.id}
                       >
-                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.isPlaceholder ? null : (
+                          <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                        )}
                         {isResizable && (
                           <div
                             {...{
