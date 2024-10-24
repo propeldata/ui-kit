@@ -82,10 +82,7 @@ export const useDataPoolColumns = ({
   )
 
   const columns = useMemo(() => {
-    const columns = columnsByIdData?.dataPool?.columns?.nodes ?? columnsByNameData?.dataPoolByName?.columns?.nodes ?? []
-
-    // Remove JSON columns not supported by GroupBy
-    return columns.filter((column) => column.type !== 'JSON')
+    return columnsByIdData?.dataPool?.columns?.nodes ?? columnsByNameData?.dataPoolByName?.columns?.nodes ?? []
   }, [columnsByIdData, columnsByNameData])
 
   return {
