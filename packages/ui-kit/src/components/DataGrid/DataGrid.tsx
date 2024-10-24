@@ -67,6 +67,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     },
     forwardedRef
   ) => {
+    const [pageIndex, setPageIndex] = useState(0)
+
     const innerRef = React.useRef<HTMLDivElement>(null)
     const { componentContainer, setRef } = useCombinedRefsCallback({ innerRef, forwardedRef })
     const themeWrapper = withThemeWrapper(setRef)
@@ -119,7 +121,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       data: dataGridData,
       isLoading: isLoadingDataGridData,
       error: queryError
-    } = useDataGrid({ ...query, ...withPagination, enabled: !isStatic })
+    } = useDataGrid({ ...query, columns: query?.columns ?? ['*'], ...withPagination, enabled: !isStatic })
 
     const isLoading = isStatic ? loading : isLoadingDataGridData
 
@@ -164,6 +166,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const hasPreviousPage = pageInfo?.hasPreviousPage ?? false
 
     const handlePaginateNext = () => {
+      setPageIndex(pageIndex + 1)
+
       if (isStatic) {
         table.nextPage()
         return
@@ -175,6 +179,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     }
 
     const handlePaginateBack = () => {
+      setPageIndex(pageIndex - 1)
+
       if (isStatic) {
         table.previousPage()
         return
@@ -232,6 +238,12 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         if (event.key === 'Escape') {
           handleCloseDrawer()
         }
+
+        if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
+          if (selectedCell != null) {
+            navigator.clipboard.writeText(selectedCell.value)
+          }
+        }
       }
 
       document.addEventListener('keydown', handleKeyPress)
@@ -239,7 +251,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       return () => {
         document.removeEventListener('keydown', handleKeyPress)
       }
-    }, [])
+    }, [selectedCell])
 
     const handleRowIndexClick = (row: Row<string[]>) => {
       setSelectedCell(null)
@@ -300,6 +312,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           tableLinesLayout={tableLinesLayout}
           hideBorder={hideBorder}
           slotProps={slotProps}
+          pageIndex={pageIndex}
+          pageSize={isStatic ? clientPagination.pageSize : pageSize}
           {...rest}
           style={{ ...rest.style, ...tokenStyles }}
         />
@@ -422,7 +436,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         slotProps?.cell?.className
                       )}
                     >
-                      <div>{index + 1}</div>
+                      <div>{index + 1 + pageIndex * (isStatic ? clientPagination.pageSize : pageSize)}</div>
                     </div>
                     {row.getVisibleCells().map((cell, index) => (
                       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
@@ -482,10 +496,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                     const size = Number(newValue?.value)
                     setPageSize(size)
                     if (isStatic) {
-                      setClientPagination((prev) => ({ ...prev, pageSize: size }))
+                      setClientPagination({ pageIndex: 0, pageSize: size })
                     } else {
-                      setPagination((prev) => ({ ...prev, first: size }))
+                      setPagination({ first: size })
                     }
+                    setPageIndex(0)
                   }
                 }}
               >

@@ -9,6 +9,8 @@ import { DataGridProps } from './DataGrid.types'
 interface LoaderProps extends Omit<DataGridProps, 'query' | 'headers' | 'rows'> {
   dummyArrayColumns?: number[]
   dummyArrayRows?: number[]
+  pageIndex: number
+  pageSize: number
 }
 
 export const Loader: React.FC<LoaderProps> = ({
@@ -18,6 +20,8 @@ export const Loader: React.FC<LoaderProps> = ({
   disablePagination = false,
   tableLinesLayout = 'both',
   hideBorder,
+  pageIndex,
+  pageSize,
   slotProps,
   ...rest
 }) => {
@@ -59,7 +63,7 @@ export const Loader: React.FC<LoaderProps> = ({
                     })}
                     {...slotProps?.cell}
                   >
-                    <div>{rowIndex + 1}</div>
+                    <div>{rowIndex + 1 + pageIndex * pageSize ?? 0}</div>
                   </div>
                   {dummyArrayColumns.map((_, colIndex) => (
                     <div

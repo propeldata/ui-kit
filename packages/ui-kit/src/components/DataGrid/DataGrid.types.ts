@@ -12,7 +12,7 @@ export type DataGridData = {
 }
 
 export interface DataGridQueryProps extends Omit<ChartQueryProps, 'metric'>, PaginationProps {
-  /** The columns to retrieve. */
+  /** The columns to retrieve, if not passed, all columns will be included, Pass ['*'] to retrieve all columns */
   columns?: string[]
 
   /**

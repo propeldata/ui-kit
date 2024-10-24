@@ -268,6 +268,17 @@ export const JSON: Story = {
   render: (args) => <DataGrid {...args} />
 }
 
+export const AllColumns: Story = {
+  args: {
+    ...Basic.args,
+    query: {
+      ...Basic.args?.query,
+      columns: ['*']
+    }
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
 export const Custom: Story = {
   args: {
     ...Static.args,

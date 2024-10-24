@@ -4,6 +4,8 @@ import { DataGridQuery, PROPEL_GRAPHQL_API_ENDPOINT, Sort, TimeRangeInput, useDa
 import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useLog } from './../../components/Log/useLog'
+import { useEffect, useState } from 'react'
+import { useDataPoolColumns } from '../useDataPoolColumns'
 
 /**
  * This hook allows you to query Data Grid using Propel's GraphQL API.
@@ -12,24 +14,28 @@ import { useLog } from './../../components/Log/useLog'
  * @param props
  * @returns {data: DataGridQuery | undefined, isLoading: boolean, error: Error | undefined}
  */
-export const useDataGrid = ({
-  accessToken: accessTokenFromProp,
-  propelApiUrl,
-  timeRange: timeRangeProp,
-  timeZone,
-  columns,
-  filters: filtersProp,
-  dataPool,
-  orderByColumn,
-  sort = Sort.Desc,
-  first = 50,
-  last = 50,
-  after,
-  before,
-  refetchInterval,
-  enabled: enabledProp = true,
-  retry
-}: DataGridQueryProps): UseQueryProps<DataGridQuery> => {
+export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQuery> => {
+  const {
+    accessToken: accessTokenFromProp,
+    propelApiUrl,
+    timeRange: timeRangeProp,
+    timeZone,
+    columns,
+    filters: filtersProp,
+    dataPool,
+    orderByColumn,
+    sort = Sort.Desc,
+    first = 50,
+    last = 50,
+    after,
+    before,
+    refetchInterval,
+    enabled: enabledProp = true,
+    retry
+  } = props
+
+  const [fetchedColumns, setFetchedColumns] = useState<string[] | null>(null)
+
   const log = useLog()
 
   // Get access token using useAccessToken hook
@@ -41,13 +47,15 @@ export const useDataGrid = ({
 
   const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
 
+  const isAllColumns = columns?.includes('*')
+
   const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
   const filters = filtersProp ?? filtersFromProvider
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const enabled = accessToken != null && enabledProp
+  const enabled = accessToken != null && (!isAllColumns || fetchedColumns != null) && enabledProp
 
   // Log error if no access token provided and dataPool is provided
   if (accessToken == null && dataPool != null) {
@@ -75,7 +83,7 @@ export const useDataGrid = ({
     },
     {
       dataGridInput: {
-        columns: columns ?? [],
+        columns: isAllColumns ? fetchedColumns ?? [] : columns ?? [],
         dataPool: dataPoolInput,
         filters: filters ?? [],
         ...withTimeRange,
@@ -95,9 +103,21 @@ export const useDataGrid = ({
     }
   )
 
+  const { columns: fetchedColumnsData, isLoading: isLoadingFetchedColumns } = useDataPoolColumns({ ...props })
+
+  useEffect(() => {
+    if (fetchedColumnsData) {
+      setFetchedColumns(fetchedColumnsData.map(({ columnName }) => columnName))
+    }
+  }, [fetchedColumnsData])
+
   return {
     data,
-    isLoading: (isInitialLoading || (isLoading && enabledProp)) ?? isLoadingAccessToken,
+    isLoading:
+      (isAllColumns && isLoadingFetchedColumns) ||
+      isInitialLoading ||
+      (isLoading && enabledProp) ||
+      isLoadingAccessToken,
     error: enabled ? error : accessTokenError
   }
 }
