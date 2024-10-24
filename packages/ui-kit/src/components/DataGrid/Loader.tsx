@@ -7,16 +7,12 @@ import { getLinesStyle } from './utils'
 import { DataGridProps } from './DataGrid.types'
 
 interface LoaderProps extends Omit<DataGridProps, 'query' | 'headers' | 'rows'> {
-  dummyArrayColumns?: number[]
-  dummyArrayRows?: number[]
   pageIndex: number
   pageSize: number
 }
 
 export const Loader: React.FC<LoaderProps> = ({
   className,
-  dummyArrayColumns = Array(5).fill(0),
-  dummyArrayRows = Array(10).fill(0),
   disablePagination = false,
   tableLinesLayout = 'both',
   hideBorder,
@@ -26,6 +22,9 @@ export const Loader: React.FC<LoaderProps> = ({
   ...rest
 }) => {
   const linesStyle = getLinesStyle(tableLinesLayout)
+
+  const dummyArrayColumns = Array(8).fill(0)
+  const dummyArrayRows = Array(Math.min(24, pageSize)).fill(0)
 
   return (
     <div {...rest} className={classNames(className, componentStyles.wrapper)}>

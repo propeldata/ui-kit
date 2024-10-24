@@ -48,7 +48,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       rows: rowsProp,
       resizable: isResizable = false,
       slotProps: slotPropsProp,
-      loading,
+      loading = false,
       loaderProps,
       errorFallbackProps: errorFallbackPropsInitial,
       disablePagination = false,
@@ -298,6 +298,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       a.setAttribute('download', `${query?.dataPool?.name ?? query?.dataPool?.id ?? 'data'}.csv`)
       a.click()
     }
+
+    console.log(isLoading)
 
     if (isLoading) {
       if (renderLoaderComponent) {
