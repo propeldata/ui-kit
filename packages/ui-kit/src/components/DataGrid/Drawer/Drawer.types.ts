@@ -5,7 +5,6 @@ export interface DrawerProps extends ComponentPropsWithoutRef<'div'> {
   row?: RowElement | null
   cell?: CellElement | null
   onClose: () => void
-  onCsvDownload: () => void
 }
 
 export interface RowElement {

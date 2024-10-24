@@ -11,6 +11,8 @@ import {
   Cell,
   getPaginationRowModel
 } from '@tanstack/react-table'
+import { Tooltip } from '@radix-ui/themes'
+import '@radix-ui/themes/styles.css'
 
 import { withContainer } from '../withContainer'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
@@ -18,6 +20,7 @@ import { useCombinedRefsCallback, useEmptyableData, withThemeWrapper } from '../
 import { DataGridConnection } from '../../graphql'
 import { useSetupTheme } from '../ThemeProvider'
 import { useDataGrid } from '../../hooks'
+import { ArrowDownIcon } from '../Icons'
 
 import { DataGridData, DataGridProps } from './DataGrid.types'
 import componentStyles from './DataGrid.module.scss'
@@ -299,8 +302,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       a.click()
     }
 
-    console.log(isLoading)
-
     if (isLoading) {
       if (renderLoaderComponent) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -480,12 +481,16 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
             row={selectedRow}
             cell={selectedCell}
             onClose={handleCloseDrawer}
-            onCsvDownload={handleCsvDownload}
           />
         </div>
         {!disablePagination && (
           <div {...slotProps?.footer} className={classNames(componentStyles.footer, slotProps?.footer?.className)}>
             <div className={componentStyles.footerRows}>
+              <Tooltip content="Download all data as CSV">
+                <button type="button" className={componentStyles.button} onClick={handleCsvDownload}>
+                  <ArrowDownIcon />
+                </button>
+              </Tooltip>
               <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
               <Select
                 {...slotProps?.select}

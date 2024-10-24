@@ -5,8 +5,6 @@ import axiosInstance from '../../../../../app/storybook/src/axios'
 import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
 
 import { DataGridComponent, DataGrid as DataGridSource } from './DataGrid'
-import { ThemeProvider } from '../ThemeProvider'
-
 const DataGrid = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
   const ref = React.useRef(null)
@@ -16,20 +14,18 @@ const DataGrid = (args: Story['args']) => {
   }
 
   return (
-    <ThemeProvider>
-      <DataGridSource
-        ref={ref}
-        {...{
-          ...args,
-          query: args?.query
-            ? {
-                ...args?.query,
-                accessToken
-              }
-            : undefined
-        }}
-      />
-    </ThemeProvider>
+    <DataGridSource
+      ref={ref}
+      {...{
+        ...args,
+        query: args?.query
+          ? {
+              ...args?.query,
+              accessToken
+            }
+          : undefined
+      }}
+    />
   )
 }
 
