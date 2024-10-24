@@ -275,6 +275,14 @@ export const AllColumns: Story = {
   render: (args) => <DataGrid {...args} />
 }
 
+export const ShowRowCount: Story = {
+  args: {
+    ...Basic.args,
+    showRowCount: true
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
 export const Custom: Story = {
   args: {
     ...Static.args,

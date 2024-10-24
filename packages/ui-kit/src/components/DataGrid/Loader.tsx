@@ -19,6 +19,7 @@ export const Loader: React.FC<LoaderProps> = ({
   pageIndex,
   pageSize,
   slotProps,
+  showRowCount = false,
   ...rest
 }) => {
   const linesStyle = getLinesStyle(tableLinesLayout)
@@ -85,28 +86,35 @@ export const Loader: React.FC<LoaderProps> = ({
       </div>
       {!disablePagination && (
         <div {...slotProps?.footer} className={classNames(componentStyles.footer, slotProps?.footer?.className)}>
+          <span>
+            {showRowCount === true && (
+              <SkeletonLoader className={componentStyles.selectSkeleton}>###### rows</SkeletonLoader>
+            )}
+          </span>
           <div className={componentStyles.footerRows}>
             <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
             <div style={{ width: '64px' }}>
               <SkeletonLoader className={componentStyles.selectSkeleton}>Select</SkeletonLoader>
             </div>
+            <div className={componentStyles.paginationButtons}>
+              <Button
+                {...slotProps?.button}
+                className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
+                disabled
+                type="button"
+              >
+                &lt;
+              </Button>
+              <Button
+                {...slotProps?.button}
+                className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
+                disabled
+                type="button"
+              >
+                &gt;
+              </Button>
+            </div>
           </div>
-          <Button
-            {...slotProps?.button}
-            className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
-            disabled
-            type="button"
-          >
-            &lt;
-          </Button>
-          <Button
-            {...slotProps?.button}
-            className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
-            disabled
-            type="button"
-          >
-            &gt;
-          </Button>
         </div>
       )}
     </div>

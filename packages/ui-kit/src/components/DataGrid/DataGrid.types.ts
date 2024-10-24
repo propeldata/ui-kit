@@ -82,6 +82,8 @@ export interface DataGridProps extends DataComponentProps<'div'>, ThemeSettingPr
   accentColor?: AccentColors
   /** If true, the headers will be prettified */
   prettifyHeaders?: boolean
+  /** If true, row count will be shown in the footer */
+  showRowCount?: boolean
 }
 
 interface DataGridPaginationProps {

@@ -19,7 +19,7 @@ import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
 import { useCombinedRefsCallback, useEmptyableData, withThemeWrapper } from '../../helpers'
 import { DataGridConnection } from '../../graphql'
 import { useSetupTheme } from '../ThemeProvider'
-import { useDataGrid } from '../../hooks'
+import { useCounter, useDataGrid } from '../../hooks'
 import { ArrowDownIcon } from '../Icons'
 
 import { DataGridData, DataGridProps } from './DataGrid.types'
@@ -66,6 +66,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       card,
       hideBorder,
       accentColor,
+      showRowCount = false,
       ...rest
     },
     forwardedRef
@@ -127,6 +128,27 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     } = useDataGrid({ ...query, columns: query?.columns ?? ['*'], ...withPagination, enabled: !isStatic })
 
     const isLoading = isStatic ? loading : isLoadingDataGridData
+
+    const withDataPoolName = query?.dataPool?.name != null ? { name: query.dataPool.name } : {}
+    const withDataPoolId = query?.dataPool?.id != null ? { id: query.dataPool.id } : {}
+
+    const { data: rowCountData } = useCounter({
+      ...query,
+      metric: {
+        // @ts-expect-error - could not narrow down the type, ensured at least one is defined in enabled prop
+        count: {
+          dataPool: {
+            ...withDataPoolName,
+            ...withDataPoolId
+          }
+        }
+      },
+      enabled: !isStatic && (query.dataPool?.name != null || query.dataPool?.id != null) && showRowCount === true
+    })
+
+    console.log(rowCountData)
+
+    const rowCount = isStatic ? rowsProp?.length : rowCountData?.counter?.value
 
     const { isEmptyState, setData } = useEmptyableData<DataGridData>({
       isDataEmpty: (data) => !data?.headers || !data?.rows || data?.rows.length === 0 || data?.headers?.length === 0
@@ -317,6 +339,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           slotProps={slotProps}
           pageIndex={pageIndex}
           pageSize={isStatic ? clientPagination.pageSize : pageSize}
+          showRowCount={showRowCount}
           {...rest}
           style={{ ...rest.style, ...tokenStyles }}
         />
@@ -485,6 +508,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         </div>
         {!disablePagination && (
           <div {...slotProps?.footer} className={classNames(componentStyles.footer, slotProps?.footer?.className)}>
+            <span>{rowCount != null && showRowCount === true && `${Number(rowCount).toLocaleString()} rows`}</span>
+
             <div className={componentStyles.footerRows}>
               <Tooltip content="Download all data as CSV">
                 <button type="button" className={componentStyles.downloadButton} onClick={handleCsvDownload}>
@@ -517,27 +542,29 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   </Option>
                 ))}
               </Select>
+              <div className={componentStyles.paginationButtons}>
+                <Button
+                  {...slotProps?.button}
+                  className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
+                  disabled={isStatic ? !table.getCanPreviousPage() : !hasPreviousPage}
+                  onClick={handlePaginateBack}
+                  type="button"
+                  data-testid="propel-datagrid-paginate-back"
+                >
+                  &lt;
+                </Button>
+                <Button
+                  {...slotProps?.button}
+                  className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
+                  disabled={isStatic ? !table.getCanNextPage() : !hasNextPage}
+                  onClick={handlePaginateNext}
+                  type="button"
+                  data-testid="propel-datagrid-paginate-next"
+                >
+                  &gt;
+                </Button>
+              </div>
             </div>
-            <Button
-              {...slotProps?.button}
-              className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
-              disabled={isStatic ? !table.getCanPreviousPage() : !hasPreviousPage}
-              onClick={handlePaginateBack}
-              type="button"
-              data-testid="propel-datagrid-paginate-back"
-            >
-              &lt;
-            </Button>
-            <Button
-              {...slotProps?.button}
-              className={classNames(componentStyles.paginationButton, slotProps?.button?.className)}
-              disabled={isStatic ? !table.getCanNextPage() : !hasNextPage}
-              onClick={handlePaginateNext}
-              type="button"
-              data-testid="propel-datagrid-paginate-next"
-            >
-              &gt;
-            </Button>
           </div>
         )}
       </div>

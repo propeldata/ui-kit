@@ -8,6 +8,8 @@
   height: inherit;
   width: 100%;
   border-radius: 20px;
+
+  border-radius: var(--propel-radius-5);
 }
 
 .container {
@@ -295,7 +297,7 @@
   padding-top: var(--propel-space-4);
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: var(--propel-spacing-xs);
 
@@ -361,4 +363,10 @@
       fill: var(--propel-accent-8);
     }
   }
+}
+
+
+.paginationButtons {
+  display: flex;
+  align-items: center;
 }
