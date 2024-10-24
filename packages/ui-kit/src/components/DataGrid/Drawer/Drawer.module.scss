@@ -83,7 +83,17 @@
 
 .copyButton {
   @extend .button;
-  display: flex
+  display: flex;
+
+  svg {
+    fill: var(--propel-gray-8);
+  }
+
+  &:hover {
+    svg {
+      fill: var(--propel-accent-8);
+    }
+  }
 }
 
 .downloadButton {

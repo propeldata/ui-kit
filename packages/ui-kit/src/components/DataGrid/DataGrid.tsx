@@ -487,7 +487,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           <div {...slotProps?.footer} className={classNames(componentStyles.footer, slotProps?.footer?.className)}>
             <div className={componentStyles.footerRows}>
               <Tooltip content="Download all data as CSV">
-                <button type="button" className={componentStyles.button} onClick={handleCsvDownload}>
+                <button type="button" className={componentStyles.downloadButton} onClick={handleCsvDownload}>
                   <ArrowDownIcon />
                 </button>
               </Tooltip>
