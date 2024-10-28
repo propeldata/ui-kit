@@ -36,6 +36,7 @@ import { DEFAULT_PAGE_SIZE_OPTIONS, MINIMUM_TABLE_HEIGHT } from './consts'
 import { getLinesStyle } from './utils'
 import { handleArbitraryColor, useParsedComponentProps } from '../../themes'
 import { prettifyName } from '../shared.utils'
+import { TriangleIcon } from '../Icons/Triangle'
 
 const tanstackColumnHelper = createColumnHelper<DataGridConnection['headers']>()
 
@@ -428,7 +429,14 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         key={header.id}
                       >
                         {header.isPlaceholder ? null : (
-                          <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                          <>
+                            <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                            {query?.orderByColumn != null && query.orderByColumn - 1 === idx && (
+                              <div>
+                                <TriangleIcon />
+                              </div>
+                            )}
+                          </>
                         )}
                         {isResizable && (
                           <div

@@ -283,6 +283,18 @@ export const ShowRowCount: Story = {
   render: (args) => <DataGrid {...args} />
 }
 
+export const OrderBy: Story = {
+  args: {
+    ...Basic.args,
+    query: {
+      ...Basic.args?.query,
+      orderByColumn: 3
+    },
+    resizable: true
+  },
+  render: (args) => <DataGrid {...args} />
+}
+
 export const Custom: Story = {
   args: {
     ...Static.args,

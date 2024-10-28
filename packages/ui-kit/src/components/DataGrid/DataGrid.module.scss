@@ -196,6 +196,22 @@
     overflow: hidden;
 
     width: 100%;
+    max-width: fit-content;
+
+    align-content: center;
+
+    float: right;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+
+    margin-left: var(--propel-space-1);
+
+    svg {
+      fill: var(--propel-gray-11);
+    }
   }
 }
 
@@ -377,4 +393,6 @@
 
 .numeric {
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
 }
