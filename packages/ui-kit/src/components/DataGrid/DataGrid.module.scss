@@ -115,6 +115,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+
+    width: 100%;
   }
 
   &.horizontalLines {
@@ -192,6 +194,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+
+    width: 100%;
   }
 }
 
@@ -369,4 +373,8 @@
 .paginationButtons {
   display: flex;
   align-items: center;
+}
+
+.numeric {
+  text-align: right;
 }

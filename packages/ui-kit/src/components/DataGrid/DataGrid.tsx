@@ -146,8 +146,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       enabled: !isStatic && (query.dataPool?.name != null || query.dataPool?.id != null) && showRowCount === true
     })
 
-    console.log(rowCountData)
-
     const rowCount = isStatic ? rowsProp?.length : rowCountData?.counter?.value
 
     const { isEmptyState, setData } = useEmptyableData<DataGridData>({
@@ -364,6 +362,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const linesStyle = getLinesStyle(tableLinesLayout)
 
+    const headerGroups = table.getHeaderGroups()
+    const rowGroup = table.getRowModel().rows
+
     return (
       <div
         ref={setRef}
@@ -385,7 +386,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   width: table.getCenterTotalSize()
                 }}
               >
-                {table.getHeaderGroups().map((headerGroup) => (
+                {headerGroups.map((headerGroup) => (
                   <div className={classNames(componentStyles.tableRowHead)} key={headerGroup.id}>
                     <div
                       role="cell"
@@ -402,7 +403,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         }
                       )}
                     ></div>
-                    {headerGroup.headers.map((header) => (
+                    {headerGroup.headers.map((header, idx) => (
                       <div
                         role="cell"
                         {...slotProps?.cell}
@@ -413,7 +414,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                           slotProps?.cell?.className,
                           slotProps?.header?.className,
                           {
-                            [componentStyles.hideBorder]: hideBorder
+                            [componentStyles.hideBorder]: hideBorder,
+                            [componentStyles.numeric]: rowGroup.every(
+                              (row) => !isNaN(Number(row.getAllCells()[idx].getValue()))
+                            )
                           }
                         )}
                         style={{
@@ -442,7 +446,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                 ))}
               </div>
               <div className={componentStyles.tableBody}>
-                {table.getRowModel().rows.map((row, index) => (
+                {rowGroup.map((row, index) => (
                   <div className={componentStyles.tableRow} key={row.id}>
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
                     <div
@@ -480,7 +484,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                           linesStyle,
                           slotProps?.cell?.className,
                           {
-                            [componentStyles.hideBorder]: hideBorder
+                            [componentStyles.hideBorder]: hideBorder,
+                            [componentStyles.numeric]: !isNaN(Number(cell.getValue()))
                           }
                         )}
                         key={cell.id}
