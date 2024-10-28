@@ -47,7 +47,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
   const enabled = accessToken != null && enabledProp
 
   // Log error if no access token provided and metric is provided
-  if (!enabled && metric) {
+  if (accessToken == null && metric != null) {
     log.error(accessTokenError ?? 'No access token provided.')
   }
 

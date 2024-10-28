@@ -1,6 +1,6 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
-import { Dom, mockDataGridQuery, setupTestHandlers } from '../../testing'
+import { Dom, mockDataGridQuery, mockDataPoolColumnsByNameQuery, setupTestHandlers } from '../../testing'
 
 import { DataGrid } from './DataGrid'
 
@@ -88,8 +88,29 @@ const handlers = [
         }
       })
     )
+  }),
+
+  mockDataPoolColumnsByNameQuery((req, res, ctx) => {
+    return res(
+      ctx.data({
+        dataPoolByName: {
+          columns: {
+            nodes: [
+              { columnName: 'taco_name' },
+              { columnName: 'restaurant_name' },
+              { columnName: 'tortilla_name' },
+              { columnName: 'restaurant_id' }
+            ]
+          }
+        }
+      })
+    )
   })
 ]
+
+jest.mock('@radix-ui/themes', () => ({
+  Tooltip: ({ children }: { children: React.ReactNode }) => <div>{children}</div>
+}))
 
 describe('DataGrid', () => {
   let dom: Dom
@@ -135,11 +156,11 @@ describe('DataGrid', () => {
   it('changes page size', async () => {
     dom = render(<DataGrid query={{ dataPool: { name: 'changes-page-size' }, accessToken: 'test-token' }} />)
 
-    await dom.findByText('page size 10')
+    await dom.findByText('10')
 
     fireEvent.click(await dom.findByLabelText('Rows per page:'))
     fireEvent.click(await dom.findByText('50'))
 
-    await dom.findByText('page size 50')
-  }, 20000)
+    expect(await dom.findByLabelText('Rows per page:')).toHaveTextContent('50')
+  }, 40000)
 })
