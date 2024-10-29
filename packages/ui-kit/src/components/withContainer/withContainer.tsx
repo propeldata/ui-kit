@@ -15,7 +15,7 @@ export const withContainer = <P extends object, C extends object>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { errorFallbackProps, card, cardProps, ...componentProps } = props as any
 
-    const withFallbackProps = { errorFallbackProps } ?? {}
+    const withFallbackProps = errorFallbackProps != null ? { errorFallbackProps } : {}
 
     const wrappedComponent = <WrappedComponent ref={ref} {...withFallbackProps} card={card} {...componentProps} />
 

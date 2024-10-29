@@ -33,7 +33,7 @@ describe('ThemeProvider', () => {
   //     const styles = getComputedStyle(screen.getByTestId('theme-provider'))
 
   //     expect(styles.getPropertyValue('--propel-foreground-brand-primary')).toBe('red')
-  //     expect(styles.getPropertyValue('--propel-border-primary')).toBe('blue')
+  //     expect(styles.getPropertyValue('--propel-gray-12')).toBe('blue')
   //   })
 })
 
@@ -89,7 +89,7 @@ describe('useSetupTheme', () => {
   it('should return the current theme and chart configuration if a theme is provided', () => {
     const div = document.createElement('div')
     div.style.setProperty('--propel-foreground-brand-primary', 'red')
-    div.style.setProperty('--propel-border-primary', 'blue')
+    div.style.setProperty('--propel-gray-12', 'blue')
 
     render(<TestComponent container={div} />)
     // expect(screen.getByText(/Theme: {"borderPrimary":"blue","foregroundBrandPrimary":"red"}/)).toBeInTheDocument()

@@ -180,7 +180,7 @@ export const FreeSoloStory: Story = {
     (Story) => {
       return (
         <div>
-          <p style={{ color: 'var(--propel-text-primary)' }}>
+          <p style={{ color: 'var(--propel-gray-10)' }}>
             <strong>Note:</strong> You can enable <code>freeSolo</code> in order to set values that are not in the
             dropdown, for example, try typing <code>Queso Blanco</code> and press <code>ENTER</code>.
           </p>
@@ -228,7 +228,7 @@ export const ErrorStory: Story = {
     (Story) => {
       return (
         <div>
-          <p style={{ color: 'var(--propel-text-primary)' }}>
+          <p style={{ color: 'var(--propel-gray-10)' }}>
             <strong>Note:</strong> In case the API returns an error the component will work on <code>freeSolo</code>{' '}
             mode.
           </p>

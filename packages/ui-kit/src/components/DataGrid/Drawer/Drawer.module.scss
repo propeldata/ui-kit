@@ -1,0 +1,101 @@
+.container {
+  background-color: var(--propel-color-background);
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  max-width: 400px;
+  min-width: 450px;
+  width: 70%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 250ms ease-in-out;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.main {
+  position: relative;
+  overflow-y: auto;
+  padding: 0 var(--propel-space-4);
+}
+
+.hidden {
+  width: 0 !important;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden * {
+  display: none;
+}
+
+.valueContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--propel-space-4);
+
+  &>div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.value {
+  margin-top: var(--propel-space-4);
+  padding-left: var(--propel-space-4);
+  color: var(--propel-gray-10);
+
+  resize: none;
+  max-height: 560px;
+  display: block;
+
+  border: none;
+  outline: none;
+
+  white-space: pre-wrap;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--propel-gray-4);
+  margin: var(--propel-space-4) 0;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.closeButton {
+  @extend .button;
+}
+
+.copyButton {
+  @extend .button;
+  display: flex;
+
+  svg {
+    fill: var(--propel-gray-8);
+  }
+
+  &:hover {
+    svg {
+      fill: var(--propel-accent-8);
+    }
+  }
+}
+
+.downloadButton {
+  @extend .button;
+}

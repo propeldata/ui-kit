@@ -55,6 +55,7 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
     const columns = isStatic
       ? columnsProp ?? []
       : data
+          ?.filter((column) => column.type !== 'JSON')
           ?.map(({ columnName }) => columnName)
           .filter((column) => isIncludeAllColumns || includeColumns.includes(column)) ?? []
 
