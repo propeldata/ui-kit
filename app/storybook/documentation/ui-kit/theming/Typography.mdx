@@ -1,0 +1,21 @@
+import { Meta } from '@storybook/blocks'
+import LinkTo from '@storybook/addon-links/react'
+import { SourceCode } from '../../../.storybook/blocks/SourceCode'
+import * as TypographyStories from '../../../../../packages/ui-kit/src/components/Typography/Typography.stories'
+
+<Meta title="Theming/Typography" />
+
+# Typography
+
+Guidance for using and tuning typography.
+
+## Base component
+
+Use <LinkTo kind="Components/Typography" story="Overview">Typography</LinkTo> component to render text. This component
+has `size` prop and map to the underlying type system to ensure consistent typography throughout your app.
+
+It can render text using various semantic HTML elements (e.g., `h1`, `p`, `span`) while maintaining consistent styling.
+It adapts its underlying DOM element based on the context or props, ensuring proper document structure and
+accessibility.
+
+<SourceCode of={TypographyStories.MixedWithdStory} shown />
