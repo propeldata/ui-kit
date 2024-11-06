@@ -2,7 +2,7 @@ import type { ChartConfiguration } from 'chart.js'
 import React from 'react'
 import type { ThemeTokenProps } from '../../themes/theme.types'
 
-export type ThemeContextProps = {
+export interface ThemeContextProps {
   theme?: ThemeTokenProps
 
   /**

@@ -1,25 +1,10 @@
 import React, { createContext, useState } from 'react'
 
-import { FilterInput } from '../../helpers'
-
-interface FilterInputWithId extends FilterInput {
-  id: symbol
-}
-
-export interface FilterContextValue {
-  /** Filters that will be provided to the child components */
-  filters: FilterInputWithId[]
-  /** Setter function for the Filters */
-  setFilters: React.Dispatch<React.SetStateAction<FilterInputWithId[]>>
-}
+import { FilterContextValue, FilterInputWithId } from './FilterProvider.types'
 
 export const FilterContext = createContext<FilterContextValue>({ filters: [], setFilters: () => {} })
 
-export interface FilterContextProps {
-  children?: React.ReactNode
-}
-
-export const FilterProvider: React.FC<FilterContextProps> = ({ children }) => {
+export const FilterProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [filters, setFilters] = useState<FilterInputWithId[]>([])
 
   return <FilterContext.Provider value={{ filters, setFilters }}>{children}</FilterContext.Provider>
