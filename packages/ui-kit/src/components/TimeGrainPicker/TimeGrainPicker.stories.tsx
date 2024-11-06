@@ -51,7 +51,8 @@ export const SingleStory: Story = {
   args: {
     selectProps: {
       placeholder: 'Granularity'
-    }
+    },
+    defaultOpen: true
   },
   render: (args) => (
     <FilterProvider>

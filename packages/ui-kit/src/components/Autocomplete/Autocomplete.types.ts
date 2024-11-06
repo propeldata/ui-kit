@@ -42,4 +42,7 @@ export interface AutocompleteProps
 
   /** If true, enables the user to type an arbitrary value */
   freeSolo?: boolean
+
+  /** If true, the dropdown will be open by default */
+  defaultOpen?: boolean
 }

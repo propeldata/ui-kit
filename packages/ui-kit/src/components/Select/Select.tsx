@@ -18,6 +18,9 @@ export interface SelectProps<T extends OptionValue>
     Pick<ButtonProps, 'startAdornment' | 'endAdornment' | 'size'>,
     MUISelectProps<T, false> {
   options?: SelectOptionDefinition<T>[]
+
+  /** If true, the select is open by default. */
+  defaultOpen?: boolean
 }
 
 const ButtonSlot = prepareForSlot(Button)
@@ -34,6 +37,7 @@ const SelectComponent = <T extends OptionValue>(
     listboxOpen = false,
     size = 'default',
     onListboxOpenChange,
+    defaultOpen = false,
     ...rest
   }: SelectProps<T>,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>
@@ -44,13 +48,15 @@ const SelectComponent = <T extends OptionValue>(
   useSetupTheme({ componentContainer: componentContainer?.parentElement, ...themeSettings })
   const popperRef = React.useRef<HTMLDivElement>(null)
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
-  const [listboxVisible, setListboxVisible] = React.useState(listboxOpen)
+  const [listboxVisible, setListboxVisible] = React.useState(defaultOpen || listboxOpen)
   const { getButtonProps, getListboxProps, value, contextValue, open } = useSelect<T>({
     onOpenChange: setListboxVisible,
     open: listboxVisible,
     value: valueProp,
     ...rest
   })
+
+  const isFirstRender = React.useRef(true)
 
   const onKeyDown = React.useCallback(() => {
     if (timeoutRef.current) {
@@ -76,10 +82,17 @@ const SelectComponent = <T extends OptionValue>(
   }, [onListboxOpenChange, listboxVisible])
 
   React.useEffect(() => {
-    setListboxVisible(listboxOpen)
-  }, [listboxOpen])
+    if (!defaultOpen) {
+      setListboxVisible(listboxOpen)
+    }
+  }, [defaultOpen, listboxOpen])
 
   React.useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+
     setListboxVisible(false)
   }, [value])
 
@@ -107,6 +120,7 @@ const SelectComponent = <T extends OptionValue>(
         className={classNames(componentStyles.rootSelect, className)}
         {...rest}
         slots={{ root: ButtonSlot, ...rest.slots }}
+        defaultListboxOpen={defaultOpen}
         slotProps={{
           root: {
             ...getButtonProps({
@@ -132,6 +146,10 @@ const SelectComponent = <T extends OptionValue>(
           listbox,
           popper: {
             ref: popperRef,
+            anchorEl: ref?.current,
+            popperOptions: {
+              strategy: 'fixed'
+            },
             className: classNames(
               componentStyles.popper,
               { [componentStyles[size]]: size && size !== 'default' },
