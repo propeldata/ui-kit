@@ -14,6 +14,9 @@ export interface TimeGrainPickerProps
 
   /** Whether there was an error or not, setting to `true` will enable freeSolo mode */
   error?: boolean
+
+  /** If true, the select is open by default. */
+  defaultOpen?: boolean
 }
 
 export const OrderedTimeSeriesGranularity = [

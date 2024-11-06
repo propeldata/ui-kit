@@ -2,7 +2,7 @@ import type { TimeRangeInput } from '../../graphql'
 import { ThemeSettingProps } from '../../themes'
 import type { ButtonProps } from '../Button'
 
-export type DateRangeOptionsProps = {
+export interface DateRangeOptionsProps {
   /** A unique identifier for the date range option, used to distinguish between different options. */
   value: string
 
@@ -46,4 +46,7 @@ export interface TimeRangePickerProps
 
   /** A callback function that is fired when the selected value changes, providing the new value as an argument. */
   onChange?: (option: DateRangeOptionsProps) => void
+
+  /** If true, the select is open by default. */
+  defaultOpen?: boolean
 }

@@ -34,6 +34,7 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     listClassname,
     optionStyle,
     optionClassname,
+    defaultOpen = false,
     disableClearable = false,
     ...rest
   } = props
@@ -41,6 +42,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
   const inputContainerRef = React.useRef<HTMLDivElement>(null)
 
   const { themeSettings, parsedPropsWithoutRest } = useParsedComponentProps(props)
+
+  const [isOpen, setIsOpen] = React.useState(defaultOpen)
 
   const {
     getRootProps,
@@ -55,7 +58,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
     anchorEl,
     setAnchorEl,
     groupedOptions,
-    getClearProps
+    getClearProps,
+    value
   } = useAutocomplete({
     ...props,
     componentName: 'Autocomplete',
@@ -73,8 +77,15 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
       }
       return ''
     },
-    blurOnSelect: true
+    blurOnSelect: true,
+    open: isOpen
   })
+
+  React.useEffect(() => {
+    if (value) {
+      setIsOpen(false)
+    }
+  }, [value])
 
   const { componentContainer, setRef } = useForwardedRefCallback(ref)
 
@@ -114,6 +125,12 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
               style: {
                 ...getInputProps().style,
                 ...inputStyle
+              },
+              onFocus: () => {
+                setIsOpen(true)
+              },
+              onBlur: () => {
+                setIsOpen(false)
               }
             }
           }}
@@ -139,6 +156,9 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
           open={popupOpen}
           anchorEl={anchorEl}
           placement="bottom-start"
+          popperOptions={{
+            strategy: 'fixed'
+          }}
           slots={{
             root: 'div'
           }}

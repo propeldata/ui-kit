@@ -15,7 +15,7 @@ interface TimeGrainPickerOption {
 }
 
 export const TimeGrainPicker = React.forwardRef<HTMLDivElement, TimeGrainPickerProps>(
-  ({ selectProps, options = OrderedTimeSeriesGranularity, ...rest }, forwardedRef) => {
+  ({ selectProps, options = OrderedTimeSeriesGranularity, defaultOpen = false, ...rest }, forwardedRef) => {
     const selectOptions = React.useMemo(
       () => options.map((option) => ({ label: granularityLabel[option], value: option })),
       [options]
@@ -37,6 +37,7 @@ export const TimeGrainPicker = React.forwardRef<HTMLDivElement, TimeGrainPickerP
         <Select
           {...selectProps}
           ref={selectRef}
+          defaultOpen={defaultOpen}
           onChange={(_, optionValue) => {
             if (optionValue == null) {
               return
