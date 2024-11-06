@@ -11,7 +11,7 @@ export type ChartScales = DeepPartial<{ [key: string]: ScaleOptionsByType<'linea
 
 export type TimeSeriesChartVariant = 'bar' | 'line'
 
-export type TimeSeriesData = {
+export interface TimeSeriesData {
   values?: (number | string | null)[]
   labels?: string[]
   groups?: {

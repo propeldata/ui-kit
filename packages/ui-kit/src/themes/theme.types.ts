@@ -16,7 +16,7 @@ export type PanelBackgrounds = (typeof panelBackgrounds)[number]
 
 export type ThemeAppearances = 'light' | 'dark'
 
-export type ThemeSettingProps = {
+export interface ThemeSettingProps {
   /**
    * The initial theme used as a base. It provides a default set of styling
    * from which customizations can be applied.
@@ -60,7 +60,7 @@ export interface ThemeTokenProps extends ThemeSettingProps {
   }
 }
 
-export type ThemeComponentProps = {
+export interface ThemeComponentProps {
   /** Supports all standard CSS properties along with custom theme-based CSS variables */
   style?: React.CSSProperties
 

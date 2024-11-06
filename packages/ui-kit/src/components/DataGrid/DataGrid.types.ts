@@ -6,7 +6,7 @@ import type { DataPoolInput, Sort } from '../../graphql'
 import { ButtonProps } from '../Button'
 import { OptionValue, SelectProps } from '../Select'
 
-export type DataGridData = {
+export interface DataGridData {
   headers?: string[] | null
   rows?: (string | null)[][]
 }
