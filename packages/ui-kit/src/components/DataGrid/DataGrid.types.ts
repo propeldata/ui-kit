@@ -47,7 +47,7 @@ interface SlotProps {
   header?: ComponentPropsWithoutRef<'div'>
 }
 
-export interface DataGridProps extends DataComponentProps<'div'>, ThemeSettingProps {
+export interface DataGridProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** DataGrid query props */
   query?: DataGridQueryProps
   /** If true, the table columns will be resizable */
