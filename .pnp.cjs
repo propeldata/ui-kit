@@ -34,6 +34,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@propeldata/ui-kit",\
         "reference": "workspace:packages/ui-kit"\
+      },\
+      {\
+        "name": "colors-7bb702",\
+        "reference": "workspace:packages/ui-kit/dist/cjs/colors"\
+      },\
+      {\
+        "name": "colors-2c749e",\
+        "reference": "workspace:packages/ui-kit/dist/esm/colors"\
       }\
     ],\
     "enableTopLevelFallback": true,\
@@ -41,6 +49,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "fallbackExclusionList": [\
       ["@propeldata/ui-kit", ["virtual:5a5654a74dd0c04c5098a6f512068feec2c8e29bf2d7f2f4f51fc2ab6bc3c25e312c721937dac9a06feea26b637c0eedc3cdde0a175e4193238da9736337ebd8#workspace:packages/ui-kit", "virtual:ac97dc161a7119c9069046e42490ca00bf6883b0c120a420828f620346e5a616f38063c37c4d30577588c8b903e63efd6999cff91af9cad2663faf104588286f#workspace:packages/ui-kit", "virtual:b6fae5393a385f4f1bbe5a18f6e1eb116e43df87482141188b0ea2783134c1c43b4542d4d2bc120bac7fb6e4d07c5a98dceeaef7ca716c462765afdea8bc7675#workspace:packages/ui-kit", "workspace:packages/ui-kit"]],\
       ["@propeldata/ui-kit-monorepo", ["workspace:."]],\
+      ["colors-2c749e", ["workspace:packages/ui-kit/dist/esm/colors"]],\
+      ["colors-7bb702", ["workspace:packages/ui-kit/dist/cjs/colors"]],\
       ["react-16", ["workspace:app/examples/react-16"]],\
       ["react-17", ["workspace:app/examples/react-17"]],\
       ["react-18", ["workspace:app/examples/react-18"]],\
@@ -8968,6 +8978,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A4.9.5%3A%3A__archiveUrl=https%253A%252F%252Fregistry.npmjs.org%252Ftypescript%252F-%252Ftypescript-4.9.5.tgz#~builtin<compat/typescript>::version=4.9.5&hash=289587"]\
           ],\
           "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@radix-ui/colors", [\
+        ["npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz", {\
+          "packageLocation": "./.yarn/cache/@radix-ui-colors-npm-3.0.0-9f82aaefb4-5ac1b69df7.zip/node_modules/@radix-ui/colors/",\
+          "packageDependencies": [\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@radix-ui/number", [\
@@ -18654,6 +18673,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["colorette", "npm:2.0.20::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fcolorette%2F-%2Fcolorette-2.0.20.tgz"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["colors-2c749e", [\
+        ["workspace:packages/ui-kit/dist/esm/colors", {\
+          "packageLocation": "./packages/ui-kit/dist/esm/colors/",\
+          "packageDependencies": [\
+            ["colors-2c749e", "workspace:packages/ui-kit/dist/esm/colors"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["colors-7bb702", [\
+        ["workspace:packages/ui-kit/dist/cjs/colors", {\
+          "packageLocation": "./packages/ui-kit/dist/cjs/colors/",\
+          "packageDependencies": [\
+            ["colors-7bb702", "workspace:packages/ui-kit/dist/cjs/colors"],\
+            ["@radix-ui/colors", "npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40radix-ui%2Fcolors%2F-%2Fcolors-3.0.0.tgz"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["combined-stream", [\
