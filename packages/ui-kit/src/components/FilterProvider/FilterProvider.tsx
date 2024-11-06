@@ -1,8 +1,10 @@
 'use client'
 
 import React, { createContext, useState } from 'react'
+import { TimeSeriesGranularity } from '../../graphql'
+import { DateRangeOptionsProps } from '../TimeRangePicker'
 
-import { FilterContextValue, FilterInputWithId } from './FilterProvider.types'
+import { FilterContextProps, FilterContextValue, FilterInputWithId } from './FilterProvider.types'
 
 export const FilterContext = createContext<FilterContextValue>({
   filters: [],
@@ -17,8 +19,20 @@ export const FilterContext = createContext<FilterContextValue>({
   maxGroupBy: undefined
 })
 
-export const FilterProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [filters, setFilters] = useState<FilterInputWithId[]>([])
+export const FilterProvider: React.FC<FilterContextProps> = ({
+  children,
+  baseFilters,
+  defaultGranularity = TimeSeriesGranularity.Day,
+  defaultGroupBy = [],
+  emptyGroupBy = [],
+  maxGroupBy
+}) => {
+  const [filters, setFilters] = useState<FilterInputWithId[]>(
+    baseFilters?.map((filter) => ({ ...filter, id: Symbol() })) ?? []
+  )
+  const [timeRange, setTimeRange] = useState<DateRangeOptionsProps>({ value: '' })
+  const [granularity, setGranularity] = useState<TimeSeriesGranularity>(defaultGranularity)
+  const [groupBy, setGroupBy] = useState<string[]>(defaultGroupBy)
 
   return (
     <FilterContext.Provider

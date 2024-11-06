@@ -12,7 +12,8 @@ import { Dom, mockCounterQuery, mockLeaderboardQuery, mockTimeSeriesQuery, setup
 import { Counter } from '../Counter'
 import { Leaderboard } from '../Leaderboard'
 import { TimeSeries } from '../TimeSeries'
-import { AccessTokenProvider, AccessTokenProviderProps } from './AccessTokenProvider'
+import { AccessTokenProviderProps } from './AccessTokenProvider.types'
+import { AccessTokenProvider } from './AccessTokenProvider'
 
 const counterResponse: CounterQuery = {
   counter: {

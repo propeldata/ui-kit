@@ -4,6 +4,7 @@ import React, { createContext, useCallback, useEffect, useRef, useState } from '
 import { sleep } from '../../helpers'
 import { useLog } from '../Log'
 import { AccessTokenContextValue, AccessTokenProviderProps } from './AccessTokenProvider.types'
+import { AccessTokenError } from './utils'
 
 const ACCESS_TOKEN_REFRESH_INTERVAL = 3300000 // 55 minutes
 const ACCESS_TOKEN_MAX_RETRIES = 3

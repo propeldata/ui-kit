@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
-import { AccessTokenContext, AccessTokenContextValue } from './AccessTokenProvider'
-
+import { AccessTokenContext } from './AccessTokenProvider'
+import { AccessTokenContextValue } from './AccessTokenProvider.types'
 /**
  * Access the values from the AccessTokenProvider
  * @returns {AccessTokenContextValue} accessToken, isLoading, onExpiredToken, failedRetry
