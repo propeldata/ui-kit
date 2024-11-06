@@ -19,7 +19,7 @@ export const FilterContext = createContext<FilterContextValue>({
   maxGroupBy: undefined
 })
 
-export const FilterProvider: React.FC<FilterContextProps> = ({
+export const FilterProvider: React.FC<React.PropsWithChildren<FilterContextProps>> = ({
   children,
   baseFilters,
   defaultGranularity = TimeSeriesGranularity.Day,

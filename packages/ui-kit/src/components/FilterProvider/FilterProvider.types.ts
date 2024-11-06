@@ -29,7 +29,6 @@ export interface FilterContextValue {
 }
 
 export interface FilterContextProps {
-  children?: React.ReactNode
   /** Set of pre defined filters that will be used by all the child components */
   baseFilters?: FilterInput[]
   /** Default time granularity */
