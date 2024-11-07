@@ -1,5 +1,17 @@
 # @propeldata/ui-kit
 
+## 0.12.0
+
+### Minor Changes
+
+- ac3eb2b: Added new DataGrid component v1
+- 00be816: Added GroupBy component
+
+### Patch Changes
+
+- 382dc2d: Fix unintentional export
+- c8ff3a8: Added `defaultOpen` prop
+
 ## 0.11.2
 
 ### Patch Changes
