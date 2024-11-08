@@ -1,7 +1,8 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { GroupBy as GroupBySource } from './GroupBy'
 import { FilterProvider } from '../FilterProvider'

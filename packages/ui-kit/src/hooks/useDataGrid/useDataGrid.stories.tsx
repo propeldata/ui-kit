@@ -3,7 +3,8 @@ import React from 'react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, Sort } from '../../graphql'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 
 import { DataGridQueryProps } from '../../components/DataGrid/DataGrid.types'
 import '../css/stories.css'
