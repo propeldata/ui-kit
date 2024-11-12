@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange } from '../../graphql'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import { useCounter } from './useCounter'
 
 const args = {
@@ -42,8 +43,8 @@ const meta: Meta = {
       body
         .replace(
           'function',
-          `import {fractionUnicode} from "./fractionUnicode" 
-      
+          `import {fractionUnicode} from "./fractionUnicode"
+
       function`
         )
         .replace(`useStorybookAccessToken(axiosInstance)`, 'useAccessToken()')

@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange } from '../../graphql'
-import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { quotedStringRegex, storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import { useCounter } from './useCounter'
 
 const args = {
@@ -67,7 +68,7 @@ const meta: Meta = {
       body
         .replace(
           'function',
-          `      
+          `
       function`
         )
         .replace(`useStorybookAccessToken(axiosInstance)`, 'useAccessToken()')

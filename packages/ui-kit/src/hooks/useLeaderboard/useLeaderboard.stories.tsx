@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, Sort } from '../../graphql'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import '../css/stories.css'
 import { useLeaderboard } from './useLeaderboard'
 
@@ -65,7 +66,7 @@ export const LeaderboardTable: Story = {
             </tr>
           </thead>
           <tbody>
-            {rows?.map((row, index) => (
+            {rows?.map((row) => (
               <tr key={row[0]}>
                 <td key={row[0]}>{row[0]}</td>
                 <td key={row[1]}>{row[1]}</td>
