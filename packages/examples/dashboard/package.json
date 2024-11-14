@@ -1,6 +1,6 @@
 {
   "name": "dashboard-example",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "private": true,
   "license": "MIT",
   "source": "src/index.ts",
