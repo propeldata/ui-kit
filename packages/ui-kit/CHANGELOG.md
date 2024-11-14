@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.12.1
+
+### Patch Changes
+
+- f688b6f: Fix type definitions defining interfaces as type
+
 ## 0.12.0
 
 ### Minor Changes
