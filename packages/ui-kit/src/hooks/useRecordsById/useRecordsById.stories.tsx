@@ -2,7 +2,8 @@ import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 
 import { useRecordsById } from './useRecordsById'
 import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.types'
@@ -48,7 +49,7 @@ export const RecordsByIdStory: Story = {
   render: (args) =>
     (function RecordsById() {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
-      const { data } = useRecordsById({ ...args, accessToken })
+      const { data } = useRecordsById({ ...(args as RecordsByIdQueryProps), accessToken })
       const { columns, values } = data?.recordsByUniqueId ?? {}
 
       return (

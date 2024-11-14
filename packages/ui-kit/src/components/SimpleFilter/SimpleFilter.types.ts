@@ -34,4 +34,7 @@ export interface SimpleFilterProps
 
   /** Whether there was an error or not, setting to `true` will enable freeSolo mode */
   error?: boolean
+
+  /** If true, the dropdown will be open by default */
+  defaultOpen?: boolean
 }

@@ -2,7 +2,8 @@ import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 
 import { SqlQueryProps } from './Sql.types'
 import { useSql } from './useSql'
@@ -44,7 +45,7 @@ export const SqlStory: Story = {
   render: (args) =>
     (function Sql() {
       const { accessToken } = useStorybookAccessToken(axiosInstance)
-      const { data } = useSql({ ...args, accessToken })
+      const { data } = useSql({ ...(args as SqlQueryProps), accessToken })
       const { columns, rows } = data?.sqlV1 ?? {}
 
       return (

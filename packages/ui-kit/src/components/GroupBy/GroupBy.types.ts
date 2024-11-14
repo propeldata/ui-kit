@@ -39,4 +39,7 @@ export interface GroupByProps
 
   /** Maximum number of group by columns */
   maxGroupBy?: number
+
+  /** If true, the dropdown will be open by default */
+  defaultOpen?: boolean
 }

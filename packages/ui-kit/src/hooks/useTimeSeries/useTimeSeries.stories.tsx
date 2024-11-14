@@ -3,7 +3,8 @@ import { Chart, registerables } from 'chart.js'
 import React from 'react'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import { useTimeSeries } from './useTimeSeries'
 
 Chart.register(...registerables)
@@ -63,7 +64,7 @@ export const TimeSeriesChart: Story = {
       }, [chartRef])
 
       React.useEffect(() => {
-        if (labels && labels.length > 0) {
+        if (labels && labels.length > 0 && canvasRef.current != null) {
           chartRef.current = new Chart(canvasRef.current, {
             type: 'line',
             data: {
@@ -71,7 +72,7 @@ export const TimeSeriesChart: Story = {
               datasets: [
                 {
                   label: 'TimeSeries',
-                  data: values,
+                  data: values?.map((v) => Number(v)) ?? [],
                   borderWidth: 1
                 }
               ]

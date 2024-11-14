@@ -2,7 +2,8 @@ import React from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { quotedStringRegex, storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { quotedStringRegex, storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import { TimeGrainPicker } from './TimeGrainPicker'
 import { TimeSeries as TimeSeriesSource, TimeSeriesProps } from '../TimeSeries'
 import { FilterProvider } from '../FilterProvider'
@@ -51,7 +52,8 @@ export const SingleStory: Story = {
   args: {
     selectProps: {
       placeholder: 'Granularity'
-    }
+    },
+    defaultOpen: true
   },
   render: (args) => (
     <FilterProvider>

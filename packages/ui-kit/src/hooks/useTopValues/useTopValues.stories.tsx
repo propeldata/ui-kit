@@ -2,7 +2,8 @@ import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import axiosInstance from '../../../../../app/storybook/src/axios'
-import { storybookCodeTemplate, useStorybookAccessToken } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { useStorybookAccessToken } from '../../helpers/useStorybookAccessToken'
 import { RelativeTimeRange } from '../../graphql'
 
 import { useTopValues } from './useTopValues'

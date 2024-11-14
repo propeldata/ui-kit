@@ -58,6 +58,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       size = 'default',
       value,
       onChange,
+      defaultOpen = false,
       ...rest
     },
     forwardedRef
@@ -326,6 +327,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
           startAdornment={() => <CalendarIcon size={16} />}
           value={selectedOption}
           placeholder="Date Range"
+          defaultOpen={defaultOpen}
           onListboxOpenChange={(listboxOpen) => {
             if (!popupOpen) {
               setSelectOpen(listboxOpen)

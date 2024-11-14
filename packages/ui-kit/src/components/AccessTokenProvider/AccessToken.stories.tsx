@@ -4,7 +4,8 @@ import React from 'react'
 import { Counter, TimeSeries } from '..'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { RelativeTimeRange } from '../../graphql'
-import { fetchStorybookAccessToken, storybookCodeTemplate } from '../../helpers'
+import { storybookCodeTemplate } from '../../helpers'
+import { fetchStorybookAccessToken } from '../../helpers/fetchStorybookAccessToken'
 import { AccessTokenProvider } from './AccessTokenProvider'
 
 const meta: Meta = {

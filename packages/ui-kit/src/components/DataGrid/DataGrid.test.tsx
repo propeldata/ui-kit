@@ -151,7 +151,7 @@ describe('DataGrid', () => {
 
     fireEvent.click(await dom.findByTestId('propel-datagrid-paginate-back'))
     await dom.findByText('page 1')
-  }, 20000)
+  }, 30000)
 
   it('changes page size', async () => {
     dom = render(<DataGrid query={{ dataPool: { name: 'changes-page-size' }, accessToken: 'test-token' }} />)

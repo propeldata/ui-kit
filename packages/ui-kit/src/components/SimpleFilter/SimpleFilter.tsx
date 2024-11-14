@@ -24,6 +24,7 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
       loading,
       loaderProps: loaderPropsInitial,
       renderLoader,
+      defaultOpen = false,
       options = []
     },
     forwardedRef
@@ -96,6 +97,7 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
         {...autocompleteProps}
         options={autocompleteOptions}
         onChange={handleChange}
+        defaultOpen={defaultOpen}
         freeSolo={isError || autocompleteProps?.freeSolo}
       />
     )
