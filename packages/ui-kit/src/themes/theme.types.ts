@@ -1,22 +1,49 @@
 // prettier-ignore
-export const accentColors = ['amber', 'blue', 'bronze', 'brown', 'crimson', 'cyan', 'gold', 'grass', 'gray', 'green', 'indigo', 'iris', 'jade', 'lime', 'mint', 'orange', 'pink', 'plum', 'purple', 'red', 'ruby', 'sky', 'teal', 'tomato', 'violet', 'yellow'] as const
-export type AccentColors = (typeof accentColors)[number]
+export type AccentColors = 'amber' | 'blue' | 'bronze' | 'brown' | 'crimson' | 'cyan' | 'gold' | 'grass' | 'gray' | 'green' | 'indigo' | 'iris' | 'jade' | 'lime' | 'mint' | 'orange' | 'pink' | 'plum' | 'purple' | 'red' | 'ruby' | 'sky' | 'teal' | 'tomato' | 'violet' | 'yellow'
+export const accentColors: AccentColors[] = [
+  'amber',
+  'blue',
+  'bronze',
+  'brown',
+  'crimson',
+  'cyan',
+  'gold',
+  'grass',
+  'gray',
+  'green',
+  'indigo',
+  'iris',
+  'jade',
+  'lime',
+  'mint',
+  'orange',
+  'pink',
+  'plum',
+  'purple',
+  'red',
+  'ruby',
+  'sky',
+  'teal',
+  'tomato',
+  'violet',
+  'yellow'
+]
 
-export const grayColors = ['auto', 'gray', 'mauve', 'slate', 'sage', 'olive', 'sand'] as const
-export type GrayColors = (typeof grayColors)[number]
+export type GrayColors = 'auto' | 'gray' | 'mauve' | 'slate' | 'sage' | 'olive' | 'sand'
+export const grayColors: GrayColors[] = ['auto', 'gray', 'mauve', 'slate', 'sage', 'olive', 'sand']
 
-export const radii = ['none', 'small', 'medium', 'large', 'full'] as const
-export type Radii = (typeof radii)[number]
+export type Radii = 'none' | 'small' | 'medium' | 'large' | 'full'
+export const radii: Radii[] = ['none', 'small', 'medium', 'large', 'full']
 
-export const scalings = ['90%', '95%', '100%', '105%', '110%'] as const
-export type Scalings = (typeof scalings)[number]
+export type Scalings = '90%' | '95%' | '100%' | '105%' | '110%'
+export const scalings: Scalings[] = ['90%', '95%', '100%', '105%', '110%']
 
-export const panelBackgrounds = ['solid', 'translucent'] as const
-export type PanelBackgrounds = (typeof panelBackgrounds)[number]
+export type PanelBackgrounds = 'solid' | 'translucent'
+export const panelBackgrounds: PanelBackgrounds[] = ['solid', 'translucent']
 
 export type ThemeAppearances = 'light' | 'dark'
 
-export type ThemeSettingProps = {
+export interface ThemeSettingProps {
   /**
    * The initial theme used as a base. It provides a default set of styling
    * from which customizations can be applied.
@@ -60,7 +87,7 @@ export interface ThemeTokenProps extends ThemeSettingProps {
   }
 }
 
-export type ThemeComponentProps = {
+export interface ThemeComponentProps {
   /** Supports all standard CSS properties along with custom theme-based CSS variables */
   style?: React.CSSProperties
 

@@ -5,7 +5,7 @@ import { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export type PieChartVariant = 'pie' | 'doughnut'
 
-export type ChartProps = {
+export interface ChartProps {
   /** Sets the position of the labels */
   labelPosition?: 'axis' | 'inside' | 'top'
 
@@ -46,7 +46,7 @@ export type ChartProps = {
   totalPosition?: 'top' | 'bottom'
 }
 
-export type PieChartData = {
+export interface PieChartData {
   headers?: string[]
   rows?: Array<Array<string | null>>
 }

@@ -6,7 +6,7 @@ import type { DataComponentProps, ChartQueryProps } from '../shared.types'
 
 export type LeaderboardChartVariant = 'bar' | 'table'
 
-export type LeaderboardData = {
+export interface LeaderboardData {
   headers?: string[]
   rows?: Array<Array<string | null>>
 }
@@ -22,7 +22,7 @@ export interface LeaderboardQueryProps extends ChartQueryProps {
   dimensions?: DimensionInput[]
 }
 
-export type LeaderboardTableProps = {
+export interface LeaderboardTableProps {
   /** Whether the table header should remain fixed while scrolling */
   stickyHeader?: boolean
 
@@ -42,7 +42,7 @@ export type LeaderboardTableProps = {
   sufixValue?: string
 }
 
-export type LeaderboardChartProps = {
+export interface LeaderboardChartProps {
   /** Whether the chart should show a value inside the bar */
   showBarValues?: boolean
 

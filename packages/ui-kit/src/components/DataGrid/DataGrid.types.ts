@@ -6,7 +6,7 @@ import type { DataPoolInput, Sort } from '../../graphql'
 import { ButtonProps } from '../Button'
 import { OptionValue, SelectProps } from '../Select'
 
-export type DataGridData = {
+export interface DataGridData {
   headers?: string[] | null
   rows?: (string | null)[][]
 }
@@ -47,7 +47,7 @@ interface SlotProps {
   header?: ComponentPropsWithoutRef<'div'>
 }
 
-export interface DataGridProps extends DataComponentProps<'div'>, ThemeSettingProps {
+export interface DataGridProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** DataGrid query props */
   query?: DataGridQueryProps
   /** If true, the table columns will be resizable */

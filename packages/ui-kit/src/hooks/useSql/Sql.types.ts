@@ -10,8 +10,7 @@ import { QueryProps } from '../../components/shared.types'
  * @property {boolean} enabled - Whether to enable or not.
  * @property {string} propelApiUrl - To override the URL for Propel's GraphQL API.
  */
-export interface SqlQueryProps
-  extends Pick<QueryProps, 'accessToken' | 'refetchInterval' | 'retry' | 'enabled' | 'propelApiUrl'> {
+export interface SqlQueryProps extends QueryProps {
   /** The SQL query. */
   query: string
 }

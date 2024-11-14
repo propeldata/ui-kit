@@ -1,1 +1,1 @@
-export { useDataGrid } from './useDataGrid'
+export * from './useDataGrid'
