@@ -1,5 +1,12 @@
 # @propeldata/ui-kit
 
+## 0.12.2
+
+### Patch Changes
+
+- f276508: - Fix types for radix exported components
+  - Add export for radix Link component
+
 ## 0.12.1
 
 ### Patch Changes
