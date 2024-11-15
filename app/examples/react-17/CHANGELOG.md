@@ -1,5 +1,11 @@
 # react-17
 
+## 0.1.22
+
+### Patch Changes
+
+- dashboard-example@7.0.3
+
 ## 0.1.21
 
 ### Patch Changes

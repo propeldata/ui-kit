@@ -1,5 +1,13 @@
 # react-16
 
+## 0.1.22
+
+### Patch Changes
+
+- Updated dependencies [1dcb01a]
+  - @propeldata/ui-kit@0.12.3
+  - dashboard-example@7.0.3
+
 ## 0.1.21
 
 ### Patch Changes
