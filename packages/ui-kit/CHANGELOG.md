@@ -1,5 +1,12 @@
 # @propeldata/ui-kit
 
+## 0.12.3
+
+### Patch Changes
+
+- 1dcb01a: - Remove `accentColor` deprecated tag for TimeSeries
+  - Rename `accentColors` to `groupByColors` and deprecate `accentColors`
+
 ## 0.12.2
 
 ### Patch Changes
