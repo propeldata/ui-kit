@@ -324,7 +324,7 @@ interface BuildDatasetsOptions {
   fill?: boolean
   maxGroupBy: number
   showGroupByOther: boolean
-  accentColors: (AccentColors | string)[]
+  groupByColors: (AccentColors | string)[]
   otherColor?: GrayColors | string
 }
 
@@ -336,14 +336,14 @@ export function buildDatasets(
 ): ChartDataset<TimeSeriesChartVariant>[] {
   const { values, groups } = data
 
-  const { fill = false, maxGroupBy, showGroupByOther, accentColors, otherColor } = options ?? {}
+  const { fill = false, maxGroupBy, showGroupByOther, groupByColors, otherColor } = options ?? {}
 
   const borderRadius = Math.max(
     getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-2')),
     getPixelFontSizeAsNumber(theme?.getVar('--propel-radius-full'))
   )
 
-  const accentColor = accentColors[0] ?? theme.accentColor
+  const accentColor = groupByColors[0] ?? theme.accentColor
 
   const mainColor = {
     name: accentColor,
@@ -383,14 +383,14 @@ export function buildDatasets(
       : theme.tokens[`${otherColor ?? theme.grayColor}10`] ?? radixColors.gray.gray10
   }
 
-  const isCustomColors = accentColors.length > 0
+  const isCustomColors = groupByColors.length > 0
 
   let customColors: (PaletteColor | undefined)[] = []
 
   let colorPos = palette.findIndex((value) => value?.name === accentColor)
 
   if (isCustomColors) {
-    customColors = accentColors.map(
+    customColors = groupByColors.map(
       (color) =>
         palette.find(({ name }) => name === color) ?? {
           primary: handleArbitraryColor(color),

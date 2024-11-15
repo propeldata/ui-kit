@@ -98,7 +98,7 @@ export const LineStory: Story = {
     variant: 'line',
     query: connectedParams,
     card: true,
-    accentColors: ['#ff0000']
+    groupByColors: ['#ff0000']
   },
   render: (args) => <TimeSeries {...args} />
 }
@@ -309,7 +309,7 @@ export const GroupedStory: Story = {
     showGroupByOther: true,
     maxGroupBy: 5,
     stacked: true,
-    accentColors: ['red', 'blue'],
+    groupByColors: ['red', 'blue'],
     card: true,
     otherColor: 'gray'
   },
