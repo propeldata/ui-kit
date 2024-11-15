@@ -40,7 +40,7 @@ export interface TimeSeriesChartProps {
   fillArea?: boolean
 }
 
-export interface TimeSeriesBaseProps extends Omit<ThemeSettingProps, 'accentColor'>, DataComponentProps<'div'> {
+export interface TimeSeriesBaseProps extends ThemeSettingProps, DataComponentProps<'div'> {
   /** @deprecated This type is deprecated, use `errorFallbackProps` and `errorFallback` instead */
   error?: {
     title: string
@@ -80,21 +80,17 @@ export interface TimeSeriesBaseProps extends Omit<ThemeSettingProps, 'accentColo
   /** If true, an `other` dataset will be shown */
   showGroupByOther?: boolean
 
-  /** A list of accent colors the TimeSeries component will use to show groups, those will be picked in order */
+  /** @deprecated - A list of accent colors the TimeSeries component will use to show groups, those will be picked in order, this prop is deprecated and will be removed in a future release. Use `groupByColors` instead. */
   accentColors?: (AccentColors | string)[]
+
+  /** A list of accent colors the TimeSeries component will use to show groups, those will be picked in order */
+  groupByColors?: (AccentColors | string)[]
 
   /** If true, chart's lines or bars will be stacked */
   stacked?: boolean
 
   /** Color that will be used for the `other` dataset when using groupBy */
   otherColor?: GrayColors | string
-
-  /**
-   * The global theme accent color. This color is used to highlight elements
-   *
-   * @deprecated - This prop is deprecated and will be removed in a future release. Use `accentColors` prop instead.
-   */
-  accentColor?: AccentColors
 }
 export interface TimeSeriesDefaultVariantProps extends TimeSeriesBaseProps {
   variant?: undefined

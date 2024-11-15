@@ -80,6 +80,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
       maxGroupBy: maxGroupByProp,
       showGroupByOther = true,
       accentColors = [],
+      groupByColors = [],
       stacked = false,
       otherColor,
       ...rest
@@ -88,7 +89,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
   ) => {
     const { themeSettings, parsedProps } = useParsedComponentProps({
       ...rest,
-      accentColor: (accentColors[0] as AccentColors) ?? rest.accentColor
+      accentColor: (groupByColors[0] as AccentColors) ?? (accentColors[0] as AccentColors) ?? rest.accentColor
     })
     const { componentContainer, setRef } = useForwardedRefCallback(forwardedRef)
     const themeWrapper = withThemeWrapper(setRef)
@@ -207,7 +208,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         const datasets = buildDatasets(
           data,
           theme,
-          { fill, maxGroupBy, showGroupByOther, accentColors, otherColor },
+          { fill, maxGroupBy, showGroupByOther, groupByColors: groupByColors ?? accentColors, otherColor },
           log
         )
 
@@ -278,6 +279,7 @@ export const TimeSeriesComponent = React.forwardRef<HTMLDivElement, TimeSeriesPr
         variant,
         maxGroupBy,
         showGroupByOther,
+        groupByColors,
         accentColors,
         otherColor,
         log,
