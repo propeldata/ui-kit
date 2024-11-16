@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.12.4
+
+### Patch Changes
+
+- 691fd76: Fix `Link` export
+
 ## 0.12.3
 
 ### Patch Changes
