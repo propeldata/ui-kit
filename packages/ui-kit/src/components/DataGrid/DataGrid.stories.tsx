@@ -136,7 +136,8 @@ export const Resizable: Story = {
       columns: ['taco_name', 'restaurant_name', 'tortilla_name', 'restaurant_id', 'sauce_id']
     },
     paginationProps: {
-      defaultPageSize: 50
+      defaultPageSize: 3,
+      pageSizeOptions: [3, 50, 100]
     },
     resizable: true,
     card: true,

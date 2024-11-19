@@ -28,7 +28,10 @@ export const Loader: React.FC<LoaderProps> = ({
   const dummyArrayRows = Array(Math.min(24, pageSize)).fill(0)
 
   return (
-    <div {...rest} className={classNames(className, componentStyles.wrapper)}>
+    <div
+      {...rest}
+      className={classNames(className, componentStyles.wrapper, { [componentStyles.hideBorder]: hideBorder })}
+    >
       <div className={componentStyles.container}>
         <div className={componentStyles.tableContainer}>
           <div className={componentStyles.table} style={{ width: '100%' }}>

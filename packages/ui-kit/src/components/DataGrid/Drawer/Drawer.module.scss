@@ -10,7 +10,8 @@
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 250ms ease-in-out;
+  transition: min-width 250ms ease-in-out;
+  max-height: 100%;
   box-sizing: border-box;
   z-index: 2;
 }

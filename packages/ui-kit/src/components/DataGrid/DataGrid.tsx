@@ -229,6 +229,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     )
 
     const tableRef = useRef<HTMLTableElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const [clientPagination, setClientPagination] = useState({ pageIndex: 0, pageSize })
 
@@ -250,12 +251,70 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       columnResizeDirection: 'ltr',
       enableColumnResizing: true,
       defaultColumn: {
-        size: 200,
-        minSize: 10,
-        maxSize: 500
+        size: 500
       },
       ...reactTablePagination
     })
+
+    useEffect(() => {
+      function setDefaultSizing() {
+        const INDEX_COLUMN_WIDTH = 40
+
+        const tableCopy = containerRef.current
+
+        const tableChildren = []
+
+        if (tableCopy) {
+          while (tableCopy.firstChild) {
+            tableChildren.push(tableCopy.firstChild)
+            tableCopy.removeChild(tableCopy.firstChild)
+          }
+        }
+
+        const clientWidth = tableCopy?.clientWidth
+
+        if (tableCopy && tableChildren.length > 0) {
+          tableChildren.forEach((child) => {
+            tableCopy.appendChild(child)
+          })
+        }
+
+        const defaultColumnWidth = ((clientWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length
+
+        if (defaultColumnWidth && defaultColumnWidth !== Infinity && defaultColumnWidth > 0) {
+          table.setColumnSizing(() => {
+            const obj: Record<string, number> = {}
+            table.getAllColumns().forEach((col) => {
+              obj[col.id] = defaultColumnWidth
+            })
+            return obj
+          })
+        }
+
+        const containerWidth = containerRef.current?.clientWidth
+        const columnWidth = ((containerWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length
+
+        if (columnWidth && columnWidth !== Infinity && columnWidth > 0) {
+          table.setColumnSizing(() => {
+            const obj: Record<string, number> = {}
+            table.getAllColumns().forEach((col) => {
+              obj[col.id] = columnWidth
+            })
+            return obj
+          })
+        }
+      }
+
+      setDefaultSizing()
+
+      window.addEventListener('resize', () => {
+        setDefaultSizing()
+      })
+
+      return () => {
+        window.removeEventListener('resize', () => {})
+      }
+    }, [table, tanstackTableColumns.length, pageSize])
 
     useEffect(() => {
       function handleKeyPress(event: KeyboardEvent) {
@@ -370,25 +429,19 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       <div
         ref={setRef}
         {...parsedProps}
-        className={classNames(componentStyles.wrapper, className)}
+        className={classNames(componentStyles.wrapper, { [componentStyles.hideBorder]: hideBorder }, className)}
         style={{ ...rest.style, ...tokenStyles }}
       >
-        <div className={componentStyles.container}>
+        <div ref={containerRef} className={componentStyles.container}>
           <div className={componentStyles.tableContainer}>
-            <div
-              ref={tableRef}
-              className={componentStyles.table}
-              style={{ width: isResizable ? table.getCenterTotalSize() : '100%' }}
-              {...slotProps?.table}
-            >
-              <div
-                className={classNames(componentStyles.tableHead)}
-                style={{
-                  width: table.getCenterTotalSize()
-                }}
-              >
+            <div ref={tableRef} className={componentStyles.table} style={{ width: '100%' }} {...slotProps?.table}>
+              <div className={classNames(componentStyles.tableHead)}>
                 {headerGroups.map((headerGroup) => (
-                  <div className={classNames(componentStyles.tableRowHead)} key={headerGroup.id}>
+                  <div
+                    className={classNames(componentStyles.tableRowHead)}
+                    style={{ width: isResizable ? 'fit-content' : '100%' }}
+                    key={headerGroup.id}
+                  >
                     <div
                       role="cell"
                       {...slotProps?.cell}
@@ -424,7 +477,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         style={{
                           ...slotProps?.cell?.style,
                           ...slotProps?.header?.style,
-                          width: header.getSize()
+                          width: isResizable ? header.getSize() : '100%'
                         }}
                         key={header.id}
                       >
@@ -455,7 +508,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               </div>
               <div className={componentStyles.tableBody}>
                 {rowGroup.map((row, index) => (
-                  <div className={componentStyles.tableRow} key={row.id}>
+                  <div
+                    className={componentStyles.tableRow}
+                    style={{ width: isResizable ? 'fit-content' : '100%' }}
+                    key={row.id}
+                  >
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
                     <div
                       {...slotProps?.cell}
@@ -482,7 +539,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         {...slotProps?.cell}
                         role="cell"
                         onClick={() => handleRowCellClick(cell)}
-                        style={{ ...slotProps?.cell?.style, width: cell.column.getSize() }}
+                        style={{ ...slotProps?.cell?.style, width: isResizable ? cell.column.getSize() : '100%' }}
                         className={classNames(
                           componentStyles.tableCell,
                           {
@@ -509,8 +566,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           <Drawer
             style={{
               maxHeight:
-                tableRef.current?.clientHeight != null && tableRef.current.clientHeight >= MINIMUM_TABLE_HEIGHT
-                  ? tableRef.current.clientHeight
+                containerRef.current?.clientHeight != null && containerRef.current.clientHeight >= MINIMUM_TABLE_HEIGHT
+                  ? containerRef.current.clientHeight
                   : '100%'
             }}
             isOpen={isOpenDrawer}
