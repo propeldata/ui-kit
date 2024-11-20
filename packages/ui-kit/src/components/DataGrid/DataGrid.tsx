@@ -20,7 +20,7 @@ import { useCombinedRefsCallback, useEmptyableData, withThemeWrapper } from '../
 import { DataGridConnection } from '../../graphql'
 import { useSetupTheme } from '../ThemeProvider'
 import { useCounter, useDataGrid } from '../../hooks'
-import { ArrowDownIcon } from '../Icons'
+import { ArrowDownIcon, ChevronLeftIcon, ChevronRightIcon } from '../Icons'
 
 import { DataGridData, DataGridProps } from './DataGrid.types'
 import componentStyles from './DataGrid.module.scss'
@@ -115,6 +115,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     const [isOpenDrawer, setIsOpenDrawer] = useState(false)
     const [selectedRow, setSelectedRow] = useState<RowElement | null>(null)
     const [selectedCell, setSelectedCell] = useState<CellElement | null>(null)
+    const [isTableOverflowingY, setIsTableOverflowingY] = useState(false)
 
     const [pagination, setPagination] = useState<PaginationProps>({ first: pageSize })
 
@@ -293,6 +294,13 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
         const containerWidth = containerRef.current?.clientWidth
         const columnWidth = ((containerWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length
+
+        const containerHeight = containerRef.current?.clientHeight
+        const containerScrollHeight = containerRef.current?.scrollHeight
+
+        setIsTableOverflowingY(
+          containerHeight != null && containerScrollHeight != null && containerHeight < containerScrollHeight
+        )
 
         if (columnWidth && columnWidth !== Infinity && columnWidth > 0) {
           table.setColumnSizing(() => {
@@ -509,7 +517,9 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               <div className={componentStyles.tableBody}>
                 {rowGroup.map((row, index) => (
                   <div
-                    className={componentStyles.tableRow}
+                    className={classNames(componentStyles.tableRow, {
+                      [componentStyles.preventGap]: isTableOverflowingY
+                    })}
                     style={{ width: isResizable ? 'fit-content' : '100%' }}
                     key={row.id}
                   >
@@ -586,32 +596,34 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   <ArrowDownIcon />
                 </button>
               </Tooltip>
-              <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
-              <Select
-                {...slotProps?.select}
-                className={classNames(componentStyles.paginationSelect, slotProps?.select?.className)}
-                id="data-grid-rows-per-page"
-                size="small"
-                value={pageSizeOptionValues.find((option) => option.value === pageSize)}
-                onChange={(_, newValue) => {
-                  if (newValue != null) {
-                    const size = Number(newValue?.value)
-                    setPageSize(size)
-                    if (isStatic) {
-                      setClientPagination({ pageIndex: 0, pageSize: size })
-                    } else {
-                      setPagination({ first: size })
+              <div className={componentStyles.paginationSelectWrapper}>
+                <label htmlFor="data-grid-rows-per-page">Rows per page:</label>
+                <Select
+                  {...slotProps?.select}
+                  className={classNames(componentStyles.paginationSelect, slotProps?.select?.className)}
+                  id="data-grid-rows-per-page"
+                  size="small"
+                  value={pageSizeOptionValues.find((option) => option.value === pageSize)}
+                  onChange={(_, newValue) => {
+                    if (newValue != null) {
+                      const size = Number(newValue?.value)
+                      setPageSize(size)
+                      if (isStatic) {
+                        setClientPagination({ pageIndex: 0, pageSize: size })
+                      } else {
+                        setPagination({ first: size })
+                      }
+                      setPageIndex(0)
                     }
-                    setPageIndex(0)
-                  }
-                }}
-              >
-                {pageSizeOptionValues.map((option) => (
-                  <Option key={option.value} value={option}>
-                    {option.label}
-                  </Option>
-                ))}
-              </Select>
+                  }}
+                >
+                  {pageSizeOptionValues.map((option) => (
+                    <Option key={option.value} value={option}>
+                      {option.label}
+                    </Option>
+                  ))}
+                </Select>
+              </div>
               <div className={componentStyles.paginationButtons}>
                 <Button
                   {...slotProps?.button}
@@ -621,7 +633,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   type="button"
                   data-testid="propel-datagrid-paginate-back"
                 >
-                  &lt;
+                  <ChevronLeftIcon />
                 </Button>
                 <Button
                   {...slotProps?.button}
@@ -631,7 +643,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   type="button"
                   data-testid="propel-datagrid-paginate-next"
                 >
-                  &gt;
+                  <ChevronRightIcon />
                 </Button>
               </div>
             </div>

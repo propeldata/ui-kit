@@ -5,6 +5,8 @@ import { Loader as SkeletonLoader } from '../Loader'
 import componentStyles from './DataGrid.module.scss'
 import { getLinesStyle } from './utils'
 import { DataGridProps } from './DataGrid.types'
+import { ChevronLeftIcon } from '../Icons'
+import { ChevronRightIcon } from '../Icons'
 
 interface LoaderProps extends Omit<DataGridProps, 'query' | 'headers' | 'rows'> {
   pageIndex: number
@@ -106,7 +108,7 @@ export const Loader: React.FC<LoaderProps> = ({
                 disabled
                 type="button"
               >
-                &lt;
+                <ChevronLeftIcon />
               </Button>
               <Button
                 {...slotProps?.button}
@@ -114,7 +116,7 @@ export const Loader: React.FC<LoaderProps> = ({
                 disabled
                 type="button"
               >
-                &gt;
+                <ChevronRightIcon />
               </Button>
             </div>
           </div>

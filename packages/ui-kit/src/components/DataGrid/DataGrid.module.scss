@@ -7,7 +7,6 @@
   min-height: inherit;
   height: inherit;
   width: 100%;
-  border-radius: 20px;
 
   border: 1px solid var(--propel-datagrid-border-color);
 
@@ -15,7 +14,7 @@
     border: none;
   }
 
-  border-radius: var(--propel-radius-5);
+  border-radius: var(--propel-radius-3);
 }
 
 .container {
@@ -33,7 +32,7 @@
 
   box-sizing: border-box;
 
-  border-radius: var(--propel-radius-5);
+  border-radius: var(--propel-radius-3);
 }
 
 .tableContainer {
@@ -74,9 +73,21 @@
 
   display: flex;
 
+  &:hover {
+    background-color: var(--propel-gray-2);
+    transition: background-color 0.1s;
+    .tableIndexCell {
+      background-color: var(--propel-gray-2);
+    }
+  }
+
   &:last-child {
     & > .tableCell {
       border-bottom: 1px solid var(--propel-datagrid-border-color);
+    }
+
+    &.preventGap > .tableCell {
+      border-bottom: none;
     }
 
     & > .hideBorder {
@@ -92,7 +103,7 @@
 
   display: flex;
 
-  border-radius: var(--propel-radius-5);
+  border-radius: var(--propel-radius-3);
 
   .hideBorder {
     border-top: none;
@@ -139,14 +150,6 @@
   &.selectedRow {
     background-color: var(--propel-accent-8) !important;
   }
-
-  &:last-child {
-    border-right: 1px solid var(--propel-datagrid-border-color);
-
-    &.hideBorder {
-      border-right: none;
-    }
-  }
 }
 
 .tableCellHead {
@@ -168,7 +171,6 @@
 
   text-align: left;
   border: 1px solid var(--propel-datagrid-grid-line-color);
-  border-top: 1px solid var(--propel-datagrid-border-color);
   border-left: none;
 
   position: relative;
@@ -188,8 +190,6 @@
   }
 
   &:last-child {
-    border-right: 1px solid var(--propel-datagrid-border-color);
-
     &.hideBorder {
       border-right: none;
     }
@@ -231,7 +231,6 @@
   top: 0;
   background-color: var(--propel-gray-3);
   z-index: 2;
-  border-left: 1px solid var(--propel-datagrid-border-color);
 
   height: var(--propel-space-7);
 
@@ -318,7 +317,7 @@
 }
 
 .footer {
-  padding: var(--propel-space-4) 0;
+  padding: var(--propel-space-4) var(--propel-space-2);
 
   border-top: 1px solid var(--propel-datagrid-border-color);
 
@@ -334,15 +333,27 @@
 
 .footerRows {
   display: flex;
-  margin: 0 var(--propel-space-2);
+  margin: 0;
   gap: var(--propel-space-1);
   align-items: center;
+
+  gap: var(--propel-space-5);
 }
 
 .paginationButton {
   width: var(--propel-space-5);
   height: var(--propel-space-5);
   padding: 0 !important;
+
+  &[disabled] {
+    &:hover {
+      box-shadow: none;
+    }
+
+    svg > path {
+      fill: var(--propel-gray-8);
+    }
+  }
 }
 
 .paginationSelect {
@@ -368,7 +379,7 @@
     display: block;
   }
 
-  border-radius: var(--propel-radius-2);
+  border-radius: var(--propel-radius-3);
 }
 
 .button {
@@ -391,10 +402,16 @@
   }
 }
 
+.paginationSelectWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--propel-space-1);
+}
 
 .paginationButtons {
   display: flex;
   align-items: center;
+  gap: var(--propel-space-1);
 }
 
 .numeric {
