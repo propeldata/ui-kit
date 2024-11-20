@@ -6,9 +6,9 @@ packages/nextjs/**
 # testing
 coverage
 
-# parcel
-.parcel-cache
+# rollup
 dist
+stats
 
 # local env files
 .env

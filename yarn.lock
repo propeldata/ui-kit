@@ -3014,6 +3014,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bundle-stats/cli-utils@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "@bundle-stats/cli-utils@npm:4.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40bundle-stats%2Fcli-utils%2F-%2Fcli-utils-4.17.0.tgz"
+  dependencies:
+    "@bundle-stats/html-templates": ^4.17.0
+    "@bundle-stats/plugin-webpack-filter": ^4.17.0
+    "@bundle-stats/utils": ^4.17.0
+    find-cache-dir: ^3.1.0
+    lodash: ^4.17.21
+    stream-chain: ^3.0.1
+    stream-json: ^1.8.0
+  checksum: 3b6f8d20c89de461892e33b4ed583f87d8d4636c83ad7eff0dc02be80e048cbb8580c3f99d629d55438897921f006c82869ae48fd85fd218ad3cd3d967ca64a8
+  languageName: node
+  linkType: hard
+
+"@bundle-stats/html-templates@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "@bundle-stats/html-templates@npm:4.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40bundle-stats%2Fhtml-templates%2F-%2Fhtml-templates-4.17.0.tgz"
+  checksum: 5ca7fec354392d585d1fceb24d6a36c5878209139f875e9b59d40f11f4c8385f1330b0733458dee5c7f0aa9426449fa9e5ad50965110e00b0b8d092834441ee9
+  languageName: node
+  linkType: hard
+
+"@bundle-stats/plugin-webpack-filter@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "@bundle-stats/plugin-webpack-filter@npm:4.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40bundle-stats%2Fplugin-webpack-filter%2F-%2Fplugin-webpack-filter-4.17.0.tgz"
+  peerDependencies:
+    core-js: ^3.0.0
+  checksum: 06d9bd79e8ef52f45be90bf171bac6f3fedf060b5a46fa95136900c31a6e7b8d12714f715f4138c980e4e1ef31179120a19a8dd864ad1a0f9df19a9565583bb8
+  languageName: node
+  linkType: hard
+
+"@bundle-stats/plugin-webpack-validate@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "@bundle-stats/plugin-webpack-validate@npm:4.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40bundle-stats%2Fplugin-webpack-validate%2F-%2Fplugin-webpack-validate-4.17.0.tgz"
+  dependencies:
+    lodash: 4.17.21
+    superstruct: 2.0.2
+  checksum: 31085c141fb5182a4e01eafdbcd3f2ae0a37b2f4227d1b770df0a8cab3cf1554cae11d24e2dbe1ab16ef1a483e16bcaf9c8ce96ecb8f8e8e75c549419ea62ed1
+  languageName: node
+  linkType: hard
+
+"@bundle-stats/utils@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "@bundle-stats/utils@npm:4.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40bundle-stats%2Futils%2F-%2Futils-4.17.0.tgz"
+  dependencies:
+    "@bundle-stats/plugin-webpack-filter": ^4.17.0
+    "@bundle-stats/plugin-webpack-validate": ^4.17.0
+    serialize-query-params: 2.0.2
+  peerDependencies:
+    core-js: ^3.0.0
+    lodash: ^4.0.0
+  checksum: 77006cb4b39a3ef13bb3861ed5ae7fc5e98b750e2d1278cb8d0365e32a9474058fea14fdbece45f599bfdc4de022edb489e319b09366ee4f97b725a2180bfc8e
+  languageName: node
+  linkType: hard
+
 "@changesets/apply-release-plan@npm:^7.0.0":
   version: 7.0.0
   resolution: "@changesets/apply-release-plan@npm:7.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40changesets%2Fapply-release-plan%2F-%2Fapply-release-plan-7.0.0.tgz"
@@ -5725,6 +5780,7 @@ __metadata:
     react-docgen-typescript: ^2.2.2
     react-dom: ^18.2.0
     rollup: ^4.1.4
+    rollup-plugin-bundle-stats: ^4.17.0
     rollup-plugin-generate-package-json: ^3.2.0
     rollup-plugin-node-externals: ^7.1.3
     rollup-plugin-postcss: ^4.0.2
@@ -16299,7 +16355,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-cache-dir@npm:^3.0.0, find-cache-dir@npm:^3.3.1, find-cache-dir@npm:^3.3.2":
+"find-cache-dir@npm:^3.0.0, find-cache-dir@npm:^3.1.0, find-cache-dir@npm:^3.3.1, find-cache-dir@npm:^3.3.2":
   version: 3.3.2
   resolution: "find-cache-dir@npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Ffind-cache-dir%2F-%2Ffind-cache-dir-3.3.2.tgz"
   dependencies:
@@ -24986,6 +25042,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-bundle-stats@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "rollup-plugin-bundle-stats@npm:4.17.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-bundle-stats%2F-%2Frollup-plugin-bundle-stats-4.17.0.tgz"
+  dependencies:
+    "@bundle-stats/cli-utils": ^4.17.0
+    rollup-plugin-webpack-stats: 0.4.1
+  peerDependencies:
+    rollup: ^3.0.0 || ^4.0.0
+  checksum: 169fbdd08074cb2c8e936f1d7aca1262c41bae7936bd34f74195598b12b1ae2c72eaa04d78cbebcc511ec50b08d0b902fd66c868972aa2349f651c77950b4379
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-generate-package-json@npm:^3.2.0":
   version: 3.2.0
   resolution: "rollup-plugin-generate-package-json@npm:3.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-generate-package-json%2F-%2Frollup-plugin-generate-package-json-3.2.0.tgz"
@@ -25069,6 +25137,15 @@ __metadata:
     rollup: ">=1.26.3"
     typescript: ">=2.4.0"
   checksum: 199afe11f9218ad943b67138b3165c2be2cd2535926da6ed467124273f7bbb1dd779521a648a26a65073cafe43388104857a90e0fdf06ca526a6613771eb2e70
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-webpack-stats@npm:0.4.1":
+  version: 0.4.1
+  resolution: "rollup-plugin-webpack-stats@npm:0.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Frollup-plugin-webpack-stats%2F-%2Frollup-plugin-webpack-stats-0.4.1.tgz"
+  peerDependencies:
+    rollup: ^3.0.0 || ^4.0.0
+  checksum: 5152569f8b199d62200f793ef5daf3f6a63db31f00860f4e711df38ad4e4686a551338a6f18b7ee4abc18458faf317d86dff30646cc21464c717bd0ccd301f75
   languageName: node
   linkType: hard
 
@@ -25515,6 +25592,13 @@ __metadata:
   dependencies:
     randombytes: ^2.1.0
   checksum: 3c4f4cb61d0893b988415bdb67243637333f3f574e9e9cc9a006a2ced0b390b0b3b44aef8d51c951272a9002ec50885eefdc0298891bc27eb2fe7510ea87dc4f
+  languageName: node
+  linkType: hard
+
+"serialize-query-params@npm:2.0.2":
+  version: 2.0.2
+  resolution: "serialize-query-params@npm:2.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fserialize-query-params%2F-%2Fserialize-query-params-2.0.2.tgz"
+  checksum: 6dccdbd68cbec44c99599c4f77968e8685a74cc597f473ed93b15a8d03c3a67f50c958af9af3d186e64aabd7f98b59d674a05aa4e69d997ed86a5478cf133b27
   languageName: node
   linkType: hard
 
@@ -26145,6 +26229,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stream-chain@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "stream-chain@npm:2.2.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstream-chain%2F-%2Fstream-chain-2.2.5.tgz"
+  checksum: c83cbf504bd11e2bcbe761a92801295b3decac7ffa4092ceffca2eb1b5d0763bcc511fa22cd8044e8a18c21ca66794fd10c8d9cd1292a3e6c0d83a4194c6b8ed
+  languageName: node
+  linkType: hard
+
+"stream-chain@npm:^3.0.1":
+  version: 3.3.2
+  resolution: "stream-chain@npm:3.3.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstream-chain%2F-%2Fstream-chain-3.3.2.tgz"
+  checksum: 241e27d39d26e14bcdc085728d5d05fd92b81ba6377eca8e28ff031cdcb15f29b472f05acd709f31c853dbc7ffd3ec5bfe94ae85685a6f5534600cc85fddcf88
+  languageName: node
+  linkType: hard
+
+"stream-json@npm:^1.8.0":
+  version: 1.9.1
+  resolution: "stream-json@npm:1.9.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstream-json%2F-%2Fstream-json-1.9.1.tgz"
+  dependencies:
+    stream-chain: ^2.2.5
+  checksum: 2ebf0648f9ed82ee79727a9a47805231a70d5032e0c21cee3e05cd3c449d3ce49c72b371555447eeef55904bae22ac64be8ae6086fc6cce0b83b3aa617736b64
+  languageName: node
+  linkType: hard
+
 "stream-shift@npm:^1.0.0":
   version: 1.0.1
   resolution: "stream-shift@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fstream-shift%2F-%2Fstream-shift-1.0.1.tgz"
@@ -26553,6 +26660,13 @@ __metadata:
     sucrase: bin/sucrase
     sucrase-node: bin/sucrase-node
   checksum: 61860063bdf6103413698e13247a3074d25843e91170825a9752e4af7668ffadd331b6e99e92fc32ee5b3c484ee134936f926fa9039d5711fafff29d017a2110
+  languageName: node
+  linkType: hard
+
+"superstruct@npm:2.0.2":
+  version: 2.0.2
+  resolution: "superstruct@npm:2.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsuperstruct%2F-%2Fsuperstruct-2.0.2.tgz"
+  checksum: a5f75b72cb8b14b86f4f7f750dae8c5ab0e4e1d92414b55e7625bae07bbcafad81c92486e7e32ccacd6ae1f553caff2b92a50ff42ad5093fd35b9cb7f4e5ec86
   languageName: node
   linkType: hard
 
