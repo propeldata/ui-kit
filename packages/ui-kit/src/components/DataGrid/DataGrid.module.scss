@@ -7,9 +7,14 @@
   min-height: inherit;
   height: inherit;
   width: 100%;
-  border-radius: 20px;
 
-  border-radius: var(--propel-radius-5);
+  border: 1px solid var(--propel-datagrid-border-color);
+
+  &.hideBorder {
+    border: none;
+  }
+
+  border-radius: var(--propel-radius-3);
 }
 
 .container {
@@ -25,7 +30,9 @@
 
   flex: 1;
 
-  border-radius: var(--propel-radius-5);
+  box-sizing: border-box;
+
+  border-radius: var(--propel-radius-3);
 }
 
 .tableContainer {
@@ -43,16 +50,13 @@
 .table {
   background-color: var(--propel-color-background);
 
-  border-collapse: separate;
-  border-spacing: 0;
-
-  width: fit-content;
+  width: 100%;
 
   color: var(--propel-gray-12);
 }
 
 .tableHead {
-  background-color: var(--propel-color-background);
+  background-color: var(--propel-gray-3);
 
   position: relative;
 
@@ -68,11 +72,23 @@
   position: relative;
 
   display: flex;
-  width: fit-content;
+
+  &:hover {
+    background-color: var(--propel-gray-2);
+    transition: background-color 0.1s;
+    .tableIndexCell {
+      background-color: var(--propel-gray-2);
+      transition: background-color 0.1s;
+    }
+  }
 
   &:last-child {
     & > .tableCell {
       border-bottom: 1px solid var(--propel-datagrid-border-color);
+    }
+
+    &.preventGap > .tableCell {
+      border-bottom: none;
     }
 
     & > .hideBorder {
@@ -84,8 +100,11 @@
 .tableRowHead {
   position: relative;
 
+  width: 100%;
+
   display: flex;
-  width: fit-content;
+
+  border-radius: var(--propel-radius-3);
 
   .hideBorder {
     border-top: none;
@@ -104,8 +123,6 @@
 
   display: flex;
   align-items: center;
-
-  max-width: 800px;
   overflow: hidden;
 
   font-size: var(--propel-font-size-1);
@@ -133,14 +150,7 @@
 
   &.selectedRow {
     background-color: var(--propel-accent-8) !important;
-  }
-
-  &:last-child {
-    border-right: 1px solid var(--propel-datagrid-border-color);
-
-    &.hideBorder {
-      border-right: none;
-    }
+    border-right: 1px solid transparent;
   }
 }
 
@@ -163,7 +173,6 @@
 
   text-align: left;
   border: 1px solid var(--propel-datagrid-grid-line-color);
-  border-top: 1px solid var(--propel-datagrid-border-color);
   border-left: none;
 
   position: relative;
@@ -183,8 +192,6 @@
   }
 
   &:last-child {
-    border-right: 1px solid var(--propel-datagrid-border-color);
-
     &.hideBorder {
       border-right: none;
     }
@@ -226,7 +233,6 @@
   top: 0;
   background-color: var(--propel-gray-3);
   z-index: 2;
-  border-left: 1px solid var(--propel-datagrid-border-color);
 
   height: var(--propel-space-7);
 
@@ -268,9 +274,8 @@
     border-right: none;
     border-bottom: none;
   }
-  &.hideBorder {
-    border-left: none;
-  }
+
+  border-left: none;
 
   & > div {
     position: absolute;
@@ -285,6 +290,7 @@
 
   &.selectedRow {
     background-color: var(--propel-color-background) !important;
+    border-right: 1px solid var(--propel-accent-8);
   }
 
   &.selectedRow {
@@ -314,7 +320,9 @@
 }
 
 .footer {
-  padding-top: var(--propel-space-4);
+  padding: var(--propel-space-4) var(--propel-space-2);
+
+  border-top: 1px solid var(--propel-datagrid-border-color);
 
   display: flex;
   justify-content: space-between;
@@ -323,20 +331,32 @@
 
   font-size: var(--propel-font-size-1);
   font-weight: var(--propel-font-weight-regular);
-  color: var(--propel-gray-12);
+  color: var(--propel-gray-11);
 }
 
 .footerRows {
   display: flex;
-  margin: 0 var(--propel-space-2);
+  margin: 0;
   gap: var(--propel-space-1);
   align-items: center;
+
+  gap: var(--propel-space-5);
 }
 
 .paginationButton {
   width: var(--propel-space-5);
   height: var(--propel-space-5);
   padding: 0 !important;
+
+  &[disabled] {
+    &:hover {
+      box-shadow: none;
+    }
+
+    svg > path {
+      fill: var(--propel-gray-8);
+    }
+  }
 }
 
 .paginationSelect {
@@ -362,7 +382,7 @@
     display: block;
   }
 
-  border-radius: var(--propel-radius-2);
+  border-radius: var(--propel-radius-3);
 }
 
 .button {
@@ -385,10 +405,16 @@
   }
 }
 
+.paginationSelectWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--propel-space-1);
+}
 
 .paginationButtons {
   display: flex;
   align-items: center;
+  gap: var(--propel-space-1);
 }
 
 .numeric {
