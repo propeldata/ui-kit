@@ -150,6 +150,7 @@
 
   &.selectedRow {
     background-color: var(--propel-accent-8) !important;
+    border-right: 1px solid transparent;
   }
 }
 
@@ -289,6 +290,7 @@
 
   &.selectedRow {
     background-color: var(--propel-color-background) !important;
+    border-right: 1px solid var(--propel-accent-8);
   }
 
   &.selectedRow {
@@ -329,7 +331,7 @@
 
   font-size: var(--propel-font-size-1);
   font-weight: var(--propel-font-weight-regular);
-  color: var(--propel-gray-12);
+  color: var(--propel-gray-11);
 }
 
 .footerRows {
