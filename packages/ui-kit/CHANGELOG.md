@@ -1,5 +1,12 @@
 # @propeldata/ui-kit
 
+## 0.12.5
+
+### Patch Changes
+
+- f9ce006: Improved DaraGrid resizing and borders
+- 390feca: Enabled sub path imports
+
 ## 0.12.4
 
 ### Patch Changes
