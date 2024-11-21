@@ -5,6 +5,7 @@ const typescript = require('rollup-plugin-typescript2')
 const preserveDirectives = require('rollup-plugin-preserve-directives').preserveDirectives
 const generatePackageJson = require('rollup-plugin-generate-package-json')
 const packageJson = require('./package.json')
+const { bundleStats } = require('rollup-plugin-bundle-stats')
 
 const plugins = [
   nodeResolve({
@@ -36,15 +37,33 @@ const plugins = [
       Object.entries(bundle).forEach(([fileName, file]) => {
         if (fileName.endsWith('.css.js') || fileName.endsWith('.scss.js')) {
           file.code = file.code.replace(/import styleInject from '.*'/, `import styleInject from 'style-inject'`)
-          file.code = file.code.replace(/var styleInject = require\(['"].*['"]\);/, `var styleInject = require('style-inject');`)
+          file.code = file.code.replace(
+            /var styleInject = require\(['"].*['"]\);/,
+            `var styleInject = require('style-inject');`
+          )
         }
       })
     }
-  }
+  },
+  {
+    name: 'Remove duplicate client directive',
+    generateBundle: (options, bundle) => {
+      Object.entries(bundle).forEach(([fileName, file]) => {
+        if (fileName.endsWith('.js') || fileName.endsWith('.js')) {
+          file.code = file.code.replace(/'use client';/, '')
+        }
+      })
+    }
+  },
+  bundleStats({
+    outDir: 'stats'
+  })
 ]
 
+/** @type {Array<import('rollup').RollupOptions>} */
 module.exports = [
   {
+    treeshake: false,
     input: 'src/index.ts',
     output: [
       {

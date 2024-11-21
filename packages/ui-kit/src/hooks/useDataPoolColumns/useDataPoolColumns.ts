@@ -5,7 +5,8 @@ import {
   useDataPoolColumnsByNameQuery,
   useDataPoolColumnsQuery
 } from '../../graphql'
-import { useAccessToken, useLog } from '../../components'
+import { useAccessToken } from '../../components/AccessTokenProvider/useAccessToken'
+import { useLog } from '../../components/Log/useLog'
 import { GroupByQueryProps } from '../../components/GroupBy/GroupBy.types'
 import { useMemo } from 'react'
 
