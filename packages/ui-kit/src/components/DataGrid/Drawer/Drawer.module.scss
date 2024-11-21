@@ -20,6 +20,7 @@
   position: relative;
   overflow-y: auto;
   padding: 0 var(--propel-space-4);
+  flex: 1;
 }
 
 .hidden {
@@ -38,8 +39,9 @@
   flex-direction: column;
   margin-bottom: var(--propel-space-4);
 
-  &>div {
+  & > div {
     display: flex;
+    gap: 8px;
     align-items: center;
   }
 }
@@ -70,6 +72,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 50px;
+  padding: var(--propel-space-3);
 }
 
 .button {
