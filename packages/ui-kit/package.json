@@ -105,6 +105,22 @@
       "import": "./dist/esm/components/*/index.js",
       "require": "./dist/cjs/components/*/index.js"
     },
+    "./graphql/*": {
+      "import": "./dist/esm/graphql/*/index.js",
+      "require": "./dist/cjs/graphql/*/index.js"
+    },
+    "./helpers/*": {
+      "import": "./dist/esm/helpers/*/index.js",
+      "require": "./dist/cjs/helpers/*/index.js"
+    },
+    "./hooks/*": {
+      "import": "./dist/esm/hooks/*/index.js",
+      "require": "./dist/cjs/hooks/*/index.js"
+    },
+    "./themes/*": {
+      "import": "./dist/esm/themes/*/index.js",
+      "require": "./dist/cjs/themes/*/index.js"
+    },
     "./package.json": "./package.json"
   }
 }
