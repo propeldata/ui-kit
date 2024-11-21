@@ -63,7 +63,7 @@ const plugins = [
 /** @type {Array<import('rollup').RollupOptions>} */
 module.exports = [
   {
-    treeshake: 'smallest',
+    treeshake: false,
     input: 'src/index.ts',
     output: [
       {
