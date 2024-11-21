@@ -1,5 +1,13 @@
 # dashboard-example
 
+## 7.0.5
+
+### Patch Changes
+
+- Updated dependencies [f9ce006]
+- Updated dependencies [390feca]
+  - @propeldata/ui-kit@0.12.5
+
 ## 7.0.4
 
 ### Patch Changes
