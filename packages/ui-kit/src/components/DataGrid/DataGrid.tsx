@@ -446,6 +446,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               <div className={classNames(componentStyles.tableHead)}>
                 {headerGroups.map((headerGroup) => (
                   <div
+                    role="rowheader"
                     className={classNames(componentStyles.tableRowHead)}
                     style={{ width: isResizable ? 'fit-content' : '100%' }}
                     key={headerGroup.id}
@@ -514,9 +515,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                   </div>
                 ))}
               </div>
-              <div className={componentStyles.tableBody}>
+              <div role="rowgroup" className={componentStyles.tableBody}>
                 {rowGroup.map((row, index) => (
                   <div
+                    role="row"
                     className={classNames(componentStyles.tableRow, {
                       [componentStyles.preventGap]: isTableOverflowingY
                     })}
