@@ -4,7 +4,7 @@ import componentStyles from './DataGrid.module.scss'
 export function getDisplayValue(value: string) {
   try {
     return JSON.stringify(JSON.parse(value), null, 2)
-  } catch (error) {
+  } catch {
     return value
   }
 }
