@@ -1,5 +1,12 @@
 # @propeldata/ui-kit
 
+## 0.12.6
+
+### Patch Changes
+
+- 651fc90: Small style fixes to DataGrid
+- 0496e0e: DataGrid columns will expand their size uniformly based on the container width but with a minimum width
+
 ## 0.12.5
 
 ### Patch Changes
