@@ -260,6 +260,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
     useEffect(() => {
       function setDefaultSizing() {
         const INDEX_COLUMN_WIDTH = 40
+        const MIN_COLUMN_WIDTH = 200
 
         const tableCopy = containerRef.current
 
@@ -280,7 +281,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           })
         }
 
-        const defaultColumnWidth = ((clientWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length
+        const defaultColumnWidth = Math.max(
+          ((clientWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length,
+          MIN_COLUMN_WIDTH
+        )
 
         if (defaultColumnWidth && defaultColumnWidth !== Infinity && defaultColumnWidth > 0) {
           table.setColumnSizing(() => {
@@ -293,10 +297,15 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         }
 
         const containerWidth = containerRef.current?.clientWidth
-        const columnWidth = ((containerWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length
+        const columnWidth = Math.max(
+          ((containerWidth ?? 0) - INDEX_COLUMN_WIDTH) / tanstackTableColumns.length,
+          MIN_COLUMN_WIDTH
+        )
 
         const containerHeight = containerRef.current?.clientHeight
         const containerScrollHeight = containerRef.current?.scrollHeight
+
+        console.log(columnWidth)
 
         setIsTableOverflowingY(
           containerHeight != null && containerScrollHeight != null && containerHeight < containerScrollHeight
@@ -322,7 +331,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       return () => {
         window.removeEventListener('resize', () => {})
       }
-    }, [table, tanstackTableColumns.length, pageSize])
+    }, [table, tanstackTableColumns.length, pageSize, isResizable])
 
     useEffect(() => {
       function handleKeyPress(event: KeyboardEvent) {
@@ -486,7 +495,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         style={{
                           ...slotProps?.cell?.style,
                           ...slotProps?.header?.style,
-                          width: isResizable ? header.getSize() : '100%'
+                          width: isResizable ? header.getSize() : header.getSize()
+                          // maxWidth: isResizable ? 'initial' : '250px'
                         }}
                         key={header.id}
                       >
@@ -551,7 +561,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         {...slotProps?.cell}
                         role="cell"
                         onClick={() => handleRowCellClick(cell)}
-                        style={{ ...slotProps?.cell?.style, width: isResizable ? cell.column.getSize() : '100%' }}
+                        style={{
+                          ...slotProps?.cell?.style,
+                          width: isResizable ? cell.column.getSize() : cell.column.getSize()
+                          // maxWidth: isResizable ? 'initial' : '250px'
+                        }}
                         className={classNames(
                           componentStyles.tableCell,
                           {
