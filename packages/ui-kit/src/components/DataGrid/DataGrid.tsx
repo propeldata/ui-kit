@@ -305,8 +305,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         const containerHeight = containerRef.current?.clientHeight
         const containerScrollHeight = containerRef.current?.scrollHeight
 
-        console.log(columnWidth)
-
         setIsTableOverflowingY(
           containerHeight != null && containerScrollHeight != null && containerHeight < containerScrollHeight
         )
@@ -496,7 +494,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                           ...slotProps?.cell?.style,
                           ...slotProps?.header?.style,
                           width: isResizable ? header.getSize() : header.getSize()
-                          // maxWidth: isResizable ? 'initial' : '250px'
                         }}
                         key={header.id}
                       >
@@ -564,7 +561,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                         style={{
                           ...slotProps?.cell?.style,
                           width: isResizable ? cell.column.getSize() : cell.column.getSize()
-                          // maxWidth: isResizable ? 'initial' : '250px'
                         }}
                         className={classNames(
                           componentStyles.tableCell,
