@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.12.7
+
+### Patch Changes
+
+- 54eb76b: DataGrid csv columns will be escaped
+
 ## 0.12.6
 
 ### Patch Changes
