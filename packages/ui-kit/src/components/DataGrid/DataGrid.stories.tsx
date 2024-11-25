@@ -58,7 +58,8 @@ export const Basic: Story = {
         'restaurant_name',
         'order_id',
         'timestamp',
-        'restaurant_id'
+        'restaurant_id',
+        'toppings'
       ]
     },
     paginationProps: {

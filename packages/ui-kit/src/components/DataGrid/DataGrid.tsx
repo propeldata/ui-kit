@@ -384,7 +384,10 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       const csvRows: string[] = []
 
       csvRows.push(headers?.join(',') + '\n' ?? '')
-      rows?.forEach((row) => {
+
+      const escapedRows = rows?.map((row) => row.map((cell) => `"${cell?.replaceAll('"', '""') ?? ''}"`))
+
+      escapedRows?.forEach((row) => {
         csvRows.push(row?.join(',') + '\n' ?? '')
       })
 
