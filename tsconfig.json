@@ -6,7 +6,7 @@
     "isolatedModules": true,
     "module": "esnext",
     "strict": true,
-    "lib": ["dom", "es2015"],
+    "lib": ["dom", "ES2021"],
     "esModuleInterop": true,
     "moduleResolution": "node",
     "target": "es2020",
