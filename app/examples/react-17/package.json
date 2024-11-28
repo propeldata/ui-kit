@@ -3,7 +3,7 @@
   "version": "0.1.26",
   "private": true,
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
+    "dev": "DISABLE_ESLINT_PLUGIN=true PORT=3017 react-scripts start"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.18",
