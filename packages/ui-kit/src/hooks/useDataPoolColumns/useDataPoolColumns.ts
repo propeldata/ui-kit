@@ -9,10 +9,11 @@ import { useAccessToken } from '../../components/AccessTokenProvider/useAccessTo
 import { useLog } from '../../components/Log/useLog'
 import { GroupByQueryProps } from '../../components/GroupBy/GroupBy.types'
 import { useMemo } from 'react'
+import { useFilters } from '@/components/FilterProvider/useFilters'
 
 export const useDataPoolColumns = ({
   accessToken: accessTokenFromProp,
-  dataPool,
+  dataPool: dataPoolProp,
   enabled: enabledProp,
   propelApiUrl,
   refetchInterval,
@@ -25,6 +26,10 @@ export const useDataPoolColumns = ({
     isLoading: isLoadingAccessToken,
     error: accessTokenError
   } = useAccessToken()
+
+  const { dataPool: defaultDataPool } = useFilters()
+
+  const dataPool = dataPoolProp ?? defaultDataPool
 
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 

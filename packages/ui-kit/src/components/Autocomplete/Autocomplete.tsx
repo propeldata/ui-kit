@@ -124,7 +124,8 @@ export const Autocomplete = React.forwardRef(function Autocomplete(
               ),
               style: {
                 ...getInputProps().style,
-                ...inputStyle
+                ...inputStyle,
+                width: '100%'
               },
               onFocus: () => {
                 setIsOpen(true)

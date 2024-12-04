@@ -130,7 +130,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
         setSelectedOption(option ?? null)
 
         if (!value.params && option && (onChange || setTimeRange)) {
-          setTimeRange?.(option)
+          setTimeRange?.(option.params)
           onChange?.(option)
         }
       }
@@ -173,7 +173,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
 
       if (selectedOption && (onChange || setTimeRange)) {
         onChange?.({ ...selectedOption })
-        setTimeRange?.({ ...selectedOption })
+        setTimeRange?.(selectedOption.params)
       }
     }, [selectedOption, value, onChange, setTimeRange])
 

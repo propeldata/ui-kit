@@ -1,3 +1,4 @@
+import { useFilters } from '@/components/FilterProvider/useFilters'
 import { RecordsByIdQueryProps } from '../../components/RecordsById/RecordsById.types'
 import { PROPEL_GRAPHQL_API_ENDPOINT, RecordsByUniqueIdQuery, useRecordsByUniqueIdQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
@@ -12,7 +13,7 @@ import { useLog } from './../../components/Log/useLog'
  * @returns {data: RecordsByUniqueIdQuery | undefined, isLoading: boolean, error: Error | undefined}
  */
 export const useRecordsById = ({
-  dataPool,
+  dataPool: dataPoolProp,
   uniqueIds,
   columns,
   accessToken: accessTokenFromProp,
@@ -29,6 +30,10 @@ export const useRecordsById = ({
     isLoading: isLoadingAccessToken,
     error: accessTokenError
   } = useAccessToken()
+
+  const { dataPool: defaultDataPool } = useFilters()
+
+  const dataPool = dataPoolProp ?? defaultDataPool
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider

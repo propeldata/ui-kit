@@ -5,6 +5,7 @@ import type { Loader as LoaderComponent, LoaderProps } from './Loader'
 import type { ThemeStateProps } from './ThemeProvider/ThemeProvider.types'
 import { ButtonProps } from './Button'
 import { CardProps } from './Card'
+import { DeepPartial } from 'chart.js/dist/types/utils'
 
 /** Shared props for the data components. */
 
@@ -73,7 +74,8 @@ export interface CommonComponentProps {
 
 export type DataComponentProps<T extends keyof JSX.IntrinsicElements> = ThemeComponentProps &
   Omit<React.ComponentPropsWithoutRef<T>, 'style' | 'className'> &
-  FallbackComponents & CommonComponentProps
+  FallbackComponents &
+  CommonComponentProps
 
 export interface QueryProps {
   /**
@@ -138,7 +140,7 @@ export interface ChartQueryProps extends QueryProps {
    * you can query metrics on-the-fly by passing an inline metric definition to the prop.
    * @type string | MetricInput
    * */
-  metric?: string | MetricInput
+  metric?: string | DeepPartial<MetricInput>
 
   /** Filters that the chart will respond to */
   filters?: FilterInput[]

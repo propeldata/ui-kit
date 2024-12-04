@@ -10,6 +10,8 @@ import { useAccessToken } from './../../components/AccessTokenProvider/useAccess
 import { useFilters } from './../../components/FilterProvider/useFilters'
 import { useLog } from './../../components/Log/useLog'
 import { TimeSeriesQueryProps } from './../../components/TimeSeries/TimeSeries.types'
+import { patchMetricInputDataPool } from '@/helpers/patchMetricInputDataPool'
+import { MetricInput } from '@/helpers/graphql/generated'
 
 /**
  * This hook allows you to query a Time Series using Propel's GraphQL API.
@@ -22,7 +24,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   const {
     accessToken: accessTokenFromProp,
     propelApiUrl,
-    metric,
+    metric: metricProp,
     timeRange: timeRangeProp,
     granularity: granularityProp,
     filters: filtersFromProp,
@@ -48,12 +50,15 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   const {
     filters: filtersFromProvider,
     timeRange: timeRangeFromProvider,
-    granularity: granularityFromProvider
+    granularity: granularityFromProvider,
+    dataPool: defaultDataPool
   } = useFilters()
 
   const filters = filtersFromProp ?? filtersFromProvider
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
+  const timeRange = { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+
+  const metric = patchMetricInputDataPool(metricProp, defaultDataPool)
 
   const granularity = granularityProp ?? granularityFromProvider
 
@@ -65,7 +70,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   }
 
   // Define metric input
-  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
+  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric as MetricInput }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
   const withGroupBy: Partial<{ groupBy: string[] }> = groupBy != null ? { groupBy } : {}
