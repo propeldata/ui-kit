@@ -11,7 +11,7 @@ import { useFilters } from './../../components/FilterProvider/useFilters'
 import { useLog } from './../../components/Log/useLog'
 import { TimeSeriesQueryProps } from './../../components/TimeSeries/TimeSeries.types'
 import { patchMetricInputDataPool } from '@/helpers/patchMetricInputDataPool'
-import { MetricInput } from '@/helpers/graphql/generated'
+import { MetricInput } from '@/graphql/generated'
 
 /**
  * This hook allows you to query a Time Series using Propel's GraphQL API.

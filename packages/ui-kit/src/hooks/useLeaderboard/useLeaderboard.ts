@@ -14,7 +14,7 @@ import { useAccessToken } from './../../components/AccessTokenProvider/useAccess
 import { useFilters } from './../../components/FilterProvider/useFilters'
 import { useLog } from './../../components/Log/useLog'
 import { patchMetricInputDataPool } from '@/helpers/patchMetricInputDataPool'
-import { MetricInput } from '@/helpers/graphql/generated'
+import { MetricInput } from '@/graphql/generated'
 
 /**
  * This hook allows you to query a Leaderboard using Propel's GraphQL API.
