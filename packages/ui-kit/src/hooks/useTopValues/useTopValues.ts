@@ -50,9 +50,12 @@ export const useTopValues = ({
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
-  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = {
-    timeRange: { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
-  }
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> =
+    timeRangeFromProvider != null || timeRangeProp != null
+      ? {
+          timeRange: { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+        }
+      : {}
 
   /**
    * @hook react-query wrapper
