@@ -55,7 +55,10 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
 
   const isAllColumns = columns?.includes('*')
 
-  const timeRange = { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+  const timeRange =
+    timeRangeFromProvider != null || timeRangeProp != null
+      ? { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+      : null
   const filters = filtersProp ?? filtersFromProvider
 
   // Get access token first from props, then if it is not provided via prop get it from provider

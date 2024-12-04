@@ -43,7 +43,10 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
 
   const filters = filtersFromProp ?? filtersFromProvider
 
-  const timeRange = { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+  const timeRange =
+    timeRangeFromProvider != null || timeRangeProp != null
+      ? { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+      : null
 
   const metric = patchMetricInputDataPool(metricProp, defaultDataPool)
 
