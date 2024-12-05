@@ -13,6 +13,8 @@ import { UseQueryProps } from '../types/Query.types'
 import { useAccessToken } from './../../components/AccessTokenProvider/useAccessToken'
 import { useFilters } from './../../components/FilterProvider/useFilters'
 import { useLog } from './../../components/Log/useLog'
+import { patchMetricInputDataPool } from '@/helpers/patchMetricInputDataPool'
+import { MetricInput } from '@/graphql/generated'
 
 /**
  * This hook allows you to query a Leaderboard using Propel's GraphQL API.
@@ -25,7 +27,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   const {
     accessToken: accessTokenFromProp,
     propelApiUrl,
-    metric,
+    metric: metricProp,
     sort,
     rowLimit,
     dimensions,
@@ -49,11 +51,16 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
+  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider, dataPool: defaultDataPool } = useFilters()
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
+  const timeRange =
+    timeRangeFromProvider != null || timeRangeProp != null
+      ? { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+      : null
 
   const filters = filtersFromProp ?? filtersFromProvider
+
+  const metric = patchMetricInputDataPool(metricProp, defaultDataPool)
 
   const enabled = accessToken != null && enabledProp
 
@@ -65,7 +72,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   }
 
   // Define metric input
-  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric }
+  const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric as MetricInput }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
 

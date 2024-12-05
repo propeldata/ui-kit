@@ -22,7 +22,7 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
     timeZone,
     columns,
     filters: filtersProp,
-    dataPool,
+    dataPool: dataPoolProp,
     orderByColumn,
     sort = Sort.Desc,
     first = 50,
@@ -45,11 +45,20 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
     error: accessTokenError
   } = useAccessToken()
 
-  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider } = useFilters()
+  const {
+    filters: filtersFromProvider,
+    timeRange: timeRangeFromProvider,
+    dataPool: dataPoolFromProvider
+  } = useFilters()
+
+  const dataPool = dataPoolProp ?? dataPoolFromProvider
 
   const isAllColumns = columns?.includes('*')
 
-  const timeRange = timeRangeProp ?? timeRangeFromProvider?.params
+  const timeRange =
+    timeRangeFromProvider != null || timeRangeProp != null
+      ? { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+      : null
   const filters = filtersProp ?? filtersFromProvider
 
   // Get access token first from props, then if it is not provided via prop get it from provider

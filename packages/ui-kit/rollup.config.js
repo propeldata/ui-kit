@@ -88,7 +88,8 @@ module.exports = [
         id.startsWith('./') ||
         id.endsWith('.ts') ||
         id.endsWith('.tsx') ||
-        id.endsWith('.scss')
+        id.endsWith('.scss') ||
+        id.startsWith('@/')
       ) {
         return false
       }

@@ -119,7 +119,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const [pagination, setPagination] = useState<PaginationProps>({ first: pageSize })
 
-    const isStatic = !query
+    const isStatic = rowsProp != null || headersProp != null
 
     const withPagination = disablePagination ? {} : pagination
 
@@ -145,7 +145,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
           }
         }
       },
-      enabled: !isStatic && (query.dataPool?.name != null || query.dataPool?.id != null) && showRowCount === true
+      enabled: !isStatic && showRowCount === true
     })
 
     const rowCount = isStatic ? rowsProp?.length : rowCountData?.counter?.value

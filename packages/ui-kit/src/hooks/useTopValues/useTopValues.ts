@@ -1,3 +1,4 @@
+import { useFilters } from '@/components/FilterProvider/useFilters'
 import { TopValuesQueryProps } from '../../components/TopValues/TopValues.types'
 import { PROPEL_GRAPHQL_API_ENDPOINT, TimeRangeInput, TopValuesQuery, useTopValuesQuery } from '../../graphql'
 import { UseQueryProps } from '../types/Query.types'
@@ -15,9 +16,9 @@ export const useTopValues = ({
   accessToken: accessTokenFromProp,
   propelApiUrl,
   metric,
-  timeRange,
+  timeRange: timeRangeProp,
   columnName,
-  dataPool,
+  dataPool: dataPoolProp,
   maxValues,
   refetchInterval,
   retry,
@@ -33,6 +34,10 @@ export const useTopValues = ({
     error: accessTokenError
   } = useAccessToken()
 
+  const { dataPool: defaultDataPool, timeRange: timeRangeFromProvider } = useFilters()
+
+  const dataPool = dataPoolProp ?? defaultDataPool
+
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
@@ -45,7 +50,12 @@ export const useTopValues = ({
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
-  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withTimeRange: Partial<{ timeRange: TimeRangeInput }> =
+    timeRangeFromProvider != null || timeRangeProp != null
+      ? {
+          timeRange: { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
+        }
+      : {}
 
   /**
    * @hook react-query wrapper

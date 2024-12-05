@@ -8,7 +8,8 @@ const config = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   modulePathIgnorePatterns: ['dist'],
   moduleNameMapper: {
-    '^.+\\.(css|less|scss)$': '<rootDir>/src/testing/mockStyles.ts'
+    '^.+\\.(css|less|scss)$': '<rootDir>/src/testing/mockStyles.ts',
+    '@/(.*)': '<rootDir>/src/$1'
   },
   rootDir: '.',
   roots: ['<rootDir>'],

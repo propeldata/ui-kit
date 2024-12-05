@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@ui-kit/*": ["../../packages/ui-kit/src/*"]
+      "@ui-kit/*": ["../../packages/ui-kit/src/*"],
+      "@/*": ["../../packages/ui-kit/src/*"]
     }
   },
   "include": ["src", "documentation"]
