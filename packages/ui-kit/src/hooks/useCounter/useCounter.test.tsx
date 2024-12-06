@@ -14,8 +14,6 @@ const handlers = [
     const metric = req.variables.counterInput.metricName
     const timeRange = req.variables.counterInput.timeRange
 
-    console.log('timeRange', timeRange)
-
     if (metric === 'not-receive-timerange' && timeRange != null) {
       return res(ctx.errors([{ message: 'timeRange should not be provided' }]))
     }

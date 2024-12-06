@@ -96,6 +96,19 @@ export const SingleDimensionDoughnutStory: Story = {
   render: (args) => <PieChart {...args} />
 }
 
+export const MultiDimensionPieStory: Story = {
+  name: 'Multi Dimension Pie',
+  args: {
+    query: {
+      ...connectedParams,
+      dimensions: [{ columnName: 'taco_name' }, { columnName: 'tortilla_name' }]
+    },
+    showGroupByOther: false,
+    card: true
+  },
+  render: (args) => <PieChart {...args} />
+}
+
 export const PieLegendBottomStory: Story = {
   name: 'Pie legend on bottom',
   args: {
