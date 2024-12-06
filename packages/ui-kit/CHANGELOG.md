@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.13.0
+
+### Minor Changes
+
+- a58b274: Added `defaultTimeRange` and `defaultDataPool` props for FilterProvider
+
 ## 0.12.7
 
 ### Patch Changes
