@@ -45,7 +45,7 @@ const GroupByComponent = React.forwardRef<HTMLButtonElement, GroupByProps>(
 
     const { setRef } = useForwardedRefCallback(forwardedRef)
 
-    const isStatic = query?.dataPool == null
+    const isStatic = query == null && columnsProp != null
     const isIncludeAllColumns = includeColumns.includes('*') && includeColumns.length === 1
 
     const { columns: data, isLoading, error } = useDataPoolColumns({ ...query, enabled: !isStatic })
