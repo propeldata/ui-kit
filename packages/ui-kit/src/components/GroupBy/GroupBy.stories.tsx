@@ -10,6 +10,7 @@ import { TimeSeries as TimeSeriesSource, TimeSeriesQueryProps } from '../TimeSer
 import { RelativeTimeRange, TimeSeriesGranularity } from '../../graphql'
 import { Leaderboard as LeaderboardSource, LeaderboardQueryProps } from '../Leaderboard'
 import { PieChart as PieChartSource } from '../PieChart'
+import { AccessTokenProvider as AccessTokenProviderSource } from '../AccessTokenProvider'
 
 const meta: Meta<typeof GroupBySource> = {
   title: 'Components/GroupBy',
@@ -22,6 +23,12 @@ const meta: Meta<typeof GroupBySource> = {
 }
 
 export default meta
+
+const AccessTokenProvider = (props: { children: React.ReactNode }) => {
+  const { accessToken } = useStorybookAccessToken(axiosInstance)
+
+  return <AccessTokenProviderSource accessToken={accessToken} {...props} />
+}
 
 const GroupBy = (args: Story['args']) => {
   const { accessToken } = useStorybookAccessToken(axiosInstance)
@@ -188,5 +195,15 @@ export const IncludeColumns: Story = {
       <GroupBy {...args} />
       <TimeSeries />
     </FilterProvider>
+  )
+}
+
+export const WithFilterProviderDataPool: Story = {
+  render: () => (
+    <AccessTokenProvider>
+      <FilterProvider defaultDataPool={{ name: process.env.STORYBOOK_DATA_POOL_UNIQUE_NAME_1 ?? '' }}>
+        <GroupBy />
+      </FilterProvider>
+    </AccessTokenProvider>
   )
 }
