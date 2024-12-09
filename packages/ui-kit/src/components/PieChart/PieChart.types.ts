@@ -58,8 +58,11 @@ export interface PieChartQueryProps extends ChartQueryProps {
   /** The sort order of the rows. It can be ascending (ASC) or descending (DESC) order. Defaults to descending (DESC) order when not provided. */
   sort?: Sort
 
-  /** One Dimension to group the Metric values by. Typically, Dimension in a piechart is what you want to compare and rank. */
+  /** @deprecated This prop is deprecated, use `dimensions` instead. */
   dimension?: DimensionInput
+
+  /** Dimensions to group the Metric values by. Typically, Dimensions in a piechart is what you want to compare and rank. */
+  dimensions?: DimensionInput[]
 }
 
 export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'div'> {
@@ -98,6 +101,9 @@ export interface PieChartProps extends ThemeSettingProps, DataComponentProps<'di
 
   /** Color that will be used for `other` */
   otherColor?: GrayColors | string
+
+  /** If set to true, shows the `other` slice of the pie chart, defaults to true */
+  showGroupByOther?: boolean
 
   /** An optional prop that provides access to the Chart.js API, allowing for further customization of chart settings. */
   chartConfigProps?: (config: ChartConfiguration<'pie' | 'doughnut'>) => ChartConfiguration<'pie' | 'doughnut'>

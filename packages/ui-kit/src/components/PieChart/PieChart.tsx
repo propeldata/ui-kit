@@ -34,6 +34,7 @@ import { emptyStatePlugin } from './plugins/empty'
 import { useFilters } from '../FilterProvider'
 import { useLog } from '../Log'
 import { DEFAULT_MAX_GROUP_BY } from '../shared.consts'
+import { buildDimensionsInput } from './utils'
 
 let idCounter = 0
 
@@ -60,6 +61,7 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       chartConfigProps,
       accentColors,
       otherColor,
+      showGroupByOther = true,
       ...rest
     }: PieChartProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>
@@ -118,10 +120,11 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
     } = useLeaderboard({
       ...query,
       timeZone,
-      dimensions:
-        query?.dimension != null || groupBy[0] || emptyGroupBy[0]
-          ? [query?.dimension ?? { columnName: groupBy[0] ?? emptyGroupBy[0] ?? '' }]
-          : undefined,
+      dimensions: buildDimensionsInput(
+        query?.dimensions ?? (query?.dimension && [query.dimension]) ?? [],
+        groupBy,
+        emptyGroupBy
+      ),
       enabled: !isStatic,
       rowLimit: query?.rowLimit ?? maxGroupBy ?? DEFAULT_MAX_GROUP_BY
     })
@@ -177,7 +180,9 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
       return [...customColors, ...additionalColors, ...palette].map(({ primary }) => primary)
     }, [accentColors, theme?.accentColor])
 
-    const totalValue = isStatic ? rows?.reduce((a, b) => a + Number(b[1]), 0) ?? 0 : Number(counterData?.counter?.value)
+    const totalValue = isStatic
+      ? rows?.reduce((a, b) => a + Number(b[b.length - 1]), 0) ?? 0
+      : leaderboardData?.leaderboard?.rows.reduce((a, b) => a + Number(b[b.length - 1]), 0) ?? 0
 
     const destroyChart = React.useCallback(() => {
       if (chartRef.current) {
@@ -205,8 +210,8 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
           totalPosition = 'bottom'
         } = chartProps ?? {}
 
-        const labels = data.rows?.map((row) => row[0]) ?? []
-        const values = data.rows?.map((row) => Number(row[1])) ?? []
+        const labels = data.rows?.map((row) => row.slice(0, -1).join(', ')) ?? []
+        const values = data.rows?.map((row) => Number(row[row.length - 1])) ?? []
 
         const customChartLabelsPlugin: Plugin<PieChartVariant> = getCustomChartLabelsPlugin({
           theme,
@@ -362,15 +367,16 @@ export const PieChartComponent = React.forwardRef<HTMLDivElement, PieChartProps>
         return
       }
 
-      const leaderboardTotalValue = leaderboardData?.leaderboard?.rows.reduce((a, b) => a + Number(b[1]), 0) ?? 0
+      const leaderboardTotalValue =
+        leaderboardData?.leaderboard?.rows.reduce((a, b) => a + Number(b[b.length - 1]), 0) ?? 0
       const counterValue = Number(counterData?.counter?.value ?? '0')
 
-      if (counterValue > leaderboardTotalValue) {
+      if (counterValue > leaderboardTotalValue && showGroupByOther) {
         leaderboardData?.leaderboard?.rows.push([otherLabel, (counterValue - leaderboardTotalValue).toString()])
       }
 
       return leaderboardData
-    }, [leaderboardData, counterData, otherLabel])
+    }, [leaderboardData, counterData, showGroupByOther, otherLabel])
 
     const loadingStyles = {
       opacity: isLoading || isLoadingStatic ? '0.3' : '1',
