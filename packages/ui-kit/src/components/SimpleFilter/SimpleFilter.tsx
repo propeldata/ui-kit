@@ -56,7 +56,7 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
 
     const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
       if (selectedOption == null) {
-        setFilterSqlList(filterSqlList.filter(({ id }) => id !== id))
+        setFilterSqlList(filterSqlList.filter((filter) => filter.id !== id))
         return
       }
       const filterValue =
