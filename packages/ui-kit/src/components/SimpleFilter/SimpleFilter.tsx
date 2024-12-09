@@ -1,7 +1,6 @@
 'use client'
 
 import React, { SyntheticEvent, useEffect, useRef } from 'react'
-import { FilterInput, FilterOperator } from '../../graphql'
 import { getTimeZone, useForwardedRefCallback, withThemeWrapper } from '../../helpers'
 import { useTopValues } from '../../hooks'
 import { Autocomplete } from '../Autocomplete'
@@ -39,7 +38,7 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
     const id = useRef(Symbol()).current
     const isStatic = !query
 
-    const { filters, setFilters, dataPool: defaultDataPool } = useFilters()
+    const { filterSqlList, setFilterSqlList, dataPool: defaultDataPool } = useFilters()
     const columnName = query?.columnName ?? columnNameProp
     const log = useLog()
     const {
@@ -57,21 +56,15 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
 
     const handleChange = (_: SyntheticEvent<Element, Event>, selectedOption: AutocompleteOption | string | null) => {
       if (selectedOption == null) {
-        const filterList = filters.filter((filter) => filter.id !== id)
-        setFilters(filterList)
+        setFilterSqlList(filterSqlList.filter(({ id }) => id !== id))
         return
       }
+      const filterValue =
+        typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
 
-      const filter: FilterInput = {
-        column: columnName,
-        operator: FilterOperator.Equals,
-        value:
-          typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
-      }
-
-      const filterList = filters.filter((filter) => filter.id !== id).concat({ ...filter, id })
-
-      setFilters(filterList)
+      setFilterSqlList((prev) =>
+        prev.filter((filter) => filter.id !== id).concat({ filterSql: `${columnName} = '${filterValue}'`, id })
+      )
     }
 
     const autocompleteOptions = (isStatic ? options : data?.topValues.values) ?? []

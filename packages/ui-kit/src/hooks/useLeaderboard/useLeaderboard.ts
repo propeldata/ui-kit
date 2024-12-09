@@ -33,6 +33,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     dimensions,
     timeRange: timeRangeProp,
     filters: filtersFromProp,
+    filterSql: filterSqlFromProp,
     refetchInterval,
     retry,
     enabled: enabledProp = true,
@@ -51,14 +52,22 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider, dataPool: defaultDataPool } = useFilters()
+  const {
+    filters: filtersFromProvider,
+    timeRange: timeRangeFromProvider,
+    dataPool: defaultDataPool,
+    filterSql: filterSqlFromProvider
+  } = useFilters()
+
+  const filterSql = filterSqlFromProp ?? filterSqlFromProvider
+
+  // Only use filters if filterSql is not provided
+  const filters = filterSql != null ? filtersFromProp ?? filtersFromProvider : []
 
   const timeRange =
     timeRangeFromProvider != null || timeRangeProp != null
       ? { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
       : null
-
-  const filters = filtersFromProp ?? filtersFromProvider
 
   const metric = patchMetricInputDataPool(metricProp, defaultDataPool)
 
@@ -75,6 +84,7 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric as MetricInput }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withFilters = filters.length > 0 ? { filters } : {}
 
   const leaderboardEnabled = enabled && !isNoDimensions
 
@@ -101,12 +111,13 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     {
       leaderboardInput: {
         ...metricInput,
-        filters,
         sort: sort,
         rowLimit: rowLimit ?? 100,
         dimensions: dimensions ?? [],
         timeZone: getTimeZone(timeZone),
-        ...withTimeRange
+        ...withTimeRange,
+        ...withFilters,
+        filterSql
       }
     },
     {
@@ -135,9 +146,10 @@ export const useLeaderboard = (props: LeaderboardQueryProps): UseQueryProps<Lead
     {
       counterInput: {
         ...metricInput,
-        filters,
         timeZone: getTimeZone(timeZone),
-        ...withTimeRange
+        ...withTimeRange,
+        ...withFilters,
+        filterSql
       }
     },
     { enabled: counterEnabled, refetchInterval, retry }
