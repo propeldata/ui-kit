@@ -66,3 +66,17 @@ export const DefaultTimeRange: Story = {
     </TokenProvider>
   )
 }
+
+export const PieChartGroupBy: Story = {
+  render: (args) => (
+    <TokenProvider>
+      <FilterProvider
+        {...args}
+        defaultDataPool={{ name: 'TacoSoft Demo Data' }}
+        defaultGroupBy={['restaurant_name', 'taco_name']}
+      >
+        <PieChart query={{ metric: { count: {} } }} showGroupByOther={false} />
+      </FilterProvider>
+    </TokenProvider>
+  )
+}
