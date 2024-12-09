@@ -62,9 +62,11 @@ const SimpleFilterComponent = React.forwardRef<HTMLSpanElement, SimpleFilterProp
       const filterValue =
         typeof selectedOption === 'string' ? selectedOption : selectedOption?.value ?? selectedOption?.label ?? ''
 
-      setFilterSqlList((prev) =>
-        prev.filter((filter) => filter.id !== id).concat({ filterSql: `${columnName} = '${filterValue}'`, id })
-      )
+      const filterSqlListResult = filterSqlList
+        .filter((filter) => filter.id !== id)
+        .concat({ filterSql: `"${columnName}" = '${filterValue}'`, id })
+
+      setFilterSqlList(filterSqlListResult)
     }
 
     const autocompleteOptions = (isStatic ? options : data?.topValues.values) ?? []
