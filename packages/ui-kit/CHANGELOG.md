@@ -1,5 +1,15 @@
 # @propeldata/ui-kit
 
+## 0.14.0
+
+### Minor Changes
+
+- 4cb9c78: Added support for multiple dimensions on PieChart
+
+### Patch Changes
+
+- f824df8: Fix GroupBy component connected mode
+
 ## 0.13.0
 
 ### Minor Changes
