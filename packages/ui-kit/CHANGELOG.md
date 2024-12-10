@@ -1,5 +1,15 @@
 # @propeldata/ui-kit
 
+## 0.15.0
+
+### Minor Changes
+
+- d0f9b8f: Prefer filterSql and deprecate filters
+
+### Patch Changes
+
+- cafe0ae: Fix style precedence issue
+
 ## 0.14.0
 
 ### Minor Changes
