@@ -21,7 +21,8 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
     timeRange: timeRangeProp,
     timeZone,
     columns,
-    filters: filtersProp,
+    filters: filtersFromProp,
+    filterSql: filterSqlFromProp,
     dataPool: dataPoolProp,
     orderByColumn,
     sort = Sort.Desc,
@@ -48,7 +49,8 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
   const {
     filters: filtersFromProvider,
     timeRange: timeRangeFromProvider,
-    dataPool: dataPoolFromProvider
+    dataPool: dataPoolFromProvider,
+    filterSql: filterSqlFromProvider
   } = useFilters()
 
   const dataPool = dataPoolProp ?? dataPoolFromProvider
@@ -59,7 +61,11 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
     timeRangeFromProvider != null || timeRangeProp != null
       ? { ...(timeRangeFromProvider ?? {}), ...(timeRangeProp ?? {}) }
       : null
-  const filters = filtersProp ?? filtersFromProvider
+
+  const filterSql = filterSqlFromProp ?? filterSqlFromProvider
+
+  // Only use filters if filterSql is not provided
+  const filters = filterSql != null ? filtersFromProp ?? filtersFromProvider : []
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
@@ -72,6 +78,7 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
   }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withFilters = filters.length > 0 ? { filters } : {}
 
   const dataPoolInput = dataPool?.name != null ? { name: dataPool.name } : { id: dataPool?.id ?? '' }
 
@@ -94,7 +101,7 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
       dataGridInput: {
         columns: isAllColumns ? fetchedColumns ?? [] : columns ?? [],
         dataPool: dataPoolInput,
-        filters: filters ?? [],
+        ...withFilters,
         ...withTimeRange,
         timeZone,
         orderByColumn,
@@ -102,7 +109,8 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
         first,
         last,
         after,
-        before
+        before,
+        filterSql
       }
     },
     {

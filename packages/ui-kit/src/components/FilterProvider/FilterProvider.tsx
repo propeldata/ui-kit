@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { DataPoolInput, TimeRangeInput, TimeSeriesGranularity } from '../../graphql'
 
 import { FilterContextProps, FilterContextValue, FilterInputWithId } from './FilterProvider.types'
@@ -17,7 +17,11 @@ export const FilterContext = createContext<FilterContextValue>({
   emptyGroupBy: [],
   maxGroupBy: undefined,
   dataPool: null,
-  setDataPool: () => {}
+  setDataPool: () => {},
+  filterSql: null,
+  setFilterSql: () => {},
+  filterSqlList: [],
+  setFilterSqlList: () => {}
 })
 
 export const FilterProvider: React.FC<React.PropsWithChildren<FilterContextProps>> = ({
@@ -28,7 +32,8 @@ export const FilterProvider: React.FC<React.PropsWithChildren<FilterContextProps
   emptyGroupBy = [],
   maxGroupBy,
   defaultTimeRange,
-  defaultDataPool
+  defaultDataPool,
+  baseFilterSql
 }) => {
   const [filters, setFilters] = useState<FilterInputWithId[]>(
     baseFilters?.map((filter) => ({ ...filter, id: Symbol() })) ?? []
@@ -37,6 +42,17 @@ export const FilterProvider: React.FC<React.PropsWithChildren<FilterContextProps
   const [granularity, setGranularity] = useState<TimeSeriesGranularity>(defaultGranularity)
   const [groupBy, setGroupBy] = useState<string[]>(defaultGroupBy)
   const [dataPool, setDataPool] = useState<DataPoolInput | null | undefined>(defaultDataPool)
+  const [filterSql, setFilterSql] = useState<string | null | undefined>(baseFilterSql)
+
+  const [filterSqlList, setFilterSqlList] = useState<Array<{ filterSql: string; id: symbol }>>([])
+
+  useEffect(() => {
+    if (filterSqlList.length > 0) {
+      setFilterSql(filterSqlList.map(({ filterSql }) => filterSql).join(' AND '))
+    } else {
+      setFilterSql(baseFilterSql)
+    }
+  }, [baseFilterSql, filterSql, filterSqlList])
 
   return (
     <FilterContext.Provider
@@ -52,7 +68,11 @@ export const FilterProvider: React.FC<React.PropsWithChildren<FilterContextProps
         emptyGroupBy,
         maxGroupBy,
         dataPool,
-        setDataPool
+        setDataPool,
+        filterSql,
+        setFilterSql,
+        filterSqlList,
+        setFilterSqlList
       }}
     >
       {children}

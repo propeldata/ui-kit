@@ -142,6 +142,9 @@ export interface ChartQueryProps extends QueryProps {
    * */
   metric?: string | DeepPartial<MetricInput>
 
-  /** Filters that the chart will respond to */
+  /** @deprecated Filters that the chart will respond to, this prop is deprecated, use `filterSql` instead */
   filters?: FilterInput[]
+
+  /** SQL Filter that the chart will respond to. */
+  filterSql?: string
 }
