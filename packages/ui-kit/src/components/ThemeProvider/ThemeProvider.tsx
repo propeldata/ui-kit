@@ -166,10 +166,6 @@ export const useSetupTheme = <T extends ChartVariant>({
       return
     }
 
-    if (!componentContainer.classList.contains(themes['propel-themes'])) {
-      componentContainer.classList.add(themes['propel-themes'])
-    }
-
     if (context) {
       let componentColors = colors
 
