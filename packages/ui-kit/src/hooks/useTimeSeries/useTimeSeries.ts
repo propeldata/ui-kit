@@ -28,6 +28,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     timeRange: timeRangeProp,
     granularity: granularityProp,
     filters: filtersFromProp,
+    filterSql: filterSqlFromProp,
     refetchInterval,
     enabled: enabledProp = true,
     retry,
@@ -51,10 +52,14 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
     filters: filtersFromProvider,
     timeRange: timeRangeFromProvider,
     granularity: granularityFromProvider,
-    dataPool: defaultDataPool
+    dataPool: defaultDataPool,
+    filterSql: filterSqlFromProvider
   } = useFilters()
 
-  const filters = filtersFromProp ?? filtersFromProvider
+  const filterSql = filterSqlFromProp ?? filterSqlFromProvider
+
+  // Only use filters if filterSql is not provided
+  const filters = filterSql != null ? filtersFromProp ?? filtersFromProvider : []
 
   const timeRange =
     timeRangeFromProvider != null || timeRangeProp != null
@@ -77,6 +82,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
   const withGroupBy: Partial<{ groupBy: string[] }> = groupBy != null ? { groupBy } : {}
+  const withFilters = filters.length > 0 ? { filters } : {}
 
   /**
    * @hook react-query wrapper
@@ -99,8 +105,9 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
         timeZone,
         ...withTimeRange,
         granularity: granularity as TimeSeriesGranularity,
-        filters,
-        ...withGroupBy
+        ...withFilters,
+        ...withGroupBy,
+        filterSql
       }
     },
     {

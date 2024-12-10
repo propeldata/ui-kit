@@ -341,3 +341,24 @@ export const ErrorStory: Story = {
   },
   render: (args) => <TimeSeries {...args} />
 }
+
+export const FilterSqlStory: Story = {
+  name: 'FilterSql',
+  args: {
+    query: {
+      filterSql: "taco_name = 'Chorizo'",
+      metric: {
+        count: {
+          dataPool: {
+            name: 'TacoSoft Demo Data'
+          }
+        }
+      },
+      timeRange: {
+        relative: RelativeTimeRange.LastNDays,
+        n: 7
+      }
+    }
+  },
+  render: (args) => <TimeSeries {...args} />
+}

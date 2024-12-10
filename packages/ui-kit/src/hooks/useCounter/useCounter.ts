@@ -20,6 +20,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
     propelApiUrl,
     timeRange: timeRangeProp,
     filters: filtersFromProp,
+    filterSql: filterSqlFromProp,
     refetchInterval,
     retry,
     enabled: enabledProp = true,
@@ -39,9 +40,17 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider
 
-  const { filters: filtersFromProvider, timeRange: timeRangeFromProvider, dataPool: defaultDataPool } = useFilters()
+  const {
+    filters: filtersFromProvider,
+    timeRange: timeRangeFromProvider,
+    dataPool: defaultDataPool,
+    filterSql: filterSqlFromProvider
+  } = useFilters()
 
-  const filters = filtersFromProp ?? filtersFromProvider
+  const filterSql = filterSqlFromProp ?? filterSqlFromProvider
+
+  // Only use filters if filterSql is not provided
+  const filters = filterSql != null ? filtersFromProp ?? filtersFromProvider : []
 
   const timeRange =
     timeRangeFromProvider != null || timeRangeProp != null
@@ -61,6 +70,7 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
   const metricInput = typeof metric === 'string' ? { metricName: metric } : { metric: metric as MetricInput }
 
   const withTimeRange: Partial<{ timeRange: TimeRangeInput }> = timeRange != null ? { timeRange: { ...timeRange } } : {}
+  const withFilters = filters.length > 0 ? { filters } : {}
 
   /**
    * @hook react-query wrapper
@@ -82,7 +92,8 @@ export const useCounter = (props: CounterQueryProps): UseQueryProps<CounterQuery
         ...metricInput,
         timeZone: getTimeZone(timeZone),
         ...withTimeRange,
-        filters
+        ...withFilters,
+        filterSql
       }
     },
     {

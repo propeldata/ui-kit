@@ -80,3 +80,25 @@ export const PieChartGroupBy: Story = {
     </TokenProvider>
   )
 }
+
+export const FilterSql: Story = {
+  name: 'FilterSql',
+  render: (args) => (
+    <TokenProvider>
+      <FilterProvider
+        {...args}
+        defaultDataPool={{ name: 'TacoSoft Demo Data' }}
+        baseFilterSql="taco_name = 'Veggie' AND sauce_name = 'Queso Blanco'"
+      >
+        <SimpleFilter query={{ columnName: 'taco_name' }} />
+        <SimpleFilter query={{ columnName: 'sauce_name' }} />
+        <TimeRangePicker />
+        <Counter query={{ metric: { count: {} } }} />
+        <TimeSeries query={{ metric: { count: {} } }} />
+        <Leaderboard query={{ metric: { count: {} }, dimensions: [{ columnName: 'taco_name' }] }} />
+        <DataGrid />
+        <PieChart query={{ metric: { count: {} } }} />
+      </FilterProvider>
+    </TokenProvider>
+  )
+}

@@ -2,16 +2,19 @@ import React from 'react'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 
 import { FilterProvider } from '../FilterProvider'
-import { Dom, FilterOperator, mockTopValuesQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
+import { Dom, mockTopValuesQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 
 import { SimpleFilter } from './SimpleFilter'
 
 const setFilterMock = jest.fn()
+const setFilterSqlListMock = jest.fn()
 
 jest.mock('../FilterProvider/useFilters', () => ({
   useFilters: () => ({
     filters: [],
-    setFilters: setFilterMock
+    setFilters: setFilterMock,
+    filterSqlList: [],
+    setFilterSqlList: setFilterSqlListMock
   })
 }))
 
@@ -66,12 +69,10 @@ describe('SimpleFilter', () => {
     fireEvent.click(dom.getByRole('button', { name: 'dropdown-button' }))
     fireEvent.click(dom.getByText('option 1'))
 
-    expect(setFilterMock).toHaveBeenCalledWith([
+    expect(setFilterSqlListMock).toHaveBeenCalledWith([
       {
         id: expect.any(Symbol),
-        column: 'test column',
-        operator: FilterOperator.Equals,
-        value: 'option 1'
+        filterSql: `"test column" = 'option 1'`
       }
     ])
   })
@@ -101,12 +102,10 @@ describe('SimpleFilter', () => {
       fireEvent.click(dom.getByText('option 1'))
     })
 
-    expect(setFilterMock).toHaveBeenCalledWith([
+    expect(setFilterSqlListMock).toHaveBeenCalledWith([
       {
         id: expect.any(Symbol),
-        column: 'test column',
-        operator: FilterOperator.Equals,
-        value: 'option 1'
+        filterSql: `"test column" = 'option 1'`
       }
     ])
   })
@@ -137,12 +136,10 @@ describe('SimpleFilter', () => {
       fireEvent.click(dom.getByText('Europe/Berlin'))
     })
 
-    expect(setFilterMock).toHaveBeenCalledWith([
+    expect(setFilterSqlListMock).toHaveBeenCalledWith([
       {
         id: expect.any(Symbol),
-        column: 'test-time-zone',
-        operator: FilterOperator.Equals,
-        value: 'Europe/Berlin'
+        filterSql: `"test-time-zone" = 'Europe/Berlin'`
       }
     ])
   })
@@ -159,12 +156,10 @@ describe('SimpleFilter', () => {
       fireEvent.click(dom.getByText('Option 1'))
     })
 
-    expect(setFilterMock).toHaveBeenCalledWith([
+    expect(setFilterSqlListMock).toHaveBeenCalledWith([
       {
         id: expect.any(Symbol),
-        column: 'test column',
-        operator: FilterOperator.Equals,
-        value: 'option_1'
+        filterSql: `"test column" = 'option_1'`
       }
     ])
   })

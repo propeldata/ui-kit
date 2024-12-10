@@ -1,20 +1,16 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 
-import { Dom, FilterInput, FilterOperator, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
+import { Dom, mockCounterQuery, RelativeTimeRange, setupTestHandlers } from '../../testing'
 import { FilterProvider } from './FilterProvider'
 import { SimpleFilter } from '../SimpleFilter'
 import { Counter } from '../Counter'
 
 const handlers = [
   mockCounterQuery((req, res, ctx) => {
-    const filters: FilterInput[] = req.variables.counterInput.filters
+    const filterSql: string = req.variables.counterInput.filterSql
 
-    if (
-      filters[0].column === 'test-column' &&
-      filters[0].operator === FilterOperator.Equals &&
-      filters[0].value === 'option'
-    ) {
+    if (filterSql === `"test-column" = 'option'`) {
       return res(ctx.data({ counter: { value: 200 } }))
     }
 
