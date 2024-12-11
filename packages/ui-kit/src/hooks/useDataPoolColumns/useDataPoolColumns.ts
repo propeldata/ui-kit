@@ -57,7 +57,7 @@ export const useDataPoolColumns = ({
       dataPoolId: dataPool?.id ?? ''
     },
     {
-      enabled: enabled && dataPool?.id != null,
+      enabled: enabled && Boolean(dataPool?.id),
       refetchInterval,
       retry
     }
