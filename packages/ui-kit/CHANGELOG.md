@@ -1,5 +1,11 @@
 # @propeldata/ui-kit
 
+## 0.15.1
+
+### Patch Changes
+
+- 2d94745: Fix `useDataGrid` hook running broken query Fix `filters` prop not working
+
 ## 0.15.0
 
 ### Minor Changes

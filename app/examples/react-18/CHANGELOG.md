@@ -1,5 +1,13 @@
 # react-18
 
+## 0.1.30
+
+### Patch Changes
+
+- Updated dependencies [2d94745]
+  - @propeldata/ui-kit@0.15.1
+  - dashboard-example@10.0.1
+
 ## 0.1.29
 
 ### Patch Changes
