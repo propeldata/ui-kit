@@ -65,7 +65,7 @@ export const useDataGrid = (props: DataGridQueryProps): UseQueryProps<DataGridQu
   const filterSql = filterSqlFromProp ?? filterSqlFromProvider
 
   // Only use filters if filterSql is not provided
-  const filters = filterSql != null ? filtersFromProp ?? filtersFromProvider : []
+  const filters = filterSql == null ? filtersFromProp ?? filtersFromProvider : []
 
   // Get access token first from props, then if it is not provided via prop get it from provider
   const accessToken = accessTokenFromProp ?? accessTokenFromProvider

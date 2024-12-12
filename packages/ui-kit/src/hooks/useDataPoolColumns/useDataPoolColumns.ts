@@ -14,7 +14,7 @@ import { useFilters } from '@/components/FilterProvider/useFilters'
 export const useDataPoolColumns = ({
   accessToken: accessTokenFromProp,
   dataPool: dataPoolProp,
-  enabled: enabledProp,
+  enabled: enabledProp = true,
   propelApiUrl,
   refetchInterval,
   retry
@@ -57,7 +57,7 @@ export const useDataPoolColumns = ({
       dataPoolId: dataPool?.id ?? ''
     },
     {
-      enabled: enabled && dataPool?.id != null,
+      enabled: enabled && Boolean(dataPool?.id),
       refetchInterval,
       retry
     }

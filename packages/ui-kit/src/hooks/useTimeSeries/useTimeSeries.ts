@@ -59,7 +59,7 @@ export const useTimeSeries = (props: TimeSeriesQueryProps): UseQueryProps<TimeSe
   const filterSql = filterSqlFromProp ?? filterSqlFromProvider
 
   // Only use filters if filterSql is not provided
-  const filters = filterSql != null ? filtersFromProp ?? filtersFromProvider : []
+  const filters = filterSql == null ? filtersFromProp ?? filtersFromProvider : []
 
   const timeRange =
     timeRangeFromProvider != null || timeRangeProp != null
