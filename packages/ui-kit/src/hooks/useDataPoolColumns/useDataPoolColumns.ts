@@ -14,7 +14,7 @@ import { useFilters } from '@/components/FilterProvider/useFilters'
 export const useDataPoolColumns = ({
   accessToken: accessTokenFromProp,
   dataPool: dataPoolProp,
-  enabled: enabledProp,
+  enabled: enabledProp = true,
   propelApiUrl,
   refetchInterval,
   retry
