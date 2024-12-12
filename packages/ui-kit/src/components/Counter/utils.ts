@@ -1,4 +1,4 @@
-import { getDisplayValue } from "../../helpers"
+import { getDisplayValue } from '../../helpers'
 
 export const getValueWithPrefixAndSufix = (params: {
   prefix?: string
@@ -8,7 +8,7 @@ export const getValueWithPrefixAndSufix = (params: {
 }) => {
   const { prefix, value, sufix, localize } = params
 
-  if (value === undefined) return
+  if (value === undefined) return '-'
 
   return (prefix ? prefix : '') + getDisplayValue({ value, localize }) + (sufix ? sufix : '')
 }
