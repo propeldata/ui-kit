@@ -13,6 +13,17 @@ export interface DateRangeOptionsProps {
   params?: TimeRangeInput
 }
 
+export enum TimeRangePickerOption {
+  Today = 'today',
+  ThisWeek = 'this-week',
+  ThisMonth = 'this-month',
+  ThisYear = 'this-year',
+  Last7Days = 'last-7-days',
+  Last30Days = 'last-30-days',
+  Last90Days = 'last-90-days',
+  Last365Days = 'last-365-days'
+}
+
 export interface TimeRangePickerProps
   extends ThemeSettingProps,
     Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue' | 'size'>,
@@ -32,8 +43,11 @@ export interface TimeRangePickerProps
   /** If true, the entire component is disabled, and users cannot interact with it. */
   disabled?: boolean
 
-  /** Sets an initial default value for the picker using a structured object that defines a range of options. */
+  /** @deprecated - Sets an initial default value for the picker using a structured object that defines a range of options. This prop is deprecated, use defaultOption instead. */
   defaultValue?: DateRangeOptionsProps
+
+  /** Sets an initial default option selected for the picker using the string value for custom options and `TimeRangePickerOption` enum for default options. */
+  defaultOption?: TimeRangePickerOption | string
 
   /** Controls the current value of the picker through a structured object, enabling controlled component behavior. */
   value?: DateRangeOptionsProps
