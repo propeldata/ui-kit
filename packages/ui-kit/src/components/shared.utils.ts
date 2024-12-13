@@ -12,9 +12,10 @@ export function prettifyName(name: string | number) {
     return name.toString()
   }
 
-  // If the name is all uppercase, return it as is
+  // If the name is all uppercase, capitalize the first letter
   if (name === name.toUpperCase()) {
-    return name
+    const words = name.split('_')
+    return words.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
   }
 
   const camelCaseFormatted = name.replace(/([A-Z])/g, ' $1').trim()

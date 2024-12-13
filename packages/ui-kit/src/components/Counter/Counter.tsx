@@ -68,7 +68,13 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       timeZone: getTimeZone(query?.timeZone ?? timeZone),
       enabled: !isStatic
     })
-    const value = isStatic ? staticValue : data?.counter?.value
+
+    const lastValue = React.useRef(data?.counter?.value) // Prevent flickering when the value is fetching due to filters change
+    const value = isStatic ? staticValue : data?.counter?.value ?? lastValue.current
+
+    if (value != null) {
+      lastValue.current = value
+    }
 
     React.useEffect(() => {
       function handlePropsMismatch() {
@@ -122,12 +128,16 @@ export const CounterComponent = React.forwardRef<HTMLSpanElement, CounterProps>(
       return themeWrapper(renderEmptyComponent({ theme }))
     }
 
+    console.log(value)
+
     return (
       <span
         ref={setRef}
         className={classnames(
           componentStyles.rootCounter,
-          (isLoading || isLoadingStatic) && componentStyles.loading,
+          {
+            [componentStyles.loading]: isLoading || isLoadingStatic
+          },
           className
         )}
         {...parsedProps}

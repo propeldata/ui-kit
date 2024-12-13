@@ -58,6 +58,15 @@ const SelectComponent = <T extends OptionValue>(
 
   const isFirstRender = React.useRef(true)
 
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (containerRef.current) {
+      // Hide not used input element that causes a layout issue with screen size
+      containerRef.current.querySelector('input')?.style.setProperty('display', 'none')
+    }
+  }, [])
+
   const onKeyDown = React.useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
@@ -113,7 +122,7 @@ const SelectComponent = <T extends OptionValue>(
   )
 
   return (
-    <div {...parsedPropsWithoutRest}>
+    <div ref={containerRef} {...parsedPropsWithoutRest}>
       <MUISelect<T, false>
         ref={setRef}
         value={value}
