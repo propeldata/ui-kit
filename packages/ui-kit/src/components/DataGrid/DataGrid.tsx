@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-table'
 import { Tooltip } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
-import { useVirtualizer } from '@tanstack/react-virtual'
+import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
 
 import { withContainer } from '../withContainer'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
@@ -69,6 +69,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       hideBorder,
       accentColor,
       showRowCount = false,
+      virtualize = false,
       ...rest
     },
     forwardedRef
@@ -270,8 +271,11 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
         typeof window !== 'undefined' && navigator.userAgent.indexOf('Firefox') === -1
           ? (element) => element?.getBoundingClientRect().height
           : undefined,
-      overscan: 5
+      overscan: 5,
+      enabled: virtualize
     })
+
+    const visibleRowGroup = virtualize ? rowVirtualizer.getVirtualItems() : rowGroup
 
     useEffect(() => {
       function setDefaultSizing() {
@@ -469,8 +473,8 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
               ref={tableRef}
               className={componentStyles.table}
               style={{
-                height: rowVirtualizer.getTotalSize() + 'px',
-                position: 'relative',
+                height: virtualize ? rowVirtualizer.getTotalSize() + 'px' : undefined,
+                position: virtualize ? 'relative' : undefined,
                 width: '100%',
                 maxHeight: 'unset'
               }}
@@ -549,21 +553,27 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                 ))}
               </div>
               <div role="rowgroup" className={componentStyles.tableBody}>
-                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                  const row = rowGroup?.[virtualRow.index]
+                {visibleRowGroup.map((groupRow) => {
+                  const virtualRow = { ...groupRow } as VirtualItem
+                  let row: Row<string[]>
+                  if (virtualRow.start != null) {
+                    row = rowGroup[virtualRow.index]
+                  } else {
+                    row = groupRow as Row<string[]>
+                  }
 
                   return (
                     <div
                       role="row"
-                      data-index={virtualRow.index}
+                      data-index={row.index}
                       ref={(node) => rowVirtualizer.measureElement(node)} //measure dynamic row height
                       className={classNames(componentStyles.tableRow, {
                         [componentStyles.preventGap]: isTableOverflowingY
                       })}
                       style={{
                         display: 'flex',
-                        position: 'absolute',
-                        transform: `translateY(${virtualRow.start}px)`, //this should always be a `style` as it changes on scroll
+                        position: virtualize ? 'absolute' : undefined,
+                        transform: virtualize ? `translateY(${virtualRow.start}px)` : undefined, //this should always be a `style` as it changes on scroll
                         width: isResizable ? 'fit-content' : '100%'
                       }}
                       key={row.id}

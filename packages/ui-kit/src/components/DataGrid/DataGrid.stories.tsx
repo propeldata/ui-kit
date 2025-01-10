@@ -325,8 +325,9 @@ export const Virtualization: Story = {
     },
     paginationProps: {
       defaultPageSize: 20000,
-      pageSizeOptions: [20000]
-    }
+      pageSizeOptions: [1, 20000]
+    },
+    virtualize: true
   },
   render: (args) => <DataGrid {...args} />
 }

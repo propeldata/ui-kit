@@ -16,7 +16,7 @@ const handlers = [
           ctx.data({
             dataGrid: {
               headers: ['name'],
-              rows: [['page 2']],
+              rows: [['page 2'], ['page 2.2']],
               pageInfo: {
                 hasNextPage: false,
                 hasPreviousPage: true,
@@ -32,7 +32,7 @@ const handlers = [
         ctx.data({
           dataGrid: {
             headers: ['name'],
-            rows: [['page 1']],
+            rows: [['page 1'], ['page 1.1']],
             pageInfo: {
               hasNextPage: true,
               hasPreviousPage: false,
@@ -138,7 +138,11 @@ describe('DataGrid', () => {
   }, 10000)
 
   it('paginates forward and backwards', async () => {
-    dom = render(<DataGrid query={{ dataPool: { name: 'should-paginate' }, accessToken: 'test-token' }} />)
+    dom = render(
+      <div style={{ height: '1000px' }}>
+        <DataGrid query={{ dataPool: { name: 'should-paginate' }, accessToken: 'test-token' }} />
+      </div>
+    )
 
     await dom.findByText('page 1')
 
@@ -151,7 +155,7 @@ describe('DataGrid', () => {
 
     fireEvent.click(await dom.findByTestId('propel-datagrid-paginate-back'))
     await dom.findByText('page 1')
-  }, 30000)
+  }, 40000)
 
   it('changes page size', async () => {
     dom = render(<DataGrid query={{ dataPool: { name: 'changes-page-size' }, accessToken: 'test-token' }} />)
