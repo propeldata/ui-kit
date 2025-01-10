@@ -9,6 +9,7 @@ import { FilterProvider } from '../FilterProvider'
 import axiosInstance from '../../../../../app/storybook/src/axios'
 import { TimeSeries as TimeSeriesSource, TimeSeriesProps } from '../TimeSeries'
 import { TimeSeriesGranularity } from '../../graphql'
+import { TimeRangePickerOption } from './TimeRangePicker.types'
 
 const meta: Meta<typeof TimeRangePickerSource> = {
   title: 'Components/TimeRangePicker',
@@ -123,6 +124,7 @@ export const CustomOptionsStory: Story = {
       })
       return newOptions
     },
+    defaultOption: 'yesterday',
     disableCustomRelative: true
   },
   render: (args) => <TimeRangePicker {...args} />
@@ -134,6 +136,25 @@ export const FiltersProviderStory: Story = {
     defaultValue: {
       value: 'last-365-days'
     }
+  },
+  render: (args) => (
+    <FilterProvider>
+      <TimeRangePicker {...args} />
+      <TimeSeries
+        card
+        query={{
+          metric: 'Revenue',
+          granularity: TimeSeriesGranularity.Day
+        }}
+        style={{ marginTop: '12px' }}
+      />
+    </FilterProvider>
+  )
+}
+
+export const DefaultOption: Story = {
+  args: {
+    defaultOption: TimeRangePickerOption.Last7Days
   },
   render: (args) => (
     <FilterProvider>
