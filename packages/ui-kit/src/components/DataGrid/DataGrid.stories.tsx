@@ -316,3 +316,18 @@ export const Custom: Story = {
   },
   render: (args) => <DataGrid {...args} />
 }
+
+export const Virtualization: Story = {
+  args: {
+    ...Basic.args,
+    query: {
+      ...Basic.args?.query
+    },
+    paginationProps: {
+      defaultPageSize: 20000,
+      pageSizeOptions: [1, 20000]
+    },
+    virtualize: true
+  },
+  render: (args) => <DataGrid {...args} />
+}

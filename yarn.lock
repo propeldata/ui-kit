@@ -5750,6 +5750,7 @@ __metadata:
     "@swc/jest": ^0.2.26
     "@tanstack/react-query": ^4.29.17
     "@tanstack/react-table": ^8.15.3
+    "@tanstack/react-virtual": ^3.11.2
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
@@ -9587,10 +9588,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-virtual@npm:^3.11.2":
+  version: 3.11.2
+  resolution: "@tanstack/react-virtual@npm:3.11.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Freact-virtual%2F-%2Freact-virtual-3.11.2.tgz"
+  dependencies:
+    "@tanstack/virtual-core": 3.11.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: a1136da0ec4c2ecbd4f996d8b84f228f0b8d851b15806e01049a160ad1d9b2eef0e0a491035fe017c6f84a0e125334f69ea23b32c180df23614ea4a8eeb7490c
+  languageName: node
+  linkType: hard
+
 "@tanstack/table-core@npm:8.15.3":
   version: 8.15.3
   resolution: "@tanstack/table-core@npm:8.15.3::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Ftable-core%2F-%2Ftable-core-8.15.3.tgz"
   checksum: eab528dcbb994cd8182f099e5b59f416b3b9cde08e88c676614f3484bc6172c7e3e3d895d1e35fa64a749b237390bc665b01187286ee37ac0417d8286953dad9
+  languageName: node
+  linkType: hard
+
+"@tanstack/virtual-core@npm:3.11.2":
+  version: 3.11.2
+  resolution: "@tanstack/virtual-core@npm:3.11.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40tanstack%2Fvirtual-core%2F-%2Fvirtual-core-3.11.2.tgz"
+  checksum: b5c91662461e3edd1cba0efbaa89e1d061c8bb605bb78d1e87e2a687335c740a731c96a81798b05491df4882ff2fbd27b312f5e7440e4f9d553a81fb2283156a
   languageName: node
   linkType: hard
 

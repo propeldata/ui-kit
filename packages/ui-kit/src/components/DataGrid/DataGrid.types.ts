@@ -84,6 +84,8 @@ export interface DataGridProps extends ThemeSettingProps, DataComponentProps<'di
   prettifyHeaders?: boolean
   /** If true, row count will be shown in the footer */
   showRowCount?: boolean
+  /** If true, the table will be virtualized */
+  virtualize?: boolean
 }
 
 interface DataGridPaginationProps {

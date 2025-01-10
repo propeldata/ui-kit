@@ -13,6 +13,7 @@ import {
 } from '@tanstack/react-table'
 import { Tooltip } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
+import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual'
 
 import { withContainer } from '../withContainer'
 import { ErrorFallback, ErrorFallbackProps } from '../ErrorFallback'
@@ -68,6 +69,7 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       hideBorder,
       accentColor,
       showRowCount = false,
+      virtualize = false,
       ...rest
     },
     forwardedRef
@@ -257,6 +259,24 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       ...reactTablePagination
     })
 
+    const headerGroups = table.getHeaderGroups()
+    const rowGroup = table.getRowModel().rows
+
+    const rowVirtualizer = useVirtualizer({
+      count: rowGroup?.length ?? 0,
+      estimateSize: () => 40, //estimate row height for accurate scrollbar dragging
+      getScrollElement: () => containerRef.current,
+      //measure dynamic row height, except in firefox because it measures table border height incorrectly
+      measureElement:
+        typeof window !== 'undefined' && navigator.userAgent.indexOf('Firefox') === -1
+          ? (element) => element?.getBoundingClientRect().height
+          : undefined,
+      overscan: 5,
+      enabled: virtualize
+    })
+
+    const visibleRowGroup = virtualize ? rowVirtualizer.getVirtualItems() : rowGroup
+
     useEffect(() => {
       function setDefaultSizing() {
         const INDEX_COLUMN_WIDTH = 40
@@ -440,9 +460,6 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
 
     const linesStyle = getLinesStyle(tableLinesLayout)
 
-    const headerGroups = table.getHeaderGroups()
-    const rowGroup = table.getRowModel().rows
-
     return (
       <div
         ref={setRef}
@@ -452,7 +469,17 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
       >
         <div ref={containerRef} className={componentStyles.container}>
           <div className={componentStyles.tableContainer}>
-            <div ref={tableRef} className={componentStyles.table} style={{ width: '100%' }} {...slotProps?.table}>
+            <div
+              ref={tableRef}
+              className={componentStyles.table}
+              style={{
+                height: virtualize ? rowVirtualizer.getTotalSize() + 'px' : undefined,
+                position: virtualize ? 'relative' : undefined,
+                width: '100%',
+                maxHeight: 'unset'
+              }}
+              {...slotProps?.table}
+            >
               <div className={classNames(componentStyles.tableHead)}>
                 {headerGroups.map((headerGroup) => (
                   <div
@@ -526,65 +553,83 @@ export const DataGridComponent = React.forwardRef<HTMLDivElement, DataGridProps>
                 ))}
               </div>
               <div role="rowgroup" className={componentStyles.tableBody}>
-                {rowGroup.map((row, index) => (
-                  <div
-                    role="row"
-                    className={classNames(componentStyles.tableRow, {
-                      [componentStyles.preventGap]: isTableOverflowingY
-                    })}
-                    style={{ width: isResizable ? 'fit-content' : '100%' }}
-                    key={row.id}
-                  >
-                    {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
+                {visibleRowGroup.map((groupRow) => {
+                  const virtualRow = { ...groupRow } as VirtualItem
+                  let row: Row<string[]>
+                  if (virtualRow.start != null) {
+                    row = rowGroup[virtualRow.index]
+                  } else {
+                    row = groupRow as Row<string[]>
+                  }
+
+                  return (
                     <div
-                      {...slotProps?.cell}
-                      role="cell"
-                      onClick={() => handleRowIndexClick(row)}
-                      className={classNames(
-                        componentStyles.tableCell,
-                        componentStyles.tableIndexCell,
-                        {
-                          [componentStyles.selectedRow]: row.id === selectedRow?.id
-                        },
-                        linesStyle,
-                        {
-                          [componentStyles.hideBorder]: hideBorder
-                        },
-                        slotProps?.cell?.className
-                      )}
+                      role="row"
+                      data-index={row.index}
+                      ref={(node) => rowVirtualizer.measureElement(node)} //measure dynamic row height
+                      className={classNames(componentStyles.tableRow, {
+                        [componentStyles.preventGap]: isTableOverflowingY
+                      })}
+                      style={{
+                        display: 'flex',
+                        position: virtualize ? 'absolute' : undefined,
+                        transform: virtualize ? `translateY(${virtualRow.start}px)` : undefined, //this should always be a `style` as it changes on scroll
+                        width: isResizable ? 'fit-content' : '100%'
+                      }}
+                      key={row.id}
                     >
-                      <div>{index + 1 + pageIndex * (isStatic ? clientPagination.pageSize : pageSize)}</div>
-                    </div>
-                    {row.getVisibleCells().map((cell, index) => (
-                      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+                      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
                       <div
                         {...slotProps?.cell}
                         role="cell"
-                        onClick={() => handleRowCellClick(cell)}
-                        style={{
-                          ...slotProps?.cell?.style,
-                          width: isResizable ? cell.column.getSize() : cell.column.getSize()
-                        }}
+                        onClick={() => handleRowIndexClick(row)}
                         className={classNames(
                           componentStyles.tableCell,
+                          componentStyles.tableIndexCell,
                           {
-                            [componentStyles.selectedRow]:
-                              cell.id === selectedRow?.cells[index].id || cell.id === selectedCell?.id
+                            [componentStyles.selectedRow]: row.id === selectedRow?.id
                           },
                           linesStyle,
-                          slotProps?.cell?.className,
                           {
-                            [componentStyles.hideBorder]: hideBorder,
-                            [componentStyles.numeric]: !isNaN(Number(cell.getValue()))
-                          }
+                            [componentStyles.hideBorder]: hideBorder
+                          },
+                          slotProps?.cell?.className
                         )}
-                        key={cell.id}
+                        style={slotProps?.cell?.style}
                       >
-                        <span>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
+                        <div>{row.index + 1 + pageIndex * (isStatic ? clientPagination.pageSize : pageSize)}</div>
                       </div>
-                    ))}
-                  </div>
-                ))}
+                      {row.getVisibleCells().map((cell, index) => (
+                        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
+                        <div
+                          {...slotProps?.cell}
+                          role="cell"
+                          onClick={() => handleRowCellClick(cell)}
+                          style={{
+                            ...slotProps?.cell?.style,
+                            width: isResizable ? cell.column.getSize() : cell.column.getSize()
+                          }}
+                          className={classNames(
+                            componentStyles.tableCell,
+                            {
+                              [componentStyles.selectedRow]:
+                                cell.id === selectedRow?.cells[index].id || cell.id === selectedCell?.id
+                            },
+                            linesStyle,
+                            slotProps?.cell?.className,
+                            {
+                              [componentStyles.hideBorder]: hideBorder,
+                              [componentStyles.numeric]: !isNaN(Number(cell.getValue()))
+                            }
+                          )}
+                          key={cell.id}
+                        >
+                          <span>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
