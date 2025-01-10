@@ -55,6 +55,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
       locale: localeProp,
       options: optionsProp,
       defaultValue = null,
+      defaultOption = null,
       size = 'default',
       value,
       onChange,
@@ -86,7 +87,7 @@ export const TimeRangePicker = React.forwardRef<HTMLDivElement, TimeRangePickerP
     const lastNOptionRef = React.useRef(lastNOption)
 
     const [selectedOption, setSelectedOption] = React.useState<DateRangeOptionsProps | null>(
-      options?.find((option) => option.value === defaultValue?.value) ?? null
+      options?.find((option) => option.value === defaultValue?.value || option.value === defaultOption) ?? null
     )
 
     const [datepickerRange, setDatepickerRange] = React.useState<DateRange | null>(null)
