@@ -1,5 +1,13 @@
 # @propeldata/ui-kit
 
+## 0.15.2
+
+### Patch Changes
+
+- b81acba: Fix GroupBy prettifyColumnNames for uppercase names Fix Counter loading state Fix Select based component
+  causing layout height issue
+- aef6178: Added defaultOption prop for TimeRangePicker
+
 ## 0.15.1
 
 ### Patch Changes
